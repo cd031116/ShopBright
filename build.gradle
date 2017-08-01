@@ -1,0 +1,40 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.3'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+ext {
+    // android build info
+    android = [
+            compileSdkVersion: 25,
+            buildToolsVersion: "25.0.0",
+            minSdkVersion    : 16,
+            targetSdkVersion : 25,
+            applicationId    : "com.zhl.huiqu",
+            versionCode      : 1,
+            versionName      : "1.0.0"
+    ]
+
+    // support lib version
+    supportLibVersion = "25.0.0"
+    okhttpLibVersion = "2.6.0"
+    fastjsonLibVersion = "1.2.6"
+}
