@@ -1,13 +1,34 @@
 package com.zhl.huiqu;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.KeyEvent;
 
-public class MainActivity extends AppCompatActivity {
+import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.base.DoubleClickExitHelper;
+
+public class MainActivity extends BaseActivity {
+    private DoubleClickExitHelper mDoubleClickExit;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public void initView() {
+        super.initView();
+        mDoubleClickExit=new DoubleClickExitHelper(this);
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            return mDoubleClickExit.onKeyDown(keyCode, event);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
