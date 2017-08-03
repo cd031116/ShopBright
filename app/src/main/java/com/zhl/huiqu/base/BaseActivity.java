@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -29,7 +30,7 @@ import butterknife.ButterKnife;
  * Created by lyj on 2017/2/6 0006.
  */
 
-public class BaseActivity extends org.aisen.android.ui.activity.basic.BaseActivity implements BaseViewInterface {
+public class BaseActivity extends AppCompatActivity implements BaseViewInterface {
     protected View contentView;
     private TextView msg;
      private boolean isActive=true;
@@ -43,6 +44,7 @@ public class BaseActivity extends org.aisen.android.ui.activity.basic.BaseActivi
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         if (getLayoutId()!= 0){
+
             // setContentView(getLayoutId());
             contentView = View.inflate(this, getLayoutId(), null);
             setContentView(contentView);

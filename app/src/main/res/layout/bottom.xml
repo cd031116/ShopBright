@@ -41,14 +41,14 @@
                 android:id="@+id/text_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="学习"
+                android:text="首页"
                 android:textSize="@dimen/s16"
                 android:textColor="#00d2ec"
                 />
         </LinearLayout>
         <!--2-->
         <LinearLayout
-            android:id="@+id/job_line"
+            android:id="@+id/service_line"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -57,7 +57,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/image_job"
+                android:id="@+id/image_service"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
@@ -65,26 +65,26 @@
                 android:background="@mipmap/ic_launcher"
                 />
             <TextView
-                android:id="@+id/job_text"
+                android:id="@+id/service_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="工作"
+                android:text="客服"
                 android:textSize="@dimen/s16"
                 android:textColor="#a1b0b2"
                 />
         </LinearLayout>
 
 
-<!--2-->
+<!--周边-->
         <LinearLayout
-            android:id="@+id/find_line"
+            android:id="@+id/rim_line"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:layout_weight="1"
             android:orientation="vertical">
             <ImageButton
-                android:id="@+id/image_find"
+                android:id="@+id/image_rim"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
@@ -92,10 +92,10 @@
                 android:background="@mipmap/ic_launcher"
                 />
             <TextView
-                android:id="@+id/text_find"
+                android:id="@+id/text_rim"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="发现"
+                android:text="周边"
                 android:textSize="@dimen/s16"
                 android:textColor="#a1b0b2"
                 />
@@ -120,7 +120,7 @@
                 android:id="@+id/text_my"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="我的"
+                android:text="个人中心"
                 android:textSize="@dimen/s16"
                 android:textColor="#a1b0b2"
                 />
