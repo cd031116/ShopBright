@@ -14,8 +14,6 @@ import android.widget.TextView;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.DoubleClickExitHelper;
 
-import org.aisen.android.component.eventbus.NotificationCenter;
-
 import java.util.List;
 
 import butterknife.Bind;
@@ -43,7 +41,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public void initView() {
+    public void initView(){
         super.initView();
         mDoubleClickExit = new DoubleClickExitHelper(this);
     }

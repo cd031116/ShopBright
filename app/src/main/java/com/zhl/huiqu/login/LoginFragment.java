@@ -24,9 +24,8 @@ public class LoginFragment extends BaseFragment{
     }
     @Override
     public int inflateContentView() {
-        return 0;
+        return R.layout.fragment_login;
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
