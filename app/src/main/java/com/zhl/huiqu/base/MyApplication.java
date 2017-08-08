@@ -15,6 +15,10 @@ public class MyApplication extends Application {
     public static MyApplication instance;
     private ActivityManagerd activityManager = null;
 
+
+
+
+
     @Override
     public void onCreate(){
         super.onCreate();
