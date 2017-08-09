@@ -98,10 +98,11 @@ public class MainActivity extends BaseActivity {
 
 
 
-    @OnClick({R.id.home_line, R.id.service_line, R.id.rim_line, R.id.my_line})
+    @OnClick({R.id.home_line, R.id.service_line, R.id.rim_line, R.id.my_line,R.id.image_home,R.id.image_service,R.id.image_rim,R.id.image_my})
     void onclick(View v) {
         switch (v.getId()) {
             case R.id.home_line:
+            case  R.id.image_home:
                 if(selected==0){
                     break;
                 }
@@ -109,6 +110,7 @@ public class MainActivity extends BaseActivity {
                 switchContent(selected);
                 break;
             case R.id.service_line:
+            case  R.id.image_service:
                 if(selected==1){
                     break;
                 }
@@ -116,6 +118,7 @@ public class MainActivity extends BaseActivity {
                 switchContent(selected);
                 break;
             case R.id.rim_line:
+            case  R.id.image_rim:
                 if(selected==2){
                     break;
                 }
@@ -123,6 +126,7 @@ public class MainActivity extends BaseActivity {
                 switchContent(selected);
                 break;
             case R.id.my_line:
+            case  R.id.image_my:
                 if(selected==3){
                     break;
                 }
