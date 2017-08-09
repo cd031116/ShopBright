@@ -1,30 +1,11 @@
 package com.zhl.huiqu.base;
 
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.telecom.Call;
-import android.telephony.TelephonyManager;
-import android.text.TextUtils;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.webkit.DownloadListener;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.login.LoginFragment;
-
-import org.aisen.android.network.task.TaskException;
-import org.aisen.android.network.task.WorkTask;
-import org.aisen.android.support.inject.ViewInject;
 
 import butterknife.Bind;
 
@@ -62,10 +43,8 @@ public class StartActivity extends BaseActivity {
         });
     }
 
-
-
     @Override
-    public void initData(){
+    public void initData()  {
         super.initData();
     }
 
