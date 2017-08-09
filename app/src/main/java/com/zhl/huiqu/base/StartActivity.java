@@ -50,12 +50,6 @@ public class StartActivity extends BaseActivity {
 
     private void redirectTo() {
          BaseConfig bg=BaseConfig.getInstance(this);
-//         int first=  bg.getIntValue(ConfigConstant.IS_FIRST,1);
-//        if(first==1){
-//            startActivity(new Intent(StartActivity.this,PagerSelectActivity.class));
-//            this.finish();
-//        }else{
-//        }
         LoginFragment.launch(this);
         StartActivity.this.finish();
     }

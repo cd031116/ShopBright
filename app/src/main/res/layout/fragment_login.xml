@@ -3,7 +3,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#403030"
+    android:background="@drawable/login_bg"
     android:clipToPadding="true"
     android:fitsSystemWindows="true">
 
@@ -12,16 +12,16 @@
         android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="@dimen/d30"
+        android:layout_marginLeft="60px"
+        android:layout_marginRight="60px"
+        android:layout_marginTop="60px"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="30px"
             android:text="普通账号登录"
             android:textColor="#ffffff"
             android:textSize="@dimen/s16" />
@@ -29,12 +29,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="30px"
             android:text="手机动态密码登录"
             android:textColor="#ffffff"
             android:textSize="@dimen/s16" />
-
-
     </LinearLayout>
 
 
@@ -43,30 +41,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/top"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="90px"
         android:orientation="vertical">
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
             android:background="@drawable/login_account_bg">
 
             <EditText
                 android:id="@+id/account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="30px"
+                android:layout_marginRight="30px"
                 android:background="@null"
                 android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"
-                android:drawableLeft="@mipmap/ic_launcher"
+                android:drawableLeft="@drawable/login_phone"
                 android:drawablePadding="10dp"
                 android:hint="手机号/会员名/邮箱"
-                android:minHeight="@dimen/d30"
-                android:padding="5dp"
+                android:padding="15px"
                 android:textColor="#ffffff"
                 android:textColorHint="#ffffff" />
 
@@ -76,24 +73,23 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:layout_marginTop="60px"
             android:background="@drawable/login_account_bg">
 
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="30px"
                 android:background="@null"
-                android:drawableLeft="@mipmap/ic_launcher"
-                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/login_password"
+                android:drawablePadding="30px"
                 android:hint="密码"
                 android:inputType="textPassword"
                 android:maxLength="12"
-                android:minHeight="30dp"
-                android:padding="5dp"
+                android:padding="15px"
                 android:textColor="#939999"
                 android:textColorHint="#ffffff" />
 
@@ -103,7 +99,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:padding="30px">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -111,10 +107,10 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:paddingBottom="3dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="3dp"
+                android:layout_marginLeft="15px"
+                android:paddingBottom="15px"
+                android:paddingLeft="30px"
+                android:paddingTop="15px"
                 android:text="忘记密码"
                 android:textColor="#ffffff" />
 
@@ -123,11 +119,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="10dp"
-                android:paddingBottom="3dp"
-                android:paddingRight="10dp"
-                android:paddingTop="3dp"
+                android:layout_marginLeft="15px"
+                android:layout_marginRight="30px"
+                android:paddingBottom="15px"
+                android:paddingRight="30px"
+                android:paddingTop="15px"
                 android:text="新用户注册"
                 android:textColor="#ffffff" />
 
@@ -141,17 +137,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottem"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="90px"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="@dimen/d50"
-            android:background="@drawable/login_bg"
+            android:layout_marginLeft="90px"
+            android:layout_marginRight="90px"
+            android:layout_marginTop="90px"
+            android:background="@drawable/login_bg_x"
             android:gravity="center"
             android:padding="10dp"
             android:text="登录"
@@ -169,8 +165,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="90px"
+            android:layout_marginRight="90px"
             android:gravity="center_vertical">
 
             <TextView
@@ -182,14 +178,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="60px"
+                android:layout_marginRight="60px"
                 android:text="第三方账号登录"
                 android:textColor="#ffffff" />
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="1dp"
+                android:layout_height="3px"
                 android:layout_weight="1"
                 android:background="#ffffff" />
         </LinearLayout>
@@ -198,23 +194,38 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="225px"
+            android:layout_marginTop="50px"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="30px">
 
             <ImageView
                 android:id="@+id/qq_L"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/zhifubao" />
 
             <ImageView
                 android:id="@+id/wechat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:src="@mipmap/ic_launcher" />
+                android:layout_marginLeft="60px"
+                android:src="@drawable/wechat" />
+
+            <ImageView
+                android:id="@+id/qq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60px"
+                android:src="@drawable/login_qq" />
+
+            <ImageView
+                android:id="@+id/weibo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60px"
+                android:src="@drawable/sina_weibo" />
         </LinearLayout>
 
     </LinearLayout>

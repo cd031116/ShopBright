@@ -1,6 +1,5 @@
 package com.zhl.huiqu.base;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -15,7 +14,6 @@ import org.aisen.android.common.context.GlobalContext;
 public class MyApplication extends GlobalContext {
     public static MyApplication instance;
     private ActivityManagerd activityManager = null;
-
 
 
     @Override
@@ -61,7 +59,6 @@ public class MyApplication extends GlobalContext {
     @Override
     protected void attachBaseContext(Context base){
         super.attachBaseContext(base);
-//        MultiDex.install(this);
     }
 
     @Override
