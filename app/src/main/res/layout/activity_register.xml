@@ -2,33 +2,153 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/login_bg">
+    android:background="@drawable/login_bg">
 
     <LinearLayout
         android:id="@+id/thred_login_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="255px"
+        android:layout_marginLeft="291px"
+        android:layout_marginRight="291px"
         android:orientation="horizontal"
-        android:layout_marginLeft="97dp"
-        android:layout_marginRight="97dp"
         android:weightSum="4">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@drawable/login_qq" />
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/login_qq" />
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/login_qq" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/login_qq" />
 
     </LinearLayout>
 
     <TextView
+        android:id="@+id/thread_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_above="@id/thred_login_layout"
+        android:layout_marginBottom="90px"
+        android:gravity="center_horizontal"
+        android:text="第三方登录"
+        android:textColor="@color/comm_white" />
+
+    <TextView
+        android:id="@+id/commit_text"
+        android:layout_width="match_parent"
+        android:layout_height="102px"
+        android:layout_marginLeft="207px"
+        android:layout_marginRight="207px"
+        android:textColor="@color/comm_white"
+        android:layout_above="@id/thread_text"
+        android:textSize="36px"
+        android:layout_marginBottom="168px"
+        android:gravity="center"
+        android:background="@drawable/shape_login_commit"
+        android:text="提 交" />
+
+    <RelativeLayout
+        android:id="@+id/user_register_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/commit_text"
+        android:layout_marginBottom="168px"
+        android:gravity="right"
+        android:layout_marginRight="207px">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/comm_white"
+            android:textSize="30px"
+            android:text="新用户" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/register_psw"
+        android:layout_width="match_parent"
+        android:layout_height="102px"
+        android:layout_marginLeft="207px"
+        android:layout_marginRight="207px"
+        android:textColor="@color/comm_white"
+        android:layout_above="@id/user_register_layout"
+        android:textSize="36px"
+        android:layout_marginBottom="33px"
+        android:gravity="center"
         android:background="@drawable/shape_login_edittext"
-        android:padding="10dp" />
+        android:text="提 交" />
+
+
+    <TextView
+        android:id="@+id/register_code"
+        android:layout_width="match_parent"
+        android:layout_height="102px"
+        android:layout_marginLeft="207px"
+        android:layout_marginRight="207px"
+        android:textColor="@color/comm_white"
+        android:layout_above="@id/register_psw"
+        android:textSize="36px"
+        android:layout_marginBottom="45px"
+        android:gravity="center"
+        android:background="@drawable/shape_login_edittext"
+        android:text="提 交" />
+
+    <TextView
+        android:id="@+id/register_phone"
+        android:layout_width="match_parent"
+        android:layout_height="102px"
+        android:layout_marginLeft="207px"
+        android:layout_marginRight="207px"
+        android:textColor="@color/comm_white"
+        android:layout_above="@id/register_code"
+        android:textSize="36px"
+        android:layout_marginBottom="45px"
+        android:gravity="center"
+        android:background="@drawable/shape_login_edittext"
+        android:text="提 交" />
+
+    <TextView
+        android:id="@+id/register_area"
+        android:layout_width="match_parent"
+        android:layout_height="102px"
+        android:layout_marginLeft="207px"
+        android:layout_marginRight="207px"
+        android:textColor="@color/comm_white"
+        android:layout_above="@id/register_phone"
+        android:textSize="36px"
+        android:layout_marginBottom="45px"
+        android:gravity="center"
+        android:background="@drawable/shape_login_edittext"
+        android:text="提 交" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="126px"
+        android:gravity="center"
+        android:background="@color/comm_white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="zhuce"/>
+    </RelativeLayout>
 
 </RelativeLayout>

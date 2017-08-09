@@ -69,11 +69,7 @@ public class SupportMultipleScreensUtil {
 
 
     /**
-     * 原创作者:
-     * 谷哥的小弟
      *
-     * 博客地址:
-     * http://blog.csdn.net/lfdfhl
      */
     public static void scaleViewSize(View view) {
         if (null != view) {
