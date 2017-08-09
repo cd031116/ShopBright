@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="login_commit">#e11f1f</color>
+    <color name="login_text_color">#666666</color>
 </resources>

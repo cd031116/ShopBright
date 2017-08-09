@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_bg_x">
+    android:background="@drawable/login_bg"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <LinearLayout
         android:id="@+id/thred_login_layout"
@@ -10,60 +12,83 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="255px"
-        android:layout_marginLeft="291px"
-        android:layout_marginRight="291px"
-        android:orientation="horizontal"
-        android:weightSum="4">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/zhifubao"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginRight="60px"
+            android:background="@drawable/zhifubao" />
+
+        <TextView
+            android:id="@+id/wechat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="60px"
+            android:background="@drawable/wechat" />
+
+        <TextView
+            android:id="@+id/login_qq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="60px"
             android:background="@drawable/login_qq" />
 
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/sina_weibo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/login_qq" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/login_qq" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/login_qq" />
+            android:background="@drawable/sina_weibo" />
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/thread_text"
+    <RelativeLayout
+        android:id="@+id/thread_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/thred_login_layout"
-        android:layout_marginBottom="90px"
-        android:gravity="center_horizontal"
-        android:text="第三方登录"
-        android:textColor="@color/comm_white" />
+        android:layout_marginBottom="90px">
+
+        <TextView
+            android:id="@+id/thread_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="第三方登录"
+            android:textColor="@color/comm_white" />
+
+        <View
+            android:layout_width="240px"
+            android:layout_height="3px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30px"
+            android:layout_toRightOf="@id/thread_text"
+            android:background="@color/comm_white" />
+
+        <View
+            android:layout_width="240px"
+            android:layout_height="3px"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30px"
+            android:layout_toLeftOf="@id/thread_text"
+            android:background="@color/comm_white" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/commit_text"
         android:layout_width="match_parent"
         android:layout_height="102px"
+        android:layout_above="@id/thread_layout"
+        android:layout_marginBottom="168px"
         android:layout_marginLeft="207px"
         android:layout_marginRight="207px"
-        android:textColor="@color/comm_white"
-        android:layout_above="@id/thread_text"
-        android:textSize="36px"
-        android:layout_marginBottom="168px"
-        android:gravity="center"
         android:background="@drawable/shape_login_commit"
-        android:text="提 交" />
+        android:gravity="center"
+        android:text="@string/register_commit"
+        android:textColor="@color/comm_white"
+        android:textSize="36px" />
 
     <RelativeLayout
         android:id="@+id/user_register_layout"
@@ -71,84 +96,128 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/commit_text"
         android:layout_marginBottom="168px"
-        android:gravity="right"
-        android:layout_marginRight="207px">
+        android:layout_marginRight="207px"
+        android:gravity="right">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/register_new_user"
             android:textColor="@color/comm_white"
-            android:textSize="30px"
-            android:text="新用户" />
+            android:textSize="30px" />
 
     </RelativeLayout>
 
 
-    <TextView
+    <EditText
         android:id="@+id/register_psw"
         android:layout_width="match_parent"
         android:layout_height="102px"
+        android:layout_above="@id/user_register_layout"
+        android:layout_marginBottom="33px"
         android:layout_marginLeft="207px"
         android:layout_marginRight="207px"
-        android:textColor="@color/comm_white"
-        android:layout_above="@id/user_register_layout"
-        android:textSize="36px"
-        android:layout_marginBottom="33px"
-        android:gravity="center"
         android:background="@drawable/shape_login_edittext"
-        android:text="提 交" />
-
-
+        android:drawableLeft="@drawable/login_password"
+        android:drawablePadding="30px"
+        android:gravity="center_vertical"
+        android:paddingLeft="30px"
+        android:text="@string/register_psw"
+        android:textColor="@color/comm_white"
+        android:textSize="36px" />
     <TextView
+        android:id="@+id/register_psw_show"
+        android:layout_width="wrap_content"
+        android:layout_height="102px"
+        android:layout_alignParentRight="true"
+        android:layout_above="@id/user_register_layout"
+        android:gravity="center_vertical"
+        android:paddingRight="48px"
+        android:drawableRight="@drawable/login_show"
+        android:layout_marginBottom="33px"
+        android:layout_marginRight="207px"/>
+
+
+    <EditText
         android:id="@+id/register_code"
         android:layout_width="match_parent"
         android:layout_height="102px"
+        android:layout_above="@id/register_psw"
+        android:layout_marginBottom="45px"
         android:layout_marginLeft="207px"
         android:layout_marginRight="207px"
-        android:textColor="@color/comm_white"
-        android:layout_above="@id/register_psw"
-        android:textSize="36px"
-        android:layout_marginBottom="45px"
-        android:gravity="center"
         android:background="@drawable/shape_login_edittext"
-        android:text="提 交" />
+        android:drawableLeft="@drawable/login_vertify_phone"
+        android:drawablePadding="30px"
+        android:gravity="center_vertical"
+        android:paddingLeft="30px"
+        android:text="@string/register_msg_code"
+        android:textColor="@color/comm_white"
+        android:textSize="36px" />
 
     <TextView
+        android:id="@+id/register_push_code"
+        android:layout_width="222px"
+        android:layout_height="102px"
+        android:layout_above="@id/register_psw"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="45px"
+        android:layout_marginLeft="207px"
+        android:layout_marginRight="207px"
+        android:background="@drawable/login_push_code"
+        android:gravity="center"
+        android:text="@string/register_push_code"
+        android:textColor="@color/login_text_color"
+        android:textSize="36px" />
+
+    <EditText
         android:id="@+id/register_phone"
         android:layout_width="match_parent"
         android:layout_height="102px"
+        android:layout_above="@id/register_code"
+        android:layout_marginBottom="45px"
         android:layout_marginLeft="207px"
         android:layout_marginRight="207px"
-        android:textColor="@color/comm_white"
-        android:layout_above="@id/register_code"
-        android:textSize="36px"
-        android:layout_marginBottom="45px"
-        android:gravity="center"
         android:background="@drawable/shape_login_edittext"
-        android:text="提 交" />
+        android:drawableLeft="@drawable/login_phone"
+        android:drawablePadding="30px"
+        android:gravity="center_vertical"
+        android:paddingLeft="30px"
+        android:text="@string/register_phone"
+        android:textColor="@color/comm_white"
+        android:textSize="36px" />
 
     <TextView
         android:id="@+id/register_area"
         android:layout_width="match_parent"
         android:layout_height="102px"
+        android:layout_above="@id/register_phone"
+        android:layout_marginBottom="45px"
         android:layout_marginLeft="207px"
         android:layout_marginRight="207px"
-        android:textColor="@color/comm_white"
-        android:layout_above="@id/register_phone"
-        android:textSize="36px"
-        android:layout_marginBottom="45px"
-        android:gravity="center"
         android:background="@drawable/shape_login_edittext"
-        android:text="提 交" />
+        android:drawableLeft="@drawable/login_"
+        android:drawablePadding="30px"
+        android:gravity="center_vertical"
+        android:paddingLeft="30px"
+        android:text="@string/register_area"
+        android:drawableRight="@drawable/login_arrow_right"
+        android:paddingRight="48px"
+        android:textColor="@color/comm_white"
+        android:textSize="36px" />
+
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="126px"
-        android:gravity="center"
-        android:background="@color/comm_white">
+        android:background="@color/comm_white"
+        android:gravity="center">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="zhuce"/>
+            android:text="zhuce" />
     </RelativeLayout>
 
 </RelativeLayout>

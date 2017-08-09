@@ -2,4 +2,26 @@
     <string name="app_name">ShopBright</string>
     <item name="is_scale_size_tag" type="id" />
     <item name="is_scale_font_tag" type="id" />
+
+    <string name="register_title">注册</string>
+    <string name="register_commit">提 交</string>
+    <string name="register_psw">密码.6-16位字母或数字</string>
+    <string name="register_msg_code">请填写短信验证码</string>
+    <string name="register_push_code">发送验证码</string>
+    <string name="register_phone">请填写正确的手机号码</string>
+    <string name="register_new_user">新用户注册</string>
+    <string name="register_area">中国  0086</string>
+
+    <string name="personal_my_order">我的订单</string>
+    <string name="personal_all_order">全部订单</string>
+    <string name="personal_pay">待付款</string>
+    <string name="personal_out">待出行</string>
+    <string name="personal_tuikuan">退款</string>
+    <string name="personal_setting">设置</string>
+    <string name="personal_my_collect">我的收藏</string>
+    <string name="personal_look_history">浏览历史</string>
+    <string name="personal_normal_msg">常用信息</string>
+    <string name="personal_kefu_center">客服中心</string>
+    <string name="personal_your_like">猜你喜欢</string>
+
 </resources>

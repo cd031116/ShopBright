@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/comm_gray">
+
+        <RelativeLayout
+            android:id="@+id/personal_head_layout"
+            android:layout_width="match_parent"
+            android:layout_height="384px"
+            android:background="@color/md_amber_500">
+
+            <TextView
+                android:id="@+id/personal_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="126px"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical"
+                android:paddingLeft="54px"
+                android:text="@string/personal_setting"
+                android:textColor="@color/comm_white"
+                android:textSize="42px" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="126px"
+                android:layout_toRightOf="@id/personal_setting"
+                android:gravity="center_vertical"
+                android:paddingRight="63px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/personal_msg_gray" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/personal_msg_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/personal_setting"
+                android:layout_centerVertical="true">
+
+                <ImageView
+                    android:id="@+id/personal_head_img"
+                    android:layout_width="168px"
+                    android:layout_height="168px"
+                    android:layout_marginBottom="45px"
+                    android:layout_marginLeft="54px"
+                    android:layout_marginTop="45px"
+                    android:background="@drawable/personal_collect" />
+
+                <TextView
+                    android:id="@+id/personal_tel_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="27px"
+                    android:layout_toRightOf="@id/personal_head_img"
+                    android:text="18655555555"
+                    android:textColor="@color/comm_white"
+                    android:textSize="42px" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="276px"
+            android:layout_below="@id/personal_head_layout"
+            android:layout_marginTop="9px"
+            android:background="@color/comm_white">
+
+            <TextView
+                android:id="@+id/personal_my_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/personal_order"
+                android:drawablePadding="18px"
+                android:gravity="center_vertical"
+                android:paddingLeft="27px"
+                android:paddingTop="12px"
+                android:text="@string/personal_my_order"
+                android:textSize="42px" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/personal_my_order"
+                android:paddingBottom="15px"
+                android:paddingLeft="66px"
+                android:paddingRight="66px"
+                android:paddingTop="15px"
+                android:weightSum="4">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="12px"
+                    android:drawableTop="@drawable/personal_all_order"
+                    android:gravity="center_horizontal"
+                    android:text="@string/personal_all_order" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="12px"
+                    android:drawableTop="@drawable/personal_pay"
+                    android:gravity="center_horizontal"
+                    android:text="@string/personal_pay" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="12px"
+                    android:drawableTop="@drawable/personal_goout"
+                    android:gravity="center_horizontal"
+                    android:text="@string/personal_out" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="12px"
+                    android:drawableTop="@drawable/personal_tuikuan"
+                    android:gravity="center_horizontal"
+                    android:text="@string/personal_tuikuan" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>
+
