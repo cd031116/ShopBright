@@ -78,6 +78,7 @@ public class StartActivity extends BaseActivity {
 //        }else{
 //        }
         LoginFragment.launch(this);
+        StartActivity.this.finish();
     }
 
 }
