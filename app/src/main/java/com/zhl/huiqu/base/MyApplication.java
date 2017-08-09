@@ -18,7 +18,6 @@ public class MyApplication extends GlobalContext {
 
 
 
-
     @Override
     public void onCreate(){
         super.onCreate();
