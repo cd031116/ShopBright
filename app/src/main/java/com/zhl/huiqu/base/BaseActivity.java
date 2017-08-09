@@ -21,6 +21,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.zhl.huiqu.interfaces.BaseViewInterface;
+import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.widget.ShowMsgDialog;
 
 import butterknife.ButterKnife;
@@ -48,6 +49,9 @@ public class BaseActivity extends org.aisen.android.ui.activity.basic.BaseActivi
             // setContentView(getLayoutId());
             contentView = View.inflate(this, getLayoutId(), null);
             setContentView(contentView);
+            View rootView=findViewById(android.R.id.content);
+            SupportMultipleScreensUtil.init(getApplication());
+            SupportMultipleScreensUtil.scale(rootView);
         }
         ButterKnife.bind(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){

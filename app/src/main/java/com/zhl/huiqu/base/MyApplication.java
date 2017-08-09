@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.support.multidex.MultiDex;
 
 import org.aisen.android.common.context.GlobalContext;
 
@@ -63,7 +62,7 @@ public class MyApplication extends GlobalContext {
     @Override
     protected void attachBaseContext(Context base){
         super.attachBaseContext(base);
-        MultiDex.install(this);
+//        MultiDex.install(this);
     }
 
     @Override
