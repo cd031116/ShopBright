@@ -4,6 +4,11 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="line">#d4d4d4</color>
+
+    <color name="personal_bg">#e9e9e9</color>
+    <color name="personal_row_text">#999999</color>
+
     <color name="login_commit">#e11f1f</color>
     <color name="login_text_color">#666666</color>
 </resources>

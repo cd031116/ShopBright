@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/line"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/row_collect_layout"
+        android:layout_width="match_parent"
+        android:layout_height="111px"
+        android:background="@color/comm_white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="27px"
+            android:drawableLeft="@drawable/personal_collect"
+            android:drawablePadding="27px"
+            android:gravity="center_vertical"
+            android:paddingBottom="17px"
+            android:paddingTop="17px"
+            android:text="@string/personal_my_collect" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="39px"
+            android:background="@drawable/personal_right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/row_look_his_layout"
+        android:layout_width="match_parent"
+        android:layout_height="111px"
+        android:layout_below="@id/row_collect_layout"
+        android:layout_marginTop="1dp"
+        android:background="@color/comm_white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="27px"
+            android:drawableLeft="@drawable/personal_history"
+            android:drawablePadding="27px"
+            android:gravity="center_vertical"
+            android:paddingBottom="17px"
+            android:paddingTop="17px"
+            android:text="@string/personal_look_history" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="39px"
+            android:background="@drawable/personal_right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/row_normal_msg_layout"
+        android:layout_width="match_parent"
+        android:layout_height="111px"
+        android:layout_below="@+id/row_look_his_layout"
+        android:layout_marginTop="1dp"
+        android:background="@color/comm_white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="27px"
+            android:drawableLeft="@drawable/personal_msg"
+            android:drawablePadding="27px"
+            android:gravity="center_vertical"
+            android:paddingBottom="17px"
+            android:paddingTop="17px"
+            android:text="@string/personal_normal_msg" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="39px"
+            android:background="@drawable/personal_right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/row_kefu_center_layout"
+        android:layout_width="match_parent"
+        android:layout_height="111px"
+        android:layout_below="@id/row_normal_msg_layout"
+        android:layout_marginTop="1dp"
+        android:background="@color/comm_white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="27px"
+            android:drawableLeft="@drawable/personal_service"
+            android:drawablePadding="27px"
+            android:gravity="center_vertical"
+            android:paddingBottom="17px"
+            android:paddingTop="17px"
+            android:text="@string/personal_kefu_center" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="39px"
+            android:background="@drawable/personal_right" />
+    </RelativeLayout>
+
+</RelativeLayout>
