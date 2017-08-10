@@ -12,6 +12,13 @@
     <string name="register_new_user">新用户注册</string>
     <string name="register_area">中国  0086</string>
 
+    <string name="reset_commit">确认修改</string>
+    <string name="reset_psw">重置密码</string>
+    <string name="reset_new_psw">确认新密码</string>
+    <string name="set_new_psw">设置新密码</string>
+    <string name="reset_account_login">已有账号登录</string>
+    <string name="reset_register_phone">请填写注册的手机号码</string>
+
     <string name="personal_my_order">我的订单</string>
     <string name="personal_all_order">全部订单</string>
     <string name="personal_pay">待付款</string>
