@@ -111,10 +111,10 @@ public class LoginActivity extends BaseActivity {
 
                 break;
             case R.id.forget:
-
+                startActivity(new Intent(LoginActivity.this,ResetPswActivity.class));
                 break;
             case R.id.register:
-
+                startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
                 break;
         }
     }
