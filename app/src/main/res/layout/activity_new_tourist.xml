@@ -8,7 +8,14 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="126px"
-        android:background="@color/comm_white"></RelativeLayout>
+        android:background="@color/comm_white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/reset_account_login" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/new_tourist_name_msg"
@@ -159,15 +166,40 @@
             android:textColor="@color/new_tourist_text_color"
             android:textSize="36px" />
 
-        <EditText
-            android:id="@+id/new_tourist_sex_edit"
+        <ImageView
+            android:id="@+id/new_tourist_sex_mail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="330px"
-            android:background="@null"
-            android:text="@string/new_tourist_name_edit"
-            android:textSize="30px" />
+            android:background="@drawable/yksf_red_ygou" />
+        <TextView
+            android:id="@+id/new_tourist_mail_text"
+            android:textSize="36px"
+            android:layout_toRightOf="@id/new_tourist_sex_mail"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="9px"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/new_tourist_mail"/>
+
+        <ImageView
+            android:id="@+id/new_tourist_sex_femail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/new_tourist_mail_text"
+            android:layout_marginLeft="135px"
+            android:background="@drawable/yksf_gray_gou" />
+        <TextView
+            android:id="@+id/new_tourist_femail_text"
+            android:textSize="36px"
+            android:layout_toRightOf="@id/new_tourist_sex_femail"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="9px"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/new_tourist_femail"/>
 
     </RelativeLayout>
 
@@ -209,11 +241,11 @@
         android:layout_marginLeft="155px"
         android:layout_marginRight="155px"
         android:layout_marginTop="102px"
+        android:background="@drawable/shape_login_commit"
+        android:gravity="center"
         android:text="@string/new_tourist_commit"
         android:textColor="@color/comm_white"
-        android:gravity="center"
-        android:textSize="36px"
-        android:background="@drawable/shape_login_commit" />
+        android:textSize="36px" />
 
 
 </RelativeLayout>

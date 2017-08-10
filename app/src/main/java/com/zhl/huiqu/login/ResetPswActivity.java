@@ -1,35 +1,38 @@
 package com.zhl.huiqu.login;
 
-import android.content.Intent;
 import android.text.InputType;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.utils.ToastUtils;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
- * Created by Administrator on 2017/8/9.
+ * Created by Administrator on 2017/8/10.
  */
 
-public class RegisterActivity extends BaseActivity {
+public class ResetPswActivity extends BaseActivity {
     @Bind(R.id.register_psw)
     EditText register_psw;
+    @Bind(R.id.register_psw_sure)
+    EditText register_psw_sure;
     @Bind(R.id.register_code)
     EditText register_code;
     @Bind(R.id.register_phone)
     EditText register_phone;
     @Bind(R.id.register_area)
     TextView register_area;
-    @Bind(R.id.register_psw_show)
-    TextView register_psw_show;
     @Bind(R.id.commit_text)
     TextView commit_text;
+    @Bind(R.id.reset_account_login)
+    TextView reset_account_login;
     @Bind(R.id.register_push_code)
     TextView register_push_code;
     @Bind(R.id.zhifubao)
@@ -43,7 +46,7 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_register;
+        return R.layout.activity_reset_psw;
     }
 
     @Override
@@ -56,27 +59,30 @@ public class RegisterActivity extends BaseActivity {
         super.initData();
     }
 
-    @OnClick({R.id.register_area, R.id.register_psw_show, R.id.commit_text, R.id.register_push_code,
+    @OnClick({R.id.register_area, R.id.reset_account_login, R.id.commit_text, R.id.register_push_code,
             R.id.zhifubao, R.id.wechat, R.id.login_qq, R.id.sina_weibo})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.register_area:
                 //TODO 手机地点
                 break;
+            case R.id.reset_account_login:
+                //TODO 跳转登录页面
+                break;
             case R.id.commit_text:
                 //TODO 提交注册
-                startActivity(new Intent(this, ResetPswActivity.class));
+                checkIsNull();
+
+                ToastUtils.showShortToast(this,getResources().getString(R.string.register_phone_null));
                 break;
             case R.id.register_push_code:
+                checkIsNull();
+
                 //TODO 发送验证码
-                break;
-            case R.id.register_psw_show:
-                showOrHindPsw();
                 break;
             case R.id.zhifubao:
                 break;
             case R.id.wechat:
-
                 break;
             case R.id.login_qq:
                 break;
@@ -89,15 +95,20 @@ public class RegisterActivity extends BaseActivity {
     }
 
     /**
-     * 显示或者隐藏密码
+     * 判断填写
      */
-    private void showOrHindPsw() {
-        if (register_psw.getInputType() == 129) {
-            // 显示密码  其实就是setInputType（144）
-            register_psw.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-        } else {
-            // 隐藏密码  其实就是setInputType（129）
-            register_psw.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        }
+    private void checkIsNull() {
+        String psw=register_psw.toString().trim();
+        String pswSure=register_psw_sure.toString().trim();
+        String phoneNum=register_phone.toString().trim();
+        String msgCode=register_code.toString().trim();
+        if (TextUtils.isEmpty(phoneNum))
+            ToastUtils.showShortToast(this,getResources().getString(R.string.register_phone_null));
+        if (TextUtils.isEmpty(msgCode))
+            ToastUtils.showShortToast(this,getResources().getString(R.string.register_msg_code_null));
+        if (TextUtils.isEmpty(psw))
+            ToastUtils.showShortToast(this,getResources().getString(R.string.register_psw_null));
+        if (TextUtils.isEmpty(pswSure))
+            ToastUtils.showShortToast(this,getResources().getString(R.string.register_psw_sure_null));
     }
 }

@@ -11,6 +11,10 @@
     <string name="register_phone">请填写正确的手机号码</string>
     <string name="register_new_user">新用户注册</string>
     <string name="register_area">中国  0086</string>
+    <string name="register_phone_null">手机号不能为空</string>
+    <string name="register_msg_code_null">短信验证码不能为空</string>
+    <string name="register_psw_null">密码填写不能为空</string>
+    <string name="register_psw_sure_null">密码确认填写不能为空</string>
 
     <string name="reset_commit">确认修改</string>
     <string name="reset_psw">重置密码</string>
@@ -32,7 +36,7 @@
     <string name="personal_your_like">猜你喜欢</string>
 
     <string name="new_tourist_name_text">中文姓名</string>
-    <string name="new_tourist_name_edit">与证件保持一致</string>
+    <string name="new_tourist_name_edit">与证件保持一致\n<font color="#e111818"><b>需包含汉字,生僻字可用拼音代替</b></font></string>
     <string name="new_tourist_card_type">证件类型</string>
     <string name="new_tourist_sfz">身份证</string>
     <string name="new_tourist_hz">护照</string>
@@ -41,9 +45,9 @@
     <string name="new_tourist_hxz">回乡证</string>
     <string name="new_tourist_tbz">台胞证</string>
     <string name="new_tourist_card_num">证件号码</string>
-    <string name="new_tourist_card_num_edit">请输入正确的证件号码</string>
+    <string name="new_tourist_card_num_edit">与证件保持一致\n<font color="#e111818"><b>请输入正确的证件号码</b></font></string>
     <string name="new_tourist_phone">手机号码</string>
-    <string name="new_tourist_phone_edit">与证件保持一致</string>
+    <string name="new_tourist_phone_edit">与证件保持一致\n<font color="#e111818"><b>请输入正确的手机号码</b></font></string>
     <string name="new_tourist_sex">性别</string>
     <string name="new_tourist_mail">男</string>
     <string name="new_tourist_femail">女</string>
@@ -51,5 +55,6 @@
     <string name="new_tourist_eamil_edit">选填</string>
     <string name="new_tourist_commit">提交保存</string>
     <string name="new_tourist_msg">姓名及证件信息</string>
+    <string name="new_tourist_title">新增游客身份</string>
 
 </resources>

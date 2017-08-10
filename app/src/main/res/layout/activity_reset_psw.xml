@@ -100,6 +100,7 @@
         android:gravity="right">
 
         <TextView
+            android:id="@+id/reset_account_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/reset_account_login"
@@ -121,8 +122,8 @@
         android:drawablePadding="30px"
         android:gravity="center_vertical"
         android:paddingLeft="30px"
-        android:text="@string/reset_new_psw"
-        android:textColor="@color/comm_white"
+        android:hint="@string/reset_new_psw"
+        android:textColorHint="@color/comm_white"
         android:textSize="36px" />
 
     <EditText
@@ -138,8 +139,8 @@
         android:drawablePadding="30px"
         android:gravity="center_vertical"
         android:paddingLeft="30px"
-        android:text="@string/set_new_psw"
-        android:textColor="@color/comm_white"
+        android:hint="@string/set_new_psw"
+        android:textColorHint="@color/comm_white"
         android:textSize="36px" />
 
 
@@ -156,8 +157,8 @@
         android:drawablePadding="30px"
         android:gravity="center_vertical"
         android:paddingLeft="30px"
-        android:text="@string/register_msg_code"
-        android:textColor="@color/comm_white"
+        android:hint="@string/register_msg_code"
+        android:textColorHint="@color/comm_white"
         android:textSize="36px" />
 
     <TextView
@@ -172,7 +173,7 @@
         android:background="@drawable/login_push_code"
         android:gravity="center"
         android:text="@string/register_push_code"
-        android:textColor="@color/login_text_color"
+        android:textColorHint="@color/comm_white"
         android:textSize="36px" />
 
     <EditText
@@ -188,8 +189,8 @@
         android:drawablePadding="30px"
         android:gravity="center_vertical"
         android:paddingLeft="30px"
-        android:text="@string/reset_register_phone"
-        android:textColor="@color/comm_white"
+        android:hint="@string/reset_register_phone"
+        android:textColorHint="@color/comm_white"
         android:textSize="36px" />
 
     <TextView

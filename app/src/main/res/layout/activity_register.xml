@@ -122,8 +122,8 @@
         android:drawablePadding="30px"
         android:gravity="center_vertical"
         android:paddingLeft="30px"
-        android:text="@string/register_psw"
-        android:textColor="@color/comm_white"
+        android:hint="@string/register_psw"
+        android:textColorHint="@color/comm_white"
         android:textSize="36px" />
     <TextView
         android:id="@+id/register_psw_show"
@@ -151,8 +151,8 @@
         android:drawablePadding="30px"
         android:gravity="center_vertical"
         android:paddingLeft="30px"
-        android:text="@string/register_msg_code"
-        android:textColor="@color/comm_white"
+        android:hint="@string/register_msg_code"
+        android:textColorHint="@color/comm_white"
         android:textSize="36px" />
 
     <TextView
@@ -183,8 +183,8 @@
         android:drawablePadding="30px"
         android:gravity="center_vertical"
         android:paddingLeft="30px"
-        android:text="@string/register_phone"
-        android:textColor="@color/comm_white"
+        android:hint="@string/register_phone"
+        android:textColorHint="@color/comm_white"
         android:textSize="36px" />
 
     <TextView
