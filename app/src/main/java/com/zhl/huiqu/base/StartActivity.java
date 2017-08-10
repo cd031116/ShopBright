@@ -1,11 +1,12 @@
 package com.zhl.huiqu.base;
 
+import android.content.Intent;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 
 import com.zhl.huiqu.R;
-import com.zhl.huiqu.login.LoginFragment;
+import com.zhl.huiqu.login.LoginActivity;
 
 import butterknife.Bind;
 
@@ -50,7 +51,7 @@ public class StartActivity extends BaseActivity {
 
     private void redirectTo() {
          BaseConfig bg=BaseConfig.getInstance(this);
-        LoginFragment.launch(this);
+        startActivity(new Intent(StartActivity.this,LoginActivity.class));
         StartActivity.this.finish();
     }
 

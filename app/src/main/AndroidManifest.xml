@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zhl.huiqu">
+
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".base.MyApplication"
         android:allowBackup="true"
@@ -11,8 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--<activity android:name=".base.StartActivity">-->
-        <activity android:name=".login.RegisterActivity">
+
+        <!-- <activity android:name=".base.StartActivity"> -->
+        <activity android:name=".base.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,13 +25,14 @@
 
         <!-- 微信支付回调 -->
         <activity
-            android:name="com.zhl.huiqu.wxapi.WXPayEntryActivity"
+            android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:launchMode="singleTop">
-        </activity>
-        <activity android:name=".base.ContainerActivity"/>
-        <activity android:name=".MainActivity"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTop"></activity>
+        <activity android:name=".base.ContainerActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".login.LoginActivity"></activity>
     </application>
 
 </manifest>
