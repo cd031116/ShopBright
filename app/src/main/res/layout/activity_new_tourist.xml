@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/personal_bg">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="126px"
+        android:background="@color/comm_white"></RelativeLayout>
+
+    <TextView
+        android:id="@+id/new_tourist_name_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="84px"
+        android:layout_below="@id/toolbar"
+        android:drawablePadding="15px"
+        android:drawableRight="@drawable/yksf_wh"
+        android:gravity="center_vertical"
+        android:paddingLeft="33px"
+        android:text="@string/new_tourist_msg"
+        android:textSize="36px" />
+
+    <RelativeLayout
+        android:id="@+id/new_tourist_name_layout"
+        android:layout_width="match_parent"
+        android:layout_height="114px"
+        android:layout_below="@id/new_tourist_name_msg"
+        android:background="@color/comm_white">
+
+        <TextView
+            android:id="@+id/new_tourist_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="39px"
+            android:text="@string/new_tourist_name_text"
+            android:textColor="@color/new_tourist_text_color"
+            android:textSize="36px" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="330px"
+            android:background="@null"
+            android:text="@string/new_tourist_name_edit"
+            android:textSize="30px" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/new_tourist_cardtype_layout"
+        android:layout_width="match_parent"
+        android:layout_height="114px"
+        android:layout_below="@id/new_tourist_name_layout"
+        android:layout_marginTop="2px"
+        android:background="@color/comm_white">
+
+        <TextView
+            android:id="@+id/new_tourist_cardtype_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="39px"
+            android:text="@string/new_tourist_card_type"
+            android:textColor="@color/new_tourist_text_color"
+            android:textSize="36px" />
+
+        <TextView
+            android:id="@+id/new_tourist_cardtype_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="330px"
+            android:text="@string/new_tourist_sfz"
+            android:textColor="@color/new_tourist_text_color"
+            android:textSize="30px" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/new_tourist_cardnum_layout"
+        android:layout_width="match_parent"
+        android:layout_height="114px"
+        android:layout_below="@id/new_tourist_cardtype_layout"
+        android:layout_marginTop="2px"
+        android:background="@color/comm_white">
+
+        <TextView
+            android:id="@+id/new_tourist_cardnum_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="39px"
+            android:text="@string/new_tourist_card_num"
+            android:textColor="@color/new_tourist_text_color"
+            android:textSize="36px" />
+
+        <EditText
+            android:id="@+id/new_tourist_cardnum_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="330px"
+            android:background="@null"
+            android:text="@string/new_tourist_card_num_edit"
+            android:textSize="30px" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/new_tourist_phone_layout"
+        android:layout_width="match_parent"
+        android:layout_height="114px"
+        android:layout_below="@id/new_tourist_cardnum_layout"
+        android:layout_marginTop="2px"
+        android:background="@color/comm_white">
+
+        <TextView
+            android:id="@+id/new_tourist_phone_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="39px"
+            android:text="@string/new_tourist_phone"
+            android:textColor="@color/new_tourist_text_color"
+            android:textSize="36px" />
+
+        <EditText
+            android:id="@+id/new_tourist_phone_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="330px"
+            android:background="@null"
+            android:text="@string/new_tourist_phone_edit"
+            android:textSize="30px" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/new_tourist_sex_layout"
+        android:layout_width="match_parent"
+        android:layout_height="114px"
+        android:layout_below="@id/new_tourist_phone_layout"
+        android:layout_marginTop="2px"
+        android:background="@color/comm_white">
+
+        <TextView
+            android:id="@+id/new_tourist_sex_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="39px"
+            android:text="@string/new_tourist_sex"
+            android:textColor="@color/new_tourist_text_color"
+            android:textSize="36px" />
+
+        <EditText
+            android:id="@+id/new_tourist_sex_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="330px"
+            android:background="@null"
+            android:text="@string/new_tourist_name_edit"
+            android:textSize="30px" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/new_tourist_eamil_layout"
+        android:layout_width="match_parent"
+        android:layout_height="114px"
+        android:layout_below="@id/new_tourist_sex_layout"
+        android:layout_marginTop="2px"
+        android:background="@color/comm_white">
+
+        <TextView
+            android:id="@+id/new_tourist_eamil_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="39px"
+            android:text="@string/new_tourist_email"
+            android:textColor="@color/new_tourist_text_color"
+            android:textSize="36px" />
+
+        <EditText
+            android:id="@+id/new_tourist_eamil_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="330px"
+            android:background="@null"
+            android:text="@string/new_tourist_eamil_edit"
+            android:textSize="30px" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/new_tourist_commit_btn"
+        android:layout_width="match_parent"
+        android:layout_height="102px"
+        android:layout_below="@id/new_tourist_eamil_layout"
+        android:layout_marginLeft="155px"
+        android:layout_marginRight="155px"
+        android:layout_marginTop="102px"
+        android:text="@string/new_tourist_commit"
+        android:textColor="@color/comm_white"
+        android:gravity="center"
+        android:textSize="36px"
+        android:background="@drawable/shape_login_commit" />
+
+
+</RelativeLayout>

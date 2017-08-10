@@ -24,4 +24,25 @@
     <string name="personal_kefu_center">客服中心</string>
     <string name="personal_your_like">猜你喜欢</string>
 
+    <string name="new_tourist_name_text">中文姓名</string>
+    <string name="new_tourist_name_edit">与证件保持一致</string>
+    <string name="new_tourist_card_type">证件类型</string>
+    <string name="new_tourist_sfz">身份证</string>
+    <string name="new_tourist_hz">护照</string>
+    <string name="new_tourist_gatxz">港澳通行证</string>
+    <string name="new_tourist_twtxz">台湾通行证</string>
+    <string name="new_tourist_hxz">回乡证</string>
+    <string name="new_tourist_tbz">台胞证</string>
+    <string name="new_tourist_card_num">证件号码</string>
+    <string name="new_tourist_card_num_edit">请输入正确的证件号码</string>
+    <string name="new_tourist_phone">手机号码</string>
+    <string name="new_tourist_phone_edit">与证件保持一致</string>
+    <string name="new_tourist_sex">性别</string>
+    <string name="new_tourist_mail">男</string>
+    <string name="new_tourist_femail">女</string>
+    <string name="new_tourist_email">电子邮件</string>
+    <string name="new_tourist_eamil_edit">选填</string>
+    <string name="new_tourist_commit">提交保存</string>
+    <string name="new_tourist_msg">姓名及证件信息</string>
+
 </resources>
