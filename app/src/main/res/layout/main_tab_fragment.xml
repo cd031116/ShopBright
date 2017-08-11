@@ -50,8 +50,6 @@
 
                             <include layout="@layout/main_center"/>
 
-
-
                     </LinearLayout>
 
                     <android.support.v7.widget.Toolbar

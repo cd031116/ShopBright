@@ -19,7 +19,6 @@
     android:layout_marginRight="20px"
     android:drawableRight="@drawable/mpxq_down"/>
 
-
     <RelativeLayout
         android:id="@+id/searh_line"
         android:layout_width="match_parent"
@@ -29,6 +28,7 @@
         android:layout_toRightOf="@+id/address">
 
         <ImageView
+            android:id="@+id/scan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dip"
@@ -49,19 +49,16 @@
             android:text="输入您要搜索的景点/地区"
             android:textColor="#666666"
             android:textSize="32px" />
-
     </RelativeLayout>
 
     <ImageView
         android:id="@+id/info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70px"
+        android:layout_height="70px"
         android:layout_centerVertical="true"
         android:layout_marginLeft="45px"
         android:layout_marginRight="45px"
         android:layout_alignParentRight="true"
         android:src="@drawable/hp_gray_msg"/>
-
-
 
 </RelativeLayout>

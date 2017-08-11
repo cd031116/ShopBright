@@ -1,6 +1,7 @@
 package com.zhl.huiqu.main;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -14,6 +15,7 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.scan.CaptureActivity;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.widget.GlideImageLoader;
 
@@ -21,6 +23,7 @@ import org.aisen.android.common.utils.Logger;
 import org.aisen.android.common.utils.SystemUtils;
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.support.bean.TabItem;
+import org.aisen.android.support.inject.OnClick;
 import org.aisen.android.support.inject.ViewInject;
 import org.aisen.android.ui.fragment.ATabsTabLayoutFragment;
 
@@ -60,7 +63,6 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         int width = SystemUtils.getScreenWidth(getActivity());
         setBanner();
     }
-
 
     @Override
     public void onPause() {
@@ -146,6 +148,17 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         banner.start();
 
     }
+
+
+    @OnClick({R.id.scan})
+    void onclik(View v){
+        switch (v.getId()){
+            case R.id.scan:
+                startActivity(new Intent(getActivity(), CaptureActivity.class));
+                break;
+        }
+    }
+
 
 
 
