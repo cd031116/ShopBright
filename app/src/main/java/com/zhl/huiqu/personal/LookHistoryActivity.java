@@ -1,5 +1,6 @@
 package com.zhl.huiqu.personal;
 
+import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 
 /**
@@ -10,7 +11,7 @@ import com.zhl.huiqu.base.BaseActivity;
 public class LookHistoryActivity extends BaseActivity{
     @Override
     protected int getLayoutId() {
-        return super.getLayoutId();
+        return R.layout.activity_my_collect;
     }
 
     @Override

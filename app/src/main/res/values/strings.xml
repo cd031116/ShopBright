@@ -75,6 +75,25 @@
     <string name="kefu_phone_text">惠趣旅行官方电话\n<font color="#e111818"><b>400-9988-725</b></font></string>
     <string name="call_kefu_phone">拨打官方客服电话400-9988-725  </string>
 
+    <string name="order_detail">订单详情</string>
+    <string name="order_detail_commit">提交订单</string>
+    <string name="order_detail_should_pay">待支付</string>
+    <string name="order_detail_ticketing">出票中</string>
+    <string name="order_detail_success">交易成功</string>
+    <string name="order_detail_goin_type">入园方式</string>
+    <string name="order_detail_coupon_using">优惠券使用</string>
+    <string name="order_detail_total">总价</string>
+    <string name="order_detail_refund_design">退订规则</string>
+    <string name="order_detail_deal_time">成交时间</string>
+    <string name="order_detail_pay_type">支付方式</string>
+    <string name="order_detail_apply_refund">申请退款</string>
+    <string name="order_detail_huiqu_phone">惠趣客服热线</string>
+    <string name="account_msg">联系人信息</string>
+    <string name="account_phone">手机号：</string>
+    <string name="account_name">姓名：</string>
+
+
+
     <string name="scan_tips">将二维码图片对准扫描框即可自动扫描</string>
 
 

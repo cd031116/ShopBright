@@ -1,5 +1,6 @@
 package com.zhl.huiqu.personal;
 
+import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 
 /**
@@ -10,7 +11,7 @@ import com.zhl.huiqu.base.BaseActivity;
 public class KefuCenterActivity extends BaseActivity{
     @Override
     protected int getLayoutId() {
-        return super.getLayoutId();
+        return R.layout.activity_kefu_center;
     }
 
     @Override
