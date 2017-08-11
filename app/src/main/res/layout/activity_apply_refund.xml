@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/view_top"
+        layout="@layout/view_top" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="186px"
+        android:paddingBottom="15px"
+        android:paddingLeft="98px"
+        android:paddingRight="98px"
+        android:paddingTop="15px">
+
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

@@ -58,7 +58,22 @@
     <string name="new_tourist_title">新增游客身份</string>
 
     <string name="history_is_null">历史记录为空</string>
+    <string name="all_order">全部订单</string>
+    <string name="all_order_sx">筛选</string>
+    <string name="all_order_ticket">门票</string>
+    <string name="all_order_delete">删除</string>
+    <string name="all_order_goout">待出行</string>
+    <string name="all_order_complete">已完成</string>
+    <string name="all_order_tuikuaning">退款中</string>
+    <string name="all_order_outing_time">出游时间</string>
+    <string name="all_order_order_num">订单号</string>
 
+    <string name="kefu_cpzx">产品咨询</string>
+    <string name="kefu_sqzx">售前咨询</string>
+    <string name="kefu_order_question">订单问题</string>
+    <string name="kefu_center">客服中心</string>
+    <string name="kefu_phone_text">惠趣旅行官方电话\n<font color="#e111818"><b>400-9988-725</b></font></string>
+    <string name="call_kefu_phone">拨打官方客服电话400-9988-725  </string>
 
 
 </resources>

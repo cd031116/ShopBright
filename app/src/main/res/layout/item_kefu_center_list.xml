@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingLeft="50px"
+    android:paddingTop="40px"
+    android:paddingBottom="40px"
+    android:layout_height="231px">
+    
+    <TextView
+        android:id="@+id/kefu_cpzx"
+        android:text="@string/kefu_cpzx"
+        android:layout_width="wrap_content"
+        android:layout_height="34px" />
+    <TextView
+        android:id="@+id/kefu_sqzx"
+        android:layout_below="@id/kefu_cpzx"
+        android:layout_marginTop="24px"
+        android:text="@string/kefu_sqzx"
+        android:layout_width="wrap_content"
+        android:layout_height="34px" />
+    <TextView
+        android:id="@+id/kefu_order_question"
+        android:layout_below="@id/kefu_sqzx"
+        android:layout_marginTop="24px"
+        android:text="@string/kefu_order_question"
+        android:layout_width="wrap_content"
+        android:layout_height="34px" />
+    
+    <TextView
+        android:layout_centerInParent="true"
+        android:id="@+id/kefu_phone_text"
+        android:text="@string/kefu_phone_text"
+        android:layout_marginLeft="201px"
+        android:drawablePadding="24px"
+        android:drawableLeft="@drawable/kefu_phone"
+        android:layout_toRightOf="@id/kefu_cpzx"
+        android:layout_width="wrap_content"
+        android:layout_height="90px" />
+
+</RelativeLayout>

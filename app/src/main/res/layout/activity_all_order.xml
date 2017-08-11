@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/view_top"
+        layout="@layout/view_top" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="141px"
+        android:layout_alignParentBottom="true"
+        android:text="@string/all_order_sx"
+        android:drawablePadding="9px"
+        android:gravity="center"
+        android:drawableTop="@drawable/all_order_sx"
+        android:background="@color/all_order_text"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/all_order_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/view_top" />
+</RelativeLayout>

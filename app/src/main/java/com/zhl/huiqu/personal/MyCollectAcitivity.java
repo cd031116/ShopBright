@@ -7,12 +7,11 @@ import android.widget.TextView;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 
-import java.util.List;
-
 import butterknife.Bind;
 
 /**
- * Created by Administrator on 2017/8/11.
+ * 我的收藏
+ * Created by dw on 2017/8/11.
  */
 
 public class MyCollectAcitivity extends BaseActivity {

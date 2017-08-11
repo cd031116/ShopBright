@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/view_top" layout="@layout/view_top"/>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="141px"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:background="@color/comm_white">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginRight="93px"
+            android:layout_marginLeft="93px"
+            android:background="@drawable/personal_kefu_phone"
+            android:gravity="center"
+            android:textColor="@color/comm_white"
+            android:text="@string/call_kefu_phone"
+            android:layout_height="90px" />
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_below="@id/view_top"
+        android:layout_height="match_parent"/>
+    
+</RelativeLayout>
