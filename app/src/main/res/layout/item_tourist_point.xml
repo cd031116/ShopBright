@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="375px"
+    android:background="@color/comm_white">
+
+    <ImageView
+        android:id="@+id/tourist_view"
+        android:layout_width="312px"
+        android:layout_height="273px"
+        android:layout_marginBottom="51px"
+        android:layout_marginLeft="15px"
+        android:layout_marginTop="51px" />
+
+    <TextView
+        android:id="@+id/tourist_area"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="27px"
+        android:layout_marginTop="51px"
+        android:layout_toRightOf="@id/tourist_view"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="@string/register_title"
+        android:textColor="@color/black_text"
+        android:textSize="42px" />
+
+    <TextView
+        android:id="@+id/tourist_ms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tourist_area"
+        android:layout_marginLeft="27px"
+        android:layout_marginTop="24px"
+        android:layout_toRightOf="@id/tourist_view"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="@string/register_title"
+        android:textColor="@color/gray_text"
+        android:textSize="33px" />
+
+    <TextView
+        android:id="@+id/tourist_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tourist_ms"
+        android:layout_marginLeft="27px"
+        android:layout_marginTop="24px"
+        android:layout_toRightOf="@id/tourist_view"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="@string/register_title"
+        android:textColor="@color/gray_text"
+        android:textSize="33px" />
+
+    <TextView
+        android:id="@+id/tourist_place_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tourist_ms"
+        android:layout_marginLeft="27px"
+        android:layout_marginTop="24px"
+        android:layout_toRightOf="@id/tourist_place"
+        android:text="@string/register_title"
+        android:textColor="@color/red_text"
+        android:textSize="33px" />
+
+    <TextView
+        android:id="@+id/tourist_place_jibie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tourist_ms"
+        android:layout_marginLeft="27px"
+        android:layout_marginTop="24px"
+        android:layout_toRightOf="@id/tourist_place_score"
+        android:text="@string/register_title"
+        android:textColor="@color/gray_text"
+        android:textSize="33px" />
+
+    <TextView
+        android:id="@+id/tourist_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="60px"
+        android:layout_alignBottom="@id/tourist_view"
+        android:layout_marginLeft="27px"
+        android:layout_toRightOf="@id/tourist_view"
+        android:background="@color/tourist_tag"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:paddingLeft="15px"
+        android:paddingRight="15px"
+        android:singleLine="true"
+        android:text="@string/register_title"
+        android:textColor="@color/comm_white"
+        android:textSize="33px" />
+
+    <TextView
+        android:id="@+id/tourist_price"
+        android:layout_width="wrap_content"
+        android:layout_height="60px"
+        android:layout_alignBottom="@id/tourist_view"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="36px"
+        android:gravity="center"
+        android:text="@string/register_title"
+        android:textSize="36px" />
+
+</RelativeLayout>

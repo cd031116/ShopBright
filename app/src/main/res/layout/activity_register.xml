@@ -121,21 +121,22 @@
         android:drawableLeft="@drawable/login_password"
         android:drawablePadding="30px"
         android:gravity="center_vertical"
-        android:paddingLeft="30px"
         android:hint="@string/register_psw"
+        android:paddingLeft="30px"
         android:textColorHint="@color/comm_white"
         android:textSize="36px" />
+
     <TextView
         android:id="@+id/register_psw_show"
         android:layout_width="wrap_content"
         android:layout_height="102px"
-        android:layout_alignParentRight="true"
         android:layout_above="@id/user_register_layout"
-        android:gravity="center_vertical"
-        android:paddingRight="48px"
-        android:drawableRight="@drawable/login_show"
+        android:layout_alignParentRight="true"
         android:layout_marginBottom="33px"
-        android:layout_marginRight="207px"/>
+        android:layout_marginRight="207px"
+        android:drawableRight="@drawable/login_show"
+        android:gravity="center_vertical"
+        android:paddingRight="48px" />
 
 
     <EditText
@@ -150,8 +151,8 @@
         android:drawableLeft="@drawable/login_vertify_phone"
         android:drawablePadding="30px"
         android:gravity="center_vertical"
-        android:paddingLeft="30px"
         android:hint="@string/register_msg_code"
+        android:paddingLeft="30px"
         android:textColorHint="@color/comm_white"
         android:textSize="36px" />
 
@@ -182,8 +183,8 @@
         android:drawableLeft="@drawable/login_phone"
         android:drawablePadding="30px"
         android:gravity="center_vertical"
-        android:paddingLeft="30px"
         android:hint="@string/register_phone"
+        android:paddingLeft="30px"
         android:textColorHint="@color/comm_white"
         android:textSize="36px" />
 
@@ -198,26 +199,17 @@
         android:background="@drawable/shape_login_edittext"
         android:drawableLeft="@drawable/login_"
         android:drawablePadding="30px"
+        android:drawableRight="@drawable/login_arrow_right"
         android:gravity="center_vertical"
         android:paddingLeft="30px"
-        android:text="@string/register_area"
-        android:drawableRight="@drawable/login_arrow_right"
         android:paddingRight="48px"
+        android:text="@string/register_area"
         android:textColor="@color/comm_white"
         android:textSize="36px" />
 
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="126px"
-        android:background="@color/comm_white"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="zhuce" />
-    </RelativeLayout>
+    <include
+        android:id="view_top"
+        layout="@layout/view_top" />
 
 </RelativeLayout>

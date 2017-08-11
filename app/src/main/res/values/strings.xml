@@ -57,4 +57,8 @@
     <string name="new_tourist_msg">姓名及证件信息</string>
     <string name="new_tourist_title">新增游客身份</string>
 
+    <string name="history_is_null">历史记录为空</string>
+
+
+
 </resources>

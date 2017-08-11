@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/view_top"
+        layout="@layout/view_top" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/my_collect_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/personal_bg"
+        android:layout_below="@id/view_top" />
+
+    <TextView
+        android:id="@+id/his_is_null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:background="@color/personal_bg"
+        android:text="@string/history_is_null"
+        android:layout_below="@id/view_top" />
+</RelativeLayout>
