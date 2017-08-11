@@ -73,7 +73,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"
-                        app:tabIndicatorColor="#00d2ec"
+                        app:tabIndicatorColor="#E43232"
                         app:tabIndicatorHeight="2dip"
                         app:tabTextAppearance="@style/MyTabLayoutTextAppearance" />
                 </RelativeLayout>

@@ -93,9 +93,9 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     @Override
     protected ArrayList<TabItem> generateTabs() {
         ArrayList<TabItem> tabs = new ArrayList<>();
-        tabs.add(new TabItem("1", "详情"));
-        tabs.add(new TabItem("2", "测试"));
-
+        tabs.add(new TabItem("1", "景区门票"));
+        tabs.add(new TabItem("2", "跟团游"));
+        tabs.add(new TabItem("3", "酒店+景点"));
         return tabs;
     }
 
@@ -105,7 +105,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         if (getTabItems().size() <= 3) {
             getTablayout().setTabMode(TabLayout.MODE_FIXED);
         }
-        getTablayout().setTabTextColors(Color.parseColor("#333333"), Color.parseColor("#00d2ec"));
+        getTablayout().setTabTextColors(Color.parseColor("#333333"), Color.parseColor("#333333"));
     }
 
 
