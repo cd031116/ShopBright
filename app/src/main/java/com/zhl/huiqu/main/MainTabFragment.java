@@ -150,11 +150,14 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     }
 
 
-    @OnClick({R.id.scan})
+    @OnClick({R.id.scan,R.id.searh_line})
     void onclik(View v){
         switch (v.getId()){
             case R.id.scan:
                 startActivity(new Intent(getActivity(), CaptureActivity.class));
+                break;
+            case R.id.searh_line:
+
                 break;
         }
     }

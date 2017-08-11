@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:id="@+id/tag"
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:app="http://schemas.android.com/apk/res-auto"
+          xmlns:tools="http://schemas.android.com/tools"
+          android:layout_width="wrap_content"
+          android:layout_height="30dip"
+          android:background="@drawable/bg_search_tag"
+          android:gravity="center"
+          android:paddingLeft="16dp"
+          android:paddingRight="16dp"
+          android:textColor="#999999"
+          android:textSize="14sp"
+          app:tcvBorder="8dip"
+          app:tcvTextSize="14sp"
+          app:tcvTextColor="#838282"
+          app:tcvBackground="@drawable/bg_search_tag"
+          tools:text="哈哈哈"/>

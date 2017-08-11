@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EFEFEF"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:background="@color/comm_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="12dip"
+        android:paddingRight="16dip">
+
+        <LinearLayout
+            android:id="@+id/line_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="16dip"
+                android:src="@drawable/login_arrow_left" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/searh_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/go_search"
+            android:layout_toRightOf="@+id/line_back"
+            android:background="@drawable/search_bg">
+
+            <ImageView
+                android:id="@+id/scan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dip"
+                android:padding="20px"
+                android:scaleType="centerCrop"
+                android:src="@drawable/search_sm" />
+
+            <EditText
+                android:id="@+id/editSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="30px"
+                android:background="@null"
+                android:drawableLeft="@drawable/search_ss"
+                android:drawablePadding="30px"
+                android:gravity="center_vertical"
+                android:text="输入您要搜索的景点/地区"
+                android:textColor="#666666"
+                android:textSize="32px" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/go_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="10px"
+            android:gravity="center_vertical"
+            android:src="@drawable/hp_gray_msg"
+            android:text="搜索" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip">
+
+        <RelativeLayout
+            android:id="@+id/layHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dip"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/txtHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="16dip"
+                android:text="搜索历史"
+                android:textColor="#333333"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/txtClearHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dip"
+                android:background="@drawable/search_delete"
+                android:textSize="16sp" />
+
+            <eher.edu.c.widget.TagCloudView
+                android:id="@+id/tagsHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtHistory"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="10dip"></eher.edu.c.widget.TagCloudView>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/text_school"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="16dip"
+            android:layout_marginTop="10dip"
+            android:text="热门搜索"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:visibility="visible" />
+
+        <eher.edu.c.widget.TagCloudView
+            android:id="@+id/tagsSchool"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtHistory"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="10dip"
+            android:visibility="visible"></eher.edu.c.widget.TagCloudView>
+    </LinearLayout>
+
+    <include
+        android:id="@id/layoutLoading"
+        layout="@layout/comm_lay_loading"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone" />
+
+    <include
+        android:id="@id/layoutLoadFailed"
+        layout="@layout/ui_common_failed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+</LinearLayout>
