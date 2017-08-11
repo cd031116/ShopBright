@@ -17,4 +17,9 @@
     <color name="login_commit">#e11f1f</color>
     <color name="login_text_color">#666666</color>
     <color name="new_tourist_text_color">#333333</color>
+    <!--首页-->
+    <color name="white">#ffffff</color>
+    <color name="tab_ckeck">#00d2cc</color>
+    <color name="tab_no">#333333</color>
+
 </resources>

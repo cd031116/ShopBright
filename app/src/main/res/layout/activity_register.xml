@@ -209,7 +209,6 @@
 
 
     <include
-        android:id="view_top"
         layout="@layout/view_top" />
 
 </RelativeLayout>

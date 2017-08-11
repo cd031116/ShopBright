@@ -3,6 +3,7 @@ package com.zhl.huiqu.personal;
 import android.view.ViewGroup;
 
 import com.zhl.huiqu.base.BaseFragment;
+import com.zhl.huiqu.main.MainTabFragment;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 
 /**
@@ -10,6 +11,10 @@ import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
  */
 
 public class PersonalFragment extends BaseFragment{
+
+    public static PersonalFragment newInstance(){
+        return new PersonalFragment();
+    }
     @Override
     public int inflateContentView() {
         return 0;

@@ -13,6 +13,10 @@ import android.widget.TextView;
 
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.DoubleClickExitHelper;
+import com.zhl.huiqu.main.MainTabFragment;
+import com.zhl.huiqu.personal.PersonalFragment;
+
+import org.aisen.android.common.utils.Logger;
 
 import java.util.List;
 
@@ -43,6 +47,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initView(){
         super.initView();
+        mFragmentMan = getFragmentManager();
         mDoubleClickExit = new DoubleClickExitHelper(this);
     }
 
@@ -68,7 +73,8 @@ public class MainActivity extends BaseActivity {
             if (mCurrentFragment == null){
                 switch (index){
                     case 0:
-//                        mCurrentFragment = MainProductTabFragment.newInstance();
+                        Logger.d("mCurrentFragment");
+                        mCurrentFragment = MainTabFragment.newInstance();
                         break;
                     case 1:
 //                       mCurrentFragment =StartScanActivity.launch(MainActivity.this);//子Fragment实例
@@ -77,7 +83,7 @@ public class MainActivity extends BaseActivity {
 //                        mCurrentFragment =FindFragment.newInstance();//子Fragment实例
                         break;
                     case 3:
-//                        mCurrentFragment =IsMeFragment.newInstance();//子Fragment实例
+                        mCurrentFragment = PersonalFragment.newInstance();//子Fragment实例
                         break;
                 }
                 transaction.add(R.id.id_content, mCurrentFragment, tag);
@@ -91,7 +97,6 @@ public class MainActivity extends BaseActivity {
                 transaction.hide(mLastFragment);
             }
             transaction.commit();
-
             lastFragmentTag = tag;
         }
     }
@@ -140,20 +145,22 @@ public class MainActivity extends BaseActivity {
         initFoot();
         if(select==0){
             mTabs.get(0).setSelected(true);
-            mText.get(0).setTextColor(Color.parseColor("#00d2ec"));
+            mText.get(0).setTextColor(Color.parseColor("#e11818"));
             changeFrament("pFragment",0);
+            Logger.d("select==0");
         }else if(select==1){
             mTabs.get(1).setSelected(true);
-            mText.get(1).setTextColor(Color.parseColor("#00d2ec"));
+            mText.get(1).setTextColor(Color.parseColor("#e11818"));
             changeFrament("dFragment",1);
         }else if(select==2){
             mTabs.get(2).setSelected(true);
-            mText.get(2).setTextColor(Color.parseColor("#00d2ec"));
+            mText.get(2).setTextColor(Color.parseColor("#e11818"));
             changeFrament("dFragment",2);
         }else if(select==3){
             mTabs.get(3).setSelected(true);
-            mText.get(3).setTextColor(Color.parseColor("#00d2ec"));
+            mText.get(3).setTextColor(Color.parseColor("#e11818"));
             changeFrament("fFragment",3);
+            Logger.d("select==3");
         }
     }
 
@@ -162,10 +169,10 @@ public class MainActivity extends BaseActivity {
         mTabs.get(1).setSelected(false);
         mTabs.get(2).setSelected(false);
         mTabs.get(3).setSelected(false);
-        mText.get(0).setTextColor(Color.parseColor("#a1b0b2"));
-        mText.get(1).setTextColor(Color.parseColor("#999999"));
-        mText.get(2).setTextColor(Color.parseColor("#a1b0b2"));
-        mText.get(3).setTextColor(Color.parseColor("#a1b0b2"));
+        mText.get(0).setTextColor(Color.parseColor("#494949"));
+        mText.get(1).setTextColor(Color.parseColor("#494949"));
+        mText.get(2).setTextColor(Color.parseColor("#494949"));
+        mText.get(3).setTextColor(Color.parseColor("#494949"));
     }
     @Override
     public void onResume(){

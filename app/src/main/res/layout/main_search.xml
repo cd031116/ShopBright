@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_search"
+    android:layout_width="match_parent"
+    android:layout_height="150px"
+    android:padding="30px"
+    android:background="#ffffff">
+
+<TextView
+    android:id="@+id/address"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="长沙"
+    android:drawablePadding="9px"
+    android:gravity="center_vertical"
+    android:layout_centerVertical="true"
+    android:textSize="32px"
+    android:layout_marginLeft="30px"
+    android:layout_marginRight="20px"
+    android:drawableRight="@drawable/mpxq_down"/>
+
+
+    <RelativeLayout
+        android:id="@+id/searh_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_bg"
+        android:layout_toLeftOf="@+id/info"
+        android:layout_toRightOf="@+id/address">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dip"
+            android:padding="20px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/search_sm" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:drawableLeft="@drawable/search_ss"
+            android:drawablePadding="30px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30px"
+            android:text="输入您要搜索的景点/地区"
+            android:textColor="#666666"
+            android:textSize="32px" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="45px"
+        android:layout_marginRight="45px"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/hp_gray_msg"/>
+
+
+
+</RelativeLayout>

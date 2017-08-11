@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mian_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="15px">
+    <!--1-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="262px"
+            android:layout_weight="1"
+            android:background="@drawable/hp_mp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="262px"
+            android:layout_marginLeft="5px"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#FF5058"
+                android:gravity="center"
+                android:textSize="@dimen/t_size"
+                android:padding="30px"
+                android:text="浪漫海景"
+                android:textColor="@color/white" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5px"
+                android:layout_weight="1"
+                android:background="#FF5058"
+                android:gravity="center"
+                android:padding="30px"
+                android:textSize="@dimen/t_size"
+                android:text="游乐世界"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="262px"
+            android:layout_marginLeft="5px"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/mian_right_top"
+                android:gravity="center"
+                android:padding="30px"
+                android:text="风景名胜"
+                android:textSize="@dimen/t_size"
+                android:textColor="@color/white" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5px"
+                android:layout_weight="1"
+                android:background="#FF5058"
+                android:gravity="center"
+                android:padding="30px"
+                android:textSize="@dimen/t_size"
+                android:text="休闲娱乐"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--2-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginTop="5px"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="262px"
+            android:layout_weight="1"
+            android:background="@drawable/hp_jd" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="262px"
+            android:layout_marginLeft="5px"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#47ADFF"
+                android:gravity="center"
+                android:padding="30px"
+                android:textSize="@dimen/t_size"
+                android:text="商务酒店"
+                android:textColor="@color/white" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5px"
+                android:layout_weight="1"
+                android:background="#47ADFF"
+                android:gravity="center"
+                android:textSize="@dimen/t_size"
+                android:padding="30px"
+                android:text="温泉酒店"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="262px"
+            android:layout_marginLeft="5px"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#47ADFF"
+                android:gravity="center"
+                android:padding="30px"
+                android:textSize="@dimen/t_size"
+                android:text="快捷酒店"
+                android:textColor="@color/white" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5px"
+                android:layout_weight="1"
+                android:background="#47ADFF"
+                android:gravity="center"
+                android:padding="30px"
+                android:text="民宿客栈"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--3-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginTop="5px"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="262px"
+            android:layout_weight="1"
+            android:background="@drawable/hp_gty" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="262px"
+            android:layout_marginLeft="5px"
+            android:layout_weight="1"
+            android:textSize="@dimen/t_size"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="262px"
+                android:layout_weight="1"
+                android:background="#11BE64"
+                android:gravity="center"
+                android:padding="30px"
+                android:textSize="@dimen/t_size"
+                android:text="酒店+景点"
+                android:textColor="@color/white" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="262px"
+                android:layout_marginTop="5px"
+                android:layout_weight="1"
+                android:background="#11BE64"
+                android:textSize="@dimen/t_size"
+                android:gravity="center"
+                android:padding="30px"
+                android:text="周边主题"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="262px"
+            android:layout_marginLeft="5px"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="262px"
+                android:layout_weight="1"
+                android:background="#11BE64"
+                android:gravity="center"
+                android:padding="30px"
+                android:text="目的地"
+                android:textSize="@dimen/t_size"
+                android:textColor="@color/white" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="262px"
+                android:layout_marginTop="5px"
+                android:layout_weight="1"
+                android:background="@drawable/main_bottem_right"
+                android:gravity="center"
+                android:padding="30px"
+                android:textSize="@dimen/t_size"
+                android:text="热门线路"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
