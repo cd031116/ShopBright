@@ -119,6 +119,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
 //        throw new TaskException(TaskException.TaskError.resultIllegal + "");
 
         setTabItems(generateTabs());
+        setTabInit(null);
     }
 
 

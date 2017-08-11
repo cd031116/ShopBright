@@ -7,6 +7,7 @@ import android.widget.RelativeLayout;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseFragment;
+import com.zhl.huiqu.main.MainTabFragment;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 
 import butterknife.Bind;
@@ -26,6 +27,12 @@ public class PersonalFragment extends BaseFragment {
     RelativeLayout normalMsg;
     @Bind(R.id.row_kefu_center_layout)
     RelativeLayout kefuCenter;
+
+
+    public static PersonalFragment newInstance() {
+        return new PersonalFragment();
+    }
+
 
     @Override
     public int inflateContentView() {
