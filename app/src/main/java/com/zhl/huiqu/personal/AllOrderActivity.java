@@ -11,7 +11,7 @@ import com.zhl.huiqu.base.BaseActivity;
 public class AllOrderActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_apply_refund;
+        return R.layout.activity_order_detail;
     }
 
     @Override

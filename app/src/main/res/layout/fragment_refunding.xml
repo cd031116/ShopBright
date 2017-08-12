@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/refunding_bg">
+
+
+
+    <TextView
+        android:id="@+id/refund_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/all_order_tuikuaned"
+        android:textSize="33px"
+        android:gravity="center"
+        android:textColor="@color/black_text"
+        android:layout_centerInParent="true"/>
+    <ImageView
+        android:id="@+id/refund_img"
+        android:layout_margin="24px"
+        android:layout_toLeftOf="@id/refund_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/refund_ygou"/>
+</RelativeLayout>

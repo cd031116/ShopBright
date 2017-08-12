@@ -13,6 +13,8 @@
     <color name="personal_bg">#e9e9e9</color>
     <color name="new_tourist_bg">#f7f3f7</color>
     <color name="personal_row_text">#999999</color>
+    <color name="huiqu_tel">#414141</color>
+    <color name="refunding_bg">#fef1f1</color>
 
     <color name="login_commit">#e11f1f</color>
     <color name="login_text_color">#666666</color>

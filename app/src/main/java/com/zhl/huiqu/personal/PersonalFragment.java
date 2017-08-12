@@ -80,6 +80,7 @@ public class PersonalFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(), AllOrderActivity.class));
                 break;
             case R.id.pay_order_btn:
+                startActivity(new Intent(getActivity(), OrderDetailActivity.class));
                 break;
             case R.id.goout_order_btn:
                 break;
