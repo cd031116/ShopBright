@@ -59,7 +59,7 @@
                 android:drawableLeft="@drawable/search_ss"
                 android:drawablePadding="30px"
                 android:gravity="center_vertical"
-                android:text="输入您要搜索的景点/地区"
+                android:hint="输入您要搜索的景点/地区"
                 android:textColor="#666666"
                 android:textSize="32px" />
         </RelativeLayout>

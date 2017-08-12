@@ -16,10 +16,10 @@ import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.main.search.SearchFragment;
+import com.zhl.huiqu.main.ticket.TicketMainFragment;
 import com.zhl.huiqu.scan.CaptureActivity;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.widget.GlideImageLoader;
-
 import org.aisen.android.common.utils.Logger;
 import org.aisen.android.common.utils.SystemUtils;
 import org.aisen.android.network.task.TaskException;
@@ -31,9 +31,12 @@ import org.aisen.android.ui.fragment.ATabsTabLayoutFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by lyj on 2017/8/11.
- */
+/*
+*
+* @author lyj
+* @describe 首页
+* @data 2017/8/12
+* */
 
 public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     @ViewInject(id = R.id.banner)
@@ -120,7 +123,6 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     @Override
     public void requestData() {
 //        throw new TaskException(TaskException.TaskError.resultIllegal + "");
-
         setTabItems(generateTabs());
         setTabInit(null);
     }
@@ -151,7 +153,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     }
 
 
-    @OnClick({R.id.scan,R.id.searh_line})
+    @OnClick({R.id.scan,R.id.searh_line,R.id.main_mp})
     void onclik(View v){
         switch (v.getId()){
             case R.id.scan:
@@ -159,6 +161,9 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
                 break;
             case R.id.searh_line:
                 SearchFragment.launch(getActivity());
+                break;
+            case R.id.main_mp:
+                TicketMainFragment.launch(getActivity());
                 break;
         }
     }

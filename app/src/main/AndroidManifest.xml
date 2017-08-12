@@ -36,6 +36,7 @@
         </activity>
         <activity android:name=".base.ContainerActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:screenOrientation="portrait"/>
         <activity android:name=".login.ResetPswActivity"
             android:screenOrientation="portrait"/>
