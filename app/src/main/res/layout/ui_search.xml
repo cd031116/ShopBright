@@ -7,12 +7,11 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dip"
+        android:layout_height="150px"
         android:background="@color/comm_white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="12dip"
-        android:paddingRight="16dip">
+        android:padding="30px">
 
         <LinearLayout
             android:id="@+id/line_back"
@@ -111,14 +110,14 @@
                 android:background="@drawable/search_delete"
                 android:textSize="16sp" />
 
-            <eher.edu.c.widget.TagCloudView
+            <com.zhl.huiqu.widget.TagCloudView
                 android:id="@+id/tagsHistory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtHistory"
                 android:layout_marginLeft="10dip"
                 android:layout_marginRight="10dip"
-                android:layout_marginTop="10dip"></eher.edu.c.widget.TagCloudView>
+                android:layout_marginTop="10dip"/>
 
         </RelativeLayout>
 
@@ -134,7 +133,7 @@
             android:textSize="16sp"
             android:visibility="visible" />
 
-        <eher.edu.c.widget.TagCloudView
+        <com.zhl.huiqu.widget.TagCloudView
             android:id="@+id/tagsSchool"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -142,7 +141,7 @@
             android:layout_marginLeft="10dip"
             android:layout_marginRight="10dip"
             android:layout_marginTop="10dip"
-            android:visibility="visible"></eher.edu.c.widget.TagCloudView>
+            android:visibility="visible"/>
     </LinearLayout>
 
     <include

@@ -41,9 +41,6 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".login.RegisterActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".base.ContainerActivity"/>
-        <activity android:name=".login.ResetPswActivity"/>
-        <activity android:name=".login.RegisterActivity"/>
         <activity android:name=".personal.MyCollectAcitivity"/>
         <activity android:name=".personal.AllOrderActivity"/>
         <activity android:name=".personal.ApplyRefundActivity"/>

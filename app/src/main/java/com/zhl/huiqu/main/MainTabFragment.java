@@ -15,6 +15,7 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.main.search.SearchFragment;
 import com.zhl.huiqu.scan.CaptureActivity;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.widget.GlideImageLoader;
@@ -157,7 +158,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
                 startActivity(new Intent(getActivity(), CaptureActivity.class));
                 break;
             case R.id.searh_line:
-
+                SearchFragment.launch(getActivity());
                 break;
         }
     }

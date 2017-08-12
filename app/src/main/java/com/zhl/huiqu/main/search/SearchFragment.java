@@ -18,6 +18,7 @@ import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.ContainerActivity;
 import com.zhl.huiqu.sdk.eventbus.ISearchSubscriber;
 import com.zhl.huiqu.sdk.eventbus.SearchEvent;
+import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.widget.TagCloudView;
 
 import org.aisen.android.component.eventbus.NotificationCenter;
@@ -63,7 +64,12 @@ public class SearchFragment extends ABaseFragment  implements ISearchSubscriber 
     EditText editSearch;
     @ViewInject(id = R.id.text_school)
     TextView text_school;
-
+    @Override
+    public void setContentView(ViewGroup view) {
+        super.setContentView(view);
+        SupportMultipleScreensUtil.init(getActivity());
+        SupportMultipleScreensUtil.scale(view);
+    }
     @Override
     public int inflateContentView() {
         return R.layout.ui_search;
