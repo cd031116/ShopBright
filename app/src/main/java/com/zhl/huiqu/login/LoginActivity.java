@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +48,8 @@ public class LoginActivity extends BaseActivity {
     LinearLayout view2;
     @Bind(R.id.code)
     TextView code;//获取验证码
+    @Bind(R.id.top_image)
+    ImageView top_image;
 
     TimerCount timerCount;
     private int select=1;
@@ -61,6 +64,7 @@ public class LoginActivity extends BaseActivity {
         super.initView();
         top_title.setText("登录");
         timerCount = new TimerCount(60000, 1000, code);
+        top_image.setImageResource(R.drawable.login_close);
     }
 
     @Override

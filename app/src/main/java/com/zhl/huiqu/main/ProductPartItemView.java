@@ -1,15 +1,10 @@
 package com.zhl.huiqu.main;
 
 import android.app.Activity;
-import android.graphics.Color;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 
 import com.zhl.huiqu.R;
 
@@ -20,15 +15,16 @@ import org.aisen.android.ui.fragment.adapter.ARecycleViewItemView;
 
 
 /**
- * Created by wangdan on 17/2/12.
+ * Created by lyj on 17/2/12.
  */
 
 public class ProductPartItemView extends ARecycleViewItemView<ProductPartBean> {
-
     public static final int LAYOUT_RES = R.layout.item_product_part;
 
     @ViewInject(id = R.id.main_top)
     LinearLayout main_top;
+    @ViewInject(id = R.id.tname)
+    TextView tname;
 
 //
     public ProductPartItemView(Activity context, View itemView) {
@@ -45,7 +41,15 @@ public class ProductPartItemView extends ARecycleViewItemView<ProductPartBean> {
 
     @Override
     public void onBindData(View view, ProductPartBean bean, int i) {
-//        txtName.setText(bean.getName());
+
+        try {
+            tname.setText(bean.getId()+"");
+        }catch (Exception e){
+            Log.i("tttt","tname="+e.toString());
+        }
+
+
+
 
 //        Glide.with(getContext())
 //                .load(bean.getCoverImageUrl())

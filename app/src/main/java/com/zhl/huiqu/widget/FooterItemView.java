@@ -19,7 +19,7 @@ import java.io.Serializable;
 
 
 /**
- * Created by wangdan on 16/8/30.
+ * Created by lyj on 16/8/30.
  */
 public class FooterItemView<T extends Serializable> extends AFooterItemView<T> {
 
@@ -87,7 +87,7 @@ public class FooterItemView<T extends Serializable> extends AFooterItemView<T> {
         else if (state == ABaseFragment.ABaseTaskState.prepare) {
             if (getCallback().canLoadMore()) {
                 progressLoading.setVisibility(View.VISIBLE);
-                btnMore.setVisibility(View.GONE);
+                btnMore.setVisibility(View.VISIBLE);
             }
         }
         else if (state == ABaseFragment.ABaseTaskState.success) {

@@ -24,12 +24,13 @@ import org.aisen.android.ui.fragment.itemview.IITemView;
 import org.aisen.android.ui.fragment.itemview.IItemViewCreator;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
 /**
  * 首页产品列表界面
- * Created by wangdan on 17/2/12.
+ * Created by lyj on 17/2/12.
  */
 
 public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<ProductPartBean, ProductPartListBean, Serializable> {
@@ -61,7 +62,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
         super.onItemClick(parent, view, position, id);
         int a = getAdapterItems().get(position).getId();
         if (position < getAdapterItems().size()) {
-//            MainDetailFragment.launch(getActivity(), getAdapterItems().get(position).getId(), getAdapterItems().get(position).getProductType());
+            ProductDetailFragment.launch(getActivity());
         }
     }
 
@@ -75,7 +76,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
     public IItemViewCreator<ProductPartBean> configItemViewCreator() {
         return new IItemViewCreator<ProductPartBean>() {
             @Override
-            public View newContentView(LayoutInflater layoutInflater, ViewGroup viewGroup, int i) {
+            public View newContentView(LayoutInflater layoutInflater, ViewGroup viewGroup, int i){
                 return layoutInflater.inflate(ProductPartItemView.LAYOUT_RES, viewGroup, false);
             }
 
@@ -169,7 +170,17 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
     protected ProductPartListBean queryList(int start) throws TaskException {
 //        return SDK.newInstance(getActivity()).queryBProductList(AppContext.getEmployeeId(), categoryId, start);
         //
-        return  null;
+        ProductPartListBean bean=new ProductPartListBean();
+        bean.setTotal(5);
+
+         List<ProductPartBean> result=new ArrayList<>();
+        for(int i=0;i<10;i++){
+            ProductPartBean bn=new ProductPartBean();
+            bn.setId(i+5);
+            result.add(bn);
+        }
+        bean.setResult(result);
+        return  bean;
     }
 
     @Override

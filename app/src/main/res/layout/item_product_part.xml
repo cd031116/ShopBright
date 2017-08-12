@@ -5,7 +5,13 @@
               android:layout_height="wrap_content"
               android:background="?attr/selectableItemBackground" android:orientation="vertical">
 
-
+            <TextView
+                android:id="@+id/tname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#333333"
+                android:gravity="center"
+                android:padding="10px"/>
 
 
 </LinearLayout>

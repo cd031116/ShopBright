@@ -24,7 +24,7 @@
             <ImageView
                 android:id="@+id/btnBack"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="60px"
                 android:paddingRight="16dip"
                 android:src="@drawable/login_arrow_left" />
         </LinearLayout>
