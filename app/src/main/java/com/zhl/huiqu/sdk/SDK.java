@@ -5,18 +5,19 @@ import android.app.Activity;
 import com.zhl.huiqu.BuildConfig;
 import com.zhl.huiqu.sdk.http.DTODataParseHttp;
 
+import org.aisen.android.common.setting.Setting;
 import org.aisen.android.network.biz.ABizLogic;
 import org.aisen.android.network.http.HttpConfig;
 import org.aisen.android.network.http.IHttpUtility;
 import org.aisen.android.network.http.Params;
+import org.aisen.android.network.task.TaskException;
 import org.json.JSONObject;
 
 /**
-*
-*@author lyj
-*@description 服务端接口api
-*@date 2017/7/26
-*/
+ * @author lyj
+ * @description 服务端接口api
+ * @date 2017/7/26
+ */
 
 public class SDK extends ABizLogic {
     private static Activity context;
@@ -30,7 +31,7 @@ public class SDK extends ABizLogic {
     }
 
     public static SDK newInstance(Activity context) {
-        SDK.context=context;
+        SDK.context = context;
         return newInstance(CacheMode.disable);
     }
 
@@ -40,41 +41,140 @@ public class SDK extends ABizLogic {
 
     /**
      * 封装基础参数
+     *
      * @param paramsJson
      * @return
      */
-    public JSONObject getBasicParams(JSONObject paramsJson){
-        try{
+    public JSONObject getBasicParams(JSONObject paramsJson) {
+        try {
             Params basicParams = basicParams(null);
             for (String key : basicParams.getKeys()) {
                 paramsJson.put(key, basicParams.getParameter(key));
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return paramsJson;
     }
 
+    /*
+       * 获取验证码
+        * @param phone
+        * @param
+        * @return
+        * @throws TaskException
+        */
+    public String getCode(String mobile) throws TaskException {
+        Setting action = newSetting("getCheckCode", "/appapi/Memberpub/getCheckCode", "验证码");
+        Params params = new Params();
+        params.addParameter("mobile", mobile);
+        // 这个接口，是将form表单数据，按照json格式走post协议，请使用requestObject这个参数。
+        return doPost(configHttpConfig(), action, null, null, basicParams(params), String.class);
+    }
 
-//    /**
-//     * 查询评论列表
-//     *
-//     * @param bProductId //产品id
-//     * @return
-//     * @throws TaskException
-//     */
-//    public CommentListBean queryComment(String bProductId) throws TaskException {
-//        Setting action = newSetting("queryComment", "/bProduct/comment", "查询评论列表");
-//        Params params = new Params();
-//        params.addParameter("bProductId", bProductId);
-//        // 测试接口
-////        action.getExtras().put(HTTP_UTILITY, newSettingExtra(HTTP_UTILITY, TestCommentListAPI.class.getName(), ""));
-//        return doGet(action, basicParams(params), CommentListBean.class);
-//    }
+    /**
+     * 注册
+     *
+     * @param mobile   //作为账号的有效手机号码
+     * @param code     //接收到的短信验证码 6位随机数字
+     * @param password //6-16数字组合的密码
+     * @return
+     * @throws TaskException
+     */
+    public String register(String mobile, String code, String password) throws TaskException {
+        Setting action = newSetting("insertMemberInfo", "/appapi/Memberpub/insertMemberInfor", "注册");
+        Params params = new Params();
+        params.addParameter("mobile", mobile);
+        params.addParameter("code", code);
+        params.addParameter("password", password);
+        return doPost(configHttpConfig(), action, null, null, basicParams(params), String.class);
+    }
+
+
+    /**
+     * 登录
+     *
+     * @param mobile   //作为账号的有效手机号码
+     * @param code     //接收到的短信验证码 6位随机数字
+     * @param password //6-16数字组合的密码
+    * @param type //	登陆类型：0为账号密码1为动态验证码
+     * @return
+     * @throws TaskException
+     */
+    public String login(String mobile, String password, String type,String code) throws TaskException {
+        Setting action = newSetting("sendLoginInfo", "/appapi/Memberpub/sendLoginInfo", "登录");
+        Params params = new Params();
+        params.addParameter("mobile", mobile);
+        params.addParameter("password", password);
+        params.addParameter("type", type);
+        params.addParameter("code", code);
+        return doPost(configHttpConfig(), action, null, null, basicParams(params), String.class);
+    }
+
+    /**
+     * 获取景点门票页面门票数据
+     *
+     * @param theme_id   //	主题id
+     * @param page     //页码数
+     * @return
+     * @throws TaskException
+     */
+    public String getTicketData(String theme_id, String page) throws TaskException {
+        Setting action = newSetting("getTicketInfo", "/appapi/SpotTicket1/getTicketInfo", "获取景点门票页面门票数据");
+        Params params = new Params();
+        params.addParameter("theme_id", theme_id);
+        params.addParameter("page", page);
+        return doGet(action, basicParams(params), String.class);
+    }
+
+
+    /**
+     * 获取首页上方数据
+     *
+     * @return
+     * @throws TaskException
+     */
+    public String getMainTop(String theme_id, String page) throws TaskException {
+        Setting action = newSetting("getMainTop", "/appapi/Index/getShopTop", "获取app首页上方数据");
+        return doGet(action, null, String.class);
+    }
+
+
+    /**
+     * 获取首页下发数据
+     *@param page     //页码数
+     *@param type     //商品类型
+     * @return
+     * @throws TaskException
+     */
+    public String getMainbottum(String type, String page) throws TaskException {
+        Setting action = newSetting("getMainbottum", "/appapi/Index/getShopTop", "获取首页下发数据");
+        Params params = new Params();
+        params.addParameter("type", type);
+        params.addParameter("page", page);
+        return doGet(action, basicParams(params), String.class);
+    }
+
+
+    /**
+     * 根据经纬度获取周边
+     *@param longitude     //页码数
+     *@param latitude     //商品类型
+     * @return
+     * @throws TaskException
+     */
+    public String getCityAround(String longitude, String latitude) throws TaskException {
+        Setting action = newSetting("getCityAround", "/appapi/SpotTicket/getCityAround", "通过经纬度获取景点门票总页面周边城市");
+        Params params = new Params();
+        params.addParameter("longitude", longitude);
+        params.addParameter("latitude", latitude);
+        return doGet(action, basicParams(params), String.class);
+    }
+
 
 
     @Override
-    protected IHttpUtility configHttpUtility(){
+    protected IHttpUtility configHttpUtility() {
         return new DTODataParseHttp(context);
     }
 
@@ -93,7 +193,7 @@ public class SDK extends ABizLogic {
         if (params == null) {
             params = new Params();
         }
-        params.addParameter("version",BuildConfig.VERSION_NAME);
+//        params.addParameter("version", BuildConfig.VERSION_NAME);
         return params;
     }
 

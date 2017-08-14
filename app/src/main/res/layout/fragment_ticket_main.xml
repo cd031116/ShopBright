@@ -281,6 +281,7 @@
                         android:layout_marginRight="10px"
                         android:textSize="32px"
                         android:gravity="center_vertical"
+                        android:layout_centerVertical="true"
                         android:drawableRight="@drawable/mpxq_right"
                         android:text="今日可定"
                         android:textColor="#999999" />

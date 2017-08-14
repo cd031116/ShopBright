@@ -1,7 +1,6 @@
 package com.zhl.huiqu.main.ticket;
 
 import android.app.Activity;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.youth.banner.Banner;
