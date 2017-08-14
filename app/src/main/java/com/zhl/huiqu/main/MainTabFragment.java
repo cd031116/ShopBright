@@ -63,7 +63,6 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
 
     @Override
     public int inflateContentView() {
-
         return R.layout.main_tab_fragment;
     }
 

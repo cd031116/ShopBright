@@ -151,11 +151,11 @@ public class MainActivity extends BaseActivity {
         }else if(select==1){
             mTabs.get(1).setSelected(true);
             mText.get(1).setTextColor(Color.parseColor("#e11818"));
-            changeFrament("dFragment",1);
+//            changeFrament("dFragment",1);
         }else if(select==2){
             mTabs.get(2).setSelected(true);
             mText.get(2).setTextColor(Color.parseColor("#e11818"));
-            changeFrament("dFragment",2);
+//            changeFrament("dFragment",2);
         }else if(select==3){
             mTabs.get(3).setSelected(true);
             mText.get(3).setTextColor(Color.parseColor("#e11818"));

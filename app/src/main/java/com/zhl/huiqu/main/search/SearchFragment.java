@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.ContainerActivity;
+import com.zhl.huiqu.scan.CaptureActivity;
 import com.zhl.huiqu.sdk.eventbus.ISearchSubscriber;
 import com.zhl.huiqu.sdk.eventbus.SearchEvent;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
@@ -75,12 +76,15 @@ public class SearchFragment extends ABaseFragment  implements ISearchSubscriber 
         return R.layout.ui_search;
     }
 
-    @OnClick({R.id.btnBack,R.id.line_back})
+    @OnClick({R.id.btnBack,R.id.line_back,R.id.scan})
     void onBtnBackClicked(View v) {
         switch (v.getId()){
             case R.id.btnBack:
             case R.id.line_back:
                 getActivity().finish();
+                break;
+            case R.id.scan:
+                startActivity(new Intent(getActivity(), CaptureActivity.class));
                 break;
         }
     }

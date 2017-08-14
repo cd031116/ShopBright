@@ -77,7 +77,6 @@
     <string name="commit_refund_apply">提交退款申请</string>
 
 
-
     <string name="kefu_cpzx">产品咨询</string>
     <string name="kefu_sqzx">售前咨询</string>
     <string name="kefu_order_question">订单问题</string>
@@ -103,9 +102,7 @@
     <string name="account_name">姓名：</string>
 
 
-
     <string name="scan_tips">将二维码图片对准扫描框即可自动扫描</string>
-
 
 
 </resources>
