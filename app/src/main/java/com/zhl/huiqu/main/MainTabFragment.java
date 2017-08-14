@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.main.search.SearchFragment;
 import com.zhl.huiqu.main.ticket.TicketMainFragment;
@@ -132,7 +133,6 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         setTabInit(null);
     }
 
-
     private void setBanner(){
         images.add( "http://pic30.nipic.com/20130626/8174275_085522448172_2.jpg");
         images.add( "http://pic18.nipic.com/20111215/577405_080531548148_2.jpg");
@@ -154,9 +154,13 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         banner.setIndicatorGravity(BannerConfig.CENTER);
         //banner设置方法全部调用完毕时最后调用
         banner.start();
-
+        banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                startActivity(new Intent(getActivity(),ProductDetailActivity.class));
+            }
+        });
     }
-
 
     @OnClick({R.id.scan,R.id.searh_line,R.id.main_mp})
     void onclik(View v){
@@ -172,8 +176,4 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
                 break;
         }
     }
-
-
-
-
 }
