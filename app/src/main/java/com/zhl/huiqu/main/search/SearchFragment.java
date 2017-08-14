@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by wangdan on 17/2/19.
+ * Created by lyj on 17/2/19.
  */
 
 public class SearchFragment extends ABaseFragment  implements ISearchSubscriber {

@@ -7,23 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.ContainerActivity;
-import com.zhl.huiqu.main.search.SearchFragment;
-import com.zhl.huiqu.main.search.SearchHistoryBean;
-import com.zhl.huiqu.main.search.SearchHistoryManager;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
-import com.zhl.huiqu.widget.TagCloudView;
 
 import org.aisen.android.support.inject.OnClick;
 import org.aisen.android.support.inject.ViewInject;
 import org.aisen.android.ui.fragment.ABaseFragment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 
@@ -31,50 +24,38 @@ import butterknife.Bind;
  * Created by lyj on 2017/8/12.
  */
 
-public class ProductDetailFragment extends ABaseFragment {
-    @ViewInject(id = R.id.top_title)
+public class ProductDetailActivity extends BaseActivity {
+    @Bind( R.id.top_title)
     TextView top_title;
-    @ViewInject(id = R.id.image)
+    @Bind( R.id.image)
     ImageView soucang;
-    @ViewInject(id = R.id.image_t)
+    @Bind(R.id.image_t)
     ImageView fenxiang;
 
     //切换
-    @ViewInject(id = R.id.tab1_t)
+    @Bind(R.id.tab1_t)
     TextView tab1_t;
-    @ViewInject(id = R.id.tab1_v)
+    @Bind(R.id.tab1_v)
     TextView tab1_v;
-    @ViewInject(id = R.id.tab2_t)
+    @Bind(R.id.tab2_t)
     TextView tab2_t;
-    @ViewInject(id = R.id.tab2_v)
+    @Bind(R.id.tab2_v)
     TextView tab2_v;
-    @ViewInject(id = R.id.tab3_t)
+    @Bind( R.id.tab3_t)
     TextView tab3_t;
-    @ViewInject(id = R.id.tab3_v)
+    @Bind( R.id.tab3_v)
     TextView tab3_v;
     private int select = 1;
 
-    public static void launch(Activity from) {
-        ContainerActivity.launch(from, ProductDetailFragment.class, null);
-
-    }
-
     @Override
-    public void setContentView(ViewGroup view) {
-        super.setContentView(view);
-        SupportMultipleScreensUtil.init(getActivity());
-        SupportMultipleScreensUtil.scale(view);
-    }
-
-
-    @Override
-    public int inflateContentView() {
+    protected int getLayoutId() {
         return R.layout.fragment_detail_profuct;
     }
 
     @Override
-    protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate) {
-        super.layoutInit(inflater, savedInstanceSate);
+    public void initView() {
+        super.initView();
+        changeview(1);
         top_title.setText("产品详情");
         soucang.setVisibility(View.VISIBLE);
         fenxiang.setVisibility(View.VISIBLE);
@@ -82,11 +63,17 @@ public class ProductDetailFragment extends ABaseFragment {
         fenxiang.setBackgroundResource(R.drawable.mpxq_black_fx);
     }
 
+    @Override
+    public void initData() {
+        super.initData();
+    }
+
+
     @OnClick({R.id.top_left, R.id.image, R.id.image_t, R.id.tab1_mian, R.id.tab2_mian, R.id.tab3_mian})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.top_left:
-                getActivity().finish();
+                ProductDetailActivity.this.finish();
                 break;
             case R.id.image:
 

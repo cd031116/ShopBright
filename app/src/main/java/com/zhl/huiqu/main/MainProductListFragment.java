@@ -1,5 +1,6 @@
 package com.zhl.huiqu.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -11,10 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
-import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.Utils;
 
-import org.aisen.android.component.eventbus.NotificationCenter;
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.support.inject.ViewInject;
 import org.aisen.android.support.paging.IPaging;
@@ -62,7 +61,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
         super.onItemClick(parent, view, position, id);
         int a = getAdapterItems().get(position).getId();
         if (position < getAdapterItems().size()) {
-            ProductDetailFragment.launch(getActivity());
+           startActivity(new Intent(getActivity(),ProductDetailActivity.class));
         }
     }
 
