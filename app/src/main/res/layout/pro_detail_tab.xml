@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tab_mian"
+    android:layout_width="match_parent"
+    android:layout_height="120px"
+    android:background="#ffffff"
+    android:orientation="horizontal">
+
+    <!--1-->
+    <RelativeLayout
+        android:id="@+id/tab1_mian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tab1_t"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="10px"
+            android:text="订票"
+            android:textColor="#333333"
+            android:textSize="32px" />
+
+        <TextView
+            android:id="@+id/tab1_v"
+            android:layout_width="match_parent"
+            android:layout_height="6px"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:background="@drawable/detail_text_bg" />
+
+    </RelativeLayout>
+
+    <!--2-->
+    <RelativeLayout
+        android:id="@+id/tab2_mian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tab2_t"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="10px"
+            android:text="景点介绍"
+            android:textColor="#333333"
+            android:textSize="32px" />
+
+        <TextView
+            android:id="@+id/tab2_v"
+            android:layout_width="match_parent"
+            android:layout_height="6px"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:background="@drawable/detail_text_bg" />
+    </RelativeLayout>
+
+    <!--3-->
+    <RelativeLayout
+        android:id="@+id/tab3_mian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tab3_t"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="10px"
+            android:text="点评"
+            android:textColor="#333333"
+            android:textSize="32px" />
+
+        <TextView
+            android:id="@+id/tab3_v"
+            android:layout_width="match_parent"
+            android:layout_height="6px"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:background="@drawable/detail_text_bg" />
+
+    </RelativeLayout>
+</LinearLayout>

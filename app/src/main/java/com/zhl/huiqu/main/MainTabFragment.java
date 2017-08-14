@@ -3,7 +3,9 @@ package com.zhl.huiqu.main;
 import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.util.Log;
@@ -41,6 +43,9 @@ import java.util.List;
 public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     @ViewInject(id = R.id.banner)
     Banner banner;
+    @ViewInject(id = R.id.layoutContentd)
+    CoordinatorLayout scro;
+
     private List<String> images=new ArrayList<>();
     private List<String> titles=new ArrayList<>();
 

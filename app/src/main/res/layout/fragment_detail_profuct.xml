@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_line"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/back_bg"
@@ -8,11 +9,16 @@
     android:orientation="vertical">
 
     <include layout="@layout/view_top" />
-<android.support.v4.widget.NestedScrollView
+
+    <com.zhl.huiqu.widget.MyScroview
+    android:id="@+id/myscroview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+        android:layout_below="@+id/top_layout"
     android:scrollbars="none">
-    <LinearLayout
+
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -115,6 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="1px"
             android:background="#ffffff"
+            android:layout_marginBottom="10px"
             android:padding="10px">
 
             <TextView
@@ -139,102 +146,21 @@
         </RelativeLayout>
 
 
-        <LinearLayout
-            android:id="@+id/main_tab"
-            android:layout_width="match_parent"
-            android:layout_height="120px"
-            android:layout_marginTop="10px"
-            android:background="#ffffff"
-            android:orientation="horizontal">
-            <!--1-->
-            <RelativeLayout
-                android:id="@+id/tab1_mian"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+            <LinearLayout
+                android:id="@+id/search02"
+                android:layout_width="match_parent"
+                android:layout_height="120px"
                 android:orientation="vertical">
+                <include layout="@layout/pro_detail_tab"/>
+            </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tab1_t"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:padding="10px"
-                    android:text="订票"
-                    android:textColor="#333333"
-                    android:textSize="32px" />
 
-                <TextView
-                    android:id="@+id/tab1_v"
-                    android:layout_width="match_parent"
-                    android:layout_height="6px"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="30px"
-                    android:layout_marginRight="30px"
-                    android:background="@drawable/detail_text_bg" />
 
-            </RelativeLayout>
 
-            <!--2-->
-            <RelativeLayout
-                android:id="@+id/tab2_mian"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tab2_t"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:padding="10px"
-                    android:text="景点介绍"
-                    android:textColor="#333333"
-                    android:textSize="32px" />
-
-                <TextView
-                    android:id="@+id/tab2_v"
-                    android:layout_width="match_parent"
-                    android:layout_height="6px"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="30px"
-                    android:layout_marginRight="30px"
-                    android:background="@drawable/detail_text_bg" />
-            </RelativeLayout>
-
-            <!--3-->
-            <RelativeLayout
-                android:id="@+id/tab3_mian"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tab3_t"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:padding="10px"
-                    android:text="点评"
-                    android:textColor="#333333"
-                    android:textSize="32px" />
-
-                <TextView
-                    android:id="@+id/tab3_v"
-                    android:layout_width="match_parent"
-                    android:layout_height="6px"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="30px"
-                    android:layout_marginRight="30px"
-                    android:background="@drawable/detail_text_bg" />
-
-            </RelativeLayout>
-        </LinearLayout>
 
         <!--成人票-->
         <LinearLayout
+            android:id="@+id/crp_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1px"
@@ -455,6 +381,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/jd_js"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1px"
@@ -614,13 +541,15 @@
 
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10px"
+            android:paddingLeft="20px"
             android:layout_marginTop="10px"
             android:drawableLeft="@drawable/mpxq_red_ts"
             android:drawablePadding="20px"
+            android:background="#ffffff"
             android:text="预定须知"
+            android:gravity="center_vertical"
             android:textColor="#333333"
             android:textSize="32px" />
 
@@ -635,12 +564,14 @@
 
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10px"
             android:layout_marginTop="10px"
+            android:paddingLeft="20px"
+            android:background="#ffffff"
             android:drawableLeft="@drawable/mpxq_jd_red"
             android:drawablePadding="20px"
+            android:gravity="center_vertical"
             android:text="周边景点"
             android:textColor="#333333"
             android:textSize="32px" />
@@ -654,8 +585,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="120px"
+            android:layout_height="900px"
             android:padding="10px"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
@@ -663,21 +595,35 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:layout_gravity="center"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/t_size"
+                android:padding="10px"
                 android:text="周边景点"
                 android:background="#5A5963"
                 android:drawableTop="@drawable/mpxq_jd_white"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:background="#5A5963"
                 android:textColor="#ffffff"
+                android:layout_gravity="center"
+                android:padding="10px"
                 android:textSize="@dimen/t_size"
                 android:text="周边酒店"
                 android:drawableTop="@drawable/mpxq_jd_fangzi"/>
 
         </LinearLayout>
+
     </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
-</LinearLayout>
+</com.zhl.huiqu.widget.MyScroview>
+    <LinearLayout
+        android:id="@+id/search01"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/top_layout"
+        android:layout_height="120px"
+        android:orientation="vertical">
+    </LinearLayout>
+</RelativeLayout>
