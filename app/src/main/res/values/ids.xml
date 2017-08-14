@@ -8,4 +8,7 @@
     <item name="restart_preview" type="id"/>
     <item name="quit" type="id"/>
 
+    <item name="recyclerView" type="id" />
+    <item name="pullRecycler" type="id" />
+
 </resources>

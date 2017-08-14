@@ -7,24 +7,6 @@
         android:id="@+id/view_top"
         layout="@layout/view_top" />
 
-    <LinearLayout
-        android:id="@id/layoutContent" android:layout_width="match_parent" android:layout_height="match_parent"
-        android:layout_below="@id/view_top"
-        android:orientation="vertical">
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
-        android:layout_width="match_parent"
-
-        android:layout_height="match_parent">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@id/recycleview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#E9E9E9"
-            android:overScrollMode="never" />
-    </android.support.v4.widget.SwipeRefreshLayout>
-    </LinearLayout>
     <TextView
         android:id="@+id/order_sx"
         android:layout_width="match_parent"
@@ -36,4 +18,25 @@
         android:gravity="center"
         android:text="@string/all_order_sx" />
 
+    <LinearLayout
+        android:id="@id/layoutContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/view_top"
+        android:layout_above="@id/order_sx"
+        android:orientation="vertical">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@id/recycleview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#E9E9E9"
+                android:overScrollMode="never" />
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </LinearLayout>
 </RelativeLayout>

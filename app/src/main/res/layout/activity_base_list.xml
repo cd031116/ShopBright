@@ -1,0 +1,16 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <include
+        android:id="@+id/view_top"
+        layout="@layout/view_top" />
+
+    <com.zhl.huiqu.pull.PullRecycler
+        android:id="@id/pullRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/view_top" />
+
+</RelativeLayout>

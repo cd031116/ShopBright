@@ -1,6 +1,7 @@
 package com.zhl.huiqu.personal;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -58,7 +59,9 @@ public class OrderListFragment extends ARecycleViewSwipeRefreshFragment<OrderEnt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
         super.onItemClick(parent, view, position, id);
+        startActivity(new Intent(getActivity(), OrderDetailActivity.class));
     }
 
     @Override
