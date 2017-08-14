@@ -101,6 +101,25 @@
     <string name="account_phone">手机号：</string>
     <string name="account_name">姓名：</string>
 
+    <string name="write_order">订单填写</string>
+    <string name="write_order_is_login">有账号可先登录</string>
+    <string name="one_card_one_order">【一张身份证限定一张票】</string>
+    <string name="in_your_know">入园须知，退改说明</string>
+    <string name="play_time">游玩日期</string>
+    <string name="order_price">￥215</string>
+    <string name="play_today">今日\n不可订</string>
+    <string name="play_more_time">更多\n日期</string>
+    <string name="ticket_num">数量</string>
+    <string name="take_ticket_person">取票人信息</string>
+    <string name="take_person_name">姓名<font color="#e111818"><b>*</b></font></string>
+    <string name="take_person_id_card">身份证号<font color="#e111818"><b>*</b></font></string>
+    <string name="take_person_phone">手机号<font color="#e111818"><b>*</b></font></string>
+    <string name="take_person_code">验证码</string>
+    <string name="take_person_check_code">校验码</string>
+    <string name="take_person_free">免费获取</string>
+    <string name="take_person_pay_toutal">应付总金额:</string>
+    <string name="take_person_commit">提交订单</string>
+    <string name="take_person_fymx">费用明细</string>
 
     <string name="scan_tips">将二维码图片对准扫描框即可自动扫描</string>
 

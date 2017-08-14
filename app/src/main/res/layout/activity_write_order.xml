@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/personal_bg">
+
+    <include
+        android:id="@+id/view_top"
+        layout="@layout/view_top" />
+
+    <TextView
+        android:id="@+id/is_login_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view_top"
+        android:paddingBottom="15px"
+        android:paddingLeft="33px"
+        android:paddingTop="15px"
+        android:text="@string/write_order_is_login"
+        android:textSize="33px" />
+
+    <RelativeLayout
+        android:id="@+id/ticket_type_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/is_login_text"
+        android:background="@color/white"
+        android:padding="33px">
+
+        <TextView
+            android:id="@+id/ticket_type_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/one_card_one_order"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+
+        <TextView
+            android:id="@+id/in_your_know"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ticket_type_text"
+            android:layout_marginTop="24px"
+            android:drawableRight="@drawable/gray_right"
+            android:gravity="center_vertical"
+            android:text="@string/in_your_know"
+            android:textColor="@color/gray_text"
+            android:textSize="30px" />
+
+        <TextView
+            android:id="@+id/order_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/order_price"
+            android:textColor="@color/red_text"
+            android:textSize="42px" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/play_time_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ticket_type_layout"
+        android:layout_marginTop="2px"
+        android:background="@color/white"
+        android:paddingLeft="33px"
+        android:paddingRight="33px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="33px"
+            android:paddingTop="33px"
+            android:text="@string/play_time"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+
+        <TextView
+            android:id="@+id/more_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/personal_all_order_delete"
+            android:drawableRight="@drawable/red_right"
+            android:gravity="center"
+            android:paddingBottom="12px"
+            android:paddingLeft="36px"
+            android:paddingRight="12px"
+            android:paddingTop="12px"
+            android:text="@string/play_more_time"
+            android:textColor="@color/red_text"
+            android:textSize="24px" />
+
+        <TextView
+            android:id="@+id/tomorrow_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="24px"
+            android:layout_toLeftOf="@id/more_time"
+            android:background="@drawable/personal_all_order_delete"
+            android:gravity="center"
+            android:paddingBottom="12px"
+            android:paddingLeft="36px"
+            android:paddingRight="36px"
+            android:paddingTop="12px"
+            android:text="@string/play_more_time"
+            android:textColor="@color/red_text"
+            android:textSize="24px" />
+
+        <TextView
+            android:id="@+id/today_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="24px"
+            android:layout_toLeftOf="@id/tomorrow_time"
+            android:background="@drawable/personal_all_order_delete"
+            android:gravity="center"
+            android:paddingBottom="12px"
+            android:paddingLeft="36px"
+            android:paddingRight="36px"
+            android:paddingTop="12px"
+            android:text="@string/play_today"
+            android:textColor="@color/black_text"
+            android:textSize="24px" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/play_num_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/play_time_layout"
+        android:layout_marginTop="15px"
+        android:background="@color/white"
+        android:paddingLeft="33px"
+        android:paddingRight="33px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="33px"
+            android:paddingTop="33px"
+            android:text="@string/ticket_num"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+
+        <TextView
+            android:id="@+id/add_btn"
+            android:layout_width="45px"
+            android:layout_height="45px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/order_num_red"
+            android:gravity="center"
+            android:text="+"
+            android:textColor="@color/red_text"
+            android:textSize="33px" />
+
+        <TextView
+            android:id="@+id/show_num"
+            android:layout_width="wrap_content"
+            android:layout_height="45px"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="18px"
+            android:layout_toLeftOf="@id/add_btn"
+            android:background="@drawable/order_num_gray"
+            android:gravity="center"
+            android:paddingLeft="30px"
+            android:paddingRight="30px"
+            android:text="+"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+
+        <TextView
+            android:id="@+id/down_btn"
+            android:layout_width="45px"
+            android:layout_height="45px"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="18px"
+            android:layout_toLeftOf="@id/show_num"
+            android:background="@drawable/order_num_gray"
+            android:gravity="center"
+            android:text="一"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/take_ticket_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/play_num_layout"
+        android:layout_marginTop="15px"
+        android:background="@color/white"
+        android:padding="33px">
+
+        <TextView
+            android:id="@+id/take_ticket_person"
+            android:layout_width="210px"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/take_ticket_person"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/take_ticket_person"
+            android:background="@null"
+            android:hint="(请填写正确信息)"
+            android:textSize="33px" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/take_ticket_name_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/take_ticket_layout"
+        android:layout_marginTop="2px"
+        android:background="@color/white"
+        android:padding="33px">
+
+        <TextView
+            android:id="@+id/take_person_name"
+            android:layout_width="210px"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/take_person_name"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/take_person_name"
+            android:background="@null"
+            android:hint="(请填写正确信息)"
+            android:textSize="33px" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/take_person_id_card_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/take_ticket_name_layout"
+        android:layout_marginTop="2px"
+        android:background="@color/white"
+        android:padding="33px">
+
+        <TextView
+            android:id="@+id/take_person_id_card"
+            android:layout_width="210px"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/take_person_id_card"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/take_person_id_card"
+            android:background="@null"
+            android:hint="(请填写正确信息)"
+            android:textSize="33px" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/take_person_phone_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/take_person_id_card_layout"
+        android:layout_marginTop="2px"
+        android:background="@color/white"
+        android:padding="33px">
+
+        <TextView
+            android:id="@+id/take_person_phone"
+            android:layout_width="210px"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/take_person_phone"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/take_person_phone"
+            android:background="@null"
+            android:hint="(请填写正确信息)"
+            android:textSize="33px" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/take_person_code_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/take_person_phone_layout"
+        android:layout_marginTop="2px"
+        android:background="@color/white"
+        android:padding="33px">
+
+        <TextView
+            android:id="@+id/take_person_code"
+            android:layout_width="210px"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/take_person_code"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/take_person_code"
+            android:background="@null"
+            android:hint="(请填写正确信息)"
+            android:textSize="33px" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/take_person_check_code_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/take_person_code_layout"
+        android:layout_marginTop="2px"
+        android:background="@color/white"
+        android:padding="33px">
+
+        <TextView
+            android:id="@+id/take_person_check_code"
+            android:layout_width="210px"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/take_person_check_code"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/take_person_check_code"
+            android:background="@null"
+            android:hint="(请填写正确信息)"
+            android:textSize="33px" />
+
+    </RelativeLayout>
+
+    <CheckBox
+        android:id="@+id/checkbox_read"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/take_person_check_code_layout"
+        android:layout_marginLeft="33px"
+        android:button="@drawable/checkbox_style"
+        android:checked="true"
+        android:padding="24px"
+        android:text="@string/refund_know"
+        android:textSize="33px" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="99px"
+        android:layout_below="@id/checkbox_read"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/take_pay_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="33px"
+            android:text="@string/take_person_pay_toutal"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+
+        <TextView
+            android:id="@+id/take_pay_total_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/take_pay_total"
+            android:textSize="33px" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12px"
+            android:layout_toRightOf="@id/take_pay_total_text"
+            android:padding="33px"
+            android:src="@drawable/order_write_down" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:paddingRight="60px"
+            android:paddingLeft="60px"
+            android:background="@drawable/order_write_commit"
+            android:text="@string/take_person_commit" />
+    </RelativeLayout>
+
+</RelativeLayout>
