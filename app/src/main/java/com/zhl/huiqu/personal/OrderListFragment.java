@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
@@ -36,11 +37,8 @@ import java.util.List;
  */
 
 public class OrderListFragment extends ARecycleViewSwipeRefreshFragment<OrderEntity, OrderListEntity, Serializable> {
-
-    @ViewInject(id = R.id.all_order_list)
-    RecyclerView recycleview;
     @ViewInject(id = R.id.order_sx)
-    RecyclerView sxTextView;
+    TextView sxTextView;
 
     @Override
     public void setContentView(ViewGroup view) {
