@@ -8,18 +8,28 @@
         layout="@layout/view_top" />
 
     <TextView
+        android:id="@+id/order_sx"
         android:layout_width="match_parent"
         android:layout_height="141px"
         android:layout_alignParentBottom="true"
-        android:text="@string/all_order_sx"
+        android:background="@color/all_order_text"
         android:drawablePadding="9px"
-        android:gravity="center"
         android:drawableTop="@drawable/all_order_sx"
-        android:background="@color/all_order_text"/>
+        android:gravity="center"
+        android:text="@string/all_order_sx" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/all_order_list"
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/view_top" />
+        android:layout_below="@id/view_top"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/all_order_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#E9E9E9"
+            android:overScrollMode="never" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>

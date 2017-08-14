@@ -4,13 +4,11 @@ package com.zhl.huiqu.personal;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
-import com.zhl.huiqu.utils.ToastUtils;
 
 import org.aisen.android.support.inject.ViewInject;
 

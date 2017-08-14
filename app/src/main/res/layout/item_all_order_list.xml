@@ -23,6 +23,7 @@
             android:textColor="@color/black_text" />
 
         <TextView
+            android:id="@+id/all_order_ticket_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
