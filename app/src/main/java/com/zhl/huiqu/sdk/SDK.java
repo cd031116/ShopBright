@@ -172,6 +172,25 @@ public class SDK extends ABizLogic {
     }
 
 
+    /**
+     * 商品详情
+     *@param id     //所请求商品的id
+     *@param check_sign     //登陆时收到的返回签名
+     *@param session_id     //登陆时收到的返回签名的sesionid
+     * @return
+     * @throws TaskException
+     */
+    public String getGoodsDetail(String id,String check_sign,String session_id) throws TaskException {
+        Setting action = newSetting("getGoodsDetail", "appapi/Goods/getGoodsDetail", "获取商品详情");
+        Params params = new Params();
+        params.addParameter("id", id);
+        params.addParameter("check_sign", check_sign);
+        params.addParameter("session_id", session_id);
+        return doPost(configHttpConfig(), action, null, null, null, String.class);
+    }
+
+
+
 
     @Override
     protected IHttpUtility configHttpUtility() {

@@ -21,14 +21,14 @@ android {
     buildTypes {
         release {
             buildConfigField "boolean", "LOG_DEBUG", "false"
-            buildConfigField "String", "BASE_URL", "\"http://120.24.74.199:9001/eher\""
+            buildConfigField "String", "BASE_URL", "\"http://zengteng.com/wechat/\""
 //            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
             buildConfigField "boolean", "LOG_DEBUG", "true"
-            buildConfigField "String", "BASE_URL", "\"http://120.24.74.199:9001/eher\""
+            buildConfigField "String", "BASE_URL", "\"http://zengteng.com/wechat/\""
 //            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

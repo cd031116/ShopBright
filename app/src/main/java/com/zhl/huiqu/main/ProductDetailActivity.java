@@ -10,7 +10,12 @@ import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.sdk.SDK;
+import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.widget.MyScroview;
+
+import org.aisen.android.network.task.TaskException;
+import org.aisen.android.network.task.WorkTask;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -88,6 +93,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
     @Override
     public void initData() {
         super.initData();
+        new getInfoTask().execute();
     }
 
 
@@ -213,5 +219,37 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
         }
         return result;
     }
+
+
+    /*
+      * */
+    class getInfoTask extends WorkTask<Void, Void, String> {
+        @Override
+        protected void onPrepare() {
+            super.onPrepare();
+            showAlert("",false);
+        }
+
+        @Override
+        public String workInBackground(Void... voids) throws TaskException {
+            return SDK.newInstance(ProductDetailActivity.this).getGoodsDetail("","","");
+        }
+
+        @Override
+        protected void onSuccess(String info) {
+            super.onSuccess(info);
+            dismissAlert();
+            TLog.log("tttt","info="+info);
+
+        }
+
+        @Override
+        protected void onFailure(TaskException exception){
+            dismissAlert();
+        }
+    }
+
+
+
 
 }

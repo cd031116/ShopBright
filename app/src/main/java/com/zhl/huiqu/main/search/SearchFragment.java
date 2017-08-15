@@ -3,18 +3,15 @@ package com.zhl.huiqu.main.search;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.base.BaseFragment;
 import com.zhl.huiqu.base.ContainerActivity;
 import com.zhl.huiqu.scan.CaptureActivity;
 import com.zhl.huiqu.sdk.eventbus.ISearchSubscriber;
@@ -23,16 +20,9 @@ import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.widget.TagCloudView;
 
 import org.aisen.android.component.eventbus.NotificationCenter;
-import org.aisen.android.network.task.TaskException;
 import org.aisen.android.support.inject.OnClick;
 import org.aisen.android.support.inject.ViewInject;
-import org.aisen.android.ui.fragment.ABaseFragment;
-import org.aisen.android.ui.fragment.AGridFragment;
-import org.aisen.android.ui.fragment.ARecycleViewFragment;
-import org.aisen.android.ui.fragment.itemview.IITemView;
-import org.aisen.android.ui.fragment.itemview.IItemViewCreator;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +30,7 @@ import java.util.List;
  * Created by lyj on 17/2/19.
  */
 
-public class SearchFragment extends ABaseFragment  implements ISearchSubscriber {
+public class SearchFragment extends BaseFragment implements ISearchSubscriber {
 
     public static void launch(Activity from) {
         ContainerActivity.launch(from, SearchFragment.class, null);
