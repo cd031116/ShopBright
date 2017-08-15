@@ -37,9 +37,35 @@
     <string name="personal_normal_msg">常用信息</string>
     <string name="personal_kefu_center">客服中心</string>
     <string name="personal_your_like">猜你喜欢</string>
+    <string name="personal_change_img">更换图像</string>
+    <string name="personal_setting_nick">修改昵称</string>
+    <string name="personal_setting_name">姓名</string>
+    <string name="personal_setting_sex">性别</string>
+    <string name="personal_setting_bir">生日</string>
+    <string name="personal_setting_add">所在城市</string>
+    <string name="personal_setting_psw">修改密码</string>
+    <string name="personal_setting_phone">绑定手机</string>
+    <string name="personal_setting_email">绑定邮箱</string>
+    <string name="setting_email">邮箱</string>
+    <string name="setting_old_psw">原密码</string>
+    <string name="setting_new_psw">新密码</string>
+    <string name="setting_sure_psw">确认新密码</string>
+    <string name="setting_psw_put">请输入6-16位密码</string>
+    <string name="setting_save">保存</string>
+    <string name="setting_phone_text">提示：请确认填写正确的手机号码</string>
+    <string name="setting_phone_text_call">提示：如果手机号码已停用，请拨打惠趣客服电话号码：400-9988725</string>
+    <string name="setting_email_write">请填写邮箱账号</string>
+    <string name="setting_name_write">请填写您的姓名</string>
+    <string name="setting_nick_write">请填写您的昵称</string>
+    <string name="setting_phone_code">获取验证码</string>
+    <string name="setting_email_text">邮箱将接收相关通知和旅行合同，请谨慎填写正确的邮箱</string>
+    <string name="setting_name_text">昵称要求为2-20个汉字或2-40个英文，不能中英文混搭</string>
+    <string name="setting_nick_text">昵称要求为4-16个字符，支持中文、英文、"-"、"_"。</string>
+    <string name="personal_setting_cache">清楚缓存</string>
+    <string name="personal_setting_out">退出登录账号</string>
 
     <string name="new_tourist_name_text">中文姓名</string>
-    <string name="new_tourist_name_edit">与证件保持一致\n<font color="#e111818"><b>需包含汉字,生僻字可用拼音代替</b></font></string>
+    <string name="new_tourist_name_edit">与证件保持一致\n<font color="#e11818"><b>需包含汉字,生僻字可用拼音代替</b></font></string>
     <string name="new_tourist_card_type">证件类型</string>
     <string name="new_tourist_sfz">身份证</string>
     <string name="new_tourist_hz">护照</string>
@@ -48,9 +74,9 @@
     <string name="new_tourist_hxz">回乡证</string>
     <string name="new_tourist_tbz">台胞证</string>
     <string name="new_tourist_card_num">证件号码</string>
-    <string name="new_tourist_card_num_edit">与证件保持一致\n<font color="#e111818"><b>请输入正确的证件号码</b></font></string>
+    <string name="new_tourist_card_num_edit">与证件保持一致\n<font color="#e11818"><b>请输入正确的证件号码</b></font></string>
     <string name="new_tourist_phone">手机号码</string>
-    <string name="new_tourist_phone_edit">与证件保持一致\n<font color="#e111818"><b>请输入正确的手机号码</b></font></string>
+    <string name="new_tourist_phone_edit">与证件保持一致\n<font color="#e11818"><b>请输入正确的手机号码</b></font></string>
     <string name="new_tourist_sex">性别</string>
     <string name="new_tourist_mail">男</string>
     <string name="new_tourist_femail">女</string>
@@ -84,7 +110,7 @@
     <string name="kefu_sqzx">售前咨询</string>
     <string name="kefu_order_question">订单问题</string>
     <string name="kefu_center">客服中心</string>
-    <string name="kefu_phone_text">惠趣旅行官方电话\n<font color="#e111818"><b>400-9988-725</b></font></string>
+    <string name="kefu_phone_text">惠趣旅行官方电话\n<font color="#e11818"><b>400-9988-725</b></font></string>
     <string name="call_kefu_phone">拨打官方客服电话400-9988-725  </string>
 
     <string name="order_detail">订单详情</string>
@@ -114,9 +140,9 @@
     <string name="play_more_time">更多\n日期</string>
     <string name="ticket_num">数量</string>
     <string name="take_ticket_person">取票人信息</string>
-    <string name="take_person_name">姓名<font color="#e111818"><b>*</b></font></string>
-    <string name="take_person_id_card">身份证号<font color="#e111818"><b>*</b></font></string>
-    <string name="take_person_phone">手机号<font color="#e111818"><b>*</b></font></string>
+    <string name="take_person_name">姓名<font color="#e11818"><b>*</b></font></string>
+    <string name="take_person_id_card">身份证号<font color="#e11818"><b>*</b></font></string>
+    <string name="take_person_phone">手机号<font color="#e11818"><b>*</b></font></string>
     <string name="take_person_code">验证码</string>
     <string name="take_person_check_code">校验码</string>
     <string name="push_check_code">请输入右侧校验码</string>

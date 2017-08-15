@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/personal_bg"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/view_top" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2px"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingBottom="6px"
+        android:paddingLeft="36px"
+        android:paddingRight="36px"
+        android:paddingTop="6px">
+
+        <ImageView
+            android:id="@+id/img_head"
+            android:layout_width="180px"
+            android:layout_height="180px" />
+
+        <LinearLayout
+            android:id="@+id/change_img_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/personal_change_img"
+                android:textColor="@color/black_text"
+                android:textSize="33px" />
+
+            <TextView
+                android:id="@+id/change_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/personal_right" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/change_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12px"
+        android:background="@color/white"
+        android:padding="33px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/personal_setting_nick"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawablePadding="24px"
+            android:drawableRight="@drawable/personal_right"
+            android:text="@string/personal_setting"
+            android:textColor="@color/gray_text"
+            android:textSize="33px" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/setting_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2px"
+        android:background="@color/white"
+        android:padding="33px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/personal_setting_name"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawablePadding="24px"
+            android:drawableRight="@drawable/personal_right"
+            android:text="@string/personal_setting"
+            android:textColor="@color/gray_text"
+            android:textSize="33px" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/setting_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2px"
+        android:background="@color/white"
+        android:padding="33px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/personal_setting_sex"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawablePadding="24px"
+            android:drawableRight="@drawable/personal_right"
+            android:text="@string/personal_setting"
+            android:textColor="@color/gray_text"
+            android:textSize="33px" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/setting_bir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2px"
+        android:background="@color/white"
+        android:padding="33px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/personal_setting_bir"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawablePadding="24px"
+            android:drawableRight="@drawable/personal_right"
+            android:text="@string/personal_setting"
+            android:textColor="@color/gray_text"
+            android:textSize="33px" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/setting_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2px"
+        android:background="@color/white"
+        android:padding="33px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/personal_setting_add"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawablePadding="24px"
+            android:drawableRight="@drawable/personal_right"
+            android:text="@string/personal_setting"
+            android:textColor="@color/gray_text"
+            android:textSize="33px" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/setting_psw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12px"
+        android:background="@color/white"
+        android:padding="33px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/personal_setting_psw"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/personal_right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/setting_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2px"
+        android:background="@color/white"
+        android:padding="33px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/personal_setting_phone"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawablePadding="24px"
+            android:drawableRight="@drawable/personal_right"
+            android:text="@string/personal_setting"
+            android:textColor="@color/gray_text"
+            android:textSize="33px" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/setting_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2px"
+        android:background="@color/white"
+        android:padding="33px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/personal_setting_email"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawablePadding="24px"
+            android:drawableRight="@drawable/personal_right"
+            android:text="@string/personal_setting"
+            android:textColor="@color/gray_text"
+            android:textSize="33px" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/setting_cache"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2px"
+        android:background="@color/white"
+        android:padding="33px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/personal_setting_cache"
+            android:textColor="@color/black_text"
+            android:textSize="33px" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/personal_right" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="150px"
+        android:layout_marginRight="150px"
+        android:layout_marginTop="240px"
+        android:background="@drawable/shape_login_commit"
+        android:gravity="center"
+        android:padding="24px"
+        android:text="@string/personal_setting_out"
+        android:textColor="@color/white" />
+
+</LinearLayout>

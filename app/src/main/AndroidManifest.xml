@@ -69,6 +69,24 @@
             android:name=".scan.CaptureActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".personal.ChangeNameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".personal.ChangeNicknameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".personal.ChangePswActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".personal.ChangeEmailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".personal.ChangePhoneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".personal.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".main.ProductDetailActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".main.PayActivity"></activity>

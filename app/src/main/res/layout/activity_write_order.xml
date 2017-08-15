@@ -222,6 +222,13 @@
             android:textColor="@color/black_text"
             android:textSize="33px" />
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/order_write_contacter" />
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -348,9 +355,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@drawable/personal_all_order_delete"
-            android:textSize="33px"
             android:padding="24px"
-            android:text="@string/take_person_free"/>
+            android:text="@string/take_person_free"
+            android:textSize="33px" />
 
     </RelativeLayout>
 
@@ -384,11 +391,11 @@
 
         <ImageView
             android:id="@+id/check_code_img"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:background="#f0f4f7"
             android:layout_width="240px"
-            android:layout_height="78px" />
+            android:layout_height="78px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="#f0f4f7" />
 
     </RelativeLayout>
 
@@ -405,9 +412,64 @@
         android:textSize="33px" />
 
     <RelativeLayout
+        android:id="@+id/fymx_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkbox_read">
+
+        <TextView
+            android:id="@+id/fymx_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/huiqu_tel"
+            android:gravity="center"
+            android:padding="24px"
+            android:text="@string/take_person_fymx"
+            android:textColor="@color/white"
+            android:textSize="42px" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fymx_text"
+            android:background="@color/white"
+            android:paddingBottom="24px"
+            android:paddingLeft="33px"
+            android:paddingRight="33px"
+            android:paddingTop="24px">
+
+            <TextView
+                android:id="@+id/fymx_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/one_card_one_order"
+                android:textSize="30px" />
+
+            <TextView
+                android:id="@+id/fymx_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="*1"
+                android:textSize="33px" />
+
+            <TextView
+                android:id="@+id/fymx_price_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/fymx_price"
+                android:textColor="@color/red_text"
+                android:text="￥215"
+                android:textSize="33px" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="99px"
-        android:layout_below="@id/checkbox_read"
+        android:layout_marginTop="2px"
+        android:layout_below="@id/fymx_layout"
         android:background="@color/white"
         android:gravity="center_vertical">
 
@@ -415,7 +477,7 @@
             android:id="@+id/take_pay_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="33px"
+            android:padding="24px"
             android:text="@string/take_person_pay_toutal"
             android:textColor="@color/black_text"
             android:textSize="33px" />
@@ -425,15 +487,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/take_pay_total"
+            android:layout_centerVertical="true"
+            android:textColor="@color/red_text"
+            android:text="￥215"
             android:textSize="33px" />
 
         <ImageView
+            android:id="@+id/fymx_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12px"
             android:layout_toRightOf="@id/take_pay_total_text"
             android:padding="33px"
-            android:src="@drawable/order_write_down" />
+            android:src="@drawable/order_write_up" />
 
         <TextView
             android:id="@+id/commit_order_btn"

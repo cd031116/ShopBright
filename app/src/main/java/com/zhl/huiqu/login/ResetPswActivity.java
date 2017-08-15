@@ -157,7 +157,7 @@ public class ResetPswActivity extends BaseActivity {
 
         @Override
         public String workInBackground(String... params) throws TaskException {
-            return SDK.newInstance(ResetPswActivity.this).getCheckCode(params[0]);
+            return SDK.newInstance(ResetPswActivity.this).getCode(params[0]);
         }
 
         @Override

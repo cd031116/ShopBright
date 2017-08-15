@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/personal_bg"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/view_top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2px"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="33px">
+
+        <TextView
+            android:layout_width="300px"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_email"
+            android:textColor="@color/black_text" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/setting_email_write"
+            android:textColor="@color/black_text"
+            android:textColorHint="@color/gray_text"
+            android:textSize="33px" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray_text"
+        android:textSize="33px"
+        android:text="@string/setting_email_text"
+        android:padding="33px"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2px"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="33px">
+
+        <TextView
+            android:layout_width="300px"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_email"
+            android:textColor="@color/black_text" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/setting_email_write"
+            android:textColor="@color/black_text"
+            android:textColorHint="@color/gray_text"
+            android:textSize="33px" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150px"
+        android:layout_marginTop="558px"
+        android:layout_marginRight="150px"
+        android:padding="33px"
+        android:textSize="33px"
+        android:textColor="@color/white"
+        android:gravity=""
+        android:text="@string/setting_save"
+        android:background="@drawable/shape_login_commit"/>
+
+</LinearLayout>

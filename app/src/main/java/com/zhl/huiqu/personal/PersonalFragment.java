@@ -60,7 +60,7 @@ public class PersonalFragment extends BaseFragment {
     }
 
     @OnClick({R.id.row_collect_layout, R.id.row_look_his_layout, R.id.row_normal_msg_layout, R.id.row_kefu_center_layout,
-            R.id.refund_order_btn, R.id.goout_order_btn, R.id.pay_order_btn, R.id.all_order_btn})
+            R.id.refund_order_btn, R.id.goout_order_btn, R.id.pay_order_btn, R.id.all_order_btn, R.id.personal_msg_layout})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.row_collect_layout:
@@ -85,6 +85,9 @@ public class PersonalFragment extends BaseFragment {
             case R.id.goout_order_btn:
                 break;
             case R.id.refund_order_btn:
+                break;
+            case R.id.personal_msg_layout:
+                startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
         }
     }
