@@ -48,7 +48,7 @@ public class ToastUtils {
             getToast(context);
             toast.setText(msg);
             toast.setDuration(duration);
-            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.setGravity(Gravity.BOTTOM, 0, 100);
             toast.show();
         } catch (Exception e) {
             e.printStackTrace();

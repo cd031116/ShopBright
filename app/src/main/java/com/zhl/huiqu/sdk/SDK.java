@@ -97,11 +97,11 @@ public class SDK extends ABizLogic {
      * @param mobile   //作为账号的有效手机号码
      * @param code     //接收到的短信验证码 6位随机数字
      * @param password //6-16数字组合的密码
-    * @param type //	登陆类型：0为账号密码1为动态验证码
+     * @param type     //	登陆类型：0为账号密码1为动态验证码
      * @return
      * @throws TaskException
      */
-    public String login(String mobile, String password, String type,String code) throws TaskException {
+    public String login(String mobile, String password, String type, String code) throws TaskException {
         Setting action = newSetting("sendLoginInfo", "/appapi/Memberpub/sendLoginInfo", "登录");
         Params params = new Params();
         params.addParameter("mobile", mobile);
@@ -114,7 +114,7 @@ public class SDK extends ABizLogic {
     /**
      * 获取景点门票页面门票数据
      *
-     * @param theme_id   //	主题id
+     * @param theme_id //	主题id
      * @param page     //页码数
      * @return
      * @throws TaskException
@@ -142,8 +142,9 @@ public class SDK extends ABizLogic {
 
     /**
      * 获取首页下发数据
-     *@param page     //页码数
-     *@param type     //商品类型
+     *
+     * @param page //页码数
+     * @param type //商品类型
      * @return
      * @throws TaskException
      */
@@ -158,8 +159,9 @@ public class SDK extends ABizLogic {
 
     /**
      * 根据经纬度获取周边
-     *@param longitude     //页码数
-     *@param latitude     //商品类型
+     *
+     * @param longitude //页码数
+     * @param latitude  //商品类型
      * @return
      * @throws TaskException
      */
@@ -174,13 +176,14 @@ public class SDK extends ABizLogic {
 
     /**
      * 商品详情
-     *@param id     //所请求商品的id
-     *@param check_sign     //登陆时收到的返回签名
-     *@param session_id     //登陆时收到的返回签名的sesionid
+     *
+     * @param id         //所请求商品的id
+     * @param check_sign //登陆时收到的返回签名
+     * @param session_id //登陆时收到的返回签名的sesionid
      * @return
      * @throws TaskException
      */
-    public String getGoodsDetail(String id,String check_sign,String session_id) throws TaskException {
+    public String getGoodsDetail(String id, String check_sign, String session_id) throws TaskException {
         Setting action = newSetting("getGoodsDetail", "appapi/Goods/getGoodsDetail", "获取商品详情");
         Params params = new Params();
         params.addParameter("id", id);
@@ -189,8 +192,56 @@ public class SDK extends ABizLogic {
         return doPost(configHttpConfig(), action, null, null, null, String.class);
     }
 
+    /**
+     * 手机号码获取验证码
+     *
+     * @param phone 接收验证码的手机号码
+     * @return
+     * @throws TaskException
+     */
+    public String getCheckCode(String phone) throws TaskException {
+        Setting action = newSetting("getCheckCode", "appapi/Memberpub/getCheckCode", "手机号码获取验证码");
+        Params params = new Params();
+        params.addParameter("mobile", phone);
+        return doPost(configHttpConfig(), action, null, null, null, String.class);
+    }
 
+    /**
+     * 注册一条新的用户信息
+     *
+     * @param phone 作为账号的有效手机号码
+     * @param code  接收到的短信验证码 6位随机数字
+     * @param psw   6-16数字组合的密码
+     * @return
+     * @throws TaskException
+     */
+    public String registCommit(String phone, String code, String psw) throws TaskException {
+        Setting action = newSetting("insertMemberInfo", "/appapi/Memberpub/insertMemberInfo", "注册一条新的用户信息");
+        Params params = new Params();
+        params.addParameter("mobile", phone);
+        params.addParameter("code", code);
+        params.addParameter("password", psw);
+        return doPost(configHttpConfig(), action, null, null, null, String.class);
+    }
 
+    /**
+     * TODO 重置密码接口
+     * @param phone
+     * @param code
+     * @param psw
+     * @param pswSure
+     * @return
+     * @throws TaskException
+     */
+    public String resetCommit(String phone, String code, String psw,String pswSure) throws TaskException {
+        Setting action = newSetting("insertMemberInfo", "/appapi/Memberpub/insertMemberInfo", "注册一条新的用户信息");
+        Params params = new Params();
+        params.addParameter("mobile", phone);
+        params.addParameter("code", code);
+        params.addParameter("password", psw);
+        params.addParameter("password", pswSure);
+        return doPost(configHttpConfig(), action, null, null, null, String.class);
+    }
 
     @Override
     protected IHttpUtility configHttpUtility() {

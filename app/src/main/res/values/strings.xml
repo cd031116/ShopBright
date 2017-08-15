@@ -13,8 +13,11 @@
     <string name="register_area">中国  0086</string>
     <string name="register_phone_null">手机号不能为空</string>
     <string name="register_msg_code_null">短信验证码不能为空</string>
+    <string name="register_check_msg_code">接收到的短信验证码为6位随机数字</string>
     <string name="register_psw_null">密码填写不能为空</string>
+    <string name="register_check_psw">6-16数字和字母组合的密码</string>
     <string name="register_psw_sure_null">密码确认填写不能为空</string>
+    <string name="register_psw_is_equals">两次密码填写不相同</string>
 
     <string name="reset_commit">确认修改</string>
     <string name="reset_psw">重置密码</string>

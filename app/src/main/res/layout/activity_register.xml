@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_bg"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
@@ -100,9 +102,10 @@
         android:gravity="right">
 
         <TextView
+            android:id="@+id/has_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/register_new_user"
+            android:text="@string/reset_account_login"
             android:textColor="@color/comm_white"
             android:textSize="30px" />
 
@@ -121,8 +124,10 @@
         android:drawableLeft="@drawable/login_password"
         android:drawablePadding="30px"
         android:gravity="center_vertical"
+        android:inputType="textPassword"
         android:hint="@string/register_psw"
         android:paddingLeft="30px"
+        android:textColor="@color/white"
         android:textColorHint="@color/comm_white"
         android:textSize="36px" />
 
@@ -153,6 +158,7 @@
         android:gravity="center_vertical"
         android:hint="@string/register_msg_code"
         android:paddingLeft="30px"
+        android:textColor="@color/white"
         android:textColorHint="@color/comm_white"
         android:textSize="36px" />
 
@@ -185,6 +191,7 @@
         android:gravity="center_vertical"
         android:hint="@string/register_phone"
         android:paddingLeft="30px"
+        android:textColor="@color/white"
         android:textColorHint="@color/comm_white"
         android:textSize="36px" />
 
