@@ -12,7 +12,7 @@ public class BaseBean implements Serializable {
 
     private String code;
 
-    private String msg;
+    private String message;
 
     public String getCode() {
         return code;
@@ -22,11 +22,12 @@ public class BaseBean implements Serializable {
         this.code = code;
     }
 
-    public String getMsg() {
-        return msg;
+
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

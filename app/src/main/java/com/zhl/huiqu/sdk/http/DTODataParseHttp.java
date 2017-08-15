@@ -52,7 +52,11 @@ public class DTODataParseHttp extends DefHttpUtility {
                 }
                 if (bean != null) {
                     bean.setCode(jsonObject.getString("code"));
-                    bean.setMsg(jsonObject.getString("msg"));
+                    String msg=jsonObject.getString("message");
+                    if(TextUtils.isEmpty(msg)){
+                        msg=jsonObject.getString("msg");
+                    }
+                    bean.setMessage(msg);
                 }
             }
             return result;

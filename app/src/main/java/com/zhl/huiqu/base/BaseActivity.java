@@ -124,9 +124,6 @@ public class BaseActivity extends org.aisen.android.ui.activity.basic.BaseActivi
     * @param txt
     */
     public void showAlert(String txt,final boolean isCancel){
-        if(!isConnect(this)){
-            return;
-        }
         if(!"".equals(txt)&&txt!=null){
             if(progressDialog==null){
                 progressDialog=new ShowMsgDialog(this,isCancel);

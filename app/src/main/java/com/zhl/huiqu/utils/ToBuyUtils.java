@@ -22,7 +22,7 @@ public class ToBuyUtils {
      */
     public static void lunchWeChat(Context context, Consts.PayType payType, BRewardBean info){
         //获取到打赏订单等信息
-        if (String.valueOf("success").equals(info.getMsg())){
+        if (String.valueOf("success").equals(info.getMessage())){
             IWXAPI msgApi = WXAPIFactory.createWXAPI(context,null);
             msgApi.registerApp(Constants.WE_CHAT_APP_ID);
             PayReq req = ToBuyUtils.getWeChatPayReq(info);
