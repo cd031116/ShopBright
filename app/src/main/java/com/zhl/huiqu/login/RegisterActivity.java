@@ -3,21 +3,18 @@ package com.zhl.huiqu.login;
 import android.content.Intent;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
-import com.zhl.huiqu.main.ProductDetailActivity;
+import com.zhl.huiqu.personal.OrderWriteFragment;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.PhoneFormatCheckUtils;
 import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.utils.ToastUtils;
 
-import org.aisen.android.network.http.Params;
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
 
@@ -109,6 +106,7 @@ public class RegisterActivity extends BaseActivity {
                 showOrHindPsw();
                 break;
             case R.id.zhifubao:
+                OrderWriteFragment.launch(RegisterActivity.this);
                 break;
             case R.id.wechat:
                 break;
@@ -142,7 +140,7 @@ public class RegisterActivity extends BaseActivity {
 
         @Override
         public String workInBackground(String... params) throws TaskException {
-            return SDK.newInstance(RegisterActivity.this).getCheckCode(params[0]);
+            return SDK.newInstance(RegisterActivity.this).getCode(params[0]);
         }
 
         @Override
@@ -168,7 +166,7 @@ public class RegisterActivity extends BaseActivity {
 
         @Override
         public String workInBackground(String... params) throws TaskException {
-            return SDK.newInstance(RegisterActivity.this).registCommit(params[0], params[1], params[2]);
+            return SDK.newInstance(RegisterActivity.this).register(params[0], params[1], params[2]);
         }
 
         @Override

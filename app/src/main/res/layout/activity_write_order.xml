@@ -212,12 +212,14 @@
             android:textSize="33px" />
 
         <EditText
+            android:id="@+id/take_ticket_person_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/take_ticket_person"
             android:background="@null"
             android:hint="(请填写正确信息)"
+            android:textColor="@color/black_text"
             android:textSize="33px" />
 
     </RelativeLayout>
@@ -241,12 +243,13 @@
             android:textSize="33px" />
 
         <EditText
+            android:id="@+id/take_person_name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/take_person_name"
             android:background="@null"
-            android:hint="(请填写正确信息)"
+            android:hint="@string/take_person_name_text"
             android:textSize="33px" />
 
     </RelativeLayout>
@@ -270,12 +273,13 @@
             android:textSize="33px" />
 
         <EditText
+            android:id="@+id/take_person_id_card_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/take_person_id_card"
             android:background="@null"
-            android:hint="(请填写正确信息)"
+            android:hint="@string/tourist_rypz"
             android:textSize="33px" />
 
     </RelativeLayout>
@@ -299,12 +303,13 @@
             android:textSize="33px" />
 
         <EditText
+            android:id="@+id/take_person_phone_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/take_person_phone"
             android:background="@null"
-            android:hint="(请填写正确信息)"
+            android:hint="@string/recieve_msg_pz"
             android:textSize="33px" />
 
     </RelativeLayout>
@@ -328,13 +333,24 @@
             android:textSize="33px" />
 
         <EditText
+            android:id="@+id/take_person_code_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/take_person_code"
             android:background="@null"
-            android:hint="(请填写正确信息)"
+            android:hint="@string/register_msg_code"
             android:textSize="33px" />
+
+        <TextView
+            android:id="@+id/take_person_free_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/personal_all_order_delete"
+            android:textSize="33px"
+            android:padding="24px"
+            android:text="@string/take_person_free"/>
 
     </RelativeLayout>
 
@@ -357,13 +373,22 @@
             android:textSize="33px" />
 
         <EditText
+            android:id="@+id/check_code_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/take_person_check_code"
             android:background="@null"
-            android:hint="(请填写正确信息)"
+            android:hint="@string/push_check_code"
             android:textSize="33px" />
+
+        <ImageView
+            android:id="@+id/check_code_img"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:background="#f0f4f7"
+            android:layout_width="240px"
+            android:layout_height="78px" />
 
     </RelativeLayout>
 
@@ -411,15 +436,16 @@
             android:src="@drawable/order_write_down" />
 
         <TextView
+            android:id="@+id/commit_order_btn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:paddingRight="60px"
-            android:paddingLeft="60px"
             android:background="@drawable/order_write_commit"
-            android:text="@string/take_person_commit" />
+            android:gravity="center"
+            android:paddingLeft="60px"
+            android:paddingRight="60px"
+            android:text="@string/take_person_commit"
+            android:textColor="@color/white" />
     </RelativeLayout>
 
 </RelativeLayout>

@@ -119,9 +119,13 @@
     <string name="take_person_phone">手机号<font color="#e111818"><b>*</b></font></string>
     <string name="take_person_code">验证码</string>
     <string name="take_person_check_code">校验码</string>
-    <string name="take_person_free">免费获取</string>
+    <string name="push_check_code">请输入右侧校验码</string>
+    <string name="take_person_free">免费获取验证码</string>
     <string name="take_person_pay_toutal">应付总金额:</string>
     <string name="take_person_commit">提交订单</string>
+    <string name="take_person_name_text">必填</string>
+    <string name="tourist_rypz">用于景区入园等凭证</string>
+    <string name="recieve_msg_pz">接收取票短信凭证</string>
     <string name="take_person_fymx">费用明细</string>
 
     <string name="scan_tips">将二维码图片对准扫描框即可自动扫描</string>
