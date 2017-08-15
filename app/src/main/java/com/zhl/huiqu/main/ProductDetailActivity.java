@@ -249,7 +249,4 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
         }
     }
 
-
-
-
 }

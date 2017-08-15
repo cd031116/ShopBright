@@ -28,7 +28,7 @@ android {
         }
         debug {
             buildConfigField "boolean", "LOG_DEBUG", "true"
-            buildConfigField "String", "BASE_URL", "\"http://zengteng.com/wechat/\""
+            buildConfigField "String", "BASE_URL", "\"http://192.168.18.234/\""
 //            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
