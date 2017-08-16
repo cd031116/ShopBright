@@ -10,7 +10,7 @@ import com.zhl.huiqu.base.BaseActivity;
 public class ChangePhoneActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_setting;
+        return R.layout.activity_change_phone;
     }
 
     @Override

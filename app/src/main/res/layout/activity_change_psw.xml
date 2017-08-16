@@ -24,6 +24,7 @@
             android:textSize="33px" />
 
         <EditText
+            android:id="@+id/old_psw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -49,6 +50,7 @@
             android:textSize="33px" />
 
         <EditText
+            android:id="@+id/new_psw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -74,6 +76,7 @@
             android:textSize="33px" />
 
         <EditText
+            android:id="@+id/new_sure_psw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -85,6 +88,7 @@
 
 
     <TextView
+        android:id="@+id/save_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="150px"

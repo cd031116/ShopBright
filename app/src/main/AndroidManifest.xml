@@ -87,6 +87,9 @@
             android:name=".personal.SettingActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".personal.OrderWriteActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".main.ProductDetailActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".main.PayActivity" />

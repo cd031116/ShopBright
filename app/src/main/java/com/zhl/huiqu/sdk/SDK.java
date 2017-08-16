@@ -8,6 +8,7 @@ import com.zhl.huiqu.main.bean.DetailBean;
 import com.zhl.huiqu.main.bean.MainTopInfo;
 import com.zhl.huiqu.main.ticket.TickListInfo;
 import com.zhl.huiqu.sdk.http.DTODataParseHttp;
+import com.zhl.huiqu.utils.TLog;
 
 import org.aisen.android.common.setting.Setting;
 import org.aisen.android.network.biz.ABizLogic;
@@ -71,9 +72,11 @@ public class SDK extends ABizLogic {
     public String getCode(String mobile) throws TaskException {
         Setting action = newSetting("getCheckCode", "appapi/Memberpub/getCheckCode", "验证码");
         Params params = new Params();
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?mobile=" + mobile);
         params.addParameter("mobile", mobile);
         // 这个接口，是将form表单数据，按照json格式走post协议，请使用requestObject这个参数。
-        return doPost(configHttpConfig(), action, params, null,null, String.class);
+        return doPost(configHttpConfig(), action, params, null, null, String.class);
+
     }
 
     /**
@@ -86,12 +89,30 @@ public class SDK extends ABizLogic {
      * @throws TaskException
      */
     public String register(String mobile, String code, String password) throws TaskException {
-        Setting action = newSetting("insertMemberInfo", "appapi/Memberpub/insertMemberInfor", "注册");
+        Setting action = newSetting("insertMemberInfo", "appapi/Memberpub/insertMemberInfo", "注册");
         Params params = new Params();
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?mobile=" + mobile + "&code=" + code + "&password=" + password);
         params.addParameter("mobile", mobile);
         params.addParameter("code", code);
         params.addParameter("password", password);
-        return doPost(configHttpConfig(), action, null, null, basicParams(params), String.class);
+        return doPost(configHttpConfig(), action, params, null, null, String.class);
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param oldPsw 原密码
+     * @param newPsw 老密码
+     * @return
+     * @throws TaskException
+     */
+    public String changePsw(String oldPsw, String newPsw) throws TaskException {
+        Setting action = newSetting("insertMemberInfo", "appapi/Memberpub/insertMemberInfo", "注册");
+        Params params = new Params();
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?oldPsw=" + oldPsw + "&newPsw=" + newPsw);
+        params.addParameter("oldPsw", oldPsw);
+        params.addParameter("newPsw", newPsw);
+        return doPost(configHttpConfig(), action, basicParams(params), null, null, String.class);
     }
 
 
@@ -153,18 +174,19 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public ProductPartListBean getMainbottum(String type, int page) throws TaskException {
-        Setting action = newSetting("getMainbottum", "appapi/Index/getShopBottom", "获取首页下发数据");
+    public String getMainbottum(String type, String page) throws TaskException {
+        Setting action = newSetting("getMainbottum", "/appapi/Index/getShopBottom", "获取首页下发数据");
         Params params = new Params();
         params.addParameter("type", type);
-        params.addParameter("page", page+"");
-        return doGet(action, basicParams(params), ProductPartListBean.class);
+        params.addParameter("page", page);
+        return doGet(action, basicParams(params), String.class);
     }
+
 
     /**
      * 根据经纬度获取周边
-     *@param longitude     //
-     *@param latitude     //
+     *@param longitude     //页码数
+     *@param latitude     //商品类型
      * @return
      * @throws TaskException
      */

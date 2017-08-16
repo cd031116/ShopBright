@@ -3,6 +3,8 @@ package com.zhl.huiqu.pull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
+
 /**
  * Created by Stay on 1/3/16.
  * Powered by www.stay4it.com
@@ -10,6 +12,7 @@ import android.view.View;
 public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
     public BaseViewHolder(View itemView) {
         super(itemView);
+        SupportMultipleScreensUtil.scale(itemView);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

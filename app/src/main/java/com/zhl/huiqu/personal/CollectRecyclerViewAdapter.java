@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.utils.GlideCircleTransform;
+import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +78,7 @@ public class CollectRecyclerViewAdapter extends RecyclerView.Adapter<CollectRecy
     @Override
     public CollectRecyclerViewAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mLayoutInflater.inflate(R.layout.item_tourist_point, parent, false);
+        SupportMultipleScreensUtil.scale(view);
         CollectRecyclerViewAdapter.MyViewHolder vh = new CollectRecyclerViewAdapter.MyViewHolder(view);
         view.setOnClickListener(this);
         return vh;

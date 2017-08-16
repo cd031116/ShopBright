@@ -4,24 +4,14 @@
     android:layout_height="match_parent"
     android:background="@color/personal_bg">
 
-    <RelativeLayout
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="126px"
-        android:background="@color/comm_white">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/reset_account_login" />
-    </RelativeLayout>
+    <include layout="@layout/view_top"
+        android:id="@+id/view_top"/>
 
     <TextView
         android:id="@+id/new_tourist_name_msg"
         android:layout_width="wrap_content"
         android:layout_height="84px"
-        android:layout_below="@id/toolbar"
+        android:layout_below="@id/view_top"
         android:drawablePadding="15px"
         android:drawableRight="@drawable/yksf_wh"
         android:gravity="center_vertical"
@@ -146,6 +136,13 @@
             android:text="@string/new_tourist_phone_edit"
             android:textSize="30px" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/yksf_lxr"/>
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -166,40 +163,30 @@
             android:textColor="@color/new_tourist_text_color"
             android:textSize="36px" />
 
-        <ImageView
-            android:id="@+id/new_tourist_sex_mail"
+        <CheckBox
+            android:id="@+id/checkbox_mail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="330px"
-            android:background="@drawable/yksf_red_ygou" />
-        <TextView
-            android:id="@+id/new_tourist_mail_text"
-            android:textSize="36px"
-            android:layout_toRightOf="@id/new_tourist_sex_mail"
-            android:layout_width="wrap_content"
-            android:layout_marginLeft="9px"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/new_tourist_mail"/>
+            android:button="@drawable/checkbox_sex_style"
+            android:checked="true"
+            android:paddingLeft="15px"
+            android:text="@string/new_tourist_mail"
+            android:textSize="33px" />
 
-        <ImageView
-            android:id="@+id/new_tourist_sex_femail"
+        <CheckBox
+            android:id="@+id/checkbox_femail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/new_tourist_mail_text"
-            android:layout_marginLeft="135px"
-            android:background="@drawable/yksf_gray_gou" />
-        <TextView
-            android:id="@+id/new_tourist_femail_text"
-            android:textSize="36px"
-            android:layout_toRightOf="@id/new_tourist_sex_femail"
-            android:layout_width="wrap_content"
-            android:layout_marginLeft="9px"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/new_tourist_femail"/>
+            android:layout_marginLeft="36px"
+            android:button="@drawable/checkbox_sex_style"
+            android:layout_toRightOf="@id/checkbox_mail"
+            android:checked="false"
+            android:paddingLeft="15px"
+            android:text="@string/new_tourist_femail"
+            android:textSize="33px" />
 
     </RelativeLayout>
 

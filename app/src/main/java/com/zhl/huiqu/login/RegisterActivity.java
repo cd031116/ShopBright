@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
-import com.zhl.huiqu.personal.OrderWriteFragment;
+import com.zhl.huiqu.personal.OrderWriteActivity;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.PhoneFormatCheckUtils;
 import com.zhl.huiqu.utils.TLog;
@@ -89,7 +89,7 @@ public class RegisterActivity extends BaseActivity {
                     ToastUtils.showShortToast(this, getResources().getString(R.string.register_phone));
                 else if (code.length() != 6)
                     ToastUtils.showShortToast(this, getResources().getString(R.string.register_check_msg_code));
-                else if (password.length() < 6 || password.length() > 6)
+                else if (password.length() < 6 || password.length() > 16)
                     ToastUtils.showShortToast(this, getResources().getString(R.string.register_check_psw));
                 else
                     new commitTask().execute(phone, code, password);
@@ -106,7 +106,6 @@ public class RegisterActivity extends BaseActivity {
                 showOrHindPsw();
                 break;
             case R.id.zhifubao:
-                OrderWriteFragment.launch(RegisterActivity.this);
                 break;
             case R.id.wechat:
                 break;

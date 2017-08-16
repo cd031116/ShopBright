@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 
 import org.aisen.android.common.utils.SystemUtils;
 import org.aisen.android.common.utils.Utils;
@@ -42,7 +43,7 @@ public class OrderItemView extends ARecycleViewItemView<OrderEntity> {
     @Override
     public void onBindView(View convertView) {
         super.onBindView(convertView);
-
+        SupportMultipleScreensUtil.scale(convertView);
         int width = SystemUtils.getScreenWidth(getContext());
 //        imgCover.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, Math.round(360 * 1.0f / 750 * width)));
     }

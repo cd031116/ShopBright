@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +63,7 @@ public class KefuRecyclerViewAdapter extends RecyclerView.Adapter<KefuRecyclerVi
     @Override
     public KefuRecyclerViewAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mLayoutInflater.inflate(R.layout.item_kefu_center_list, parent, false);
+        SupportMultipleScreensUtil.scale(view);
         KefuRecyclerViewAdapter.MyViewHolder vh = new KefuRecyclerViewAdapter.MyViewHolder(view);
         view.setOnClickListener(this);
         return vh;

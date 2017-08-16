@@ -73,9 +73,4 @@ public class ApplyRefundActivity extends BaseActivity implements RefundLisener {
 //            order_detail_red3.setCompoundDrawables(null, drawable, null, null);
         }
     }
-
-    private void hindAllFragment(FragmentTransaction fragmentTransaction) {
-        fragmentTransaction.hide(refundApplyFragment);
-        fragmentTransaction.hide(refundingFragment);
-    }
 }
