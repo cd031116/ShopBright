@@ -212,7 +212,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         @Override
         protected void onPrepare() {
             super.onPrepare();
-            showAlert("..正在获取数据..",false);
+            showAlert("..正在加载..",false);
         }
 
         @Override
@@ -237,7 +237,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         if(info==null){
             return;
         }
-        List<HotInfo> list = info.getHot3();
+        List<HotInfo> list = info.getHot();
             if (!TextUtils.isEmpty(list.get(0).getThumb())) {
                 Glide.with(getActivity())
                         .load(list.get(0).getThumb())
@@ -253,11 +253,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
                         .load(list.get(2).getThumb())
                         .into(hot_3);
             }
-
-
     }
-
-
 
 
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_line"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,6 +15,7 @@
     android:id="@+id/myscroview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_below="@+id/top_layout"
     android:scrollbars="none">
 
@@ -26,9 +28,10 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="500px"
-            android:background="#5EAEF6">
+            android:background="#ffffff">
 
-            <ImageView
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
@@ -36,27 +39,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="100px"
                 android:layout_alignParentBottom="true"
-                android:background="#00000000"
+                android:background="#a0000000"
                 android:orientation="horizontal"
                 android:padding="20px">
 
 
                 <TextView
+                    android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20px"
-                    android:text="平江石牛寨旅游区"
                     android:textColor="@color/white"
                     android:textSize="40px" />
 
-                <ImageView
+                <TextView
+                    android:id="@+id/num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="20px"
-                    android:src="@drawable/mpxq_tp" />
+                    android:textColor="#ffffff"
+                    android:gravity="center_vertical"
+                    android:drawableLeft="@drawable/mpxq_tp"
+                    android:layout_marginRight="20px"/>
 
             </RelativeLayout>
         </RelativeLayout>
@@ -68,6 +74,7 @@
             android:padding="10px">
 
             <TextView
+                android:id="@+id/address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10px"
@@ -75,7 +82,6 @@
                 android:drawablePadding="20px"
                 android:gravity="center_vertical"
                 android:padding="10px"
-                android:text="湖南省岳阳市平江县"
                 android:textColor="#333333"
                 android:textSize="32px" />
 
@@ -96,6 +102,7 @@
             android:padding="10px">
 
             <TextView
+                android:id="@+id/open_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10px"
@@ -103,7 +110,6 @@
                 android:drawablePadding="20px"
                 android:gravity="center_vertical"
                 android:padding="10px"
-                android:text="开放时间:08:00-17:30"
                 android:textColor="#333333"
                 android:textSize="32px" />
 
@@ -167,6 +173,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/mp_rela"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1px"
@@ -181,7 +188,7 @@
                     android:drawablePadding="20px"
                     android:gravity="center_vertical"
                     android:padding="10px"
-                    android:text="成人票"
+                    android:text="门票"
                     android:textColor="#333333"
                     android:textSize="32px" />
 
@@ -198,14 +205,16 @@
                 android:id="@+id/cr_p"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone" />
+                android:layout_marginTop="1px"
+                android:visibility="visible" />
 
         </LinearLayout>
-        <!--儿童票-->
+    <!-- &lt;!&ndash;儿童票&ndash;&gt;
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1px"
+            android:visibility="gone"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -244,11 +253,12 @@
         </LinearLayout>
 
 
-        <!--家庭票-->
+        &lt;!&ndash;家庭票&ndash;&gt;
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1px"
+            android:visibility="gone"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -286,11 +296,12 @@
                 android:visibility="gone" />
         </LinearLayout>
 
-        <!--酒店加景点-->
+        &lt;!&ndash;酒店加景点&ndash;&gt;
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10px"
+            android:visibility="gone"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -329,11 +340,12 @@
         </LinearLayout>
 
 
-        <!--跟团游-->
+        &lt;!&ndash;跟团游&ndash;&gt;
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1px"
+            android:visibility="gone"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -370,10 +382,10 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone" />
         </LinearLayout>
-
-
-        <!--介绍-->
+-->
+            <!--介绍-->
         <LinearLayout
+            android:id="@+id/js_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10px"
@@ -424,11 +436,15 @@
 
 
         <RelativeLayout
+            android:id="@+id/look_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1px"
             android:background="#ffffff"
-            android:padding="10px">
+            android:paddingTop="20px"
+            android:paddingBottom="20px"
+            android:paddingLeft="10px"
+            android:paddingRight="10px">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -559,11 +575,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1px"
+            android:background="#ffffff"
+            android:padding="20px"
             android:textColor="#333333"
             android:textSize="32px" />
 
 
-        <TextView
+       <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10px"
@@ -585,7 +603,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="900px"
+            android:layout_height="130px"
             android:padding="10px"
             android:gravity="center"
             android:orientation="horizontal">

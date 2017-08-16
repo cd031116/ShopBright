@@ -9,34 +9,33 @@ import java.util.List;
 
 public class MainTopInfo implements Serializable{
 
-   private List<HotelInfo>  hotel4;
+   private List<HotelInfo>  hotel;
 
-    private List<TicketsInfo>  ticket4;
+    private List<TicketsInfo>  ticket;
 
-    private List<HotInfo>  hot3;
+    private List<HotInfo>  hot;
 
-
-    public List<HotelInfo> getHotel4() {
-        return hotel4;
+    public List<HotelInfo> getHotel() {
+        return hotel;
     }
 
-    public void setHotel4(List<HotelInfo> hotel4) {
-        this.hotel4 = hotel4;
+    public void setHotel(List<HotelInfo> hotel) {
+        this.hotel = hotel;
     }
 
-    public List<TicketsInfo> getTicket4() {
-        return ticket4;
+    public List<TicketsInfo> getTicket() {
+        return ticket;
     }
 
-    public void setTicket4(List<TicketsInfo> ticket4) {
-        this.ticket4 = ticket4;
+    public void setTicket(List<TicketsInfo> ticket) {
+        this.ticket = ticket;
     }
 
-    public List<HotInfo> getHot3() {
-        return hot3;
+    public List<HotInfo> getHot() {
+        return hot;
     }
 
-    public void setHot3(List<HotInfo> hot3) {
-        this.hot3 = hot3;
+    public void setHot(List<HotInfo> hot) {
+        this.hot = hot;
     }
 }

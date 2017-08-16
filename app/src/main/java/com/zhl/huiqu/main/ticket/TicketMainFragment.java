@@ -1,6 +1,7 @@
 package com.zhl.huiqu.main.ticket;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -34,12 +35,12 @@ import java.util.List;
 
 
 public class TicketMainFragment extends ABaseFragment {
-    private String[] titles = {"全部", "浪漫海景", "风景名胜", "水上乐园", "城市观光", "游乐世界", "历史人文", "健康养生","影视基地","民俗风情",
-            "古镇水乡","演出表演","动植物园","休闲娱乐","宗教寺庙","户外探险","拓展培训","飞行培训"};
-    private int[] images = {R.drawable.jdmp_all,R.drawable.jdmp_qhj,R.drawable.jdmp_fenjing,R.drawable.jdmp_ssyd,R.drawable.jdmp_csgg,R.drawable.jdmp_yly
-            ,R.drawable.jdmp_ls,R.drawable.jdmp_yangsheng,R.drawable.jdmp_ys,R.drawable.jdmp_all,R.drawable.jdmp_gzms,R.drawable.jdmp_yc,R.drawable.jdmp_dzw,R.drawable.jdmp_ylxx,
-            R.drawable.jdmp_sm,R.drawable.jdmp_fw,R.drawable.jdmp_px,R.drawable.jdmp_feiji};
-    private List<String> imaged=new ArrayList<>();
+    private String[] titles = {"全部", "浪漫海景", "风景名胜", "水上乐园", "城市观光", "游乐世界", "历史人文", "健康养生", "影视基地", "民俗风情",
+            "古镇水乡", "演出表演", "动植物园", "休闲娱乐", "宗教寺庙", "户外探险", "拓展培训", "飞行培训"};
+    private int[] images = {R.drawable.jdmp_all, R.drawable.jdmp_qhj, R.drawable.jdmp_fenjing, R.drawable.jdmp_ssyd, R.drawable.jdmp_csgg, R.drawable.jdmp_yly
+            , R.drawable.jdmp_ls, R.drawable.jdmp_yangsheng, R.drawable.jdmp_ys, R.drawable.jdmp_all, R.drawable.jdmp_gzms, R.drawable.jdmp_yc, R.drawable.jdmp_dzw, R.drawable.jdmp_ylxx,
+            R.drawable.jdmp_sm, R.drawable.jdmp_fw, R.drawable.jdmp_px, R.drawable.jdmp_feiji};
+    private List<String> imaged = new ArrayList<>();
     private List<View> mPagerList;
     private List<Model> mDatas;
     private LayoutInflater inflater_d;
@@ -57,27 +58,29 @@ public class TicketMainFragment extends ABaseFragment {
     private int curIndex = 0;
 
 
-    @ViewInject(id=R.id.viewpager)
+    @ViewInject(id = R.id.viewpager)
     ViewPager viewpager;
-    @ViewInject(id=R.id.ll_dot)
+    @ViewInject(id = R.id.ll_dot)
     LinearLayout ll_dot;
     @ViewInject(id = R.id.banner)
     Banner banner;
 
 
-
     public static TicketMainFragment newInstance() {
         return new TicketMainFragment();
     }
+
     public static void launch(Activity from) {
         ContainerActivity.launch(from, TicketMainFragment.class, null);
     }
+
     @Override
     public void setContentView(ViewGroup view) {
         super.setContentView(view);
         SupportMultipleScreensUtil.init(getActivity());
         SupportMultipleScreensUtil.scale(view);
     }
+
     @Override
     public int inflateContentView() {
         return R.layout.fragment_ticket_main;
@@ -113,19 +116,18 @@ public class TicketMainFragment extends ABaseFragment {
     }
 
 
-
     @Override
     public void onStart() {
         super.onStart();
         banner.startAutoPlay();
     }
+
     @Override
     public void onStop() {
         super.onStop();
         //结束轮播
         banner.stopAutoPlay();
     }
-
 
 
     /**
@@ -138,6 +140,7 @@ public class TicketMainFragment extends ABaseFragment {
             mDatas.add(new Model(titles[i], images[i]));
         }
     }
+
     /**
      * 设置圆点
      */
@@ -169,10 +172,10 @@ public class TicketMainFragment extends ABaseFragment {
         });
     }
 
-    private void setBanner(){
-        imaged.add( "http://pic30.nipic.com/20130626/8174275_085522448172_2.jpg");
-        imaged.add( "http://pic18.nipic.com/20111215/577405_080531548148_2.jpg");
-        imaged.add( "http://pic15.nipic.com/20110722/2912365_092519919000_2.jpg");
+    private void setBanner() {
+        imaged.add("http://pic30.nipic.com/20130626/8174275_085522448172_2.jpg");
+        imaged.add("http://pic18.nipic.com/20111215/577405_080531548148_2.jpg");
+        imaged.add("http://pic15.nipic.com/20110722/2912365_092519919000_2.jpg");
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         //设置图片加载器
         banner.setImageLoader(new GlideImageLoader());
@@ -193,16 +196,19 @@ public class TicketMainFragment extends ABaseFragment {
 
     }
 
-    @OnClick({R.id.btnBack,R.id.line_back})
+    @OnClick({R.id.btnBack, R.id.line_back, R.id.searh_line, R.id.editSearch})
     void onBtnBackClicked(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btnBack:
             case R.id.line_back:
                 getActivity().finish();
                 break;
+            case R.id.searh_line:
+            case R.id.editSearch:
+                startActivity(new Intent(getActivity(), TixkSearchActivity.class));
+                break;
         }
     }
-
 
 
 }

@@ -22,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 
 import org.aisen.android.common.utils.SystemUtils;
 
@@ -52,6 +53,7 @@ public class ViewHolder extends RecyclerView.ViewHolder
     {
         View itemView = LayoutInflater.from(context).inflate(layoutId, parent,
                 false);
+        SupportMultipleScreensUtil.scale(itemView);
         ViewHolder holder = new ViewHolder(context, itemView);
         return holder;
     }

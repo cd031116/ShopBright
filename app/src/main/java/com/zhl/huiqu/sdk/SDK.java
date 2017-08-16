@@ -3,6 +3,7 @@ package com.zhl.huiqu.sdk;
 import android.app.Activity;
 
 import com.zhl.huiqu.BuildConfig;
+import com.zhl.huiqu.main.bean.DetailBean;
 import com.zhl.huiqu.main.bean.MainTopInfo;
 import com.zhl.huiqu.sdk.http.DTODataParseHttp;
 
@@ -149,7 +150,7 @@ public class SDK extends ABizLogic {
      * @throws TaskException
      */
     public String getMainbottum(String type, String page) throws TaskException {
-        Setting action = newSetting("getMainbottum", "/appapi/Index/getShopTop", "获取首页下发数据");
+        Setting action = newSetting("getMainbottum", "/appapi/Index/getShopBottom", "获取首页下发数据");
         Params params = new Params();
         params.addParameter("type", type);
         params.addParameter("page", page);
@@ -181,15 +182,14 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public String getGoodsDetail(String id,String check_sign,String session_id) throws TaskException {
+    public DetailBean getGoodsDetail(String id, String check_sign, String session_id) throws TaskException {
         Setting action = newSetting("getGoodsDetail", "appapi/Goods/getGoodsDetail", "获取商品详情");
         Params params = new Params();
         params.addParameter("id", id);
-        params.addParameter("check_sign", check_sign);
-        params.addParameter("session_id", session_id);
-        return doPost(configHttpConfig(), action, null, null, null, String.class);
+//        params.addParameter("check_sign", check_sign);
+//        params.addParameter("session_id", session_id);
+        return doPost(configHttpConfig(), action, params, null, null, DetailBean.class);
     }
-
 
 
     /**
@@ -202,7 +202,7 @@ public class SDK extends ABizLogic {
      * @throws TaskException
      */
     public String resetCommit(String phone, String code, String psw,String pswSure) throws TaskException {
-        Setting action = newSetting("insertMemberInfo", "/appapi/Memberpub/insertMemberInfo", "注册一条新的用户信息");
+        Setting action = newSetting("insertMemberInfo", "/appapi/Memberpub/insertMemberInfo", "重置密码接口");
         Params params = new Params();
         params.addParameter("mobile", phone);
         params.addParameter("code", code);

@@ -72,6 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -88,16 +89,17 @@
                     android:paddingLeft="200px"
                     android:paddingRight="200px">
 
-                    <EditText
+                    <TextView
                         android:id="@+id/editSearch"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10px"
+                        android:focusable="false"
                         android:background="@null"
                         android:drawableLeft="@drawable/search_ss"
                         android:drawablePadding="10px"
                         android:gravity="center"
-                        android:hint="输入您要搜索的景点/地区"
+                        android:text="输入您要搜索的景点/地区"
                         android:textColor="#666666"
                         android:textSize="32px" />
                 </LinearLayout>

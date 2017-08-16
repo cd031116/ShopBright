@@ -1,4 +1,4 @@
-package com.zhl.huiqu.main;
+package com.zhl.huiqu.main.ticket;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.main.ProductDetailActivity;
+import com.zhl.huiqu.main.ProductPartBean;
+import com.zhl.huiqu.main.ProductPartListBean;
+import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.Utils;
 
 import org.aisen.android.network.task.TaskException;
@@ -26,17 +30,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
- * 首页产品列表界面
- * Created by lyj on 17/2/12.
+ * Created by Administrator on 2017/8/15.
  */
 
-public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<ProductPartBean, ProductPartListBean, Serializable> {
-    public static MainProductListFragment newInstance(String categoryId) {
+public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<ProductPartBean, ProductPartListBean, Serializable> {
+
+    public static TickListFragment newInstance() {
         Bundle args = new Bundle();
 //        args.putString("categoryId", categoryId);
-        MainProductListFragment fragment = new MainProductListFragment();
+        TickListFragment fragment = new TickListFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,7 +53,12 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
     RecyclerView recycleview;
 
     private String categoryId;
-
+    @Override
+    public void setContentView(ViewGroup view) {
+        super.setContentView(view);
+        SupportMultipleScreensUtil.init(getActivity());
+        SupportMultipleScreensUtil.scale(view);
+    }
     @Override
     public int inflateContentView() {
         return R.layout.ui_recycle;
@@ -61,7 +69,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
         super.onItemClick(parent, view, position, id);
         int a = getAdapterItems().get(position).getId();
         if (position < getAdapterItems().size()) {
-           startActivity(new Intent(getActivity(),ProductDetailActivity.class));
+            startActivity(new Intent(getActivity(),ProductDetailActivity.class));
         }
     }
 
@@ -76,12 +84,12 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
         return new IItemViewCreator<ProductPartBean>() {
             @Override
             public View newContentView(LayoutInflater layoutInflater, ViewGroup viewGroup, int i){
-                return layoutInflater.inflate(ProductPartItemView.LAYOUT_RES, viewGroup, false);
+                return layoutInflater.inflate(TickItemView.LAYOUT_RES, viewGroup, false);
             }
 
             @Override
             public IITemView<ProductPartBean> newItemView(View view, int i) {
-                return new ProductPartItemView(getActivity(), view);
+                return new TickItemView(getActivity(), view);
             }
         };
     }
@@ -139,7 +147,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
         @Override
         protected ProductPartListBean workInBackground(RefreshMode refreshMode, String s, String nextPage, Void... voids) throws TaskException {
             int start = 1;
-            if (mode == RefreshMode.update && !TextUtils.isEmpty(nextPage)) {
+            if (mode == RefreshMode.update && !TextUtils.isEmpty(nextPage)){
                 try {
                     start = Integer.parseInt(nextPage);
                 } catch (Exception e) {
@@ -165,14 +173,14 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
 //            }
         }
     }
-
+    int a=0;
     protected ProductPartListBean queryList(int start) throws TaskException {
 //        return SDK.newInstance(getActivity()).queryBProductList(AppContext.getEmployeeId(), categoryId, start);
         //
+
         ProductPartListBean bean=new ProductPartListBean();
         bean.setTotal(5);
-
-         List<ProductPartBean> result=new ArrayList<>();
+        List<ProductPartBean> result=new ArrayList<>();
         for(int i=0;i<10;i++){
             ProductPartBean bn=new ProductPartBean();
             bn.setId(i+5);
@@ -187,6 +195,20 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
         super.onDestroy();
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

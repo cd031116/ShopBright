@@ -26,4 +26,6 @@
 
     <color name="all_order_text">#5a5963</color>
     <color name="back_bg">#E9E9E9</color>
+    <color name="mp_s_black">#2D2D2D</color>
+    <color name="mp_s_gray">#5A5963</color>
 </resources>

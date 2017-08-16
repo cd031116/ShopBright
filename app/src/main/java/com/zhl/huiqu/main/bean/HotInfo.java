@@ -8,16 +8,16 @@ import java.io.Serializable;
 
 public class HotInfo implements Serializable {
 
-    private String id;
+    private String shop_spot_id;
     private String title;
     private String thumb;
 
-    public String getId() {
-        return id;
+    public String getShop_spot_id() {
+        return shop_spot_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setShop_spot_id(String shop_spot_id) {
+        this.shop_spot_id = shop_spot_id;
     }
 
     public String getTitle() {
