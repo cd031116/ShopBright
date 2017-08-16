@@ -94,7 +94,8 @@
             android:name=".main.ticket.TixkSearchActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".main.WebviewActivity"></activity>
+        <activity android:name=".main.WebviewActivity" />
+        <activity android:name=".main.ticket.TicketListActivity"></activity>
     </application>
 
 </manifest>

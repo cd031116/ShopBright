@@ -74,7 +74,7 @@
                     android:layout_marginLeft="30px"
                     android:layout_marginRight="30px"
                     android:background="@null"
-                    android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"
+                     android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_@."
                     android:drawableLeft="@drawable/login_phone"
                     android:drawablePadding="10dp"
                     android:hint="手机号/会员名/邮箱"

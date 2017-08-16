@@ -112,6 +112,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/jd_1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -124,6 +125,7 @@
 
 
             <TextView
+                android:id="@+id/jd_2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5px"
@@ -144,6 +146,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/jd_3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -156,6 +159,7 @@
 
 
             <TextView
+                android:id="@+id/jd_4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5px"

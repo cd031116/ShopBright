@@ -47,9 +47,7 @@
                             android:layout_height="300px" />
 
                            <include layout="@layout/mian_top_item"/>
-
                             <include layout="@layout/main_center"/>
-
                     </LinearLayout>
 
                     <!--<android.support.v7.widget.Toolbar-->
@@ -76,7 +74,6 @@
                         app:tabTextAppearance="@style/MyTabLayoutTextAppearance" />
                 </RelativeLayout>
             </android.support.design.widget.AppBarLayout>
-
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewPager"
@@ -105,8 +102,4 @@
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"-->
         <!--android:visibility="gone" />-->
-
-
-
-
 </RelativeLayout>

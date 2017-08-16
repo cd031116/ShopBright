@@ -3,8 +3,10 @@ package com.zhl.huiqu.sdk;
 import android.app.Activity;
 
 import com.zhl.huiqu.BuildConfig;
+import com.zhl.huiqu.main.ProductPartListBean;
 import com.zhl.huiqu.main.bean.DetailBean;
 import com.zhl.huiqu.main.bean.MainTopInfo;
+import com.zhl.huiqu.main.ticket.TickListInfo;
 import com.zhl.huiqu.sdk.http.DTODataParseHttp;
 
 import org.aisen.android.common.setting.Setting;
@@ -67,11 +69,11 @@ public class SDK extends ABizLogic {
         * @throws TaskException
         */
     public String getCode(String mobile) throws TaskException {
-        Setting action = newSetting("getCheckCode", "/appapi/Memberpub/getCheckCode", "验证码");
+        Setting action = newSetting("getCheckCode", "appapi/Memberpub/getCheckCode", "验证码");
         Params params = new Params();
         params.addParameter("mobile", mobile);
         // 这个接口，是将form表单数据，按照json格式走post协议，请使用requestObject这个参数。
-        return doPost(configHttpConfig(), action, null, null, basicParams(params), String.class);
+        return doPost(configHttpConfig(), action, params, null,null, String.class);
     }
 
     /**
@@ -84,7 +86,7 @@ public class SDK extends ABizLogic {
      * @throws TaskException
      */
     public String register(String mobile, String code, String password) throws TaskException {
-        Setting action = newSetting("insertMemberInfo", "/appapi/Memberpub/insertMemberInfor", "注册");
+        Setting action = newSetting("insertMemberInfo", "appapi/Memberpub/insertMemberInfor", "注册");
         Params params = new Params();
         params.addParameter("mobile", mobile);
         params.addParameter("code", code);
@@ -104,13 +106,16 @@ public class SDK extends ABizLogic {
      * @throws TaskException
      */
     public String login(String mobile, String password, String type,String code) throws TaskException {
-        Setting action = newSetting("sendLoginInfo", "/appapi/Memberpub/sendLoginInfo", "登录");
+        Setting action = newSetting("sendLoginInfo", "appapi/Memberpub/sendLoginInfo", "登录");
         Params params = new Params();
         params.addParameter("mobile", mobile);
-        params.addParameter("password", password);
+        if("0".equals(type)){
+            params.addParameter("password", password);
+        }else {
+            params.addParameter("code", code);
+        }
         params.addParameter("type", type);
-        params.addParameter("code", code);
-        return doPost(configHttpConfig(), action, null, null, basicParams(params), String.class);
+        return doPost(configHttpConfig(), action, params, null, null, String.class);
     }
 
     /**
@@ -121,14 +126,13 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public String getTicketData(String theme_id, String page) throws TaskException {
-        Setting action = newSetting("getTicketInfo", "/appapi/SpotTicket1/getTicketInfo", "获取景点门票页面门票数据");
+    public TickListInfo getTicketData(String theme_id, String page) throws TaskException {
+        Setting action = newSetting("getTicketInfo", "/appapi/Spotticket/getTicketInfo", "获取景点门票页面门票数据");
         Params params = new Params();
         params.addParameter("theme_id", theme_id);
-        params.addParameter("page", page);
-        return doGet(action, basicParams(params), String.class);
+//        params.addParameter("page", page);
+        return doGet(action, basicParams(params), TickListInfo.class);
     }
-
 
     /**
      * 获取首页上方数据
@@ -137,7 +141,7 @@ public class SDK extends ABizLogic {
      * @throws TaskException
      */
     public MainTopInfo getMainTop() throws TaskException {
-        Setting action = newSetting("getMainTop", "/appapi/Index/getShopTop", "获取app首页上方数据");
+        Setting action = newSetting("getMainTop", "appapi/Index/getShopTop", "获取app首页上方数据");
         return doGet(action, null, MainTopInfo.class);
     }
 
@@ -149,19 +153,18 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public String getMainbottum(String type, String page) throws TaskException {
-        Setting action = newSetting("getMainbottum", "/appapi/Index/getShopBottom", "获取首页下发数据");
+    public ProductPartListBean getMainbottum(String type, int page) throws TaskException {
+        Setting action = newSetting("getMainbottum", "appapi/Index/getShopBottom", "获取首页下发数据");
         Params params = new Params();
         params.addParameter("type", type);
-        params.addParameter("page", page);
-        return doGet(action, basicParams(params), String.class);
+        params.addParameter("page", page+"");
+        return doGet(action, basicParams(params), ProductPartListBean.class);
     }
-
 
     /**
      * 根据经纬度获取周边
-     *@param longitude     //页码数
-     *@param latitude     //商品类型
+     *@param longitude     //
+     *@param latitude     //
      * @return
      * @throws TaskException
      */

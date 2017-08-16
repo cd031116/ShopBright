@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.Utils;
 
 import org.aisen.android.network.task.TaskException;
@@ -59,7 +60,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         super.onItemClick(parent, view, position, id);
-        int a = getAdapterItems().get(position).getId();
+        int a = getAdapterItems().get(position).getShop_spot_id();
         if (position < getAdapterItems().size()) {
            startActivity(new Intent(getActivity(),ProductDetailActivity.class));
         }
@@ -133,7 +134,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
 
         @Override
         protected List<ProductPartBean> parseResult(ProductPartListBean productPartListBean) {
-            return productPartListBean.getResult();
+            return productPartListBean.getData();
         }
 
         @Override
@@ -149,10 +150,9 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
 
             ProductPartListBean beans = queryList(start);
 
-            if (beans != null && beans.getResult() != null) {
-                beans.setEndPaging(beans.getResult().size() <= 5);
+            if (beans != null && beans.getData() != null) {
+                beans.setEndPaging(beans.getData().size() <= 5);
             }
-
             return beans;
         }
 
@@ -167,19 +167,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
     }
 
     protected ProductPartListBean queryList(int start) throws TaskException {
-//        return SDK.newInstance(getActivity()).queryBProductList(AppContext.getEmployeeId(), categoryId, start);
-        //
-        ProductPartListBean bean=new ProductPartListBean();
-        bean.setTotal(5);
-
-         List<ProductPartBean> result=new ArrayList<>();
-        for(int i=0;i<10;i++){
-            ProductPartBean bn=new ProductPartBean();
-            bn.setId(i+5);
-            result.add(bn);
-        }
-        bean.setResult(result);
-        return  bean;
+        return SDK.newInstance(getActivity()).getMainbottum("",start);
     }
 
     @Override

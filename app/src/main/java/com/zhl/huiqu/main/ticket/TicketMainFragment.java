@@ -99,12 +99,13 @@ public class TicketMainFragment extends ABaseFragment {
             GridView gridView = (GridView) inflater.inflate(R.layout.gridview, viewpager, false);
             gridView.setAdapter(new GridViewAdapter(getActivity(), mDatas, i, pageSize));
             mPagerList.add(gridView);
-
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     int pos = position + curIndex * pageSize;
-
+                    Intent intent=new Intent(getActivity(),TicketListActivity.class);
+                    intent.putExtra("title",mDatas.get(position).getName());
+                    startActivity(intent);
                 }
             });
         }

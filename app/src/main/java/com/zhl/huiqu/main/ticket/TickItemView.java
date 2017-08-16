@@ -1,12 +1,14 @@
 package com.zhl.huiqu.main.ticket;
 
 import android.app.Activity;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.main.ProductPartBean;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
@@ -20,13 +22,31 @@ import org.aisen.android.ui.fragment.adapter.ARecycleViewItemView;
  * Created by Administrator on 2017/8/15.
  */
 
-public class TickItemView extends ARecycleViewItemView<ProductPartBean> {
+public class TickItemView extends ARecycleViewItemView<TickInfo> {
     public static final int LAYOUT_RES = R.layout.item_tourist_point;
 
     @ViewInject(id = R.id.tourist_view)
     ImageView image;
     @ViewInject(id = R.id.tourist_area)
     TextView tname;
+
+    @ViewInject(id = R.id.tourist_area)
+    TextView tourist_area;
+    @ViewInject(id = R.id.tourist_ms)
+    TextView tourist_ms;
+
+    @ViewInject(id = R.id.tourist_place)
+    TextView tourist_place;
+    @ViewInject(id = R.id.tourist_place_score)
+    TextView tourist_place_score;
+    @ViewInject(id = R.id.tourist_place_jibie)
+    TextView tourist_place_jibie;
+
+    @ViewInject(id = R.id.tourist_tag)
+    TextView tourist_tag;
+    @ViewInject(id = R.id.tourist_price)
+    TextView tourist_price;
+
     private Activity activity;
 
     //
@@ -47,23 +67,32 @@ public class TickItemView extends ARecycleViewItemView<ProductPartBean> {
     }
 
     @Override
-    public void onBindData(View view, ProductPartBean bean, int i) {
+    public void onBindData(View view, TickInfo bean, int i) {
+
+        tourist_area.setText(bean.getTitle());
+        tourist_ms.setText(bean.getDesc());
+        tourist_place.setText(bean.getCity());
+        tourist_place_score.setText(bean.getCsr());
+        tourist_place_jibie.setText(bean.getGrade());
+        tourist_tag.setText("风景名胜");
+
+        String textStr = "<strong><font color='#e11818'>" + "￥"+bean.getShop_price() + "</font></strong>起";
+        String charSequence="";
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            charSequence = Html.fromHtml(textStr, Html.FROM_HTML_MODE_LEGACY).toString();
+        } else {
+            charSequence = Html.fromHtml(textStr).toString();
+        }
+        tourist_price.setText(charSequence);
 
         try {
-            tname.setText(bean.getId() + "");
+            tname.setText(bean.getTitle() + "");
         } catch (Exception e) {
             Log.i("tttt", "tname=" + e.toString());
         }
-
-
-//        Glide.with(getContext())
-//                .load(bean.getCoverImageUrl())
-//                .asBitmap()
-//                .centerCrop()
-//                .dontAnimate()
-//                .placeholder(GlideLoadingBGUtils.bg_product_list)
-//                .error(GlideLoadingBGUtils.bg_product_list)
-//                .into(imgCover);
+        Glide.with(getContext())
+                .load(bean.getThumb())
+                .into(image);
 
         if (itemPosition() == 0) {
             view.setPadding(0, 0, 0, 0);

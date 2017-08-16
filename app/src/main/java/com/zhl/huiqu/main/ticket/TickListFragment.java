@@ -1,5 +1,6 @@
 package com.zhl.huiqu.main.ticket;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -12,9 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.base.ContainerActivity;
 import com.zhl.huiqu.main.ProductDetailActivity;
 import com.zhl.huiqu.main.ProductPartBean;
 import com.zhl.huiqu.main.ProductPartListBean;
+import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.Utils;
 
@@ -31,14 +34,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/8/15.
+ * Created by lyj on 2017/8/15.
  */
 
-public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<ProductPartBean, ProductPartListBean, Serializable> {
+public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo, TickListInfo, Serializable> {
 
-    public static TickListFragment newInstance() {
+
+    public static TickListFragment newInstance(String theme_id) {
         Bundle args = new Bundle();
-//        args.putString("categoryId", categoryId);
+        args.putString("theme_id", theme_id);
         TickListFragment fragment = new TickListFragment();
         fragment.setArguments(args);
         return fragment;
@@ -52,7 +56,7 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<ProductP
     @ViewInject(id = R.id.recycleview)
     RecyclerView recycleview;
 
-    private String categoryId;
+    private String theme_id;
     @Override
     public void setContentView(ViewGroup view) {
         super.setContentView(view);
@@ -67,7 +71,7 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<ProductP
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         super.onItemClick(parent, view, position, id);
-        int a = getAdapterItems().get(position).getId();
+        int a = getAdapterItems().get(position).getShop_spot_id();
         if (position < getAdapterItems().size()) {
             startActivity(new Intent(getActivity(),ProductDetailActivity.class));
         }
@@ -76,31 +80,31 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<ProductP
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        categoryId = getArguments().getString("categoryId");
+        theme_id = getArguments().getString("theme_id");
     }
 
     @Override
-    public IItemViewCreator<ProductPartBean> configItemViewCreator() {
-        return new IItemViewCreator<ProductPartBean>() {
+    public IItemViewCreator<TickInfo> configItemViewCreator() {
+        return new IItemViewCreator<TickInfo>() {
             @Override
             public View newContentView(LayoutInflater layoutInflater, ViewGroup viewGroup, int i){
                 return layoutInflater.inflate(TickItemView.LAYOUT_RES, viewGroup, false);
             }
 
             @Override
-            public IITemView<ProductPartBean> newItemView(View view, int i) {
+            public IITemView<TickInfo> newItemView(View view, int i) {
                 return new TickItemView(getActivity(), view);
             }
         };
     }
 
     @Override
-    protected IItemViewCreator<ProductPartBean> configFooterViewCreator() {
+    protected IItemViewCreator<TickInfo> configFooterViewCreator() {
         return Utils.configFooterViewCreator(getActivity(), this);
     }
 
     @Override
-    protected IPaging<ProductPartBean, ProductPartListBean> newPaging() {
+    protected IPaging<TickInfo, TickListInfo> newPaging() {
         return new PageIndexPaging<>();
     }
 
@@ -134,18 +138,18 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<ProductP
         new Task(refreshMode != RefreshMode.update ? RefreshMode.reset : RefreshMode.update).execute();
     }
 
-    class Task extends APagingTask<Void, Void, ProductPartListBean> {
+    class Task extends APagingTask<Void, Void, TickListInfo> {
         public Task(RefreshMode mode) {
             super(mode);
         }
 
         @Override
-        protected List<ProductPartBean> parseResult(ProductPartListBean productPartListBean) {
-            return productPartListBean.getResult();
+        protected List<TickInfo> parseResult(TickListInfo bean) {
+            return bean.getTicketOnly();
         }
 
         @Override
-        protected ProductPartListBean workInBackground(RefreshMode refreshMode, String s, String nextPage, Void... voids) throws TaskException {
+        protected TickListInfo workInBackground(RefreshMode refreshMode, String s, String nextPage, Void... voids) throws TaskException {
             int start = 1;
             if (mode == RefreshMode.update && !TextUtils.isEmpty(nextPage)){
                 try {
@@ -155,10 +159,10 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<ProductP
                 }
             }
 
-            ProductPartListBean beans = queryList(start);
+            TickListInfo beans = queryList(start);
 
-            if (beans != null && beans.getResult() != null) {
-                beans.setEndPaging(beans.getResult().size() <= 5);
+            if (beans != null && beans.getTicketOnly() != null) {
+                beans.setEndPaging(beans.getTicketOnly().size() <= 5);
             }
 
             return beans;
@@ -173,21 +177,8 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<ProductP
 //            }
         }
     }
-    int a=0;
-    protected ProductPartListBean queryList(int start) throws TaskException {
-//        return SDK.newInstance(getActivity()).queryBProductList(AppContext.getEmployeeId(), categoryId, start);
-        //
-
-        ProductPartListBean bean=new ProductPartListBean();
-        bean.setTotal(5);
-        List<ProductPartBean> result=new ArrayList<>();
-        for(int i=0;i<10;i++){
-            ProductPartBean bn=new ProductPartBean();
-            bn.setId(i+5);
-            result.add(bn);
-        }
-        bean.setResult(result);
-        return  bean;
+    protected TickListInfo queryList(int start) throws TaskException {
+        return SDK.newInstance(getActivity()).getTicketData("5",start+"");
     }
 
     @Override
@@ -195,20 +186,5 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<ProductP
         super.onDestroy();
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

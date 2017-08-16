@@ -30,7 +30,6 @@ public class DTODataParseHttp extends DefHttpUtility {
             if(TextUtils.isEmpty(resultStr)){
                 throw new TaskException("数据为空");
             }
-
             JSONObject jsonObject = JSON.parseObject(resultStr);
             String code = jsonObject.getString("code");
 //            if(TextUtils.isEmpty(code)){
@@ -52,8 +51,10 @@ public class DTODataParseHttp extends DefHttpUtility {
                 }
                 if (bean != null) {
                     bean.setCode(jsonObject.getString("code"));
-                    String msg=jsonObject.getString("message");
-                    if(TextUtils.isEmpty(msg)){
+                    String msg="";
+                    if(jsonObject.containsKey("message")){
+                        msg=jsonObject.getString("message");
+                    }else {
                         msg=jsonObject.getString("msg");
                     }
                     bean.setMessage(msg);

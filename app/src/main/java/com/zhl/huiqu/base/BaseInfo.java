@@ -3,16 +3,16 @@ package com.zhl.huiqu.base;
 import java.io.Serializable;
 
 /**
- * Created by lyj on 17/2/12.
+ * Created by Administrator on 2017/8/16.
  */
 
-public class BaseBean implements Serializable {
+public class BaseInfo implements Serializable {
 
     private static final long serialVersionUID = -7956466350732983639L;
 
     private String code;
 
-    private String message;
+    private String msg;
 
     public String getCode() {
         return code;
@@ -22,12 +22,11 @@ public class BaseBean implements Serializable {
         this.code = code;
     }
 
-
-    public String getMessage() {
-        return message;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }

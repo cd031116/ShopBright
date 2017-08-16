@@ -25,8 +25,11 @@ import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.main.bean.HotInfo;
+import com.zhl.huiqu.main.bean.HotelInfo;
 import com.zhl.huiqu.main.bean.MainTopInfo;
+import com.zhl.huiqu.main.bean.TicketsInfo;
 import com.zhl.huiqu.main.search.SearchFragment;
+import com.zhl.huiqu.main.ticket.TicketListActivity;
 import com.zhl.huiqu.main.ticket.TicketMainFragment;
 import com.zhl.huiqu.scan.CaptureActivity;
 import com.zhl.huiqu.sdk.SDK;
@@ -66,6 +69,18 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     @ViewInject(id = R.id.mp_4)
     TextView mp_4;
 
+    @ViewInject(id = R.id.jd_1)
+    TextView jd_1;
+    @ViewInject(id = R.id.jd_2)
+    TextView jd_2;
+    @ViewInject(id = R.id.jd_3)
+    TextView jd_3;
+    @ViewInject(id = R.id.jd_4)
+    TextView jd_4;
+
+
+
+
     @ViewInject(id = R.id.hot_1)
     ImageView hot_1;
     @ViewInject(id = R.id.hot_2)
@@ -78,6 +93,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     private List<String> images = new ArrayList<>();
     private List<String> titles = new ArrayList<>();
     private ShowMsgDialog progressDialog;
+
     public static MainTabFragment newInstance() {
         return new MainTabFragment();
     }
@@ -191,7 +207,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         });
     }
 
-    @OnClick({R.id.scan, R.id.searh_line, R.id.main_mp})
+    @OnClick({R.id.scan, R.id.searh_line, R.id.main_mp,R.id.mp_1,R.id.mp_2,R.id.mp_3,R.id.mp_4})
     void onclik(View v) {
         switch (v.getId()) {
             case R.id.scan:
@@ -203,6 +219,31 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
             case R.id.main_mp:
                 TicketMainFragment.launch(getActivity());
                 break;
+            case  R.id.mp_1:
+                Intent intent=new Intent(getActivity(),TicketListActivity.class);
+                intent.putExtra("title",mp_1.getText().toString());
+                intent.putExtra("theme_id",mp_1.getTag().toString());
+                startActivity(intent);
+                break;
+            case  R.id.mp_2:
+                Intent intent2=new Intent(getActivity(),TicketListActivity.class);
+                intent2.putExtra("title",mp_2.getText().toString());
+                intent2.putExtra("theme_id",mp_2.getTag().toString());
+                startActivity(intent2);
+                break;
+            case  R.id.mp_3:
+                Intent intent3=new Intent(getActivity(),TicketListActivity.class);
+                intent3.putExtra("title",mp_3.getText().toString());
+                intent3.putExtra("theme_id",mp_3.getTag().toString());
+                startActivity(intent3);
+                break;
+
+            case  R.id.mp_4:
+                Intent intent4=new Intent(getActivity(),TicketListActivity.class);
+                intent4.putExtra("title",mp_3.getText().toString());
+                intent4.putExtra("theme_id",mp_3.getTag().toString());
+                startActivity(intent4);
+                break;
         }
     }
 
@@ -212,7 +253,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         @Override
         protected void onPrepare() {
             super.onPrepare();
-            showAlert("..正在加载..",false);
+            showAlert("..正在加载..", false);
         }
 
         @Override
@@ -234,44 +275,68 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     }
 
     private void settopView(MainTopInfo info) {
-        if(info==null){
+        if (info == null) {
             return;
         }
         List<HotInfo> list = info.getHot();
-            if (!TextUtils.isEmpty(list.get(0).getThumb())) {
-                Glide.with(getActivity())
-                        .load(list.get(0).getThumb())
-                        .into(hot_1);
-            }
-            if (!TextUtils.isEmpty(list.get(1).getThumb())) {
-                Glide.with(getActivity())
-                        .load(list.get(1).getThumb())
-                        .into(hot_2);
-            }
-            if (!TextUtils.isEmpty(list.get(2).getThumb())) {
-                Glide.with(getActivity())
-                        .load(list.get(2).getThumb())
-                        .into(hot_3);
-            }
+        if (!TextUtils.isEmpty(list.get(0).getThumb())) {
+            Glide.with(getActivity())
+                    .load(list.get(0).getThumb())
+                    .into(hot_1);
+        }
+        if (!TextUtils.isEmpty(list.get(1).getThumb())) {
+            Glide.with(getActivity())
+                    .load(list.get(1).getThumb())
+                    .into(hot_2);
+        }
+        if (!TextUtils.isEmpty(list.get(2).getThumb())) {
+            Glide.with(getActivity())
+                    .load(list.get(2).getThumb())
+                    .into(hot_3);
+        }
+        List<TicketsInfo> tlist = info.getTicket();
+        if (tlist != null) {
+            mp_1.setText(tlist.get(0).getName());
+            mp_1.setTag(tlist.get(0).getShop_spot_attr_id());
+            mp_2.setText(tlist.get(1).getName());
+            mp_2.setTag(tlist.get(1).getShop_spot_attr_id());
+            mp_3.setText(tlist.get(2).getName());
+            mp_3.setTag(tlist.get(2).getShop_spot_attr_id());
+            mp_4.setText(tlist.get(3).getName());
+            mp_4.setTag(tlist.get(3).getShop_spot_attr_id());
+        }
+
+        List<HotelInfo> hlist=info.getHotel();
+        if (hlist != null) {
+            jd_1.setText(hlist.get(0).getType());
+            jd_1.setTag(hlist.get(0).getShop_hotel_type_id());
+            jd_2.setText(hlist.get(1).getType());
+            jd_2.setTag(hlist.get(1).getShop_hotel_type_id());
+            jd_3.setText(hlist.get(2).getType());
+            jd_3.setTag(hlist.get(2).getShop_hotel_type_id());
+            jd_4.setText(hlist.get(3).getType());
+            jd_4.setTag(hlist.get(3).getShop_hotel_type_id());
+        }
+
+
     }
-
-
 
 
     /**
      * 显示加载图标
+     *
      * @param txt
      */
-    public void showAlert(String txt,final boolean isCancel){
-        if(!"".equals(txt)&&txt!=null){
-            if(progressDialog==null){
-                progressDialog=new ShowMsgDialog(getActivity(),isCancel);
+    public void showAlert(String txt, final boolean isCancel) {
+        if (!"".equals(txt) && txt != null) {
+            if (progressDialog == null) {
+                progressDialog = new ShowMsgDialog(getActivity(), isCancel);
             }
-            progressDialog.setOnKeyListener(new DialogInterface.OnKeyListener(){
+            progressDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
                 @Override
                 public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
                     if (keyCode == KeyEvent.KEYCODE_BACK) {
-                        if(isCancel){
+                        if (isCancel) {
 
                         }
                     }
@@ -282,11 +347,12 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
             progressDialog.showText(txt);
         }
     }
+
     /**
      * 关闭加载图标
      */
-    public void dismissAlert(){
-        if(progressDialog!=null&&progressDialog.isShowing()){
+    public void dismissAlert() {
+        if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
     }
