@@ -22,6 +22,8 @@ public class MyApplication extends GlobalContext {
     public void onCreate(){
         super.onCreate();
         instance = this;
+
+
         activityManager = ActivityManagerd.getScreenManager();
         SearchHistoryManager.setup(this);
     }

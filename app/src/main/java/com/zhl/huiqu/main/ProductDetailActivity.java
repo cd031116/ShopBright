@@ -20,6 +20,7 @@ import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.main.bean.DetailBean;
 import com.zhl.huiqu.main.bean.DitalTickList;
+import com.zhl.huiqu.main.ticket.LocationActivity;
 import com.zhl.huiqu.recyclebase.CommonAdapter;
 import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.sdk.SDK;
@@ -105,6 +106,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
     @Bind(R.id.yd_content)
     TextView yd_content;//预定须知
 
+
     @Bind(R.id.banner)
     Banner banner;
     private int select = 1;
@@ -161,7 +163,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
 
 
 
-    @OnClick({R.id.top_left, R.id.image, R.id.image_t, R.id.tab1_mian, R.id.tab2_mian, R.id.tab3_mian,R.id.look_detail})
+    @OnClick({R.id.top_left, R.id.image, R.id.image_t, R.id.tab1_mian, R.id.tab2_mian, R.id.tab3_mian,R.id.look_detail,R.id.location})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.top_left:
@@ -189,10 +191,13 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
                 intent.putExtra("content",info.getSpot_info().getContent());
                 startActivity(intent);
                 break;
-//            case R.id.tab3_mian:
-//                select = 3;
-//                changeview(select);
-//                break;
+            case R.id.location:
+                Intent intent1=new Intent(ProductDetailActivity.this, LocationActivity.class);
+                intent1.putExtra("latitude",info.getSpot_info().getLatitude());//纬度
+                intent1.putExtra("longitude",info.getSpot_info().getLongitude());//经度
+                intent1.putExtra("address",info.getSpot_info().getAddress());
+                startActivity(intent1);
+                break;
         }
     }
 
