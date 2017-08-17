@@ -155,7 +155,6 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-
     /*
   * 发送验证码
   * */

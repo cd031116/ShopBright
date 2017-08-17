@@ -166,7 +166,7 @@ public class RegisterActivity extends BaseActivity {
         @Override
         protected void onPrepare() {
             super.onPrepare();
-            showAlert("", false);
+            showAlert("..正在提交..", false);
         }
 
         @Override

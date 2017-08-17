@@ -98,7 +98,7 @@ public class SDK extends ABizLogic {
         params.addParameter("mobile", mobile);
         params.addParameter("code", code);
         params.addParameter("password", password);
-        return doPost(configHttpConfig(), action, params, null, null, RegisterEntity.class);
+        return doPost(configHttpConfig(), action,null, params, null, RegisterEntity.class);
     }
 
     /**
@@ -110,7 +110,7 @@ public class SDK extends ABizLogic {
      * @throws TaskException
      */
     public String changePsw(String oldPsw, String newPsw) throws TaskException {
-        Setting action = newSetting("insertMemberInfo", "appapi/Memberpub/insertMemberInfo", "注册");
+        Setting action = newSetting("insertMemberInfo", "appapi/Memberpub/insertMemberInfo", "修改密码");
         Params params = new Params();
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?oldPsw=" + oldPsw + "&newPsw=" + newPsw);
         params.addParameter("oldPsw", oldPsw);
@@ -262,6 +262,7 @@ public class SDK extends ABizLogic {
 
     @Override
     protected IHttpUtility configHttpUtility() {
+
         return new DTODataParseHttp(context);
     }
 
