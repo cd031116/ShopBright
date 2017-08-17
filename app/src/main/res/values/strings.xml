@@ -29,8 +29,11 @@
     <string name="personal_my_order">我的订单</string>
     <string name="personal_all_order">全部订单</string>
     <string name="personal_pay">待付款</string>
+    <string name="personal_pay_order">待付款订单</string>
     <string name="personal_out">待出行</string>
+    <string name="personal_out_order">待出行订单</string>
     <string name="personal_tuikuan">退款</string>
+    <string name="personal_tuikuan_order">退款订单</string>
     <string name="personal_setting">设置</string>
     <string name="personal_my_collect">我的收藏</string>
     <string name="personal_look_history">浏览历史</string>

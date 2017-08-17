@@ -3,6 +3,7 @@ package com.zhl.huiqu.sdk;
 import android.app.Activity;
 
 import com.zhl.huiqu.BuildConfig;
+import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.main.ProductPartListBean;
 import com.zhl.huiqu.main.bean.DetailBean;
 import com.zhl.huiqu.main.bean.DetailMainBean;
@@ -90,14 +91,14 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public String register(String mobile, String code, String password) throws TaskException {
+    public RegisterEntity register(String mobile, String code, String password) throws TaskException {
         Setting action = newSetting("insertMemberInfo", "appapi/Memberpub/insertMemberInfo", "注册");
         Params params = new Params();
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?mobile=" + mobile + "&code=" + code + "&password=" + password);
         params.addParameter("mobile", mobile);
         params.addParameter("code", code);
         params.addParameter("password", password);
-        return doPost(configHttpConfig(), action, params, null, null, String.class);
+        return doPost(configHttpConfig(), action, params, null, null, RegisterEntity.class);
     }
 
     /**

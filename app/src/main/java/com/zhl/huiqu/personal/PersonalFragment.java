@@ -1,21 +1,17 @@
 package com.zhl.huiqu.personal;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseFragment;
-import com.zhl.huiqu.main.MainTabFragment;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 
 import org.aisen.android.support.inject.OnClick;
-import org.aisen.android.support.inject.ViewInject;
-
-import butterknife.Bind;
+import org.aisen.android.ui.activity.container.FragmentArgs;
 
 /**
  * 个人中心
@@ -62,6 +58,7 @@ public class PersonalFragment extends BaseFragment {
     @OnClick({R.id.row_collect_layout, R.id.row_look_his_layout, R.id.row_normal_msg_layout, R.id.row_kefu_center_layout,
             R.id.refund_order_btn, R.id.goout_order_btn, R.id.pay_order_btn, R.id.all_order_btn, R.id.personal_msg_layout})
     void onClick(View view) {
+        FragmentArgs args = new FragmentArgs();
         switch (view.getId()) {
             case R.id.row_collect_layout:
                 Log.e("dddd", "onClick: row_collect_layout");
@@ -76,15 +73,25 @@ public class PersonalFragment extends BaseFragment {
             case R.id.row_kefu_center_layout:
                 startActivity(new Intent(getActivity(), KefuCenterActivity.class));
                 break;
+            //所有订单
             case R.id.all_order_btn:
-                OrderListFragment.launch(getActivity());
+                args.add("productId", getResources().getString(R.string.personal_all_order));
+                OrderAllListFragment.launch(getActivity(),args);
                 break;
+            //待付款
             case R.id.pay_order_btn:
-                startActivity(new Intent(getActivity(), OrderDetailActivity.class));
+                args.add("productId", getResources().getString(R.string.personal_pay_order));
+                OrderAllListFragment.launch(getActivity(),args);
                 break;
+            //待出行
             case R.id.goout_order_btn:
+                args.add("productId", getResources().getString(R.string.personal_out_order));
+                OrderAllListFragment.launch(getActivity(),args);
                 break;
+            //退款
             case R.id.refund_order_btn:
+                args.add("productId", getResources().getString(R.string.personal_tuikuan_order));
+                OrderAllListFragment.launch(getActivity(),args);
                 break;
             case R.id.personal_msg_layout:
                 startActivity(new Intent(getActivity(), SettingActivity.class));

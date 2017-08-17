@@ -1,6 +1,7 @@
 package com.zhl.huiqu.login;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.personal.OrderWriteActivity;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.PhoneFormatCheckUtils;
@@ -39,7 +41,7 @@ public class RegisterActivity extends BaseActivity {
     @Bind(R.id.commit_text)
     TextView commit_text;
     @Bind(R.id.register_push_code)
-    TextView register_push_code;
+    TextView code;
     @Bind(R.id.zhifubao)
     TextView zhifubao;
     @Bind(R.id.wechat)
@@ -50,6 +52,7 @@ public class RegisterActivity extends BaseActivity {
     TextView sina_weibo;
     @Bind(R.id.top_title)
     TextView top_title;
+    private TimerCount timerCount;
 
     @Override
     protected int getLayoutId() {
@@ -60,6 +63,7 @@ public class RegisterActivity extends BaseActivity {
     public void initView() {
         super.initView();
         top_title.setText(getResources().getString(R.string.register_title));
+        timerCount = new TimerCount(60000, 1000, code);
     }
 
     @Override
@@ -92,7 +96,8 @@ public class RegisterActivity extends BaseActivity {
                 else if (password.length() < 6 || password.length() > 16)
                     ToastUtils.showShortToast(this, getResources().getString(R.string.register_check_psw));
                 else
-                    new commitTask().execute(phone, code, password);
+//                    new commitTask().execute(phone, code, password);
+                    new commitTask().execute();
                 break;
             case R.id.register_push_code:
                 if (TextUtils.isEmpty(phone))
@@ -146,6 +151,7 @@ public class RegisterActivity extends BaseActivity {
         protected void onSuccess(String info) {
             super.onSuccess(info);
             dismissAlert();
+            timerCount.start();
             TLog.log("tttt", "info=" + info);
         }
 
@@ -155,7 +161,7 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
-    class commitTask extends WorkTask<String, Void, String> {
+    class commitTask extends WorkTask<String, Void, RegisterEntity> {
 
         @Override
         protected void onPrepare() {
@@ -164,16 +170,18 @@ public class RegisterActivity extends BaseActivity {
         }
 
         @Override
-        public String workInBackground(String... params) throws TaskException {
-            return SDK.newInstance(RegisterActivity.this).register(params[0], params[1], params[2]);
+        public RegisterEntity workInBackground(String... params) throws TaskException {
+            String phone = register_phone.getText().toString().trim();
+            String password = register_psw.getText().toString().trim();
+            String code = register_code.getText().toString().trim();
+            return SDK.newInstance(RegisterActivity.this).register(phone, code, password);
         }
 
         @Override
-        protected void onSuccess(String info) {
+        protected void onSuccess(RegisterEntity info) {
             super.onSuccess(info);
             dismissAlert();
-            TLog.log("tttt", "info=" + info);
-
+            TLog.log("tttt", "info=" + info.getData().getMember_id() + "");
         }
 
         @Override
@@ -192,6 +200,32 @@ public class RegisterActivity extends BaseActivity {
         } else {
             // 隐藏密码  其实就是setInputType（129）
             register_psw.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        }
+    }
+
+    class TimerCount extends CountDownTimer {
+        private TextView bnt;
+
+        public TimerCount(long millisInFuture, long countDownInterval,
+                          TextView bnt) {
+            super(millisInFuture, countDownInterval);
+            this.bnt = bnt;
+        }
+
+        @Override
+        public void onFinish() {
+            bnt.setClickable(true);
+            bnt.setText("重获验证码");
+            bnt.setEnabled(true);
+        }
+
+        @Override
+        public void onTick(long arg0) {
+            // if(bnt!=null){
+            bnt.setClickable(false);
+            bnt.setText("验证码" + arg0 / 1000 + "S");
+            bnt.setEnabled(false);
+            // }
         }
     }
 }
