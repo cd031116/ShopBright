@@ -167,7 +167,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
     }
 
     protected ProductPartListBean queryList(int start) throws TaskException {
-        return SDK.newInstance(getActivity()).getMainbottum("",start);
+        return SDK.newInstance(getActivity()).getMainbottum("",start+"");
     }
 
     @Override

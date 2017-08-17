@@ -174,12 +174,12 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public String getMainbottum(String type, String page) throws TaskException {
+    public ProductPartListBean getMainbottum(String type, String page) throws TaskException {
         Setting action = newSetting("getMainbottum", "/appapi/Index/getShopBottom", "获取首页下发数据");
         Params params = new Params();
         params.addParameter("type", type);
         params.addParameter("page", page);
-        return doGet(action, basicParams(params), String.class);
+        return doGet(action, basicParams(params), ProductPartListBean.class);
     }
 
 
