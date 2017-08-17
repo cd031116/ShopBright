@@ -26,6 +26,7 @@ import com.youth.banner.listener.OnBannerListener;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.main.bean.HotInfo;
 import com.zhl.huiqu.main.bean.HotelInfo;
+import com.zhl.huiqu.main.bean.MainBean;
 import com.zhl.huiqu.main.bean.MainTopInfo;
 import com.zhl.huiqu.main.bean.TicketsInfo;
 import com.zhl.huiqu.main.search.SearchFragment;
@@ -249,7 +250,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
 
     /*上部分数据
     * */
-    class getTopTask extends WorkTask<Void, Void, MainTopInfo> {
+    class getTopTask extends WorkTask<Void, Void, MainBean> {
         @Override
         protected void onPrepare() {
             super.onPrepare();
@@ -257,15 +258,15 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         }
 
         @Override
-        public MainTopInfo workInBackground(Void... voids) throws TaskException {
+        public MainBean workInBackground(Void... voids) throws TaskException {
             return SDK.newInstance(getActivity()).getMainTop();
         }
 
         @Override
-        protected void onSuccess(MainTopInfo info) {
+        protected void onSuccess(MainBean info) {
             super.onSuccess(info);
             dismissAlert();
-            settopView(info);
+            settopView(info.getData());
         }
 
         @Override

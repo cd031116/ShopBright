@@ -106,7 +106,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
     @Override
     protected void setupRefreshConfig(RefreshConfig config) {
         super.setupRefreshConfig(config);
-        config.footerMoreEnable = false;
+        config.footerMoreEnable = true;
     }
 
     @Override

@@ -31,35 +31,37 @@ public class DTODataParseHttp extends DefHttpUtility {
                 throw new TaskException("数据为空");
             }
             JSONObject jsonObject = JSON.parseObject(resultStr);
-            String code = jsonObject.getString("code");
-//            if(TextUtils.isEmpty(code)){
-//                code=jsonObject.getString("retCode");
-//            }
             T result;
-            BaseBean bean = null;
-            if (code.equals("3")) {
-                result = super.parseResponse(resultStr, responseCls);
-            } else {
-                if (jsonObject.containsKey("data")) {
-                    result = super.parseResponse(jsonObject.getString("data"), responseCls);
-                    if (result instanceof BaseBean) {
-                        bean = (BaseBean) result;
-                    }
-                } else {
-                    bean = new BaseBean();
-                    result = (T) bean;
-                }
-                if (bean != null) {
-                    bean.setCode(jsonObject.getString("code"));
-                    String msg="";
-                    if(jsonObject.containsKey("message")){
-                        msg=jsonObject.getString("message");
-                    }else {
-                        msg=jsonObject.getString("msg");
-                    }
-                    bean.setMessage(msg);
-                }
-            }
+            result = super.parseResponse(resultStr, responseCls);
+//            String code = jsonObject.getString("code");
+////            if(TextUtils.isEmpty(code)){
+////                code=jsonObject.getString("retCode");
+////            }
+//
+//            BaseBean bean = null;
+//            if (code.equals("3")) {
+//                result = super.parseResponse(resultStr, responseCls);
+//            } else {
+//                if (jsonObject.containsKey("data")) {
+//                    result = super.parseResponse(jsonObject.getString("data"), responseCls);
+//                    if (result instanceof BaseBean) {
+//                        bean = (BaseBean) result;
+//                    }
+//                } else {
+//                    bean = new BaseBean();
+//                    result = (T) bean;
+//                }
+//                if (bean != null) {
+//                    bean.setCode(jsonObject.getString("code"));
+//                    String msg="";
+//                    if(jsonObject.containsKey("message")){
+//                        msg=jsonObject.getString("message");
+//                    }else {
+//                        msg=jsonObject.getString("msg");
+//                    }
+//                    bean.setMessage(msg);
+//                }
+//            }
             return result;
 
         } catch (Throwable e) {

@@ -1,5 +1,6 @@
 package com.zhl.huiqu.main.popupWindow;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
@@ -10,16 +11,25 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.main.ProductDetailActivity;
+import com.zhl.huiqu.main.bean.DetailBean;
+import com.zhl.huiqu.main.bean.DetailMainBean;
+import com.zhl.huiqu.sdk.SDK;
+import com.zhl.huiqu.utils.TLog;
+
+import org.aisen.android.network.task.TaskException;
+import org.aisen.android.network.task.WorkTask;
 
 /**
  * Created by Administrator on 2017/8/17.
  */
 
 public class SelectTourWindow extends PopupWindow {
-    private Context mContext;
+    private Activity mContext;
     private View view;
     private TextView btn_cancel;
-    public SelectTourWindow(Context mContext, View.OnClickListener itemsOnClick) {
+    public SelectTourWindow(Activity mContext, View.OnClickListener itemsOnClick) {
+
         this.view = LayoutInflater.from(mContext).inflate(R.layout.select_window, null);
 
 
@@ -65,4 +75,31 @@ public class SelectTourWindow extends PopupWindow {
         this.setAnimationStyle(R.style.select_anim);
     }
 
+
+
+
+
+    class getInfoTask extends WorkTask<Void, Void, DetailMainBean>{
+        @Override
+        protected void onPrepare() {
+            super.onPrepare();
+
+        }
+
+        @Override
+        public DetailMainBean workInBackground(Void... voids) throws TaskException{
+            return SDK.newInstance(mContext).getGoodsDetail("12", "", "");
+        }
+
+        @Override
+        protected void onSuccess(DetailMainBean infot){
+            super.onSuccess(infot);
+
+        }
+
+        @Override
+        protected void onFailure(TaskException exception){
+
+        }
+    }
 }

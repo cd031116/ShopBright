@@ -19,6 +19,7 @@ import com.youth.banner.listener.OnBannerListener;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.main.bean.DetailBean;
+import com.zhl.huiqu.main.bean.DetailMainBean;
 import com.zhl.huiqu.main.bean.DitalTickList;
 import com.zhl.huiqu.main.ticket.LocationActivity;
 import com.zhl.huiqu.recyclebase.CommonAdapter;
@@ -298,7 +299,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
 
     /*
       * */
-    class getInfoTask extends WorkTask<Void, Void, DetailBean> {
+    class getInfoTask extends WorkTask<Void, Void, DetailMainBean> {
         @Override
         protected void onPrepare() {
             super.onPrepare();
@@ -306,17 +307,17 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
         }
 
         @Override
-        public DetailBean workInBackground(Void... voids) throws TaskException {
+        public DetailMainBean workInBackground(Void... voids) throws TaskException {
             return SDK.newInstance(ProductDetailActivity.this).getGoodsDetail("12", "", "");
         }
 
         @Override
-        protected void onSuccess(DetailBean infot) {
+        protected void onSuccess(DetailMainBean infot) {
             super.onSuccess(infot);
-            info=infot;
+            info=infot.getData();
             dismissAlert();
             TLog.log("tttt", "info=" + infot);
-            showView(infot);
+            showView(infot.getData());
         }
 
         @Override
