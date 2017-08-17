@@ -32,13 +32,13 @@ public class LocationActivity extends BaseActivity {
     private String address;
 
     @Override
-    protected int getLayoutId() {
+    protected int getLayoutId(){
         SDKInitializer.initialize(getApplicationContext());
         return R.layout.activity_location;
     }
 
     @Override
-    public void initView() {
+    public void initView(){
         super.initView();
         Bundle bd=getIntent().getExtras();
         if(bd!=null){
@@ -52,7 +52,7 @@ public class LocationActivity extends BaseActivity {
     }
 
     @Override
-    public void initData() {
+    public void initData(){
         super.initData();
         top_title.setText(address);
     }
