@@ -52,7 +52,6 @@ public class ProductPartItemView extends ARecycleViewItemView<ProductPartBean> {
 
     @Override
     public void onBindData(View view, ProductPartBean bean, int i) {
-
         Glide.with(activity)
                 .load(bean.getThumb())
                 .into(photo);
@@ -62,20 +61,8 @@ public class ProductPartItemView extends ARecycleViewItemView<ProductPartBean> {
         }else {
             comment.setText(bean.getComment_num()+"条评论 "+bean.getCsr()+"满意");
         }
-
         price.setText("￥"+bean.getShop_price());
-
         desc.setText(bean.getDesc());
-
-//        Glide.with(getContext())
-//                .load(bean.getCoverImageUrl())
-//                .asBitmap()
-//                .centerCrop()
-//                .dontAnimate()
-//                .placeholder(GlideLoadingBGUtils.bg_product_list)
-//                .error(GlideLoadingBGUtils.bg_product_list)
-//                .into(imgCover);
-
         if (itemPosition() == 0) {
             view.setPadding(0, 0, 0, 0);
         }

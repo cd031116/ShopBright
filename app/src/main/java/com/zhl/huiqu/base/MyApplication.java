@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.zhl.huiqu.main.search.SearchHistoryManager;
 
 import org.aisen.android.common.context.GlobalContext;
@@ -22,8 +23,7 @@ public class MyApplication extends GlobalContext {
     public void onCreate(){
         super.onCreate();
         instance = this;
-
-
+        SDKInitializer.initialize(getApplicationContext());
         activityManager = ActivityManagerd.getScreenManager();
         SearchHistoryManager.setup(this);
     }

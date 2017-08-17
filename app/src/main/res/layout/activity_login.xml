@@ -8,6 +8,14 @@
     android:fitsSystemWindows="true">
     <include layout="@layout/view_top"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+            android:layout_marginTop="50px"
+        android:layout_below="@+id/top_layout"
+        android:orientation="vertical">
+
+
     <LinearLayout
         android:id="@+id/top"
         android:layout_width="match_parent"
@@ -16,7 +24,7 @@
         android:layout_marginRight="120px"
         android:layout_marginTop="180px"
         android:gravity="center_horizontal"
-        android:layout_below="@+id/top_layout"
+
         android:orientation="horizontal">
 
         <TextView
@@ -50,6 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/top"
+
         android:layout_marginTop="90px"
         android:orientation="vertical">
         <!--view1-->
@@ -323,7 +332,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="160px"
+            android:layout_marginBottom="100px"
             android:layout_marginTop="50px"
             android:gravity="center"
             android:orientation="horizontal"
@@ -358,4 +367,5 @@
         </LinearLayout>
 
     </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

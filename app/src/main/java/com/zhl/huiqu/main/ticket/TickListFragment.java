@@ -52,19 +52,19 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
     TextView error_text;
     @ViewInject(id = R.id.error_image)
     ImageView error_image;
-
     @ViewInject(id = R.id.recycleview)
     RecyclerView recycleview;
 
     private String theme_id;
     @Override
-    public void setContentView(ViewGroup view) {
+    public void setContentView(ViewGroup view){
         super.setContentView(view);
         SupportMultipleScreensUtil.init(getActivity());
         SupportMultipleScreensUtil.scale(view);
     }
+
     @Override
-    public int inflateContentView() {
+    public int inflateContentView(){
         return R.layout.ui_recycle;
     }
 
@@ -134,11 +134,11 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
     }
 
     @Override
-    public void requestData(RefreshMode refreshMode) {
+    public void requestData(RefreshMode refreshMode){
         new Task(refreshMode != RefreshMode.update ? RefreshMode.reset : RefreshMode.update).execute();
     }
 
-    class Task extends APagingTask<Void, Void, TickListInfo> {
+    class Task extends APagingTask<Void, Void, TickListInfo>{
         public Task(RefreshMode mode) {
             super(mode);
         }
@@ -149,7 +149,7 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
         }
 
         @Override
-        protected TickListInfo workInBackground(RefreshMode refreshMode, String s, String nextPage, Void... voids) throws TaskException {
+        protected TickListInfo workInBackground(RefreshMode refreshMode, String s, String nextPage, Void... voids)throws TaskException{
             int start = 1;
             if (mode == RefreshMode.update && !TextUtils.isEmpty(nextPage)){
                 try {
@@ -158,18 +158,15 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
                     e.printStackTrace();
                 }
             }
-
             TickListInfo beans = queryList(start);
-
-            if (beans != null && beans.getTicketOnly() != null) {
+            if (beans != null && beans.getTicketOnly() != null){
                 beans.setEndPaging(beans.getTicketOnly().size() <= 5);
             }
-
             return beans;
         }
 
         @Override
-        protected void onFailure(TaskException exception) {
+        protected void onFailure(TaskException exception){
             super.onFailure(exception);
 //            error_text.setText(exception.getMessage());
 //            if ("noneNetwork".equals(exception.getCode())) {
@@ -184,7 +181,6 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
     @Override
     public void onDestroy() {
         super.onDestroy();
-
     }
 
 }

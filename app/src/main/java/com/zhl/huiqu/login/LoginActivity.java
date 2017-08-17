@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,9 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity {
+    @Bind(R.id.top_layout)
+    RelativeLayout top_layout;
+
     @Bind(R.id.top_left)
     LinearLayout top_left;
     @Bind(R.id.top_title)
@@ -66,9 +70,11 @@ public class LoginActivity extends BaseActivity {
     @Override
     public void initView() {
         super.initView();
+        top_layout.setVisibility(View.GONE);
         top_title.setText("登录");
         timerCount = new TimerCount(60000, 1000, code);
-        top_image.setImageResource(R.drawable.login_close);
+//        top_image.setImageResource(R.drawable.login_close);
+        top_image.setVisibility(View.GONE);
     }
 
     @Override
@@ -86,31 +92,31 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.login:
                   startActivity(new Intent(LoginActivity.this,MainActivity.class));
-              /*  if (select == 1) {
-                    String co = account.getText().toString();
-                    String psd = password.getText().toString();
-                    if (TextUtils.isEmpty(co)) {
-                        Toast.makeText(LoginActivity.this, "请输入账号", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
-                    if (TextUtils.isEmpty(psd)) {
-                        Toast.makeText(LoginActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
-                    new LoginTask().execute();
-                } else {
-                    String acou=shouji.getText().toString();
-                    String code_=code.getText().toString();
-                    if (TextUtils.isEmpty(acou)) {
-                        Toast.makeText(LoginActivity.this, "请输入账号", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
-                    if (TextUtils.isEmpty(code_)) {
-                        Toast.makeText(LoginActivity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
-                    new LoginTask().execute();
-                }*/
+//               if (select == 1) {
+//                    String co = account.getText().toString();
+//                    String psd = password.getText().toString();
+//                    if (TextUtils.isEmpty(co)) {
+//                        Toast.makeText(LoginActivity.this, "请输入账号", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    }
+//                    if (TextUtils.isEmpty(psd)) {
+//                        Toast.makeText(LoginActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    }
+//                    new LoginTask().execute();
+//                } else {
+//                    String acou=shouji.getText().toString();
+//                    String code_=code.getText().toString();
+//                    if (TextUtils.isEmpty(acou)) {
+//                        Toast.makeText(LoginActivity.this, "请输入账号", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    }
+//                    if (TextUtils.isEmpty(code_)) {
+//                        Toast.makeText(LoginActivity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    }
+//                    new LoginTask().execute();
+//                }
                 break;
             case R.id.tab1:
                 if (select == 1) {

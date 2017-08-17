@@ -24,7 +24,6 @@ import org.aisen.android.ui.fragment.itemview.IITemView;
 import org.aisen.android.ui.fragment.itemview.IItemViewCreator;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -46,10 +45,8 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
     TextView error_text;
     @ViewInject(id = R.id.error_image)
     ImageView error_image;
-
     @ViewInject(id = R.id.recycleview)
     RecyclerView recycleview;
-
     private String categoryId;
 
     @Override
@@ -58,7 +55,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         super.onItemClick(parent, view, position, id);
         int a = getAdapterItems().get(position).getShop_spot_id();
         if (position < getAdapterItems().size()) {
@@ -116,7 +113,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
     }
 
     @Override
-    protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate) {
+    protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate){
         super.layoutInit(inflater, savedInstanceSate);
         getSwipeRefreshLayout().setEnabled(false);
 //        scrollView.setFillViewport(true);

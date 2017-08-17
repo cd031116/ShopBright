@@ -33,7 +33,7 @@ public class LocationActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId(){
-        SDKInitializer.initialize(getApplicationContext());
+
         return R.layout.activity_location;
     }
 

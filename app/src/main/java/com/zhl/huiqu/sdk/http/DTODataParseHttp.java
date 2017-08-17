@@ -32,12 +32,20 @@ public class DTODataParseHttp extends DefHttpUtility {
             }
             JSONObject jsonObject = JSON.parseObject(resultStr);
             T result;
-            result = super.parseResponse(resultStr, responseCls);
-//            String code = jsonObject.getString("code");
-////            if(TextUtils.isEmpty(code)){
-////                code=jsonObject.getString("retCode");
-////            }
-//
+
+            String code = jsonObject.getString("code");
+            if("1".equals(code)){
+                result = super.parseResponse(resultStr, responseCls);
+            }else {
+                String codes= jsonObject.getString("code");
+                if(jsonObject.containsKey("message")){
+                    String message= jsonObject.getString("message");
+                    throw new TaskException(codes,message);
+                }else {
+                    String msg= jsonObject.getString("msg");
+                    throw new TaskException(codes,msg);
+                }
+            }
 //            BaseBean bean = null;
 //            if (code.equals("3")) {
 //                result = super.parseResponse(resultStr, responseCls);

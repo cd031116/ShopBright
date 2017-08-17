@@ -318,8 +318,6 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
             jd_4.setText(hlist.get(3).getType());
             jd_4.setTag(hlist.get(3).getShop_hotel_type_id());
         }
-
-
     }
 
 

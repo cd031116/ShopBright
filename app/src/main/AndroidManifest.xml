@@ -104,7 +104,7 @@
         <activity android:name=".main.ticket.LocationActivity"/>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="EnpKGRD7qtk1rGVMhmdxqpO9" />
+            android:value="BMTW3yWdhihnWiMl53u85jniROCiWFeS" />
     </application>
 
 </manifest>
