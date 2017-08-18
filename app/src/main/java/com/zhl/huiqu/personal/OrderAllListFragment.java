@@ -68,7 +68,10 @@ public class OrderAllListFragment extends ARecycleViewSwipeRefreshFragment<Order
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         super.onItemClick(parent, view, position, id);
-        startActivity(new Intent(getActivity(), OrderDetailActivity.class));
+        Intent intent=new Intent(getActivity(), OrderDetailActivity.class);
+        intent.putExtra("order_state",productId);
+        startActivity(intent);
+
     }
 
     @Override

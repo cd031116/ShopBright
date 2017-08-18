@@ -20,7 +20,7 @@ public class OrderPayFragment extends Fragment implements View.OnClickListener {
     private TextView ticketToWhere, ticket_type, ticket_type_text, ticket_price, ticket_outing_time_text,
             ticket_in_type_text, price_all_text, refund_layout_text, refund_order_num_text, refund_time_text,
             refund_pay_type_text, order_account_name_text, order_account_phone_text, apply_cancel,
-            ticket_num_text, refund_order_goout_text, apply_refund_btn;
+            ticket_num_text, refund_order_goout_text, order_pay_btn;
 
     private ImageView refundGzImg;
 
@@ -55,9 +55,9 @@ public class OrderPayFragment extends Fragment implements View.OnClickListener {
         order_account_name_text = (TextView) view.findViewById(R.id.order_account_name_text);
         order_account_phone_text = (TextView) view.findViewById(R.id.order_account_phone_text);
         apply_cancel = (TextView) view.findViewById(R.id.apply_cancel);
-        apply_refund_btn = (TextView) view.findViewById(R.id.apply_refund_btn);
+        order_pay_btn = (TextView) view.findViewById(R.id.apply_refund_btn);
         apply_cancel.setOnClickListener(this);
-        apply_refund_btn.setOnClickListener(this);
+        order_pay_btn.setOnClickListener(this);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class OrderPayFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.apply_cancel:
                 break;
-            case R.id.apply_refund_btn:
+            case R.id.order_pay_btn:
                 startActivity(new Intent(getActivity(),OrderWriteActivity.class));
                 break;
         }

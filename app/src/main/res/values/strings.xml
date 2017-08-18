@@ -133,6 +133,7 @@
     <string name="order_detail_refund_design">退订规则</string>
     <string name="order_detail_deal_time">成交时间</string>
     <string name="order_detail_pay_type">支付方式:</string>
+    <string name="order_detail_pay">立即支付</string>
     <string name="order_detail_apply_refund">申请退款</string>
     <string name="order_detail_huiqu_phone">惠趣客服热线</string>
     <string name="account_msg">联系人信息</string>

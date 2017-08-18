@@ -26,14 +26,14 @@
             android:textSize="36px" />
 
         <TextView
-            android:id="@+id/apply_refund_btn"
+            android:id="@+id/order_pay_btn"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="93px"
             android:layout_marginRight="72px"
             android:background="@drawable/personal_kefu_phone"
             android:gravity="center"
-            android:text="@string/order_detail_apply_refund"
+            android:text="@string/order_detail_pay"
             android:textColor="@color/white"
             android:textSize="36px" />
     </LinearLayout>
