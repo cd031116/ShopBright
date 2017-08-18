@@ -90,7 +90,10 @@ public class OrderWriteActivity extends BaseActivity {
                     new checkCodeTask().execute(phone);
                 break;
             case R.id.commit_order_btn:
-                startActivity(new Intent(this, OrderDetailActivity.class));
+                Intent intent = new Intent(this, OrderDetailActivity.class);
+                intent.putExtra("order_state", getResources().getString(R.string.personal_out_order));
+                startActivity(intent);
+
                 break;
             case R.id.fymx_arrow:
                 if (isExpande) {

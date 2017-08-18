@@ -55,7 +55,7 @@ public class OrderPayFragment extends Fragment implements View.OnClickListener {
         order_account_name_text = (TextView) view.findViewById(R.id.order_account_name_text);
         order_account_phone_text = (TextView) view.findViewById(R.id.order_account_phone_text);
         apply_cancel = (TextView) view.findViewById(R.id.apply_cancel);
-        order_pay_btn = (TextView) view.findViewById(R.id.apply_refund_btn);
+        order_pay_btn = (TextView) view.findViewById(R.id.order_pay_btn);
         apply_cancel.setOnClickListener(this);
         order_pay_btn.setOnClickListener(this);
     }
