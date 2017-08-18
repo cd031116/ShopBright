@@ -23,7 +23,9 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
+import com.zhl.huiqu.MainActivity;
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.main.bean.HotInfo;
 import com.zhl.huiqu.main.bean.HotelInfo;
 import com.zhl.huiqu.main.bean.MainBean;
@@ -34,6 +36,9 @@ import com.zhl.huiqu.main.ticket.TicketListActivity;
 import com.zhl.huiqu.main.ticket.TicketMainFragment;
 import com.zhl.huiqu.scan.CaptureActivity;
 import com.zhl.huiqu.sdk.SDK;
+import com.zhl.huiqu.sdk.eventbus.CityEvent;
+import com.zhl.huiqu.sdk.eventbus.CitySubscriber;
+import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.widget.GlideImageLoader;
@@ -41,6 +46,7 @@ import com.zhl.huiqu.widget.ShowMsgDialog;
 
 import org.aisen.android.common.utils.Logger;
 import org.aisen.android.common.utils.SystemUtils;
+import org.aisen.android.component.eventbus.NotificationCenter;
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
 import org.aisen.android.support.bean.TabItem;
@@ -79,6 +85,8 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     @ViewInject(id = R.id.jd_4)
     TextView jd_4;
 
+    @ViewInject(id = R.id.address)
+    TextView address;
 
 
 
@@ -110,13 +118,28 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     public int inflateContentView() {
         return R.layout.main_tab_fragment;
     }
-
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        NotificationCenter.defaultCenter().subscriber(CityEvent.class, cityEvent);
+    }
     @Override
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceState) {
         super.layoutInit(inflater, savedInstanceState);
         int width = SystemUtils.getScreenWidth(getActivity());
         setBanner();
     }
+
+    CitySubscriber cityEvent = new CitySubscriber() {
+        @Override
+        public void onEvent(CityEvent v) {
+            BaseConfig bg=new BaseConfig(getActivity());
+          String addre= bg.getStringValue(Constants.Address,"");
+            address.setText(addre);
+
+        }
+    };
+
 
     @Override
     public void onPause() {
@@ -138,6 +161,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
 
     @Override
     public void onDestroy() {
+        NotificationCenter.defaultCenter().unsubscribe(CityEvent.class, cityEvent);
         super.onDestroy();
     }
 

@@ -3,16 +3,14 @@ package com.zhl.huiqu.main.ticket;
 
 import com.zhl.huiqu.base.ASResultbean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/8/16.
  */
 
-public class TickListInfo extends ASResultbean {
-
-    private static final long serialVersionUID = 2267060725486603901L;
-
+public class TickListInfo implements Serializable{
     private List<TickInfo> ticketOnly;
 
 //    private int total;
@@ -21,7 +19,7 @@ public class TickListInfo extends ASResultbean {
         return ticketOnly;
     }
 
-    public void setTicketOnly(List<TickInfo> ticketOnly) {
+    public void setTicketOnly(List<TickInfo> ticketOnly){
         this.ticketOnly = ticketOnly;
     }
 

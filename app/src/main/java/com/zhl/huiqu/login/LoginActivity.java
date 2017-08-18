@@ -17,7 +17,10 @@ import com.zhl.huiqu.MainActivity;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.BaseConfig;
+import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.sdk.SDK;
+import com.zhl.huiqu.utils.Constants;
+import com.zhl.huiqu.utils.SaveObjectUtils;
 
 
 import org.aisen.android.network.task.TaskException;
@@ -56,6 +59,8 @@ public class LoginActivity extends BaseActivity {
     LinearLayout view2;
     @Bind(R.id.code)
     TextView code;//获取验证码
+    @Bind(R.id.mima)
+    TextView mima;//获取验证码
     @Bind(R.id.top_image)
     ImageView top_image;
 
@@ -91,32 +96,32 @@ public class LoginActivity extends BaseActivity {
                 LoginActivity.this.finish();
                 break;
             case R.id.login:
-                  startActivity(new Intent(LoginActivity.this,MainActivity.class));
-//               if (select == 1) {
-//                    String co = account.getText().toString();
-//                    String psd = password.getText().toString();
-//                    if (TextUtils.isEmpty(co)) {
-//                        Toast.makeText(LoginActivity.this, "请输入账号", Toast.LENGTH_SHORT).show();
-//                        break;
-//                    }
-//                    if (TextUtils.isEmpty(psd)) {
-//                        Toast.makeText(LoginActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
-//                        break;
-//                    }
-//                    new LoginTask().execute();
-//                } else {
-//                    String acou=shouji.getText().toString();
-//                    String code_=code.getText().toString();
-//                    if (TextUtils.isEmpty(acou)) {
-//                        Toast.makeText(LoginActivity.this, "请输入账号", Toast.LENGTH_SHORT).show();
-//                        break;
-//                    }
-//                    if (TextUtils.isEmpty(code_)) {
-//                        Toast.makeText(LoginActivity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
-//                        break;
-//                    }
-//                    new LoginTask().execute();
-//                }
+//                  startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                if (select == 1) {
+                    String co = account.getText().toString();
+                    String psd = password.getText().toString();
+                    if (TextUtils.isEmpty(co)) {
+                        Toast.makeText(LoginActivity.this, "请输入账号", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    if (TextUtils.isEmpty(psd)) {
+                        Toast.makeText(LoginActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    new LoginTask().execute();
+                } else {
+                    String acou = shouji.getText().toString();
+                    String code_ = mima.getText().toString().trim();
+                    if (TextUtils.isEmpty(acou)) {
+                        Toast.makeText(LoginActivity.this, "请输入账号", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    if (TextUtils.isEmpty(code_)) {
+                        Toast.makeText(LoginActivity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    new LoginTask().execute();
+                }
                 break;
             case R.id.tab1:
                 if (select == 1) {
@@ -166,14 +171,13 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         public String workInBackground(Void... voids) throws TaskException {
-            return SDK.newInstance(LoginActivity.this).getCode(account.getText().toString());
+            return SDK.newInstance(LoginActivity.this).getCode(shouji.getText().toString());
         }
 
         @Override
         protected void onSuccess(String info) {
             super.onSuccess(info);
             timerCount.start();
-            String code = info.toString();
         }
 
         @Override
@@ -184,9 +188,9 @@ public class LoginActivity extends BaseActivity {
     }
 
     /*
-*登录
-* */
-    class LoginTask extends WorkTask<Void, Void, String> {
+    *登录
+    * */
+    class LoginTask extends WorkTask<Void, Void, RegisterEntity>{
         @Override
         protected void onPrepare() {
             super.onPrepare();
@@ -194,23 +198,25 @@ public class LoginActivity extends BaseActivity {
         }
 
         @Override
-        public String workInBackground(Void... voids) throws TaskException {
+        public RegisterEntity workInBackground(Void... voids) throws TaskException {
             String accounst = account.getText().toString();
             String psd = password.getText().toString();
             //2
-            String acou=shouji.getText().toString();
-            String code_=code.getText().toString();
-            if(select==1){
+            String acou = shouji.getText().toString();
+            String code_ = mima.getText().toString();
+            if (select == 1) {
                 return SDK.newInstance(LoginActivity.this).login(accounst, psd, "0", "");
-            }else {
+            } else {
                 return SDK.newInstance(LoginActivity.this).login(acou, "", "1", code_);
             }
         }
 
         @Override
-        protected void onSuccess(String info) {
+        protected void onSuccess(RegisterEntity info){
             super.onSuccess(info);
             dismissAlert();
+            SaveObjectUtils.getInstance(LoginActivity.this).setObject(Constants.USER_INFO,info);
+            startActivity(new Intent(LoginActivity.this,MainActivity.class));
         }
 
         @Override
@@ -220,7 +226,6 @@ public class LoginActivity extends BaseActivity {
             Toast.makeText(LoginActivity.this, "" + exception.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
 
     @Override
     public void onPause() {

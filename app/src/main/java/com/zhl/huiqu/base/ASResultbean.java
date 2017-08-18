@@ -3,7 +3,7 @@ package com.zhl.huiqu.base;
 import org.aisen.android.network.biz.IResult;
 
 /**
- * Created by Administrator on 2017/8/16.
+ * Created by lyj on 2017/8/16.
  */
 
 public class ASResultbean extends BaseInfo implements IResult {

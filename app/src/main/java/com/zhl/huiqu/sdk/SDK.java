@@ -9,8 +9,11 @@ import com.zhl.huiqu.main.bean.DetailBean;
 import com.zhl.huiqu.main.bean.DetailMainBean;
 import com.zhl.huiqu.main.bean.MainBean;
 import com.zhl.huiqu.main.bean.MainTopInfo;
+import com.zhl.huiqu.main.ticket.TickBean;
 import com.zhl.huiqu.main.ticket.TickListInfo;
 import com.zhl.huiqu.sdk.http.DTODataParseHttp;
+import com.zhl.huiqu.utils.Constants;
+import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.TLog;
 
 import org.aisen.android.common.setting.Setting;
@@ -29,7 +32,6 @@ import org.json.JSONObject;
 
 public class SDK extends ABizLogic {
     private static Activity context;
-    private String PHPSESSID=null;
 
     private SDK() {
         this(CacheMode.disable);
@@ -80,7 +82,6 @@ public class SDK extends ABizLogic {
         params.addParameter("mobile", mobile);
         // 这个接口，是将form表单数据，按照json格式走post协议，请使用requestObject这个参数。
         return doPost(configHttpConfig(), action, params, null, null, String.class);
-
     }
 
     /**
@@ -130,7 +131,7 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public String login(String mobile, String password, String type,String code) throws TaskException {
+    public RegisterEntity login(String mobile, String password, String type,String code) throws TaskException {
         Setting action = newSetting("sendLoginInfo", "appapi/Memberpub/sendLoginInfo", "登录");
         Params params = new Params();
         params.addParameter("mobile", mobile);
@@ -140,7 +141,7 @@ public class SDK extends ABizLogic {
             params.addParameter("code", code);
         }
         params.addParameter("type", type);
-        return doPost(configHttpConfig(), action, params, null, null, String.class);
+        return doPost(configHttpConfig(), action, params, null, null, RegisterEntity.class);
     }
 
     /**
@@ -151,12 +152,12 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public TickListInfo getTicketData(String theme_id, String page) throws TaskException {
-        Setting action = newSetting("getTicketInfo", "/appapi/Spotticket/getTicketInfo", "获取景点门票页面门票数据");
+    public TickBean getTicketData(String theme_id, String page) throws TaskException {
+        Setting action = newSetting("getTicketInfo", "appapi/Spotticket/getTicketInfo", "获取景点门票页面门票数据");
         Params params = new Params();
         params.addParameter("theme_id", theme_id);
 //        params.addParameter("page", page);
-        return doGet(action, basicParams(params), TickListInfo.class);
+        return doGet(action, basicParams(params), TickBean.class);
     }
 
     /**
@@ -211,12 +212,16 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public DetailMainBean getGoodsDetail(String id, String check_sign, String session_id) throws TaskException {
+    public DetailMainBean getGoodsDetail(String id) throws TaskException {
         Setting action = newSetting("getGoodsDetail", "appapi/Goods/getGoodsDetail", "获取商品详情");
         Params params = new Params();
-        params.addParameter("id", id);
-//        params.addParameter("check_sign", check_sign);
-//        params.addParameter("session_id", session_id);
+        RegisterEntity info=  SaveObjectUtils.getInstance(context).getObject(Constants.USER_INFO,RegisterEntity.class);
+        if(info!=null){
+          params.addParameter("check_sign", info.getCheck_sign());
+        params.addParameter("session_id", info.getSession_id());
+        }
+        params.addParameter("shop_spot_id", id);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?session_id=" + info.getSession_id() + "&check_sign=" + info.getCheck_sign());
         return doPost(configHttpConfig(), action, params, null, null, DetailMainBean.class);
     }
 
@@ -248,7 +253,7 @@ public class SDK extends ABizLogic {
      * @throws TaskException
      */
     public String getSpotTheme(String type) throws TaskException {
-        Setting action = newSetting("getGoodsDetail", "appapi/Spotticket/getSpotTheme", "获取商品详情");
+        Setting action = newSetting("getGoodsDetail", "appapi/Spotticket/getSpotTheme", "景点主题");
         Params params = new Params();
         params.addParameter("type",type);
 //        params.addParameter("check_sign", check_sign);
@@ -271,7 +276,6 @@ public class SDK extends ABizLogic {
         config.baseUrl = BuildConfig.BASE_URL;
 //        http://192.168.10.115:9100
         config.addHeader("Content-Type", "application/json");
-        config.addHeader("Cookie", "PHPSESSID=" + PHPSESSID);
         return config;
     }
 

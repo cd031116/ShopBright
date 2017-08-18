@@ -3,8 +3,10 @@ package com.zhl.huiqu.base;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Vibrator;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.zhl.huiqu.main.location.LocationService;
 import com.zhl.huiqu.main.search.SearchHistoryManager;
 
 import org.aisen.android.common.context.GlobalContext;
@@ -19,16 +21,17 @@ import java.net.CookiePolicy;
 public class MyApplication extends GlobalContext {
     public static MyApplication instance;
     private ActivityManagerd activityManager = null;
-
-
+    public LocationService locationService;
     @Override
     public void onCreate(){
         super.onCreate();
         instance = this;
         SDKInitializer.initialize(getApplicationContext());
+        locationService = new LocationService(getApplicationContext());
         activityManager = ActivityManagerd.getScreenManager();
         SearchHistoryManager.setup(this);
         getOkHttpClient().setCookieHandler(new CookieManager(null, CookiePolicy.ACCEPT_ORIGINAL_SERVER));
+
     }
 
 

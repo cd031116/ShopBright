@@ -147,14 +147,14 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
 
             ProductPartListBean beans = queryList(start);
 
-            if (beans != null && beans.getData() != null) {
+            if (beans != null && beans.getData() != null){
                 beans.setEndPaging(beans.getData().size() <= 5);
             }
             return beans;
         }
 
         @Override
-        protected void onFailure(TaskException exception) {
+        protected void onFailure(TaskException exception){
             super.onFailure(exception);
 //            error_text.setText(exception.getMessage());
 //            if ("noneNetwork".equals(exception.getCode())) {
@@ -168,10 +168,8 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
     }
 
     @Override
-    public void onDestroy() {
+    public void onDestroy(){
         super.onDestroy();
-
     }
-
 
 }

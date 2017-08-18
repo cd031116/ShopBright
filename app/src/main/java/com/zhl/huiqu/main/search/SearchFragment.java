@@ -79,6 +79,7 @@ public class SearchFragment extends BaseFragment implements ISearchSubscriber {
         }
     }
 
+
     @Override
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate) {
         super.layoutInit(inflater, savedInstanceSate);

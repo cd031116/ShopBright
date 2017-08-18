@@ -24,4 +24,7 @@ public class Constants {
     public static final String USER="USER";
 
     public static final String USER_INFO="user_info";
+
+    public static final String Address="address";
+
 }

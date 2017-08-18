@@ -308,7 +308,8 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
 
         @Override
         public DetailMainBean workInBackground(Void... voids) throws TaskException {
-            return SDK.newInstance(ProductDetailActivity.this).getGoodsDetail("12", "", "");
+
+            return SDK.newInstance(ProductDetailActivity.this).getGoodsDetail("12");
         }
 
         @Override

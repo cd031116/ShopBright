@@ -10,15 +10,21 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.base.ContainerActivity;
+import com.zhl.huiqu.sdk.eventbus.CityEvent;
+import com.zhl.huiqu.sdk.eventbus.CitySubscriber;
+import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.widget.GlideImageLoader;
 
+import org.aisen.android.component.eventbus.NotificationCenter;
 import org.aisen.android.support.inject.OnClick;
 import org.aisen.android.support.inject.ViewInject;
 import org.aisen.android.ui.fragment.ABaseFragment;
@@ -64,7 +70,8 @@ public class TicketMainFragment extends ABaseFragment {
     LinearLayout ll_dot;
     @ViewInject(id = R.id.banner)
     Banner banner;
-
+    @ViewInject(id = R.id.top_text)
+    TextView top_text;
 
     public static TicketMainFragment newInstance() {
         return new TicketMainFragment();
@@ -82,10 +89,25 @@ public class TicketMainFragment extends ABaseFragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        NotificationCenter.defaultCenter().subscriber(CityEvent.class, cityEvent);
+    }
+    @Override
     public int inflateContentView() {
         return R.layout.fragment_ticket_main;
     }
 
+
+
+    CitySubscriber cityEvent = new CitySubscriber() {
+        @Override
+        public void onEvent(CityEvent v) {
+            BaseConfig bg=new BaseConfig(getActivity());
+            String addre= bg.getStringValue(Constants.Address,"");
+            top_text.setText(addre);
+        }
+    };
 
     @Override
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate) {
@@ -116,6 +138,11 @@ public class TicketMainFragment extends ABaseFragment {
         setBanner();
     }
 
+    @Override
+    public void onDestroy() {
+        NotificationCenter.defaultCenter().unsubscribe(CityEvent.class, cityEvent);
+        super.onDestroy();
+    }
 
     @Override
     public void onStart() {

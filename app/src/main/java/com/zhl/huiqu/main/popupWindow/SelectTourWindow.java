@@ -3,6 +3,7 @@ package com.zhl.huiqu.main.popupWindow;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,11 +29,11 @@ public class SelectTourWindow extends PopupWindow {
     private Activity mContext;
     private View view;
     private TextView btn_cancel;
+    private RecyclerView recycle;
     public SelectTourWindow(Activity mContext, View.OnClickListener itemsOnClick) {
 
         this.view = LayoutInflater.from(mContext).inflate(R.layout.select_window, null);
-
-
+        recycle= (RecyclerView) view.findViewById(R.id.recycleview);
 
 
 
@@ -88,7 +89,7 @@ public class SelectTourWindow extends PopupWindow {
 
         @Override
         public DetailMainBean workInBackground(Void... voids) throws TaskException{
-            return SDK.newInstance(mContext).getGoodsDetail("12", "", "");
+            return SDK.newInstance(mContext).getGoodsDetail("12");
         }
 
         @Override

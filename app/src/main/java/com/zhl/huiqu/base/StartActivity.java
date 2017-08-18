@@ -5,8 +5,12 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 
+import com.zhl.huiqu.MainActivity;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.login.LoginActivity;
+import com.zhl.huiqu.login.entity.RegisterEntity;
+import com.zhl.huiqu.utils.Constants;
+import com.zhl.huiqu.utils.SaveObjectUtils;
 
 import butterknife.Bind;
 
@@ -50,9 +54,14 @@ public class StartActivity extends BaseActivity {
     }
 
     private void redirectTo() {
-         BaseConfig bg=BaseConfig.getInstance(this);
-        startActivity(new Intent(StartActivity.this,LoginActivity.class));
+        RegisterEntity info=  SaveObjectUtils.getInstance(StartActivity.this).getObject(Constants.USER_INFO,RegisterEntity.class);
+        if(info!=null){
+            startActivity(new Intent(StartActivity.this,MainActivity.class));
+        }else {
+            startActivity(new Intent(StartActivity.this,LoginActivity.class));
+        }
         StartActivity.this.finish();
+
     }
 
 }

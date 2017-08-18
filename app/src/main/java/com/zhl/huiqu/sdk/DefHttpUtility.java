@@ -159,7 +159,6 @@ public class DefHttpUtility implements IHttpUtility {
 
         try {
             Response e = this.getOkHttpClient().newCall(request).execute();
-            TLog.log("dddd","cookieHandler= "+e.toString());
             Logger.w(getTag(action, method), "Http-code = %d", new Object[]{Integer.valueOf(e.code())});
             String responseStr;
             if(e.code() != 200 && e.code() != 206) {

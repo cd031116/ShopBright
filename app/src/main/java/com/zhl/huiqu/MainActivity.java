@@ -11,12 +11,21 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.baidu.location.BDAbstractLocationListener;
+import com.baidu.location.BDLocation;
+import com.baidu.location.Poi;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.base.DoubleClickExitHelper;
+import com.zhl.huiqu.base.MyApplication;
 import com.zhl.huiqu.main.MainTabFragment;
+import com.zhl.huiqu.main.location.LocationService;
 import com.zhl.huiqu.personal.PersonalFragment;
+import com.zhl.huiqu.sdk.eventbus.CityEvent;
+import com.zhl.huiqu.utils.Constants;
 
 import org.aisen.android.common.utils.Logger;
+import org.aisen.android.component.eventbus.NotificationCenter;
 
 import java.util.List;
 
@@ -39,6 +48,7 @@ public class MainActivity extends BaseActivity {
     List<TextView> mText;
     FragmentManager mFragmentMan;
     int selected=0;
+    private LocationService locationService;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -100,7 +110,6 @@ public class MainActivity extends BaseActivity {
             lastFragmentTag = tag;
         }
     }
-
 
 
     @OnClick({R.id.home_line, R.id.service_line, R.id.rim_line, R.id.my_line,R.id.image_home,R.id.image_service,R.id.image_rim,R.id.image_my})
@@ -197,4 +206,71 @@ public class MainActivity extends BaseActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+    @Override
+    protected void onStart() {
+        // TODO Auto-generated method stub
+        super.onStart();
+        // -----------location config ------------
+        locationService = ((MyApplication) getApplication()).locationService;
+        //获取locationservice实例，建议应用中只初始化1个location实例，然后使用，可以参考其他示例的activity，都是通过此种方式获取locationservice实例的
+        locationService.registerListener(mListener);
+        //注册监听
+        int type = getIntent().getIntExtra("from", 0);
+        if (type == 0) {
+            locationService.setLocationOption(locationService.getDefaultLocationClientOption());
+        } else if (type == 1) {
+            locationService.setLocationOption(locationService.getOption());
+        }
+
+        locationService.start();
+    }
+
+    /***
+     * Stop location service
+     */
+    @Override
+    protected void onStop() {
+        // TODO Auto-generated method stub
+        locationService.unregisterListener(mListener); //注销掉监听
+        locationService.stop(); //停止定位服务
+        super.onStop();
+    }
+
+
+    /*****
+     *
+     * 定位结果回调，重写onReceiveLocation方法，可以直接拷贝如下代码到自己工程中修改
+     *
+     */
+    private BDAbstractLocationListener mListener = new BDAbstractLocationListener() {
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            // TODO Auto-generated method stub
+            if (null != location && location.getLocType() != BDLocation.TypeServerError) {
+                StringBuffer sb = new StringBuffer();
+                /**
+                 * 时间也可以使用systemClock.elapsedRealtime()方法 获取的是自从开机以来，每次回调的时间；
+                 * location.getTime() 是指服务端出本次结果的时间，如果位置不发生变化，则时间不变
+                 */
+                sb.append("\nlatitude : ");// 纬度
+                sb.append(location.getLatitude());
+                sb.append("\nlontitude : ");// 经度
+                sb.append(location.getLongitude());
+
+                sb.append("\ncity : ");// 城市
+                sb.append(location.getCity());
+                BaseConfig bg=new BaseConfig(MainActivity.this);
+                bg.setStringValue(Constants.Address,location.getCity());
+                NotificationCenter.defaultCenter().publish(new CityEvent());
+//                if (location.getPoiList() != null && !location.getPoiList().isEmpty()) {
+//                    for (int i = 0; i < location.getPoiList().size(); i++) {
+//                        Poi poi = (Poi) location.getPoiList().get(i);
+//                        sb.append(poi.getName() + ";");
+//                    }
+//                }
+
+            }
+        }
+
+    };
 }

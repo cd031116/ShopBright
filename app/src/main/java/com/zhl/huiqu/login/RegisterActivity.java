@@ -14,6 +14,7 @@ import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.personal.OrderWriteActivity;
 import com.zhl.huiqu.sdk.SDK;
+import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.PhoneFormatCheckUtils;
 import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.TLog;
@@ -183,7 +184,7 @@ public class RegisterActivity extends BaseActivity {
         protected void onSuccess(RegisterEntity info) {
             super.onSuccess(info);
             dismissAlert();
-            SaveObjectUtils.getInstance(RegisterActivity.this).setObject("account", info);
+            SaveObjectUtils.getInstance(RegisterActivity.this).setObject(Constants.USER_INFO, info);
             startActivity(new Intent(RegisterActivity.this, MainActivity.class));
             RegisterActivity.this.finish();
         }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
@@ -39,7 +40,6 @@ import java.util.List;
 
 public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo, TickListInfo, Serializable> {
 
-
     public static TickListFragment newInstance(String theme_id) {
         Bundle args = new Bundle();
         args.putString("theme_id", theme_id);
@@ -54,6 +54,9 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
     ImageView error_image;
     @ViewInject(id = R.id.recycleview)
     RecyclerView recycleview;
+
+    @ViewInject(id = R.id.progress)
+    ProgressBar progress;
 
     private String theme_id;
     @Override
@@ -138,18 +141,19 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
         new Task(refreshMode != RefreshMode.update ? RefreshMode.reset : RefreshMode.update).execute();
     }
 
-    class Task extends APagingTask<Void, Void, TickListInfo>{
+    class Task extends APagingTask<Void, Void, TickBean>{
         public Task(RefreshMode mode) {
             super(mode);
         }
 
         @Override
-        protected List<TickInfo> parseResult(TickListInfo bean) {
-            return bean.getTicketOnly();
+        protected List<TickInfo> parseResult(TickBean bean) {
+            progress.setVisibility(View.GONE);
+            return bean.getData().getTicketOnly();
         }
 
         @Override
-        protected TickListInfo workInBackground(RefreshMode refreshMode, String s, String nextPage, Void... voids)throws TaskException{
+        protected TickBean workInBackground(RefreshMode refreshMode, String s, String nextPage, Void... voids)throws TaskException{
             int start = 1;
             if (mode == RefreshMode.update && !TextUtils.isEmpty(nextPage)){
                 try {
@@ -158,9 +162,9 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
                     e.printStackTrace();
                 }
             }
-            TickListInfo beans = queryList(start);
-            if (beans != null && beans.getTicketOnly() != null){
-                beans.setEndPaging(beans.getTicketOnly().size() <= 5);
+            TickBean beans = queryList(start);
+            if (beans != null && beans.getData() != null){
+                beans.setEndPaging(beans.getData().getTicketOnly().size() <= 5);
             }
             return beans;
         }
@@ -168,13 +172,14 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
         @Override
         protected void onFailure(TaskException exception){
             super.onFailure(exception);
+            progress.setVisibility(View.GONE);
 //            error_text.setText(exception.getMessage());
 //            if ("noneNetwork".equals(exception.getCode())) {
 //                error_image.setImageResource(R.mipmap.no_net);
 //            }
         }
     }
-    protected TickListInfo queryList(int start) throws TaskException {
+    protected TickBean queryList(int start) throws TaskException {
         return SDK.newInstance(getActivity()).getTicketData("5",start+"");
     }
 

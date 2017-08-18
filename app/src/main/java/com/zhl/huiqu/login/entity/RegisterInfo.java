@@ -19,6 +19,116 @@ public class RegisterInfo implements Serializable{
      * status : 1
      * member_id : 1863068
      */
+    private String role;
+    private String type;
+
+    private String email;
+    private String score;
+    private String sex;
+    private String money;
+    private String recode;
+    private String unionid;
+    private String litpic;
+
+    private String sinaid;
+    private String openid;
+    private String hongbao;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
+
+    public String getRecode() {
+        return recode;
+    }
+
+    public void setRecode(String recode) {
+        this.recode = recode;
+    }
+
+    public String getUnionid() {
+        return unionid;
+    }
+
+    public void setUnionid(String unionid) {
+        this.unionid = unionid;
+    }
+
+    public String getLitpic() {
+        return litpic;
+    }
+
+    public void setLitpic(String litpic) {
+        this.litpic = litpic;
+    }
+
+    public String getSinaid() {
+        return sinaid;
+    }
+
+    public void setSinaid(String sinaid) {
+        this.sinaid = sinaid;
+    }
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
+    }
+
+    public String getHongbao() {
+        return hongbao;
+    }
+
+    public void setHongbao(String hongbao) {
+        this.hongbao = hongbao;
+    }
 
     private String password;
     private String mobile;
@@ -30,6 +140,8 @@ public class RegisterInfo implements Serializable{
     private int add_time;
     private int status;
     private String member_id;
+
+
 
     public String getPassword() {
         return password;
