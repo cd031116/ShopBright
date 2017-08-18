@@ -8,12 +8,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.zhl.huiqu.MainActivity;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.personal.OrderWriteActivity;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.PhoneFormatCheckUtils;
+import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.utils.ToastUtils;
 
@@ -181,7 +183,9 @@ public class RegisterActivity extends BaseActivity {
         protected void onSuccess(RegisterEntity info) {
             super.onSuccess(info);
             dismissAlert();
-            TLog.log("tttt", "info=" + info.getData().getMember_id() + "");
+            SaveObjectUtils.getInstance(RegisterActivity.this).setObject("account", info);
+            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+            RegisterActivity.this.finish();
         }
 
         @Override

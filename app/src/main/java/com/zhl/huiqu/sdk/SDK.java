@@ -29,6 +29,7 @@ import org.json.JSONObject;
 
 public class SDK extends ABizLogic {
     private static Activity context;
+    private String PHPSESSID=null;
 
     private SDK() {
         this(CacheMode.disable);
@@ -270,6 +271,7 @@ public class SDK extends ABizLogic {
         config.baseUrl = BuildConfig.BASE_URL;
 //        http://192.168.10.115:9100
         config.addHeader("Content-Type", "application/json");
+        config.addHeader("Cookie", "PHPSESSID=" + PHPSESSID);
         return config;
     }
 

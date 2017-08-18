@@ -55,7 +55,7 @@
                     android:layout_marginBottom="45px"
                     android:layout_marginLeft="54px"
                     android:layout_marginTop="45px"
-                    android:background="@drawable/personal_collect" />
+                    android:background="@drawable/person_setting" />
 
                 <TextView
                     android:id="@+id/personal_tel_text"
@@ -64,7 +64,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="27px"
                     android:layout_toRightOf="@id/personal_head_img"
-                    android:text="18655555555"
+                    android:text="@string/should_account_login"
                     android:textColor="@color/comm_white"
                     android:textSize="42px" />
 

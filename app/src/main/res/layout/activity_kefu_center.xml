@@ -6,28 +6,34 @@
     android:fitsSystemWindows="true">
 
     <include
-        android:id="@+id/view_top" layout="@layout/view_top"/>
-    
+        android:id="@+id/view_top"
+        layout="@layout/view_top" />
+
     <RelativeLayout
+        android:id="@+id/call_kefu_layout"
         android:layout_width="match_parent"
         android:layout_height="141px"
         android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:background="@color/comm_white">
+        android:background="@color/comm_white"
+        android:gravity="center">
+
         <TextView
+            android:id="@+id/call_kefu"
             android:layout_width="match_parent"
-            android:layout_marginRight="93px"
+            android:layout_height="90px"
             android:layout_marginLeft="93px"
+            android:layout_marginRight="93px"
             android:background="@drawable/personal_kefu_phone"
             android:gravity="center"
-            android:textColor="@color/comm_white"
             android:text="@string/call_kefu_phone"
-            android:layout_height="90px" />
+            android:textColor="@color/comm_white" />
     </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/kefu_list"
         android:layout_width="match_parent"
-        android:layout_below="@id/view_top"
-        android:layout_height="match_parent"/>
-    
+        android:layout_above="@id/call_kefu_layout"
+        android:layout_height="match_parent"
+        android:layout_below="@id/view_top" />
+
 </RelativeLayout>
