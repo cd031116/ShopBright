@@ -9,6 +9,9 @@ import com.zhl.huiqu.main.search.SearchHistoryManager;
 
 import org.aisen.android.common.context.GlobalContext;
 
+import java.net.CookieManager;
+import java.net.CookiePolicy;
+
 
 /**
  * Created by lyj on 17/8/2.
@@ -26,6 +29,7 @@ public class MyApplication extends GlobalContext {
         SDKInitializer.initialize(getApplicationContext());
         activityManager = ActivityManagerd.getScreenManager();
         SearchHistoryManager.setup(this);
+        getOkHttpClient().setCookieHandler(new CookieManager(null, CookiePolicy.ACCEPT_ORIGINAL_SERVER));
     }
 
 
