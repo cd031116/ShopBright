@@ -173,14 +173,12 @@ public class DefHttpUtility implements IHttpUtility {
             } else {
                 Request.Builder result = request.newBuilder();
                 CookieHandler cookieHandler = this.getOkHttpClient().getCookieHandler();
-                TLog.log("dddd","cookieHandler= ");
                 if (cookieHandler != null) {
                     // Capture the request headers added so far so that they can be offered to the CookieHandler.
                     // This is mostly to stay close to the RI; it is unlikely any of the headers above would
                     // affect cookie choice besides "Host".
                     Map<String, List<String>> headers = OkHeaders.toMultimap(result.build().headers(), null);
                     Map<String, List<String>> cookies = cookieHandler.get(request.uri(), headers);
-                    TLog.log("dddd","Cookie2222= "+cookies);
                     OkHeaders.addCookies(result, cookies);
                 }
                 responseStr = e.body().string();
