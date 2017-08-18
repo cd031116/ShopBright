@@ -12,7 +12,6 @@ import org.aisen.android.common.context.GlobalContext;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
 
-
 /**
  * Created by lyj on 17/8/2.
  */
