@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="浪漫海景"
+        android:padding="20px"
+        android:textSize="32px"
+        android:gravity="center"
+        android:background="@drawable/select_window_bg"
+        android:layout_margin="10px"
+        android:textColor="#333333"/>
+
+
+
+</LinearLayout>

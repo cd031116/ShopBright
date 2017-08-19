@@ -9,6 +9,7 @@ import com.zhl.huiqu.main.bean.DetailBean;
 import com.zhl.huiqu.main.bean.DetailMainBean;
 import com.zhl.huiqu.main.bean.MainBean;
 import com.zhl.huiqu.main.bean.MainTopInfo;
+import com.zhl.huiqu.main.ticket.SpotTBean;
 import com.zhl.huiqu.main.ticket.TickBean;
 import com.zhl.huiqu.main.ticket.TickListInfo;
 import com.zhl.huiqu.sdk.http.DTODataParseHttp;
@@ -252,13 +253,11 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public String getSpotTheme(String type) throws TaskException {
+    public SpotTBean getSpotTheme(String type) throws TaskException {
         Setting action = newSetting("getGoodsDetail", "appapi/Spotticket/getSpotTheme", "景点主题");
         Params params = new Params();
         params.addParameter("type",type);
-//        params.addParameter("check_sign", check_sign);
-//        params.addParameter("session_id", session_id);
-        return doGet(action, basicParams(params), String.class);
+        return doGet(action, basicParams(params), SpotTBean.class);
     }
 
 

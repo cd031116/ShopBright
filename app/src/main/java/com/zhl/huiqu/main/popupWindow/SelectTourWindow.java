@@ -2,6 +2,7 @@ package com.zhl.huiqu.main.popupWindow;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,11 +16,18 @@ import com.zhl.huiqu.R;
 import com.zhl.huiqu.main.ProductDetailActivity;
 import com.zhl.huiqu.main.bean.DetailBean;
 import com.zhl.huiqu.main.bean.DetailMainBean;
+import com.zhl.huiqu.main.ticket.SpotTBean;
+import com.zhl.huiqu.main.ticket.SpotThemeInfo;
+import com.zhl.huiqu.recyclebase.CommonAdapter;
+import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.TLog;
 
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/8/17.
@@ -28,15 +36,75 @@ import org.aisen.android.network.task.WorkTask;
 public class SelectTourWindow extends PopupWindow {
     private Activity mContext;
     private View view;
-    private TextView btn_cancel;
     private RecyclerView recycle;
-    public SelectTourWindow(Activity mContext, View.OnClickListener itemsOnClick) {
-
+    private TextView zhuti,jibie;
+    private ItemInclick itemsOnClick;
+    private TextView cancel,summit;
+    private CommonAdapter<SpotThemeInfo> mAdapter;
+    private List<SpotThemeInfo> mData=new ArrayList<>();
+    private String getId="";
+    public SelectTourWindow(Activity mContext, ItemInclick itemsOnClickd) {
+        this.mContext=mContext;
+        this.itemsOnClick=itemsOnClickd;
         this.view = LayoutInflater.from(mContext).inflate(R.layout.select_window, null);
         recycle= (RecyclerView) view.findViewById(R.id.recycleview);
+        cancel= (TextView) view.findViewById(R.id.cancel);
+        summit= (TextView) view.findViewById(R.id.sure);
+
+        zhuti= (TextView) view.findViewById(R.id.zhuti);
+        jibie= (TextView) view.findViewById(R.id.jibie);
+        for(int i=0;i<10;i++){
+            SpotThemeInfo info=new SpotThemeInfo();
+            info.setName("主题"+i+"");
+            info.setTheme_id("1");
+            mData.add(info);
+        }
+
+        mAdapter=new CommonAdapter<SpotThemeInfo>(mContext,R.layout.select_window_item,mData) {
+            @Override
+            protected void convert(ViewHolder holder,final SpotThemeInfo info,final int position) {
+                holder.setText(R.id.content,info.getName());
+
+                if(info.isselect()){
+                    holder.setSesect(R.id.content,true);
+
+                    holder.setTextColor(R.id.content, Color.parseColor("#ffffff"));
+                }else {
+                    holder.setSesect(R.id.content,false);
+                    holder.setTextColor(R.id.content, Color.parseColor("#5A5863"));
+                }
+                holder.setOnClickListener(R.id.content, new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+
+                       for(int i=0;i<mData.size();i++){
+                           mData.get(i).setIsselect(false);
+                       }
+                        getId=info.getTheme_id();
+                        info.setIsselect(true);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
+
+            }
+        };
+        recycle.setAdapter(mAdapter);
 
 
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
 
+        summit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemsOnClick.ItemClick("1",getId);
+                dismiss();
+            }
+        });
 //        btn_take_photo = (Button) view.findViewById(R.id.btn_take_photo);
 //        btn_pick_photo = (Button) view.findViewById(R.id.btn_pick_photo);
         // 设置按钮监听
@@ -64,7 +132,7 @@ public class SelectTourWindow extends PopupWindow {
         // 设置视图
         this.setContentView(this.view);
         // 设置弹出窗体的宽和高
-        this.setHeight(RelativeLayout.LayoutParams.WRAP_CONTENT);
+        this.setHeight(RelativeLayout.LayoutParams.MATCH_PARENT);
         this.setWidth(RelativeLayout.LayoutParams.MATCH_PARENT);
         // 设置弹出窗体可点击
         this.setFocusable(true);
@@ -74,13 +142,13 @@ public class SelectTourWindow extends PopupWindow {
         this.setBackgroundDrawable(dw);
         // 设置弹出窗体显示时的动画，从底部向上弹出
         this.setAnimationStyle(R.style.select_anim);
+        new getInfoTask().execute();
     }
 
 
 
 
-
-    class getInfoTask extends WorkTask<Void, Void, DetailMainBean>{
+    class getInfoTask extends WorkTask<Void, Void, SpotTBean>{
         @Override
         protected void onPrepare() {
             super.onPrepare();
@@ -88,12 +156,12 @@ public class SelectTourWindow extends PopupWindow {
         }
 
         @Override
-        public DetailMainBean workInBackground(Void... voids) throws TaskException{
-            return SDK.newInstance(mContext).getGoodsDetail("12");
+        public SpotTBean workInBackground(Void... voids) throws TaskException{
+            return SDK.newInstance(mContext).getSpotTheme("12");
         }
 
         @Override
-        protected void onSuccess(DetailMainBean infot){
+        protected void onSuccess(SpotTBean infot){
             super.onSuccess(infot);
 
         }
@@ -102,5 +170,10 @@ public class SelectTourWindow extends PopupWindow {
         protected void onFailure(TaskException exception){
 
         }
+    }
+
+
+    public interface ItemInclick{
+        void ItemClick(String tab,String item);
     }
 }
