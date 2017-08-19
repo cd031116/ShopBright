@@ -17,7 +17,10 @@ import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseConfig;
+import com.zhl.huiqu.base.BaseFragment;
 import com.zhl.huiqu.base.ContainerActivity;
+import com.zhl.huiqu.main.bean.MainBean;
+import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.sdk.eventbus.CityEvent;
 import com.zhl.huiqu.sdk.eventbus.CitySubscriber;
 import com.zhl.huiqu.utils.Constants;
@@ -25,9 +28,10 @@ import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.widget.GlideImageLoader;
 
 import org.aisen.android.component.eventbus.NotificationCenter;
+import org.aisen.android.network.task.TaskException;
+import org.aisen.android.network.task.WorkTask;
 import org.aisen.android.support.inject.OnClick;
 import org.aisen.android.support.inject.ViewInject;
-import org.aisen.android.ui.fragment.ABaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +44,7 @@ import java.util.List;
 * */
 
 
-public class TicketMainFragment extends ABaseFragment {
+public class TicketMainFragment extends BaseFragment {
     private String[] titles = {"全部", "浪漫海景", "风景名胜", "水上乐园", "城市观光", "游乐世界", "历史人文", "健康养生", "影视基地", "民俗风情",
             "古镇水乡", "演出表演", "动植物园", "休闲娱乐", "宗教寺庙", "户外探险", "拓展培训", "飞行培训"};
     private int[] images = {R.drawable.jdmp_all, R.drawable.jdmp_qhj, R.drawable.jdmp_fenjing, R.drawable.jdmp_ssyd, R.drawable.jdmp_csgg, R.drawable.jdmp_yly
@@ -92,6 +96,7 @@ public class TicketMainFragment extends ABaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         NotificationCenter.defaultCenter().subscriber(CityEvent.class, cityEvent);
+        new getData().execute();
     }
     @Override
     public int inflateContentView() {
@@ -237,6 +242,34 @@ public class TicketMainFragment extends ABaseFragment {
                 break;
         }
     }
+
+    /*门票首页
+  * */
+    class getData extends WorkTask<Void, Void, TickBean> {
+        @Override
+        protected void onPrepare() {
+            super.onPrepare();
+            showAlert("..正在加载..", false);
+        }
+
+        @Override
+        public TickBean workInBackground(Void... voids) throws TaskException {
+            return SDK.newInstance(getActivity()).getTicketInfo("");
+        }
+
+        @Override
+        protected void onSuccess(TickBean info) {
+            super.onSuccess(info);
+            dismissAlert();
+
+        }
+
+        @Override
+        protected void onFailure(TaskException exception) {
+            dismissAlert();
+        }
+    }
+
 
 
 }

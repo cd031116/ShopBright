@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.main.popupWindow.SelectTourWindow;
+import com.zhl.huiqu.main.popupWindow.TickBottomWindow;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -22,6 +23,7 @@ public class TixkSearchActivity extends BaseActivity {
     @Bind(R.id.top_title)
     TextView top_title;
     private SelectTourWindow mopupWindow;
+    private TickBottomWindow pPopupWindow;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_tixk_search;
@@ -33,6 +35,7 @@ public class TixkSearchActivity extends BaseActivity {
         top_title.setText("门票搜索");
         getView();
         mopupWindow = new SelectTourWindow(TixkSearchActivity.this, itemsOnClick);
+        pPopupWindow=new TickBottomWindow(TixkSearchActivity.this, itemsOnslick);
     }
 
     @Override
@@ -40,7 +43,7 @@ public class TixkSearchActivity extends BaseActivity {
         super.initData();
     }
 
-    @OnClick({R.id.top_left, R.id.top_image,R.id.jd_zhuti})
+    @OnClick({R.id.top_left, R.id.top_image,R.id.jd_zhuti,R.id.saixuan})
     void onClicked(View v) {
         switch (v.getId()) {
             case R.id.top_left:
@@ -49,6 +52,10 @@ public class TixkSearchActivity extends BaseActivity {
                 break;
             case R.id.jd_zhuti:
                 mopupWindow.showAtLocation(TixkSearchActivity.this.findViewById(R.id.main),
+                        Gravity.BOTTOM| Gravity.CENTER_HORIZONTAL, 0, 0);
+                break;
+            case R.id.saixuan:
+                pPopupWindow.showAtLocation(TixkSearchActivity.this.findViewById(R.id.main),
                         Gravity.BOTTOM| Gravity.CENTER_HORIZONTAL, 0, 0);
                 break;
 
@@ -72,5 +79,10 @@ public class TixkSearchActivity extends BaseActivity {
         }
     };
 
-
+    private TickBottomWindow.ItemInclick itemsOnslick = new TickBottomWindow.ItemInclick(){
+        @Override
+        public void ItemClick(String item){
+            Toast.makeText(TixkSearchActivity.this,"tabtabtab=",Toast.LENGTH_SHORT).show();
+        }
+    };
 }

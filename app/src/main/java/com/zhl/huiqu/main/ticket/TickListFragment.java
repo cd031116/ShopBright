@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -55,8 +56,6 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
     @ViewInject(id = R.id.recycleview)
     RecyclerView recycleview;
 
-    @ViewInject(id = R.id.progress)
-    ProgressBar progress;
 
     private String theme_id;
     @Override
@@ -148,9 +147,10 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
 
         @Override
         protected List<TickInfo> parseResult(TickBean bean) {
-            progress.setVisibility(View.GONE);
             return bean.getData().getTicketOnly();
         }
+
+
 
         @Override
         protected TickBean workInBackground(RefreshMode refreshMode, String s, String nextPage, Void... voids)throws TaskException{
@@ -172,7 +172,6 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
         @Override
         protected void onFailure(TaskException exception){
             super.onFailure(exception);
-            progress.setVisibility(View.GONE);
 //            error_text.setText(exception.getMessage());
 //            if ("noneNetwork".equals(exception.getCode())) {
 //                error_image.setImageResource(R.mipmap.no_net);

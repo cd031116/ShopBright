@@ -11,7 +11,7 @@
             android:descendantFocusability="blocksDescendants"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:scrollbars="none">-->
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -25,33 +25,20 @@
                     android:id="@id/recycleview" android:layout_width="match_parent"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     android:overScrollMode="never"
-                    android:layout_height="match_parent" android:background="#E9E9E9"/>
+                    android:layout_height="match_parent" android:background="#ffffff"/>
             </android.support.v4.widget.SwipeRefreshLayout>
         </LinearLayout>
 
         <!--<include-->
-            <!--android:id="@id/layoutLoading" layout="@layout/comm_lay_loading" android:layout_width="fill_parent" android:layout_height="fill_parent"-->
+            <!--android:id="@id/layoutLoading" layout="@layout/ui_common_empty" android:layout_width="fill_parent" android:layout_height="fill_parent"-->
             <!--android:visibility="gone"/>-->
 
-        <!--<include-->
-            <!--android:id="@id/layoutLoadFailed" layout="@layout/ui_common_failed" android:layout_width="match_parent" android:layout_height="match_parent"-->
-            <!--android:visibility="gone"/>-->
+        <include
+            android:id="@id/layoutLoadFailed" layout="@layout/ui_common_failed" android:layout_width="match_parent" android:layout_height="match_parent"
+            android:visibility="gone"/>
 
+    </RelativeLayout>
 
-    </LinearLayout>
-    <include
-        android:id="@id/layoutEmpty"
-        layout="@layout/ui_common_empty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"/>
-
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="visible"/>
 
     <!--  </android.support.v4.widget.NestedScrollView>-->
 </RelativeLayout>

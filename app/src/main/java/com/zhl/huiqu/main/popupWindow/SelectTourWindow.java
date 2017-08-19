@@ -43,6 +43,7 @@ public class SelectTourWindow extends PopupWindow {
     private CommonAdapter<SpotThemeInfo> mAdapter;
     private List<SpotThemeInfo> mData=new ArrayList<>();
     private String getId="";
+    private int select=1;
     public SelectTourWindow(Activity mContext, ItemInclick itemsOnClickd) {
         this.mContext=mContext;
         this.itemsOnClick=itemsOnClickd;
@@ -50,7 +51,6 @@ public class SelectTourWindow extends PopupWindow {
         recycle= (RecyclerView) view.findViewById(R.id.recycleview);
         cancel= (TextView) view.findViewById(R.id.cancel);
         summit= (TextView) view.findViewById(R.id.sure);
-
         zhuti= (TextView) view.findViewById(R.id.zhuti);
         jibie= (TextView) view.findViewById(R.id.jibie);
         for(int i=0;i<10;i++){
@@ -59,7 +59,7 @@ public class SelectTourWindow extends PopupWindow {
             info.setTheme_id("1");
             mData.add(info);
         }
-
+        changeview(select);
         mAdapter=new CommonAdapter<SpotThemeInfo>(mContext,R.layout.select_window_item,mData) {
             @Override
             protected void convert(ViewHolder holder,final SpotThemeInfo info,final int position) {
@@ -90,6 +90,30 @@ public class SelectTourWindow extends PopupWindow {
         };
         recycle.setAdapter(mAdapter);
 
+        //
+        zhuti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(select==1){
+                    return;
+                }else {
+                    select=1;
+                    changeview(select);
+                }
+            }
+        });
+
+        jibie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(select==2){
+                    return;
+                }else {
+                    select=2;
+                    changeview(select);
+                }
+            }
+        });
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,6 +169,21 @@ public class SelectTourWindow extends PopupWindow {
         new getInfoTask().execute();
     }
 
+
+
+    private void changeview(int index){
+        if(index==2){
+            jibie.setSelected(true);
+            jibie.setTextColor(Color.parseColor("#ffffff"));
+            zhuti.setSelected(false);
+            zhuti.setTextColor(Color.parseColor("#5A5863"));
+        }else {
+            zhuti.setSelected(true);
+            zhuti.setTextColor(Color.parseColor("#ffffff"));
+            jibie.setSelected(false);
+            jibie.setTextColor(Color.parseColor("#5A5863"));
+        }
+    }
 
 
 

@@ -146,7 +146,7 @@ public class SDK extends ABizLogic {
     }
 
     /**
-     * 获取景点门票页面门票数据
+     * 景点门票页面获取门票分类信息
      *
      * @param theme_id   //	主题id
      * @param page     //页码数
@@ -154,12 +154,30 @@ public class SDK extends ABizLogic {
      * @throws TaskException
      */
     public TickBean getTicketData(String theme_id, String page) throws TaskException {
-        Setting action = newSetting("getTicketInfo", "appapi/Spotticket/getTicketInfo", "获取景点门票页面门票数据");
+        Setting action = newSetting("getTicketInfo", "appapi/Spotticket/getTicketInfo", "景点门票页面获取门票分类信息");
         Params params = new Params();
         params.addParameter("theme_id", theme_id);
 //        params.addParameter("page", page);
         return doGet(action, basicParams(params), TickBean.class);
     }
+
+
+    /**
+     * 门票列表页面获取大部分数据	 详情
+     *
+     * @param type   //	type
+     * @return
+     * @throws TaskException
+     */
+    public TickBean getTicketInfo(String type) throws TaskException {
+        Setting action = newSetting("getTicketInfo", "appapi/Ticketlist/getTicketInfo", "门票列表页面获取大部分数据");
+        Params params = new Params();
+        params.addParameter("type", type);
+        return doGet(action, basicParams(params), TickBean.class);
+    }
+
+
+
 
     /**
      * 获取首页上方数据
