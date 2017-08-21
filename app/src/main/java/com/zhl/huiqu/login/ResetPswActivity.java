@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.sdk.SDK;
+import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.PhoneFormatCheckUtils;
 import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.utils.ToastUtils;

@@ -1,15 +1,18 @@
 package com.zhl.huiqu;
 
+import android.Manifest;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
@@ -31,8 +34,10 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks{
     private DoubleClickExitHelper mDoubleClickExit;
     @Bind(R.id.home_line)
     LinearLayout home_line;
@@ -210,19 +215,8 @@ public class MainActivity extends BaseActivity {
     protected void onStart() {
         // TODO Auto-generated method stub
         super.onStart();
+        requireSomePermission();
         // -----------location config ------------
-        locationService = ((MyApplication) getApplication()).locationService;
-        //获取locationservice实例，建议应用中只初始化1个location实例，然后使用，可以参考其他示例的activity，都是通过此种方式获取locationservice实例的
-        locationService.registerListener(mListener);
-        //注册监听
-        int type = getIntent().getIntExtra("from", 0);
-        if (type == 0) {
-            locationService.setLocationOption(locationService.getDefaultLocationClientOption());
-        } else if (type == 1) {
-            locationService.setLocationOption(locationService.getOption());
-        }
-
-        locationService.start();
     }
 
     /***
@@ -273,4 +267,62 @@ public class MainActivity extends BaseActivity {
         }
 
     };
+    private static final int num = 123;//用于验证获取的权
+    @AfterPermissionGranted(num)
+    private void requireSomePermission() {
+        String[] perms = {
+                // 把你想要申请的权限放进这里就行，注意用逗号隔开
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+        };
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            locationService = ((MyApplication) getApplication()).locationService;
+            //获取locationservice实例，建议应用中只初始化1个location实例，然后使用，可以参考其他示例的activity，都是通过此种方式获取locationservice实例的
+            locationService.registerListener(mListener);
+            //注册监听
+            int type = getIntent().getIntExtra("from", 0);
+            if (type == 0) {
+                locationService.setLocationOption(locationService.getDefaultLocationClientOption());
+            } else if (type == 1) {
+                locationService.setLocationOption(locationService.getOption());
+            }
+
+            locationService.start();
+        } else {
+            // Do not have permissions, request them now
+            EasyPermissions.requestPermissions(this, "需要使用您定位权限!",
+                    num, perms);
+        }
+    }
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // EasyPermissions handles the request result.
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        locationService = ((MyApplication) getApplication()).locationService;
+        //获取locationservice实例，建议应用中只初始化1个location实例，然后使用，可以参考其他示例的activity，都是通过此种方式获取locationservice实例的
+        locationService.registerListener(mListener);
+        //注册监听
+        int type = getIntent().getIntExtra("from", 0);
+        if (type == 0) {
+            locationService.setLocationOption(locationService.getDefaultLocationClientOption());
+        } else if (type == 1) {
+            locationService.setLocationOption(locationService.getOption());
+        }
+
+        locationService.start();
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+
+    }
 }

@@ -2,6 +2,7 @@ package com.zhl.huiqu.main;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -84,7 +85,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
     RelativeLayout jd_js;//景点介绍
     @Bind(R.id.crp_line)
     LinearLayout crp_line;//成人票
-//    @Bind(R.id.main_image)
+    //    @Bind(R.id.main_image)
 //    ImageView main_image;//top图片
     @Bind(R.id.num)
     TextView num;//top图片数
@@ -107,6 +108,8 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
     @Bind(R.id.yd_content)
     TextView yd_content;//预定须知
 
+    @Bind(R.id.progress)
+    RelativeLayout progress;//预定须知
 
     @Bind(R.id.banner)
     Banner banner;
@@ -144,13 +147,24 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
         new getInfoTask().execute();
     }
 
-    private void showlist(){
+    private void showlist() {
         mAdapter = new CommonAdapter<DitalTickList>(this, R.layout.mp_item, mlist) {
             @Override
             protected void convert(ViewHolder holder, final DitalTickList bean, final int position) {
                 holder.setText(R.id.content, bean.getTitle());
                 holder.setText(R.id.now_price, "￥" + bean.getShop_price() + "起");
-                holder.setText(R.id.old_price, "￥" +bean.getMarket_price());
+                holder.setText(R.id.old_price, "￥" + bean.getMarket_price());
+                holder.setOnClickListener(R.id.submit, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ProductDetailActivity.this, PayActivity.class);
+                        intent.putExtra("pay",bean);
+                        Bundle mBundle = new Bundle();
+                        mBundle.putSerializable("pay",bean);
+                        intent.putExtras(mBundle);
+                        startActivity(intent);
+                    }
+                });
             }
         };
         pRecycle.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this));
@@ -163,8 +177,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
     }
 
 
-
-    @OnClick({R.id.top_left, R.id.image, R.id.image_t, R.id.tab1_mian, R.id.tab2_mian, R.id.tab3_mian,R.id.look_detail,R.id.location})
+    @OnClick({R.id.top_left, R.id.image, R.id.image_t, R.id.tab1_mian, R.id.tab2_mian, R.id.tab3_mian, R.id.look_detail, R.id.location})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.top_left:
@@ -187,16 +200,16 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
                 tpscoll(jd_hight);
                 break;
             case R.id.look_detail:
-                Intent intent=new Intent(ProductDetailActivity.this,WebviewActivity.class);
-                intent.putExtra("title",info.getSpot_info().getTitle());
-                intent.putExtra("content",info.getSpot_info().getContent());
+                Intent intent = new Intent(ProductDetailActivity.this, WebviewActivity.class);
+                intent.putExtra("title", info.getSpot_info().getTitle());
+                intent.putExtra("content", info.getSpot_info().getContent());
                 startActivity(intent);
                 break;
             case R.id.location:
-                Intent intent1=new Intent(ProductDetailActivity.this, LocationActivity.class);
-                intent1.putExtra("latitude",info.getSpot_info().getLatitude());//纬度
-                intent1.putExtra("longitude",info.getSpot_info().getLongitude());//经度
-                intent1.putExtra("address",info.getSpot_info().getAddress());
+                Intent intent1 = new Intent(ProductDetailActivity.this, LocationActivity.class);
+                intent1.putExtra("latitude", info.getSpot_info().getLatitude());//纬度
+                intent1.putExtra("longitude", info.getSpot_info().getLongitude());//经度
+                intent1.putExtra("address", info.getSpot_info().getAddress());
                 startActivity(intent1);
                 break;
         }
@@ -278,13 +291,13 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
     private void gethight() {
         int[] position = new int[2];
         mp_rela.getLocationOnScreen(position);
-        crp_hight = position[1] - top_layout.getHeight() - getStatusBarHeight()-mp_rela.getHeight();
+        crp_hight = position[1] - top_layout.getHeight() - getStatusBarHeight() - mp_rela.getHeight();
 
         int[] position1 = new int[2];
         jd_js.getLocationOnScreen(position1);
-        jd_hight = position1[1] - search02.getHeight() - top_layout.getHeight() - getStatusBarHeight()+crp_line.getHeight();
-        TLog.log("tttt","crp_hight="+crp_hight);
-        TLog.log("tttt","jd_hight="+jd_hight);
+        jd_hight = position1[1] - search02.getHeight() - top_layout.getHeight() - getStatusBarHeight() + crp_line.getHeight();
+        TLog.log("tttt", "crp_hight=" + crp_hight);
+        TLog.log("tttt", "jd_hight=" + jd_hight);
     }
 
     public int getStatusBarHeight() {
@@ -315,7 +328,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
         @Override
         protected void onSuccess(DetailMainBean infot) {
             super.onSuccess(infot);
-            info=infot.getData();
+            info = infot.getData();
             dismissAlert();
             TLog.log("tttt", "info=" + infot);
             showView(infot.getData());
@@ -329,6 +342,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
 
 
     private void showView(DetailBean info) {
+        progress.setVisibility(View.GONE);
         if (info == null) {
             return;
         }
@@ -362,11 +376,11 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
             }
         };
         Timer timer = new Timer();
-        timer.schedule(task,2000);//3秒后执行TimeTask的run方法
+        timer.schedule(task, 3000);//3秒后执行TimeTask的run方法
     }
 
 
-    private void setBanner(List<String> images){
+    private void setBanner(List<String> images) {
         banner.setBannerStyle(BannerConfig.NOT_INDICATOR);
         //设置图片加载器
         banner.setImageLoader(new GlideImageLoader());

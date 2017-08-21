@@ -2,8 +2,10 @@ package com.zhl.huiqu.main.ticket;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +22,8 @@ import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.base.BaseFragment;
 import com.zhl.huiqu.base.ContainerActivity;
-import com.zhl.huiqu.main.bean.MainBean;
 import com.zhl.huiqu.recyclebase.CommonAdapter;
+import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.sdk.eventbus.CityEvent;
 import com.zhl.huiqu.sdk.eventbus.CitySubscriber;
@@ -81,11 +83,19 @@ public class TicketMainFragment extends BaseFragment {
     @ViewInject(id = R.id.hot_recy)
     RecyclerView hot_recy;//热点
     @ViewInject(id = R.id.lear_city)
-    RecyclerView lear_city;//附近
+    RecyclerView lear_city;//
+    @ViewInject(id = R.id.id_content)
+    RecyclerView lear_jd;//
+
 
     private CommonAdapter<TickMianHot> adapter;//热点
     private CommonAdapter<TickCircum> mdapter;//附近
 
+    private CommonAdapter<TickCircum> jdapter;//热点
+    private List<TickCircum> jData = new ArrayList<>();
+    private List<TickMianHot> aData = new ArrayList<>();
+    private LinearLayoutManager mLayoutManage;
+    private LinearLayoutManager jLayoutManage;
 
     public static TicketMainFragment newInstance() {
         return new TicketMainFragment();
@@ -108,18 +118,18 @@ public class TicketMainFragment extends BaseFragment {
         NotificationCenter.defaultCenter().subscriber(CityEvent.class, cityEvent);
         new getData().execute();
     }
+
     @Override
     public int inflateContentView() {
         return R.layout.fragment_ticket_main;
     }
 
 
-
     CitySubscriber cityEvent = new CitySubscriber() {
         @Override
         public void onEvent(CityEvent v) {
-            BaseConfig bg=new BaseConfig(getActivity());
-            String addre= bg.getStringValue(Constants.Address,"");
+            BaseConfig bg = new BaseConfig(getActivity());
+            String addre = bg.getStringValue(Constants.Address, "");
             top_text.setText(addre);
         }
     };
@@ -140,8 +150,8 @@ public class TicketMainFragment extends BaseFragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     int pos = position + curIndex * pageSize;
-                    Intent intent=new Intent(getActivity(),TicketListActivity.class);
-                    intent.putExtra("title",mDatas.get(position).getName());
+                    Intent intent = new Intent(getActivity(), TicketListActivity.class);
+                    intent.putExtra("title", mDatas.get(position).getName());
                     startActivity(intent);
                 }
             });
@@ -253,6 +263,52 @@ public class TicketMainFragment extends BaseFragment {
         }
     }
 
+    /*热点*/
+    private void sethot() {
+        adapter = new CommonAdapter<TickMianHot>(getActivity(), R.layout.item_ur_like, aData) {
+            @Override
+            protected void convert(ViewHolder holder, TickMianHot hot, int position) {
+            holder.setVisible(R.id.ur_like_tag,false);
+                holder.setVisible(R.id.ur_like_dp,false);
+                holder.setBitmapWithUrl(R.id.ur_like_img,hot.getThumb());
+                holder.setText(R.id.ms_tourist_text,hot.getTitle());
+                holder.setText(R.id.price_text,"￥"+hot.getShop_price());
+                holder.setText(R.id.price_ms_text,"起");
+                holder.setText(R.id.address_text,hot.getCsr()+"满意度");
+
+            }
+        };
+        mLayoutManage = new LinearLayoutManager(getActivity());
+        mLayoutManage.setOrientation(LinearLayoutManager.HORIZONTAL);//设置滚动方向，横向滚动
+        hot_recy.setLayoutManager(mLayoutManage);
+        hot_recy.setAdapter(adapter);
+    }
+
+    /*周边
+    * */
+    private void setlist() {
+        jdapter = new CommonAdapter<TickCircum>(getActivity(), R.layout.item_tourist_point, jData) {
+            @Override
+            protected void convert(ViewHolder holder, TickCircum ircum, int position) {
+                holder.setBitmapWithUrl(R.id.tourist_view, ircum.getThumb());
+                holder.setText(R.id.tourist_area,ircum.getTitle());
+                holder.setText(R.id.tourist_ms,ircum.getDesc());
+                holder.setText(R.id.tourist_place,ircum.getCity());
+                holder.setText(R.id.tourist_place_score,ircum.getCsr());
+                holder.setText(R.id.tourist_place_jibie,ircum.getLevel());
+                holder.setText(R.id.tourist_tag,"风景名胜");
+                holder.setTextColor(R.id.tourist_price, Color.parseColor("#e11818"));
+                holder.setText(R.id.tourist_price,"￥"+ircum.getShop_price()+"起");
+
+            }
+        };
+        jLayoutManage = new LinearLayoutManager(getActivity());
+        jLayoutManage.setOrientation(LinearLayoutManager.VERTICAL);//设置滚动方向，横向滚动
+        lear_jd.setLayoutManager(jLayoutManage);
+        lear_jd.setAdapter(adapter);
+    }
+
+
     /*门票首页
   * */
     class getData extends WorkTask<Void, Void, TickMainBean> {
@@ -271,7 +327,10 @@ public class TicketMainFragment extends BaseFragment {
         protected void onSuccess(TickMainBean info) {
             super.onSuccess(info);
             dismissAlert();
-
+            aData = info.getData().getHot();
+            jData=info.getData().getAround();
+            setlist();
+            sethot();
         }
 
         @Override
@@ -279,7 +338,6 @@ public class TicketMainFragment extends BaseFragment {
             dismissAlert();
         }
     }
-
 
 
 }

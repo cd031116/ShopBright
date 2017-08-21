@@ -638,6 +638,16 @@
 
     </LinearLayout>
 </com.zhl.huiqu.widget.MyScroview>
+
+    <RelativeLayout
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:background="#ffffff"/>
+
+
+
     <LinearLayout
         android:id="@+id/search01"
         android:layout_width="match_parent"

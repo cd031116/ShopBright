@@ -176,7 +176,7 @@ public class SDK extends ABizLogic {
     public TickMainBean getTicketInfo(String type) throws TaskException {
         Setting action = newSetting("getTicketInfo", "appapi/Ticketlist/getTicketInfo", "门票列表页面获取大部分数据");
         Params params = new Params();
-        params.addParameter("type", type);
+//        params.addParameter("type", type);
         return doGet(action, basicParams(params), TickMainBean.class);
     }
 
