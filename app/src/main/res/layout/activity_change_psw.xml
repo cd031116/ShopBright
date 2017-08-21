@@ -25,8 +25,9 @@
 
         <EditText
             android:id="@+id/old_psw"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@null"
             android:hint="@string/take_person_name_text"
             android:textColor="@color/black_text"
@@ -51,8 +52,9 @@
 
         <EditText
             android:id="@+id/new_psw"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@null"
             android:hint="@string/setting_psw_put"
             android:textColor="@color/black_text"
@@ -77,8 +79,9 @@
 
         <EditText
             android:id="@+id/new_sure_psw"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@null"
             android:hint="@string/setting_psw_put"
             android:textColor="@color/black_text"

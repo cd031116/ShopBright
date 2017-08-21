@@ -169,7 +169,10 @@ public class PersonalFragment extends BaseFragment {
                 break;
             case R.id.personal_msg_layout:
 //                if (account != null)
-                startActivity(new Intent(getActivity(), SettingActivity.class));
+                Intent intent = new Intent(getActivity(), SettingActivity.class);
+                intent.putExtra("memberId", account.getData().getMember_id());
+                startActivity(intent);
+
 //                else
 //                    startActivity(new Intent(getActivity(), LoginActivity.class));
                 break;

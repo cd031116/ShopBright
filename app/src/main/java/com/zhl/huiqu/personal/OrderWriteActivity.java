@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.main.PayActivity;
 import com.zhl.huiqu.main.bean.DitalTickList;
 import com.zhl.huiqu.sdk.SDK;
@@ -152,7 +153,7 @@ public class OrderWriteActivity extends BaseActivity {
     /**
      * 获取验证码接口
      */
-    class checkCodeTask extends WorkTask<String, Void, String> {
+    class checkCodeTask extends WorkTask<String, Void, BaseInfo> {
 
         @Override
         protected void onPrepare() {
@@ -161,15 +162,15 @@ public class OrderWriteActivity extends BaseActivity {
         }
 
         @Override
-        public String workInBackground(String... params) throws TaskException {
+        public BaseInfo workInBackground(String... params) throws TaskException {
             return SDK.newInstance(OrderWriteActivity.this).getCode(params[0],params[1]);
         }
 
         @Override
-        protected void onSuccess(String info) {
+        protected void onSuccess(BaseInfo info) {
             super.onSuccess(info);
             dismissAlert();
-            TLog.log("tttt", "info=" + info);
+            TLog.log("tttt", "info=" + info.getMsg());
         }
 
         @Override

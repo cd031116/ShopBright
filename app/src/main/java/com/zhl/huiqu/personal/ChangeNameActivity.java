@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.utils.ToastUtils;
@@ -65,7 +66,7 @@ public class ChangeNameActivity extends BaseActivity {
     }
 
     //TODO 保存名字
-    class commitTask extends WorkTask<String, Void, String> {
+    class commitTask extends WorkTask<String, Void, BaseInfo> {
 
         @Override
         protected void onPrepare() {
@@ -74,12 +75,12 @@ public class ChangeNameActivity extends BaseActivity {
         }
 
         @Override
-        public String workInBackground(String... params) throws TaskException {
-            return SDK.newInstance(ChangeNameActivity.this).changePsw(params[0], params[1]);
+        public BaseInfo workInBackground(String... params) throws TaskException {
+            return SDK.newInstance(ChangeNameActivity.this).changeNickName(params[0], params[1]);
         }
 
         @Override
-        protected void onSuccess(String info) {
+        protected void onSuccess(BaseInfo info) {
             super.onSuccess(info);
             dismissAlert();
             TLog.log("tttt", "info=" + info);

@@ -1,5 +1,6 @@
 package com.zhl.huiqu.personal;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.login.RegisterActivity;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.PhoneFormatCheckUtils;
@@ -33,6 +35,7 @@ public class ChangePswActivity extends BaseActivity {
     EditText newPsw;
     @Bind(R.id.new_sure_psw)
     EditText newSurePsw;
+    private String memberId;
 
     @Override
     protected int getLayoutId() {
@@ -48,6 +51,7 @@ public class ChangePswActivity extends BaseActivity {
     @Override
     public void initData() {
         super.initData();
+        memberId = getIntent().getStringExtra("memberId");
     }
 
     @OnClick({R.id.top_image, R.id.save_text})
@@ -77,11 +81,11 @@ public class ChangePswActivity extends BaseActivity {
         else if (newPswStr.length() < 6 || newPswStr.length() > 16)
             ToastUtils.showShortToast(this, getResources().getString(R.string.register_check_psw));
         else
-            new commitTask().execute(oldPswStr, newPswStr);
+            new commitTask().execute(oldPswStr, newPswStr, newSurePswStr, memberId);
     }
 
     //TODO 保存密码
-    class commitTask extends WorkTask<String, Void, String> {
+    class commitTask extends WorkTask<String, Void, BaseInfo> {
 
         @Override
         protected void onPrepare() {
@@ -90,16 +94,22 @@ public class ChangePswActivity extends BaseActivity {
         }
 
         @Override
-        public String workInBackground(String... params) throws TaskException {
-            return SDK.newInstance(ChangePswActivity.this).changePsw(params[0], params[1]);
+        public BaseInfo workInBackground(String... params) throws TaskException {
+            return SDK.newInstance(ChangePswActivity.this).changePsw(params[0], params[1], params[2], params[3]);
         }
 
         @Override
-        protected void onSuccess(String info) {
+        protected void onSuccess(BaseInfo info) {
             super.onSuccess(info);
             dismissAlert();
-            TLog.log("tttt", "info=" + info);
-
+            if ("1".equals(info.getCode())) {
+                Intent intent = new Intent();
+                intent.putExtra("change_psw", "密码修改成功");
+                setResult(2, intent);
+                finish();
+            } else {
+                ToastUtils.showShortToast(ChangePswActivity.this, info.getMsg());
+            }
         }
 
         @Override

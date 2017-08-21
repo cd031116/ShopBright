@@ -328,7 +328,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="24px"
-                    android:text="@string/order_detail"
+                    android:text="@string/personal_pay"
                     android:textColor="@color/red_text"
                     android:textSize="30px" />
 

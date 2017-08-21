@@ -17,6 +17,7 @@ import com.zhl.huiqu.MainActivity;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.BaseConfig;
+import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.Constants;
@@ -163,19 +164,19 @@ public class LoginActivity extends BaseActivity {
     /*
   * 发送验证码
   * */
-    class GetCodeTask extends WorkTask<Void, Void, String> {
+    class GetCodeTask extends WorkTask<Void, Void, BaseInfo> {
         @Override
         protected void onPrepare() {
             super.onPrepare();
         }
 
         @Override
-        public String workInBackground(Void... voids) throws TaskException {
+        public BaseInfo workInBackground(Void... voids) throws TaskException {
             return SDK.newInstance(LoginActivity.this).getCode(shouji.getText().toString(),Constants.TYPE_LOGIN);
         }
 
         @Override
-        protected void onSuccess(String info) {
+        protected void onSuccess(BaseInfo info) {
             super.onSuccess(info);
             timerCount.start();
         }

@@ -79,14 +79,14 @@ public class SDK extends ABizLogic {
         * @return
         * @throws TaskException
         */
-    public String getCode(String mobile, String type) throws TaskException {
+    public BaseInfo getCode(String mobile, String type) throws TaskException {
         Setting action = newSetting("getCheckCode", "appapi/Memberpub/getCheckCode", "验证码");
         Params params = new Params();
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?mobile=" + mobile + "&type=" + type);
         params.addParameter("mobile", mobile);
         params.addParameter("type", type);
         // 这个接口，是将form表单数据，按照json格式走post协议，请使用requestObject这个参数。
-        return doPost(configHttpConfig(), action, params, null, null, String.class);
+        return doPost(configHttpConfig(), action, params, null, null, BaseInfo.class);
     }
 
     /**
@@ -116,13 +116,15 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public String changePsw(String oldPsw, String newPsw) throws TaskException {
-        Setting action = newSetting("insertMemberInfo", "appapi/Memberpub/insertMemberInfo", "修改密码");
+    public BaseInfo changePsw(String oldPsw, String newPsw, String newSurePsw, String memberId) throws TaskException {
+        Setting action = newSetting("changePassword", "appapi/Personalcenter/changePassword", "修改密码");
         Params params = new Params();
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?oldPsw=" + oldPsw + "&newPsw=" + newPsw);
-        params.addParameter("oldPsw", oldPsw);
-        params.addParameter("newPsw", newPsw);
-        return doPost(configHttpConfig(), action, basicParams(params), null, null, String.class);
+        params.addParameter("oldPassword", oldPsw);
+        params.addParameter("newPassword1", newPsw);
+        params.addParameter("newPassword2", newSurePsw);
+        params.addParameter("memberId", memberId);
+        return doPost(configHttpConfig(), action, basicParams(params), null, null, BaseInfo.class);
     }
 
 
@@ -231,8 +233,6 @@ public class SDK extends ABizLogic {
      * 商品详情
      *
      * @param id         //所请求商品的id
-     * @param check_sign //登陆时收到的返回签名
-     * @param session_id //登陆时收到的返回签名的sesionid
      * @return
      * @throws TaskException
      */
@@ -292,10 +292,10 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public RegisterEntity personalSetting(int memberId) throws TaskException {
+    public RegisterEntity personalSetting(String memberId) throws TaskException {
         Setting action = newSetting("personalSetting", "appapi/Personalcenter/personalSetting", "个人设置");
         Params params = new Params();
-        params.addParameter("memberId", memberId + "");
+        params.addParameter("memberId", memberId);
         return doGet(action, basicParams(params), RegisterEntity.class);
     }
 
@@ -340,10 +340,11 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public BaseInfo changeNickName(String nickName, int member_id) throws TaskException {
+    public BaseInfo changeNickName(String nickName, String memberId) throws TaskException {
         Setting action = newSetting("changeNickName", "appapi/Personalcenter/changeNickName", "修改昵称");
         Params params = new Params();
         params.addParameter("nickName", nickName);
+        params.addParameter("memberId", memberId);
         return doPost(configHttpConfig(), action, params, null, null, BaseInfo.class);
     }
 

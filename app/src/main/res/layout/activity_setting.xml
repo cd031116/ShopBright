@@ -23,7 +23,8 @@
         <ImageView
             android:id="@+id/img_head"
             android:layout_width="180px"
-            android:layout_height="180px" />
+            android:layout_height="180px"
+            android:background="@drawable/person_setting"/>
 
         <LinearLayout
             android:id="@+id/change_img_layout"
@@ -64,6 +65,7 @@
             android:textSize="33px" />
 
         <TextView
+            android:id="@+id/change_nickname_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -90,6 +92,7 @@
             android:textSize="33px" />
 
         <TextView
+            android:id="@+id/setting_name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -116,6 +119,7 @@
             android:textSize="33px" />
 
         <TextView
+            android:id="@+id/setting_sex_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -142,6 +146,7 @@
             android:textSize="33px" />
 
         <TextView
+            android:id="@+id/setting_bir_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -216,6 +221,7 @@
             android:textSize="33px" />
 
         <TextView
+            android:id="@+id/setting_phone_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -242,6 +248,7 @@
             android:textSize="33px" />
 
         <TextView
+            android:id="@+id/setting_email_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

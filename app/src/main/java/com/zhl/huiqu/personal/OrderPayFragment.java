@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
@@ -21,6 +22,7 @@ public class OrderPayFragment extends Fragment implements View.OnClickListener {
             ticket_in_type_text, price_all_text, refund_layout_text, refund_order_num_text, refund_time_text,
             refund_pay_type_text, order_account_name_text, order_account_phone_text, apply_cancel,
             ticket_num_text, refund_order_goout_text, order_pay_btn;
+    private RelativeLayout huiqu_tel_layout;
 
     private ImageView refundGzImg;
 

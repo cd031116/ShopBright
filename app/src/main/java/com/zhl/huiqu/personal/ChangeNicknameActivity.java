@@ -1,5 +1,6 @@
 package com.zhl.huiqu.personal;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.utils.ToastUtils;
@@ -27,6 +29,7 @@ public class ChangeNicknameActivity extends BaseActivity {
     TextView titleText;
     @Bind(R.id.name_text)
     EditText nameText;
+    private String memberId;
 
     @Override
     protected int getLayoutId() {
@@ -42,6 +45,7 @@ public class ChangeNicknameActivity extends BaseActivity {
     @Override
     public void initData() {
         super.initData();
+        memberId = getIntent().getStringExtra("memberId");
     }
 
     @OnClick({R.id.top_image, R.id.save_btn})
@@ -61,29 +65,35 @@ public class ChangeNicknameActivity extends BaseActivity {
         if (TextUtils.isEmpty(nameEdit))
             ToastUtils.showShortToast(this, getResources().getString(R.string.setting_name_write));
         else
-            new commitTask().execute(nameEdit);
+            new commitTask().execute(nameEdit, memberId);
     }
 
     //TODO 保存名字
-    class commitTask extends WorkTask<String, Void, String> {
+    class commitTask extends WorkTask<String, Void, BaseInfo> {
 
         @Override
         protected void onPrepare() {
             super.onPrepare();
-            showAlert("", false);
+            showAlert("..正在提交..", false);
         }
 
         @Override
-        public String workInBackground(String... params) throws TaskException {
-            return SDK.newInstance(ChangeNicknameActivity.this).changePsw(params[0], params[1]);
+        public BaseInfo workInBackground(String... params) throws TaskException {
+            return SDK.newInstance(ChangeNicknameActivity.this).changeNickName(params[0], params[1]);
         }
 
         @Override
-        protected void onSuccess(String info) {
+        protected void onSuccess(BaseInfo info) {
             super.onSuccess(info);
             dismissAlert();
-            TLog.log("tttt", "info=" + info);
-
+            if ("1".equals(info.getCode())) {
+                Intent intent = new Intent();
+                intent.putExtra("nickname", nameText.getText().toString().trim());
+                setResult(1, intent);
+                finish();
+            } else {
+                ToastUtils.showShortToast(ChangeNicknameActivity.this, info.getMsg());
+            }
         }
 
         @Override

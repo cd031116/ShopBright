@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.PhoneFormatCheckUtils;
@@ -148,7 +149,7 @@ public class ResetPswActivity extends BaseActivity {
     /**
      * 获取验证码接口
      */
-    class checkCodeTask extends WorkTask<String, Void, String> {
+    class checkCodeTask extends WorkTask<String, Void, BaseInfo> {
 
         @Override
         protected void onPrepare() {
@@ -157,15 +158,14 @@ public class ResetPswActivity extends BaseActivity {
         }
 
         @Override
-        public String workInBackground(String... params) throws TaskException {
+        public BaseInfo workInBackground(String... params) throws TaskException {
             return SDK.newInstance(ResetPswActivity.this).getCode(params[0],params[1]);
         }
 
         @Override
-        protected void onSuccess(String info) {
+        protected void onSuccess(BaseInfo info) {
             super.onSuccess(info);
             dismissAlert();
-            TLog.log("tttt", "info=" + info);
         }
 
         @Override

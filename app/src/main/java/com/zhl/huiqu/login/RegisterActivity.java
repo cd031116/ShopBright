@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.zhl.huiqu.MainActivity;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.personal.OrderWriteActivity;
 import com.zhl.huiqu.sdk.SDK;
@@ -136,7 +137,7 @@ public class RegisterActivity extends BaseActivity {
     /**
      * 获取验证码接口
      */
-    class checkCodeTask extends WorkTask<String, Void, String> {
+    class checkCodeTask extends WorkTask<String, Void, BaseInfo> {
 
         @Override
         protected void onPrepare() {
@@ -145,12 +146,12 @@ public class RegisterActivity extends BaseActivity {
         }
 
         @Override
-        public String workInBackground(String... params) throws TaskException {
+        public BaseInfo workInBackground(String... params) throws TaskException {
             return SDK.newInstance(RegisterActivity.this).getCode(params[0],params[1]);
         }
 
         @Override
-        protected void onSuccess(String info) {
+        protected void onSuccess(BaseInfo info) {
             super.onSuccess(info);
             dismissAlert();
             timerCount.start();
