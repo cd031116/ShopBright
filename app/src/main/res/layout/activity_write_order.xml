@@ -2,7 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/personal_bg">
+    android:background="@color/personal_bg"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <include
         android:id="@+id/view_top"
@@ -85,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/personal_all_order_delete"
+            android:background="@drawable/time_choose_style"
             android:drawableRight="@drawable/red_right"
             android:gravity="center"
             android:paddingBottom="12px"
@@ -103,7 +107,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="24px"
             android:layout_toLeftOf="@id/more_time"
-            android:background="@drawable/personal_all_order_delete"
+            android:background="@drawable/time_choose_style"
             android:gravity="center"
             android:paddingBottom="12px"
             android:paddingLeft="36px"
@@ -458,8 +462,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@id/fymx_price"
-                android:textColor="@color/red_text"
                 android:text="￥215"
+                android:textColor="@color/red_text"
                 android:textSize="33px" />
 
         </RelativeLayout>
@@ -468,8 +472,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="99px"
-        android:layout_marginTop="2px"
         android:layout_below="@id/fymx_layout"
+        android:layout_marginTop="2px"
         android:background="@color/white"
         android:gravity="center_vertical">
 
@@ -486,10 +490,10 @@
             android:id="@+id/take_pay_total_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/take_pay_total"
             android:layout_centerVertical="true"
-            android:textColor="@color/red_text"
+            android:layout_toRightOf="@id/take_pay_total"
             android:text="￥215"
+            android:textColor="@color/red_text"
             android:textSize="33px" />
 
         <ImageView

@@ -17,7 +17,8 @@
             <ImageView
                 android:id="@+id/ur_like_img"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="380px"
+                android:scaleType="fitXY"
                 android:src="@drawable/person_setting" />
 
             <TextView

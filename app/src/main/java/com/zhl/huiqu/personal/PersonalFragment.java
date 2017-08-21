@@ -110,7 +110,7 @@ public class PersonalFragment extends BaseFragment {
         mPagerList = new ArrayList<View>();
         for (int i = 0; i < pageCount; i++) {
             //每个页面都是inflate出一个新实例
-            GridView gridView = (GridView) inflater.inflate(R.layout.gridview, viewpager, false);
+            GridView gridView = (GridView) inflater.inflate(R.layout.urlike_gridview, viewpager, false);
             gridView.setAdapter(new UrLikeGridViewAdapter(getActivity(), mDatas, i, pageSize));
             mPagerList.add(gridView);
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

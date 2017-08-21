@@ -108,6 +108,7 @@
     <string name="all_order_outing_time">出游时间:</string>
     <string name="all_order_order_num">订单号</string>
     <string name="order_pay_time">下单时间</string>
+    <string name="choose_time">选择日期</string>
 
     <string name="refund_know">退款须知</string>
     <string name="refund_reason">退款理由</string>

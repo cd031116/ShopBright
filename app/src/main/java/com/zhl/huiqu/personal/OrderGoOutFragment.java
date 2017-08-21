@@ -1,20 +1,26 @@
 package com.zhl.huiqu.personal;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 
+import butterknife.OnClick;
+
 /**
- * Created by Administrator on 2017/8/16.
+ * Created by dw on 2017/8/16.
  */
 
 public class OrderGoOutFragment extends Fragment {
+
+    TextView apply_refund_btn;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,5 +37,14 @@ public class OrderGoOutFragment extends Fragment {
     }
 
     private void initView(View view) {
+        apply_refund_btn=(TextView) view.findViewById(R.id.apply_refund_btn);
+        apply_refund_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),ApplyRefundActivity.class));
+            }
+        });
     }
+
+
 }

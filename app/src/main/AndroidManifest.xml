@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zhl.huiqu">
+
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -11,7 +12,7 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -90,6 +91,9 @@
             android:name=".personal.SettingActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".personal.MoreCalendarActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".personal.OrderWriteActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -102,7 +106,8 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".main.WebviewActivity" />
         <activity android:name=".main.ticket.TicketListActivity" />
-        <activity android:name=".main.ticket.LocationActivity"/>
+        <activity android:name=".main.ticket.LocationActivity" />
+
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="BMTW3yWdhihnWiMl53u85jniROCiWFeS" />

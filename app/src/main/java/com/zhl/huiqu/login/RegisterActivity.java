@@ -99,8 +99,7 @@ public class RegisterActivity extends BaseActivity {
                 else if (password.length() < 6 || password.length() > 16)
                     ToastUtils.showShortToast(this, getResources().getString(R.string.register_check_psw));
                 else
-//                    new commitTask().execute(phone, code, password);
-                    new commitTask().execute();
+                    new commitTask().execute(phone, code, password);
                 break;
             case R.id.register_push_code:
                 if (TextUtils.isEmpty(phone))
@@ -174,10 +173,10 @@ public class RegisterActivity extends BaseActivity {
 
         @Override
         public RegisterEntity workInBackground(String... params) throws TaskException {
-            String phone = register_phone.getText().toString().trim();
-            String password = register_psw.getText().toString().trim();
-            String code = register_code.getText().toString().trim();
-            return SDK.newInstance(RegisterActivity.this).register(phone, code, password);
+//            String phone = register_phone.getText().toString().trim();
+//            String password = register_psw.getText().toString().trim();
+//            String code = register_code.getText().toString().trim();
+            return SDK.newInstance(RegisterActivity.this).register(params[0], params[1], params[2]);
         }
 
         @Override

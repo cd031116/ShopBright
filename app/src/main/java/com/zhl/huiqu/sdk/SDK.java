@@ -3,7 +3,9 @@ package com.zhl.huiqu.sdk;
 import android.app.Activity;
 
 import com.zhl.huiqu.BuildConfig;
+import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.login.entity.RegisterEntity;
+import com.zhl.huiqu.login.entity.RegisterInfo;
 import com.zhl.huiqu.main.ProductPartListBean;
 import com.zhl.huiqu.main.bean.DetailBean;
 import com.zhl.huiqu.main.bean.DetailMainBean;
@@ -101,7 +103,7 @@ public class SDK extends ABizLogic {
         params.addParameter("mobile", mobile);
         params.addParameter("code", code);
         params.addParameter("password", password);
-        return doPost(configHttpConfig(), action,null, params, null, RegisterEntity.class);
+        return doPost(configHttpConfig(), action, null, params, null, RegisterEntity.class);
     }
 
     /**
@@ -128,17 +130,17 @@ public class SDK extends ABizLogic {
      * @param mobile   //作为账号的有效手机号码
      * @param code     //接收到的短信验证码 6位随机数字
      * @param password //6-16数字组合的密码
-    * @param type //	登陆类型：0为账号密码1为动态验证码
+     * @param type     //	登陆类型：0为账号密码1为动态验证码
      * @return
      * @throws TaskException
      */
-    public RegisterEntity login(String mobile, String password, String type,String code) throws TaskException {
+    public RegisterEntity login(String mobile, String password, String type, String code) throws TaskException {
         Setting action = newSetting("sendLoginInfo", "appapi/Memberpub/sendLoginInfo", "登录");
         Params params = new Params();
         params.addParameter("mobile", mobile);
-        if("0".equals(type)){
+        if ("0".equals(type)) {
             params.addParameter("password", password);
-        }else {
+        } else {
             params.addParameter("code", code);
         }
         params.addParameter("type", type);
@@ -148,7 +150,7 @@ public class SDK extends ABizLogic {
     /**
      * 景点门票页面获取门票分类信息
      *
-     * @param theme_id   //	主题id
+     * @param theme_id //	主题id
      * @param page     //页码数
      * @return
      * @throws TaskException
@@ -165,7 +167,7 @@ public class SDK extends ABizLogic {
     /**
      * 门票列表页面获取大部分数据	 详情
      *
-     * @param type   //	type
+     * @param type //	type
      * @return
      * @throws TaskException
      */
@@ -175,8 +177,6 @@ public class SDK extends ABizLogic {
         params.addParameter("type", type);
         return doGet(action, basicParams(params), TickBean.class);
     }
-
-
 
 
     /**
@@ -193,8 +193,9 @@ public class SDK extends ABizLogic {
 
     /**
      * 获取首页下发数据
-     *@param page     //页码数
-     *@param type     //商品类型
+     *
+     * @param page //页码数
+     * @param type //商品类型
      * @return
      * @throws TaskException
      */
@@ -209,8 +210,9 @@ public class SDK extends ABizLogic {
 
     /**
      * 根据经纬度获取周边
-     *@param longitude     //页码数
-     *@param latitude     //商品类型
+     *
+     * @param longitude //页码数
+     * @param latitude  //商品类型
      * @return
      * @throws TaskException
      */
@@ -225,19 +227,20 @@ public class SDK extends ABizLogic {
 
     /**
      * 商品详情
-     *@param id     //所请求商品的id
-     *@param check_sign     //登陆时收到的返回签名
-     *@param session_id     //登陆时收到的返回签名的sesionid
+     *
+     * @param id         //所请求商品的id
+     * @param check_sign //登陆时收到的返回签名
+     * @param session_id //登陆时收到的返回签名的sesionid
      * @return
      * @throws TaskException
      */
     public DetailMainBean getGoodsDetail(String id) throws TaskException {
         Setting action = newSetting("getGoodsDetail", "appapi/Goods/getGoodsDetail", "获取商品详情");
         Params params = new Params();
-        RegisterEntity info=  SaveObjectUtils.getInstance(context).getObject(Constants.USER_INFO,RegisterEntity.class);
-        if(info!=null){
-          params.addParameter("check_sign", info.getCheck_sign());
-        params.addParameter("session_id", info.getSession_id());
+        RegisterEntity info = SaveObjectUtils.getInstance(context).getObject(Constants.USER_INFO, RegisterEntity.class);
+        if (info != null) {
+            params.addParameter("check_sign", info.getCheck_sign());
+            params.addParameter("session_id", info.getSession_id());
         }
         params.addParameter("shop_spot_id", id);
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?session_id=" + info.getSession_id() + "&check_sign=" + info.getCheck_sign());
@@ -247,6 +250,7 @@ public class SDK extends ABizLogic {
 
     /**
      * TODO 重置密码接口
+     *
      * @param phone
      * @param code
      * @param psw
@@ -254,7 +258,7 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public String resetCommit(String phone, String code, String psw,String pswSure) throws TaskException {
+    public String resetCommit(String phone, String code, String psw, String pswSure) throws TaskException {
         Setting action = newSetting("insertMemberInfo", "/appapi/Memberpub/insertMemberInfo", "重置密码接口");
         Params params = new Params();
         params.addParameter("mobile", phone);
@@ -267,17 +271,128 @@ public class SDK extends ABizLogic {
 
     /**
      * 景点主题
-     *@param type     //景点分类
+     *
+     * @param type //景点分类
      * @return
      * @throws TaskException
      */
     public SpotTBean getSpotTheme(String type) throws TaskException {
         Setting action = newSetting("getGoodsDetail", "appapi/Spotticket/getSpotTheme", "景点主题");
         Params params = new Params();
-        params.addParameter("type",type);
+        params.addParameter("type", type);
         return doGet(action, basicParams(params), SpotTBean.class);
     }
 
+    /**
+     * 个人设置
+     *
+     * @param memberId //会员Id
+     * @return
+     * @throws TaskException
+     */
+    public RegisterEntity personalSetting(int memberId) throws TaskException {
+        Setting action = newSetting("personalSetting", "appapi/Personalcenter/personalSetting", "个人设置");
+        Params params = new Params();
+        params.addParameter("memberId", memberId + "");
+        return doGet(action, basicParams(params), RegisterEntity.class);
+    }
+
+    /**
+     * 更改旧手机
+     *
+     * @param oldMobile //旧手机号码
+     * @param code      //验证码
+     * @return
+     * @throws TaskException
+     */
+    public BaseInfo changeMobile(String oldMobile, String code) throws TaskException {
+        Setting action = newSetting("personalSetting", "appapi/Personalcenter/changeMobile", "更改旧手机");
+        Params params = new Params();
+        params.addParameter("oldMobile", oldMobile);
+        params.addParameter("code", code);
+        return doGet(action, basicParams(params), BaseInfo.class);
+    }
+
+    /**
+     * 设置新手机
+     *
+     * @param newMobile //新手机号码
+     * @param code      //验证码
+     * @param memberId  //会员Id
+     * @return
+     * @throws TaskException
+     */
+    public BaseInfo setMobile(String newMobile, String code, int memberId) throws TaskException {
+        Setting action = newSetting("setMobile", "appapi/Personalcenter/setMobile", "设置新手机");
+        Params params = new Params();
+        params.addParameter("newMobile", newMobile);
+        params.addParameter("code", code);
+        params.addParameter("memberId", memberId + "");
+        return doGet(action, basicParams(params), BaseInfo.class);
+    }
+
+    /**
+     * 修改昵称
+     *
+     * @param nickName //昵称
+     * @return
+     * @throws TaskException
+     */
+    public BaseInfo changeNickName(String nickName, int member_id) throws TaskException {
+        Setting action = newSetting("changeNickName", "appapi/Personalcenter/changeNickName", "修改昵称");
+        Params params = new Params();
+        params.addParameter("nickName", nickName);
+        return doPost(configHttpConfig(), action, params, null, null, BaseInfo.class);
+    }
+
+    /**
+     * 修改密码
+     *
+     * @return
+     * @throws TaskException
+     */
+    public BaseInfo changePassword(String oldPassword, String newPassword1, String newPassword2, String memberId) throws TaskException {
+        Setting action = newSetting("changePassword", "appapi/Personalcenter/changePassword", "修改密码");
+        Params params = new Params();
+        params.addParameter("nickName", oldPassword);
+        params.addParameter("newPassword1", newPassword1);
+        params.addParameter("newPassword2", newPassword2);
+        params.addParameter("memberId", memberId);
+        return doPost(configHttpConfig(), action, params, null, null, BaseInfo.class);
+    }
+
+    /**
+     * 修改邮箱
+     *
+     * @return
+     * @throws TaskException
+     */
+    public BaseInfo changeEmail(String email, String mobile, String code, String memberId) throws TaskException {
+        Setting action = newSetting("changeEmail", "appapi/Personalcenter/changeEmail", "修改邮箱");
+        Params params = new Params();
+        params.addParameter("email", email);
+        params.addParameter("mobile", mobile);
+        params.addParameter("code", code);
+        params.addParameter("memberId", memberId);
+        return doPost(configHttpConfig(), action, params, null, null, BaseInfo.class);
+    }
+
+    /**
+     * 重置密码
+     *
+     * @return
+     * @throws TaskException
+     */
+    public BaseInfo resetPassword(String mobile, String code, String password1, String password2, String memberId) throws TaskException {
+        Setting action = newSetting("resetPassword", "appapi/Personalcenter/resetPassword", "重置密码");
+        Params params = new Params();
+        params.addParameter("mobile", mobile);
+        params.addParameter("code", code);
+        params.addParameter("password1", password1);
+        params.addParameter("password2", password2);
+        params.addParameter("memberId", memberId);
+        return doPost(configHttpConfig(), action, params, null, null, BaseInfo.class);
+    }
 
 
     @Override

@@ -27,4 +27,11 @@ public class Constants {
 
     public static final String Address="address";
 
+    public static final String TYPE_REGISTER="register";
+    public static final String TYPE_LOGIN="login";
+    public static final String TYPE_CHANGEMOBILE="changeMobile";
+    public static final String TYPE_SETMOBILE="setMobile";
+    public static final String TYPE_CHANGEEMAIL="changeEmail";
+    public static final String TYPE_RESETPASSWORD="resetPassword";
+
 }
