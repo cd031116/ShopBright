@@ -12,6 +12,7 @@ import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.CodeUtils;
+import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.PhoneFormatCheckUtils;
 import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.utils.ToastUtils;
@@ -105,7 +106,7 @@ public class OrderWriteActivity extends BaseActivity {
                 else if (!PhoneFormatCheckUtils.isChinaPhoneLegal(phone))
                     ToastUtils.showShortToast(this, getResources().getString(R.string.register_phone));
                 else
-                    new checkCodeTask().execute(phone);
+                    new checkCodeTask().execute(phone, Constants.TYPE_ORDER );
                 break;
             case R.id.commit_order_btn:
                 Intent intent = new Intent(this, OrderDetailActivity.class);
@@ -155,7 +156,7 @@ public class OrderWriteActivity extends BaseActivity {
 
         @Override
         public String workInBackground(String... params) throws TaskException {
-            return SDK.newInstance(OrderWriteActivity.this).getCode(params[0]);
+            return SDK.newInstance(OrderWriteActivity.this).getCode(params[0],params[1]);
         }
 
         @Override

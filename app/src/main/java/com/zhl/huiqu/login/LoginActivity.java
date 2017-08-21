@@ -171,7 +171,7 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         public String workInBackground(Void... voids) throws TaskException {
-            return SDK.newInstance(LoginActivity.this).getCode(shouji.getText().toString());
+            return SDK.newInstance(LoginActivity.this).getCode(shouji.getText().toString(),Constants.TYPE_LOGIN);
         }
 
         @Override
