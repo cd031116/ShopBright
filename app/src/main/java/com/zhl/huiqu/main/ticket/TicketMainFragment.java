@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.base.BaseFragment;
 import com.zhl.huiqu.base.ContainerActivity;
 import com.zhl.huiqu.main.bean.MainBean;
+import com.zhl.huiqu.recyclebase.CommonAdapter;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.sdk.eventbus.CityEvent;
 import com.zhl.huiqu.sdk.eventbus.CitySubscriber;
@@ -76,6 +78,14 @@ public class TicketMainFragment extends BaseFragment {
     Banner banner;
     @ViewInject(id = R.id.top_text)
     TextView top_text;
+    @ViewInject(id = R.id.hot_recy)
+    RecyclerView hot_recy;//热点
+    @ViewInject(id = R.id.lear_city)
+    RecyclerView lear_city;//附近
+
+    private CommonAdapter<TickMianHot> adapter;//热点
+    private CommonAdapter<TickCircum> mdapter;//附近
+
 
     public static TicketMainFragment newInstance() {
         return new TicketMainFragment();
@@ -245,7 +255,7 @@ public class TicketMainFragment extends BaseFragment {
 
     /*门票首页
   * */
-    class getData extends WorkTask<Void, Void, TickBean> {
+    class getData extends WorkTask<Void, Void, TickMainBean> {
         @Override
         protected void onPrepare() {
             super.onPrepare();
@@ -253,12 +263,12 @@ public class TicketMainFragment extends BaseFragment {
         }
 
         @Override
-        public TickBean workInBackground(Void... voids) throws TaskException {
+        public TickMainBean workInBackground(Void... voids) throws TaskException {
             return SDK.newInstance(getActivity()).getTicketInfo("");
         }
 
         @Override
-        protected void onSuccess(TickBean info) {
+        protected void onSuccess(TickMainBean info) {
             super.onSuccess(info);
             dismissAlert();
 

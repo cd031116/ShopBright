@@ -14,6 +14,7 @@ import com.zhl.huiqu.main.bean.MainTopInfo;
 import com.zhl.huiqu.main.ticket.SpotTBean;
 import com.zhl.huiqu.main.ticket.TickBean;
 import com.zhl.huiqu.main.ticket.TickListInfo;
+import com.zhl.huiqu.main.ticket.TickMainBean;
 import com.zhl.huiqu.sdk.http.DTODataParseHttp;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SaveObjectUtils;
@@ -165,17 +166,17 @@ public class SDK extends ABizLogic {
 
 
     /**
-     * 门票列表页面获取大部分数据	 详情
+     * 门票列表页面获取大部分数据
      *
      * @param type //	type
      * @return
      * @throws TaskException
      */
-    public TickBean getTicketInfo(String type) throws TaskException {
+    public TickMainBean getTicketInfo(String type) throws TaskException {
         Setting action = newSetting("getTicketInfo", "appapi/Ticketlist/getTicketInfo", "门票列表页面获取大部分数据");
         Params params = new Params();
         params.addParameter("type", type);
-        return doGet(action, basicParams(params), TickBean.class);
+        return doGet(action, basicParams(params), TickMainBean.class);
     }
 
 
