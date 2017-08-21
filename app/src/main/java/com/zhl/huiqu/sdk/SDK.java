@@ -79,11 +79,12 @@ public class SDK extends ABizLogic {
         * @return
         * @throws TaskException
         */
-    public String getCode(String mobile) throws TaskException {
+    public String getCode(String mobile, String type) throws TaskException {
         Setting action = newSetting("getCheckCode", "appapi/Memberpub/getCheckCode", "验证码");
         Params params = new Params();
-        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?mobile=" + mobile);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?mobile=" + mobile + "&type=" + type);
         params.addParameter("mobile", mobile);
+        params.addParameter("type", type);
         // 这个接口，是将form表单数据，按照json格式走post协议，请使用requestObject这个参数。
         return doPost(configHttpConfig(), action, params, null, null, String.class);
     }

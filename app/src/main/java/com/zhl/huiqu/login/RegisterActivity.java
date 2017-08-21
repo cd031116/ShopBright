@@ -107,7 +107,7 @@ public class RegisterActivity extends BaseActivity {
                 else if (!PhoneFormatCheckUtils.isChinaPhoneLegal(phone))
                     ToastUtils.showShortToast(this, getResources().getString(R.string.register_phone));
                 else
-                    new checkCodeTask().execute(phone);
+                    new checkCodeTask().execute(phone,Constants.TYPE_REGISTER);
                 break;
             case R.id.register_psw_show:
                 showOrHindPsw();
@@ -146,7 +146,7 @@ public class RegisterActivity extends BaseActivity {
 
         @Override
         public String workInBackground(String... params) throws TaskException {
-            return SDK.newInstance(RegisterActivity.this).getCode(params[0]);
+            return SDK.newInstance(RegisterActivity.this).getCode(params[0],params[1]);
         }
 
         @Override
