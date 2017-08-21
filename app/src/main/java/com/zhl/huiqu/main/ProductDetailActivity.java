@@ -23,6 +23,7 @@ import com.zhl.huiqu.main.bean.DetailBean;
 import com.zhl.huiqu.main.bean.DetailMainBean;
 import com.zhl.huiqu.main.bean.DitalTickList;
 import com.zhl.huiqu.main.ticket.LocationActivity;
+import com.zhl.huiqu.personal.OrderWriteActivity;
 import com.zhl.huiqu.recyclebase.CommonAdapter;
 import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.sdk.SDK;
@@ -157,8 +158,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
                 holder.setOnClickListener(R.id.submit, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(ProductDetailActivity.this, PayActivity.class);
-                        intent.putExtra("pay",bean);
+                        Intent intent = new Intent(ProductDetailActivity.this, OrderWriteActivity.class);
                         Bundle mBundle = new Bundle();
                         mBundle.putSerializable("pay",bean);
                         intent.putExtras(mBundle);

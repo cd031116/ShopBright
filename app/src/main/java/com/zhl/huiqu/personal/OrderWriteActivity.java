@@ -1,6 +1,7 @@
 package com.zhl.huiqu.personal;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.main.PayActivity;
+import com.zhl.huiqu.main.bean.DitalTickList;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.CodeUtils;
 import com.zhl.huiqu.utils.Constants;
@@ -56,7 +59,7 @@ public class OrderWriteActivity extends BaseActivity {
     EditText codeText;
     @Bind(R.id.check_code_text)
     EditText checkCodeText;
-
+    private  DitalTickList mPerson=null;
     private String realCode;
     private boolean isExpande = false;
     private static final int REQUEST_CODE = 0;
@@ -69,6 +72,7 @@ public class OrderWriteActivity extends BaseActivity {
     @Override
     public void initView() {
         super.initView();
+         mPerson = (DitalTickList) getIntent().getSerializableExtra("pay");
         checkCodeImg.setImageBitmap(CodeUtils.getInstance().createBitmap());
         realCode = CodeUtils.getInstance().getCode().toLowerCase();
         fymxLayout.setVisibility(View.GONE);
@@ -109,8 +113,10 @@ public class OrderWriteActivity extends BaseActivity {
                     new checkCodeTask().execute(phone, Constants.TYPE_ORDER );
                 break;
             case R.id.commit_order_btn:
-                Intent intent = new Intent(this, OrderDetailActivity.class);
-                intent.putExtra("order_state", getResources().getString(R.string.personal_out_order));
+                Intent intent = new Intent(this, PayActivity.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putSerializable("pay",mPerson);
+                intent.putExtras(mBundle);
                 startActivity(intent);
 
                 break;
