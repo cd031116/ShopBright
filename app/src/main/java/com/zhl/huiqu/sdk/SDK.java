@@ -13,6 +13,7 @@ import com.zhl.huiqu.main.bean.DetailMainBean;
 import com.zhl.huiqu.main.bean.GradeBean;
 import com.zhl.huiqu.main.bean.MainBean;
 import com.zhl.huiqu.main.bean.MainTopInfo;
+import com.zhl.huiqu.main.bean.SearchBean;
 import com.zhl.huiqu.main.ticket.SpotTBean;
 import com.zhl.huiqu.main.ticket.TickBean;
 import com.zhl.huiqu.main.ticket.TickListInfo;
@@ -421,7 +422,7 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public TickBean getSpotByCondition(String theme_id, String grade, String order, String page) throws TaskException {
+    public SearchBean getSpotByCondition(String theme_id, String grade, String order, String page) throws TaskException {
         Setting action = newSetting("getSpotByCondition", "appapi/Spotticket/getSpotByCondition", "通过筛选条件查询门票");
         Params params = new Params();
         if(!TextUtils.isEmpty(theme_id)){
@@ -434,7 +435,7 @@ public class SDK extends ABizLogic {
             params.addParameter("order", order);
         }
         params.addParameter("page", page);
-        return doGet(configHttpConfig(), action, params,TickBean.class);
+        return doGet(configHttpConfig(), action, params,SearchBean.class);
     }
 
 

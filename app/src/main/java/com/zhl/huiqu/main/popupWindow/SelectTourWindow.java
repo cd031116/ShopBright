@@ -40,28 +40,29 @@ public class SelectTourWindow extends PopupWindow {
     private View view;
     private RecyclerView recycle;
     private RecyclerView gra_recy;
-    private TextView zhuti,jibie;
+    private TextView zhuti, jibie;
     private ItemInclick itemsOnClick;
-    private TextView cancel,summit;
+    private TextView cancel, summit;
     private CommonAdapter<SpotThemeInfo> mAdapter;
-    private List<SpotThemeInfo> mData=new ArrayList<>();
+    private List<SpotThemeInfo> mData = new ArrayList<>();
 
 
     private CommonAdapter<GradeInfo> gAdapter;
-    private List<GradeInfo> gData=new ArrayList<>();
+    private List<GradeInfo> gData = new ArrayList<>();
 
-    private String getId="",garadeId="";
-    private int select=1;
+    private String getId = "", garadeId = "";
+    private int select = 1;
+
     public SelectTourWindow(Activity mContext, ItemInclick itemsOnClickd) {
-        this.mContext=mContext;
-        this.itemsOnClick=itemsOnClickd;
+        this.mContext = mContext;
+        this.itemsOnClick = itemsOnClickd;
         this.view = LayoutInflater.from(mContext).inflate(R.layout.select_window, null);
-        recycle= (RecyclerView) view.findViewById(R.id.recycleview);
-        gra_recy= (RecyclerView) view.findViewById(R.id.gra_recy);
-        cancel= (TextView) view.findViewById(R.id.cancel);
-        summit= (TextView) view.findViewById(R.id.sure);
-        zhuti= (TextView) view.findViewById(R.id.zhuti);
-        jibie= (TextView) view.findViewById(R.id.jibie);
+        recycle = (RecyclerView) view.findViewById(R.id.recycleview);
+        gra_recy = (RecyclerView) view.findViewById(R.id.gra_recy);
+        cancel = (TextView) view.findViewById(R.id.cancel);
+        summit = (TextView) view.findViewById(R.id.sure);
+        zhuti = (TextView) view.findViewById(R.id.zhuti);
+        jibie = (TextView) view.findViewById(R.id.jibie);
         new getInfoTask().execute();
         new getGradeTask().execute();
         changeview(select);
@@ -69,10 +70,10 @@ public class SelectTourWindow extends PopupWindow {
         zhuti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(select==1){
+                if (select == 1) {
                     return;
-                }else {
-                    select=1;
+                } else {
+                    select = 1;
                     changeview(select);
                 }
             }
@@ -81,10 +82,10 @@ public class SelectTourWindow extends PopupWindow {
         jibie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(select==2){
+                if (select == 2) {
                     return;
-                }else {
-                    select=2;
+                } else {
+                    select = 2;
                     changeview(select);
                 }
             }
@@ -100,11 +101,7 @@ public class SelectTourWindow extends PopupWindow {
         summit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(select==1){
-                    itemsOnClick.ItemClick(String.valueOf(select),getId);
-                }else {
-                    itemsOnClick.ItemClick(String.valueOf(select),garadeId);
-                }
+                itemsOnClick.ItemClick(String.valueOf(select), getId, garadeId);
                 dismiss();
             }
         });
@@ -147,16 +144,15 @@ public class SelectTourWindow extends PopupWindow {
     }
 
 
-
-    private void changeview(int index){
-        if(index==2){
+    private void changeview(int index) {
+        if (index == 2) {
             gra_recy.setVisibility(View.VISIBLE);
             recycle.setVisibility(View.GONE);
             jibie.setSelected(true);
             jibie.setTextColor(Color.parseColor("#ffffff"));
             zhuti.setSelected(false);
             zhuti.setTextColor(Color.parseColor("#5A5863"));
-        }else {
+        } else {
             recycle.setVisibility(View.VISIBLE);
             gra_recy.setVisibility(View.GONE);
             zhuti.setSelected(true);
@@ -167,8 +163,7 @@ public class SelectTourWindow extends PopupWindow {
     }
 
 
-
-    class getInfoTask extends WorkTask<Void, Void, SpotTBean>{
+    class getInfoTask extends WorkTask<Void, Void, SpotTBean> {
         @Override
         protected void onPrepare() {
             super.onPrepare();
@@ -176,24 +171,24 @@ public class SelectTourWindow extends PopupWindow {
         }
 
         @Override
-        public SpotTBean workInBackground(Void... voids) throws TaskException{
+        public SpotTBean workInBackground(Void... voids) throws TaskException {
             return SDK.newInstance(mContext).getSpotTheme("theme");
         }
 
         @Override
-        protected void onSuccess(SpotTBean infot){
+        protected void onSuccess(SpotTBean infot) {
             super.onSuccess(infot);
-            mData=infot.getData();
+            mData = infot.getData();
             setThmeview();
         }
 
         @Override
-        protected void onFailure(TaskException exception){
+        protected void onFailure(TaskException exception) {
 
         }
     }
 
-    class getGradeTask extends WorkTask<Void, Void, GradeBean>{
+    class getGradeTask extends WorkTask<Void, Void, GradeBean> {
         @Override
         protected void onPrepare() {
             super.onPrepare();
@@ -201,48 +196,48 @@ public class SelectTourWindow extends PopupWindow {
         }
 
         @Override
-        public GradeBean workInBackground(Void... voids) throws TaskException{
+        public GradeBean workInBackground(Void... voids) throws TaskException {
             return SDK.newInstance(mContext).getSpotTheme1("grade");
         }
 
         @Override
-        protected void onSuccess(GradeBean infot){
+        protected void onSuccess(GradeBean infot) {
             super.onSuccess(infot);
-              gData=infot.getData();
+            gData = infot.getData();
             setGradeview();
         }
 
         @Override
-        protected void onFailure(TaskException exception){
+        protected void onFailure(TaskException exception) {
 
         }
     }
 
-    public interface ItemInclick{
-        void ItemClick(String tab,String item);
+    public interface ItemInclick {
+        void ItemClick(String tab, String theme_id, String grade);
     }
 
-    private void  setThmeview(){
-        mAdapter=new CommonAdapter<SpotThemeInfo>(mContext,R.layout.select_window_item,mData) {
+    private void setThmeview() {
+        mAdapter = new CommonAdapter<SpotThemeInfo>(mContext, R.layout.select_window_item, mData) {
             @Override
-            protected void convert(ViewHolder holder,final SpotThemeInfo info,final int position) {
-                holder.setText(R.id.content,info.getName());
+            protected void convert(ViewHolder holder, final SpotThemeInfo info, final int position) {
+                holder.setText(R.id.content, info.getName());
 
-                if(info.isselect()){
-                    holder.setSesect(R.id.content,true);
+                if (info.isselect()) {
+                    holder.setSesect(R.id.content, true);
 
                     holder.setTextColor(R.id.content, Color.parseColor("#ffffff"));
-                }else {
-                    holder.setSesect(R.id.content,false);
+                } else {
+                    holder.setSesect(R.id.content, false);
                     holder.setTextColor(R.id.content, Color.parseColor("#5A5863"));
                 }
-                holder.setOnClickListener(R.id.content, new View.OnClickListener(){
+                holder.setOnClickListener(R.id.content, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        for(int i=0;i<mData.size();i++){
+                        for (int i = 0; i < mData.size(); i++) {
                             mData.get(i).setIsselect(false);
                         }
-                        getId=info.getShop_spot_attr_id();
+                        getId = info.getShop_spot_attr_id();
                         info.setIsselect(true);
                         mAdapter.notifyDataSetChanged();
                     }
@@ -253,27 +248,27 @@ public class SelectTourWindow extends PopupWindow {
         recycle.setAdapter(mAdapter);
     }
 
-    private void  setGradeview(){
-        gAdapter=new CommonAdapter<GradeInfo>(mContext,R.layout.select_window_item,gData) {
+    private void setGradeview() {
+        gAdapter = new CommonAdapter<GradeInfo>(mContext, R.layout.select_window_item, gData) {
             @Override
-            protected void convert(ViewHolder holder,final GradeInfo info,final int position) {
-                holder.setText(R.id.content,info.getName());
+            protected void convert(ViewHolder holder, final GradeInfo info, final int position) {
+                holder.setText(R.id.content, info.getName());
 
-                if(info.isselect()){
-                    holder.setSesect(R.id.content,true);
+                if (info.isselect()) {
+                    holder.setSesect(R.id.content, true);
 
                     holder.setTextColor(R.id.content, Color.parseColor("#ffffff"));
-                }else {
-                    holder.setSesect(R.id.content,false);
+                } else {
+                    holder.setSesect(R.id.content, false);
                     holder.setTextColor(R.id.content, Color.parseColor("#5A5863"));
                 }
-                holder.setOnClickListener(R.id.content, new View.OnClickListener(){
+                holder.setOnClickListener(R.id.content, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        for(int i=0;i<gData.size();i++){
+                        for (int i = 0; i < gData.size(); i++) {
                             gData.get(i).setIsselect(false);
                         }
-                        garadeId=info.getTheme_id();
+                        garadeId = info.getTheme_id();
                         info.setIsselect(true);
                         gAdapter.notifyDataSetChanged();
                     }
@@ -284,8 +279,6 @@ public class SelectTourWindow extends PopupWindow {
         gra_recy.setAdapter(gAdapter);
 
     }
-
-
 
 
 }

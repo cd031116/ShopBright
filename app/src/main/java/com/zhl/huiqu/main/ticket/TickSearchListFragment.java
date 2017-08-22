@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.main.ProductDetailActivity;
+import com.zhl.huiqu.main.bean.SearchBean;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.sdk.eventbus.CityEvent;
 import com.zhl.huiqu.sdk.eventbus.CitySubscriber;
@@ -57,7 +58,7 @@ public class TickSearchListFragment extends ARecycleViewSwipeRefreshFragment<Tic
     RecyclerView recycleview;
 
 
-    private String theme_id="",grade="";
+    private String theme_id="",grade="",order="";
 
     @Override
     public void setContentView(ViewGroup view) {
@@ -94,9 +95,9 @@ public class TickSearchListFragment extends ARecycleViewSwipeRefreshFragment<Tic
         @Override
         public void onEvent(TickSearchEvent info){
             theme_id = info.getTheme_id();
-
+            grade=info.getGrade();
+            order=info.getOrder();
             requestData(RefreshMode.reset);
-
         }
     };
 
@@ -156,19 +157,19 @@ public class TickSearchListFragment extends ARecycleViewSwipeRefreshFragment<Tic
         new Task(refreshMode != RefreshMode.update ? RefreshMode.reset : RefreshMode.update).execute();
     }
 
-    class Task extends APagingTask<Void, Void, TickBean> {
+    class Task extends APagingTask<Void, Void, SearchBean> {
         public Task(RefreshMode mode) {
             super(mode);
         }
 
         @Override
-        protected List<TickInfo> parseResult(TickBean bean) {
-            return bean.getData().getTicketOnly();
+        protected List<TickInfo> parseResult(SearchBean bean) {
+            return bean.getData();
         }
 
 
         @Override
-        protected TickBean workInBackground(RefreshMode refreshMode, String s, String nextPage, Void... voids) throws TaskException {
+        protected SearchBean workInBackground(RefreshMode refreshMode, String s, String nextPage, Void... voids) throws TaskException {
             int start = 1;
             if (mode == RefreshMode.update && !TextUtils.isEmpty(nextPage)) {
                 try {
@@ -177,9 +178,9 @@ public class TickSearchListFragment extends ARecycleViewSwipeRefreshFragment<Tic
                     e.printStackTrace();
                 }
             }
-            TickBean beans = queryList(start);
+            SearchBean beans = queryList(start);
             if (beans != null && beans.getData() != null) {
-                beans.setEndPaging(beans.getData().getTicketOnly().size() <= 5);
+                beans.setEndPaging(beans.getData().size() <= 5);
             }
             return beans;
         }
@@ -194,7 +195,7 @@ public class TickSearchListFragment extends ARecycleViewSwipeRefreshFragment<Tic
         }
     }
 
-    protected TickBean queryList(int start) throws TaskException {
+    protected SearchBean queryList(int start) throws TaskException {
         return SDK.newInstance(getActivity()).getSpotByCondition(theme_id, "", "", start + "");
     }
 

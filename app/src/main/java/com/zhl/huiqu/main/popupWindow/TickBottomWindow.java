@@ -70,7 +70,7 @@ public class TickBottomWindow extends PopupWindow{
                 }else {
                     select=1;
                     changeview(select);
-                    itemsOnClick.ItemClick("");
+                    itemsOnClick.ItemClick("1");
                     dismiss();
                 }
             }
@@ -83,7 +83,7 @@ public class TickBottomWindow extends PopupWindow{
                 }else {
                     select=2;
                     changeview(select);
-                    itemsOnClick.ItemClick("");
+                    itemsOnClick.ItemClick("2");
                     dismiss();
                 }
             }
@@ -96,7 +96,7 @@ public class TickBottomWindow extends PopupWindow{
                 }else {
                     select=3;
                     changeview(select);
-                    itemsOnClick.ItemClick("");
+                    itemsOnClick.ItemClick("1");
                     dismiss();
                 }
             }
@@ -109,7 +109,7 @@ public class TickBottomWindow extends PopupWindow{
                 }else {
                     select=4;
                     changeview(select);
-                    itemsOnClick.ItemClick("");
+                    itemsOnClick.ItemClick("2");
                     dismiss();
                 }
             }

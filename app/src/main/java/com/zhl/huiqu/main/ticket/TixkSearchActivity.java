@@ -13,6 +13,9 @@ import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.main.popupWindow.SelectTourWindow;
 import com.zhl.huiqu.main.popupWindow.TickBottomWindow;
+import com.zhl.huiqu.sdk.eventbus.TickSearchEvent;
+
+import org.aisen.android.component.eventbus.NotificationCenter;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -44,7 +47,7 @@ public class TixkSearchActivity extends BaseActivity {
     }
 
     @Override
-    public void initData() {
+    public void initData(){
         super.initData();
     }
 
@@ -81,16 +84,17 @@ public class TixkSearchActivity extends BaseActivity {
     }
 
     private SelectTourWindow.ItemInclick itemsOnClick = new SelectTourWindow.ItemInclick(){
+
         @Override
-        public void ItemClick(String tab, String item) {
-            Toast.makeText(TixkSearchActivity.this, "tabtabtab=" + tab, Toast.LENGTH_SHORT).show();
+        public void ItemClick(String tab, String theme_id, String grade) {
+            NotificationCenter.defaultCenter().publish(new TickSearchEvent("",theme_id,grade));//主题
         }
     };
 
     private TickBottomWindow.ItemInclick itemsOnslick = new TickBottomWindow.ItemInclick() {
         @Override
-        public void ItemClick(String item) {
-            Toast.makeText(TixkSearchActivity.this, "tabtabtab=", Toast.LENGTH_SHORT).show();
+        public void ItemClick(String order) {
+            NotificationCenter.defaultCenter().publish(new TickSearchEvent(order,"",""));//主题
         }
     };
 }

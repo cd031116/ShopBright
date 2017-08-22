@@ -35,6 +35,7 @@ import com.zhl.huiqu.main.bean.TicketsInfo;
 import com.zhl.huiqu.main.search.SearchFragment;
 import com.zhl.huiqu.main.ticket.TicketListActivity;
 import com.zhl.huiqu.main.ticket.TicketMainFragment;
+import com.zhl.huiqu.main.ticket.TixkSearchActivity;
 import com.zhl.huiqu.scan.CaptureActivity;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.sdk.eventbus.CityEvent;
@@ -241,7 +242,8 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
                 startActivity(new Intent(getActivity(), CaptureActivity.class));
                 break;
             case R.id.searh_line:
-                SearchFragment.launch(getActivity());
+//                SearchFragment.launch(getActivity());
+                startActivity(new Intent(getActivity(), TixkSearchActivity.class));
                 break;
             case R.id.main_mp:
                 TicketMainFragment.launch(getActivity());
