@@ -435,6 +435,7 @@ public class SDK extends ABizLogic {
             params.addParameter("order", order);
         }
         params.addParameter("page", page);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?theme_id=" + theme_id + "&grade=" + grade+ "&order=" + order);
         return doGet(configHttpConfig(), action, params,SearchBean.class);
     }
 

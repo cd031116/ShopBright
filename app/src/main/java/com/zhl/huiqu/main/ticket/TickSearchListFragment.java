@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
@@ -56,7 +57,8 @@ public class TickSearchListFragment extends ARecycleViewSwipeRefreshFragment<Tic
     ImageView error_image;
     @ViewInject(id = R.id.recycleview)
     RecyclerView recycleview;
-
+    @ViewInject(id = R.id.progress)
+    ProgressBar progress;
 
     private String theme_id="",grade="",order="";
 
@@ -94,9 +96,13 @@ public class TickSearchListFragment extends ARecycleViewSwipeRefreshFragment<Tic
     TickSearchSubscriber tickSearchEvent = new TickSearchSubscriber() {
         @Override
         public void onEvent(TickSearchEvent info){
+            theme_id="";
+            grade="";
+            order="";
             theme_id = info.getTheme_id();
             grade=info.getGrade();
             order=info.getOrder();
+            progress.setVisibility(View.VISIBLE);
             requestData(RefreshMode.reset);
         }
     };
@@ -167,6 +173,11 @@ public class TickSearchListFragment extends ARecycleViewSwipeRefreshFragment<Tic
             return bean.getData();
         }
 
+        @Override
+        protected void onSuccess(SearchBean searchBean) {
+            super.onSuccess(searchBean);
+            progress.setVisibility(View.GONE);
+        }
 
         @Override
         protected SearchBean workInBackground(RefreshMode refreshMode, String s, String nextPage, Void... voids) throws TaskException {
@@ -188,6 +199,7 @@ public class TickSearchListFragment extends ARecycleViewSwipeRefreshFragment<Tic
         @Override
         protected void onFailure(TaskException exception) {
             super.onFailure(exception);
+            progress.setVisibility(View.GONE);
 //            error_text.setText(exception.getMessage());
 //            if ("noneNetwork".equals(exception.getCode())) {
 //                error_image.setImageResource(R.mipmap.no_net);
@@ -196,7 +208,7 @@ public class TickSearchListFragment extends ARecycleViewSwipeRefreshFragment<Tic
     }
 
     protected SearchBean queryList(int start) throws TaskException {
-        return SDK.newInstance(getActivity()).getSpotByCondition(theme_id, "", "", start + "");
+        return SDK.newInstance(getActivity()).getSpotByCondition(theme_id, grade, order, start + "");
     }
 
     @Override
