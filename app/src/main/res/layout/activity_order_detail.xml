@@ -14,9 +14,10 @@
     <RelativeLayout
         android:id="@+id/order_detail_progress"
         android:layout_width="match_parent"
-        android:layout_height="186px"
+        android:layout_height="wrap_content"
         android:layout_below="@id/view_top"
         android:background="@color/white"
+        android:layout_marginTop="2px"
         android:paddingBottom="12px"
         android:paddingLeft="98px"
         android:paddingRight="98px"

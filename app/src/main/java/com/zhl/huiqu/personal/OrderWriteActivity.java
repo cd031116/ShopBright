@@ -2,7 +2,12 @@ package com.zhl.huiqu.personal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,6 +17,7 @@ import android.widget.TextView;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.BaseInfo;
+import com.zhl.huiqu.login.LoginActivity;
 import com.zhl.huiqu.main.PayActivity;
 import com.zhl.huiqu.main.bean.DitalTickList;
 import com.zhl.huiqu.sdk.SDK;
@@ -49,6 +55,12 @@ public class OrderWriteActivity extends BaseActivity {
     TextView moreTime;
     @Bind(R.id.tomorrow_time)
     TextView tomorrowTime;
+    @Bind(R.id.is_login_text)
+    TextView isLoginText;
+    @Bind(R.id.top_title)
+    TextView titleText;
+    @Bind(R.id.show_num)
+    TextView showNum;
 
     @Bind(R.id.take_person_name_text)
     EditText nameText;
@@ -60,10 +72,12 @@ public class OrderWriteActivity extends BaseActivity {
     EditText codeText;
     @Bind(R.id.check_code_text)
     EditText checkCodeText;
-    private  DitalTickList mPerson=null;
+
+    private DitalTickList mPerson = null;
     private String realCode;
     private boolean isExpande = false;
     private static final int REQUEST_CODE = 0;
+    private int type_num = 1;
 
     @Override
     protected int getLayoutId() {
@@ -73,7 +87,7 @@ public class OrderWriteActivity extends BaseActivity {
     @Override
     public void initView() {
         super.initView();
-         mPerson = (DitalTickList) getIntent().getSerializableExtra("pay");
+        mPerson = (DitalTickList) getIntent().getSerializableExtra("pay");
         checkCodeImg.setImageBitmap(CodeUtils.getInstance().createBitmap());
         realCode = CodeUtils.getInstance().getCode().toLowerCase();
         fymxLayout.setVisibility(View.GONE);
@@ -81,6 +95,19 @@ public class OrderWriteActivity extends BaseActivity {
         int month = calendar.getTime().getMonth() + 1;
         int date = calendar.getTime().getDate() + 1;
         tomorrowTime.setText("明天\n" + month + "-" + date);
+        titleText.setText(getResources().getString(R.string.write_order));
+        isLoginText.setHighlightColor(getResources().getColor(android.R.color.transparent));
+
+        SpannableString spanableInfo = new SpannableString("有账号可先登录");
+        spanableInfo.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(View view) {
+                Log.e("ttt", "onClick: view setSpan");
+//                startActivity(new Intent(OrderWriteActivity.this,LoginActivity.class));
+            }
+        }, 5, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        isLoginText.setText(spanableInfo);
+        isLoginText.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     @Override
@@ -90,12 +117,23 @@ public class OrderWriteActivity extends BaseActivity {
 
 
     @OnClick({R.id.down_btn, R.id.add_btn, R.id.commit_order_btn, R.id.check_code_img, R.id.fymx_arrow,
-            R.id.take_person_free_btn, R.id.more_time,R.id.tomorrow_time})
+            R.id.take_person_free_btn, R.id.more_time, R.id.tomorrow_time, R.id.top_left})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.down_btn:
+                if (type_num == 0)
+                    showNum.setText("0");
+                else if (type_num > 0) {
+                    type_num--;
+                    showNum.setText(type_num + "");
+                }
                 break;
             case R.id.add_btn:
+                type_num++;
+                showNum.setText(type_num + "");
+                break;
+            case R.id.top_left:
+                finish();
                 break;
             case R.id.tomorrow_time:
                 tomorrowTime.setSelected(true);
@@ -111,12 +149,12 @@ public class OrderWriteActivity extends BaseActivity {
                 else if (!PhoneFormatCheckUtils.isChinaPhoneLegal(phone))
                     ToastUtils.showShortToast(this, getResources().getString(R.string.register_phone));
                 else
-                    new checkCodeTask().execute(phone, Constants.TYPE_ORDER );
+                    new checkCodeTask().execute(phone, Constants.TYPE_ORDER);
                 break;
             case R.id.commit_order_btn:
                 Intent intent = new Intent(this, PayActivity.class);
                 Bundle mBundle = new Bundle();
-                mBundle.putSerializable("pay",mPerson);
+                mBundle.putSerializable("pay", mPerson);
                 intent.putExtras(mBundle);
                 startActivity(intent);
 
@@ -163,7 +201,7 @@ public class OrderWriteActivity extends BaseActivity {
 
         @Override
         public BaseInfo workInBackground(String... params) throws TaskException {
-            return SDK.newInstance(OrderWriteActivity.this).getCode(params[0],params[1]);
+            return SDK.newInstance(OrderWriteActivity.this).getCode(params[0], params[1]);
         }
 
         @Override

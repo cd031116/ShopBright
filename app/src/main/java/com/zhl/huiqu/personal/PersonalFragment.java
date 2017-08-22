@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -53,9 +54,7 @@ public class PersonalFragment extends BaseFragment {
     private String[] address = {"石燕湖", "石燕湖", "石燕湖", "石燕湖"};
     private String[] touristMs = {"石燕湖", "石燕湖", "石燕湖", "石燕湖"};
     private List<UrLikeEntity> mDatas;
-
     private LayoutInflater inflater_d;
-
     private List<View> mPagerList;
     /**
      * 总的页数
@@ -78,6 +77,9 @@ public class PersonalFragment extends BaseFragment {
     ImageView headImg;
     @ViewInject(id = R.id.personal_tel_text)
     TextView nameText;
+    @ViewInject(id = R.id.your_like_layout)
+    RelativeLayout urLikeLayout;
+
     RegisterEntity account;
 
 
@@ -101,6 +103,7 @@ public class PersonalFragment extends BaseFragment {
     @Override
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate) {
         super.layoutInit(inflater, savedInstanceSate);
+        urLikeLayout.setVisibility(View.GONE);
         inflater_d = LayoutInflater.from(getActivity());
         account = SaveObjectUtils.getInstance(getActivity()).getObject(Constants.USER_INFO, RegisterEntity.class);
         if (account != null)
@@ -116,10 +119,6 @@ public class PersonalFragment extends BaseFragment {
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    int pos = position + curIndex * pageSize;
-//                    Intent intent=new Intent(getActivity(),TicketListActivity.class);
-//                    intent.putExtra("title",mDatas.get(position).getName());
-//                    startActivity(intent);
                 }
             });
         }

@@ -178,7 +178,7 @@
             android:gravity="center"
             android:paddingLeft="30px"
             android:paddingRight="30px"
-            android:text="+"
+            android:text="1"
             android:textColor="@color/black_text"
             android:textSize="33px" />
 
