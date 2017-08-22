@@ -1,6 +1,7 @@
 package com.zhl.huiqu.main.ticket;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.utils.Utils;
 
 import java.util.List;
 
@@ -26,8 +29,9 @@ public class GridViewAdapter extends BaseAdapter {
      * 每一页显示的个数
      */
     private int pageSize;
-
+    private Context mContext;
     public GridViewAdapter(Context context, List<Model> mDatas, int curIndex, int pageSize) {
+        this.mContext=context;
         inflater = LayoutInflater.from(context);
         this.mDatas = mDatas;
         this.curIndex = curIndex;
@@ -70,8 +74,11 @@ public class GridViewAdapter extends BaseAdapter {
          * 在给View绑定显示的数据时，计算正确的position = position + curIndex * pageSize，
          */
         int pos = position + curIndex * pageSize;
-        viewHolder.tv.setText(mDatas.get(pos).name);
-        viewHolder.iv.setImageResource(mDatas.get(pos).iconRes);
+        viewHolder.tv.setText(mDatas.get(pos).getName());
+        String imagurl=Utils.getImageUrl(mDatas.get(pos).getImg());
+        Glide.with(mContext)
+                .load(imagurl)
+                .into(viewHolder.iv);
         return convertView;
     }
 

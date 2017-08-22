@@ -122,7 +122,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
     private CommonAdapter<DitalTickList> mAdapter;
     private List<DitalTickList> mlist = new ArrayList<>();
     private DetailBean info;
-
+    private String shop_spot_id="";
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_detail_profuct;
@@ -131,6 +131,10 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
     @Override
     public void initView() {
         super.initView();
+        Bundle bd=getIntent().getExtras();
+        if(bd!=null){
+            shop_spot_id=bd.getString("shop_spot_id");
+        }
         changeview(1);
         myscroview.setOnScrollListener(this);
         top_title.setText("产品详情");
@@ -245,6 +249,9 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
 //        topHeight = titleBarHeight + statusBarHeight;
         if (hasFocus) {
             topHeight = search02.getBottom() - search02.getHeight();
+            int[] position = new int[2];
+            mp_rela.getLocationOnScreen(position);
+            crp_hight = position[1] - top_layout.getHeight() - getStatusBarHeight() - mp_rela.getHeight();
             gethight();
         }
 
@@ -252,7 +259,6 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
 
     @Override
     public void onScroll(int y) {
-        Log.i("tttt", "yyyyyyyyy=" + y);
         if (y >= topHeight) {
             if (tab_mian.getParent() != search01) {
                 search02.removeView(tab_mian);
@@ -278,6 +284,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
     public void onResume() {
         super.onResume();
         topHeight = search02.getBottom() - search02.getHeight();
+
         gethight();
     }
 
@@ -289,14 +296,9 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
     }
 
     private void gethight() {
-        int[] position = new int[2];
-        mp_rela.getLocationOnScreen(position);
-        crp_hight = position[1] - top_layout.getHeight() - getStatusBarHeight() - mp_rela.getHeight();
-
         int[] position1 = new int[2];
         jd_js.getLocationOnScreen(position1);
         jd_hight = position1[1] - search02.getHeight() - top_layout.getHeight() - getStatusBarHeight() + crp_line.getHeight();
-        TLog.log("tttt", "crp_hight=" + crp_hight);
         TLog.log("tttt", "jd_hight=" + jd_hight);
     }
 
@@ -322,7 +324,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
         @Override
         public DetailMainBean workInBackground(Void... voids) throws TaskException {
 
-            return SDK.newInstance(ProductDetailActivity.this).getGoodsDetail("12");
+            return SDK.newInstance(ProductDetailActivity.this).getGoodsDetail(shop_spot_id);
         }
 
         @Override
@@ -376,7 +378,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
             }
         };
         Timer timer = new Timer();
-        timer.schedule(task, 3000);//3秒后执行TimeTask的run方法
+        timer.schedule(task, 2000);//3秒后执行TimeTask的run方法
     }
 
 

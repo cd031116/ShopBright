@@ -3,7 +3,7 @@
     android:id="@+id/main_top"
     android:layout_width="match_parent"
     android:layout_height="220px"
-    android:background="#ffffff"
+    android:background="@drawable/onclick_bg"
     android:layout_marginTop="1px"
     android:orientation="vertical"
     android:padding="20px">
@@ -18,8 +18,8 @@
 
         <ImageView
             android:id="@+id/photo"
-            android:layout_width="250px"
-            android:layout_height="250px"
+            android:layout_width="290px"
+            android:layout_height="230px"
             android:layout_marginLeft="20px"
             android:layout_marginRight="20px"
             android:scaleType="fitXY"/>

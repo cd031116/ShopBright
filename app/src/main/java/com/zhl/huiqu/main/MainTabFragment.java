@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -39,6 +40,7 @@ import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.sdk.eventbus.CityEvent;
 import com.zhl.huiqu.sdk.eventbus.CitySubscriber;
 import com.zhl.huiqu.utils.Constants;
+import com.zhl.huiqu.utils.GlideCircleTransform;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.widget.GlideImageLoader;
@@ -89,7 +91,6 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     TextView address;
 
 
-
     @ViewInject(id = R.id.hot_1)
     ImageView hot_1;
     @ViewInject(id = R.id.hot_2)
@@ -102,7 +103,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     private List<String> images = new ArrayList<>();
     private List<String> titles = new ArrayList<>();
     private ShowMsgDialog progressDialog;
-
+    private MainTopInfo mainInfo;
     public static MainTabFragment newInstance() {
         return new MainTabFragment();
     }
@@ -118,11 +119,13 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     public int inflateContentView() {
         return R.layout.main_tab_fragment;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         NotificationCenter.defaultCenter().subscriber(CityEvent.class, cityEvent);
     }
+
     @Override
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceState) {
         super.layoutInit(inflater, savedInstanceState);
@@ -133,8 +136,8 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     CitySubscriber cityEvent = new CitySubscriber() {
         @Override
         public void onEvent(CityEvent v) {
-            BaseConfig bg=new BaseConfig(getActivity());
-          String addre= bg.getStringValue(Constants.Address,"");
+            BaseConfig bg = new BaseConfig(getActivity());
+            String addre = bg.getStringValue(Constants.Address, "");
             address.setText(addre);
 
         }
@@ -204,9 +207,6 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     }
 
     private void setBanner() {
-        images.add("http://pic30.nipic.com/20130626/8174275_085522448172_2.jpg");
-        images.add("http://pic18.nipic.com/20111215/577405_080531548148_2.jpg");
-        images.add("http://pic15.nipic.com/20110722/2912365_092519919000_2.jpg");
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         //设置图片加载器
         banner.setImageLoader(new GlideImageLoader());
@@ -227,14 +227,16 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         banner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-                startActivity(new Intent(getActivity(), ProductDetailActivity.class));
+                Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
+                intent.putExtra("shop_spot_id",mainInfo.getNav().get(position).getShop_spot_id());
+                startActivity(intent);
             }
         });
     }
 
-    @OnClick({R.id.scan, R.id.searh_line, R.id.main_mp,R.id.mp_1,R.id.mp_2,R.id.mp_3,R.id.mp_4})
-    void onclik(View v){
-        switch (v.getId()){
+    @OnClick({R.id.scan, R.id.searh_line, R.id.main_mp, R.id.mp_1, R.id.mp_2, R.id.mp_3, R.id.mp_4, R.id.hot_1, R.id.hot_2, R.id.hot_3})
+    void onclik(View v) {
+        switch (v.getId()) {
             case R.id.scan:
                 startActivity(new Intent(getActivity(), CaptureActivity.class));
                 break;
@@ -244,30 +246,44 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
             case R.id.main_mp:
                 TicketMainFragment.launch(getActivity());
                 break;
-            case  R.id.mp_1:
-                Intent intent=new Intent(getActivity(),TicketListActivity.class);
-                intent.putExtra("title",mp_1.getText().toString());
-                intent.putExtra("theme_id",mp_1.getTag().toString());
+            case R.id.mp_1:
+                Intent intent = new Intent(getActivity(), TicketListActivity.class);
+                intent.putExtra("title", mp_1.getText().toString());
+                intent.putExtra("theme_id", mp_1.getTag().toString());
                 startActivity(intent);
                 break;
-            case  R.id.mp_2:
-                Intent intent2=new Intent(getActivity(),TicketListActivity.class);
-                intent2.putExtra("title",mp_2.getText().toString());
-                intent2.putExtra("theme_id",mp_2.getTag().toString());
+            case R.id.mp_2:
+                Intent intent2 = new Intent(getActivity(), TicketListActivity.class);
+                intent2.putExtra("title", mp_2.getText().toString());
+                intent2.putExtra("theme_id", mp_2.getTag().toString());
                 startActivity(intent2);
                 break;
-            case  R.id.mp_3:
-                Intent intent3=new Intent(getActivity(),TicketListActivity.class);
-                intent3.putExtra("title",mp_3.getText().toString());
-                intent3.putExtra("theme_id",mp_3.getTag().toString());
+            case R.id.mp_3:
+                Intent intent3 = new Intent(getActivity(), TicketListActivity.class);
+                intent3.putExtra("title", mp_3.getText().toString());
+                intent3.putExtra("theme_id", mp_3.getTag().toString());
                 startActivity(intent3);
                 break;
 
-            case  R.id.mp_4:
-                Intent intent4=new Intent(getActivity(),TicketListActivity.class);
-                intent4.putExtra("title",mp_3.getText().toString());
-                intent4.putExtra("theme_id",mp_3.getTag().toString());
+            case R.id.mp_4:
+                Intent intent4 = new Intent(getActivity(), TicketListActivity.class);
+                intent4.putExtra("title", mp_3.getText().toString());
+                intent4.putExtra("theme_id", mp_3.getTag().toString());
                 startActivity(intent4);
+                break;
+            case R.id.hot_1:
+                Intent intent5 = new Intent(getActivity(), ProductDetailActivity.class);
+                startActivity(intent5);
+                break;
+            case R.id.hot_2:
+                Intent intent6 = new Intent(getActivity(), ProductDetailActivity.class);
+                startActivity(intent6);
+                startActivity(new Intent(getActivity(), ProductDetailActivity.class));
+                break;
+            case R.id.hot_3:
+                Intent intent7 = new Intent(getActivity(), ProductDetailActivity.class);
+                startActivity(intent7);
+                startActivity(new Intent(getActivity(), ProductDetailActivity.class));
                 break;
         }
     }
@@ -290,7 +306,8 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         protected void onSuccess(MainBean info) {
             super.onSuccess(info);
             dismissAlert();
-            settopView(info.getData());
+            mainInfo=info.getData();
+            settopView(mainInfo);
         }
 
         @Override
@@ -303,21 +320,28 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         if (info == null) {
             return;
         }
+        for (int i = 0; i < info.getNav().size(); i++) {
+            images.add(info.getNav().get(i).getBig_img());
+        }
+        setBanner();
         List<HotInfo> list = info.getHot();
         if (!TextUtils.isEmpty(list.get(0).getThumb())) {
             Glide.with(getActivity())
                     .load(list.get(0).getThumb())
                     .into(hot_1);
+            hot_1.setTag(list.get(0).getShop_spot_id());
         }
         if (!TextUtils.isEmpty(list.get(1).getThumb())) {
             Glide.with(getActivity())
                     .load(list.get(1).getThumb())
                     .into(hot_2);
+            hot_2.setTag(list.get(1).getShop_spot_id());
         }
         if (!TextUtils.isEmpty(list.get(2).getThumb())) {
             Glide.with(getActivity())
                     .load(list.get(2).getThumb())
                     .into(hot_3);
+            hot_3.setTag(list.get(2).getShop_spot_id());
         }
         List<TicketsInfo> tlist = info.getTicket();
         if (tlist != null) {
@@ -331,7 +355,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
             mp_4.setTag(tlist.get(3).getShop_spot_attr_id());
         }
 
-        List<HotelInfo> hlist=info.getHotel();
+        List<HotelInfo> hlist = info.getHotel();
         if (hlist != null) {
             jd_1.setText(hlist.get(0).getType());
             jd_1.setTag(hlist.get(0).getShop_hotel_type_id());

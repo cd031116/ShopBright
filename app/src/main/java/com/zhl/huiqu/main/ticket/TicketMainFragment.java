@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.base.BaseFragment;
 import com.zhl.huiqu.base.ContainerActivity;
+import com.zhl.huiqu.main.ProductDetailActivity;
 import com.zhl.huiqu.recyclebase.CommonAdapter;
 import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.sdk.SDK;
@@ -49,11 +51,6 @@ import java.util.List;
 
 
 public class TicketMainFragment extends BaseFragment {
-    private String[] titles = {"全部", "浪漫海景", "风景名胜", "水上乐园", "城市观光", "游乐世界", "历史人文", "健康养生", "影视基地", "民俗风情",
-            "古镇水乡", "演出表演", "动植物园", "休闲娱乐", "宗教寺庙", "户外探险", "拓展培训", "飞行培训"};
-    private int[] images = {R.drawable.jdmp_all, R.drawable.jdmp_qhj, R.drawable.jdmp_fenjing, R.drawable.jdmp_ssyd, R.drawable.jdmp_csgg, R.drawable.jdmp_yly
-            , R.drawable.jdmp_ls, R.drawable.jdmp_yangsheng, R.drawable.jdmp_ys, R.drawable.jdmp_all, R.drawable.jdmp_gzms, R.drawable.jdmp_yc, R.drawable.jdmp_dzw, R.drawable.jdmp_ylxx,
-            R.drawable.jdmp_sm, R.drawable.jdmp_fw, R.drawable.jdmp_px, R.drawable.jdmp_feiji};
     private List<String> imaged = new ArrayList<>();
     private List<View> mPagerList;
     private List<Model> mDatas;
@@ -96,7 +93,7 @@ public class TicketMainFragment extends BaseFragment {
     private List<TickMianHot> aData = new ArrayList<>();
     private LinearLayoutManager mLayoutManage;
     private LinearLayoutManager jLayoutManage;
-
+    private  LayoutInflater minflater;
     public static TicketMainFragment newInstance() {
         return new TicketMainFragment();
     }
@@ -137,29 +134,7 @@ public class TicketMainFragment extends BaseFragment {
     @Override
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate) {
         super.layoutInit(inflater, savedInstanceSate);
-        initDatas();
-        inflater_d = LayoutInflater.from(getActivity());
-        pageCount = (int) Math.ceil(mDatas.size() * 1.0 / pageSize);
-        mPagerList = new ArrayList<View>();
-        for (int i = 0; i < pageCount; i++) {
-            //每个页面都是inflate出一个新实例
-            GridView gridView = (GridView) inflater.inflate(R.layout.gridview, viewpager, false);
-            gridView.setAdapter(new GridViewAdapter(getActivity(), mDatas, i, pageSize));
-            mPagerList.add(gridView);
-            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    int pos = position + curIndex * pageSize;
-                    Intent intent = new Intent(getActivity(), TicketListActivity.class);
-                    intent.putExtra("title", mDatas.get(position).getName());
-                    startActivity(intent);
-                }
-            });
-        }
-        //设置适配器
-        viewpager.setAdapter(new ViewPagerAdapter(mPagerList));
-        //设置圆点
-        setOvalLayout();
+        this.minflater=inflater;
         setBanner();
     }
 
@@ -187,11 +162,29 @@ public class TicketMainFragment extends BaseFragment {
      * 初始化数据源
      */
     private void initDatas() {
-        mDatas = new ArrayList<Model>();
-        for (int i = 0; i < titles.length; i++) {
-            //动态获取资源ID，第一个参数是资源名，第二个参数是资源类型例如drawable，string等，第三个参数包名
-            mDatas.add(new Model(titles[i], images[i]));
+        inflater_d = LayoutInflater.from(getActivity());
+        pageCount = (int) Math.ceil(mDatas.size() * 1.0 / pageSize);
+        mPagerList = new ArrayList<View>();
+        for (int i = 0; i < pageCount; i++) {
+            //每个页面都是inflate出一个新实例
+            GridView gridView = (GridView) minflater.inflate(R.layout.gridview, viewpager, false);
+            gridView.setAdapter(new GridViewAdapter(getActivity(), mDatas, i, pageSize));
+            mPagerList.add(gridView);
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    int pos = position + curIndex * pageSize;
+                    Intent intent = new Intent(getActivity(), TicketListActivity.class);
+                    intent.putExtra("title", mDatas.get(position).getName());
+                    intent.putExtra("theme_id",mDatas.get(position).getShop_spot_attr_id());
+                    startActivity(intent);
+                }
+            });
         }
+        //设置适配器
+        viewpager.setAdapter(new ViewPagerAdapter(mPagerList));
+        //设置圆点
+        setOvalLayout();
     }
 
     /**
@@ -265,9 +258,9 @@ public class TicketMainFragment extends BaseFragment {
 
     /*热点*/
     private void sethot() {
-        adapter = new CommonAdapter<TickMianHot>(getActivity(), R.layout.item_ur_like, aData) {
+        adapter = new CommonAdapter<TickMianHot>(getActivity(), R.layout.item_hot, aData) {
             @Override
-            protected void convert(ViewHolder holder, TickMianHot hot, int position) {
+            protected void convert(ViewHolder holder, TickMianHot hot, int position){
             holder.setVisible(R.id.ur_like_tag,false);
                 holder.setVisible(R.id.ur_like_dp,false);
                 holder.setBitmapWithUrl(R.id.ur_like_img,hot.getThumb());
@@ -275,6 +268,12 @@ public class TicketMainFragment extends BaseFragment {
                 holder.setText(R.id.price_text,"￥"+hot.getShop_price());
                 holder.setText(R.id.price_ms_text,"起");
                 holder.setText(R.id.address_text,hot.getCsr()+"满意度");
+                holder.setOnClickListener(R.id.main_top, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getActivity(),ProductDetailActivity.class));
+                    }
+                });
 
             }
         };
@@ -299,13 +298,18 @@ public class TicketMainFragment extends BaseFragment {
                 holder.setText(R.id.tourist_tag,"风景名胜");
                 holder.setTextColor(R.id.tourist_price, Color.parseColor("#e11818"));
                 holder.setText(R.id.tourist_price,"￥"+ircum.getShop_price()+"起");
-
+                holder.setOnClickListener(R.id.main_top, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getActivity(),ProductDetailActivity.class));
+                    }
+                });
             }
         };
         jLayoutManage = new LinearLayoutManager(getActivity());
         jLayoutManage.setOrientation(LinearLayoutManager.VERTICAL);//设置滚动方向，横向滚动
         lear_jd.setLayoutManager(jLayoutManage);
-        lear_jd.setAdapter(adapter);
+        lear_jd.setAdapter(jdapter);
     }
 
 
@@ -320,7 +324,7 @@ public class TicketMainFragment extends BaseFragment {
 
         @Override
         public TickMainBean workInBackground(Void... voids) throws TaskException {
-            return SDK.newInstance(getActivity()).getTicketInfo("");
+            return SDK.newInstance(getActivity()).getTicketInfo("ticket");
         }
 
         @Override
@@ -329,6 +333,9 @@ public class TicketMainFragment extends BaseFragment {
             dismissAlert();
             aData = info.getData().getHot();
             jData=info.getData().getAround();
+            mDatas=info.getData().getTheme();
+            Log.i("mmmm","jData="+jData.size());
+            initDatas();
             setlist();
             sethot();
         }

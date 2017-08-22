@@ -94,6 +94,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
         return new PageIndexPaging<>();
     }
 
+
 //    @Override
 //    protected RecyclerView.LayoutManager configLayoutManager() {
 //

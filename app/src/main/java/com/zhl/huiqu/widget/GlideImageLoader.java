@@ -6,6 +6,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.youth.banner.loader.ImageLoader;
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.utils.Utils;
+
 
 /**
  * Created by Administrator on 2017/8/11.
@@ -23,7 +25,7 @@ public class GlideImageLoader extends ImageLoader {
          */
         //Glide 加载图片简单用法
         Glide.with(context)
-                .load(path)
+                .load(Utils.getImageUrl(String.valueOf(path)))
                 .into(imageView);
     }
 

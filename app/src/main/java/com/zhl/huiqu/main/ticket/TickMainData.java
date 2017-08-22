@@ -1,5 +1,7 @@
 package com.zhl.huiqu.main.ticket;
 
+import com.zhl.huiqu.main.bean.TickActiveInfo;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -8,29 +10,37 @@ import java.util.List;
  */
 
 public class TickMainData implements Serializable{
+    private List<TickActiveInfo> nav;
 
+    private List<Model> theme;
 
-    private TickMianTabItem ticket_before;
-
-    private TickMianPro promoteInfo;
+    private List<TickMianPro> promoteInfo;
 
     private List<TickMianHot> hot;
 
     private List<TickCircum> around;
 
-    public TickMianTabItem getTicket_before() {
-        return ticket_before;
+    public List<TickActiveInfo> getNav() {
+        return nav;
     }
 
-    public void setTicket_before(TickMianTabItem ticket_before) {
-        this.ticket_before = ticket_before;
+    public void setNav(List<TickActiveInfo> nav) {
+        this.nav = nav;
     }
 
-    public TickMianPro getPromoteInfo() {
+    public List<Model> getTheme() {
+        return theme;
+    }
+
+    public void setTheme(List<Model> theme) {
+        this.theme = theme;
+    }
+
+    public List<TickMianPro> getPromoteInfo() {
         return promoteInfo;
     }
 
-    public void setPromoteInfo(TickMianPro promoteInfo) {
+    public void setPromoteInfo(List<TickMianPro> promoteInfo) {
         this.promoteInfo = promoteInfo;
     }
 

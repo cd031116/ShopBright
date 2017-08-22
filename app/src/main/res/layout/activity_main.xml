@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     android:orientation="vertical"
     android:clipToPadding="true"
     android:fitsSystemWindows="true">
@@ -12,6 +13,7 @@
         android:layout_width="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_height="0dp"
+        android:background="#ffffff"
         android:layout_weight="1"
         />
     <include layout="@layout/bottom" />

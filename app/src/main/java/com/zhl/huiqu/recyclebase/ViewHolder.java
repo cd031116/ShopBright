@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.text.util.Linkify;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,10 +23,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
-
-import org.aisen.android.common.utils.SystemUtils;
-
+import com.zhl.huiqu.utils.Utils;
 
 
 public class ViewHolder extends RecyclerView.ViewHolder
@@ -146,7 +146,7 @@ public class ViewHolder extends RecyclerView.ViewHolder
     public ViewHolder setImageWithUrl(int viewId, String url) {
         ImageView view = getView(viewId);
         Glide.with(mContext)
-                .load(url)
+                .load(Utils.getImageUrl(url))
                 .into(view);
 
         return this;
@@ -154,10 +154,10 @@ public class ViewHolder extends RecyclerView.ViewHolder
 
     public ViewHolder setBitmapWithUrl(int viewId, String url) {
         ImageView view = getView(viewId);
+        String image=Utils.getImageUrl(url);
         Glide.with(mContext)
-                .load(url)
+                .load(image)
                 .into(view);
-
         return this;
     }
 

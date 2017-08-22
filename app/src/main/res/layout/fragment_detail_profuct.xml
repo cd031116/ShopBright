@@ -647,7 +647,6 @@
         android:background="#ffffff"/>
 
 
-
     <LinearLayout
         android:id="@+id/search01"
         android:layout_width="match_parent"

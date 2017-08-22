@@ -41,28 +41,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5px"
-                android:background="@color/red_text"
+                android:background="@drawable/mp_list_bg"
                 android:padding="10px"
                 android:text="优惠券"
-                android:textColor="#ffffff" />
+                android:textColor="@color/red_text" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5px"
-                android:background="@color/red_text"
+                android:background="@drawable/mp_list_bg"
                 android:padding="10px"
                 android:text="促销"
-                android:textColor="#ffffff" />
+                android:textColor="@color/red_text" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5px"
-                android:background="@color/red_text"
+                android:background="@drawable/mp_list_bg"
                 android:padding="10px"
                 android:text="随时退"
-                android:textColor="#ffffff" />
+                android:textColor="@color/red_text" />
 
         </LinearLayout>
 
@@ -123,7 +123,7 @@
             android:textColor="#666666"
             android:textSize="28px" />
 
-        <TextView
+          <TextView
             android:id="@+id/submit"
             android:layout_width="178px"
             android:layout_height="80px"

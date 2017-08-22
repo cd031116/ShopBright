@@ -8,7 +8,7 @@ import java.util.List;
  */
 
 public class MainTopInfo implements Serializable{
-
+    private List<BannerInfo> nav;
    private List<HotelInfo>  hotel;
 
     private List<TicketsInfo>  ticket;
@@ -37,5 +37,13 @@ public class MainTopInfo implements Serializable{
 
     public void setHot(List<HotInfo> hot) {
         this.hot = hot;
+    }
+
+    public List<BannerInfo> getNav() {
+        return nav;
+    }
+
+    public void setNav(List<BannerInfo> nav) {
+        this.nav = nav;
     }
 }

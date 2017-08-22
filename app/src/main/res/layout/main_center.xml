@@ -99,12 +99,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
+            android:src="@mipmap/error"
             android:layout_weight="2"/>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="1px"
+            android:layout_marginLeft="2px"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="vertical">
@@ -113,16 +114,18 @@
             <ImageView
                 android:id="@+id/hot_2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:scaleType="fitXY"
+                android:src="@mipmap/error"
                 android:layout_weight="1"/>
 
             <ImageView
                 android:id="@+id/hot_3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:scaleType="fitXY"
-                android:layout_marginTop="1px"
+                android:src="@mipmap/error"
+                android:layout_marginTop="2px"
                 android:layout_weight="1" />
 
 

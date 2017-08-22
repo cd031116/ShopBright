@@ -6,9 +6,9 @@ import com.zhl.huiqu.base.BaseInfo;
  * Created by Administrator on 2017/8/19.
  */
 
-public class TickMainBean extends BaseInfo{
+public class TickMainBean extends BaseInfo {
 
-private TickMainData data;
+    private TickMainData data;
 
     public TickMainData getData() {
         return data;

@@ -2,6 +2,7 @@ package com.zhl.huiqu.utils;
 
 import android.app.Activity;
 import android.os.Build;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.view.WindowManager;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.zhl.huiqu.BuildConfig;
+import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.widget.FooterItemView;
 
 import org.aisen.android.ui.fragment.itemview.AFooterItemView;
@@ -125,5 +128,15 @@ public class Utils {
         }
     }
 
-
+    public static String getImageUrl(String url){
+        if(TextUtils.isEmpty(url)){
+            return "";
+        }
+        if(url.contains("http://")){
+            return url;
+        }else {
+            url= BuildConfig.BASE_URL+url;
+            return url;
+        }
+    }
 }

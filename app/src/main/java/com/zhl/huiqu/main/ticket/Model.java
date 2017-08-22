@@ -7,12 +7,16 @@ import java.io.Serializable;
  */
 
 public class Model implements Serializable{
-    public String name;
-    public int iconRes;
+    private String shop_spot_attr_id;
+    private String name;
+    private String img;
 
-    public Model(String name, int iconRes) {
-        this.name = name;
-        this.iconRes = iconRes;
+    public String getShop_spot_attr_id() {
+        return shop_spot_attr_id;
+    }
+
+    public void setShop_spot_attr_id(String shop_spot_attr_id) {
+        this.shop_spot_attr_id = shop_spot_attr_id;
     }
 
     public String getName() {
@@ -23,11 +27,11 @@ public class Model implements Serializable{
         this.name = name;
     }
 
-    public int getIconRes() {
-        return iconRes;
+    public String getImg() {
+        return img;
     }
 
-    public void setIconRes(int iconRes) {
-        this.iconRes = iconRes;
+    public void setImg(String img) {
+        this.img = img;
     }
 }

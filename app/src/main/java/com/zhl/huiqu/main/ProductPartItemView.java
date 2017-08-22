@@ -8,8 +8,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
+import com.zhl.huiqu.widget.GlideRoundTransform;
 
 import org.aisen.android.common.utils.SystemUtils;
 import org.aisen.android.common.utils.Utils;
@@ -52,8 +54,12 @@ public class ProductPartItemView extends ARecycleViewItemView<ProductPartBean> {
 
     @Override
     public void onBindData(View view, ProductPartBean bean, int i) {
+        RequestOptions myOptions = new RequestOptions()
+                .centerCrop()
+                .transform(new GlideRoundTransform(activity,10));
         Glide.with(activity)
                 .load(bean.getThumb())
+                .apply(myOptions)
                 .into(photo);
         title.setText(bean.getTitle());
         if(bean.getComment_num()<=0){
