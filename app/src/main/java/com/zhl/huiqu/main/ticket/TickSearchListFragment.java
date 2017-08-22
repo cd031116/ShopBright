@@ -1,6 +1,5 @@
 package com.zhl.huiqu.main.ticket;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -10,19 +9,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
-import com.zhl.huiqu.base.ContainerActivity;
+import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.main.ProductDetailActivity;
-import com.zhl.huiqu.main.ProductPartBean;
-import com.zhl.huiqu.main.ProductPartListBean;
 import com.zhl.huiqu.sdk.SDK;
+import com.zhl.huiqu.sdk.eventbus.CityEvent;
+import com.zhl.huiqu.sdk.eventbus.CitySubscriber;
+import com.zhl.huiqu.sdk.eventbus.TickSearchEvent;
+import com.zhl.huiqu.sdk.eventbus.TickSearchSubscriber;
+import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.Utils;
 
+import org.aisen.android.component.eventbus.NotificationCenter;
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.support.inject.ViewInject;
 import org.aisen.android.support.paging.IPaging;
@@ -32,19 +33,18 @@ import org.aisen.android.ui.fragment.itemview.IITemView;
 import org.aisen.android.ui.fragment.itemview.IItemViewCreator;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by lyj on 2017/8/15.
+ * Created by Administrator on 2017/8/22.
  */
 
-public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo, TickListInfo, Serializable> {
+public class TickSearchListFragment extends ARecycleViewSwipeRefreshFragment<TickInfo, TickListInfo, Serializable> {
 
-    public static TickListFragment newInstance(String theme_id) {
+    public static TickSearchListFragment newInstance(String theme_id) {
         Bundle args = new Bundle();
         args.putString("theme_id", theme_id);
-        TickListFragment fragment = new TickListFragment();
+        TickSearchListFragment fragment = new TickSearchListFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,16 +57,18 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
     RecyclerView recycleview;
 
 
-    private String theme_id;
+    private String theme_id="",grade="";
+
     @Override
-    public void setContentView(ViewGroup view){
+    public void setContentView(ViewGroup view) {
         super.setContentView(view);
         SupportMultipleScreensUtil.init(getActivity());
         SupportMultipleScreensUtil.scale(view);
     }
 
+
     @Override
-    public int inflateContentView(){
+    public int inflateContentView() {
         return R.layout.ui_recycle;
     }
 
@@ -76,7 +78,7 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
         int a = getAdapterItems().get(position).getShop_spot_id();
         if (position < getAdapterItems().size()) {
             Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
-            intent.putExtra("shop_spot_id",a+"");
+            intent.putExtra("shop_spot_id", a + "");
             startActivity(intent);
         }
     }
@@ -85,13 +87,25 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         theme_id = getArguments().getString("theme_id");
+        NotificationCenter.defaultCenter().subscriber(TickSearchEvent.class, tickSearchEvent);
     }
+
+    TickSearchSubscriber tickSearchEvent = new TickSearchSubscriber() {
+        @Override
+        public void onEvent(TickSearchEvent info){
+            theme_id = info.getTheme_id();
+
+            requestData(RefreshMode.reset);
+
+        }
+    };
+
 
     @Override
     public IItemViewCreator<TickInfo> configItemViewCreator() {
         return new IItemViewCreator<TickInfo>() {
             @Override
-            public View newContentView(LayoutInflater layoutInflater, ViewGroup viewGroup, int i){
+            public View newContentView(LayoutInflater layoutInflater, ViewGroup viewGroup, int i) {
                 return layoutInflater.inflate(TickItemView.LAYOUT_RES, viewGroup, false);
             }
 
@@ -121,7 +135,7 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
     @Override
     protected void setupRefreshConfig(RefreshConfig config) {
         super.setupRefreshConfig(config);
-        config.footerMoreEnable = false;
+        config.footerMoreEnable = true;
     }
 
     @Override
@@ -138,11 +152,11 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
     }
 
     @Override
-    public void requestData(RefreshMode refreshMode){
+    public void requestData(RefreshMode refreshMode) {
         new Task(refreshMode != RefreshMode.update ? RefreshMode.reset : RefreshMode.update).execute();
     }
 
-    class Task extends APagingTask<Void, Void, TickBean>{
+    class Task extends APagingTask<Void, Void, TickBean> {
         public Task(RefreshMode mode) {
             super(mode);
         }
@@ -153,11 +167,10 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
         }
 
 
-
         @Override
-        protected TickBean workInBackground(RefreshMode refreshMode, String s, String nextPage, Void... voids)throws TaskException{
+        protected TickBean workInBackground(RefreshMode refreshMode, String s, String nextPage, Void... voids) throws TaskException {
             int start = 1;
-            if (mode == RefreshMode.update && !TextUtils.isEmpty(nextPage)){
+            if (mode == RefreshMode.update && !TextUtils.isEmpty(nextPage)) {
                 try {
                     start = Integer.parseInt(nextPage);
                 } catch (Exception e) {
@@ -165,14 +178,14 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
                 }
             }
             TickBean beans = queryList(start);
-            if (beans != null && beans.getData() != null){
+            if (beans != null && beans.getData() != null) {
                 beans.setEndPaging(beans.getData().getTicketOnly().size() <= 5);
             }
             return beans;
         }
 
         @Override
-        protected void onFailure(TaskException exception){
+        protected void onFailure(TaskException exception) {
             super.onFailure(exception);
 //            error_text.setText(exception.getMessage());
 //            if ("noneNetwork".equals(exception.getCode())) {
@@ -180,13 +193,14 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
 //            }
         }
     }
+
     protected TickBean queryList(int start) throws TaskException {
-        return SDK.newInstance(getActivity()).getTicketData(theme_id,start+"");
+        return SDK.newInstance(getActivity()).getSpotByCondition(theme_id, "", "", start + "");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        NotificationCenter.defaultCenter().unsubscribe(TickSearchEvent.class, tickSearchEvent);
     }
-
 }

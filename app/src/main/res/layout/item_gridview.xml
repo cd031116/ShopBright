@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="80px"
-        android:layout_height="80px"
+        android:layout_width="112px"
+        android:layout_height="112px"
         android:src="@drawable/person_setting"/>
 
     <TextView

@@ -20,7 +20,7 @@
         android:layout_below="@+id/top_layout"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,20 +42,25 @@
                 android:paddingLeft="200px"
                 android:paddingRight="200px">
 
+                <ImageView
+                    android:id="@+id/go_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/search_ss"/>
+
                 <EditText
                     android:id="@+id/editSearch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10px"
                     android:background="@null"
-                    android:drawableLeft="@drawable/search_ss"
                     android:drawablePadding="10px"
                     android:gravity="center"
                     android:hint="输入您要搜索的景点/地区"
                     android:textColor="#666666"
                     android:textSize="32px" />
             </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -63,6 +68,7 @@
             android:layout_marginBottom="5px"
             android:layout_marginLeft="20px"
             android:layout_marginTop="5px"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <TextView
@@ -87,6 +93,7 @@
             android:id="@+id/city_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:background="#ffffff"/>
 
         <TextView

@@ -1,6 +1,7 @@
 package com.zhl.huiqu.sdk;
 
 import android.app.Activity;
+import android.text.TextUtils;
 
 import com.zhl.huiqu.BuildConfig;
 import com.zhl.huiqu.base.BaseInfo;
@@ -9,6 +10,7 @@ import com.zhl.huiqu.login.entity.RegisterInfo;
 import com.zhl.huiqu.main.ProductPartListBean;
 import com.zhl.huiqu.main.bean.DetailBean;
 import com.zhl.huiqu.main.bean.DetailMainBean;
+import com.zhl.huiqu.main.bean.GradeBean;
 import com.zhl.huiqu.main.bean.MainBean;
 import com.zhl.huiqu.main.bean.MainTopInfo;
 import com.zhl.huiqu.main.ticket.SpotTBean;
@@ -160,10 +162,10 @@ public class SDK extends ABizLogic {
      * @throws TaskException
      */
     public TickBean getTicketData(String theme_id, String page) throws TaskException {
-        Setting action = newSetting("getTicketInfo", "appapi/Spotticket/getTicketInfo", "景点门票页面获取门票分类信息");
+        Setting action = newSetting("getTicketInfo", "appapi/Spotticket/getTicketByThemeId", "景点门票页面获取门票分类信息");
         Params params = new Params();
         params.addParameter("theme_id", theme_id);
-//        params.addParameter("page", page);
+        params.addParameter("page", page);
         return doGet(action, basicParams(params), TickBean.class);
     }
 
@@ -279,10 +281,24 @@ public class SDK extends ABizLogic {
      * @throws TaskException
      */
     public SpotTBean getSpotTheme(String type) throws TaskException {
-        Setting action = newSetting("getGoodsDetail", "appapi/Spotticket/getSpotTheme", "景点主题");
+        Setting action = newSetting("getSpotTheme", "appapi/Spotticket/getSpotTheme", "景点主题");
         Params params = new Params();
         params.addParameter("type", type);
         return doGet(action, basicParams(params), SpotTBean.class);
+    }
+
+    /**
+     * 景点主题
+     *
+     * @param type //景点分类
+     * @return
+     * @throws TaskException
+     */
+    public GradeBean getSpotTheme1(String type) throws TaskException {
+        Setting action = newSetting("getSpotTheme", "appapi/Spotticket/getSpotTheme", "景点主题");
+        Params params = new Params();
+        params.addParameter("type", type);
+        return doGet(action, basicParams(params), GradeBean.class);
     }
 
     /**
@@ -396,6 +412,31 @@ public class SDK extends ABizLogic {
         params.addParameter("memberId", memberId);
         return doPost(configHttpConfig(), action, params, null, null, BaseInfo.class);
     }
+
+
+
+    /**
+     * 通过筛选条件查询门票
+     *
+     * @return
+     * @throws TaskException
+     */
+    public TickBean getSpotByCondition(String theme_id, String grade, String order, String page) throws TaskException {
+        Setting action = newSetting("getSpotByCondition", "appapi/Spotticket/getSpotByCondition", "通过筛选条件查询门票");
+        Params params = new Params();
+        if(!TextUtils.isEmpty(theme_id)){
+            params.addParameter("theme_id", theme_id);
+        }
+        if(!TextUtils.isEmpty(grade)){
+            params.addParameter("grade", grade);
+        }
+        if(!TextUtils.isEmpty(order)){
+            params.addParameter("order", order);
+        }
+        params.addParameter("page", page);
+        return doGet(configHttpConfig(), action, params,TickBean.class);
+    }
+
 
 
     @Override

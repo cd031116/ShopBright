@@ -59,7 +59,9 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
         super.onItemClick(parent, view, position, id);
         int a = getAdapterItems().get(position).getShop_spot_id();
         if (position < getAdapterItems().size()) {
-           startActivity(new Intent(getActivity(),ProductDetailActivity.class));
+            Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
+            intent.putExtra("shop_spot_id",a+"");
+            startActivity(intent);
         }
     }
 

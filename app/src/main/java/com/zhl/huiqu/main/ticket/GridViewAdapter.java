@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.Utils;
 
 import java.util.List;
@@ -63,6 +64,7 @@ public class GridViewAdapter extends BaseAdapter {
         ViewHolder viewHolder = null;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.item_gridview, parent, false);
+            SupportMultipleScreensUtil.scale(convertView);
             viewHolder = new ViewHolder();
             viewHolder.tv = (TextView) convertView.findViewById(R.id.textView);
             viewHolder.iv = (ImageView) convertView.findViewById(R.id.imageView);

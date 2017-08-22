@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_top"
     android:layout_width="match_parent"
-    android:layout_height="220px"
+    android:layout_height="wrap_content"
     android:background="@drawable/onclick_bg"
     android:layout_marginTop="1px"
     android:orientation="vertical"
@@ -50,6 +50,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
+                android:layout_marginTop="10px"
+                android:layout_below="@+id/desc"
                 android:orientation="vertical">
 
                 <TextView
@@ -81,15 +83,8 @@
 
                 </LinearLayout>
 
-
-
-
-
             </LinearLayout>
-
-
         </RelativeLayout>
-
 
     </LinearLayout>
 
@@ -100,13 +95,15 @@
         android:layout_alignParentRight="true"
         android:padding="20px"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/linearLayout">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/gray_right"/>
 
     </LinearLayout>
+
 
 
 </RelativeLayout>

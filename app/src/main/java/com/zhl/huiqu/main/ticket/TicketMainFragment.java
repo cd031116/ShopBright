@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.base.BaseFragment;
@@ -31,8 +33,10 @@ import com.zhl.huiqu.sdk.eventbus.CityEvent;
 import com.zhl.huiqu.sdk.eventbus.CitySubscriber;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
+import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.widget.GlideImageLoader;
 
+import org.aisen.android.common.utils.SystemUtils;
 import org.aisen.android.component.eventbus.NotificationCenter;
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
@@ -83,7 +87,7 @@ public class TicketMainFragment extends BaseFragment {
     RecyclerView lear_city;//
     @ViewInject(id = R.id.id_content)
     RecyclerView lear_jd;//
-
+    private TickMainBean tickInfo;
 
     private CommonAdapter<TickMianHot> adapter;//热点
     private CommonAdapter<TickCircum> mdapter;//附近
@@ -93,7 +97,8 @@ public class TicketMainFragment extends BaseFragment {
     private List<TickMianHot> aData = new ArrayList<>();
     private LinearLayoutManager mLayoutManage;
     private LinearLayoutManager jLayoutManage;
-    private  LayoutInflater minflater;
+    private LayoutInflater minflater;
+
     public static TicketMainFragment newInstance() {
         return new TicketMainFragment();
     }
@@ -134,7 +139,7 @@ public class TicketMainFragment extends BaseFragment {
     @Override
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate) {
         super.layoutInit(inflater, savedInstanceSate);
-        this.minflater=inflater;
+        this.minflater = inflater;
         setBanner();
     }
 
@@ -165,7 +170,7 @@ public class TicketMainFragment extends BaseFragment {
         inflater_d = LayoutInflater.from(getActivity());
         pageCount = (int) Math.ceil(mDatas.size() * 1.0 / pageSize);
         mPagerList = new ArrayList<View>();
-        for (int i = 0; i < pageCount; i++) {
+        for (int i = 0; i < pageCount; i++){
             //每个页面都是inflate出一个新实例
             GridView gridView = (GridView) minflater.inflate(R.layout.gridview, viewpager, false);
             gridView.setAdapter(new GridViewAdapter(getActivity(), mDatas, i, pageSize));
@@ -175,8 +180,8 @@ public class TicketMainFragment extends BaseFragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     int pos = position + curIndex * pageSize;
                     Intent intent = new Intent(getActivity(), TicketListActivity.class);
-                    intent.putExtra("title", mDatas.get(position).getName());
-                    intent.putExtra("theme_id",mDatas.get(position).getShop_spot_attr_id());
+                    intent.putExtra("title", mDatas.get(pos).getName());
+                    intent.putExtra("theme_id", mDatas.get(pos).getShop_spot_attr_id());
                     startActivity(intent);
                 }
             });
@@ -219,9 +224,13 @@ public class TicketMainFragment extends BaseFragment {
     }
 
     private void setBanner() {
-        imaged.add("http://pic30.nipic.com/20130626/8174275_085522448172_2.jpg");
-        imaged.add("http://pic18.nipic.com/20111215/577405_080531548148_2.jpg");
-        imaged.add("http://pic15.nipic.com/20110722/2912365_092519919000_2.jpg");
+        if (tickInfo == null) {
+            return;
+        }
+        for (int i = 0; i < tickInfo.getData().getNav().size(); i++) {
+            imaged.add(tickInfo.getData().getNav().get(i).getBig_img());
+        }
+
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         //设置图片加载器
         banner.setImageLoader(new GlideImageLoader());
@@ -239,7 +248,14 @@ public class TicketMainFragment extends BaseFragment {
         banner.setIndicatorGravity(BannerConfig.CENTER);
         //banner设置方法全部调用完毕时最后调用
         banner.start();
-
+        banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
+                intent.putExtra("shop_spot_id", tickInfo.getData().getNav().get(position).getShop_spot_id());
+                startActivity(intent);
+            }
+        });
     }
 
     @OnClick({R.id.btnBack, R.id.line_back, R.id.searh_line, R.id.editSearch})
@@ -258,20 +274,30 @@ public class TicketMainFragment extends BaseFragment {
 
     /*热点*/
     private void sethot() {
+      final   int width = SystemUtils.getScreenWidth(getActivity());
         adapter = new CommonAdapter<TickMianHot>(getActivity(), R.layout.item_hot, aData) {
             @Override
-            protected void convert(ViewHolder holder, TickMianHot hot, int position){
-            holder.setVisible(R.id.ur_like_tag,false);
-                holder.setVisible(R.id.ur_like_dp,false);
-                holder.setBitmapWithUrl(R.id.ur_like_img,hot.getThumb());
-                holder.setText(R.id.ms_tourist_text,hot.getTitle());
-                holder.setText(R.id.price_text,"￥"+hot.getShop_price());
-                holder.setText(R.id.price_ms_text,"起");
-                holder.setText(R.id.address_text,hot.getCsr()+"满意度");
+            protected void convert(ViewHolder holder, final TickMianHot hot, int position) {
+//                holder.setRelatHW(R.id.main_top,width*1/3, Math.round(1/4* width));
+
+                holder.setVisible(R.id.ur_like_tag, false);
+                holder.setVisible(R.id.ur_like_dp, false);
+                holder.setBitmapWithUrl(R.id.ur_like_img, hot.getThumb());
+                holder.setText(R.id.ms_tourist_text, hot.getTitle());
+                holder.setText(R.id.price_text, "￥" + hot.getShop_price());
+                holder.setText(R.id.price_ms_text, "起");
+                String manyidu = hot.getCsr();
+                if (!TextUtils.isEmpty(manyidu)) {
+                    holder.setText(R.id.address_text, hot.getCsr() + "满意度");
+                } else {
+                    holder.setText(R.id.address_text, hot.getCsr());
+                }
                 holder.setOnClickListener(R.id.main_top, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(getActivity(),ProductDetailActivity.class));
+                        Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
+                        intent.putExtra("shop_spot_id", hot.getShop_spot_id());
+                        startActivity(intent);
                     }
                 });
 
@@ -288,20 +314,22 @@ public class TicketMainFragment extends BaseFragment {
     private void setlist() {
         jdapter = new CommonAdapter<TickCircum>(getActivity(), R.layout.item_tourist_point, jData) {
             @Override
-            protected void convert(ViewHolder holder, TickCircum ircum, int position) {
+            protected void convert(ViewHolder holder, final TickCircum ircum, int position) {
                 holder.setBitmapWithUrl(R.id.tourist_view, ircum.getThumb());
-                holder.setText(R.id.tourist_area,ircum.getTitle());
-                holder.setText(R.id.tourist_ms,ircum.getDesc());
-                holder.setText(R.id.tourist_place,ircum.getCity());
-                holder.setText(R.id.tourist_place_score,ircum.getCsr());
-                holder.setText(R.id.tourist_place_jibie,ircum.getLevel());
-                holder.setText(R.id.tourist_tag,"风景名胜");
+                holder.setText(R.id.tourist_area, ircum.getTitle());
+                holder.setText(R.id.tourist_ms, ircum.getDesc());
+                holder.setText(R.id.tourist_place, ircum.getCity());
+                holder.setText(R.id.tourist_place_score, ircum.getCsr());
+                holder.setText(R.id.tourist_place_jibie, ircum.getLevel());
+                holder.setText(R.id.tourist_tag, "风景名胜");
                 holder.setTextColor(R.id.tourist_price, Color.parseColor("#e11818"));
-                holder.setText(R.id.tourist_price,"￥"+ircum.getShop_price()+"起");
+                holder.setText(R.id.tourist_price, "￥" + ircum.getShop_price() + "起");
                 holder.setOnClickListener(R.id.main_top, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(getActivity(),ProductDetailActivity.class));
+                        Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
+                        intent.putExtra("shop_spot_id", ircum.getSpot_team_id());
+                        startActivity(intent);
                     }
                 });
             }
@@ -330,14 +358,16 @@ public class TicketMainFragment extends BaseFragment {
         @Override
         protected void onSuccess(TickMainBean info) {
             super.onSuccess(info);
+            tickInfo = info;
             dismissAlert();
             aData = info.getData().getHot();
-            jData=info.getData().getAround();
-            mDatas=info.getData().getTheme();
-            Log.i("mmmm","jData="+jData.size());
+            jData = info.getData().getAround();
+            mDatas = info.getData().getTheme();
+            Log.i("mmmm", "jData=" + jData.size());
             initDatas();
             setlist();
             sethot();
+            setBanner();
         }
 
         @Override

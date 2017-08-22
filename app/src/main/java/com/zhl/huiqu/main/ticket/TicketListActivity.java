@@ -24,7 +24,7 @@ public class TicketListActivity extends BaseActivity {
     }
 
     @Override
-    public void initView() {
+    public void initView(){
         super.initView();
         Bundle bd=getIntent().getExtras();
         if(bd!=null){
@@ -54,7 +54,7 @@ public class TicketListActivity extends BaseActivity {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         //步骤二：用add()方法加上Fragment的对象rightFragment
-        TickListFragment rightFragment = TickListFragment.newInstance("5");
+        TickListFragment rightFragment = TickListFragment.newInstance(theme_id);
         transaction.add(R.id.content, rightFragment);
         //步骤三：调用commit()方法使得FragmentTransaction实例的改变生效
         transaction.commit();

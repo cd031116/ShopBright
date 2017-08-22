@@ -87,6 +87,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20px"
+                android:visibility="visible"
+                app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                app:spanCount="3" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/gra_recy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:visibility="gone"
                 app:layoutManager="android.support.v7.widget.GridLayoutManager"
                 app:spanCount="3" />
         </LinearLayout>

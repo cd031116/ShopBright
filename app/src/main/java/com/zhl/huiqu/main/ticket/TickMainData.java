@@ -10,6 +10,9 @@ import java.util.List;
  */
 
 public class TickMainData implements Serializable{
+
+
+
     private List<TickActiveInfo> nav;
 
     private List<Model> theme;

@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,8 +23,12 @@ public class TixkSearchActivity extends BaseActivity {
     FrameLayout frameLayout;
     @Bind(R.id.top_title)
     TextView top_title;
+    @Bind(R.id.go_search)
+    ImageView go_search;
+
     private SelectTourWindow mopupWindow;
     private TickBottomWindow pPopupWindow;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_tixk_search;
@@ -35,7 +40,7 @@ public class TixkSearchActivity extends BaseActivity {
         top_title.setText("门票搜索");
         getView();
         mopupWindow = new SelectTourWindow(TixkSearchActivity.this, itemsOnClick);
-        pPopupWindow=new TickBottomWindow(TixkSearchActivity.this, itemsOnslick);
+        pPopupWindow = new TickBottomWindow(TixkSearchActivity.this, itemsOnslick);
     }
 
     @Override
@@ -43,7 +48,7 @@ public class TixkSearchActivity extends BaseActivity {
         super.initData();
     }
 
-    @OnClick({R.id.top_left, R.id.top_image,R.id.jd_zhuti,R.id.saixuan})
+    @OnClick({R.id.top_left, R.id.top_image, R.id.jd_zhuti, R.id.saixuan, R.id.go_search})
     void onClicked(View v) {
         switch (v.getId()) {
             case R.id.top_left:
@@ -52,13 +57,16 @@ public class TixkSearchActivity extends BaseActivity {
                 break;
             case R.id.jd_zhuti:
                 mopupWindow.showAtLocation(TixkSearchActivity.this.findViewById(R.id.main),
-                        Gravity.BOTTOM| Gravity.CENTER_HORIZONTAL, 0, 0);
+                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 break;
             case R.id.saixuan:
                 pPopupWindow.showAtLocation(TixkSearchActivity.this.findViewById(R.id.main),
-                        Gravity.BOTTOM| Gravity.CENTER_HORIZONTAL, 0, 0);
+                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 break;
+            case R.id.go_search:
 
+
+                break;
         }
     }
 
@@ -66,7 +74,7 @@ public class TixkSearchActivity extends BaseActivity {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         //步骤二：用add()方法加上Fragment的对象rightFragment
-        TickListFragment rightFragment = TickListFragment.newInstance("");
+        TickSearchListFragment rightFragment = TickSearchListFragment.newInstance("");
         transaction.add(R.id.content, rightFragment);
         //步骤三：调用commit()方法使得FragmentTransaction实例的改变生效
         transaction.commit();
@@ -74,15 +82,15 @@ public class TixkSearchActivity extends BaseActivity {
 
     private SelectTourWindow.ItemInclick itemsOnClick = new SelectTourWindow.ItemInclick(){
         @Override
-        public void ItemClick(String tab, String item){
-            Toast.makeText(TixkSearchActivity.this,"tabtabtab="+tab,Toast.LENGTH_SHORT).show();
+        public void ItemClick(String tab, String item) {
+            Toast.makeText(TixkSearchActivity.this, "tabtabtab=" + tab, Toast.LENGTH_SHORT).show();
         }
     };
 
-    private TickBottomWindow.ItemInclick itemsOnslick = new TickBottomWindow.ItemInclick(){
+    private TickBottomWindow.ItemInclick itemsOnslick = new TickBottomWindow.ItemInclick() {
         @Override
-        public void ItemClick(String item){
-            Toast.makeText(TixkSearchActivity.this,"tabtabtab=",Toast.LENGTH_SHORT).show();
+        public void ItemClick(String item) {
+            Toast.makeText(TixkSearchActivity.this, "tabtabtab=", Toast.LENGTH_SHORT).show();
         }
     };
 }

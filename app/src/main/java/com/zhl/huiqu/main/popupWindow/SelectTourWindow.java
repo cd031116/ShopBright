@@ -16,6 +16,8 @@ import com.zhl.huiqu.R;
 import com.zhl.huiqu.main.ProductDetailActivity;
 import com.zhl.huiqu.main.bean.DetailBean;
 import com.zhl.huiqu.main.bean.DetailMainBean;
+import com.zhl.huiqu.main.bean.GradeBean;
+import com.zhl.huiqu.main.bean.GradeInfo;
 import com.zhl.huiqu.main.ticket.SpotTBean;
 import com.zhl.huiqu.main.ticket.SpotThemeInfo;
 import com.zhl.huiqu.recyclebase.CommonAdapter;
@@ -37,59 +39,32 @@ public class SelectTourWindow extends PopupWindow {
     private Activity mContext;
     private View view;
     private RecyclerView recycle;
+    private RecyclerView gra_recy;
     private TextView zhuti,jibie;
     private ItemInclick itemsOnClick;
     private TextView cancel,summit;
     private CommonAdapter<SpotThemeInfo> mAdapter;
     private List<SpotThemeInfo> mData=new ArrayList<>();
-    private String getId="";
+
+
+    private CommonAdapter<GradeInfo> gAdapter;
+    private List<GradeInfo> gData=new ArrayList<>();
+
+    private String getId="",garadeId="";
     private int select=1;
     public SelectTourWindow(Activity mContext, ItemInclick itemsOnClickd) {
         this.mContext=mContext;
         this.itemsOnClick=itemsOnClickd;
         this.view = LayoutInflater.from(mContext).inflate(R.layout.select_window, null);
         recycle= (RecyclerView) view.findViewById(R.id.recycleview);
+        gra_recy= (RecyclerView) view.findViewById(R.id.gra_recy);
         cancel= (TextView) view.findViewById(R.id.cancel);
         summit= (TextView) view.findViewById(R.id.sure);
         zhuti= (TextView) view.findViewById(R.id.zhuti);
         jibie= (TextView) view.findViewById(R.id.jibie);
-        for(int i=0;i<10;i++){
-            SpotThemeInfo info=new SpotThemeInfo();
-            info.setName("主题"+i+"");
-            info.setTheme_id("1");
-            mData.add(info);
-        }
+        new getInfoTask().execute();
+        new getGradeTask().execute();
         changeview(select);
-        mAdapter=new CommonAdapter<SpotThemeInfo>(mContext,R.layout.select_window_item,mData) {
-            @Override
-            protected void convert(ViewHolder holder,final SpotThemeInfo info,final int position) {
-                holder.setText(R.id.content,info.getName());
-
-                if(info.isselect()){
-                    holder.setSesect(R.id.content,true);
-
-                    holder.setTextColor(R.id.content, Color.parseColor("#ffffff"));
-                }else {
-                    holder.setSesect(R.id.content,false);
-                    holder.setTextColor(R.id.content, Color.parseColor("#5A5863"));
-                }
-                holder.setOnClickListener(R.id.content, new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v) {
-
-                       for(int i=0;i<mData.size();i++){
-                           mData.get(i).setIsselect(false);
-                       }
-                        getId=info.getTheme_id();
-                        info.setIsselect(true);
-                        mAdapter.notifyDataSetChanged();
-                    }
-                });
-
-            }
-        };
-        recycle.setAdapter(mAdapter);
-
         //
         zhuti.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +100,11 @@ public class SelectTourWindow extends PopupWindow {
         summit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemsOnClick.ItemClick("1",getId);
+                if(select==1){
+                    itemsOnClick.ItemClick(String.valueOf(select),getId);
+                }else {
+                    itemsOnClick.ItemClick(String.valueOf(select),garadeId);
+                }
                 dismiss();
             }
         });
@@ -141,7 +120,6 @@ public class SelectTourWindow extends PopupWindow {
         this.view.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
                 int height = view.findViewById(R.id.pop_layout).getTop();
-
                 int y = (int) event.getY();
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (y < height) {
@@ -166,18 +144,21 @@ public class SelectTourWindow extends PopupWindow {
         this.setBackgroundDrawable(dw);
         // 设置弹出窗体显示时的动画，从底部向上弹出
         this.setAnimationStyle(R.style.select_anim);
-        new getInfoTask().execute();
     }
 
 
 
     private void changeview(int index){
         if(index==2){
+            gra_recy.setVisibility(View.VISIBLE);
+            recycle.setVisibility(View.GONE);
             jibie.setSelected(true);
             jibie.setTextColor(Color.parseColor("#ffffff"));
             zhuti.setSelected(false);
             zhuti.setTextColor(Color.parseColor("#5A5863"));
         }else {
+            recycle.setVisibility(View.VISIBLE);
+            gra_recy.setVisibility(View.GONE);
             zhuti.setSelected(true);
             zhuti.setTextColor(Color.parseColor("#ffffff"));
             jibie.setSelected(false);
@@ -196,13 +177,14 @@ public class SelectTourWindow extends PopupWindow {
 
         @Override
         public SpotTBean workInBackground(Void... voids) throws TaskException{
-            return SDK.newInstance(mContext).getSpotTheme("12");
+            return SDK.newInstance(mContext).getSpotTheme("theme");
         }
 
         @Override
         protected void onSuccess(SpotTBean infot){
             super.onSuccess(infot);
-
+            mData=infot.getData();
+            setThmeview();
         }
 
         @Override
@@ -211,8 +193,99 @@ public class SelectTourWindow extends PopupWindow {
         }
     }
 
+    class getGradeTask extends WorkTask<Void, Void, GradeBean>{
+        @Override
+        protected void onPrepare() {
+            super.onPrepare();
+
+        }
+
+        @Override
+        public GradeBean workInBackground(Void... voids) throws TaskException{
+            return SDK.newInstance(mContext).getSpotTheme1("grade");
+        }
+
+        @Override
+        protected void onSuccess(GradeBean infot){
+            super.onSuccess(infot);
+              gData=infot.getData();
+            setGradeview();
+        }
+
+        @Override
+        protected void onFailure(TaskException exception){
+
+        }
+    }
 
     public interface ItemInclick{
         void ItemClick(String tab,String item);
     }
+
+    private void  setThmeview(){
+        mAdapter=new CommonAdapter<SpotThemeInfo>(mContext,R.layout.select_window_item,mData) {
+            @Override
+            protected void convert(ViewHolder holder,final SpotThemeInfo info,final int position) {
+                holder.setText(R.id.content,info.getName());
+
+                if(info.isselect()){
+                    holder.setSesect(R.id.content,true);
+
+                    holder.setTextColor(R.id.content, Color.parseColor("#ffffff"));
+                }else {
+                    holder.setSesect(R.id.content,false);
+                    holder.setTextColor(R.id.content, Color.parseColor("#5A5863"));
+                }
+                holder.setOnClickListener(R.id.content, new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        for(int i=0;i<mData.size();i++){
+                            mData.get(i).setIsselect(false);
+                        }
+                        getId=info.getShop_spot_attr_id();
+                        info.setIsselect(true);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
+
+            }
+        };
+        recycle.setAdapter(mAdapter);
+    }
+
+    private void  setGradeview(){
+        gAdapter=new CommonAdapter<GradeInfo>(mContext,R.layout.select_window_item,gData) {
+            @Override
+            protected void convert(ViewHolder holder,final GradeInfo info,final int position) {
+                holder.setText(R.id.content,info.getName());
+
+                if(info.isselect()){
+                    holder.setSesect(R.id.content,true);
+
+                    holder.setTextColor(R.id.content, Color.parseColor("#ffffff"));
+                }else {
+                    holder.setSesect(R.id.content,false);
+                    holder.setTextColor(R.id.content, Color.parseColor("#5A5863"));
+                }
+                holder.setOnClickListener(R.id.content, new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        for(int i=0;i<gData.size();i++){
+                            gData.get(i).setIsselect(false);
+                        }
+                        garadeId=info.getTheme_id();
+                        info.setIsselect(true);
+                        gAdapter.notifyDataSetChanged();
+                    }
+                });
+
+            }
+        };
+        gra_recy.setAdapter(gAdapter);
+
+    }
+
+
+
+
 }

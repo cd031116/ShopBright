@@ -107,6 +107,21 @@ public class ViewHolder extends RecyclerView.ViewHolder
     }
 
 
+    public ViewHolder setRelatHW(int viewId, int width,int height)
+    {
+        RelativeLayout view = getView(viewId);
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+        params.width = width;
+        params.height = height;
+        view.setLayoutParams(params);
+        return this;
+    }
+
+
+
+
+
+
     public ViewHolder setLayoutParam(int viewId, int weith,int hight)
     {
         ImageView view = getView(viewId);

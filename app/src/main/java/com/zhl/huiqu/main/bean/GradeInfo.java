@@ -1,22 +1,21 @@
-package com.zhl.huiqu.main.ticket;
+package com.zhl.huiqu.main.bean;
 
 import java.io.Serializable;
 
 /**
- * Created by Administrator on 2017/8/19.
+ * Created by Administrator on 2017/8/22.
  */
 
-public class SpotThemeInfo implements Serializable{
-    private String shop_spot_attr_id;
+public class GradeInfo implements Serializable{
+    private String theme_id;
     private String name;
     private boolean isselect;
-
-    public String getShop_spot_attr_id() {
-        return shop_spot_attr_id;
+    public String getTheme_id() {
+        return theme_id;
     }
 
-    public void setShop_spot_attr_id(String shop_spot_attr_id) {
-        this.shop_spot_attr_id = shop_spot_attr_id;
+    public void setTheme_id(String theme_id) {
+        this.theme_id = theme_id;
     }
 
     public String getName() {

@@ -6,23 +6,22 @@
     android:orientation="vertical"
     android:padding="10px">
 
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10px"
+        android:singleLine="true"
+        android:textSize="38px"
+        android:layout_marginLeft="5px"
+        android:textColor="#333333" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerVertical="true"
         android:orientation="vertical"
+        android:layout_below="@+id/content"
         android:padding="10px">
-
-        <TextView
-            android:id="@+id/content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:padding="10px"
-            android:singleLine="true"
-            android:text="按时大大发打发打发打发打发打发"
-            android:textColor="#333333" />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,9 +57,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5px"
                 android:background="@drawable/mp_list_bg"
                 android:padding="10px"
+                android:layout_marginLeft="5px"
                 android:text="随时退"
                 android:textColor="@color/red_text" />
 
@@ -69,6 +68,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:orientation="horizontal"
             android:padding="10px">
 
@@ -98,6 +98,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:layout_below="@+id/content"
         android:gravity="right"
         android:orientation="vertical"
         android:padding="10px">
@@ -118,6 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginTop="5px"
             android:gravity="right"
             android:padding="10px"
             android:textColor="#666666"

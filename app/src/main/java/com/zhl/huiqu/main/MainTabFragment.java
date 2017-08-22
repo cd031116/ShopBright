@@ -273,17 +273,18 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
                 break;
             case R.id.hot_1:
                 Intent intent5 = new Intent(getActivity(), ProductDetailActivity.class);
+                intent5.putExtra("shop_spot_id", hot_1.getTag()+"");
                 startActivity(intent5);
                 break;
             case R.id.hot_2:
                 Intent intent6 = new Intent(getActivity(), ProductDetailActivity.class);
+                intent6.putExtra("shop_spot_id", hot_2.getTag()+"");
                 startActivity(intent6);
-                startActivity(new Intent(getActivity(), ProductDetailActivity.class));
                 break;
             case R.id.hot_3:
                 Intent intent7 = new Intent(getActivity(), ProductDetailActivity.class);
+                intent7.putExtra("shop_spot_id", hot_3.getTag()+"");
                 startActivity(intent7);
-                startActivity(new Intent(getActivity(), ProductDetailActivity.class));
                 break;
         }
     }

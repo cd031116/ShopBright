@@ -7,7 +7,13 @@ import java.io.Serializable;
  */
 
 public class DitalTickList implements Serializable{
-    private String ticket_id;
+    private String shop_ticket_id;
+    private String spot_id;
+
+    private String t_id;
+
+    private String t_spot_id;
+
 
     private String title;
 
@@ -17,13 +23,36 @@ public class DitalTickList implements Serializable{
 
     private String market_price;
 
-
-    public String getTicket_id() {
-        return ticket_id;
+    public String getShop_ticket_id() {
+        return shop_ticket_id;
     }
 
-    public void setTicket_id(String ticket_id) {
-        this.ticket_id = ticket_id;
+    public void setShop_ticket_id(String shop_ticket_id) {
+        this.shop_ticket_id = shop_ticket_id;
+    }
+
+    public String getSpot_id() {
+        return spot_id;
+    }
+
+    public void setSpot_id(String spot_id) {
+        this.spot_id = spot_id;
+    }
+
+    public String getT_id() {
+        return t_id;
+    }
+
+    public void setT_id(String t_id) {
+        this.t_id = t_id;
+    }
+
+    public String getT_spot_id() {
+        return t_spot_id;
+    }
+
+    public void setT_spot_id(String t_spot_id) {
+        this.t_spot_id = t_spot_id;
     }
 
     public String getTitle() {

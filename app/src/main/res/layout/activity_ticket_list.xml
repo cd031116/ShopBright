@@ -9,12 +9,17 @@
     android:fitsSystemWindows="true"
     tools:context="com.zhl.huiqu.main.ticket.TixkSearchActivity">
     <include layout="@layout/view_top" />
-
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/top_layout"
+            android:background="#cacaca"/>
     <FrameLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
-        android:layout_below="@+id/top_layout" />
+        android:layout_below="@+id/line" />
 
 </RelativeLayout>
