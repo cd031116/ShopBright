@@ -1,6 +1,7 @@
 package com.zhl.huiqu.personal;
 
 import com.zhl.huiqu.bean.ASResultBean;
+import com.zhl.huiqu.personal.bean.OrderEntity;
 
 import java.util.List;
 

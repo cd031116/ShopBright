@@ -14,7 +14,7 @@
     <RelativeLayout
         android:id="@+id/order_detail_progress"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="186px"
         android:layout_below="@id/view_top"
         android:background="@color/white"
         android:layout_marginTop="2px"
@@ -35,7 +35,7 @@
 
         <View
             android:id="@+id/view_line1"
-            android:layout_width="114px"
+            android:layout_width="111px"
             android:layout_height="6px"
             android:layout_marginTop="60px"
             android:layout_toRightOf="@id/order_detail_red1"
@@ -55,7 +55,7 @@
 
         <View
             android:id="@+id/view_line2"
-            android:layout_width="114px"
+            android:layout_width="111px"
             android:layout_height="6px"
             android:layout_marginTop="60px"
             android:layout_toRightOf="@id/order_detail_red2"
@@ -74,7 +74,7 @@
 
         <View
             android:id="@+id/view_line3"
-            android:layout_width="114px"
+            android:layout_width="111px"
             android:layout_height="6px"
             android:layout_marginTop="60px"
             android:layout_toRightOf="@id/order_detail_red3"

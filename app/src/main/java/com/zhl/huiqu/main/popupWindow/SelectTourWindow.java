@@ -203,7 +203,7 @@ public class SelectTourWindow extends PopupWindow {
         @Override
         protected void onSuccess(GradeBean infot) {
             super.onSuccess(infot);
-            gData = infot.getData();
+            gData = infot.getBody();
             setGradeview();
         }
 

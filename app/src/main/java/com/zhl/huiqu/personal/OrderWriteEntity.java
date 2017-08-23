@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by dw on 2017/8/14.
  */
 
-public class OrderEntity implements Serializable {
+public class OrderWriteEntity implements Serializable {
 
     String ticketState;
     String ticketWhere;

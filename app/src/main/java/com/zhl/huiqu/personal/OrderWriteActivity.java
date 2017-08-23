@@ -17,13 +17,15 @@ import android.widget.TextView;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.BaseInfo;
-import com.zhl.huiqu.login.LoginActivity;
+import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.main.PayActivity;
 import com.zhl.huiqu.main.bean.DitalTickList;
+import com.zhl.huiqu.personal.bean.OrderEntity;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.CodeUtils;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.PhoneFormatCheckUtils;
+import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.utils.ToastUtils;
 
@@ -72,12 +74,16 @@ public class OrderWriteActivity extends BaseActivity {
     EditText codeText;
     @Bind(R.id.check_code_text)
     EditText checkCodeText;
+    @Bind(R.id.take_person_check_code_layout)
+    RelativeLayout takeCheckCodeLayout;
 
     private DitalTickList mPerson = null;
     private String realCode;
     private boolean isExpande = false;
     private static final int REQUEST_CODE = 0;
     private int type_num = 1;
+    private String use_date = null;
+    private String memberId = null;
 
     @Override
     protected int getLayoutId() {
@@ -87,7 +93,9 @@ public class OrderWriteActivity extends BaseActivity {
     @Override
     public void initView() {
         super.initView();
+        takeCheckCodeLayout.setVisibility(View.GONE);
         mPerson = (DitalTickList) getIntent().getSerializableExtra("pay");
+        Log.e("ttt", "initView: "+ mPerson.getShop_ticket_id()+"--"+mPerson.getTitle());
         checkCodeImg.setImageBitmap(CodeUtils.getInstance().createBitmap());
         realCode = CodeUtils.getInstance().getCode().toLowerCase();
         fymxLayout.setVisibility(View.GONE);
@@ -102,7 +110,6 @@ public class OrderWriteActivity extends BaseActivity {
         spanableInfo.setSpan(new ClickableSpan() {
             @Override
             public void onClick(View view) {
-                Log.e("ttt", "onClick: view setSpan");
 //                startActivity(new Intent(OrderWriteActivity.this,LoginActivity.class));
             }
         }, 5, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -113,6 +120,9 @@ public class OrderWriteActivity extends BaseActivity {
     @Override
     public void initData() {
         super.initData();
+        RegisterEntity account = SaveObjectUtils.getInstance(this).getObject(Constants.USER_INFO, RegisterEntity.class);
+        if (account != null)
+            memberId = account.getBody().getMember_id();
     }
 
 
@@ -138,6 +148,11 @@ public class OrderWriteActivity extends BaseActivity {
             case R.id.tomorrow_time:
                 tomorrowTime.setSelected(true);
                 moreTime.setSelected(false);
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.getTime().getYear() + 1900;
+                int month = calendar.getTime().getMonth() + 1;
+                int date = calendar.getTime().getDate() + 1;
+                use_date = year + "-" + month + "-" + date;
                 break;
             case R.id.more_time:
                 startActivityForResult(new Intent(this, MoreCalendarActivity.class), REQUEST_CODE);
@@ -152,12 +167,7 @@ public class OrderWriteActivity extends BaseActivity {
                     new checkCodeTask().execute(phone, Constants.TYPE_ORDER);
                 break;
             case R.id.commit_order_btn:
-                Intent intent = new Intent(this, PayActivity.class);
-                Bundle mBundle = new Bundle();
-                mBundle.putSerializable("pay", mPerson);
-                intent.putExtras(mBundle);
-                startActivity(intent);
-
+                checkIsNull();
                 break;
             case R.id.fymx_arrow:
                 if (isExpande) {
@@ -177,12 +187,47 @@ public class OrderWriteActivity extends BaseActivity {
         }
     }
 
+    private void checkIsNull() {
+        String num = showNum.getText().toString();
+        String use_name = nameText.getText().toString().trim();
+        String use_card = idCardText.getText().toString().trim();
+        String mobile = phoneText.getText().toString().trim();
+        String code = codeText.getText().toString().trim();
+        String ticket_id = mPerson.getShop_ticket_id();//门票id
+        String status = "0";
+
+        if (TextUtils.isEmpty(num))
+            ToastUtils.showShortToast(this, "门票数量不能为空");
+        else if (TextUtils.isEmpty(use_date))
+            ToastUtils.showShortToast(this, "请选择出行日期");
+        else if (TextUtils.isEmpty(use_name))
+            ToastUtils.showShortToast(this, "请填写姓名");
+        else if (TextUtils.isEmpty(use_card))
+            ToastUtils.showShortToast(this, "请填写身份证");
+        else if (TextUtils.isEmpty(mobile))
+            ToastUtils.showShortToast(this, "请填写手机号");
+        else if (TextUtils.isEmpty(code))
+            ToastUtils.showShortToast(this, "请填写验证码");
+        else if (!PhoneFormatCheckUtils.isChinaPhoneLegal(mobile))
+            ToastUtils.showShortToast(this, getResources().getString(R.string.register_phone));
+        else if (code.length() != 6)
+            ToastUtils.showShortToast(this, getResources().getString(R.string.register_check_msg_code));
+        else if (TextUtils.isEmpty(memberId)) {
+            status = "0";
+            new commitOrderTask().execute(status, use_date, use_name, use_card, mobile, code, ticket_id,num);
+        } else {
+            status = "1";
+            new commitOrderTask().execute(status, use_date, use_name, use_card, mobile, code, memberId, ticket_id,num);
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             String time = data.getStringExtra("time");
             moreTime.setText("更多日期\n" + time);
+            use_date = time;
             moreTime.setSelected(true);
             tomorrowTime.setSelected(false);
         }
@@ -209,6 +254,46 @@ public class OrderWriteActivity extends BaseActivity {
             super.onSuccess(info);
             dismissAlert();
             TLog.log("tttt", "info=" + info.getMsg());
+        }
+
+        @Override
+        protected void onFailure(TaskException exception) {
+            dismissAlert();
+        }
+    }
+
+    /**
+     * 获取验证码接口
+     */
+    class commitOrderTask extends WorkTask<String, Void, OrderEntity> {
+
+        @Override
+        protected void onPrepare() {
+            super.onPrepare();
+            showAlert("", false);
+        }
+
+        @Override
+        public OrderEntity workInBackground(String... params) throws TaskException {
+            if ("0".equals(params[0]))
+                return SDK.newInstance(OrderWriteActivity.this).insertOrderInfo(params[0], params[1],
+                        params[2], params[3], params[4], params[5], params[6],params[7]);
+            else
+                return SDK.newInstance(OrderWriteActivity.this).insertOrderInfo(params[0], params[1],
+                        params[2], params[3], params[4], params[5], params[6], params[7],params[8]);
+
+        }
+
+        @Override
+        protected void onSuccess(OrderEntity info) {
+            super.onSuccess(info);
+            dismissAlert();
+            TLog.log("tttt", "info=" + info.getOrder_sn());
+            Intent intent = new Intent(OrderWriteActivity.this, PayActivity.class);
+            Bundle mBundle = new Bundle();
+            mBundle.putSerializable("pay", mPerson);
+            intent.putExtras(mBundle);
+            startActivity(intent);
         }
 
         @Override

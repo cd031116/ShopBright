@@ -4,14 +4,19 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -47,7 +52,6 @@ public class OrderDetailActivity extends BaseActivity {
     public void initView() {
         super.initView();
         top_title.setText(getResources().getString(R.string.order_detail));
-
     }
 
     @Override
@@ -75,6 +79,8 @@ public class OrderDetailActivity extends BaseActivity {
         Drawable drawable = getResources().getDrawable(drawableId);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(),
                 drawable.getMinimumHeight());
+        SupportMultipleScreensUtil.scaleDrawableBounds(drawable);
+        Log.e("ttt", "changeFragment: ");
         order_detail_red3.setCompoundDrawables(null, drawable, null, null);
         view_line2.setBackgroundResource(colorId);
     }

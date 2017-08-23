@@ -330,10 +330,10 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
         @Override
         protected void onSuccess(DetailMainBean infot) {
             super.onSuccess(infot);
-            info = infot.getData();
+            info = infot.getBody();
             dismissAlert();
             TLog.log("tttt", "info=" + infot);
-            showView(infot.getData());
+            showView(infot.getBody());
         }
 
         @Override

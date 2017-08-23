@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 
 /**
  * Created by Administrator on 2017/8/16.
@@ -35,6 +36,7 @@ public class OrderPayFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_should_pay, container, false);
+        SupportMultipleScreensUtil.scale(view);
         initView(view);
         return view;
     }

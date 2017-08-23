@@ -191,7 +191,7 @@
             android:layout_toLeftOf="@id/show_num"
             android:background="@drawable/order_num_gray"
             android:gravity="center"
-            android:text="一"
+            android:text=" - "
             android:textColor="@color/black_text"
             android:textSize="33px" />
     </RelativeLayout>
@@ -257,6 +257,7 @@
             android:id="@+id/take_person_name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/take_person_name"
             android:background="@null"
@@ -287,6 +288,7 @@
             android:id="@+id/take_person_id_card_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/take_person_id_card"
             android:background="@null"
@@ -317,6 +319,7 @@
             android:id="@+id/take_person_phone_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/take_person_phone"
             android:background="@null"
@@ -343,16 +346,6 @@
             android:textColor="@color/black_text"
             android:textSize="33px" />
 
-        <EditText
-            android:id="@+id/take_person_code_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/take_person_code"
-            android:background="@null"
-            android:hint="@string/register_msg_code"
-            android:textSize="33px" />
-
         <TextView
             android:id="@+id/take_person_free_btn"
             android:layout_width="wrap_content"
@@ -362,6 +355,18 @@
             android:padding="24px"
             android:text="@string/take_person_free"
             android:textSize="33px" />
+
+        <EditText
+            android:id="@+id/take_person_code_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/take_person_free_btn"
+            android:layout_toRightOf="@id/take_person_code"
+            android:background="@null"
+            android:hint="@string/register_msg_code"
+            android:textSize="33px" />
+
 
     </RelativeLayout>
 

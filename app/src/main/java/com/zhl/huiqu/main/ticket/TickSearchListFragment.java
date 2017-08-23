@@ -170,7 +170,7 @@ public class TickSearchListFragment extends ARecycleViewSwipeRefreshFragment<Tic
 
         @Override
         protected List<TickInfo> parseResult(SearchBean bean) {
-            return bean.getData();
+            return bean.getBody();
         }
 
         @Override
@@ -190,8 +190,8 @@ public class TickSearchListFragment extends ARecycleViewSwipeRefreshFragment<Tic
                 }
             }
             SearchBean beans = queryList(start);
-            if (beans != null && beans.getData() != null) {
-                beans.setEndPaging(beans.getData().size() <= 5);
+            if (beans != null && beans.getBody() != null) {
+                beans.setEndPaging(beans.getBody().size() <= 5);
             }
             return beans;
         }

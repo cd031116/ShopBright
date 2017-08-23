@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.personal.bean.AllOrderEntity;
+import com.zhl.huiqu.personal.bean.OrderEntity;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 
 import org.aisen.android.common.utils.SystemUtils;
@@ -17,7 +19,7 @@ import org.aisen.android.ui.fragment.adapter.ARecycleViewItemView;
  * Created by dw on 2017/8/14.
  */
 
-public class OrderItemView extends ARecycleViewItemView<OrderEntity> {
+public class OrderItemView extends ARecycleViewItemView<AllOrderEntity> {
 
     public static final int LAYOUT_RES = R.layout.item_all_order_list;
 
@@ -49,16 +51,25 @@ public class OrderItemView extends ARecycleViewItemView<OrderEntity> {
     }
 
     @Override
-    public void onBindData(View view, OrderEntity orderEntity, int i) {
+    public void onBindData(View view, AllOrderEntity allOrderEntity, int i) {
 
         try {
-            ticketState.setText(orderEntity.getTicketState());
-            ticketWhere.setText(orderEntity.getTicketWhere());
-            ticketType.setText(orderEntity.getTicketType());
-            ticketNum.setText(orderEntity.getTicketNum() + "");
-            ticketTime.setText(orderEntity.getTicketTime());
-            ticketPrice.setText(orderEntity.getTicketPrice() + "");
-            orderNum.setText(orderEntity.getOrderNum());
+            String status = null;
+            if (allOrderEntity.getStatus()==0)
+                status = "未付款";
+            else if (allOrderEntity.getStatus()==1)
+                status = "已支付";
+            else if (allOrderEntity.getStatus()==5)
+                status = "已核销";
+            else if (allOrderEntity.getStatus()==6)
+                status="已完成";
+            ticketState.setText(status);
+            ticketWhere.setText(allOrderEntity.getProduct_name());
+//            ticketType.setText(orderEntity.getTicketType());
+            ticketNum.setText(allOrderEntity.getProduct_num() + "");
+            ticketTime.setText(allOrderEntity.getUse_date());
+            ticketPrice.setText(allOrderEntity.getTotal() + "");
+            orderNum.setText(allOrderEntity.getOrder_sn());
         } catch (Exception e) {
             Log.i("tttt", "tname=" + e.toString());
         }

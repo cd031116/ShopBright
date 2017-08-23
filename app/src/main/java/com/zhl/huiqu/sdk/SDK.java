@@ -18,6 +18,8 @@ import com.zhl.huiqu.main.ticket.SpotTBean;
 import com.zhl.huiqu.main.ticket.TickBean;
 import com.zhl.huiqu.main.ticket.TickListInfo;
 import com.zhl.huiqu.main.ticket.TickMainBean;
+import com.zhl.huiqu.personal.bean.AllOrderBean;
+import com.zhl.huiqu.personal.bean.OrderEntity;
 import com.zhl.huiqu.sdk.http.DTODataParseHttp;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SaveObjectUtils;
@@ -414,6 +416,61 @@ public class SDK extends ABizLogic {
         return doPost(configHttpConfig(), action, params, null, null, BaseInfo.class);
     }
 
+
+    /**
+     * 查看全部订单
+     *
+     * @return
+     * @throws TaskException
+     */
+    public AllOrderBean getAllOrder(String member_id) throws TaskException {
+        Setting action = newSetting("getAllOrder", "appapi/Personalcenter/getAllOrder", "查看全部订单");
+        Params params = new Params();
+        params.addParameter("member_id", member_id);
+        return doPost(configHttpConfig(), action, params, null, null, AllOrderBean.class);
+    }
+
+    /**
+     * 订单生成
+     *
+     * @return
+     * @throws TaskException
+     */
+    public OrderEntity insertOrderInfo(String status, String use_date, String use_name, String use_card, String mobile,
+                                       String code, String member_id, String ticket_id, String num) throws TaskException {
+        Setting action = newSetting("insertOrderInfo", "appapi/Order1/insertOrderInfo", "订单生成");
+        Params params = new Params();
+        params.addParameter("status", status);
+        params.addParameter("use_date", use_date);
+        params.addParameter("use_name", use_name);
+        params.addParameter("use_card", use_card);
+        params.addParameter("mobile", mobile);
+        params.addParameter("code", code);
+        params.addParameter("member_id", member_id);
+        params.addParameter("ticket_id", ticket_id);
+        params.addParameter("num", num);
+        return doPost(configHttpConfig(), action, params, null, null, OrderEntity.class);
+    }
+    /**
+     * 订单生成
+     *
+     * @return
+     * @throws TaskException
+     */
+    public OrderEntity insertOrderInfo(String status, String use_date, String use_name, String use_card, String mobile,
+                                       String code, String ticket_id, String num) throws TaskException {
+        Setting action = newSetting("insertOrderInfo", "appapi/Order1/insertOrderInfo", "订单生成");
+        Params params = new Params();
+        params.addParameter("status", status);
+        params.addParameter("use_date", use_date);
+        params.addParameter("use_name", use_name);
+        params.addParameter("use_card", use_card);
+        params.addParameter("mobile", mobile);
+        params.addParameter("code", code);
+        params.addParameter("ticket_id", ticket_id);
+        params.addParameter("num", num);
+        return doPost(configHttpConfig(), action, params, null, null, OrderEntity.class);
+    }
 
 
     /**

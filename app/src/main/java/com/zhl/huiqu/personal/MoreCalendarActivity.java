@@ -85,7 +85,7 @@ public class MoreCalendarActivity extends BaseActivity implements OnDateSelected
         if (date == null) {
             return "No Selection";
         }
-        return (date.getMonth() + 1) + "-" + date.getDay();
+        return date.getYear()+"-"+(date.getMonth() + 1) + "-" + date.getDay();
     }
 
     private static class PrimeDayDisableDecorator implements DayViewDecorator {
@@ -96,7 +96,7 @@ public class MoreCalendarActivity extends BaseActivity implements OnDateSelected
         public boolean shouldDecorate(CalendarDay day) {
             int month = calendar.getTime().getMonth();
             int year = calendar.getTime().getYear() + 1900;
-            int date = calendar.getTime().getDate();
+            int date = calendar.getTime().getDate()+1;
             Log.e("tttt", "shouldDecorate: " + day.getDay() + "--:" + date
                     + "\n--:" + day.getMonth() + "--:" + month
                     + "\n--:" + day.getYear() + "--:" + year);
@@ -115,8 +115,6 @@ public class MoreCalendarActivity extends BaseActivity implements OnDateSelected
                     return false;
             } else
                 return false;
-
-
         }
 
         @Override
