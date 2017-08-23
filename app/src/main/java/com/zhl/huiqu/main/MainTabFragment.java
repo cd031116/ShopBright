@@ -279,17 +279,23 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
                 break;
             case R.id.hot_1:
                 Intent intent5 = new Intent(getActivity(), ProductDetailActivity.class);
-                intent5.putExtra("shop_spot_id", hot_1.getTag()+"");
+                if(mainInfo!=null){
+                    intent5.putExtra("shop_spot_id",mainInfo.getHot().get(0).getShop_spot_id());
+                }
                 startActivity(intent5);
                 break;
             case R.id.hot_2:
                 Intent intent6 = new Intent(getActivity(), ProductDetailActivity.class);
-                intent6.putExtra("shop_spot_id", hot_2.getTag()+"");
+                if(mainInfo!=null){
+                    intent6.putExtra("shop_spot_id",mainInfo.getHot().get(1).getShop_spot_id());
+                }
                 startActivity(intent6);
                 break;
             case R.id.hot_3:
                 Intent intent7 = new Intent(getActivity(), ProductDetailActivity.class);
-                intent7.putExtra("shop_spot_id", hot_3.getTag()+"");
+                if(mainInfo!=null){
+                    intent7.putExtra("shop_spot_id",mainInfo.getHot().get(2).getShop_spot_id());
+                }
                 startActivity(intent7);
                 break;
         }
@@ -342,19 +348,16 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
             Glide.with(getActivity())
                     .load(list.get(0).getThumb())
                     .into(hot_1);
-            hot_1.setTag(list.get(0).getShop_spot_id());
         }
         if (!TextUtils.isEmpty(list.get(1).getThumb())) {
             Glide.with(getActivity())
                     .load(list.get(1).getThumb())
                     .into(hot_2);
-            hot_2.setTag(list.get(1).getShop_spot_id());
         }
         if (!TextUtils.isEmpty(list.get(2).getThumb())) {
             Glide.with(getActivity())
                     .load(list.get(2).getThumb())
                     .into(hot_3);
-            hot_3.setTag(list.get(2).getShop_spot_id());
         }
         List<TicketsInfo> tlist = info.getTicket();
         if (tlist != null) {
