@@ -7,13 +7,13 @@ import com.zhl.huiqu.base.BaseInfo;
  */
 
 public class DetailMainBean extends BaseInfo{
-    private DetailBean data;
+    private DetailBean body;
 
-    public DetailBean getData() {
-        return data;
+    public DetailBean getBody() {
+        return body;
     }
 
-    public void setData(DetailBean data) {
-        this.data = data;
+    public void setBody(DetailBean body) {
+        this.body = body;
     }
 }

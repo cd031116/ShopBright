@@ -1,20 +1,21 @@
 package com.zhl.huiqu.main.bean;
 
 import com.zhl.huiqu.base.BaseBean;
+import com.zhl.huiqu.base.BaseInfo;
 
 /**
  * Created by Administrator on 2017/8/17.
  */
 
-public class MainBean extends BaseBean{
+public class MainBean extends BaseInfo{
 
-   private MainTopInfo data;
+   private MainTopInfo body;
 
-    public MainTopInfo getData() {
-        return data;
+    public MainTopInfo getBody() {
+        return body;
     }
 
-    public void setData(MainTopInfo data) {
-        this.data = data;
+    public void setBody(MainTopInfo body) {
+        this.body = body;
     }
 }

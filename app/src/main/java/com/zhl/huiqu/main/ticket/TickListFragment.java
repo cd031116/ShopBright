@@ -149,9 +149,8 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
 
         @Override
         protected List<TickInfo> parseResult(TickBean bean) {
-            return bean.getData().getTicketOnly();
+            return bean.getBody().getTicketOnly();
         }
-
 
 
         @Override
@@ -165,8 +164,8 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
                 }
             }
             TickBean beans = queryList(start);
-            if (beans != null && beans.getData() != null){
-                beans.setEndPaging(beans.getData().getTicketOnly().size() <= 5);
+            if (beans != null && beans.getBody()!= null){
+                beans.setEndPaging(beans.getBody().getTicketOnly().size() <= 5);
             }
             return beans;
         }

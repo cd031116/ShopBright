@@ -107,7 +107,7 @@ public class PersonalFragment extends BaseFragment {
         inflater_d = LayoutInflater.from(getActivity());
         account = SaveObjectUtils.getInstance(getActivity()).getObject(Constants.USER_INFO, RegisterEntity.class);
         if (account != null)
-            nameText.setText(account.getData().getNickname());
+            nameText.setText(account.getBody().getNickname());
         initDatas();
         pageCount = (int) Math.ceil(mDatas.size() * 1.0 / pageSize);
         mPagerList = new ArrayList<View>();
@@ -169,7 +169,7 @@ public class PersonalFragment extends BaseFragment {
             case R.id.personal_msg_layout:
 //                if (account != null)
                 Intent intent = new Intent(getActivity(), SettingActivity.class);
-                intent.putExtra("memberId", account.getData().getMember_id());
+                intent.putExtra("memberId", account.getBody().getMember_id());
                 startActivity(intent);
 
 //                else

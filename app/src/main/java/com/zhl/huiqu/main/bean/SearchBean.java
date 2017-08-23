@@ -11,13 +11,13 @@ import java.util.List;
  */
 
 public class SearchBean extends ASResultbean {
-    private List<TickInfo>  data;
+    private List<TickInfo>  body;
 
-    public List<TickInfo> getData() {
-        return data;
+    public List<TickInfo> getBody() {
+        return body;
     }
 
-    public void setData(List<TickInfo> data) {
-        this.data = data;
+    public void setBody(List<TickInfo> body) {
+        this.body = body;
     }
 }

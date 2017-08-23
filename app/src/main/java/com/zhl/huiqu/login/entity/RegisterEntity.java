@@ -15,16 +15,16 @@ public class RegisterEntity extends BaseInfo {
      * check_sign : feb7fabd3595d755d89917190dc07b41
      */
 
-    private RegisterInfo data;
+    private RegisterInfo body;
     private String session_id;
     private String check_sign;
 
-    public RegisterInfo getData() {
-        return data;
+    public RegisterInfo getBody() {
+        return body;
     }
 
-    public void setData(RegisterInfo data) {
-        this.data = data;
+    public void setBody(RegisterInfo body) {
+        this.body = body;
     }
 
     public String getSession_id() {

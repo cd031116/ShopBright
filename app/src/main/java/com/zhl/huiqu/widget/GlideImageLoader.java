@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.youth.banner.loader.ImageLoader;
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.utils.Utils;
 
 
@@ -24,6 +25,7 @@ public class GlideImageLoader extends ImageLoader {
          切记不要胡乱强转！
          */
         //Glide 加载图片简单用法
+        TLog.log("mmmm","hhhhhhhhhhhhhhhhhhh="+Utils.getImageUrl(String.valueOf(path)));
         Glide.with(context)
                 .load(Utils.getImageUrl(String.valueOf(path)))
                 .into(imageView);

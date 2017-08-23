@@ -9,13 +9,13 @@ import java.util.List;
  */
 
 public class GradeBean extends BaseInfo{
-    private List<GradeInfo> data;
+    private List<GradeInfo> body;
 
-    public List<GradeInfo> getData() {
-        return data;
+    public List<GradeInfo> getBody() {
+        return body;
     }
 
-    public void setData(List<GradeInfo> data) {
-        this.data = data;
+    public void setBody(List<GradeInfo> body) {
+        this.body = body;
     }
 }

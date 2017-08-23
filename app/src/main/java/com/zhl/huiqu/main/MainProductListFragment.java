@@ -33,9 +33,9 @@ import java.util.List;
  */
 
 public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<ProductPartBean, ProductPartListBean, Serializable> {
-    public static MainProductListFragment newInstance(String categoryId) {
+    public static MainProductListFragment newInstance(String type) {
         Bundle args = new Bundle();
-//        args.putString("categoryId", categoryId);
+        args.putString("type", type);
         MainProductListFragment fragment = new MainProductListFragment();
         fragment.setArguments(args);
         return fragment;
@@ -47,8 +47,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
     ImageView error_image;
     @ViewInject(id = R.id.recycleview)
     RecyclerView recycleview;
-    private String categoryId;
-
+    private  String type;
     @Override
     public int inflateContentView() {
         return R.layout.ui_recycle;
@@ -68,7 +67,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        categoryId = getArguments().getString("categoryId");
+        type = getArguments().getString("type");
     }
 
     @Override
@@ -134,7 +133,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
 
         @Override
         protected List<ProductPartBean> parseResult(ProductPartListBean productPartListBean) {
-            return productPartListBean.getData();
+            return productPartListBean.getBody();
         }
 
         @Override
@@ -150,8 +149,8 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
 
             ProductPartListBean beans = queryList(start);
 
-            if (beans != null && beans.getData() != null){
-                beans.setEndPaging(beans.getData().size() <= 5);
+            if (beans != null && beans.getBody() != null){
+                beans.setEndPaging(beans.getBody().size() <= 5);
             }
             return beans;
         }
@@ -167,7 +166,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
     }
 
     protected ProductPartListBean queryList(int start) throws TaskException {
-        return SDK.newInstance(getActivity()).getMainbottum("",start+"");
+        return SDK.newInstance(getActivity()).getMainbottum(type,start+"");
     }
 
     @Override

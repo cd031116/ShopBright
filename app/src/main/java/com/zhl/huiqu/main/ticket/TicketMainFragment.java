@@ -227,8 +227,8 @@ public class TicketMainFragment extends BaseFragment {
         if (tickInfo == null) {
             return;
         }
-        for (int i = 0; i < tickInfo.getData().getNav().size(); i++) {
-            imaged.add(tickInfo.getData().getNav().get(i).getBig_img());
+        for (int i = 0; i < tickInfo.getBody().getNav().size(); i++) {
+            imaged.add(tickInfo.getBody().getNav().get(i).getBig_img());
         }
 
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
@@ -252,7 +252,7 @@ public class TicketMainFragment extends BaseFragment {
             @Override
             public void OnBannerClick(int position) {
                 Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
-                intent.putExtra("shop_spot_id", tickInfo.getData().getNav().get(position).getShop_spot_id());
+                intent.putExtra("shop_spot_id", tickInfo.getBody().getNav().get(position).getShop_spot_id());
                 startActivity(intent);
             }
         });
@@ -360,9 +360,9 @@ public class TicketMainFragment extends BaseFragment {
             super.onSuccess(info);
             tickInfo = info;
             dismissAlert();
-            aData = info.getData().getHot();
-            jData = info.getData().getAround();
-            mDatas = info.getData().getTheme();
+            aData = info.getBody().getHot();
+            jData = info.getBody().getAround();
+            mDatas = info.getBody().getTheme();
             Log.i("mmmm", "jData=" + jData.size());
             initDatas();
             setlist();

@@ -13,16 +13,16 @@ public class ProductPartListBean extends ASResultBean {
 
     private static final long serialVersionUID = 2267060725486603901L;
 
-    private List<ProductPartBean> data;
+    private List<ProductPartBean> body;
 
     private int total;
 
-    public List<ProductPartBean> getData() {
-        return data;
+    public List<ProductPartBean> getBody() {
+        return body;
     }
 
-    public void setData(List<ProductPartBean> data) {
-        this.data = data;
+    public void setBody(List<ProductPartBean> body) {
+        this.body = body;
     }
 
     public int getTotal() {

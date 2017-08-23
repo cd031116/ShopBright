@@ -8,13 +8,13 @@ import com.zhl.huiqu.main.bean.TicketsInfo;
  */
 
 public class TickBean extends ASResultbean {
-    private TickListInfo data;
+    private TickListInfo body;
 
-    public TickListInfo getData() {
-        return data;
+    public TickListInfo getBody() {
+        return body;
     }
 
-    public void setData(TickListInfo data) {
-        this.data = data;
+    public void setBody(TickListInfo body) {
+        this.body = body;
     }
 }

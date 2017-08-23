@@ -132,7 +132,7 @@ public class Utils {
         if(TextUtils.isEmpty(url)){
             return "";
         }
-        if(url.contains("http://")){
+        if(url.contains("http://")||url.contains("www.")){
             return url;
         }else {
             url= BuildConfig.BASE_URL+url;

@@ -1,6 +1,7 @@
 package com.zhl.huiqu.bean;
 
 import com.zhl.huiqu.base.BaseBean;
+import com.zhl.huiqu.base.BaseInfo;
 
 import org.aisen.android.network.biz.IResult;
 
@@ -8,7 +9,7 @@ import org.aisen.android.network.biz.IResult;
  * Created by Administrator on 2017/8/11.
  */
 
-public class ASResultBean extends BaseBean implements IResult {
+public class ASResultBean extends BaseInfo implements IResult {
     private static final long serialVersionUID = -6216660700053567496L;
 
     private boolean outofdate;

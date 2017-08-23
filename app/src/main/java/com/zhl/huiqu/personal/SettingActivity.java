@@ -111,7 +111,7 @@ public class SettingActivity extends BaseActivity {
         protected void onSuccess(RegisterEntity info) {
             super.onSuccess(info);
             dismissAlert();
-            settingView(info.getData());
+            settingView(info.getBody());
         }
 
         @Override

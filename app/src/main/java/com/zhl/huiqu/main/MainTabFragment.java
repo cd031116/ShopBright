@@ -42,6 +42,7 @@ import com.zhl.huiqu.sdk.eventbus.CityEvent;
 import com.zhl.huiqu.sdk.eventbus.CitySubscriber;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.GlideCircleTransform;
+import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.widget.GlideImageLoader;
@@ -131,6 +132,8 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceState) {
         super.layoutInit(inflater, savedInstanceState);
         int width = SystemUtils.getScreenWidth(getActivity());
+        mainInfo=   SaveObjectUtils.getInstance(getActivity()).getObject(Constants.MAIN_DATA,null);
+        settopView(mainInfo);
         setBanner();
     }
 
@@ -196,6 +199,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
 
     @Override
     protected Fragment newFragment(TabItem tabItem) {
+        TLog.log("mmmm","tabItem="+tabItem.getType());
         return MainProductListFragment.newInstance(tabItem.getType());
     }
 
@@ -297,7 +301,9 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         @Override
         protected void onPrepare() {
             super.onPrepare();
-            showAlert("..正在加载..", false);
+            if(mainInfo==null){
+                showAlert("..正在加载..", false);
+            }
         }
 
         @Override
@@ -309,7 +315,8 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         protected void onSuccess(MainBean info) {
             super.onSuccess(info);
             dismissAlert();
-            mainInfo=info.getData();
+            mainInfo=info.getBody();
+            SaveObjectUtils.getInstance(getActivity()).setObject(Constants.MAIN_DATA,mainInfo);
             settopView(mainInfo);
         }
 
@@ -322,6 +329,9 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     private void settopView(MainTopInfo info) {
         if (info == null) {
             return;
+        }
+        if(images!=null){
+            images.clear();
         }
         for (int i = 0; i < info.getNav().size(); i++) {
             images.add(info.getNav().get(i).getBig_img());

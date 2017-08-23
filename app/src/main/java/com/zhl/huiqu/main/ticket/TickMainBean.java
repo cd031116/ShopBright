@@ -8,13 +8,13 @@ import com.zhl.huiqu.base.BaseInfo;
 
 public class TickMainBean extends BaseInfo {
 
-    private TickMainData data;
+    private TickMainData body;
 
-    public TickMainData getData() {
-        return data;
+    public TickMainData getBody() {
+        return body;
     }
 
-    public void setData(TickMainData data) {
-        this.data = data;
+    public void setBody(TickMainData body) {
+        this.body = body;
     }
 }
