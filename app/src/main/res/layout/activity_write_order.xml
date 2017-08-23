@@ -215,7 +215,7 @@
             android:textColor="@color/black_text"
             android:textSize="33px" />
 
-        <EditText
+        <TextView
             android:id="@+id/take_ticket_person_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

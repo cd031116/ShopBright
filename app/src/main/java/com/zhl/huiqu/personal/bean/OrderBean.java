@@ -3,7 +3,7 @@ package com.zhl.huiqu.personal.bean;
 import com.zhl.huiqu.base.BaseInfo;
 
 /**
- * Created by Administrator on 2017/8/23.
+ * Created by dw on 2017/8/23.
  */
 
 public class OrderBean extends BaseInfo {

@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/personal_bg">
 
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView
     android:id="@+id/nestedScrollView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -133,7 +137,6 @@
 
                 <TextView
                     android:id="@+id/refund_order_btn"
-
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -152,49 +155,6 @@
             android:layout_below="@id/my_order_layout"
             android:layout_marginTop="15px" />
 
-        <RelativeLayout
-            android:id="@+id/your_like_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/personal_rowview"
-            android:layout_marginTop="15px"
-            android:background="@color/comm_white">
-
-            <TextView
-                android:id="@+id/your_like_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30px"
-                android:drawableLeft="@drawable/personal_wallet"
-                android:drawablePadding="15px"
-                android:gravity="center_vertical"
-                android:paddingTop="17px"
-                android:text="@string/personal_your_like"
-                android:textSize="42px" />
-
-            <RelativeLayout
-                android:id="@+id/cainixihuan"
-                android:layout_width="match_parent"
-                android:layout_height="657px"
-                android:layout_below="@id/your_like_text"
-                android:background="@color/comm_white">
-
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/viewpager"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <LinearLayout
-                    android:id="@+id/ll_dot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="center"
-                    android:orientation="horizontal" />
-            </RelativeLayout>
-        </RelativeLayout>
-
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>
-
+</RelativeLayout>

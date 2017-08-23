@@ -9,6 +9,7 @@
     <string name="register_msg_code">请填写短信验证码</string>
     <string name="register_push_code">发送验证码</string>
     <string name="register_phone">请填写正确的手机号码</string>
+    <string name="register_id_code">请填写正确的身份证号码</string>
     <string name="register_new_user">新用户注册</string>
     <string name="register_area">中国  0086</string>
     <string name="register_phone_null">手机号不能为空</string>
@@ -126,6 +127,15 @@
     <string name="kefu_phone_text">惠趣旅行官方电话\n<font color="#e11818"><b>400-9988-725</b></font></string>
     <string name="call_kefu_phone">拨打官方客服电话400-9988-725</string>
 
+    <string name="order_where">长沙石燕湖旅游区</string>
+    <string name="ticket_type">石燕湖游玩门票</string>
+    <string name="order_ticket_price">￥90</string>
+    <string name="ticket_outing_time_text">2017-08-08</string>
+    <string name="ticket_num_text">1张</string>
+    <string name="refund_pay_type_text">在线支付</string>
+    <string name="order_account_name_text">小拓</string>
+    <string name="order_account_phone_text">400-9988-725</string>
+    <string name="refund_layout_text">使用日期后7天18点（含）之前可申请取消，取消订单将收取10%的手续费</string>
     <string name="order_detail">订单详情</string>
     <string name="order_detail_commit">提交订单</string>
     <string name="order_detail_should_pay">待支付</string>

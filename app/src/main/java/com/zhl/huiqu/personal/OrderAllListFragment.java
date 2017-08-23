@@ -42,8 +42,6 @@ import java.util.List;
 
 public class OrderAllListFragment extends ARecycleViewSwipeRefreshFragment<AllOrderEntity, AllOrderBean, Serializable> {
     private String productId;
-    @ViewInject(id = R.id.order_sx)
-    TextView sxTextView;
     @ViewInject(id = R.id.top_title)
     TextView titleText;
     private String member_id;
@@ -68,8 +66,8 @@ public class OrderAllListFragment extends ARecycleViewSwipeRefreshFragment<AllOr
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         productId = getArguments().getString("productId");
-        RegisterEntity  account = SaveObjectUtils.getInstance(getActivity()).getObject(Constants.USER_INFO, RegisterEntity.class);
-        member_id=account.getBody().getMember_id();
+        RegisterEntity account = SaveObjectUtils.getInstance(getActivity()).getObject(Constants.USER_INFO, RegisterEntity.class);
+        member_id = account.getBody().getMember_id();
         Log.e("tttt", "onCreate: " + productId);
     }
 
@@ -150,7 +148,23 @@ public class OrderAllListFragment extends ARecycleViewSwipeRefreshFragment<AllOr
 
         @Override
         protected List<AllOrderEntity> parseResult(AllOrderBean allOrderBean) {
-            return allOrderBean.getData();
+            List<AllOrderEntity> list = new ArrayList<>();
+            if (getResources().getString(R.string.personal_pay_order).equals(productId)) {
+                for (AllOrderEntity allOrderEntity : allOrderBean.getBody()) {
+                    if (allOrderEntity.getStatus() == 0)
+                        list.add(allOrderEntity);
+                }
+            }
+            if (getResources().getString(R.string.personal_out_order).equals(productId)) {
+                for (AllOrderEntity allOrderEntity : allOrderBean.getBody()) {
+                    if (allOrderEntity.getStatus() == 1)
+                        list.add(allOrderEntity);
+                }
+            }
+            if (getResources().getString(R.string.personal_all_order).equals(productId)) {
+                list = allOrderBean.getBody();
+            }
+            return list;
         }
 
         @Override
@@ -166,8 +180,8 @@ public class OrderAllListFragment extends ARecycleViewSwipeRefreshFragment<AllOr
 
             AllOrderBean beans = queryList(start);
 
-            if (beans != null && beans.getData() != null) {
-                beans.setEndPaging(beans.getData().size() <= 5);
+            if (beans != null && beans.getBody() != null) {
+                beans.setEndPaging(beans.getBody().size() <= 5);
             }
 
             return beans;

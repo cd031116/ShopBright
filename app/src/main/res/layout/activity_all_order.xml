@@ -7,23 +7,12 @@
         android:id="@+id/view_top"
         layout="@layout/view_top" />
 
-    <TextView
-        android:id="@+id/order_sx"
-        android:layout_width="match_parent"
-        android:layout_height="141px"
-        android:layout_alignParentBottom="true"
-        android:background="@color/all_order_text"
-        android:drawablePadding="9px"
-        android:drawableTop="@drawable/all_order_sx"
-        android:gravity="center"
-        android:text="@string/all_order_sx" />
 
     <LinearLayout
         android:id="@id/layoutContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/view_top"
-        android:layout_above="@id/order_sx"
         android:orientation="vertical">
 
         <android.support.v4.widget.SwipeRefreshLayout
