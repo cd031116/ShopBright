@@ -66,9 +66,9 @@ public class OrderItemView extends ARecycleViewItemView<AllOrderEntity> {
             ticketState.setText(status);
             ticketWhere.setText(allOrderEntity.getProduct_name());
 //            ticketType.setText(orderEntity.getTicketType());
-            ticketNum.setText(allOrderEntity.getProduct_num() + "");
+            ticketNum.setText("("+allOrderEntity.getProduct_num() + "张)");
             ticketTime.setText(allOrderEntity.getUse_date());
-            ticketPrice.setText(allOrderEntity.getTotal() + "");
+            ticketPrice.setText("￥"+allOrderEntity.getTotal());
             orderNum.setText(allOrderEntity.getOrder_sn());
         } catch (Exception e) {
             Log.i("tttt", "tname=" + e.toString());

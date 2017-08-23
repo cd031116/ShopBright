@@ -11,20 +11,13 @@ import java.util.List;
 
 public class AllOrderBean extends ASResultBean {
 
-    List<AllOrderEntity> data;
+    List<AllOrderEntity> body;
 
-    public List<AllOrderEntity> getData() {
-        return data;
+        public List<AllOrderEntity> getBody() {
+        return body;
     }
 
-    public void setData(List<AllOrderEntity> data) {
-        this.data = data;
+    public void setBody(List<AllOrderEntity> body) {
+        this.body = body;
     }
-    //    public List<AllOrderEntity> getBody() {
-//        return body;
-//    }
-//
-//    public void setBody(List<AllOrderEntity> body) {
-//        this.body = body;
-//    }
 }

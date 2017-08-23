@@ -19,6 +19,7 @@ import com.zhl.huiqu.main.ticket.TickBean;
 import com.zhl.huiqu.main.ticket.TickListInfo;
 import com.zhl.huiqu.main.ticket.TickMainBean;
 import com.zhl.huiqu.personal.bean.AllOrderBean;
+import com.zhl.huiqu.personal.bean.OrderBean;
 import com.zhl.huiqu.personal.bean.OrderEntity;
 import com.zhl.huiqu.sdk.http.DTODataParseHttp;
 import com.zhl.huiqu.utils.Constants;
@@ -436,8 +437,8 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public OrderEntity insertOrderInfo(String status, String use_date, String use_name, String use_card, String mobile,
-                                       String code, String member_id, String ticket_id, String num) throws TaskException {
+    public OrderBean insertOrderInfo(String status, String use_date, String use_name, String use_card, String mobile,
+                                     String code, String member_id, String ticket_id, String num) throws TaskException {
         Setting action = newSetting("insertOrderInfo", "appapi/Order1/insertOrderInfo", "订单生成");
         Params params = new Params();
         params.addParameter("status", status);
@@ -449,7 +450,7 @@ public class SDK extends ABizLogic {
         params.addParameter("member_id", member_id);
         params.addParameter("ticket_id", ticket_id);
         params.addParameter("num", num);
-        return doPost(configHttpConfig(), action, params, null, null, OrderEntity.class);
+        return doPost(configHttpConfig(), action, params, null, null, OrderBean.class);
     }
     /**
      * 订单生成
@@ -457,7 +458,7 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public OrderEntity insertOrderInfo(String status, String use_date, String use_name, String use_card, String mobile,
+    public OrderBean insertOrderInfo(String status, String use_date, String use_name, String use_card, String mobile,
                                        String code, String ticket_id, String num) throws TaskException {
         Setting action = newSetting("insertOrderInfo", "appapi/Order1/insertOrderInfo", "订单生成");
         Params params = new Params();
@@ -469,7 +470,7 @@ public class SDK extends ABizLogic {
         params.addParameter("code", code);
         params.addParameter("ticket_id", ticket_id);
         params.addParameter("num", num);
-        return doPost(configHttpConfig(), action, params, null, null, OrderEntity.class);
+        return doPost(configHttpConfig(), action, params, null, null, OrderBean.class);
     }
 
 

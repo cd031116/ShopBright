@@ -69,16 +69,11 @@ public class PersonalFragment extends BaseFragment {
      */
     private int curIndex = 0;
 
-    @ViewInject(id = R.id.viewpager)
-    ViewPager viewpager;
-    @ViewInject(id = R.id.ll_dot)
-    LinearLayout ll_dot;
+
     @ViewInject(id = R.id.personal_head_img)
     ImageView headImg;
     @ViewInject(id = R.id.personal_tel_text)
     TextView nameText;
-    @ViewInject(id = R.id.your_like_layout)
-    RelativeLayout urLikeLayout;
 
     RegisterEntity account;
 
@@ -103,60 +98,10 @@ public class PersonalFragment extends BaseFragment {
     @Override
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate) {
         super.layoutInit(inflater, savedInstanceSate);
-        urLikeLayout.setVisibility(View.GONE);
         inflater_d = LayoutInflater.from(getActivity());
         account = SaveObjectUtils.getInstance(getActivity()).getObject(Constants.USER_INFO, RegisterEntity.class);
         if (account != null)
             nameText.setText(account.getBody().getNickname());
-        initDatas();
-        pageCount = (int) Math.ceil(mDatas.size() * 1.0 / pageSize);
-        mPagerList = new ArrayList<View>();
-        for (int i = 0; i < pageCount; i++) {
-            //每个页面都是inflate出一个新实例
-            GridView gridView = (GridView) inflater.inflate(R.layout.urlike_gridview, viewpager, false);
-            gridView.setAdapter(new UrLikeGridViewAdapter(getActivity(), mDatas, i, pageSize));
-            mPagerList.add(gridView);
-            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                }
-            });
-        }
-        //设置适配器
-        viewpager.setAdapter(new ViewPagerAdapter(mPagerList));
-        //设置圆点
-        setOvalLayout();
-    }
-
-    /**
-     * 设置圆点
-     */
-    public void setOvalLayout() {
-        for (int i = 0; i < pageCount; i++) {
-            ll_dot.addView(inflater_d.inflate(R.layout.dot, null));
-        }
-        // 默认显示第一页
-        ll_dot.getChildAt(0).findViewById(R.id.v_dot)
-                .setBackgroundResource(R.drawable.dot_selected);
-        viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            public void onPageSelected(int position) {
-                // 取消圆点选中
-                ll_dot.getChildAt(curIndex)
-                        .findViewById(R.id.v_dot)
-                        .setBackgroundResource(R.drawable.dot_normal);
-                // 圆点选中
-                ll_dot.getChildAt(position)
-                        .findViewById(R.id.v_dot)
-                        .setBackgroundResource(R.drawable.dot_selected);
-                curIndex = position;
-            }
-
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-            }
-
-            public void onPageScrollStateChanged(int arg0) {
-            }
-        });
     }
 
     @OnClick({R.id.row_collect_layout, R.id.row_look_his_layout, R.id.row_normal_msg_layout, R.id.row_kefu_center_layout,
@@ -181,16 +126,6 @@ public class PersonalFragment extends BaseFragment {
         }
     }
 
-    /**
-     * 初始化数据源
-     */
-    private void initDatas() {
-        mDatas = new ArrayList<UrLikeEntity>();
-        for (int i = 0; i < img_url.length; i++) {
-            //动态获取资源ID，第一个参数是资源名，第二个参数是资源类型例如drawable，string等，第三个参数包名
-            mDatas.add(new UrLikeEntity(img_url[i], tags[i], dpNum[i], price[i], address[i], touristMs[i]));
-        }
-    }
 
     private void otherClickEvent(View view) {
 

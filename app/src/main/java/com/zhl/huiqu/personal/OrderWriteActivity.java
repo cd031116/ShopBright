@@ -20,6 +20,7 @@ import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.main.PayActivity;
 import com.zhl.huiqu.main.bean.DitalTickList;
+import com.zhl.huiqu.personal.bean.OrderBean;
 import com.zhl.huiqu.personal.bean.OrderEntity;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.CodeUtils;
@@ -28,6 +29,7 @@ import com.zhl.huiqu.utils.PhoneFormatCheckUtils;
 import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.utils.ToastUtils;
+import com.zhl.huiqu.utils.Utils;
 
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
@@ -210,6 +212,8 @@ public class OrderWriteActivity extends BaseActivity {
             ToastUtils.showShortToast(this, "请填写验证码");
         else if (!PhoneFormatCheckUtils.isChinaPhoneLegal(mobile))
             ToastUtils.showShortToast(this, getResources().getString(R.string.register_phone));
+        else if (!Utils.isIdNum(use_card))
+            ToastUtils.showShortToast(this, getResources().getString(R.string.register_id_code));
         else if (code.length() != 6)
             ToastUtils.showShortToast(this, getResources().getString(R.string.register_check_msg_code));
         else if (TextUtils.isEmpty(memberId)) {
@@ -265,16 +269,16 @@ public class OrderWriteActivity extends BaseActivity {
     /**
      * 获取验证码接口
      */
-    class commitOrderTask extends WorkTask<String, Void, OrderEntity> {
+    class commitOrderTask extends WorkTask<String, Void, OrderBean> {
 
         @Override
         protected void onPrepare() {
             super.onPrepare();
-            showAlert("", false);
+            showAlert("订单提交中...", false);
         }
 
         @Override
-        public OrderEntity workInBackground(String... params) throws TaskException {
+        public OrderBean workInBackground(String... params) throws TaskException {
             if ("0".equals(params[0]))
                 return SDK.newInstance(OrderWriteActivity.this).insertOrderInfo(params[0], params[1],
                         params[2], params[3], params[4], params[5], params[6],params[7]);
@@ -285,10 +289,10 @@ public class OrderWriteActivity extends BaseActivity {
         }
 
         @Override
-        protected void onSuccess(OrderEntity info) {
+        protected void onSuccess(OrderBean info) {
             super.onSuccess(info);
             dismissAlert();
-            TLog.log("tttt", "info=" + info.getOrder_sn());
+            TLog.log("tttt", "info=" + info.getBody().getMobile());
             Intent intent = new Intent(OrderWriteActivity.this, PayActivity.class);
             Bundle mBundle = new Bundle();
             mBundle.putSerializable("pay", mPerson);

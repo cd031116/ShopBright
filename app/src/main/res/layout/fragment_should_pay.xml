@@ -92,7 +92,7 @@
                     android:drawableLeft="@drawable/mpxq_jd_sea"
                     android:drawablePadding="30px"
                     android:gravity="center"
-                    android:text="@string/order_detail"
+                    android:text="@string/order_where"
                     android:textColor="@color/black_text"
                     android:textSize="42px" />
 
@@ -121,18 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24px"
-                    android:text="@string/order_detail"
-                    android:textColor="@color/black_text"
-                    android:textSize="30px" />
-
-                <TextView
-                    android:id="@+id/ticket_type_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="33px"
-                    android:layout_marginTop="24px"
-                    android:layout_toRightOf="@id/ticket_type"
-                    android:text="@string/order_detail"
+                    android:text="@string/ticket_type"
                     android:textColor="@color/black_text"
                     android:textSize="30px" />
 
@@ -142,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="24px"
-                    android:text="@string/order_detail"
+                    android:text="@string/order_ticket_price"
                     android:textColor="@color/red_text"
                     android:textSize="30px" />
 
@@ -150,7 +139,7 @@
                     android:id="@+id/ticket_outing_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/ticket_type_text"
+                    android:layout_below="@id/ticket_type"
                     android:layout_marginTop="36px"
                     android:text="@string/all_order_outing_time"
                     android:textColor="@color/gray_text"
@@ -160,11 +149,11 @@
                     android:id="@+id/ticket_outing_time_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/ticket_type_text"
+                    android:layout_below="@id/ticket_type"
                     android:layout_marginLeft="33px"
                     android:layout_marginTop="36px"
                     android:layout_toRightOf="@id/ticket_outing_time"
-                    android:text="@string/order_detail"
+                    android:text="@string/ticket_outing_time_text"
                     android:textColor="@color/black_text"
                     android:textSize="30px" />
 
@@ -186,7 +175,7 @@
                     android:layout_marginLeft="33px"
                     android:layout_marginTop="36px"
                     android:layout_toRightOf="@id/ticket_num"
-                    android:text="@string/order_detail"
+                    android:text="@string/ticket_num_text"
                     android:textColor="@color/black_text"
                     android:textSize="30px" />
 
@@ -242,7 +231,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="@string/all_order"
+                    android:text="@string/order_ticket_price"
                     android:textColor="@color/red_text"
                     android:textSize="33px" />
             </RelativeLayout>
@@ -286,7 +275,7 @@
                 android:paddingLeft="33px"
                 android:paddingRight="33px"
                 android:paddingTop="24px"
-                android:text="@string/all_order_complete"
+                android:text="@string/refund_layout_text"
                 android:textSize="30px"></TextView>
 
             <RelativeLayout
@@ -350,7 +339,7 @@
                     android:layout_marginLeft="33px"
                     android:layout_marginTop="36px"
                     android:layout_toRightOf="@id/refund_time"
-                    android:text="@string/order_detail"
+                    android:text="@string/ticket_outing_time_text"
                     android:textColor="@color/black_text"
                     android:textSize="30px" />
 
@@ -372,7 +361,7 @@
                     android:layout_marginLeft="33px"
                     android:layout_marginTop="36px"
                     android:layout_toRightOf="@id/refund_pay_type"
-                    android:text="@string/order_detail"
+                    android:text="@string/refund_pay_type_text"
                     android:textColor="@color/black_text"
                     android:textSize="30px" />
 
@@ -420,7 +409,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="33px"
                     android:layout_toRightOf="@id/order_account_name"
-                    android:text="@string/order_detail"
+                    android:text="@string/order_account_name_text"
                     android:textColor="@color/black_text"
                     android:textSize="30px" />
 
@@ -442,7 +431,7 @@
                     android:layout_marginLeft="33px"
                     android:layout_marginTop="24px"
                     android:layout_toRightOf="@id/order_account_phone"
-                    android:text="@string/order_detail"
+                    android:text="@string/order_account_phone_text"
                     android:textColor="@color/black_text"
                     android:textSize="30px" />
 
