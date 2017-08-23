@@ -19,6 +19,7 @@ import com.zhl.huiqu.base.ContainerActivity;
 import com.zhl.huiqu.main.ProductDetailActivity;
 import com.zhl.huiqu.main.ProductPartBean;
 import com.zhl.huiqu.main.ProductPartListBean;
+import com.zhl.huiqu.main.bean.SearchBean;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.Utils;
@@ -39,7 +40,7 @@ import java.util.List;
  * Created by lyj on 2017/8/15.
  */
 
-public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo, TickListInfo, Serializable> {
+public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo, SearchBean, Serializable> {
 
     public static TickListFragment newInstance(String theme_id) {
         Bundle args = new Bundle();
@@ -108,7 +109,7 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
     }
 
     @Override
-    protected IPaging<TickInfo, TickListInfo> newPaging() {
+    protected IPaging<TickInfo, SearchBean> newPaging() {
         return new PageIndexPaging<>();
     }
 
@@ -121,7 +122,7 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
     @Override
     protected void setupRefreshConfig(RefreshConfig config) {
         super.setupRefreshConfig(config);
-        config.footerMoreEnable = false;
+        config.footerMoreEnable = true;
     }
 
     @Override
@@ -142,19 +143,19 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
         new Task(refreshMode != RefreshMode.update ? RefreshMode.reset : RefreshMode.update).execute();
     }
 
-    class Task extends APagingTask<Void, Void, TickBean>{
+    class Task extends APagingTask<Void, Void, SearchBean>{
         public Task(RefreshMode mode) {
             super(mode);
         }
 
         @Override
-        protected List<TickInfo> parseResult(TickBean bean) {
-            return bean.getBody().getTicketOnly();
+        protected List<TickInfo> parseResult(SearchBean bean) {
+            return bean.getBody();
         }
 
 
         @Override
-        protected TickBean workInBackground(RefreshMode refreshMode, String s, String nextPage, Void... voids)throws TaskException{
+        protected SearchBean workInBackground(RefreshMode refreshMode, String s, String nextPage, Void... voids)throws TaskException{
             int start = 1;
             if (mode == RefreshMode.update && !TextUtils.isEmpty(nextPage)){
                 try {
@@ -163,9 +164,9 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
                     e.printStackTrace();
                 }
             }
-            TickBean beans = queryList(start);
+            SearchBean beans = queryList(start);
             if (beans != null && beans.getBody()!= null){
-                beans.setEndPaging(beans.getBody().getTicketOnly().size() <= 5);
+                beans.setEndPaging(beans.getBody().size() <= 5);
             }
             return beans;
         }
@@ -173,13 +174,13 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
         @Override
         protected void onFailure(TaskException exception){
             super.onFailure(exception);
-//            error_text.setText(exception.getMessage());
+            error_text.setText(exception.getMessage());
 //            if ("noneNetwork".equals(exception.getCode())) {
 //                error_image.setImageResource(R.mipmap.no_net);
 //            }
         }
     }
-    protected TickBean queryList(int start) throws TaskException {
+    protected SearchBean queryList(int start) throws TaskException {
         return SDK.newInstance(getActivity()).getTicketData(theme_id,start+"");
     }
 

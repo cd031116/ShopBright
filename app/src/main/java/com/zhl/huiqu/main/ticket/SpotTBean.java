@@ -10,13 +10,13 @@ import java.util.List;
 
 public class SpotTBean extends BaseInfo{
 
-    private List<SpotThemeInfo> data;
+    private List<SpotThemeInfo> body;
 
-    public List<SpotThemeInfo> getData() {
-        return data;
+    public List<SpotThemeInfo> getBody() {
+        return body;
     }
 
-    public void setData(List<SpotThemeInfo> data) {
-        this.data = data;
+    public void setBody(List<SpotThemeInfo> body) {
+        this.body = body;
     }
 }

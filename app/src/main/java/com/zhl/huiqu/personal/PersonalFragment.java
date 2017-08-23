@@ -3,6 +3,7 @@ package com.zhl.huiqu.personal;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -106,7 +107,7 @@ public class PersonalFragment extends BaseFragment {
         urLikeLayout.setVisibility(View.GONE);
         inflater_d = LayoutInflater.from(getActivity());
         account = SaveObjectUtils.getInstance(getActivity()).getObject(Constants.USER_INFO, RegisterEntity.class);
-        if (account != null)
+        if (account.getBody()!= null)
             nameText.setText(account.getBody().getNickname());
         initDatas();
         pageCount = (int) Math.ceil(mDatas.size() * 1.0 / pageSize);

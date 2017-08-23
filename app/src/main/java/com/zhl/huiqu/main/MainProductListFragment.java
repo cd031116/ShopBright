@@ -2,6 +2,7 @@ package com.zhl.huiqu.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.Utils;
+import com.zhl.huiqu.widget.SimpleDividerItemDecoration;
 
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.support.inject.ViewInject;
@@ -41,6 +43,8 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
         return fragment;
     }
 
+//    @ViewInject(id = R.id.scrollView)
+//    NestedScrollView scrollView;
     @ViewInject(id = R.id.error_text)
     TextView error_text;
     @ViewInject(id = R.id.error_image)
@@ -49,7 +53,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
     RecyclerView recycleview;
     private  String type;
     @Override
-    public int inflateContentView() {
+    public int inflateContentView(){
         return R.layout.ui_recycle;
     }
 
@@ -63,6 +67,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
             startActivity(intent);
         }
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,6 +123,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate){
         super.layoutInit(inflater, savedInstanceSate);
         getSwipeRefreshLayout().setEnabled(false);
+        recycleview.addItemDecoration(new SimpleDividerItemDecoration(getActivity(), null, 1));
 //        scrollView.setFillViewport(true);
     }
 
@@ -158,7 +164,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
         @Override
         protected void onFailure(TaskException exception){
             super.onFailure(exception);
-//            error_text.setText(exception.getMessage());
+             error_text.setText(exception.getMessage());
 //            if ("noneNetwork".equals(exception.getCode())) {
 //                error_image.setImageResource(R.mipmap.no_net);
 //            }

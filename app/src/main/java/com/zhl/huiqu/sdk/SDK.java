@@ -12,11 +12,8 @@ import com.zhl.huiqu.main.bean.DetailBean;
 import com.zhl.huiqu.main.bean.DetailMainBean;
 import com.zhl.huiqu.main.bean.GradeBean;
 import com.zhl.huiqu.main.bean.MainBean;
-import com.zhl.huiqu.main.bean.MainTopInfo;
 import com.zhl.huiqu.main.bean.SearchBean;
 import com.zhl.huiqu.main.ticket.SpotTBean;
-import com.zhl.huiqu.main.ticket.TickBean;
-import com.zhl.huiqu.main.ticket.TickListInfo;
 import com.zhl.huiqu.main.ticket.TickMainBean;
 import com.zhl.huiqu.personal.bean.AllOrderBean;
 import com.zhl.huiqu.personal.bean.OrderEntity;
@@ -164,12 +161,12 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public TickBean getTicketData(String theme_id, String page) throws TaskException {
+    public SearchBean getTicketData(String theme_id, String page) throws TaskException {
         Setting action = newSetting("getTicketInfo", "appapi/Spotticket/getTicketByThemeId", "景点门票页面获取门票分类信息");
         Params params = new Params();
         params.addParameter("theme_id", theme_id);
         params.addParameter("page", page);
-        return doGet(action, basicParams(params), TickBean.class);
+        return doGet(action, basicParams(params), SearchBean.class);
     }
 
 

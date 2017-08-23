@@ -7,15 +7,16 @@ import java.io.Serializable;
  */
 
 public class GradeInfo implements Serializable{
-    private String theme_id;
+    private String shop_spot_attr_id;
     private String name;
     private boolean isselect;
-    public String getTheme_id() {
-        return theme_id;
+
+    public String getShop_spot_attr_id() {
+        return shop_spot_attr_id;
     }
 
-    public void setTheme_id(String theme_id) {
-        this.theme_id = theme_id;
+    public void setShop_spot_attr_id(String shop_spot_attr_id) {
+        this.shop_spot_attr_id = shop_spot_attr_id;
     }
 
     public String getName() {

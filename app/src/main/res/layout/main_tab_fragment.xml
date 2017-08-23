@@ -25,23 +25,25 @@
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
                 <!--
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"-->
-                <android.support.design.widget.CollapsingToolbarLayout
-                    android:id="@+id/collapsingToolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    app:contentScrim="#00000000"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                    app:statusBarScrim="#00000000">
+                <!--<android.support.design.widget.CollapsingToolbarLayout-->
+                    <!--android:id="@+id/collapsingToolbar"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+                    <!--app:contentScrim="#00000000"-->
+                    <!--app:layout_scrollFlags="scroll|exitUntilCollapsed"-->
+                    <!--app:statusBarScrim="#00000000">-->
 
+
+                <!--   app:layout_collapseMode="pin"
+                        app:layout_collapseParallaxMultiplier="1"-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:background="#E9E9E9"
-                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                        app:layout_collapseMode="pin"
-                        app:layout_collapseParallaxMultiplier="1">
+                        app:layout_scrollFlags="scroll"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                         <com.youth.banner.Banner
                             android:id="@+id/banner"
@@ -52,14 +54,8 @@
                             <include layout="@layout/main_center"/>
                     </LinearLayout>
 
-                    <!--<android.support.v7.widget.Toolbar-->
-                        <!--android:id="@+id/toolbar"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="52dp"-->
-                        <!--app:layout_collapseMode="pin"-->
-                        <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
-                        <!--app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />-->
-                </android.support.design.widget.CollapsingToolbarLayout>
+
+                <!--</android.support.design.widget.CollapsingToolbarLayout>-->
 
                 <RelativeLayout
                     android:id="@+id/layTabs"

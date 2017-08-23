@@ -178,7 +178,7 @@ public class SelectTourWindow extends PopupWindow {
         @Override
         protected void onSuccess(SpotTBean infot) {
             super.onSuccess(infot);
-            mData = infot.getData();
+            mData = infot.getBody();
             setThmeview();
         }
 
@@ -238,6 +238,7 @@ public class SelectTourWindow extends PopupWindow {
                             mData.get(i).setIsselect(false);
                         }
                         getId = info.getShop_spot_attr_id();
+                        TLog.log("mmmm","getId="+getId);
                         info.setIsselect(true);
                         mAdapter.notifyDataSetChanged();
                     }
@@ -268,7 +269,8 @@ public class SelectTourWindow extends PopupWindow {
                         for (int i = 0; i < gData.size(); i++) {
                             gData.get(i).setIsselect(false);
                         }
-                        garadeId = info.getTheme_id();
+                        garadeId = info.getShop_spot_attr_id();
+                        TLog.log("mmmm","garadeId="+garadeId);
                         info.setIsselect(true);
                         gAdapter.notifyDataSetChanged();
                     }

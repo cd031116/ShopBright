@@ -36,4 +36,5 @@ public class Constants {
     public static final String TYPE_RESETPASSWORD="resetPassword";
 
     public static final String MAIN_DATA="main_data";
+    public static final String TICK_DATA="tick_data";
 }

@@ -13,16 +13,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
-import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.main.ProductDetailActivity;
 import com.zhl.huiqu.main.bean.SearchBean;
 import com.zhl.huiqu.sdk.SDK;
-import com.zhl.huiqu.sdk.eventbus.CityEvent;
-import com.zhl.huiqu.sdk.eventbus.CitySubscriber;
 import com.zhl.huiqu.sdk.eventbus.TickSearchEvent;
 import com.zhl.huiqu.sdk.eventbus.TickSearchSubscriber;
-import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
+import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.utils.Utils;
 
 import org.aisen.android.component.eventbus.NotificationCenter;
@@ -41,7 +38,7 @@ import java.util.List;
  * Created by Administrator on 2017/8/22.
  */
 
-public class TickSearchListFragment extends ARecycleViewSwipeRefreshFragment<TickInfo, TickListInfo, Serializable> {
+public class TickSearchListFragment extends ARecycleViewSwipeRefreshFragment<TickInfo, SearchBean, Serializable> {
 
     public static TickSearchListFragment newInstance(String theme_id) {
         Bundle args = new Bundle();
@@ -102,6 +99,9 @@ public class TickSearchListFragment extends ARecycleViewSwipeRefreshFragment<Tic
             theme_id = info.getTheme_id();
             grade=info.getGrade();
             order=info.getOrder();
+            TLog.log("mmmm","theme_id="+theme_id);
+            TLog.log("mmmm","grade="+grade);
+            TLog.log("mmmm","order="+order);
             progress.setVisibility(View.VISIBLE);
             requestData(RefreshMode.reset);
         }
@@ -129,7 +129,7 @@ public class TickSearchListFragment extends ARecycleViewSwipeRefreshFragment<Tic
     }
 
     @Override
-    protected IPaging<TickInfo, TickListInfo> newPaging() {
+    protected IPaging<TickInfo, SearchBean> newPaging() {
         return new PageIndexPaging<>();
     }
 
@@ -200,7 +200,7 @@ public class TickSearchListFragment extends ARecycleViewSwipeRefreshFragment<Tic
         protected void onFailure(TaskException exception) {
             super.onFailure(exception);
             progress.setVisibility(View.GONE);
-//            error_text.setText(exception.getMessage());
+            error_text.setText(exception.getMessage());
 //            if ("noneNetwork".equals(exception.getCode())) {
 //                error_image.setImageResource(R.mipmap.no_net);
 //            }

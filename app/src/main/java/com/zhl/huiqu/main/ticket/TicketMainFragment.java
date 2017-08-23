@@ -8,7 +8,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +31,7 @@ import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.sdk.eventbus.CityEvent;
 import com.zhl.huiqu.sdk.eventbus.CitySubscriber;
 import com.zhl.huiqu.utils.Constants;
+import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.widget.GlideImageLoader;
@@ -98,7 +98,7 @@ public class TicketMainFragment extends BaseFragment {
     private LinearLayoutManager mLayoutManage;
     private LinearLayoutManager jLayoutManage;
     private LayoutInflater minflater;
-
+    private boolean isdestory=false;
     public static TicketMainFragment newInstance() {
         return new TicketMainFragment();
     }
@@ -118,7 +118,6 @@ public class TicketMainFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         NotificationCenter.defaultCenter().subscriber(CityEvent.class, cityEvent);
-        new getData().execute();
     }
 
     @Override
@@ -140,11 +139,29 @@ public class TicketMainFragment extends BaseFragment {
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate) {
         super.layoutInit(inflater, savedInstanceSate);
         this.minflater = inflater;
-        setBanner();
+        tickInfo= SaveObjectUtils.getInstance(getActivity()).getObject(Constants.TICK_DATA,null);
+        if(tickInfo!=null){
+            aData = tickInfo.getBody().getHot();
+            jData = tickInfo.getBody().getAround();
+            mDatas = tickInfo.getBody().getTheme();
+            initDatas();
+            setlist();
+            sethot();
+            setBanner();
+        }
+        new getData().execute();
     }
 
     @Override
     public void onDestroy() {
+        if(mDatas!=null){
+            mDatas.clear();
+        }
+        if(jData!=null){
+            jData.clear();
+        }
+        isdestory=true;
+        TLog.log("tttt","onDestroy");
         NotificationCenter.defaultCenter().unsubscribe(CityEvent.class, cityEvent);
         super.onDestroy();
     }
@@ -167,6 +184,9 @@ public class TicketMainFragment extends BaseFragment {
      * 初始化数据源
      */
     private void initDatas() {
+        if(mDatas==null) {
+            return;
+        }
         inflater_d = LayoutInflater.from(getActivity());
         pageCount = (int) Math.ceil(mDatas.size() * 1.0 / pageSize);
         mPagerList = new ArrayList<View>();
@@ -196,6 +216,9 @@ public class TicketMainFragment extends BaseFragment {
      * 设置圆点
      */
     public void setOvalLayout() {
+        if(ll_dot.getChildCount()>0){
+            ll_dot.removeAllViews();
+        }
         for (int i = 0; i < pageCount; i++) {
             ll_dot.addView(inflater_d.inflate(R.layout.dot, null));
         }
@@ -227,6 +250,10 @@ public class TicketMainFragment extends BaseFragment {
         if (tickInfo == null) {
             return;
         }
+        if(imaged!=null){
+            imaged.clear();
+        }
+
         for (int i = 0; i < tickInfo.getBody().getNav().size(); i++) {
             imaged.add(tickInfo.getBody().getNav().get(i).getBig_img());
         }
@@ -347,7 +374,9 @@ public class TicketMainFragment extends BaseFragment {
         @Override
         protected void onPrepare() {
             super.onPrepare();
-            showAlert("..正在加载..", false);
+            if(tickInfo==null){
+                showAlert("..正在加载..", false);
+            }
         }
 
         @Override
@@ -356,18 +385,21 @@ public class TicketMainFragment extends BaseFragment {
         }
 
         @Override
-        protected void onSuccess(TickMainBean info) {
+        protected void onSuccess(TickMainBean info){
             super.onSuccess(info);
             tickInfo = info;
             dismissAlert();
+            SaveObjectUtils.getInstance(getActivity()).setObject(Constants.TICK_DATA,tickInfo);
             aData = info.getBody().getHot();
+
             jData = info.getBody().getAround();
             mDatas = info.getBody().getTheme();
-            Log.i("mmmm", "jData=" + jData.size());
-            initDatas();
-            setlist();
-            sethot();
-            setBanner();
+            if(!isdestory){
+                initDatas();
+                setlist();
+                sethot();
+                setBanner();
+            }
         }
 
         @Override

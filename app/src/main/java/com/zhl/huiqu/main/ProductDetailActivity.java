@@ -112,6 +112,9 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
     @Bind(R.id.progress)
     RelativeLayout progress;//预定须知
 
+    @Bind(R.id.layoutLoading)
+    LinearLayout layoutLoading;//预定须知
+
     @Bind(R.id.banner)
     Banner banner;
     private int select = 1;
@@ -142,7 +145,6 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
         fenxiang.setVisibility(View.VISIBLE);
         soucang.setBackgroundResource(R.drawable.mpxq_sc);
         fenxiang.setBackgroundResource(R.drawable.mpxq_black_fx);
-
     }
 
     @Override
@@ -236,7 +238,6 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
             tab3_t.setTextColor(Color.parseColor("#e11818"));
             tab3_v.setSelected(true);
         }
-
     }
 
     @Override
@@ -254,7 +255,6 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
             crp_hight = position[1] - top_layout.getHeight() - getStatusBarHeight() - mp_rela.getHeight();
             gethight();
         }
-
     }
 
     @Override
@@ -333,7 +333,11 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
             info = infot.getBody();
             dismissAlert();
             TLog.log("tttt", "info=" + infot);
-            showView(infot.getBody());
+            if(infot.getBody()!=null){
+                showView(infot.getBody());
+            }else {
+                layoutLoading.setVisibility(View.VISIBLE);
+            }
         }
 
         @Override
@@ -361,14 +365,20 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
 //                    .into(main_image);
             num.setText(info.getThumb_list().size() + "");
         }
-        title.setText(info.getSpot_info().getTitle());
-        address.setText(info.getSpot_info().getAddress());
-        open_time.setText(info.getSpot_info().getOpening());
-        Glide.with(ProductDetailActivity.this)
-                .load(info.getSpot_info().getThumb())
-                .into(jd_tupian);
-        jd_content.setText(info.getSpot_info().getDesc());
-        yd_content.setText(info.getSpot_info().getReminder());
+
+        if(info.getSpot_info()!=null){
+            title.setText(info.getSpot_info().getTitle());
+            address.setText(info.getSpot_info().getAddress());
+            open_time.setText(info.getSpot_info().getOpening());
+            Glide.with(ProductDetailActivity.this)
+                    .load(info.getSpot_info().getThumb())
+                    .into(jd_tupian);
+            jd_content.setText(info.getSpot_info().getDesc());
+            yd_content.setText(info.getSpot_info().getReminder());
+        }
+
+
+
         mlist = info.getTicket_list();
         showlist();
         TimerTask task = new TimerTask() {

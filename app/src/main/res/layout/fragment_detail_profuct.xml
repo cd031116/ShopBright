@@ -4,7 +4,7 @@
     android:id="@+id/main_line"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/back_bg"
+    android:background="#000000"
     android:clipToPadding="true"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
@@ -12,145 +12,147 @@
     <include layout="@layout/view_top" />
 
     <com.zhl.huiqu.widget.MyScroview
-    android:id="@+id/myscroview"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:id="@+id/myscroview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/top_layout"
-    android:scrollbars="none">
+        android:scrollbars="none"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
         <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="500px"
-            android:background="#ffffff">
-
-            <com.youth.banner.Banner
-                android:id="@+id/banner"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="#c7c7c7"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="100px"
-                android:layout_alignParentBottom="true"
-                android:background="#a0000000"
-                android:orientation="horizontal"
-                android:padding="20px">
+                android:layout_height="500px"
+                android:background="#ffffff">
 
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100px"
+                    android:layout_alignParentBottom="true"
+                    android:background="#a0000000"
+                    android:orientation="horizontal"
+                    android:padding="20px">
+
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20px"
+                        android:textColor="@color/white"
+                        android:textSize="40px" />
+
+                    <TextView
+                        android:id="@+id/num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20px"
+                        android:drawableLeft="@drawable/mpxq_tp"
+                        android:gravity="center_vertical"
+                        android:textColor="#ffffff" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:padding="10px">
 
                 <TextView
-                    android:id="@+id/title"
+                    android:id="@+id/address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="20px"
-                    android:textColor="@color/white"
-                    android:textSize="40px" />
+                    android:layout_marginLeft="10px"
+                    android:drawableLeft="@drawable/mpxq_wz"
+                    android:drawablePadding="20px"
+                    android:gravity="center_vertical"
+                    android:padding="10px"
+                    android:textColor="#333333"
+                    android:textSize="32px" />
 
-                <TextView
-                    android:id="@+id/num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:layout_width="48px"
+                    android:layout_height="48px"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:textColor="#ffffff"
-                    android:gravity="center_vertical"
-                    android:drawableLeft="@drawable/mpxq_tp"
-                    android:layout_marginRight="20px"/>
-
+                    android:layout_marginRight="20px"
+                    android:src="@drawable/mpxq_right" />
             </RelativeLayout>
-        </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffffff"
-            android:padding="10px">
-
-            <TextView
-                android:id="@+id/address"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10px"
-                android:drawableLeft="@drawable/mpxq_wz"
-                android:drawablePadding="20px"
-                android:gravity="center_vertical"
-                android:padding="10px"
-                android:textColor="#333333"
-                android:textSize="32px" />
+                android:layout_marginTop="1px"
+                android:background="#ffffff"
+                android:padding="10px">
 
-            <ImageView
-                android:layout_width="48px"
-                android:layout_height="48px"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="20px"
-                android:src="@drawable/mpxq_right" />
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/open_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10px"
+                    android:drawableLeft="@drawable/mpxq_time"
+                    android:drawablePadding="20px"
+                    android:layout_marginRight="70px"
+                    android:gravity="center_vertical"
+                    android:padding="10px"
+                    android:textColor="#333333"
+                    android:textSize="32px" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1px"
-            android:background="#ffffff"
-            android:padding="10px">
+                <ImageView
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20px"
+                    android:src="@drawable/mpxq_right" />
+            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/open_time"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10px"
-                android:drawableLeft="@drawable/mpxq_time"
-                android:drawablePadding="20px"
-                android:gravity="center_vertical"
-                android:padding="10px"
-                android:textColor="#333333"
-                android:textSize="32px" />
+                android:layout_marginBottom="10px"
+                android:layout_marginTop="1px"
+                android:background="#ffffff"
+                android:padding="10px">
 
-            <ImageView
-                android:layout_width="48px"
-                android:layout_height="48px"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="20px"
-                android:src="@drawable/mpxq_right" />
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10px"
+                    android:drawableLeft="@drawable/mpxq_gray_ts"
+                    android:drawablePadding="20px"
+                    android:gravity="center_vertical"
+                    android:padding="10px"
+                    android:text="预定须知"
+                    android:textColor="#333333"
+                    android:textSize="32px" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1px"
-            android:background="#ffffff"
-            android:layout_marginBottom="10px"
-            android:padding="10px">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10px"
-                android:drawableLeft="@drawable/mpxq_gray_ts"
-                android:drawablePadding="20px"
-                android:gravity="center_vertical"
-                android:padding="10px"
-                android:text="预定须知"
-                android:textColor="#333333"
-                android:textSize="32px" />
-
-            <ImageView
-                android:layout_width="48px"
-                android:layout_height="48px"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="20px"
-                android:src="@drawable/mpxq_right" />
-        </RelativeLayout>
+                <ImageView
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20px"
+                    android:src="@drawable/mpxq_right" />
+            </RelativeLayout>
 
 
             <LinearLayout
@@ -158,258 +160,301 @@
                 android:layout_width="match_parent"
                 android:layout_height="120px"
                 android:orientation="vertical">
-                <include layout="@layout/pro_detail_tab"/>
+
+                <include layout="@layout/pro_detail_tab" />
             </LinearLayout>
 
 
-
-
-
-        <!--成人票-->
-        <LinearLayout
-            android:id="@+id/crp_line"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1px"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:id="@+id/mp_rela"
+            <!--成人票-->
+            <LinearLayout
+                android:id="@+id/crp_line"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1px"
-                android:background="#ffffff"
-                android:padding="10px">
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/mp_rela"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10px"
-                    android:drawableLeft="@drawable/mpxq_crp"
-                    android:drawablePadding="20px"
-                    android:gravity="center_vertical"
-                    android:padding="10px"
-                    android:text="门票"
-                    android:textColor="#333333"
-                    android:textSize="32px" />
+                    android:layout_marginTop="1px"
+                    android:background="#ffffff"
+                    android:padding="10px">
 
-                <ImageView
-                    android:layout_width="48px"
-                    android:layout_height="48px"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="20px"
-                    android:src="@drawable/mpxq_down" />
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10px"
+                        android:drawableLeft="@drawable/mpxq_crp"
+                        android:drawablePadding="20px"
+                        android:gravity="center_vertical"
+                        android:padding="10px"
+                        android:text="门票"
+                        android:textColor="#333333"
+                        android:textSize="32px" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/cr_p"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1px"
-                android:visibility="visible" />
+                    <ImageView
+                        android:layout_width="48px"
+                        android:layout_height="48px"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20px"
+                        android:src="@drawable/mpxq_down" />
+                </RelativeLayout>
 
-        </LinearLayout>
-    <!-- &lt;!&ndash;儿童票&ndash;&gt;
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1px"
-            android:visibility="gone"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1px"
-                android:background="#ffffff"
-                android:padding="10px">
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/cr_p"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10px"
-                    android:drawableLeft="@drawable/mpxq_etp"
-                    android:drawablePadding="20px"
-                    android:gravity="center_vertical"
-                    android:padding="10px"
-                    android:text="儿童票"
-                    android:textColor="#333333"
-                    android:textSize="32px" />
+                    android:layout_marginTop="1px"
+                    android:visibility="visible" />
 
-                <ImageView
-                    android:layout_width="48px"
-                    android:layout_height="48px"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="20px"
-                    android:src="@drawable/mpxq_down" />
-            </RelativeLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/et_p"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone" />
-        </LinearLayout>
-
-
-        &lt;!&ndash;家庭票&ndash;&gt;
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1px"
-            android:visibility="gone"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1px"
-                android:background="#ffffff"
-                android:padding="10px">
-
-                <TextView
-                    android:layout_width="wrap_content"
+            </LinearLayout>
+            <!-- &lt;!&ndash;儿童票&ndash;&gt;
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10px"
-                    android:drawableLeft="@drawable/mpxq_etp"
-                    android:drawablePadding="20px"
-                    android:gravity="center_vertical"
-                    android:padding="10px"
-                    android:text="家庭票"
-                    android:textColor="#333333"
-                    android:textSize="32px" />
+                    android:layout_marginTop="1px"
+                    android:visibility="gone"
+                    android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="48px"
-                    android:layout_height="48px"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="20px"
-                    android:src="@drawable/mpxq_down" />
-            </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1px"
+                        android:background="#ffffff"
+                        android:padding="10px">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/jt_p"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone" />
-        </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10px"
+                            android:drawableLeft="@drawable/mpxq_etp"
+                            android:drawablePadding="20px"
+                            android:gravity="center_vertical"
+                            android:padding="10px"
+                            android:text="儿童票"
+                            android:textColor="#333333"
+                            android:textSize="32px" />
 
-        &lt;!&ndash;酒店加景点&ndash;&gt;
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10px"
-            android:visibility="gone"
-            android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="48px"
+                            android:layout_height="48px"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="20px"
+                            android:src="@drawable/mpxq_down" />
+                    </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1px"
-                android:background="#ffffff"
-                android:padding="10px">
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/et_p"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
+
+                &lt;!&ndash;家庭票&ndash;&gt;
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10px"
-                    android:drawableLeft="@drawable/mpxq_jjj"
-                    android:drawablePadding="20px"
-                    android:gravity="center_vertical"
-                    android:padding="10px"
-                    android:text="家庭票"
-                    android:textColor="#333333"
-                    android:textSize="32px" />
+                    android:layout_marginTop="1px"
+                    android:visibility="gone"
+                    android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="48px"
-                    android:layout_height="48px"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="20px"
-                    android:src="@drawable/mpxq_down" />
-            </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1px"
+                        android:background="#ffffff"
+                        android:padding="10px">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/jd_jd_p"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone" />
-        </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10px"
+                            android:drawableLeft="@drawable/mpxq_etp"
+                            android:drawablePadding="20px"
+                            android:gravity="center_vertical"
+                            android:padding="10px"
+                            android:text="家庭票"
+                            android:textColor="#333333"
+                            android:textSize="32px" />
 
+                        <ImageView
+                            android:layout_width="48px"
+                            android:layout_height="48px"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="20px"
+                            android:src="@drawable/mpxq_down" />
+                    </RelativeLayout>
 
-        &lt;!&ndash;跟团游&ndash;&gt;
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1px"
-            android:visibility="gone"
-            android:orientation="vertical">
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/jt_p"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+                </LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1px"
-                android:background="#ffffff"
-                android:padding="10px">
-
-                <TextView
-                    android:layout_width="wrap_content"
+                &lt;!&ndash;酒店加景点&ndash;&gt;
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10px"
-                    android:drawableLeft="@drawable/mpxq_gty"
-                    android:drawablePadding="20px"
-                    android:gravity="center_vertical"
-                    android:padding="10px"
-                    android:text="跟团游"
-                    android:textColor="#333333"
-                    android:textSize="32px" />
+                    android:layout_marginTop="10px"
+                    android:visibility="gone"
+                    android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="48px"
-                    android:layout_height="48px"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="20px"
-                    android:src="@drawable/mpxq_down" />
-            </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1px"
+                        android:background="#ffffff"
+                        android:padding="10px">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/gt_p"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone" />
-        </LinearLayout>
--->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10px"
+                            android:drawableLeft="@drawable/mpxq_jjj"
+                            android:drawablePadding="20px"
+                            android:gravity="center_vertical"
+                            android:padding="10px"
+                            android:text="家庭票"
+                            android:textColor="#333333"
+                            android:textSize="32px" />
+
+                        <ImageView
+                            android:layout_width="48px"
+                            android:layout_height="48px"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="20px"
+                            android:src="@drawable/mpxq_down" />
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/jd_jd_p"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+
+                &lt;!&ndash;跟团游&ndash;&gt;
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1px"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1px"
+                        android:background="#ffffff"
+                        android:padding="10px">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10px"
+                            android:drawableLeft="@drawable/mpxq_gty"
+                            android:drawablePadding="20px"
+                            android:gravity="center_vertical"
+                            android:padding="10px"
+                            android:text="跟团游"
+                            android:textColor="#333333"
+                            android:textSize="32px" />
+
+                        <ImageView
+                            android:layout_width="48px"
+                            android:layout_height="48px"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="20px"
+                            android:src="@drawable/mpxq_down" />
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/gt_p"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+                </LinearLayout>
+        -->
             <!--介绍-->
-        <LinearLayout
-            android:id="@+id/js_line"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10px"
-            android:background="#ffffff"
-            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/js_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10px"
+                android:background="#ffffff"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/jd_js"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1px"
+                    android:background="#ffffff"
+                    android:padding="10px">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10px"
+                        android:drawableLeft="@drawable/mpxq_jd_sea"
+                        android:drawablePadding="20px"
+                        android:gravity="center_vertical"
+                        android:padding="10px"
+                        android:text="景点介绍"
+                        android:textColor="#333333"
+                        android:textSize="32px" />
+
+                    <ImageView
+                        android:layout_width="48px"
+                        android:layout_height="48px"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20px"
+                        android:src="@drawable/mpxq_down" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/jd_tupian"
+                    android:layout_width="match_parent"
+                    android:layout_height="540px" />
+
+                <TextView
+                    android:id="@+id/jd_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20px" />
+
+            </LinearLayout>
+            s
 
             <RelativeLayout
-                android:id="@+id/jd_js"
+                android:id="@+id/look_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1px"
                 android:background="#ffffff"
-                android:padding="10px">
+                android:paddingBottom="20px"
+                android:paddingLeft="10px"
+                android:paddingRight="10px"
+                android:paddingTop="20px">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10px"
-                    android:drawableLeft="@drawable/mpxq_jd_sea"
                     android:drawablePadding="20px"
                     android:gravity="center_vertical"
                     android:padding="10px"
-                    android:text="景点介绍"
+                    android:text="查看详情介绍"
                     android:textColor="#333333"
                     android:textSize="32px" />
 
@@ -419,240 +464,197 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20px"
-                    android:src="@drawable/mpxq_down" />
+                    android:src="@drawable/mpxq_right" />
             </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/jd_tupian"
-                android:layout_width="match_parent"
-                android:layout_height="540px" />
+            <!--点评-->
+            <!--<RelativeLayout-->
+            <!--android:id="@+id/dianping"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="1px"-->
+            <!--android:background="#ffffff"-->
+            <!--android:padding="10px">-->
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="10px"-->
+            <!--android:drawableLeft="@drawable/mpxq_dp"-->
+            <!--android:drawablePadding="20px"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:padding="10px"-->
+            <!--android:text="点评"-->
+            <!--android:textColor="#333333"-->
+            <!--android:textSize="32px" />-->
+
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:padding="10px"-->
+            <!--android:text="满意度:"-->
+            <!--android:textColor="#333333"-->
+            <!--android:textSize="32px" />-->
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:padding="10px"-->
+            <!--android:text="95.4%"-->
+            <!--android:textColor="#e11815"-->
+            <!--android:textSize="32px" />-->
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:padding="10px"-->
+            <!--android:text="(2050条评论)"-->
+            <!--android:textColor="#999999"-->
+            <!--android:textSize="32px" />-->
+            <!--</LinearLayout>-->
+            <!--</RelativeLayout>-->
+
+            <!---->
+            <!--&lt;!&ndash;评论&ndash;&gt;-->
+            <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/comment"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"/>-->
+            <!--&lt;!&ndash;更多评论&ndash;&gt;-->
+            <!--<RelativeLayout-->
+            <!--android:id="@+id/more_comment"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="1px"-->
+            <!--android:background="#ffffff"-->
+            <!--android:padding="10px">-->
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="10px"-->
+            <!--android:drawablePadding="20px"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:padding="10px"-->
+            <!--android:text="查看更多"-->
+            <!--android:textColor="#333333"-->
+            <!--android:textSize="32px" />-->
+
+            <!--<ImageView-->
+            <!--android:layout_width="48px"-->
+            <!--android:layout_height="48px"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginRight="20px"-->
+            <!--android:src="@drawable/mpxq_right" />-->
+            <!--</RelativeLayout>-->
+
 
             <TextView
-                android:id="@+id/jd_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="20px" />
-
-        </LinearLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/look_detail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1px"
-            android:background="#ffffff"
-            android:paddingTop="20px"
-            android:paddingBottom="20px"
-            android:paddingLeft="10px"
-            android:paddingRight="10px">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10px"
+                android:layout_marginTop="10px"
+                android:background="#ffffff"
+                android:drawableLeft="@drawable/mpxq_red_ts"
                 android:drawablePadding="20px"
                 android:gravity="center_vertical"
-                android:padding="10px"
-                android:text="查看详情介绍"
+                android:paddingLeft="20px"
+                android:text="预定须知"
                 android:textColor="#333333"
                 android:textSize="32px" />
 
-            <ImageView
-                android:layout_width="48px"
-                android:layout_height="48px"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="20px"
-                android:src="@drawable/mpxq_right" />
-        </RelativeLayout>
-
-        <!--点评-->
-        <!--<RelativeLayout-->
-        <!--android:id="@+id/dianping"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="1px"-->
-        <!--android:background="#ffffff"-->
-        <!--android:padding="10px">-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="10px"-->
-        <!--android:drawableLeft="@drawable/mpxq_dp"-->
-        <!--android:drawablePadding="20px"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:padding="10px"-->
-        <!--android:text="点评"-->
-        <!--android:textColor="#333333"-->
-        <!--android:textSize="32px" />-->
-
-
-        <!--<LinearLayout-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:padding="10px"-->
-        <!--android:text="满意度:"-->
-        <!--android:textColor="#333333"-->
-        <!--android:textSize="32px" />-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:padding="10px"-->
-        <!--android:text="95.4%"-->
-        <!--android:textColor="#e11815"-->
-        <!--android:textSize="32px" />-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:padding="10px"-->
-        <!--android:text="(2050条评论)"-->
-        <!--android:textColor="#999999"-->
-        <!--android:textSize="32px" />-->
-        <!--</LinearLayout>-->
-        <!--</RelativeLayout>-->
-
-        <!---->
-        <!--&lt;!&ndash;评论&ndash;&gt;-->
-        <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/comment"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"/>-->
-        <!--&lt;!&ndash;更多评论&ndash;&gt;-->
-        <!--<RelativeLayout-->
-        <!--android:id="@+id/more_comment"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="1px"-->
-        <!--android:background="#ffffff"-->
-        <!--android:padding="10px">-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="10px"-->
-        <!--android:drawablePadding="20px"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:padding="10px"-->
-        <!--android:text="查看更多"-->
-        <!--android:textColor="#333333"-->
-        <!--android:textSize="32px" />-->
-
-        <!--<ImageView-->
-        <!--android:layout_width="48px"-->
-        <!--android:layout_height="48px"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_marginRight="20px"-->
-        <!--android:src="@drawable/mpxq_right" />-->
-        <!--</RelativeLayout>-->
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20px"
-            android:layout_marginTop="10px"
-            android:drawableLeft="@drawable/mpxq_red_ts"
-            android:drawablePadding="20px"
-            android:background="#ffffff"
-            android:text="预定须知"
-            android:gravity="center_vertical"
-            android:textColor="#333333"
-            android:textSize="32px" />
-
-
-        <TextView
-            android:id="@+id/yd_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1px"
-            android:background="#ffffff"
-            android:padding="20px"
-            android:textColor="#333333"
-            android:textSize="32px" />
-
-
-       <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10px"
-            android:paddingLeft="20px"
-            android:background="#ffffff"
-            android:drawableLeft="@drawable/mpxq_jd_red"
-            android:drawablePadding="20px"
-            android:gravity="center_vertical"
-            android:text="周边景点"
-            android:textColor="#333333"
-            android:textSize="32px" />
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/nearly_jd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="130px"
-            android:padding="10px"
-            android:gravity="center"
-            android:visibility="gone"
-            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/yd_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:textColor="#ffffff"
-                android:textSize="@dimen/t_size"
-                android:padding="10px"
+                android:layout_marginTop="1px"
+                android:background="#ffffff"
+                android:padding="20px"
+                android:textColor="#333333"
+                android:textSize="32px" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10px"
+                android:background="#ffffff"
+                android:drawableLeft="@drawable/mpxq_jd_red"
+                android:drawablePadding="20px"
+                android:gravity="center_vertical"
+                android:paddingLeft="20px"
                 android:text="周边景点"
-                android:background="#5A5963"
-                android:drawableTop="@drawable/mpxq_jd_white"/>
-            <TextView
+                android:textColor="#333333"
+                android:textSize="32px" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/nearly_jd"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="130px"
                 android:gravity="center"
-                android:background="#5A5963"
-                android:textColor="#ffffff"
-                android:layout_gravity="center"
+                android:orientation="horizontal"
                 android:padding="10px"
-                android:textSize="@dimen/t_size"
-                android:text="周边酒店"
-                android:drawableTop="@drawable/mpxq_jd_fangzi"/>
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="#5A5963"
+                    android:drawableTop="@drawable/mpxq_jd_white"
+                    android:gravity="center"
+                    android:padding="10px"
+                    android:text="周边景点"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/t_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="#5A5963"
+                    android:drawableTop="@drawable/mpxq_jd_fangzi"
+                    android:gravity="center"
+                    android:padding="10px"
+                    android:text="周边酒店"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/t_size" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
-</com.zhl.huiqu.widget.MyScroview>
+    </com.zhl.huiqu.widget.MyScroview>
 
     <RelativeLayout
         android:id="@+id/progress"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
-        android:background="#ffffff"/>
+        android:background="#ffffff"
+        android:visibility="visible" />
+    <include
+        android:id="@+id/layoutLoading" layout="@layout/ui_common_empty" android:layout_width="fill_parent" android:layout_height="fill_parent"
+        android:visibility="gone"/>
 
-
-    <LinearLayout
-        android:id="@+id/search01"
-        android:layout_width="match_parent"
-        android:layout_below="@+id/top_layout"
-        android:layout_height="120px"
-        android:orientation="vertical">
-    </LinearLayout>
+<LinearLayout
+    android:id="@+id/search01"
+    android:layout_width="match_parent"
+    android:layout_height="120px"
+    android:layout_below="@+id/top_layout"
+    android:orientation="vertical"></LinearLayout>
 </RelativeLayout>

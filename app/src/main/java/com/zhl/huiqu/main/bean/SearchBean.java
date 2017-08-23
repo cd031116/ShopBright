@@ -2,7 +2,6 @@ package com.zhl.huiqu.main.bean;
 
 import com.zhl.huiqu.base.ASResultbean;
 import com.zhl.huiqu.main.ticket.TickInfo;
-import com.zhl.huiqu.main.ticket.TickListInfo;
 
 import java.util.List;
 
