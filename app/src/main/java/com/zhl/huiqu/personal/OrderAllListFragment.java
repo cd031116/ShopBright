@@ -45,6 +45,7 @@ public class OrderAllListFragment extends ARecycleViewSwipeRefreshFragment<AllOr
     @ViewInject(id = R.id.top_title)
     TextView titleText;
     private String member_id;
+    private List<AllOrderEntity> allOrderList = new ArrayList<>();
 
     @Override
     public void setContentView(ViewGroup view) {
@@ -82,12 +83,17 @@ public class OrderAllListFragment extends ARecycleViewSwipeRefreshFragment<AllOr
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
         super.onItemClick(parent, view, position, id);
-        Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
-        intent.putExtra("order_state", productId);
-        startActivity(intent);
-
+        //未付款点击事件
+        if (allOrderList.get(position).getStatus() == 0) {
+            Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
+            intent.putExtra("order_state", getResources().getString(R.string.personal_pay_order));
+            startActivity(intent);
+        } else if (allOrderList.get(position).getStatus() == 1) {
+            Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
+            intent.putExtra("order_state", getResources().getString(R.string.personal_out_order));
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -148,6 +154,7 @@ public class OrderAllListFragment extends ARecycleViewSwipeRefreshFragment<AllOr
 
         @Override
         protected List<AllOrderEntity> parseResult(AllOrderBean allOrderBean) {
+            allOrderList = allOrderBean.getBody();
             List<AllOrderEntity> list = new ArrayList<>();
             if (getResources().getString(R.string.personal_pay_order).equals(productId)) {
                 for (AllOrderEntity allOrderEntity : allOrderBean.getBody()) {
@@ -195,10 +202,6 @@ public class OrderAllListFragment extends ARecycleViewSwipeRefreshFragment<AllOr
 
     protected AllOrderBean queryList(int start) throws TaskException {
         return SDK.newInstance(getActivity()).getAllOrder(member_id);
-        //
-//        OrderListEntity bean = new OrderListEntity();
-//
-//        return bean;
     }
 
     @Override

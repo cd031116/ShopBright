@@ -143,9 +143,7 @@ public class SupportMultipleScreensUtil {
             Object isScale = textView.getTag(R.id.is_scale_font_tag);
             if (!(isScale instanceof Boolean) || !((Boolean) isScale).booleanValue()) {
                 float size = textView.getTextSize();
-                Log.e("ttt", "scaleTextView1: "+size );
                 size *= scale;
-                Log.e("ttt", "scaleTextView2: "+size );
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
             }
 

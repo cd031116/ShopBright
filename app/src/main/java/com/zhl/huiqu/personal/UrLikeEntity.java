@@ -3,7 +3,7 @@ package com.zhl.huiqu.personal;
 import java.io.Serializable;
 
 /**
- * Created by Administrator on 2017/8/18.
+ * Created by dw on 2017/8/18.
  */
 
 public class UrLikeEntity implements Serializable {

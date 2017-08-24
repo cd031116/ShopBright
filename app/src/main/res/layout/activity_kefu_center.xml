@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/personal_bg"
     android:clipToPadding="true"
     android:fitsSystemWindows="true">
 
@@ -29,11 +30,51 @@
             android:textColor="@color/comm_white" />
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/kefu_list"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_above="@id/call_kefu_layout"
-        android:layout_height="match_parent"
-        android:layout_below="@id/view_top" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view_top"
+        android:layout_marginTop="2px"
+        android:background="@color/white"
+        android:paddingBottom="40px"
+        android:paddingLeft="50px"
+        android:paddingTop="40px">
+
+        <TextView
+            android:id="@+id/kefu_cpzx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/kefu_cpzx" />
+
+        <TextView
+            android:id="@+id/kefu_sqzx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/kefu_cpzx"
+            android:layout_marginTop="24px"
+            android:text="@string/kefu_sqzx" />
+
+        <TextView
+            android:id="@+id/kefu_order_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/kefu_sqzx"
+            android:layout_marginTop="24px"
+            android:text="@string/kefu_order_question" />
+
+        <TextView
+            android:id="@+id/kefu_phone_text"
+            android:layout_width="wrap_content"
+            android:layout_height="90px"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="201px"
+            android:layout_toRightOf="@id/kefu_cpzx"
+            android:drawableLeft="@drawable/kefu_phone"
+            android:drawablePadding="24px"
+            android:text="@string/kefu_phone_text" />
+
+    </RelativeLayout>
+
 
 </RelativeLayout>

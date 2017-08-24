@@ -101,7 +101,7 @@ public class PersonalFragment extends BaseFragment {
         super.layoutInit(inflater, savedInstanceSate);
         inflater_d = LayoutInflater.from(getActivity());
         account = SaveObjectUtils.getInstance(getActivity()).getObject(Constants.USER_INFO, RegisterEntity.class);
-        if (account.getBody()!= null)
+        if (account.getBody() != null)
             nameText.setText(account.getBody().getNickname());
     }
 
@@ -110,7 +110,9 @@ public class PersonalFragment extends BaseFragment {
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.row_kefu_center_layout:
-                startActivity(new Intent(getActivity(), KefuCenterActivity.class));
+                FragmentArgs args=new FragmentArgs();
+                args.add("tag",0);
+                KefuCenterFragment.launch(getActivity(), args);
                 break;
             case R.id.personal_msg_layout:
 //                if (account != null)

@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.main.PayActivity;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 
 /**
@@ -70,7 +71,12 @@ public class OrderPayFragment extends Fragment implements View.OnClickListener {
             case R.id.apply_cancel:
                 break;
             case R.id.order_pay_btn:
-                startActivity(new Intent(getActivity(),OrderWriteActivity.class));
+//                startActivity(new Intent(getActivity(),OrderWriteActivity.class));
+                Intent intent = new Intent(getActivity(), PayActivity.class);
+//                Bundle mBundle = new Bundle();
+//                mBundle.putSerializable("pay", mPerson);
+//                intent.putExtras(mBundle);
+                startActivity(intent);
                 break;
         }
     }
