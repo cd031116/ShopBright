@@ -145,6 +145,7 @@
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/temai"
                 android:layout_width="match_parent"
                 android:layout_height="300px"
                 android:layout_marginTop="10px"
@@ -179,6 +180,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/jf_image"
                     android:layout_width="0dp"
                     android:layout_height="331px"
                     android:layout_weight="1"
@@ -186,6 +188,7 @@
 
 
                 <ImageView
+                    android:id="@+id/xr_image"
                     android:layout_width="0dp"
                     android:layout_height="331px"
                     android:layout_marginLeft="1px"
@@ -194,6 +197,7 @@
 
 
                 <ImageView
+                    android:id="@+id/yj_image"
                     android:layout_width="0dp"
                     android:layout_height="331px"
                     android:layout_marginLeft="1px"
@@ -322,7 +326,7 @@
                     <TextView
                         android:layout_width="6px"
                         android:layout_height="wrap_content"
-                        android:background="#F9508C"
+                        android:background="#5350F9"
                         android:padding="10px"
                         android:textColor="#5450F9" />
 
@@ -339,7 +343,8 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/lear_city"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"/>
             </LinearLayout>
 
             <LinearLayout
@@ -348,6 +353,7 @@
                 android:layout_marginTop="10px"
                 android:background="#FF8A3E"
                 android:layout_marginBottom="20px"
+                android:visibility="gone"
                 android:gravity="center">
 
                     <TextView

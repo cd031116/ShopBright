@@ -13,6 +13,7 @@ import com.zhl.huiqu.main.bean.DetailMainBean;
 import com.zhl.huiqu.main.bean.GradeBean;
 import com.zhl.huiqu.main.bean.MainBean;
 import com.zhl.huiqu.main.bean.SearchBean;
+import com.zhl.huiqu.main.ticket.CityInfo;
 import com.zhl.huiqu.main.ticket.SpotTBean;
 import com.zhl.huiqu.main.ticket.TickMainBean;
 import com.zhl.huiqu.personal.bean.AllOrderBean;
@@ -223,12 +224,12 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public String getCityAround(String longitude, String latitude) throws TaskException {
-        Setting action = newSetting("getCityAround", "/appapi/SpotTicket/getCityAround", "通过经纬度获取景点门票总页面周边城市");
+    public CityInfo getCityAround(String longitude, String latitude) throws TaskException {
+        Setting action = newSetting("getCityAround", "appapi/Ticketlist/getCityAround", "门票列表页面获取周边城市");
         Params params = new Params();
         params.addParameter("longitude", longitude);
         params.addParameter("latitude", latitude);
-        return doGet(action, basicParams(params), String.class);
+        return doGet(action, basicParams(params), CityInfo.class);
     }
 
 

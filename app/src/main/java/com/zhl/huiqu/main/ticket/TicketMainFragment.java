@@ -34,6 +34,7 @@ import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.TLog;
+import com.zhl.huiqu.utils.ToastUtils;
 import com.zhl.huiqu.widget.GlideImageLoader;
 
 import org.aisen.android.common.utils.SystemUtils;
@@ -56,6 +57,7 @@ import java.util.List;
 
 public class TicketMainFragment extends BaseFragment {
     private List<String> imaged = new ArrayList<>();
+    private List<CityData> mcity=new ArrayList<>();
     private List<View> mPagerList;
     private List<Model> mDatas;
     private LayoutInflater inflater_d;
@@ -87,10 +89,12 @@ public class TicketMainFragment extends BaseFragment {
     RecyclerView lear_city;//
     @ViewInject(id = R.id.id_content)
     RecyclerView lear_jd;//
+
+
     private TickMainBean tickInfo;
 
     private CommonAdapter<TickMianHot> adapter;//热点
-    private CommonAdapter<TickCircum> mdapter;//附近
+    private CommonAdapter<CityData> mdapter;//附近
 
     private CommonAdapter<TickCircum> jdapter;//热点
     private List<TickCircum> jData = new ArrayList<>();
@@ -98,7 +102,8 @@ public class TicketMainFragment extends BaseFragment {
     private LinearLayoutManager mLayoutManage;
     private LinearLayoutManager jLayoutManage;
     private LayoutInflater minflater;
-    private boolean isdestory=false;
+    private boolean isdestory = false;
+
     public static TicketMainFragment newInstance() {
         return new TicketMainFragment();
     }
@@ -139,8 +144,8 @@ public class TicketMainFragment extends BaseFragment {
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate) {
         super.layoutInit(inflater, savedInstanceSate);
         this.minflater = inflater;
-        tickInfo= SaveObjectUtils.getInstance(getActivity()).getObject(Constants.TICK_DATA,null);
-        if(tickInfo!=null){
+        tickInfo = SaveObjectUtils.getInstance(getActivity()).getObject(Constants.TICK_DATA, null);
+        if (tickInfo != null) {
             aData = tickInfo.getBody().getHot();
             jData = tickInfo.getBody().getAround();
             mDatas = tickInfo.getBody().getTheme();
@@ -150,18 +155,19 @@ public class TicketMainFragment extends BaseFragment {
             setBanner();
         }
         new getData().execute();
+        new getCity().execute();
     }
 
     @Override
     public void onDestroy() {
-        if(mDatas!=null){
+        if (mDatas != null) {
             mDatas.clear();
         }
-        if(jData!=null){
+        if (jData != null) {
             jData.clear();
         }
-        isdestory=true;
-        TLog.log("tttt","onDestroy");
+        isdestory = true;
+        TLog.log("tttt", "onDestroy");
         NotificationCenter.defaultCenter().unsubscribe(CityEvent.class, cityEvent);
         super.onDestroy();
     }
@@ -184,13 +190,13 @@ public class TicketMainFragment extends BaseFragment {
      * 初始化数据源
      */
     private void initDatas() {
-        if(mDatas==null) {
+        if (mDatas == null) {
             return;
         }
         inflater_d = LayoutInflater.from(getActivity());
         pageCount = (int) Math.ceil(mDatas.size() * 1.0 / pageSize);
         mPagerList = new ArrayList<View>();
-        for (int i = 0; i < pageCount; i++){
+        for (int i = 0; i < pageCount; i++) {
             //每个页面都是inflate出一个新实例
             GridView gridView = (GridView) minflater.inflate(R.layout.gridview, viewpager, false);
             gridView.setAdapter(new GridViewAdapter(getActivity(), mDatas, i, pageSize));
@@ -216,7 +222,7 @@ public class TicketMainFragment extends BaseFragment {
      * 设置圆点
      */
     public void setOvalLayout() {
-        if(ll_dot.getChildCount()>0){
+        if (ll_dot.getChildCount() > 0) {
             ll_dot.removeAllViews();
         }
         for (int i = 0; i < pageCount; i++) {
@@ -250,7 +256,7 @@ public class TicketMainFragment extends BaseFragment {
         if (tickInfo == null) {
             return;
         }
-        if(imaged!=null){
+        if (imaged != null) {
             imaged.clear();
         }
 
@@ -285,7 +291,7 @@ public class TicketMainFragment extends BaseFragment {
         });
     }
 
-    @OnClick({R.id.btnBack, R.id.line_back, R.id.searh_line, R.id.editSearch})
+    @OnClick({R.id.btnBack, R.id.line_back, R.id.searh_line, R.id.editSearch, R.id.temai, R.id.jf_image, R.id.xr_image, R.id.yj_image})
     void onBtnBackClicked(View v) {
         switch (v.getId()) {
             case R.id.btnBack:
@@ -296,12 +302,24 @@ public class TicketMainFragment extends BaseFragment {
             case R.id.editSearch:
                 startActivity(new Intent(getActivity(), TixkSearchActivity.class));
                 break;
+            case R.id.temai:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+            case R.id.jf_image:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+            case R.id.xr_image:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+            case R.id.yj_image:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
         }
     }
 
     /*热点*/
     private void sethot() {
-      final   int width = SystemUtils.getScreenWidth(getActivity());
+        final int width = SystemUtils.getScreenWidth(getActivity());
         adapter = new CommonAdapter<TickMianHot>(getActivity(), R.layout.item_hot, aData) {
             @Override
             protected void convert(ViewHolder holder, final TickMianHot hot, int position) {
@@ -366,6 +384,25 @@ public class TicketMainFragment extends BaseFragment {
         lear_jd.setLayoutManager(jLayoutManage);
         lear_jd.setAdapter(jdapter);
     }
+    private void setCity(){
+        mdapter=new CommonAdapter<CityData>(getActivity(),R.layout.city_item,mcity) {
+            @Override
+            protected void convert(ViewHolder holder, CityData cityData, int position) {
+                holder.setText(R.id.city,cityData.getCity());
+                holder.setOnClickListener(R.id.main_line, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                    }
+                });
+            }
+        };
+        mLayoutManage = new LinearLayoutManager(getActivity());
+        mLayoutManage.setOrientation(LinearLayoutManager.HORIZONTAL);//设置滚动方向，横向滚动
+        lear_city.setLayoutManager(mLayoutManage);
+        lear_city.setAdapter(mdapter);
+    }
+
 
 
     /*门票首页
@@ -374,7 +411,7 @@ public class TicketMainFragment extends BaseFragment {
         @Override
         protected void onPrepare() {
             super.onPrepare();
-            if(tickInfo==null){
+            if (tickInfo == null) {
                 showAlert("..正在加载..", false);
             }
         }
@@ -385,16 +422,15 @@ public class TicketMainFragment extends BaseFragment {
         }
 
         @Override
-        protected void onSuccess(TickMainBean info){
+        protected void onSuccess(TickMainBean info) {
             super.onSuccess(info);
             tickInfo = info;
             dismissAlert();
-            SaveObjectUtils.getInstance(getActivity()).setObject(Constants.TICK_DATA,tickInfo);
+            SaveObjectUtils.getInstance(getActivity()).setObject(Constants.TICK_DATA, tickInfo);
             aData = info.getBody().getHot();
-
             jData = info.getBody().getAround();
             mDatas = info.getBody().getTheme();
-            if(!isdestory){
+            if (!isdestory) {
                 initDatas();
                 setlist();
                 sethot();
@@ -408,5 +444,32 @@ public class TicketMainFragment extends BaseFragment {
         }
     }
 
+    /*周边
+    * */
+    class getCity extends WorkTask<Void, Void, CityInfo> {
+        @Override
+        protected void onPrepare() {
+            super.onPrepare();
+        }
+
+        @Override
+        public CityInfo workInBackground(Void... voids) throws TaskException{
+            return SDK.newInstance(getActivity()).getCityAround("113.00","28.21");
+        }
+
+        @Override
+        protected void onSuccess(CityInfo info){
+            super.onSuccess(info);
+            mcity=info.getBody();
+            if (!isdestory) {
+               setCity();
+            }
+        }
+
+        @Override
+        protected void onFailure(TaskException exception){
+
+        }
+    }
 
 }

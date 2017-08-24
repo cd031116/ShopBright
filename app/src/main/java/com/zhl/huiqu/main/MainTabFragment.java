@@ -45,6 +45,7 @@ import com.zhl.huiqu.utils.GlideCircleTransform;
 import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.TLog;
+import com.zhl.huiqu.utils.ToastUtils;
 import com.zhl.huiqu.widget.GlideImageLoader;
 import com.zhl.huiqu.widget.ShowMsgDialog;
 
@@ -300,6 +301,53 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
                 break;
         }
     }
+
+    @OnClick({R.id.imageView2,R.id.jd_1,R.id.jd_2,R.id.jd_3,R.id.jd_4})
+    void jiudian(View v){
+            switch (v.getId()){
+                case R.id.imageView2:
+                    ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                    break;
+                case R.id.jd_1:
+                    ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                    break;
+                case R.id.jd_2:
+                    ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                    break;
+                case R.id.jd_3:
+                    ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                    break;
+                case R.id.jd_4:
+                    ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                    break;
+            }
+    }
+
+
+    @OnClick({R.id.gentuan_image,R.id.gt_one,R.id.gt_two,R.id.gt_three,R.id.gt_four})
+    void gentuan(View v){
+        switch (v.getId()){
+            case R.id.gentuan_image:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+            case R.id.gt_one:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+            case R.id.gt_two:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+            case R.id.gt_three:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+            case R.id.gt_four:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+        }
+    }
+
+
+
+
 
     /*上部分数据
     * */

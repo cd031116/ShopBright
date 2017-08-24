@@ -56,7 +56,7 @@ public class ProductPartItemView extends ARecycleViewItemView<ProductPartBean> {
     public void onBindData(View view, ProductPartBean bean, int i) {
         RequestOptions myOptions = new RequestOptions()
                 .centerCrop()
-                .transform(new GlideRoundTransform(activity,10));
+                .transform(new GlideRoundTransform(activity,8));
         Glide.with(activity)
                 .load(bean.getThumb())
                 .apply(myOptions)

@@ -9,9 +9,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.main.ProductPartBean;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
+import com.zhl.huiqu.widget.GlideRoundTransform;
 
 import org.aisen.android.common.utils.SystemUtils;
 import org.aisen.android.common.utils.Utils;
@@ -90,8 +92,13 @@ public class TickItemView extends ARecycleViewItemView<TickInfo> {
         } catch (Exception e) {
             Log.i("tttt", "tname=" + e.toString());
         }
-        Glide.with(getContext())
+
+        RequestOptions myOptions = new RequestOptions()
+                .centerCrop()
+                .transform(new GlideRoundTransform(activity,8));
+        Glide.with(activity)
                 .load(bean.getThumb())
+                .apply(myOptions)
                 .into(image);
 
         if (itemPosition() == 0) {

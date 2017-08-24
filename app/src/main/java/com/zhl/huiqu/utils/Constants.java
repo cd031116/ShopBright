@@ -9,7 +9,7 @@ public class Constants {
     /**
      * 微信的APPID
      */
-    public static final  String WE_CHAT_APP_ID="wxa1dc612dba407a17";
+    public static final  String WE_CHAT_APP_ID="wx4768eeab41ed9742";
 
     public static final String ORDER_ID_KEY="orderIdKey";
 

@@ -23,6 +23,7 @@ import com.zhl.huiqu.main.bean.SearchBean;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.Utils;
+import com.zhl.huiqu.widget.SimpleDividerItemDecoration;
 
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.support.inject.ViewInject;
@@ -134,7 +135,8 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
     @Override
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate) {
         super.layoutInit(inflater, savedInstanceSate);
-        getSwipeRefreshLayout().setEnabled(false);
+//        getSwipeRefreshLayout().setEnabled(false);
+        recycleview.addItemDecoration(new SimpleDividerItemDecoration(getActivity(), null, 1));
 //        scrollView.setFillViewport(true);
     }
 
