@@ -27,8 +27,6 @@ import org.aisen.android.ui.activity.container.FragmentArgs;
  */
 
 public class KefuCenterFragment extends BaseFragment {
-
-
     @ViewInject(id = R.id.top_title)
     TextView titleText;
     @ViewInject(id = R.id.top_image)
@@ -40,7 +38,7 @@ public class KefuCenterFragment extends BaseFragment {
         args.putInt("tag", tag);
         KefuCenterFragment fragment = new KefuCenterFragment();
         fragment.setArguments(args);
-        return new KefuCenterFragment();
+        return fragment;
     }
 
     public static void launch(Activity from, FragmentArgs args) {
@@ -49,8 +47,14 @@ public class KefuCenterFragment extends BaseFragment {
     }
 
     @Override
-    public int inflateContentView() {
+    public int inflateContentView(){
         return R.layout.activity_kefu_center;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        tag = getArguments().getInt("tag");
     }
 
     @Override
@@ -58,8 +62,6 @@ public class KefuCenterFragment extends BaseFragment {
         super.setContentView(view);
         SupportMultipleScreensUtil.init(getActivity().getApplication());
         SupportMultipleScreensUtil.scale(view);
-
-        tag = getArguments().getInt("tag");
     }
 
     @Override
