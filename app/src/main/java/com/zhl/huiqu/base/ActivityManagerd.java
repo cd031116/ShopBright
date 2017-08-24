@@ -51,6 +51,7 @@ public class ActivityManagerd {
         activityStack.add(activity);
     }
 
+
     // 退出栈中所有Activity
     public void popAllActivityExceptOne() {
         while (true) {

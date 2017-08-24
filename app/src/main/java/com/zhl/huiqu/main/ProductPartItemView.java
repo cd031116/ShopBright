@@ -41,6 +41,7 @@ public class ProductPartItemView extends ARecycleViewItemView<ProductPartBean> {
 //
     public ProductPartItemView(Activity context, View itemView) {
         super(context, itemView);
+
         this.activity=context;
     }
 

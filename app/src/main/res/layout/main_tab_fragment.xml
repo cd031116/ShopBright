@@ -48,7 +48,7 @@
                         <com.youth.banner.Banner
                             android:id="@+id/banner"
                             android:layout_width="match_parent"
-                            android:layout_height="400px" />
+                            android:layout_height="350px" />
 
                            <include layout="@layout/mian_top_item"/>
                             <include layout="@layout/main_center"/>

@@ -27,6 +27,7 @@ import com.youth.banner.listener.OnBannerListener;
 import com.zhl.huiqu.MainActivity;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseConfig;
+import com.zhl.huiqu.base.MyApplication;
 import com.zhl.huiqu.main.bean.HotInfo;
 import com.zhl.huiqu.main.bean.HotelInfo;
 import com.zhl.huiqu.main.bean.MainBean;
@@ -158,6 +159,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     public void onStart() {
         super.onStart();
         banner.startAutoPlay();
+
     }
 
     @Override
