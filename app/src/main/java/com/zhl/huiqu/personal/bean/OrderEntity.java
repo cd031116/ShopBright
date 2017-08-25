@@ -1,7 +1,5 @@
 package com.zhl.huiqu.personal.bean;
 
-import com.zhl.huiqu.base.BaseInfo;
-
 import java.io.Serializable;
 
 /**
@@ -10,33 +8,46 @@ import java.io.Serializable;
 
 public class OrderEntity implements Serializable{
 
+
     /**
-     * order_sn : AS1708040259045108
-     * product_num : 50
-     * product_name : 鼋头渚家庭休闲卡三人卡
-     * use_date : 2017-08-27
-     * use_name : wyc11
+     * order_id : 1931
+     * order_sn : 170855025855269853
+     * name : 石燕湖丛林穿越套票
+     * price : 168.00
+     * num : 1
+     * use_date : 2017-8-26
+     * use_name : 刘洋
      * pay_way :
-     * add_time : 1503385144
-     * mobile : 18569502645
-     * total : 16250.00
+     * add_time : 1503644335
+     * mobile : 17688986810
+     * order_total : 168.00
      * status : 0
-     * spot_name : 鼋头渚
-     * take : 至景区售票处（鼋头渚景区充山大门）携带预订时的身份证换取门票入园，首次去需要将3人的照片印在卡上，后面只能这3人使用），先去网络窗口拿拍照凭证，然后去游客中心拍照然后去休闲卡中心做卡
+     * spot_name : 石燕湖生态旅游景区
+     * take : 前台取票
      */
 
+    private int order_id;
     private String order_sn;
-    private int product_num;
-    private String product_name;
+    private String name;
+    private String price;
+    private int num;
     private String use_date;
     private String use_name;
     private String pay_way;
     private int add_time;
     private String mobile;
-    private String total;
+    private String order_total;
     private int status;
     private String spot_name;
     private String take;
+
+    public int getOrder_id() {
+        return order_id;
+    }
+
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
+    }
 
     public String getOrder_sn() {
         return order_sn;
@@ -46,20 +57,28 @@ public class OrderEntity implements Serializable{
         this.order_sn = order_sn;
     }
 
-    public int getProduct_num() {
-        return product_num;
+    public String getName() {
+        return name;
     }
 
-    public void setProduct_num(int product_num) {
-        this.product_num = product_num;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public String getPrice() {
+        return price;
     }
 
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 
     public String getUse_date() {
@@ -102,12 +121,12 @@ public class OrderEntity implements Serializable{
         this.mobile = mobile;
     }
 
-    public String getTotal() {
-        return total;
+    public String getOrder_total() {
+        return order_total;
     }
 
-    public void setTotal(String total) {
-        this.total = total;
+    public void setOrder_total(String order_total) {
+        this.order_total = order_total;
     }
 
     public int getStatus() {

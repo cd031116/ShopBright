@@ -68,6 +68,9 @@ public class OrderDetailActivity extends BaseActivity {
         } else if (getResources().getString(R.string.personal_out_order).equals(orderState)) {
             changeFragment(orderGoOutFragment, R.drawable.order_detail_red3, R.color.red_text);
         }
+//        else if (getResources().getString(R.string.all_order_complete).equals(orderState)) {
+//            changeFragment(orderGoOutFragment, R.drawable.order_detail_red3, R.color.red_text);
+//        }
     }
 
     private void changeFragment(Fragment fragment, int drawableId, int colorId) {
