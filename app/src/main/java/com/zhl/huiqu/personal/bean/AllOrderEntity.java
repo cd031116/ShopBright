@@ -10,22 +10,32 @@ public class AllOrderEntity implements Serializable {
 
 
     /**
-     * order_id : 1894
-     * status : 0
-     * order_sn : AS1708480322488659
-     * product_name : 鼋头渚家庭休闲卡三人卡
-     * product_num : 1
-     * total : 325.00
+     * order_id : 1913
+     * order_sn : 170850032250627054
+     * name : 鼋头渚家庭休闲卡三人卡
+     * price : 325.00
+     * num : 1
      * use_date : 2017-08-24
+     * use_name : 吴云成
+     * pay_way :
+     * add_time : 1503386570
+     * mobile : 15111287366
+     * order_total : 325.00
+     * status : 0
      */
 
     private int order_id;
-    private int status;
     private String order_sn;
-    private String product_name;
-    private int product_num;
-    private String total;
+    private String name;
+    private String price;
+    private int num;
     private String use_date;
+    private String use_name;
+    private String pay_way;
+    private int add_time;
+    private String mobile;
+    private String order_total;
+    private int status;
 
     public int getOrder_id() {
         return order_id;
@@ -33,14 +43,6 @@ public class AllOrderEntity implements Serializable {
 
     public void setOrder_id(int order_id) {
         this.order_id = order_id;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 
     public String getOrder_sn() {
@@ -51,28 +53,28 @@ public class AllOrderEntity implements Serializable {
         this.order_sn = order_sn;
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public String getName() {
+        return name;
     }
 
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getProduct_num() {
-        return product_num;
+    public String getPrice() {
+        return price;
     }
 
-    public void setProduct_num(int product_num) {
-        this.product_num = product_num;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
-    public String getTotal() {
-        return total;
+    public int getNum() {
+        return num;
     }
 
-    public void setTotal(String total) {
-        this.total = total;
+    public void setNum(int num) {
+        this.num = num;
     }
 
     public String getUse_date() {
@@ -81,5 +83,53 @@ public class AllOrderEntity implements Serializable {
 
     public void setUse_date(String use_date) {
         this.use_date = use_date;
+    }
+
+    public String getUse_name() {
+        return use_name;
+    }
+
+    public void setUse_name(String use_name) {
+        this.use_name = use_name;
+    }
+
+    public String getPay_way() {
+        return pay_way;
+    }
+
+    public void setPay_way(String pay_way) {
+        this.pay_way = pay_way;
+    }
+
+    public int getAdd_time() {
+        return add_time;
+    }
+
+    public void setAdd_time(int add_time) {
+        this.add_time = add_time;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getOrder_total() {
+        return order_total;
+    }
+
+    public void setOrder_total(String order_total) {
+        this.order_total = order_total;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

@@ -2,6 +2,7 @@ package com.zhl.huiqu.personal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.BaseInfo;
+import com.zhl.huiqu.login.RegisterActivity;
 import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.main.PayActivity;
 import com.zhl.huiqu.main.bean.DitalTickList;
@@ -28,6 +30,7 @@ import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.PhoneFormatCheckUtils;
 import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.TLog;
+import com.zhl.huiqu.utils.TimerCount;
 import com.zhl.huiqu.utils.ToastUtils;
 import com.zhl.huiqu.utils.Utils;
 
@@ -55,6 +58,8 @@ public class OrderWriteActivity extends BaseActivity {
     TextView fymxType;
     @Bind(R.id.fymx_price_text)
     TextView fymxPrice;
+    @Bind(R.id.fymx_price)
+    TextView fymxPriceNum;
     @Bind(R.id.more_time)
     TextView moreTime;
     @Bind(R.id.tomorrow_time)
@@ -65,6 +70,12 @@ public class OrderWriteActivity extends BaseActivity {
     TextView titleText;
     @Bind(R.id.show_num)
     TextView showNum;
+    @Bind(R.id.order_price)
+    TextView orderPrice;
+    @Bind(R.id.take_pay_total_text)
+    TextView totalPrice;
+    @Bind(R.id.take_person_free_btn)
+    TextView code;
 
     @Bind(R.id.take_person_name_text)
     EditText nameText;
@@ -86,6 +97,8 @@ public class OrderWriteActivity extends BaseActivity {
     private int type_num = 1;
     private String use_date = null;
     private String memberId = null;
+    private String price = null;
+    private TimerCount timerCount;
 
     @Override
     protected int getLayoutId() {
@@ -97,7 +110,7 @@ public class OrderWriteActivity extends BaseActivity {
         super.initView();
         takeCheckCodeLayout.setVisibility(View.GONE);
         mPerson = (DitalTickList) getIntent().getSerializableExtra("pay");
-        Log.e("ttt", "initView: "+ mPerson.getShop_ticket_id()+"--"+mPerson.getTitle());
+        Log.e("ttt", "initView: " + mPerson.getShop_ticket_id() + "--" + mPerson.getTitle());
         checkCodeImg.setImageBitmap(CodeUtils.getInstance().createBitmap());
         realCode = CodeUtils.getInstance().getCode().toLowerCase();
         fymxLayout.setVisibility(View.GONE);
@@ -106,8 +119,19 @@ public class OrderWriteActivity extends BaseActivity {
         int date = calendar.getTime().getDate() + 1;
         tomorrowTime.setText("明天\n" + month + "-" + date);
         titleText.setText(getResources().getString(R.string.write_order));
-        isLoginText.setHighlightColor(getResources().getColor(android.R.color.transparent));
+        if (mPerson != null) {
+            price=mPerson.getShop_price();
+           String ticket_price = "￥" + mPerson.getShop_price();
+            orderPrice.setText(ticket_price);
+            fymxPrice.setText(ticket_price);
+            totalPrice.setText(ticket_price);
+        }
+        timerCount = new TimerCount(60000, 1000, code);
+    }
 
+    private void settingLoginText() {
+        isLoginText.setVisibility(View.VISIBLE);
+        isLoginText.setHighlightColor(getResources().getColor(android.R.color.transparent));
         SpannableString spanableInfo = new SpannableString("有账号可先登录");
         spanableInfo.setSpan(new ClickableSpan() {
             @Override
@@ -123,8 +147,12 @@ public class OrderWriteActivity extends BaseActivity {
     public void initData() {
         super.initData();
         RegisterEntity account = SaveObjectUtils.getInstance(this).getObject(Constants.USER_INFO, RegisterEntity.class);
-        if (account != null)
+        if (account != null) {
+            isLoginText.setVisibility(View.GONE);
             memberId = account.getBody().getMember_id();
+        } else {
+            settingLoginText();
+        }
     }
 
 
@@ -133,16 +161,22 @@ public class OrderWriteActivity extends BaseActivity {
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.down_btn:
-                if (type_num == 0)
-                    showNum.setText("0");
-                else if (type_num > 0) {
+                if (type_num == 1) {
+                    showNum.setText("1");
+                    fymxPriceNum.setText("*1");
+                    totalPrice.setText(mul(price, 1)+"");
+                } else if (type_num > 1) {
                     type_num--;
                     showNum.setText(type_num + "");
+                    fymxPriceNum.setText("*"+type_num);
+                    totalPrice.setText(mul(price, type_num)+"");
                 }
                 break;
             case R.id.add_btn:
                 type_num++;
                 showNum.setText(type_num + "");
+                fymxPriceNum.setText("*"+type_num);
+                totalPrice.setText(mul(price, type_num)+"");
                 break;
             case R.id.top_left:
                 finish();
@@ -218,10 +252,10 @@ public class OrderWriteActivity extends BaseActivity {
             ToastUtils.showShortToast(this, getResources().getString(R.string.register_check_msg_code));
         else if (TextUtils.isEmpty(memberId)) {
             status = "0";
-            new commitOrderTask().execute(status, use_date, use_name, use_card, mobile, code, ticket_id,num);
+            new commitOrderTask().execute(status, use_date, use_name, use_card, mobile, code, ticket_id, num);
         } else {
             status = "1";
-            new commitOrderTask().execute(status, use_date, use_name, use_card, mobile, code, memberId, ticket_id,num);
+            new commitOrderTask().execute(status, use_date, use_name, use_card, mobile, code, memberId, ticket_id, num);
         }
     }
 
@@ -257,6 +291,7 @@ public class OrderWriteActivity extends BaseActivity {
         protected void onSuccess(BaseInfo info) {
             super.onSuccess(info);
             dismissAlert();
+            timerCount.start();
             TLog.log("tttt", "info=" + info.getMsg());
         }
 
@@ -281,10 +316,10 @@ public class OrderWriteActivity extends BaseActivity {
         public OrderBean workInBackground(String... params) throws TaskException {
             if ("0".equals(params[0]))
                 return SDK.newInstance(OrderWriteActivity.this).insertOrderInfo(params[0], params[1],
-                        params[2], params[3], params[4], params[5], params[6],params[7]);
+                        params[2], params[3], params[4], params[5], params[6], params[7]);
             else
                 return SDK.newInstance(OrderWriteActivity.this).insertOrderInfo(params[0], params[1],
-                        params[2], params[3], params[4], params[5], params[6], params[7],params[8]);
+                        params[2], params[3], params[4], params[5], params[6], params[7], params[8]);
 
         }
 
@@ -305,4 +340,11 @@ public class OrderWriteActivity extends BaseActivity {
             dismissAlert();
         }
     }
+
+    private double mul(String prices, double num) {
+        double v = Double.parseDouble(prices);
+        double resultMul = v * num;
+        return resultMul;
+    }
+
 }
