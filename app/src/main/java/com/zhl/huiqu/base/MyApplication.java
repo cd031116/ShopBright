@@ -8,6 +8,7 @@ import android.os.Vibrator;
 import com.baidu.mapapi.SDKInitializer;
 import com.zhl.huiqu.main.location.LocationService;
 import com.zhl.huiqu.main.search.SearchHistoryManager;
+import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 
 import org.aisen.android.common.context.GlobalContext;
 

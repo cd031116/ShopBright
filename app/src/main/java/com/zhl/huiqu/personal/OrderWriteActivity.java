@@ -295,7 +295,7 @@ public class OrderWriteActivity extends BaseActivity {
             TLog.log("tttt", "info=" + info.getBody().getMobile());
             Intent intent = new Intent(OrderWriteActivity.this, PayActivity.class);
             Bundle mBundle = new Bundle();
-            mBundle.putSerializable("pay", mPerson);
+            mBundle.putSerializable("body", info.getBody());
             intent.putExtras(mBundle);
             startActivity(intent);
         }
