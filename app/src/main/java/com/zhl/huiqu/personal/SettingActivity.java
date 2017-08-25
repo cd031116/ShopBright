@@ -8,6 +8,8 @@ import android.widget.TextView;
 import com.zhl.huiqu.MainActivity;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.base.MyApplication;
+import com.zhl.huiqu.login.LoginActivity;
 import com.zhl.huiqu.login.RegisterActivity;
 import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.login.entity.RegisterInfo;
@@ -63,7 +65,7 @@ public class SettingActivity extends BaseActivity {
         new settingTask().execute(memberId);
     }
 
-    @OnClick({R.id.change_nickname, R.id.setting_name, R.id.setting_psw, R.id.setting_phone, R.id.setting_email, R.id.top_left})
+    @OnClick({R.id.change_nickname, R.id.setting_name, R.id.setting_psw, R.id.setting_phone, R.id.setting_email, R.id.top_left, R.id.out_huiqu})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.change_nickname:
@@ -91,6 +93,12 @@ public class SettingActivity extends BaseActivity {
             case R.id.top_left:
                 finish();
                 break;
+            case R.id.out_huiqu:
+                SaveObjectUtils.getInstance(this).setObject(Constants.USER_INFO, null);
+                MyApplication.getInstance().getActivityManager().popAllActivity();
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
+                break;
         }
     }
 
@@ -99,7 +107,6 @@ public class SettingActivity extends BaseActivity {
         @Override
         protected void onPrepare() {
             super.onPrepare();
-            showAlert("..正在提交..", false);
         }
 
         @Override
@@ -110,7 +117,6 @@ public class SettingActivity extends BaseActivity {
         @Override
         protected void onSuccess(RegisterEntity info) {
             super.onSuccess(info);
-            dismissAlert();
             settingView(info.getBody());
         }
 

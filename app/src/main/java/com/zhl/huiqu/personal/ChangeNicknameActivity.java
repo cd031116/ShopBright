@@ -74,7 +74,7 @@ public class ChangeNicknameActivity extends BaseActivity {
         @Override
         protected void onPrepare() {
             super.onPrepare();
-            showAlert("..正在提交..", false);
+            showAlert("..正在修改中..", false);
         }
 
         @Override
