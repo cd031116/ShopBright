@@ -1,6 +1,8 @@
 package com.zhl.huiqu.bean;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.zhl.huiqu.base.BaseBean;
+import com.zhl.huiqu.base.BaseInfo;
 
 import java.io.Serializable;
 
@@ -9,7 +11,7 @@ import java.io.Serializable;
  *
  * Created by  on 17/2/17.
  */
-public class BRewardBean extends BaseBean implements Serializable{
+public class BRewardBean  implements Serializable{
     private static final long serialVersionUID = -7236002082515439085L;
     /**
      * "payChannel": "apple", //支付模式 apple-苹果支付  other-其他方式
@@ -24,60 +26,47 @@ public class BRewardBean extends BaseBean implements Serializable{
      "sign": "0777956251E7A1FE692D580B1051BFA7",
      "codeUrl": null
      */
-    private String payChannel;//支付模式 apple-苹果支付  other-其他方式
 
-    private String tradeType;
 
-    private String appId;
+    private String appid;
 
-    private String partnerId;
+    private String partnerid;
 
-    private String prepayId;
+    private String prepayid;
 
+    @JSONField(name="package")
     private String wechatPackage;
 
-    private String nonceStr;
+    private String noncestr;
 
-    private String timeStamp;
+    private String timestamp;
 
     private String signType;
 
     private String sign;
 
-    private String codeUrl;
-
-    private String outTradeNo;
-
-    public String getPayChannel() {
-        return payChannel;
+    public String getAppid() {
+        return appid;
     }
 
-    public void setPayChannel(String payChannel) {
-        this.payChannel = payChannel;
+    public void setAppid(String appid) {
+        this.appid = appid;
     }
 
-    public String getTradeType() {
-        return tradeType;
+    public String getPartnerid() {
+        return partnerid;
     }
 
-    public void setTradeType(String tradeType) {
-        this.tradeType = tradeType;
+    public void setPartnerid(String partnerid) {
+        this.partnerid = partnerid;
     }
 
-    public String getAppId() {
-        return appId;
+    public String getPrepayid() {
+        return prepayid;
     }
 
-    public void setAppId(String appId) {
-        this.appId = appId;
-    }
-
-    public String getPartnerId() {
-        return partnerId;
-    }
-
-    public void setPartnerId(String partnerId) {
-        this.partnerId = partnerId;
+    public void setPrepayid(String prepayid) {
+        this.prepayid = prepayid;
     }
 
     public String getWechatPackage() {
@@ -88,12 +77,20 @@ public class BRewardBean extends BaseBean implements Serializable{
         this.wechatPackage = wechatPackage;
     }
 
-    public String getTimeStamp() {
-        return timeStamp;
+    public String getNoncestr() {
+        return noncestr;
     }
 
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setNoncestr(String noncestr) {
+        this.noncestr = noncestr;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getSignType() {
@@ -110,37 +107,5 @@ public class BRewardBean extends BaseBean implements Serializable{
 
     public void setSign(String sign) {
         this.sign = sign;
-    }
-
-    public String getCodeUrl() {
-        return codeUrl;
-    }
-
-    public void setCodeUrl(String codeUrl) {
-        this.codeUrl = codeUrl;
-    }
-
-    public String getPrepayId() {
-        return prepayId;
-    }
-
-    public void setPrepayId(String prepayId) {
-        this.prepayId = prepayId;
-    }
-
-    public String getNonceStr() {
-        return nonceStr;
-    }
-
-    public void setNonceStr(String nonceStr) {
-        this.nonceStr = nonceStr;
-    }
-
-    public String getOutTradeNo() {
-        return outTradeNo;
-    }
-
-    public void setOutTradeNo(String outTradeNo) {
-        this.outTradeNo = outTradeNo;
     }
 }

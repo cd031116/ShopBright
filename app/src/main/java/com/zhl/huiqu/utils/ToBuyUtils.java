@@ -22,16 +22,12 @@ public class ToBuyUtils {
      */
     public static void lunchWeChat(Context context, Consts.PayType payType, BRewardBean info){
         //获取到打赏订单等信息
-        if (String.valueOf("success").equals(info.getMessage())){
             IWXAPI msgApi = WXAPIFactory.createWXAPI(context,null);
             msgApi.registerApp(Constants.WE_CHAT_APP_ID);
             PayReq req = ToBuyUtils.getWeChatPayReq(info);
             msgApi.sendReq(req);
-        }else {
-            Toast.makeText(context,"支付失败,请重试!",Toast.LENGTH_SHORT).show();
-        }
         //存入订单编号，供后面查询订单支付情况
-        MapUtil.sharedInstance().putDefaultValue(Constants.ORDER_ID_KEY,info.getOutTradeNo());
+        MapUtil.sharedInstance().putDefaultValue(Constants.ORDER_ID_KEY,info.getNoncestr());
         //存入微信支付类型
         MapUtil.sharedInstance().putDefaultValue(Constants.ORDER_TYPE,payType.getPayTypeName());
     }
@@ -44,12 +40,12 @@ public class ToBuyUtils {
      */
     public static PayReq getWeChatPayReq(BRewardBean bean) {
         PayReq req = new PayReq();
-        req.appId = bean.getAppId();//微信ID
-        req.partnerId = bean.getPartnerId();//商户ID
-        req.prepayId = bean.getPrepayId();//预支付订单编号
+        req.appId = bean.getAppid();//微信ID
+        req.partnerId = bean.getPartnerid();//商户ID
+        req.prepayId = bean.getPrepayid();//预支付订单编号
         req.packageValue =bean.getWechatPackage();
-        req.nonceStr= bean.getNonceStr();
-        req.timeStamp = bean.getTimeStamp();
+        req.nonceStr= bean.getNoncestr();
+        req.timeStamp = bean.getTimestamp();
         req.sign = bean.getSign();
         return req;
     }

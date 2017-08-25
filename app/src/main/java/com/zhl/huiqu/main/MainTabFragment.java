@@ -94,7 +94,6 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     @ViewInject(id = R.id.address)
     TextView address;
 
-
     @ViewInject(id = R.id.hot_1)
     ImageView hot_1;
     @ViewInject(id = R.id.hot_2)

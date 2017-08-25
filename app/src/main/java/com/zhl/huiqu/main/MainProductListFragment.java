@@ -3,6 +3,7 @@ package com.zhl.huiqu.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -100,11 +101,10 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
         return new PageIndexPaging<>();
     }
 
-
+//
 //    @Override
 //    protected RecyclerView.LayoutManager configLayoutManager() {
-//
-//        return new MyLinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, true);
+//        return linearLayoutManager;
 //    }
 
     @Override
@@ -114,7 +114,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
     }
 
     @Override
-    public void onResume() {
+    public void onResume(){
         super.onResume();
         requestData(RefreshMode.reset);
     }

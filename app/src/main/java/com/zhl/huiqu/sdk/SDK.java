@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.zhl.huiqu.BuildConfig;
 import com.zhl.huiqu.base.BaseInfo;
+import com.zhl.huiqu.bean.WeiChatBean;
 import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.login.entity.RegisterInfo;
 import com.zhl.huiqu.main.ProductPartListBean;
@@ -247,6 +248,7 @@ public class SDK extends ABizLogic {
         if (info != null) {
             params.addParameter("check_sign", info.getCheck_sign());
             params.addParameter("session_id", info.getSession_id());
+            params.addParameter("member_id",info.getBody().getMember_id());
         }
         params.addParameter("shop_spot_id", id);
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?session_id=" + info.getSession_id() + "&check_sign=" + info.getCheck_sign());
@@ -493,6 +495,36 @@ public class SDK extends ABizLogic {
         params.addParameter("page", page);
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?theme_id=" + theme_id + "&grade=" + grade+ "&order=" + order);
         return doGet(configHttpConfig(), action, params,SearchBean.class);
+    }
+
+
+    /**
+     * 	调用微信下单接口
+     *
+     * @return
+     * @throws TaskException
+     */
+    public WeiChatBean getPrePayOrder(String body, String out_trade_no, String total_free) throws TaskException {
+        Setting action = newSetting("getPrePayOrder", "appapi/Wx/getPrePayOrder", "调用微信下单接口");
+        Params params = new Params();
+            params.addParameter("body", body);
+            params.addParameter("out_trade_no", out_trade_no);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?body=" + body + "&out_trade_no=" + out_trade_no+ "&total_free=" + total_free);
+        return doGet(configHttpConfig(), action, params,WeiChatBean.class);
+    }
+
+    /**
+     * 	调用微信查询订单
+     *
+     * @return
+     * @throws TaskException
+     */
+    public BaseInfo getQueryOrder(String out_trade_no) throws TaskException {
+        Setting action = newSetting("getQueryOrder", " appapi/Wx/getQueryOrder", "调用微信查询订单");
+        Params params = new Params();
+        params.addParameter("out_trade_no", out_trade_no);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "&out_trade_no=" + out_trade_no);
+        return doGet(configHttpConfig(), action, params,BaseInfo.class);
     }
 
 

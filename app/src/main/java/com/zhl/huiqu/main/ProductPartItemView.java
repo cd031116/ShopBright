@@ -54,7 +54,7 @@ public class ProductPartItemView extends ARecycleViewItemView<ProductPartBean> {
     }
 
     @Override
-    public void onBindData(View view, ProductPartBean bean, int i) {
+    public void onBindData(View view, ProductPartBean bean, int i){
         RequestOptions myOptions = new RequestOptions()
                 .centerCrop()
                 .transform(new GlideRoundTransform(activity,8));

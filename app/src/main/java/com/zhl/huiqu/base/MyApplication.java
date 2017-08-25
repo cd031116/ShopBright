@@ -14,6 +14,7 @@ import org.aisen.android.common.context.GlobalContext;
 
 import java.net.CookieManager;
 import java.net.CookiePolicy;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by lyj on 17/8/2.
@@ -31,6 +32,7 @@ public class MyApplication extends GlobalContext {
         locationService = new LocationService(getApplicationContext());
         activityManager = ActivityManagerd.getScreenManager();
         SearchHistoryManager.setup(this);
+        getOkHttpClient().setConnectTimeout((long)8000,TimeUnit.MILLISECONDS);
         getOkHttpClient().setCookieHandler(new CookieManager(null, CookiePolicy.ACCEPT_ORIGINAL_SERVER));
 
     }

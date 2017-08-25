@@ -332,6 +332,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
             super.onSuccess(infot);
             info = infot.getBody();
             dismissAlert();
+            progress.setVisibility(View.GONE);
             TLog.log("tttt", "info=" + infot);
             if(infot.getBody()!=null){
                 showView(infot.getBody());
@@ -342,6 +343,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
 
         @Override
         protected void onFailure(TaskException exception) {
+            progress.setVisibility(View.GONE);
             dismissAlert();
         }
     }

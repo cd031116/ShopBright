@@ -31,7 +31,6 @@ public class Consts {
      */
     public enum PayType{
 
-        Pay_Product_Reword("reward"),//打赏
         Pay_Product_Buy("purchase"),   //产品购买
         Pay_Orderid_Buy("orderId");   //订单购买
 
