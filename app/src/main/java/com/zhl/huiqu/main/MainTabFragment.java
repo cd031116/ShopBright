@@ -374,7 +374,6 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     }
 
 
-
     /*上部分数据
     * */
     class getTopTask extends WorkTask<Void, Void, MainBean> {
