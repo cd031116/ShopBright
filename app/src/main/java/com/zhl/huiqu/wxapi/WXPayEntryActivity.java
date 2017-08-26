@@ -20,6 +20,7 @@ import com.zhl.huiqu.base.Consts;
 import com.zhl.huiqu.interfaces.ITaskResultListener;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.MapUtil;
+import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.utils.TaskUtil;
 import com.zhl.huiqu.widget.ShowMsgDialog;
 
@@ -35,7 +36,6 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
     private IWXAPI api;
 
     private TextView tvPayCallBack;
-    private ShowMsgDialog progressDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +68,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
             }
             if (resp.errCode == 0) {
 //                //成功了
+                TLog.log("tttt", "--成功了:" );
                 tvPayCallBack.setText("正在查询支付状态");
                 TaskUtil.queryWeChatOrderTask(WXPayEntryActivity.this, new ITaskResultListener() {
                     @Override
@@ -84,13 +85,16 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
                     }
 
                     @Override
-                    public void onPrepare() {
+                    public void onPrepare(){
+
                     }
                 });
             } else if (resp.errCode == -2) {
                 //用户没有操作
+                tvPayCallBack.setText("支付取消");
                 this.finish();
             } else {
+                TLog.log("tttt", "--支付失败:" );
                 dialog("签名问题,支付失败", resp.errCode + "");
             }
         }

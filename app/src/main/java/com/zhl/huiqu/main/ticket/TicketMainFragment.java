@@ -329,10 +329,10 @@ public class TicketMainFragment extends BaseFragment {
                 holder.setVisible(R.id.ur_like_dp, false);
                 holder.setBitmapWithUrl(R.id.ur_like_img, hot.getThumb());
                 holder.setText(R.id.ms_tourist_text, hot.getTitle());
-                holder.setText(R.id.price_text, "￥" + hot.getShop_price());
-                holder.setText(R.id.price_ms_text, "起");
+                holder.setText(R.id.price_text, "￥" + hot.getShop_price()+"起");
+//                holder.setText(R.id.price_ms_text, );
                 String manyidu = hot.getCsr();
-                if (!TextUtils.isEmpty(manyidu)) {
+                if (!TextUtils.isEmpty(manyidu)&&!manyidu.equals("暂无评价")) {
                     holder.setText(R.id.address_text, hot.getCsr() + "满意度");
                 } else {
                     holder.setText(R.id.address_text, hot.getCsr());
