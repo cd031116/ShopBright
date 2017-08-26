@@ -69,7 +69,6 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
             if (resp.errCode == 0) {
 //                //成功了
                 TLog.log("tttt", "--成功了:" );
-                tvPayCallBack.setText("正在查询支付状态");
                 TaskUtil.queryWeChatOrderTask(WXPayEntryActivity.this, new ITaskResultListener() {
                     @Override
                     public void onSuccessResult(Object result) {
@@ -80,7 +79,6 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
                     @Override
                     public void onFailedResult(Object result) {
                         //支付失败了
-                        tvPayCallBack.setText("支付失败");
                         dialog("支付失败", "");
                     }
 
@@ -91,7 +89,6 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
                 });
             } else if (resp.errCode == -2) {
                 //用户没有操作
-                tvPayCallBack.setText("支付取消");
                 this.finish();
             } else {
                 TLog.log("tttt", "--支付失败:" );

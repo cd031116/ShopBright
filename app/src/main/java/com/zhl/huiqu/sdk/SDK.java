@@ -509,7 +509,7 @@ public class SDK extends ABizLogic {
         Params params = new Params();
             params.addParameter("body", body);
             params.addParameter("out_trade_no", out_trade_no);
-        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?body=" + body + "&out_trade_no=" + out_trade_no+ "&total_free=" + total_free);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?body=" + body + "&out_trade_no=" + out_trade_no);
         return doGet(configHttpConfig(), action, params,WeiChatBean.class);
     }
 
