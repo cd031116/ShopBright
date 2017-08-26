@@ -11,10 +11,11 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="15px"
-        android:visibility="gone"
+        android:visibility="visible"
         android:paddingRight="15px">
 
         <ImageView
+            android:id="@+id/jfsc_ima"
             android:layout_width="0dp"
             android:layout_height="331px"
             android:layout_weight="1"
@@ -23,6 +24,7 @@
 
 
         <ImageView
+            android:id="@+id/xrzq_ima"
             android:layout_width="0dp"
             android:layout_height="331px"
             android:layout_weight="1"
@@ -31,6 +33,7 @@
 
 
         <ImageView
+            android:id="@+id/yjgl_ima"
             android:layout_width="0dp"
             android:layout_height="331px"
             android:layout_weight="1"
@@ -46,17 +49,19 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:layout_marginTop="1px"
-        android:visibility="gone"
+        android:visibility="visible"
         android:paddingRight="15px"
         android:paddingLeft="15px">
 
         <ImageView
+            android:id="@+id/rmtj_ima"
             android:layout_width="0dp"
             android:layout_height="331px"
             android:layout_weight="1"
             android:src="@drawable/hp_rmtj" />
 
         <ImageView
+            android:id="@+id/yyqg_ima"
             android:layout_width="0dp"
             android:layout_height="331px"
             android:layout_weight="1"
@@ -65,6 +70,7 @@
 
 
         <ImageView
+            android:id="@+id/djms_ima"
             android:layout_width="0dp"
             android:layout_height="331px"
             android:layout_weight="1"
@@ -73,6 +79,7 @@
 
 
         <ImageView
+            android:id="@+id/hdmk_ima"
             android:layout_width="0dp"
             android:layout_height="331px"
             android:layout_weight="1"

@@ -346,7 +346,32 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         }
     }
 
-
+    @OnClick({R.id.jfsc_ima,R.id.xrzq_ima,R.id.yjgl_ima,R.id.rmtj_ima,R.id.yyqg_ima,R.id.djms_ima,R.id.hdmk_ima})
+    void genClick(View v){
+        switch (v.getId()){
+            case R.id.jfsc_ima:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+            case R.id.xrzq_ima:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+            case R.id.yjgl_ima:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+            case R.id.rmtj_ima:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+            case R.id.yyqg_ima:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+            case R.id.djms_ima:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+            case R.id.hdmk_ima:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+        }
+    }
 
 
 

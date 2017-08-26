@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_top"
-    android:layout_width="700px"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
@@ -17,7 +17,7 @@
 
             <ImageView
                 android:id="@+id/ur_like_img"
-                android:layout_width="match_parent"
+                android:layout_width="500px"
                 android:layout_height="300px"
                 android:scaleType="fitXY"
                 android:src="@mipmap/error" />
@@ -51,12 +51,18 @@
                 android:text="@string/account_msg"
                 android:textColor="@color/black_text" />
 
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ms_tourist_text"
+                android:layout_marginTop="18px">
+
+
             <TextView
                 android:id="@+id/price_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ms_tourist_text"
-                android:layout_marginTop="18px"
                 android:text="@string/account_msg"
                 android:textColor="@color/red_text" />
 
@@ -64,8 +70,6 @@
                 android:id="@+id/price_ms_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ms_tourist_text"
-                android:layout_marginTop="18px"
                 android:layout_toRightOf="@id/price_text"
                 android:text="@string/account_msg"
                 android:textColor="@color/gray_text" />
@@ -76,10 +80,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/account_msg"
                 android:textColor="@color/gray_text"
-                android:layout_alignBaseline="@+id/price_text"
-                android:layout_alignBottom="@+id/price_text"
+                android:layout_toRightOf="@+id/price_ms_text"
+                android:layout_marginLeft="100px"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                />
+            </RelativeLayout>
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
