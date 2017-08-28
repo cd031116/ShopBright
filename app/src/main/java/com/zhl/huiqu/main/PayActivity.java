@@ -133,6 +133,7 @@ public class PayActivity extends BaseActivity {
         public WeiChatBean workInBackground(Void... voids) throws TaskException {
             //产品编号
             MapUtil.sharedInstance().putDefaultValue(Constants.PAY_PRODUCT_ID,mPerson.getOrder_sn());
+            MapUtil.sharedInstance().putDefaultValue(Constants.ORDER_ID,mPerson.getOrder_id());
             //支付的金钱
             MapUtil.sharedInstance().putDefaultValue(Constants.PAY_MONEY, mPerson.getOrder_total());
             return SDK.newInstance(PayActivity.this).getPrePayOrder(mPerson.getName(),mPerson.getOrder_sn(), mPerson.getOrder_total());

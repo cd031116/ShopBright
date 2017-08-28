@@ -37,4 +37,6 @@ public class Constants {
 
     public static final String MAIN_DATA="main_data";
     public static final String TICK_DATA="tick_data";
+
+    public static final String ORDER_ID="order_id";
 }
