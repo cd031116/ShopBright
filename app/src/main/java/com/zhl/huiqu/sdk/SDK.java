@@ -257,7 +257,6 @@ public class SDK extends ABizLogic {
         return doPost(configHttpConfig(), action, params, null, null, DetailMainBean.class);
     }
 
-
     /**
      * TODO 重置密码接口
      *

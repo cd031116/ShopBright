@@ -47,6 +47,16 @@ public class DetailMainInfo implements Serializable{
 
     private String up_time;//
 
+    private String collect_status;
+
+    public String getCollect_status() {
+        return collect_status;
+    }
+
+    public void setCollect_status(String collect_status) {
+        this.collect_status = collect_status;
+    }
+
     public String getTag() {
         return tag;
     }
