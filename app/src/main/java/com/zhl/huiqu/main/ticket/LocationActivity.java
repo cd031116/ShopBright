@@ -71,7 +71,6 @@ public class LocationActivity extends BaseActivity {
         }
     }
 
-
     private void showview() {
         if(TextUtils.isEmpty(latitude)||TextUtils.isEmpty(longitude)){
             return;
