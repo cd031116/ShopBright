@@ -150,7 +150,6 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
     @Override
     public void initData() {
         super.initData();
-
         new getInfoTask().execute();
     }
 
@@ -174,9 +173,6 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
             }
         };
         pRecycle.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this));
-
-//        pRecycle.addItemDecoration(new I);
-//        Drawable drawable = ContextCompat.getDrawable(getActivity(), R.drawable.line_divider_red);
         pRecycle.addItemDecoration(new SimpleDividerItemDecoration(this, null, 1));
         pRecycle.setAdapter(mAdapter);
         pRecycle.setNestedScrollingEnabled(false);

@@ -16,6 +16,7 @@ import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.CoordinateConverter;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 
@@ -41,6 +42,7 @@ public class LocationActivity extends BaseActivity {
     @Override
     public void initView(){
         super.initView();
+        SDKInitializer.getCoordType();
         Bundle bd=getIntent().getExtras();
         if(bd!=null){
             latitude=bd.getString("latitude");
@@ -49,6 +51,7 @@ public class LocationActivity extends BaseActivity {
         }
         mBaiduMap = bmapView.getMap();
         mBaiduMap.setMyLocationEnabled(true);
+        mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
         showview();
     }
 
@@ -70,11 +73,9 @@ public class LocationActivity extends BaseActivity {
 
 
     private void showview() {
-
         if(TextUtils.isEmpty(latitude)||TextUtils.isEmpty(longitude)){
             return;
         }
-
         LatLng point = new LatLng(Double.parseDouble(latitude),Double.parseDouble(longitude));
     //构建Marker图标
         BitmapDescriptor bitmap = BitmapDescriptorFactory
