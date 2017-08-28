@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.text.TextUtils;
 
 import com.zhl.huiqu.BuildConfig;
+import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.bean.WeiChatBean;
 import com.zhl.huiqu.login.entity.RegisterEntity;
@@ -508,11 +509,12 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public WeiChatBean getPrePayOrder(String body, String out_trade_no, String total_free) throws TaskException {
+    public WeiChatBean getPrePayOrder(String body, String out_trade_no,String total_free) throws TaskException {
         Setting action = newSetting("getPrePayOrder", "appapi/Wx/getPrePayOrder", "调用微信下单接口");
         Params params = new Params();
         params.addParameter("body", body);
         params.addParameter("out_trade_no", out_trade_no);
+        params.addParameter("app_name",context.getResources().getString(R.string.app_name));
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?body=" + body + "&out_trade_no=" + out_trade_no);
         return doGet(configHttpConfig(), action, params, WeiChatBean.class);
     }
