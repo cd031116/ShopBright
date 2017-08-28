@@ -141,6 +141,7 @@
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:padding="20px">
 
                 <TextView
@@ -214,7 +215,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20px"
-                    android:src="@drawable/order_pay_gray_gou" />
+                    android:src="@drawable/order_pay_red_gou" />
             </RelativeLayout>
         </LinearLayout>
 
