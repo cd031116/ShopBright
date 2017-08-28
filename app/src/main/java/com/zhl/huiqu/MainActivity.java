@@ -12,11 +12,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
-import com.baidu.location.Poi;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.base.DoubleClickExitHelper;

@@ -183,7 +183,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
     }
 
 
-    @OnClick({R.id.top_left, R.id.image, R.id.image_t, R.id.tab1_mian, R.id.tab2_mian, R.id.tab3_mian, R.id.look_detail, R.id.location})
+    @OnClick({R.id.top_left, R.id.image, R.id.image_t, R.id.tab1_mian, R.id.tab2_mian, R.id.tab3_mian, R.id.look_detail, R.id.location,R.id.js_line})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.top_left:
@@ -206,6 +206,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
                 tpscoll(jd_hight);
                 break;
             case R.id.look_detail:
+            case R.id.js_line:
                 Intent intent = new Intent(ProductDetailActivity.this, WebviewActivity.class);
                 intent.putExtra("title", info.getSpot_info().getTitle());
                 intent.putExtra("content", info.getSpot_info().getContent());

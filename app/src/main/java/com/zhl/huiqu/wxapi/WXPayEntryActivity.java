@@ -18,6 +18,7 @@ import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.base.Consts;
 import com.zhl.huiqu.interfaces.ITaskResultListener;
+import com.zhl.huiqu.personal.OrderDetailActivity;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.MapUtil;
 import com.zhl.huiqu.utils.TLog;
@@ -63,8 +64,8 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
         if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
             String orderId = "";
             //产品订单编号
-            if (MapUtil.sharedInstance().getDefaultValue(Constants.ORDER_ID_KEY) instanceof String) {
-                orderId = MapUtil.sharedInstance().getDefaultValue(Constants.ORDER_ID_KEY).toString();
+            if (MapUtil.sharedInstance().getDefaultValue(Constants.PAY_PRODUCT_ID) instanceof String) {
+                orderId = MapUtil.sharedInstance().getDefaultValue(Constants.PAY_PRODUCT_ID).toString();
             }
             if (resp.errCode == 0) {
 //                //成功了
@@ -122,10 +123,15 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);  //先得到构造器
         builder.setMessage(title); //设置内容
         builder.setCancelable(false);
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() { //设置确定按钮
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener(){ //设置确定按钮
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss(); //关闭dialog
+//                MapUtil.sharedInstance().getDefaultValue(Constants.PAY_PRODUCT_ID).toString();
+                Intent intent=new Intent(WXPayEntryActivity.this,OrderDetailActivity.class);
+                intent.putExtra("order_state", getResources().getString(R.string.personal_out_order));
+                intent.putExtra("order_id",MapUtil.sharedInstance().getDefaultValue(Constants.PAY_PRODUCT_ID).toString());
+                startActivity(intent);
                 WXPayEntryActivity.this.finish();
             }
         });

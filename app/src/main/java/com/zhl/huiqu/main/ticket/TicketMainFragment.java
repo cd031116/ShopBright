@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -89,7 +90,6 @@ public class TicketMainFragment extends BaseFragment {
     RecyclerView lear_city;//
     @ViewInject(id = R.id.id_content)
     RecyclerView lear_jd;//
-
 
     private TickMainBean tickInfo;
 
@@ -291,7 +291,7 @@ public class TicketMainFragment extends BaseFragment {
         });
     }
 
-    @OnClick({R.id.btnBack, R.id.line_back, R.id.searh_line, R.id.editSearch, R.id.temai, R.id.jf_image, R.id.xr_image, R.id.yj_image})
+    @OnClick({R.id.btnBack, R.id.line_back, R.id.searh_line, R.id.editSearch, R.id.temai, R.id.jf_image, R.id.xr_image, R.id.yj_image,R.id.go_search})
     void onBtnBackClicked(View v) {
         switch (v.getId()) {
             case R.id.btnBack:
@@ -314,6 +314,10 @@ public class TicketMainFragment extends BaseFragment {
             case R.id.yj_image:
                 ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
                 break;
+            case R.id.go_search:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+
         }
     }
 

@@ -120,7 +120,7 @@ public class PayActivity extends BaseActivity {
 
 
     /*
-  *登录
+  *
   * */
     class PayOrderTask extends WorkTask<Void, Void, WeiChatBean> {
         @Override

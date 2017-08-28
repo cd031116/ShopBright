@@ -48,7 +48,6 @@
                 android:layout_marginTop="18px"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="@string/account_msg"
                 android:textColor="@color/black_text" />
 
             <LinearLayout
@@ -62,7 +61,6 @@
                 android:id="@+id/price_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/account_msg"
                 android:textColor="@color/red_text" />
 
             <TextView
@@ -70,7 +68,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/price_text"
-                android:text="@string/account_msg"
                 android:layout_marginLeft="10px"
                 android:textColor="@color/gray_text" />
 
@@ -84,7 +81,6 @@
                 android:id="@+id/address_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/account_msg"
                 android:layout_marginLeft="10px"
                 android:textColor="@color/gray_text"
                 />

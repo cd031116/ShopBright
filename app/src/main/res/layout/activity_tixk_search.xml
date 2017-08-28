@@ -127,6 +127,7 @@
             android:drawableTop="@drawable/search_white_gou"
             android:gravity="center"
             android:padding="5px"
+            android:visibility="gone"
             android:text="今日可定"
             android:textColor="#ffffff"
             android:textSize="@dimen/t_size" />

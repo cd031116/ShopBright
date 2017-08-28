@@ -2,6 +2,7 @@ package com.zhl.huiqu.main.ticket;
 
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -69,6 +70,11 @@ public class LocationActivity extends BaseActivity {
 
 
     private void showview() {
+
+        if(TextUtils.isEmpty(latitude)||TextUtils.isEmpty(longitude)){
+            return;
+        }
+
         LatLng point = new LatLng(Double.parseDouble(latitude),Double.parseDouble(longitude));
     //构建Marker图标
         BitmapDescriptor bitmap = BitmapDescriptorFactory

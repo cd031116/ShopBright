@@ -143,7 +143,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         public void onEvent(CityEvent v) {
             BaseConfig bg = new BaseConfig(getActivity());
             String addre = bg.getStringValue(Constants.Address, "");
-            address.setText(addre);
+            address.setText(TextUtils.isEmpty(addre)?"长沙":addre);
 
         }
     };
@@ -241,11 +241,12 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         });
     }
 
-    @OnClick({R.id.scan, R.id.searh_line, R.id.main_mp, R.id.mp_1, R.id.mp_2, R.id.mp_3, R.id.mp_4, R.id.hot_1, R.id.hot_2, R.id.hot_3})
+    @OnClick({R.id.scan, R.id.searh_line, R.id.main_mp, R.id.mp_1, R.id.mp_2, R.id.mp_3, R.id.mp_4, R.id.hot_1, R.id.hot_2, R.id.hot_3,R.id.info})
     void onclik(View v) {
         switch (v.getId()) {
             case R.id.scan:
-                startActivity(new Intent(getActivity(), CaptureActivity.class));
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+//                startActivity(new Intent(getActivity(), CaptureActivity.class));
                 break;
             case R.id.searh_line:
 //                SearchFragment.launch(getActivity());
@@ -299,6 +300,9 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
                     intent7.putExtra("shop_spot_id",mainInfo.getHot().get(2).getShop_spot_id());
                 }
                 startActivity(intent7);
+                break;
+            case R.id.info:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
                 break;
         }
     }

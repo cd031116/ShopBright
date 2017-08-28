@@ -42,6 +42,7 @@
                 android:layout_marginLeft="5px"
                 android:background="@drawable/mp_list_bg"
                 android:padding="10px"
+                android:visibility="gone"
                 android:text="优惠券"
                 android:textColor="@color/red_text" />
 
@@ -52,6 +53,7 @@
                 android:background="@drawable/mp_list_bg"
                 android:padding="10px"
                 android:text="促销"
+                android:visibility="gone"
                 android:textColor="@color/red_text" />
 
             <TextView
@@ -61,6 +63,7 @@
                 android:padding="10px"
                 android:layout_marginLeft="5px"
                 android:text="随时退"
+                android:visibility="gone"
                 android:textColor="@color/red_text" />
 
         </LinearLayout>

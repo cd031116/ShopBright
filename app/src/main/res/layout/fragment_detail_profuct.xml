@@ -419,6 +419,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="20px"
+                        android:visibility="gone"
                         android:src="@drawable/mpxq_down" />
                 </RelativeLayout>
 
@@ -434,17 +435,17 @@
                     android:padding="20px" />
 
             </LinearLayout>
-            s
+
 
             <RelativeLayout
                 android:id="@+id/look_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1px"
                 android:background="#ffffff"
                 android:paddingBottom="20px"
                 android:paddingLeft="10px"
                 android:paddingRight="10px"
+                android:layout_marginTop="1px"
                 android:paddingTop="20px">
 
                 <TextView
