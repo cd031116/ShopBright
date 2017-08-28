@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.main.bean.DetailBean;
 import com.zhl.huiqu.main.bean.DetailMainBean;
 import com.zhl.huiqu.main.bean.DitalTickList;
@@ -27,7 +29,10 @@ import com.zhl.huiqu.personal.OrderWriteActivity;
 import com.zhl.huiqu.recyclebase.CommonAdapter;
 import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.sdk.SDK;
+import com.zhl.huiqu.utils.Constants;
+import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.TLog;
+import com.zhl.huiqu.utils.ToastUtils;
 import com.zhl.huiqu.widget.GlideImageLoader;
 import com.zhl.huiqu.widget.MyScroview;
 import com.zhl.huiqu.widget.SimpleDividerItemDecoration;
@@ -125,7 +130,8 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
     private CommonAdapter<DitalTickList> mAdapter;
     private List<DitalTickList> mlist = new ArrayList<>();
     private DetailBean info;
-    private String shop_spot_id="";
+    private String shop_spot_id = "";
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_detail_profuct;
@@ -134,16 +140,15 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
     @Override
     public void initView() {
         super.initView();
-        Bundle bd=getIntent().getExtras();
-        if(bd!=null){
-            shop_spot_id=bd.getString("shop_spot_id");
+        Bundle bd = getIntent().getExtras();
+        if (bd != null) {
+            shop_spot_id = bd.getString("shop_spot_id");
         }
         changeview(1);
         myscroview.setOnScrollListener(this);
         top_title.setText("产品详情");
         soucang.setVisibility(View.VISIBLE);
-        fenxiang.setVisibility(View.VISIBLE);
-        soucang.setBackgroundResource(R.drawable.mpxq_sc);
+        fenxiang.setVisibility(View.GONE);
         fenxiang.setBackgroundResource(R.drawable.mpxq_black_fx);
     }
 
@@ -152,6 +157,25 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
         super.initData();
         new getInfoTask().execute();
     }
+
+    private void showcollection(DetailBean info) {
+        if (info.getSpot_info() == null) {
+            soucang.setBackgroundResource(R.drawable.mpxq_sc);
+            return;
+        }
+        String ss = info.getSpot_info().getCollect_status();
+        if (!TextUtils.isEmpty(ss)) {
+            if ("1".equals(ss)) {
+                soucang.setBackgroundResource(R.drawable.mpxq_sc_red);
+            } else {
+                soucang.setBackgroundResource(R.drawable.mpxq_sc);
+            }
+        } else {
+            soucang.setBackgroundResource(R.drawable.mpxq_sc);
+        }
+
+    }
+
 
     private void showlist() {
         mAdapter = new CommonAdapter<DitalTickList>(this, R.layout.mp_item, mlist) {
@@ -165,7 +189,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
                     public void onClick(View v) {
                         Intent intent = new Intent(ProductDetailActivity.this, OrderWriteActivity.class);
                         Bundle mBundle = new Bundle();
-                        mBundle.putSerializable("pay",bean);
+                        mBundle.putSerializable("pay", bean);
                         intent.putExtras(mBundle);
                         startActivity(intent);
                     }
@@ -179,14 +203,14 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
     }
 
 
-    @OnClick({R.id.top_left, R.id.image, R.id.image_t, R.id.tab1_mian, R.id.tab2_mian, R.id.tab3_mian, R.id.look_detail, R.id.location,R.id.js_line})
+    @OnClick({R.id.top_left, R.id.image, R.id.image_t, R.id.tab1_mian, R.id.tab2_mian, R.id.tab3_mian, R.id.look_detail, R.id.location, R.id.js_line})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.top_left:
                 ProductDetailActivity.this.finish();
                 break;
             case R.id.image:
-
+                new toTask().execute();
                 break;
             case R.id.image_t:
 
@@ -331,9 +355,10 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
             dismissAlert();
             progress.setVisibility(View.GONE);
             TLog.log("tttt", "info=" + infot);
-            if(infot.getBody()!=null){
+            if (infot.getBody() != null) {
                 showView(infot.getBody());
-            }else {
+                showcollection(info);
+            } else {
                 layoutLoading.setVisibility(View.VISIBLE);
             }
         }
@@ -341,6 +366,41 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
         @Override
         protected void onFailure(TaskException exception) {
             progress.setVisibility(View.GONE);
+            dismissAlert();
+        }
+    }
+
+    /*收藏
+    * */
+    class toTask extends WorkTask<Void, Void, String>{
+        @Override
+        protected void onPrepare(){
+            super.onPrepare();
+            showAlert("正在提交..",true);
+        }
+
+        @Override
+        public String workInBackground(Void... voids) throws TaskException{
+            RegisterEntity data = (RegisterEntity) SaveObjectUtils.getInstance(ProductDetailActivity.this).getObject(Constants.USER_INFO, null);
+            return SDK.newInstance(ProductDetailActivity.this).getCollect(data.getBody().getMember_id(), shop_spot_id);
+        }
+
+        @Override
+        protected void onSuccess(String infot){
+            super.onSuccess(infot);
+            dismissAlert();
+            if ("1".equals(info.getSpot_info().getCollect_status())){
+                info.getSpot_info().setCollect_status("0");
+                ToastUtils.showShortToast(ProductDetailActivity.this,"取消收藏");
+            } else {
+                info.getSpot_info().setCollect_status("1");
+                ToastUtils.showShortToast(ProductDetailActivity.this,"收藏成功");
+            }
+            showcollection(info);
+        }
+
+        @Override
+        protected void onFailure(TaskException exception){
             dismissAlert();
         }
     }
@@ -365,7 +425,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
             num.setText(info.getThumb_list().size() + "");
         }
 
-        if(info.getSpot_info()!=null){
+        if (info.getSpot_info() != null) {
             title.setText(info.getSpot_info().getTitle());
             address.setText(info.getSpot_info().getAddress());
             open_time.setText(info.getSpot_info().getOpening());
@@ -375,7 +435,6 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
             jd_content.setText(info.getSpot_info().getDesc());
             yd_content.setText(info.getSpot_info().getReminder());
         }
-
 
 
         mlist = info.getTicket_list();

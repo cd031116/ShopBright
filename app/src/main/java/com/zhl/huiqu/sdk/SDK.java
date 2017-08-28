@@ -547,6 +547,25 @@ public class SDK extends ABizLogic {
     }
 
 
+
+    /**
+     * 收藏
+     *
+     * @return
+     * @throws TaskException
+     */
+    public String getCollect(String member_id, String shop_spot_id) throws TaskException {
+        Setting action = newSetting("getOrderinfo", "appapi/Goods/collect", "获取订单详情");
+        Params params = new Params();
+        params.addParameter("member_id", member_id);
+        params.addParameter("shop_spot_id", shop_spot_id);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?member_id=" + member_id + "&shop_spot_id="+shop_spot_id);
+        return doGet(configHttpConfig(), action, params, String.class);
+    }
+
+
+
+
     @Override
     protected IHttpUtility configHttpUtility() {
 

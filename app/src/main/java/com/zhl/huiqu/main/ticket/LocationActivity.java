@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
@@ -22,6 +23,9 @@ import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.CoordinateConverter;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.login.LoginActivity;
+import com.zhl.huiqu.utils.ToastUtils;
+import com.zhl.huiqu.widget.ShowMsgDialog;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -76,6 +80,8 @@ public class LocationActivity extends BaseActivity {
 
     private void showview() {
         if(TextUtils.isEmpty(latitude)||TextUtils.isEmpty(longitude)){
+
+            ToastUtils.showShortToast(LocationActivity.this,"未获取到该地方的经纬度");
             return;
         }
         LatLng point = new LatLng(Double.parseDouble(latitude),Double.parseDouble(longitude));
