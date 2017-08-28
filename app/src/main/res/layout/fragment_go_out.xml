@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/huiqu_refund_layout"
@@ -46,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="@string/order_detail_huiqu_phone"
+            android:text="@string/order_account_phone_text"
             android:textColor="@color/white"
             android:textSize="33px" />
     </RelativeLayout>
@@ -69,13 +70,13 @@
                 android:paddingLeft="33px">
 
                 <TextView
+                    android:id="@+id/order_where"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:drawableLeft="@drawable/mpxq_jd_sea"
                     android:drawablePadding="30px"
                     android:gravity="center"
-                    android:text="@string/order_detail"
                     android:textColor="@color/black_text"
                     android:textSize="42px" />
 
@@ -104,18 +105,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24px"
-                    android:text="@string/order_detail"
-                    android:textColor="@color/black_text"
-                    android:textSize="30px" />
-
-                <TextView
-                    android:id="@+id/ticket_type_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="33px"
-                    android:layout_marginTop="24px"
-                    android:layout_toRightOf="@id/ticket_type"
-                    android:text="@string/order_detail"
                     android:textColor="@color/black_text"
                     android:textSize="30px" />
 
@@ -125,7 +114,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="24px"
-                    android:text="@string/order_detail"
                     android:textColor="@color/red_text"
                     android:textSize="30px" />
 
@@ -133,7 +121,7 @@
                     android:id="@+id/ticket_outing_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/ticket_type_text"
+                    android:layout_below="@id/ticket_type"
                     android:layout_marginTop="36px"
                     android:text="@string/all_order_outing_time"
                     android:textColor="@color/gray_text"
@@ -143,11 +131,10 @@
                     android:id="@+id/ticket_outing_time_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/ticket_type_text"
+                    android:layout_below="@id/ticket_type"
                     android:layout_marginLeft="33px"
                     android:layout_marginTop="36px"
                     android:layout_toRightOf="@id/ticket_outing_time"
-                    android:text="@string/order_detail"
                     android:textColor="@color/black_text"
                     android:textSize="30px" />
 
@@ -169,7 +156,6 @@
                     android:layout_marginLeft="33px"
                     android:layout_marginTop="36px"
                     android:layout_toRightOf="@id/ticket_num"
-                    android:text="@string/order_detail"
                     android:textColor="@color/black_text"
                     android:textSize="30px" />
 
@@ -190,51 +176,19 @@
                     android:layout_below="@id/ticket_num"
                     android:layout_marginLeft="33px"
                     android:layout_marginTop="36px"
-                    android:layout_toRightOf="@id/ticket_type"
+                    android:layout_toRightOf="@id/ticket_in_type"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:text="@string/order_detail"
                     android:textColor="@color/black_text"
                     android:textSize="30px" />
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/yhq_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/ticket_detail"
-                android:layout_marginTop="2px"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:paddingBottom="24px"
-                android:paddingLeft="33px"
-                android:paddingRight="33px"
-                android:paddingTop="24px">
-
-                <TextView
-                    android:id="@+id/yhq_using"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/order_detail_coupon_using"
-                    android:textColor="@color/black_text"
-                    android:textSize="33px" />
-
-                <TextView
-                    android:id="@+id/yhq_using_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="@string/all_order"
-                    android:textColor="@color/red_text"
-                    android:textSize="33px" />
-            </RelativeLayout>
-
-            <RelativeLayout
                 android:id="@+id/price_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/yhq_layout"
+                android:layout_below="@id/ticket_detail"
                 android:layout_marginTop="2px"
                 android:background="@color/white"
                 android:gravity="center_vertical"
@@ -256,7 +210,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="@string/all_order"
                     android:textColor="@color/red_text"
                     android:textSize="33px" />
             </RelativeLayout>
@@ -300,8 +253,8 @@
                 android:paddingLeft="33px"
                 android:paddingRight="33px"
                 android:paddingTop="24px"
-                android:text="@string/all_order_complete"
-                android:textSize="30px"></TextView>
+                android:text="@string/refund_layout_text"
+                android:textSize="30px" />
 
             <RelativeLayout
                 android:id="@+id/refund_order_num_layout"
@@ -332,7 +285,6 @@
                     android:layout_marginLeft="33px"
                     android:layout_marginTop="24px"
                     android:layout_toRightOf="@id/refund_order_num"
-                    android:text="@string/order_detail"
                     android:textColor="@color/black_text"
                     android:textSize="30px" />
 
@@ -342,7 +294,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="24px"
-                    android:text="@string/order_detail"
                     android:textColor="@color/red_text"
                     android:textSize="30px" />
 
@@ -364,7 +315,6 @@
                     android:layout_marginLeft="33px"
                     android:layout_marginTop="36px"
                     android:layout_toRightOf="@id/refund_time"
-                    android:text="@string/order_detail"
                     android:textColor="@color/black_text"
                     android:textSize="30px" />
 
@@ -386,7 +336,6 @@
                     android:layout_marginLeft="33px"
                     android:layout_marginTop="36px"
                     android:layout_toRightOf="@id/refund_pay_type"
-                    android:text="@string/order_detail"
                     android:textColor="@color/black_text"
                     android:textSize="30px" />
 
@@ -434,7 +383,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="33px"
                     android:layout_toRightOf="@id/order_account_name"
-                    android:text="@string/order_detail"
                     android:textColor="@color/black_text"
                     android:textSize="30px" />
 
@@ -456,7 +404,6 @@
                     android:layout_marginLeft="33px"
                     android:layout_marginTop="24px"
                     android:layout_toRightOf="@id/order_account_phone"
-                    android:text="@string/order_detail"
                     android:textColor="@color/black_text"
                     android:textSize="30px" />
 

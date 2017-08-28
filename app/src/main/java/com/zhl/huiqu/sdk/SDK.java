@@ -19,6 +19,8 @@ import com.zhl.huiqu.main.ticket.SpotTBean;
 import com.zhl.huiqu.main.ticket.TickMainBean;
 import com.zhl.huiqu.personal.bean.AllOrderBean;
 import com.zhl.huiqu.personal.bean.OrderBean;
+import com.zhl.huiqu.personal.bean.OrderDetailBean;
+import com.zhl.huiqu.personal.bean.OrderDetailEntity;
 import com.zhl.huiqu.personal.bean.OrderEntity;
 import com.zhl.huiqu.sdk.http.DTODataParseHttp;
 import com.zhl.huiqu.utils.Constants;
@@ -237,7 +239,7 @@ public class SDK extends ABizLogic {
     /**
      * 商品详情
      *
-     * @param id         //所请求商品的id
+     * @param id //所请求商品的id
      * @return
      * @throws TaskException
      */
@@ -248,7 +250,7 @@ public class SDK extends ABizLogic {
         if (info != null) {
             params.addParameter("check_sign", info.getCheck_sign());
             params.addParameter("session_id", info.getSession_id());
-            params.addParameter("member_id",info.getBody().getMember_id());
+            params.addParameter("member_id", info.getBody().getMember_id());
         }
         params.addParameter("shop_spot_id", id);
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?session_id=" + info.getSession_id() + "&check_sign=" + info.getCheck_sign());
@@ -424,10 +426,11 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public AllOrderBean getAllOrder(String member_id) throws TaskException {
+    public AllOrderBean getAllOrder(String member_id, int page) throws TaskException {
         Setting action = newSetting("getAllOrder", "appapi/Personalcenter/getAllOrder", "查看全部订单");
         Params params = new Params();
         params.addParameter("member_id", member_id);
+        params.addParameter("page", page+"");
         return doPost(configHttpConfig(), action, params, null, null, AllOrderBean.class);
     }
 
@@ -452,6 +455,7 @@ public class SDK extends ABizLogic {
         params.addParameter("num", num);
         return doPost(configHttpConfig(), action, params, null, null, OrderBean.class);
     }
+
     /**
      * 订单生成
      *
@@ -459,7 +463,7 @@ public class SDK extends ABizLogic {
      * @throws TaskException
      */
     public OrderBean insertOrderInfo(String status, String use_date, String use_name, String use_card, String mobile,
-                                       String code, String ticket_id, String num) throws TaskException {
+                                     String code, String ticket_id, String num) throws TaskException {
         Setting action = newSetting("insertOrderInfo", "appapi/Order1/insertOrderInfo", "订单生成");
         Params params = new Params();
         params.addParameter("status", status);
@@ -483,23 +487,23 @@ public class SDK extends ABizLogic {
     public SearchBean getSpotByCondition(String theme_id, String grade, String order, String page) throws TaskException {
         Setting action = newSetting("getSpotByCondition", "appapi/Spotticket/getSpotByCondition", "通过筛选条件查询门票");
         Params params = new Params();
-        if(!TextUtils.isEmpty(theme_id)){
+        if (!TextUtils.isEmpty(theme_id)) {
             params.addParameter("theme_id", theme_id);
         }
-        if(!TextUtils.isEmpty(grade)){
+        if (!TextUtils.isEmpty(grade)) {
             params.addParameter("grade", grade);
         }
-        if(!TextUtils.isEmpty(order)){
+        if (!TextUtils.isEmpty(order)) {
             params.addParameter("order", order);
         }
         params.addParameter("page", page);
-        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?theme_id=" + theme_id + "&grade=" + grade+ "&order=" + order);
-        return doGet(configHttpConfig(), action, params,SearchBean.class);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?theme_id=" + theme_id + "&grade=" + grade + "&order=" + order);
+        return doGet(configHttpConfig(), action, params, SearchBean.class);
     }
 
 
     /**
-     * 	调用微信下单接口
+     * 调用微信下单接口
      *
      * @return
      * @throws TaskException
@@ -507,26 +511,40 @@ public class SDK extends ABizLogic {
     public WeiChatBean getPrePayOrder(String body, String out_trade_no, String total_free) throws TaskException {
         Setting action = newSetting("getPrePayOrder", "appapi/Wx/getPrePayOrder", "调用微信下单接口");
         Params params = new Params();
-            params.addParameter("body", body);
-            params.addParameter("out_trade_no", out_trade_no);
+        params.addParameter("body", body);
+        params.addParameter("out_trade_no", out_trade_no);
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?body=" + body + "&out_trade_no=" + out_trade_no);
-        return doGet(configHttpConfig(), action, params,WeiChatBean.class);
+        return doGet(configHttpConfig(), action, params, WeiChatBean.class);
     }
 
     /**
-     * 	调用微信查询订单
+     * 调用微信查询订单
      *
      * @return
      * @throws TaskException
      */
     public BaseInfo getQueryOrder(String out_trade_no) throws TaskException {
-        Setting action = newSetting("getQueryOrder", " appapi/Wx/getQueryOrder", "调用微信查询订单");
+        Setting action = newSetting("getQueryOrder", "appapi/Wx/getQueryOrder", "调用微信查询订单");
         Params params = new Params();
         params.addParameter("out_trade_no", out_trade_no);
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "&out_trade_no=" + out_trade_no);
-        return doGet(configHttpConfig(), action, params,BaseInfo.class);
+        return doGet(configHttpConfig(), action, params, BaseInfo.class);
     }
 
+    /**
+     * 获取订单详情
+     *
+     * @return
+     * @throws TaskException
+     */
+    public OrderDetailBean getOrderinfo(String member_id, String order_id) throws TaskException {
+        Setting action = newSetting("getOrderinfo", "appapi/Personalcenter/getOrderInfo", "获取订单详情");
+        Params params = new Params();
+        params.addParameter("member_id", member_id);
+        params.addParameter("order_id", order_id);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "&member_id=" + member_id + "&order_id=" + order_id);
+        return doGet(configHttpConfig(), action, params, OrderDetailBean.class);
+    }
 
 
     @Override

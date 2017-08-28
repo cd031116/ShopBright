@@ -2,8 +2,10 @@ package com.zhl.huiqu.personal;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +14,26 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.base.BaseFragment;
+import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.main.PayActivity;
+import com.zhl.huiqu.personal.bean.OrderDetailBean;
+import com.zhl.huiqu.personal.bean.OrderDetailEntity;
+import com.zhl.huiqu.sdk.SDK;
+import com.zhl.huiqu.utils.Constants;
+import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
+
+import org.aisen.android.network.task.TaskException;
+import org.aisen.android.network.task.WorkTask;
+
+import java.util.Date;
 
 /**
  * Created by Administrator on 2017/8/16.
  */
 
-public class OrderPayFragment extends Fragment implements View.OnClickListener {
+public class OrderPayFragment extends BaseFragment implements View.OnClickListener {
     private TextView ticketToWhere, ticket_type, ticket_type_text, ticket_price, ticket_outing_time_text,
             ticket_in_type_text, price_all_text, refund_layout_text, refund_order_num_text, refund_time_text,
             refund_pay_type_text, order_account_name_text, order_account_phone_text, apply_cancel,
@@ -27,22 +41,32 @@ public class OrderPayFragment extends Fragment implements View.OnClickListener {
     private RelativeLayout huiqu_tel_layout;
 
     private ImageView refundGzImg;
+    private String orderId;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_should_pay, container, false);
+    public void setContentView(ViewGroup view) {
+        super.setContentView(view);
+        SupportMultipleScreensUtil.init(getActivity());
         SupportMultipleScreensUtil.scale(view);
         initView(view);
-        return view;
+    }
+
+    @Override
+    public int inflateContentView() {
+        return R.layout.fragment_go_out;
     }
 
     private void initView(View view) {
+        Bundle bundle = getArguments();//从activity传过来的Bundle
+        RegisterEntity registerInfo = SaveObjectUtils.getInstance(getActivity()).getObject(Constants.USER_INFO, RegisterEntity.class);
+        if (bundle != null) {
+            orderId = bundle.getString("orderId");
+        }
         ticketToWhere = (TextView) view.findViewById(R.id.order_to_where);
         ticket_type = (TextView) view.findViewById(R.id.ticket_type);
         ticket_type_text = (TextView) view.findViewById(R.id.ticket_type_text);
@@ -63,6 +87,7 @@ public class OrderPayFragment extends Fragment implements View.OnClickListener {
         order_pay_btn = (TextView) view.findViewById(R.id.order_pay_btn);
         apply_cancel.setOnClickListener(this);
         order_pay_btn.setOnClickListener(this);
+        new getOrderinfoTask().execute(registerInfo.getBody().getMember_id(), orderId);
     }
 
     @Override
@@ -79,5 +104,58 @@ public class OrderPayFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
         }
+    }
+
+    class getOrderinfoTask extends WorkTask<String, Void, OrderDetailBean> {
+
+        @Override
+        protected void onPrepare() {
+            super.onPrepare();
+            showAlert("..正在加载中..", false);
+        }
+
+        @Override
+        public OrderDetailBean workInBackground(String... params) throws TaskException {
+            return SDK.newInstance(getActivity()).getOrderinfo(params[0], params[1]);
+        }
+
+        @Override
+        protected void onSuccess(OrderDetailBean info) {
+            super.onSuccess(info);
+            dismissAlert();
+            Log.e("ttt", "onSuccess: info.getPrice():" + info.getBody().getPrice());
+            settingView(info.getBody());
+        }
+
+        @Override
+        protected void onFailure(TaskException exception) {
+            dismissAlert();
+        }
+    }
+
+    private void settingView(OrderDetailEntity info) {
+        ticketToWhere.setText(info.getSpot_name());
+        ticket_type.setText(info.getName());
+        ticket_price.setText("￥" + info.getPrice());
+        ticket_outing_time_text.setText(info.getUse_date());
+        ticket_num_text.setText(info.getNum() + "张");
+        ticket_in_type_text.setText(info.getTake());
+        price_all_text.setText("￥" + info.getOrder_total());
+        refund_order_num_text.setText(info.getOrder_sn());
+        refund_time_text.setText(timedate(info.getAdd_time() + ""));
+        refund_order_goout_text.setText("待付款");
+        refund_pay_type_text.setText(info.getPay_way());
+        order_account_name_text.setText(info.getUse_name());
+        order_account_phone_text.setText(info.getMobile());
+    }
+
+    public String timedate(String time) {
+        SimpleDateFormat sdr = new SimpleDateFormat("yyyy-MM-dd ");
+        @SuppressWarnings("unused")
+        long lcc = Long.valueOf(time);
+        int i = Integer.parseInt(time);
+        String times = sdr.format(new Date(i * 1000L));
+        return times;
+
     }
 }

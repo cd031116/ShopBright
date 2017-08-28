@@ -88,10 +88,12 @@ public class OrderAllListFragment extends ARecycleViewSwipeRefreshFragment<AllOr
         if (allOrderList.get(position).getStatus() == 0) {
             Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
             intent.putExtra("order_state", getResources().getString(R.string.personal_pay_order));
+            intent.putExtra("order_id", allOrderList.get(position).getOrder_id()+"");
             startActivity(intent);
         } else if (allOrderList.get(position).getStatus() == 1) {
             Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
             intent.putExtra("order_state", getResources().getString(R.string.personal_out_order));
+            intent.putExtra("order_id", allOrderList.get(position).getOrder_id()+"");
             startActivity(intent);
         }
     }
@@ -201,7 +203,7 @@ public class OrderAllListFragment extends ARecycleViewSwipeRefreshFragment<AllOr
     }
 
     protected AllOrderBean queryList(int start) throws TaskException {
-        return SDK.newInstance(getActivity()).getAllOrder(member_id);
+        return SDK.newInstance(getActivity()).getAllOrder(member_id,start);
     }
 
     @Override

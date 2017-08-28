@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -16,7 +17,20 @@ import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.base.BaseInfo;
+import com.zhl.huiqu.login.entity.RegisterEntity;
+import com.zhl.huiqu.login.entity.RegisterInfo;
+import com.zhl.huiqu.personal.bean.OrderDetailBean;
+import com.zhl.huiqu.personal.bean.OrderDetailEntity;
+import com.zhl.huiqu.sdk.SDK;
+import com.zhl.huiqu.utils.Constants;
+import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
+import com.zhl.huiqu.utils.ToastUtils;
+
+import org.aisen.android.common.setting.Setting;
+import org.aisen.android.network.task.TaskException;
+import org.aisen.android.network.task.WorkTask;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -58,24 +72,28 @@ public class OrderDetailActivity extends BaseActivity {
     public void initData() {
         super.initData();
         String orderState = getIntent().getStringExtra("order_state");
-        Log.e("tttt", "initData: " + orderState);
-        showDetailView(orderState);
+        String orderId = getIntent().getStringExtra("order_id");
+        Log.e("tttt", "initData: " + orderState+",orderId:"+orderId);
+        showDetailView(orderState, orderId);
     }
 
-    private void showDetailView(String orderState) {
+    private void showDetailView(String orderState, String orderId) {
         if (getResources().getString(R.string.personal_pay_order).equals(orderState)) {
-            changeFragment(orderPayFragment, R.drawable.order_detail_gray3, R.color.gray_text);
+            changeFragment(orderPayFragment, R.drawable.order_detail_gray3, R.color.gray_text,orderId);
         } else if (getResources().getString(R.string.personal_out_order).equals(orderState)) {
-            changeFragment(orderGoOutFragment, R.drawable.order_detail_red3, R.color.red_text);
+            changeFragment(orderGoOutFragment, R.drawable.order_detail_red3, R.color.red_text,orderId);
         }
 //        else if (getResources().getString(R.string.all_order_complete).equals(orderState)) {
 //            changeFragment(orderGoOutFragment, R.drawable.order_detail_red3, R.color.red_text);
 //        }
     }
 
-    private void changeFragment(Fragment fragment, int drawableId, int colorId) {
+    private void changeFragment(Fragment fragment, int drawableId, int colorId, String orderId) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putString("orderId", orderId);
+        fragment.setArguments(bundle);
         fragmentTransaction.add(R.id.order_detail_frame, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();

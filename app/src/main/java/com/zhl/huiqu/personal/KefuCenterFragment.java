@@ -95,7 +95,7 @@ public class KefuCenterFragment extends BaseFragment {
                     null)) {
                 @Override
                 public void doAction() {
-                    Intent dialIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + getResources().getString(R.string.call_kefu_phone)));//跳转到拨号界面
+                    Intent dialIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + getResources().getString(R.string.order_account_phone_text)));//跳转到拨号界面
                     startActivity(dialIntent);
                 }
             }.run();
