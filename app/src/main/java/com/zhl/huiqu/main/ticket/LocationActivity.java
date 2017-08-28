@@ -79,7 +79,7 @@ public class LocationActivity extends BaseActivity {
         LatLng point = new LatLng(Double.parseDouble(latitude),Double.parseDouble(longitude));
     //构建Marker图标
         BitmapDescriptor bitmap = BitmapDescriptorFactory
-                .fromResource(R.mipmap.ic_launcher);
+                .fromResource(R.mipmap.icon_openmap_mark);
         //构建MarkerOption，用于在地图上添加Marker
         OverlayOptions option = new MarkerOptions()
                 .position(point)
