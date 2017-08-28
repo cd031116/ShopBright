@@ -10,6 +10,7 @@ import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
@@ -53,6 +54,7 @@ public class LocationActivity extends BaseActivity {
         }
         mBaiduMap = bmapView.getMap();
         mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
+        mBaiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(new MapStatus.Builder().zoom(3).build()));
         showview();
     }
 
@@ -86,6 +88,7 @@ public class LocationActivity extends BaseActivity {
                 .icon(bitmap);
         //在地图上添加Marker，并显示
         mBaiduMap.addOverlay(option);
+
         MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(point);//使输入的点位于地图中心
         mBaiduMap.setMapStatus(u);
     }
