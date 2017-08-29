@@ -21,19 +21,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2px"
         android:background="@color/white"
-        android:orientation="horizontal"
-        android:padding="33px">
+        android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/change_phone"
             android:layout_width="300px"
             android:layout_height="wrap_content"
-            android:text="@string/setting_old_psw"
             android:textColor="@color/black_text"
+            android:padding="33px"
             android:textSize="33px" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:id="@+id/phone_text"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="33px"
             android:background="@null"
             android:hint="@string/take_person_name_text"
             android:textColor="@color/black_text"
@@ -46,19 +49,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2px"
         android:background="@color/white"
-        android:orientation="horizontal"
-        android:padding="33px">
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="300px"
+            android:padding="33px"
             android:layout_height="wrap_content"
-            android:text="@string/setting_new_psw"
+            android:text="@string/take_person_code"
             android:textColor="@color/black_text"
             android:textSize="33px" />
 
         <EditText
+            android:id="@+id/psw_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="33px"
             android:background="@null"
             android:hint="@string/setting_psw_put"
             android:textColor="@color/black_text"
@@ -71,6 +76,7 @@
             android:layout_weight="1" />
 
         <TextView
+            android:id="@+id/obtain_code_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/setting_phone_code"
@@ -79,6 +85,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/call_kefu_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="27px"
@@ -88,6 +95,7 @@
 
 
     <TextView
+        android:id="@+id/save_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="150px"
@@ -99,6 +107,5 @@
         android:text="@string/setting_save"
         android:textColor="@color/white"
         android:textSize="33px" />
-
 
 </LinearLayout>

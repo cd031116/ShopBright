@@ -9,11 +9,11 @@ import android.widget.TextView;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.BaseInfo;
-import com.zhl.huiqu.base.StartActivity;
-import com.zhl.huiqu.login.RegisterActivity;
+import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.PhoneFormatCheckUtils;
+import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.utils.TimerCount;
 import com.zhl.huiqu.utils.ToastUtils;
@@ -25,10 +25,10 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
- * Created by dw on 2017/8/15.
+ * Created by Administrator on 2017/8/29.
  */
 
-public class ChangePhoneActivity extends BaseActivity {
+public class ChangedPhoneActivity extends BaseActivity {
 
     @Bind(R.id.top_title)
     TextView titleText;
@@ -43,6 +43,7 @@ public class ChangePhoneActivity extends BaseActivity {
     @Bind(R.id.psw_text)
     EditText pswText;
     private TimerCount timerCount;
+    private RegisterEntity account;
 
     @Override
     protected int getLayoutId() {
@@ -55,6 +56,7 @@ public class ChangePhoneActivity extends BaseActivity {
         timerCount = new TimerCount(60000, 1000, obtainCodeText);
         titleText.setText(getResources().getString(R.string.setting_phone));
         changePhone.setText(getResources().getString(R.string.order_detail));
+        account = SaveObjectUtils.getInstance(this).getObject(Constants.USER_INFO, RegisterEntity.class);
     }
 
     @Override
@@ -73,7 +75,7 @@ public class ChangePhoneActivity extends BaseActivity {
                 else if (!PhoneFormatCheckUtils.isChinaPhoneLegal(phone))
                     ToastUtils.showShortToast(this, getResources().getString(R.string.register_phone));
                 else
-                    new checkCodeTask().execute(phone, Constants.TYPE_CHANGEMOBILE);
+                    new checkCodeTask().execute(phone, Constants.TYPE_SETMOBILE);
                 break;
             case R.id.save_btn:
                 if (TextUtils.isEmpty(phone))
@@ -84,8 +86,10 @@ public class ChangePhoneActivity extends BaseActivity {
                     ToastUtils.showShortToast(this, getResources().getString(R.string.register_phone));
                 else if (code.length() != 6)
                     ToastUtils.showShortToast(this, getResources().getString(R.string.register_check_msg_code));
+                else if (account == null)
+                    ToastUtils.showShortToast(this, getResources().getString(R.string.should_account_login));
                 else
-                    new changeMobileTask().execute(phone, code);
+                    new changeMobileTask().execute(phone, code, account.getBody().getMember_id());
                 break;
         }
     }
@@ -103,7 +107,7 @@ public class ChangePhoneActivity extends BaseActivity {
 
         @Override
         public BaseInfo workInBackground(String... params) throws TaskException {
-            return SDK.newInstance(ChangePhoneActivity.this).getCode(params[0], params[1]);
+            return SDK.newInstance(ChangedPhoneActivity.this).getCode(params[0], params[1]);
         }
 
         @Override
@@ -133,7 +137,7 @@ public class ChangePhoneActivity extends BaseActivity {
 
         @Override
         public BaseInfo workInBackground(String... params) throws TaskException {
-            return SDK.newInstance(ChangePhoneActivity.this).changeMobile(params[0], params[1]);
+            return SDK.newInstance(ChangedPhoneActivity.this).setMobile(params[0], params[1], params[2]);
         }
 
         @Override
@@ -142,7 +146,7 @@ public class ChangePhoneActivity extends BaseActivity {
             dismissAlert();
             TLog.log("tttt", "info=" + info);
             if ("1".equals(info.getCode())) {
-                startActivity(new Intent(ChangePhoneActivity.this,ChangedPhoneActivity.class));
+                ToastUtils.showShortToast(ChangedPhoneActivity.this, "手机号修改成功");
             }
         }
 

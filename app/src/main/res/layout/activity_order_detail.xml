@@ -101,6 +101,7 @@
         android:layout_marginTop="2px"
         android:background="@color/white"
         android:gravity="center"
+        android:visibility="gone"
         android:text="@string/order_detail_commit"
         android:textSize="30px" />
 

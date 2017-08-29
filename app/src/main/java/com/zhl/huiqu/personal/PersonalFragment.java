@@ -110,8 +110,8 @@ public class PersonalFragment extends BaseFragment {
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.row_kefu_center_layout:
-                FragmentArgs args=new FragmentArgs();
-                args.add("tag",0);
+                FragmentArgs args = new FragmentArgs();
+                args.add("tag", 0);
                 KefuCenterFragment.launch(getActivity(), args);
                 break;
             case R.id.personal_msg_layout:
@@ -139,13 +139,18 @@ public class PersonalFragment extends BaseFragment {
         switch (view.getId()) {
             case R.id.row_collect_layout:
                 Log.e("dddd", "onClick: row_collect_layout");
-                startActivity(new Intent(getActivity(), MyCollectAcitivity.class));
+
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+//                startActivity(new Intent(getActivity(), MyCollectAcitivity.class));
                 break;
             case R.id.row_look_his_layout:
                 Log.e("dddd", "onClick: row_look_his_layout");
-                startActivity(new Intent(getActivity(), LookHistoryActivity.class));
+
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+//                startActivity(new Intent(getActivity(), LookHistoryActivity.class));
                 break;
             case R.id.row_normal_msg_layout:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
                 break;
             //所有订单
             case R.id.all_order_btn:

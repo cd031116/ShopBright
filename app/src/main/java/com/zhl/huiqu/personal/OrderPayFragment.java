@@ -19,10 +19,12 @@ import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.main.PayActivity;
 import com.zhl.huiqu.personal.bean.OrderDetailBean;
 import com.zhl.huiqu.personal.bean.OrderDetailEntity;
+import com.zhl.huiqu.personal.bean.OrderEntity;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
+import com.zhl.huiqu.utils.ToastUtils;
 
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
@@ -33,7 +35,7 @@ import java.util.Date;
  * Created by Administrator on 2017/8/16.
  */
 
-public class OrderPayFragment extends BaseFragment implements View.OnClickListener {
+public class OrderPayFragment extends BaseFragment {
     private TextView ticketToWhere, ticket_type, ticket_type_text, ticket_price, ticket_outing_time_text,
             ticket_in_type_text, price_all_text, refund_layout_text, refund_order_num_text, refund_time_text,
             refund_pay_type_text, order_account_name_text, order_account_phone_text, apply_cancel,
@@ -42,6 +44,7 @@ public class OrderPayFragment extends BaseFragment implements View.OnClickListen
 
     private ImageView refundGzImg;
     private String orderId;
+    private OrderEntity entity;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,7 +61,7 @@ public class OrderPayFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public int inflateContentView() {
-        return R.layout.fragment_go_out;
+        return R.layout.fragment_should_pay;
     }
 
     private void initView(View view) {
@@ -85,25 +88,27 @@ public class OrderPayFragment extends BaseFragment implements View.OnClickListen
         order_account_phone_text = (TextView) view.findViewById(R.id.order_account_phone_text);
         apply_cancel = (TextView) view.findViewById(R.id.apply_cancel);
         order_pay_btn = (TextView) view.findViewById(R.id.order_pay_btn);
-        apply_cancel.setOnClickListener(this);
-        order_pay_btn.setOnClickListener(this);
+        apply_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+            }
+        });
+        order_pay_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //                startActivity(new Intent(getActivity(),OrderWriteActivity.class));
+                if (entity != null) {
+                    Intent intent = new Intent(getActivity(), PayActivity.class);
+                    Bundle mBundle = new Bundle();
+                    mBundle.putSerializable("body", entity);
+                    intent.putExtras(mBundle);
+                    startActivity(intent);
+                } else
+                    ToastUtils.showShortToast(getActivity(), getResources().getString(R.string.order_detail_msg));
+            }
+        });
         new getOrderinfoTask().execute(registerInfo.getBody().getMember_id(), orderId);
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.apply_cancel:
-                break;
-            case R.id.order_pay_btn:
-//                startActivity(new Intent(getActivity(),OrderWriteActivity.class));
-                Intent intent = new Intent(getActivity(), PayActivity.class);
-//                Bundle mBundle = new Bundle();
-//                mBundle.putSerializable("pay", mPerson);
-//                intent.putExtras(mBundle);
-                startActivity(intent);
-                break;
-        }
     }
 
     class getOrderinfoTask extends WorkTask<String, Void, OrderDetailBean> {
@@ -147,6 +152,12 @@ public class OrderPayFragment extends BaseFragment implements View.OnClickListen
         refund_pay_type_text.setText(info.getPay_way());
         order_account_name_text.setText(info.getUse_name());
         order_account_phone_text.setText(info.getMobile());
+        entity = new OrderEntity();
+        entity.setOrder_total(info.getOrder_total());
+        entity.setOrder_sn(info.getOrder_sn());
+        entity.setName(info.getName());
+        entity.setUse_date(info.getUse_date());
+        entity.setOrder_id(info.getOrder_id());
     }
 
     public String timedate(String time) {

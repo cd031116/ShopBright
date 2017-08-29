@@ -89,13 +89,16 @@ public class OrderAllListFragment extends ARecycleViewSwipeRefreshFragment<AllOr
             Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
             intent.putExtra("order_state", getResources().getString(R.string.personal_pay_order));
             intent.putExtra("order_id", allOrderList.get(position).getOrder_id()+"");
+            Log.e("ttt", "onItemClick0: "+getResources().getString(R.string.personal_pay_order) );
             startActivity(intent);
         } else if (allOrderList.get(position).getStatus() == 1) {
             Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
             intent.putExtra("order_state", getResources().getString(R.string.personal_out_order));
             intent.putExtra("order_id", allOrderList.get(position).getOrder_id()+"");
+            Log.e("ttt", "onItemClick1: "+getResources().getString(R.string.personal_out_order) );
             startActivity(intent);
         }
+
     }
 
     @Override
@@ -156,7 +159,7 @@ public class OrderAllListFragment extends ARecycleViewSwipeRefreshFragment<AllOr
 
         @Override
         protected List<AllOrderEntity> parseResult(AllOrderBean allOrderBean) {
-            allOrderList = allOrderBean.getBody();
+
             List<AllOrderEntity> list = new ArrayList<>();
             if (getResources().getString(R.string.personal_pay_order).equals(productId)) {
                 for (AllOrderEntity allOrderEntity : allOrderBean.getBody()) {
@@ -173,6 +176,7 @@ public class OrderAllListFragment extends ARecycleViewSwipeRefreshFragment<AllOr
             if (getResources().getString(R.string.personal_all_order).equals(productId)) {
                 list = allOrderBean.getBody();
             }
+            allOrderList = list;
             return list;
         }
 

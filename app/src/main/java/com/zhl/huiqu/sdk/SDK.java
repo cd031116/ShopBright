@@ -403,6 +403,21 @@ public class SDK extends ABizLogic {
     }
 
     /**
+     * 设置新手机
+     *
+     * @return
+     * @throws TaskException
+     */
+    public BaseInfo setMobile(String newMobile, String code, String memberId) throws TaskException {
+        Setting action = newSetting("setMobile", "appapi/Personalcenter/setMobile", "设置新手机");
+        Params params = new Params();
+        params.addParameter("newMobile", newMobile);
+        params.addParameter("code", code);
+        params.addParameter("memberId", memberId);
+        return doPost(configHttpConfig(), action, params, null, null, BaseInfo.class);
+    }
+
+    /**
      * 重置密码
      *
      * @return
@@ -430,7 +445,7 @@ public class SDK extends ABizLogic {
         Setting action = newSetting("getAllOrder", "appapi/Personalcenter/getAllOrder", "查看全部订单");
         Params params = new Params();
         params.addParameter("member_id", member_id);
-        params.addParameter("page", page+"");
+        params.addParameter("page", page + "");
 
         return doPost(configHttpConfig(), action, params, null, null, AllOrderBean.class);
     }
@@ -509,12 +524,12 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public WeiChatBean getPrePayOrder(String body, String out_trade_no,String total_free) throws TaskException {
+    public WeiChatBean getPrePayOrder(String body, String out_trade_no, String total_free) throws TaskException {
         Setting action = newSetting("getPrePayOrder", "appapi/Wx/getPrePayOrder", "调用微信下单接口");
         Params params = new Params();
         params.addParameter("body", body);
         params.addParameter("out_trade_no", out_trade_no);
-        params.addParameter("app_name",context.getResources().getString(R.string.app_name));
+        params.addParameter("app_name", context.getResources().getString(R.string.app_name));
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?body=" + body + "&out_trade_no=" + out_trade_no);
         return doGet(configHttpConfig(), action, params, WeiChatBean.class);
     }
@@ -549,7 +564,6 @@ public class SDK extends ABizLogic {
     }
 
 
-
     /**
      * 收藏
      *
@@ -561,11 +575,9 @@ public class SDK extends ABizLogic {
         Params params = new Params();
         params.addParameter("member_id", member_id);
         params.addParameter("shop_spot_id", shop_spot_id);
-        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?member_id=" + member_id + "&shop_spot_id="+shop_spot_id);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?member_id=" + member_id + "&shop_spot_id=" + shop_spot_id);
         return doGet(configHttpConfig(), action, params, String.class);
     }
-
-
 
 
     @Override

@@ -173,12 +173,11 @@
             android:textSize="33px" />
 
         <TextView
+            android:id="@+id/personal_where"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:drawablePadding="24px"
-            android:drawableRight="@drawable/personal_right"
-            android:text="@string/personal_setting"
+            android:text="@string/personal_setting_bj"
             android:textColor="@color/gray_text"
             android:textSize="33px" />
     </RelativeLayout>

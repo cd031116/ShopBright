@@ -9,9 +9,11 @@ import com.zhl.huiqu.R;
 import com.zhl.huiqu.personal.bean.AllOrderEntity;
 import com.zhl.huiqu.personal.bean.OrderEntity;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
+import com.zhl.huiqu.utils.ToastUtils;
 
 import org.aisen.android.common.utils.SystemUtils;
 import org.aisen.android.common.utils.Utils;
+import org.aisen.android.support.inject.OnClick;
 import org.aisen.android.support.inject.ViewInject;
 import org.aisen.android.ui.fragment.adapter.ARecycleViewItemView;
 
@@ -48,6 +50,10 @@ public class OrderItemView extends ARecycleViewItemView<AllOrderEntity> {
         SupportMultipleScreensUtil.scale(convertView);
         int width = SystemUtils.getScreenWidth(getContext());
 //        imgCover.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, Math.round(360 * 1.0f / 750 * width)));
+    }
+    @OnClick({R.id.order_delete_text})
+    void onClick(View view){
+        ToastUtils.showLongToast(getContext(), "正在开发中,敬请期待下一个版本");
     }
 
     @Override

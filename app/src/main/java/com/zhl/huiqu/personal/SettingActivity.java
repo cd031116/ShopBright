@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.zhl.huiqu.MainActivity;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.base.MyApplication;
 import com.zhl.huiqu.login.LoginActivity;
 import com.zhl.huiqu.login.RegisterActivity;
@@ -42,6 +43,8 @@ public class SettingActivity extends BaseActivity {
     TextView name;
     @Bind(R.id.top_title)
     TextView title;
+    @Bind(R.id.personal_where)
+    TextView address;
 
     private String memberId;
     private RegisterInfo registerInfo;
@@ -57,8 +60,10 @@ public class SettingActivity extends BaseActivity {
         super.initView();
         memberId = getIntent().getStringExtra("memberId");
         title.setText(getResources().getString(R.string.personal_setting));
+        String address = BaseConfig.getInstance(this).getStringValue(Constants.Address, getResources().getString(R.string.personal_setting_bj));
+        this.address.setText(address);
     }
-
+ 
     @Override
     public void initData() {
         super.initData();
@@ -70,6 +75,7 @@ public class SettingActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.change_nickname:
                 Intent nickIntent = new Intent(this, ChangeNicknameActivity.class);
+
                 nickIntent.putExtra("memberId", memberId);
                 startActivityForResult(nickIntent, REQUEST_CODE);
                 break;

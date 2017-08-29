@@ -144,7 +144,7 @@ public class OrderGoOutFragment extends BaseFragment implements View.OnClickList
         price_all_text.setText("￥" + info.getOrder_total());
         refund_order_num_text.setText(info.getOrder_sn());
         refund_time_text.setText(timedate(info.getAdd_time() + ""));
-        refund_order_goout_text.setText("待付款");
+        refund_order_goout_text.setText("待出行");
         refund_pay_type_text.setText(info.getPay_way());
         order_account_name_text.setText(info.getUse_name());
         order_account_phone_text.setText(info.getMobile());

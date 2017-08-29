@@ -37,6 +37,7 @@
     <string name="personal_tuikuan">退款</string>
     <string name="personal_tuikuan_order">退款订单</string>
     <string name="personal_setting">设置</string>
+    <string name="personal_setting_bj">北京市</string>
     <string name="personal_my_collect">我的收藏</string>
     <string name="personal_look_history">浏览历史</string>
     <string name="personal_normal_msg">常用信息</string>
@@ -69,6 +70,9 @@
     <string name="setting_email_null">邮箱填写不能为空</string>
     <string name="setting_code_null">验证码填写不能为空</string>
     <string name="setting_email_success">邮箱修改成功</string>
+    <string name="setting_phone">更改手机号</string>
+    <string name="setting_phone_success">更改手机号成功</string>
+    <string name="setting_phone_fail">更改手机号成功</string>
     <string name="setting_phone_code">获取验证码</string>
     <string name="setting_email_text">邮箱将接收相关通知和旅行合同，请谨慎填写正确的邮箱</string>
     <string name="setting_name_text">昵称要求为2-20个汉字或2-40个英文，不能中英文混搭</string>
@@ -137,6 +141,7 @@
     <string name="order_account_phone_text">400-9988-725</string>
     <string name="refund_layout_text">使用日期后7天18点（含）之前可申请取消，取消订单将收取10%的手续费</string>
     <string name="order_detail">订单详情</string>
+    <string name="order_detail_msg">还未获取到订单信息，请稍后再试</string>
     <string name="order_detail_commit">提交订单</string>
     <string name="order_detail_should_pay">待支付</string>
     <string name="order_detail_ticketing">出票中</string>

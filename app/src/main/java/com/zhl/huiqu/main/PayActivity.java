@@ -49,9 +49,12 @@ public class PayActivity extends BaseActivity {
     TextView order_time;
     @Bind(R.id.order_money)
     TextView order_money;
+    @Bind(R.id.pay_total)
+    TextView pay_total;
 
     private int select = 1;
-    private  OrderEntity mPerson;
+    private OrderEntity mPerson;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_pay;
@@ -60,13 +63,14 @@ public class PayActivity extends BaseActivity {
     @Override
     public void initView() {
         super.initView();
-         mPerson = (OrderEntity) getIntent().getSerializableExtra("body");
+        mPerson = (OrderEntity) getIntent().getSerializableExtra("body");
         if (mPerson != null) {
             price.setText("￥" + mPerson.getOrder_total());
             order_num.setText("订单号:" + mPerson.getOrder_sn());
             order_name.setText("产品名称:" + mPerson.getName());
             order_time.setText("游玩时间:" + mPerson.getUse_date());
             order_money.setText("订单金额:" + mPerson.getOrder_total() + "(在线支付)");
+            pay_total.setText("￥" + mPerson.getOrder_total());
             long time = 1000 * 60 * 30;
             count_down.setTime(time);
             count_down.start();
@@ -100,7 +104,7 @@ public class PayActivity extends BaseActivity {
                 setview(select);
                 break;
             case R.id.submit:
-                if(mPerson!=null){
+                if (mPerson != null) {
                     new PayOrderTask().execute();
                 }
                 break;
@@ -132,19 +136,19 @@ public class PayActivity extends BaseActivity {
         @Override
         public WeiChatBean workInBackground(Void... voids) throws TaskException {
             //产品编号
-            MapUtil.sharedInstance().putDefaultValue(Constants.PAY_PRODUCT_ID,mPerson.getOrder_sn());
-            MapUtil.sharedInstance().putDefaultValue(Constants.ORDER_ID,mPerson.getOrder_id());
+            MapUtil.sharedInstance().putDefaultValue(Constants.PAY_PRODUCT_ID, mPerson.getOrder_sn());
+            MapUtil.sharedInstance().putDefaultValue(Constants.ORDER_ID, mPerson.getOrder_id());
             //支付的金钱
             MapUtil.sharedInstance().putDefaultValue(Constants.PAY_MONEY, mPerson.getOrder_total());
-            return SDK.newInstance(PayActivity.this).getPrePayOrder(mPerson.getName(),mPerson.getOrder_sn(), mPerson.getOrder_total());
+            return SDK.newInstance(PayActivity.this).getPrePayOrder(mPerson.getName(), mPerson.getOrder_sn(), mPerson.getOrder_total());
         }
 
         @Override
         protected void onSuccess(WeiChatBean info) {
             super.onSuccess(info);
             dismissAlert();
-            if(info.getBody()!=null){
-                ToBuyUtils.lunchWeChat(PayActivity.this, Consts.PayType.Pay_Product_Buy,info.getBody());
+            if (info.getBody() != null) {
+                ToBuyUtils.lunchWeChat(PayActivity.this, Consts.PayType.Pay_Product_Buy, info.getBody());
             }
 
         }

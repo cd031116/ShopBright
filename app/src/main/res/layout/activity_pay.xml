@@ -245,6 +245,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/pay_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10px"
@@ -257,6 +258,7 @@
                     android:layout_height="wrap_content"
                     android:padding="10px"
                     android:text="已省￥5"
+                    android:visibility="gone"
                     android:textColor="#999999"
                     android:textSize="32px" />
             </LinearLayout>
