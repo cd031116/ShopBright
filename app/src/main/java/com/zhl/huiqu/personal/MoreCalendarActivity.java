@@ -71,7 +71,7 @@ public class MoreCalendarActivity extends BaseActivity implements OnDateSelected
         Log.e("ttt", "onDateSelected: " + getSelectedDatesString());
         Intent intent = new Intent();
         intent.putExtra("time", getSelectedDatesString());
-        setResult(RESULT_OK, intent);
+        setResult(100, intent);
         finish();
     }
 

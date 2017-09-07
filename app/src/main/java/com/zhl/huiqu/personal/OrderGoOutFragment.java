@@ -2,7 +2,6 @@ package com.zhl.huiqu.personal;
 
 import android.app.Fragment;
 import android.content.Intent;
-import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -30,6 +29,7 @@ import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
 import org.aisen.android.support.action.IAction;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import butterknife.OnClick;

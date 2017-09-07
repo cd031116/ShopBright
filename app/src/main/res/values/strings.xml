@@ -142,6 +142,7 @@
     <string name="refund_layout_text">使用日期后7天18点（含）之前可申请取消，取消订单将收取10%的手续费</string>
     <string name="order_detail">订单详情</string>
     <string name="order_detail_msg">还未获取到订单信息，请稍后再试</string>
+    <string name="order_is_cancel">订单已取消</string>
     <string name="order_detail_commit">提交订单</string>
     <string name="order_detail_should_pay">待支付</string>
     <string name="order_detail_ticketing">出票中</string>

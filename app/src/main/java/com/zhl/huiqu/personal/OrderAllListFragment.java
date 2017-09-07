@@ -40,7 +40,7 @@ import java.util.List;
  * Created by dw on 2017/8/14.
  */
 
-public class OrderAllListFragment extends ARecycleViewSwipeRefreshFragment<AllOrderEntity, AllOrderBean, Serializable> {
+public class OrderAllListFragment extends ARecycleViewSwipeRefreshFragment<AllOrderEntity, AllOrderBean, Serializable> implements OrderItemInterface {
     private String productId;
     @ViewInject(id = R.id.top_title)
     TextView titleText;
@@ -88,14 +88,14 @@ public class OrderAllListFragment extends ARecycleViewSwipeRefreshFragment<AllOr
         if (allOrderList.get(position).getStatus() == 0) {
             Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
             intent.putExtra("order_state", getResources().getString(R.string.personal_pay_order));
-            intent.putExtra("order_id", allOrderList.get(position).getOrder_id()+"");
-            Log.e("ttt", "onItemClick0: "+getResources().getString(R.string.personal_pay_order) );
+            intent.putExtra("order_id", allOrderList.get(position).getOrder_id() + "");
+            Log.e("ttt", "onItemClick0: " + getResources().getString(R.string.personal_pay_order));
             startActivity(intent);
         } else if (allOrderList.get(position).getStatus() == 1) {
             Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
             intent.putExtra("order_state", getResources().getString(R.string.personal_out_order));
-            intent.putExtra("order_id", allOrderList.get(position).getOrder_id()+"");
-            Log.e("ttt", "onItemClick1: "+getResources().getString(R.string.personal_out_order) );
+            intent.putExtra("order_id", allOrderList.get(position).getOrder_id() + "");
+            Log.e("ttt", "onItemClick1: " + getResources().getString(R.string.personal_out_order));
             startActivity(intent);
         }
 
@@ -112,7 +112,7 @@ public class OrderAllListFragment extends ARecycleViewSwipeRefreshFragment<AllOr
 
             @Override
             public IITemView<AllOrderEntity> newItemView(View view, int i) {
-                return new OrderItemView(getActivity(), view);
+                return new OrderItemView(getActivity(), view, OrderAllListFragment.this);
             }
         };
     }
@@ -150,6 +150,13 @@ public class OrderAllListFragment extends ARecycleViewSwipeRefreshFragment<AllOr
     @Override
     public void requestData(RefreshMode refreshMode) {
         new Task(refreshMode != RefreshMode.update ? RefreshMode.reset : RefreshMode.update).execute();
+    }
+
+    @Override
+    public void orderItemClick(int position) {
+        Log.e("ttt", "orderItemClick: "+position );
+        getAdapterItems().remove(position);
+        getAdapter().notifyDataSetChanged();
     }
 
     class Task extends APagingTask<Void, Void, AllOrderBean> {
@@ -207,7 +214,7 @@ public class OrderAllListFragment extends ARecycleViewSwipeRefreshFragment<AllOr
     }
 
     protected AllOrderBean queryList(int start) throws TaskException {
-        return SDK.newInstance(getActivity()).getAllOrder(member_id,start);
+        return SDK.newInstance(getActivity()).getAllOrder(member_id, start, -1);
     }
 
     @Override

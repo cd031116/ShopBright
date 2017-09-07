@@ -1,8 +1,16 @@
 package com.zhl.huiqu.personal;
 
+import android.Manifest;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -14,10 +22,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.BaseInfo;
+import com.zhl.huiqu.login.LoginActivity;
 import com.zhl.huiqu.login.RegisterActivity;
 import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.main.PayActivity;
@@ -87,6 +97,10 @@ public class OrderWriteActivity extends BaseActivity {
     EditText codeText;
     @Bind(R.id.check_code_text)
     EditText checkCodeText;
+
+
+    @Bind(R.id.read_contact)
+    ImageView readContact;
     @Bind(R.id.take_person_check_code_layout)
     RelativeLayout takeCheckCodeLayout;
 
@@ -120,8 +134,8 @@ public class OrderWriteActivity extends BaseActivity {
         tomorrowTime.setText("明天\n" + month + "-" + date);
         titleText.setText(getResources().getString(R.string.write_order));
         if (mPerson != null) {
-            price=mPerson.getShop_price();
-           String ticket_price = "￥" + mPerson.getShop_price();
+            price = mPerson.getShop_price();
+            String ticket_price = "￥" + mPerson.getShop_price();
             orderPrice.setText(ticket_price);
             fymxPrice.setText(ticket_price);
             totalPrice.setText(ticket_price);
@@ -136,7 +150,7 @@ public class OrderWriteActivity extends BaseActivity {
         spanableInfo.setSpan(new ClickableSpan() {
             @Override
             public void onClick(View view) {
-//                startActivity(new Intent(OrderWriteActivity.this,LoginActivity.class));
+                startActivity(new Intent(OrderWriteActivity.this, LoginActivity.class));
             }
         }, 5, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         isLoginText.setText(spanableInfo);
@@ -157,29 +171,34 @@ public class OrderWriteActivity extends BaseActivity {
 
 
     @OnClick({R.id.down_btn, R.id.add_btn, R.id.commit_order_btn, R.id.check_code_img, R.id.fymx_arrow,
-            R.id.take_person_free_btn, R.id.more_time, R.id.tomorrow_time, R.id.top_left})
+            R.id.take_person_free_btn, R.id.more_time, R.id.tomorrow_time, R.id.top_left, R.id.read_contact})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.down_btn:
                 if (type_num == 1) {
                     showNum.setText("1");
                     fymxPriceNum.setText("*1");
-                    totalPrice.setText(mul(price, 1)+"");
+                    totalPrice.setText(mul(price, 1) + "");
                 } else if (type_num > 1) {
                     type_num--;
                     showNum.setText(type_num + "");
-                    fymxPriceNum.setText("*"+type_num);
-                    totalPrice.setText(mul(price, type_num)+"");
+                    fymxPriceNum.setText("*" + type_num);
+                    totalPrice.setText(mul(price, type_num) + "");
                 }
                 break;
             case R.id.add_btn:
                 type_num++;
                 showNum.setText(type_num + "");
-                fymxPriceNum.setText("*"+type_num);
-                totalPrice.setText(mul(price, type_num)+"");
+                fymxPriceNum.setText("*" + type_num);
+                totalPrice.setText(mul(price, type_num) + "");
                 break;
             case R.id.top_left:
                 finish();
+                break;
+            case R.id.read_contact:
+
+                startActivityForResult(new Intent(
+                        Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI), 0);
                 break;
             case R.id.tomorrow_time:
                 tomorrowTime.setSelected(true);
@@ -259,15 +278,59 @@ public class OrderWriteActivity extends BaseActivity {
         }
     }
 
+    Intent mIntent = null;
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
+        mIntent = data;
+        if (resultCode == 100) {
             String time = data.getStringExtra("time");
             moreTime.setText("更多日期\n" + time);
             use_date = time;
             moreTime.setSelected(true);
             tomorrowTime.setSelected(false);
+        } else if (resultCode == RESULT_OK) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+                //申请授权，第一个参数为要申请用户授权的权限；第二个参数为requestCode 必须大于等于0，主要用于回调的时候检测，匹配特定的onRequestPermissionsResult。
+                //可以从方法名requestPermissions以及第二个参数看出，是支持一次性申请多个权限的，系统会通过对话框逐一询问用户是否授权。
+                requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, 1);
+            } else {
+                getContacts(data);
+            }
+
+        }
+    }
+
+    private void getContacts(Intent data) {
+        ContentResolver reContentResolverol = getContentResolver();
+        Uri contactData = data.getData();
+        @SuppressWarnings("deprecation")
+        Cursor cursor = managedQuery(contactData, null, null, null, null);
+        cursor.moveToFirst();
+        String username = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+        String contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+        Cursor phone = reContentResolverol.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                null,
+                ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + contactId,
+                null,
+                null);
+        while (phone.moveToNext()) {
+            String usernumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            nameText.setText(username);
+            phoneText.setText(usernumber);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 1) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // 用户成功授予权限
+                getContacts(mIntent);
+            } else {
+                Toast.makeText(this, "你拒绝了此应用对读取联系人权限的申请！", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

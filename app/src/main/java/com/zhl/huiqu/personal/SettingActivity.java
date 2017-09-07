@@ -101,8 +101,7 @@ public class SettingActivity extends BaseActivity {
                 break;
             case R.id.out_huiqu:
                 SaveObjectUtils.getInstance(this).setObject(Constants.USER_INFO, null);
-                MyApplication.getInstance().getActivityManager().popAllActivity();
-                startActivity(new Intent(this, LoginActivity.class));
+//                MyApplication.getInstance().getActivityManager().popAllActivity();
                 finish();
                 break;
         }

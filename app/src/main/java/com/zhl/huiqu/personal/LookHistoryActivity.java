@@ -2,7 +2,6 @@ package com.zhl.huiqu.personal;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zhl.huiqu.R;
-import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.personal.bean.CollectEntity;
 import com.zhl.huiqu.pull.BaseSectionListActivity;
 import com.zhl.huiqu.pull.BaseViewHolder;
 import com.zhl.huiqu.pull.PullRecycler;
@@ -73,14 +72,14 @@ public class LookHistoryActivity extends BaseSectionListActivity<CollectEntity> 
                 mDataList.add(new SectionData(true, size, "header " + size));
                 for (int i = size; i < size + 10; i++) {
                     CollectEntity collectEntity = new CollectEntity();
-                    collectEntity.setCollectAddress("cs");
-                    collectEntity.setCollectJb("4a");
-                    collectEntity.setCollectMs("最美石燕湖");
-                    collectEntity.setCollectPf("4.4fen");
-                    collectEntity.setCollectPrice("$50");
-                    collectEntity.setCollectTag("风景名胜");
-                    collectEntity.setCollectWhere("石燕湖");
-                    collectEntity.setImgUrl("http://wx.qlogo.cn/mmhead/MhptZYyBT66XRj8aYSynIHRaGGIo7LCZvcUk7QBGXrU/0");
+                    collectEntity.setTitle("cs");
+//                    collectEntity.setCollectJb("4a");
+//                    collectEntity.setCollectMs("最美石燕湖");
+//                    collectEntity.setCollectPf("4.4fen");
+//                    collectEntity.setCollectPrice("$50");
+//                    collectEntity.setCollectTag("风景名胜");
+//                    collectEntity.setCollectWhere("石燕湖");
+                    collectEntity.setThumb("http://wx.qlogo.cn/mmhead/MhptZYyBT66XRj8aYSynIHRaGGIo7LCZvcUk7QBGXrU/0");
                     mDataList.add(new SectionData(collectEntity));
                 }
                 adapter.notifyDataSetChanged();
@@ -110,9 +109,9 @@ public class LookHistoryActivity extends BaseSectionListActivity<CollectEntity> 
 
         @Override
         public void onBindViewHolder(int position) {
-            mSampleListItemLabel.setText(mDataList.get(position).t.getCollectWhere());
+            mSampleListItemLabel.setText(mDataList.get(position).t.getTitle());
 
-            Glide.with(mHead.getContext()).load(mDataList.get(position).t.getImgUrl()).into(mHead);
+            Glide.with(mHead.getContext()).load(mDataList.get(position).t.getThumb()).into(mHead);
 //            Glide.with(LookHistoryActivity.this.getApplicationContext()).load(mDataList.get(position).t.getImgUrl()).into(mHead);
         }
 

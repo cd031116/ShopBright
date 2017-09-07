@@ -19,6 +19,7 @@ import com.zhl.huiqu.main.ticket.CityInfo;
 import com.zhl.huiqu.main.ticket.SpotTBean;
 import com.zhl.huiqu.main.ticket.TickMainBean;
 import com.zhl.huiqu.personal.bean.AllOrderBean;
+import com.zhl.huiqu.personal.bean.CollectBean;
 import com.zhl.huiqu.personal.bean.OrderBean;
 import com.zhl.huiqu.personal.bean.OrderDetailBean;
 import com.zhl.huiqu.personal.bean.OrderDetailEntity;
@@ -254,7 +255,7 @@ public class SDK extends ABizLogic {
             params.addParameter("member_id", info.getBody().getMember_id());
         }
         params.addParameter("shop_spot_id", id);
-        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?session_id=" + info.getSession_id() + "&check_sign=" + info.getCheck_sign());
+//        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?session_id=" + info.getSession_id() + "&check_sign=" + info.getCheck_sign());
         return doPost(configHttpConfig(), action, params, null, null, DetailMainBean.class);
     }
 
@@ -441,13 +442,39 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public AllOrderBean getAllOrder(String member_id, int page) throws TaskException {
-        Setting action = newSetting("getAllOrder", "appapi/Personalcenter/getAllOrder", "查看全部订单");
+    public AllOrderBean getAllOrder(String member_id, int page, int status) throws TaskException {
+        Setting action = newSetting("getAllOrder", "appapi/Personalcenter/getOrder", "查看全部订单");
         Params params = new Params();
         params.addParameter("member_id", member_id);
         params.addParameter("page", page + "");
+        params.addParameter("status", status + "");
 
         return doPost(configHttpConfig(), action, params, null, null, AllOrderBean.class);
+    }
+
+    /**
+     * 取消订单
+     *
+     * @return
+     * @throws TaskException
+     */
+    public BaseInfo cancelOrder(String order_id) throws TaskException {
+        Setting action = newSetting("cancelOrder", "appapi/order1/cancelorder", "取消订单");
+        Params params = new Params();
+        params.addParameter("order_id", order_id);
+        return doPost(configHttpConfig(), action, params, null, null, BaseInfo.class);
+    }
+    /**
+     * 删除订单
+     *
+     * @return
+     * @throws TaskException
+     */
+    public BaseInfo deleteOrder(String order_id) throws TaskException {
+        Setting action = newSetting("deleteOrder", "appapi/personalcenter/deleteorder", "删除订单");
+        Params params = new Params();
+        params.addParameter("order_id", order_id);
+        return doPost(configHttpConfig(), action, params, null, null, BaseInfo.class);
     }
 
     /**
@@ -577,6 +604,21 @@ public class SDK extends ABizLogic {
         params.addParameter("shop_spot_id", shop_spot_id);
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?member_id=" + member_id + "&shop_spot_id=" + shop_spot_id);
         return doGet(configHttpConfig(), action, params, String.class);
+    }
+
+    /**
+     * 查看收藏商品
+     *
+     * @return
+     * @throws TaskException
+     */
+    public CollectBean getCollectList(String member_id) throws TaskException {
+        Setting action = newSetting("getCollect", "appapi/Personalcenter/getCollect", "查看收藏商品");
+        Params params = new Params();
+        params.addParameter("member_id", member_id);
+//        params.addParameter("page", page+"");
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?member_id=" + member_id );
+        return doGet(configHttpConfig(), action, params, CollectBean.class);
     }
 
 

@@ -97,12 +97,19 @@ public class PersonalFragment extends BaseFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        account = SaveObjectUtils.getInstance(getActivity()).getObject(Constants.USER_INFO, RegisterEntity.class);
+        if (account != null)
+            nameText.setText(account.getBody().getNickname());
+        else
+            nameText.setText(getResources().getString(R.string.should_account_login));
+    }
+
+    @Override
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate) {
         super.layoutInit(inflater, savedInstanceSate);
         inflater_d = LayoutInflater.from(getActivity());
-        account = SaveObjectUtils.getInstance(getActivity()).getObject(Constants.USER_INFO, RegisterEntity.class);
-        if (account.getBody() != null)
-            nameText.setText(account.getBody().getNickname());
     }
 
     @OnClick({R.id.row_collect_layout, R.id.row_look_his_layout, R.id.row_normal_msg_layout, R.id.row_kefu_center_layout,
@@ -115,13 +122,12 @@ public class PersonalFragment extends BaseFragment {
                 KefuCenterFragment.launch(getActivity(), args);
                 break;
             case R.id.personal_msg_layout:
-//                if (account != null)
-                Intent intent = new Intent(getActivity(), SettingActivity.class);
-                intent.putExtra("memberId", account.getBody().getMember_id());
-                startActivity(intent);
-
-//                else
-//                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                if (account != null) {
+                    Intent intent = new Intent(getActivity(), SettingActivity.class);
+                    intent.putExtra("memberId", account.getBody().getMember_id());
+                    startActivity(intent);
+                } else
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
                 break;
             default:
                 otherClickEvent(view);
@@ -133,46 +139,46 @@ public class PersonalFragment extends BaseFragment {
     private void otherClickEvent(View view) {
 
         FragmentArgs args = new FragmentArgs();
-//        if (account == null) {
-//            ToastUtils.showShortToast(getActivity(), getResources().getString(R.string.should_account_login));
-//        } else {
-        switch (view.getId()) {
-            case R.id.row_collect_layout:
-                Log.e("dddd", "onClick: row_collect_layout");
+        if (account == null) {
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+            ToastUtils.showShortToast(getActivity(), getResources().getString(R.string.should_account_login));
+        } else {
+            switch (view.getId()) {
+                case R.id.row_collect_layout:
+                    Intent intent = new Intent(getActivity(), MyCollectAcitivity.class);
+                    intent.putExtra("memberId", account.getBody().getMember_id());
+                    startActivity(intent);
+                    break;
+                case R.id.row_look_his_layout:
+                    Log.e("dddd", "onClick: row_look_his_layout");
 
-                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
-//                startActivity(new Intent(getActivity(), MyCollectAcitivity.class));
-                break;
-            case R.id.row_look_his_layout:
-                Log.e("dddd", "onClick: row_look_his_layout");
-
-                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                    ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
 //                startActivity(new Intent(getActivity(), LookHistoryActivity.class));
-                break;
-            case R.id.row_normal_msg_layout:
-                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
-                break;
-            //所有订单
-            case R.id.all_order_btn:
-                args.add("productId", getResources().getString(R.string.personal_all_order));
-                OrderAllListFragment.launch(getActivity(), args);
-                break;
-            //待付款
-            case R.id.pay_order_btn:
-                args.add("productId", getResources().getString(R.string.personal_pay_order));
-                OrderAllListFragment.launch(getActivity(), args);
-                break;
-            //待出行
-            case R.id.goout_order_btn:
-                args.add("productId", getResources().getString(R.string.personal_out_order));
-                OrderAllListFragment.launch(getActivity(), args);
-                break;
-            //退款
-            case R.id.refund_order_btn:
-                args.add("productId", getResources().getString(R.string.personal_tuikuan_order));
-                OrderAllListFragment.launch(getActivity(), args);
-                break;
-//            }
+                    break;
+                case R.id.row_normal_msg_layout:
+                    ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                    break;
+                //所有订单
+                case R.id.all_order_btn:
+                    args.add("productId", getResources().getString(R.string.personal_all_order));
+                    OrderAllListFragment.launch(getActivity(), args);
+                    break;
+                //待付款
+                case R.id.pay_order_btn:
+                    args.add("productId", getResources().getString(R.string.personal_pay_order));
+                    OrderAllListFragment.launch(getActivity(), args);
+                    break;
+                //待出行
+                case R.id.goout_order_btn:
+                    args.add("productId", getResources().getString(R.string.personal_out_order));
+                    OrderAllListFragment.launch(getActivity(), args);
+                    break;
+                //退款
+                case R.id.refund_order_btn:
+                    args.add("productId", getResources().getString(R.string.personal_tuikuan_order));
+                    OrderAllListFragment.launch(getActivity(), args);
+                    break;
+            }
         }
     }
 }

@@ -17,7 +17,7 @@
             <RelativeLayout
                 android:id="@+id/personal_head_layout"
                 android:layout_width="match_parent"
-                android:layout_height="384px">
+                android:layout_height="wrap_content">
 
                 <RelativeLayout
                     android:id="@+id/personal_setting_layout"
@@ -54,7 +54,7 @@
                 <RelativeLayout
                     android:id="@+id/personal_msg_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="258px"
                     android:layout_below="@id/personal_setting_layout"
                     android:layout_centerVertical="true"
                     android:background="@drawable/setting_bg">

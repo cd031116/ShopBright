@@ -9,6 +9,7 @@
     android:focusableInTouchMode="true">
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/thred_login_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,6 +48,7 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/thread_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -82,8 +84,8 @@
         android:id="@+id/commit_text"
         android:layout_width="match_parent"
         android:layout_height="102px"
-        android:layout_above="@id/thread_layout"
-        android:layout_marginBottom="141px"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="555px"
         android:layout_marginLeft="207px"
         android:layout_marginRight="207px"
         android:background="@drawable/shape_login_commit"

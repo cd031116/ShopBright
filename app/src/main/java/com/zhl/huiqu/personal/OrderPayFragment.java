@@ -1,10 +1,11 @@
 package com.zhl.huiqu.personal;
 
+import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Intent;
-import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,23 +13,28 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseFragment;
+import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.main.PayActivity;
 import com.zhl.huiqu.personal.bean.OrderDetailBean;
 import com.zhl.huiqu.personal.bean.OrderDetailEntity;
 import com.zhl.huiqu.personal.bean.OrderEntity;
 import com.zhl.huiqu.sdk.SDK;
+import com.zhl.huiqu.utils.CommomDialog;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.ToastUtils;
+import com.zhl.huiqu.widget.ShowMsgDialog;
 
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -45,6 +51,7 @@ public class OrderPayFragment extends BaseFragment {
     private ImageView refundGzImg;
     private String orderId;
     private OrderEntity entity;
+    private boolean isCancel = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,32 +98,58 @@ public class OrderPayFragment extends BaseFragment {
         apply_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                cancelOrder();
             }
         });
         order_pay_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //                startActivity(new Intent(getActivity(),OrderWriteActivity.class));
-                if (entity != null) {
-                    Intent intent = new Intent(getActivity(), PayActivity.class);
-                    Bundle mBundle = new Bundle();
-                    mBundle.putSerializable("body", entity);
-                    intent.putExtras(mBundle);
-                    startActivity(intent);
-                } else
-                    ToastUtils.showShortToast(getActivity(), getResources().getString(R.string.order_detail_msg));
+                commitOrder();
             }
         });
         new getOrderinfoTask().execute(registerInfo.getBody().getMember_id(), orderId);
     }
+
+    private void commitOrder() {
+        if (isCancel)
+            ToastUtils.showShortToast(getActivity(), getResources().getString(R.string.order_is_cancel));
+        else {
+            if (entity != null) {
+                Intent intent = new Intent(getActivity(), PayActivity.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putSerializable("body", entity);
+                intent.putExtras(mBundle);
+                startActivity(intent);
+            } else
+                ToastUtils.showShortToast(getActivity(), getResources().getString(R.string.order_detail_msg));
+        }
+    }
+
+    private void cancelOrder() {
+        if (isCancel)
+            ToastUtils.showShortToast(getActivity(), getResources().getString(R.string.order_is_cancel));
+        else {
+            if (!TextUtils.isEmpty(orderId))
+                new CommomDialog(getActivity(), R.style.progress_dialog, "您确定取消此订单？", new CommomDialog.OnCloseListener() {
+                    @Override
+                    public void onClick(Dialog dialog, boolean confirm) {
+                        if (confirm) {
+                            dialog.dismiss();
+                            new cancelOrder().execute(orderId);
+                        }
+                    }
+                })
+                        .setTitle("提示").show();
+        }
+    }
+
 
     class getOrderinfoTask extends WorkTask<String, Void, OrderDetailBean> {
 
         @Override
         protected void onPrepare() {
             super.onPrepare();
-            showAlert("..正在加载中..", false);
+            showAlert("正在加载中..", false);
         }
 
         @Override
@@ -138,7 +171,42 @@ public class OrderPayFragment extends BaseFragment {
         }
     }
 
+
+    class cancelOrder extends WorkTask<String, Void, BaseInfo> {
+
+        @Override
+        protected void onPrepare() {
+            super.onPrepare();
+            showAlert("正在取消订单", false);
+        }
+
+        @Override
+        public BaseInfo workInBackground(String... params) throws TaskException {
+            return SDK.newInstance(getActivity()).cancelOrder(params[0]);
+        }
+
+        @Override
+        protected void onSuccess(BaseInfo info) {
+            super.onSuccess(info);
+            dismissAlert();
+            if ("1".equals(info.getCode())) {
+                isCancel = true;
+                refund_order_goout_text.setText("已取消");
+                ToastUtils.showShortToast(getActivity(), "该订单已成功取消");
+            } else
+                ToastUtils.showShortToast(getActivity(), info.getMsg());
+            Log.e("ttt", "onSuccess: info.getPrice():" + info.getMsg());
+        }
+
+        @Override
+        protected void onFailure(TaskException exception) {
+            dismissAlert();
+        }
+    }
+
+
     private void settingView(OrderDetailEntity info) {
+        Log.e("ttt", "settingView: " + info.getAdd_time());
         ticketToWhere.setText(info.getSpot_name());
         ticket_type.setText(info.getName());
         ticket_price.setText("￥" + info.getPrice());
