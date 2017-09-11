@@ -1,8 +1,10 @@
 package com.zhl.huiqu.personal;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +32,7 @@ import com.zhl.huiqu.utils.GlideCircleTransform;
 import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.ToastUtils;
+import com.zhl.huiqu.utils.Utils;
 
 import org.aisen.android.support.inject.OnClick;
 import org.aisen.android.support.inject.ViewInject;
@@ -139,10 +142,10 @@ public class PersonalFragment extends BaseFragment {
     private void otherClickEvent(View view) {
 
         FragmentArgs args = new FragmentArgs();
-        if (account == null) {
-            startActivity(new Intent(getActivity(), LoginActivity.class));
-            ToastUtils.showShortToast(getActivity(), getResources().getString(R.string.should_account_login));
-        } else {
+//        if (account == null) {
+//            startActivity(new Intent(getActivity(), LoginActivity.class));
+//            ToastUtils.showShortToast(getActivity(), getResources().getString(R.string.should_account_login));
+//        } else {
             switch (view.getId()) {
                 case R.id.row_collect_layout:
                     Intent intent = new Intent(getActivity(), MyCollectAcitivity.class);
@@ -152,8 +155,8 @@ public class PersonalFragment extends BaseFragment {
                 case R.id.row_look_his_layout:
                     Log.e("dddd", "onClick: row_look_his_layout");
 
-                    ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
-//                startActivity(new Intent(getActivity(), LookHistoryActivity.class));
+//                    ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                startActivity(new Intent(getActivity(), LookHistoryActivity.class));
                     break;
                 case R.id.row_normal_msg_layout:
                     ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
@@ -178,7 +181,7 @@ public class PersonalFragment extends BaseFragment {
                     args.add("productId", getResources().getString(R.string.personal_tuikuan_order));
                     OrderAllListFragment.launch(getActivity(), args);
                     break;
-            }
+//            }
         }
     }
 }

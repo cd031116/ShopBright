@@ -249,8 +249,8 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
 //                startActivity(new Intent(getActivity(), CaptureActivity.class));
                 break;
             case R.id.searh_line:
-//                SearchFragment.launch(getActivity());
-                startActivity(new Intent(getActivity(), TixkSearchActivity.class));
+                SearchFragment.launch(getActivity());
+//                startActivity(new Intent(getActivity(), TixkSearchActivity.class));
                 break;
             case R.id.main_mp:
                 TicketMainFragment.launch(getActivity());

@@ -24,6 +24,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zhl.huiqu.MainActivity;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.BaseInfo;
@@ -369,6 +370,8 @@ public class OrderWriteActivity extends BaseActivity {
      */
     class commitOrderTask extends WorkTask<String, Void, OrderBean> {
 
+        private String state;
+
         @Override
         protected void onPrepare() {
             super.onPrepare();
@@ -377,6 +380,7 @@ public class OrderWriteActivity extends BaseActivity {
 
         @Override
         public OrderBean workInBackground(String... params) throws TaskException {
+            state = params[0];
             if ("0".equals(params[0]))
                 return SDK.newInstance(OrderWriteActivity.this).insertOrderInfo(params[0], params[1],
                         params[2], params[3], params[4], params[5], params[6], params[7]);
@@ -390,16 +394,57 @@ public class OrderWriteActivity extends BaseActivity {
         protected void onSuccess(OrderBean info) {
             super.onSuccess(info);
             dismissAlert();
-            TLog.log("tttt", "info=" + info.getBody().getMobile());
-            Intent intent = new Intent(OrderWriteActivity.this, PayActivity.class);
-            Bundle mBundle = new Bundle();
-            mBundle.putSerializable("body", info.getBody());
-            intent.putExtras(mBundle);
-            startActivity(intent);
+            TLog.log("tttt", "info=" + info.getBody().getMobile() + ",status:" + info.getBody().getStatus());
+
+            if (info.getBody().getStatus() == 0) {
+                new LoginTask().execute(info.getBody().getMemberInfo().getMobile(), info.getBody().getMemberInfo().getPassword());
+            }
+            commitSuccess(info.getBody());
+
         }
 
         @Override
         protected void onFailure(TaskException exception) {
+            dismissAlert();
+        }
+    }
+
+    private void commitSuccess(OrderEntity info) {
+        Intent intent = new Intent(OrderWriteActivity.this, PayActivity.class);
+        Bundle mBundle = new Bundle();
+        mBundle.putSerializable("body", info);
+        intent.putExtras(mBundle);
+        startActivity(intent);
+    }
+
+    /*
+    *登录
+    * */
+    class LoginTask extends WorkTask<String, Void, RegisterEntity> {
+
+        @Override
+        protected void onPrepare() {
+            super.onPrepare();
+            showAlert("正在登陆..", true);
+        }
+
+        @Override
+        public RegisterEntity workInBackground(String... params) throws TaskException {
+            return SDK.newInstance(OrderWriteActivity.this).login(params[0], params[1], "0", "");
+
+        }
+
+        @Override
+        protected void onSuccess(RegisterEntity info) {
+            super.onSuccess(info);
+            dismissAlert();
+            Log.e("ttt", "onSuccess: ");
+            SaveObjectUtils.getInstance(OrderWriteActivity.this).setObject(Constants.USER_INFO, info);
+        }
+
+        @Override
+        protected void onFailure(TaskException exception) {
+            super.onFailure(exception);
             dismissAlert();
         }
     }

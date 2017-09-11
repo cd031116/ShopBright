@@ -1,7 +1,9 @@
 package com.zhl.huiqu.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Build;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,13 +57,12 @@ public class Utils {
     public static String formatDuration(long duration) {
         if (duration < 60) {
             return duration + "分钟";
-        }
-        else {
+        } else {
             return duration / 60 + "小时";
         }
     }
 
-    public static  <T extends Serializable> IItemViewCreator<T> configFooterViewCreator(final Activity activity, final AFooterItemView.OnFooterViewCallback callback) {
+    public static <T extends Serializable> IItemViewCreator<T> configFooterViewCreator(final Activity activity, final AFooterItemView.OnFooterViewCallback callback) {
         return new IItemViewCreator<T>() {
 
             @Override
@@ -77,20 +78,21 @@ public class Utils {
         };
     }
 
-    public static String splitt(String sd){
-        String[] sArray=sd.split(":");
+    public static String splitt(String sd) {
+        String[] sArray = sd.split(":");
         return sArray[0];
     }
-    public static String splitt1(String sd){
-        String[] sArray=sd.split(":");
+
+    public static String splitt1(String sd) {
+        String[] sArray = sd.split(":");
         return sArray[1];
     }
 
-    public static long  getcuo(String sd){
-        SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date= null;
+    public static long getcuo(String sd) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = null;
         try {
-            date = sdf .parse(sd);
+            date = sdf.parse(sd);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -98,11 +100,11 @@ public class Utils {
         return timeStemp;
     }
 
-    public static long  gettcuo(String sd){
-        SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Date date= null;
+    public static long gettcuo(String sd) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date date = null;
         try {
-            date = sdf .parse(sd);
+            date = sdf.parse(sd);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -111,10 +113,9 @@ public class Utils {
     }
 
 
-
-    public static JSONObject tojson(Map<String,Object> map1){
+    public static JSONObject tojson(Map<String, Object> map1) {
         JSONObject itemJSONObj = JSONObject.parseObject(JSON.toJSONString(map1));
-        return  itemJSONObj;
+        return itemJSONObj;
     }
 
     public static void setWindowStatusBarColor(Activity activity, int colorResId) {
@@ -131,16 +132,22 @@ public class Utils {
         }
     }
 
-    public static String getImageUrl(String url){
-        if(TextUtils.isEmpty(url)){
+    public static String getImageUrl(String url) {
+        if (TextUtils.isEmpty(url)) {
             return "";
         }
-        if(url.contains("http://")||url.contains("www.")){
+        if (url.contains("http://") || url.contains("www.")) {
             return url;
-        }else {
-            url= BuildConfig.BASE_URL+url;
+        } else {
+            url = BuildConfig.BASE_URL + url;
             return url;
         }
+    }
+
+    public static String  obtainDeviceId(Context context) {
+        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        String deviceId = tm.getDeviceId();
+        return deviceId;
     }
 
     public static boolean isIdNum(String idNum) {

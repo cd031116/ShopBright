@@ -117,7 +117,7 @@
                 android:layout_below="@+id/txtHistory"
                 android:layout_marginLeft="10dip"
                 android:layout_marginRight="10dip"
-                android:layout_marginTop="10dip"/>
+                android:layout_marginTop="10dip" />
 
         </RelativeLayout>
 
@@ -141,7 +141,7 @@
             android:layout_marginLeft="10dip"
             android:layout_marginRight="10dip"
             android:layout_marginTop="10dip"
-            android:visibility="visible"/>
+            android:visibility="visible" />
     </LinearLayout>
 
     <include
@@ -157,4 +157,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />
+
 </LinearLayout>

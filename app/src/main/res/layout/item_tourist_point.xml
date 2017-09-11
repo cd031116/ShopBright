@@ -61,13 +61,13 @@
         android:id="@+id/tourist_place_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tourist_ms"
-        android:layout_marginLeft="27px"
-        android:layout_marginTop="24px"
-        android:layout_toRightOf="@id/tourist_place"
         android:text="@string/register_title"
         android:textColor="@color/red_text"
-        android:textSize="33px" />
+        android:textSize="33px"
+        android:layout_alignBaseline="@+id/tourist_place_jibie"
+        android:layout_alignBottom="@+id/tourist_place_jibie"
+        android:layout_toRightOf="@+id/tourist_tag"
+        android:layout_toEndOf="@+id/tourist_tag" />
 
     <TextView
         android:id="@+id/tourist_place_jibie"

@@ -15,6 +15,8 @@ import com.zhl.huiqu.main.bean.DetailMainBean;
 import com.zhl.huiqu.main.bean.GradeBean;
 import com.zhl.huiqu.main.bean.MainBean;
 import com.zhl.huiqu.main.bean.SearchBean;
+import com.zhl.huiqu.main.bean.SearchEntity;
+import com.zhl.huiqu.main.bean.SearchTickEntity;
 import com.zhl.huiqu.main.ticket.CityInfo;
 import com.zhl.huiqu.main.ticket.SpotTBean;
 import com.zhl.huiqu.main.ticket.TickMainBean;
@@ -245,7 +247,7 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public DetailMainBean getGoodsDetail(String id) throws TaskException {
+    public DetailMainBean getGoodsDetail(String id,String device_num) throws TaskException {
         Setting action = newSetting("getGoodsDetail", "appapi/Goods/getGoodsDetail", "获取商品详情");
         Params params = new Params();
         RegisterEntity info = SaveObjectUtils.getInstance(context).getObject(Constants.USER_INFO, RegisterEntity.class);
@@ -255,6 +257,7 @@ public class SDK extends ABizLogic {
             params.addParameter("member_id", info.getBody().getMember_id());
         }
         params.addParameter("shop_spot_id", id);
+        params.addParameter("device_num", device_num);
 //        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?session_id=" + info.getSession_id() + "&check_sign=" + info.getCheck_sign());
         return doPost(configHttpConfig(), action, params, null, null, DetailMainBean.class);
     }
@@ -306,6 +309,86 @@ public class SDK extends ABizLogic {
         Params params = new Params();
         params.addParameter("type", type);
         return doGet(action, basicParams(params), GradeBean.class);
+    }
+
+    /**
+     * 获取热门搜索
+     *
+     * @return
+     * @throws TaskException
+     */
+    public SearchEntity getHotSearch() throws TaskException {
+        Setting action = newSetting("getHotSearch", "appapi/search/getHotSearch", "获取热门搜索");
+        return doGet(action, null, SearchEntity.class);
+    }
+
+    /**
+     * 获取搜索历史
+     *
+     * @param device_num //手机设备号
+     * @return
+     * @throws TaskException
+     */
+    public SearchEntity getSearchHistory(String device_num) throws TaskException {
+        Setting action = newSetting("getSearchHistory", "appapi/Search/getSearchHistory", "获取搜索历史");
+        Params params = new Params();
+        params.addParameter("device_num", device_num);
+        return doGet(action, basicParams(params), SearchEntity.class);
+    }
+
+    /**
+     * 清空搜索历史
+     *
+     * @return
+     * @throws TaskException
+     */
+    public BaseInfo clearSearchHistory(String device_num) throws TaskException {
+        Setting action = newSetting("clearSearchHistory", "appapi/search/clearSearchHistory", "清空搜索历史");
+        Params params = new Params();
+        params.addParameter("device_num", device_num);
+        return doGet(action, basicParams(params), BaseInfo.class);
+    }
+
+    /**
+     * 通过搜索条件获取景点
+     *
+     * @return
+     * @throws TaskException
+     */
+    public SearchTickEntity getSearchInfoByCondition(String condition, String device_num, String page) throws TaskException {
+        Setting action = newSetting("getSearchInfoByCondition", "appapi/Search/getSearchInfoByCondition", "通过搜索条件获取景点");
+        Params params = new Params();
+        params.addParameter("condition", condition);
+        params.addParameter("device_num", device_num);
+        params.addParameter("page", page );
+        return doGet(action, basicParams(params), SearchTickEntity.class);
+    }
+
+    /**
+     * 获取浏览历史
+     *
+     * @return
+     * @throws TaskException
+     */
+    public SearchBean getbrowserhistory(String device_num, String page) throws TaskException {
+        Setting action = newSetting("getbrowserhistory", "appapi/personalcenter/getbrowserhistory", "获取浏览历史");
+        Params params = new Params();
+        params.addParameter("device_num", device_num);
+        params.addParameter("page", page );
+        return doGet(action, basicParams(params), SearchBean.class);
+    }
+
+    /**
+     * 清空浏览历史
+     *
+     * @return
+     * @throws TaskException
+     */
+    public BaseInfo clearbrowserhistory(String device_num) throws TaskException {
+        Setting action = newSetting("clearbrowserhistory", "appapi/personalcenter/clearbrowserhistory", "清空浏览历史");
+        Params params = new Params();
+        params.addParameter("device_num", device_num);
+        return doGet(action, basicParams(params), BaseInfo.class);
     }
 
     /**
@@ -464,6 +547,7 @@ public class SDK extends ABizLogic {
         params.addParameter("order_id", order_id);
         return doPost(configHttpConfig(), action, params, null, null, BaseInfo.class);
     }
+
     /**
      * 删除订单
      *
@@ -617,7 +701,7 @@ public class SDK extends ABizLogic {
         Params params = new Params();
         params.addParameter("member_id", member_id);
 //        params.addParameter("page", page+"");
-        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?member_id=" + member_id );
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?member_id=" + member_id);
         return doGet(configHttpConfig(), action, params, CollectBean.class);
     }
 

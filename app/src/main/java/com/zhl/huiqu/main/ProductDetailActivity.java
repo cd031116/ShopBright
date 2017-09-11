@@ -1,10 +1,12 @@
 package com.zhl.huiqu.main;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -37,6 +39,7 @@ import com.zhl.huiqu.widget.GlideImageLoader;
 import com.zhl.huiqu.widget.MyScroview;
 import com.zhl.huiqu.widget.SimpleDividerItemDecoration;
 
+import org.aisen.android.network.http.Params;
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
 
@@ -155,7 +158,9 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
     @Override
     public void initData() {
         super.initData();
-        new getInfoTask().execute();
+        TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+        String deviceId = tm.getDeviceId();
+        new getInfoTask().execute(deviceId);
     }
 
     private void showcollection(DetailBean info) {
@@ -335,7 +340,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
 
     /*
       * */
-    class getInfoTask extends WorkTask<Void, Void, DetailMainBean> {
+    class getInfoTask extends WorkTask<String, Void, DetailMainBean> {
         @Override
         protected void onPrepare() {
             super.onPrepare();
@@ -343,9 +348,9 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
         }
 
         @Override
-        public DetailMainBean workInBackground(Void... voids) throws TaskException {
+        public DetailMainBean workInBackground(String... voids) throws TaskException {
 
-            return SDK.newInstance(ProductDetailActivity.this).getGoodsDetail(shop_spot_id);
+            return SDK.newInstance(ProductDetailActivity.this).getGoodsDetail(shop_spot_id, voids[0]);
         }
 
         @Override
@@ -372,35 +377,35 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
 
     /*收藏
     * */
-    class toTask extends WorkTask<Void, Void, String>{
+    class toTask extends WorkTask<Void, Void, String> {
         @Override
-        protected void onPrepare(){
+        protected void onPrepare() {
             super.onPrepare();
-            showAlert("正在提交..",true);
+            showAlert("正在提交..", true);
         }
 
         @Override
-        public String workInBackground(Void... voids) throws TaskException{
+        public String workInBackground(Void... voids) throws TaskException {
             RegisterEntity data = (RegisterEntity) SaveObjectUtils.getInstance(ProductDetailActivity.this).getObject(Constants.USER_INFO, null);
             return SDK.newInstance(ProductDetailActivity.this).getCollect(data.getBody().getMember_id(), shop_spot_id);
         }
 
         @Override
-        protected void onSuccess(String infot){
+        protected void onSuccess(String infot) {
             super.onSuccess(infot);
             dismissAlert();
-            if ("1".equals(info.getSpot_info().getCollect_status())){
+            if ("1".equals(info.getSpot_info().getCollect_status())) {
                 info.getSpot_info().setCollect_status("0");
-                ToastUtils.showShortToast(ProductDetailActivity.this,"取消收藏");
+                ToastUtils.showShortToast(ProductDetailActivity.this, "取消收藏");
             } else {
                 info.getSpot_info().setCollect_status("1");
-                ToastUtils.showShortToast(ProductDetailActivity.this,"收藏成功");
+                ToastUtils.showShortToast(ProductDetailActivity.this, "收藏成功");
             }
             showcollection(info);
         }
 
         @Override
-        protected void onFailure(TaskException exception){
+        protected void onFailure(TaskException exception) {
             dismissAlert();
         }
     }

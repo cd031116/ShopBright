@@ -3,34 +3,16 @@ package com.zhl.huiqu.personal;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
-import com.zhl.huiqu.base.BaseInfo;
-import com.zhl.huiqu.login.entity.RegisterEntity;
-import com.zhl.huiqu.login.entity.RegisterInfo;
-import com.zhl.huiqu.personal.bean.OrderDetailBean;
-import com.zhl.huiqu.personal.bean.OrderDetailEntity;
-import com.zhl.huiqu.sdk.SDK;
-import com.zhl.huiqu.utils.Constants;
-import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
-import com.zhl.huiqu.utils.ToastUtils;
-
-import org.aisen.android.common.setting.Setting;
-import org.aisen.android.network.task.TaskException;
-import org.aisen.android.network.task.WorkTask;
 
 import butterknife.Bind;
 import butterknife.OnClick;

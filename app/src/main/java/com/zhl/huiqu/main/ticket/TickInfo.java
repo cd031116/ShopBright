@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Administrator on 2017/8/16.
  */
 
-public class TickInfo implements Serializable{
+public class TickInfo implements Serializable {
     private int shop_spot_id;
 
     private String title;
@@ -24,6 +24,26 @@ public class TickInfo implements Serializable{
     private String desc;
 
     private String csr;
+
+    private String today;
+
+    private String add_time;
+
+    public String getAdd_time() {
+        return add_time;
+    }
+
+    public void setAdd_time(String add_time) {
+        this.add_time = add_time;
+    }
+
+    public String getToday() {
+        return today;
+    }
+
+    public void setToday(String today) {
+        this.today = today;
+    }
 
     public int getShop_spot_id() {
         return shop_spot_id;
