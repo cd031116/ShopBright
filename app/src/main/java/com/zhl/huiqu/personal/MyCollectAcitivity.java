@@ -1,9 +1,11 @@
 package com.zhl.huiqu.personal;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,9 +19,11 @@ import com.zhl.huiqu.main.ProductDetailActivity;
 import com.zhl.huiqu.personal.bean.CollectBean;
 import com.zhl.huiqu.personal.bean.CollectEntity;
 import com.zhl.huiqu.sdk.SDK;
+import com.zhl.huiqu.utils.CommomDialog;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.TLog;
+import com.zhl.huiqu.utils.ToastUtils;
 
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
@@ -45,6 +49,7 @@ public class MyCollectAcitivity extends BaseActivity {
 
     List<CollectEntity> list = new ArrayList<>();
     private CollectRecyclerViewAdapter mRecyclerViewAdapter;
+    private boolean isCancel;
 
     @Override
     protected int getLayoutId() {
@@ -117,8 +122,29 @@ public class MyCollectAcitivity extends BaseActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(MyCollectAcitivity.this, ProductDetailActivity.class);
-                intent.putExtra("shop_spot_id", collectEntityList.get(position).getProduct_id() + "");
+                intent.putExtra("shop_spot_id", collectEntityList.get(position).getShop_spot_id() + "");
                 startActivity(intent);
+            }
+        });
+        mRecyclerViewAdapter.setOnItemLongClickListener(new CollectRecyclerViewAdapter.OnItemLongClickListener() {
+            @Override
+            public void onItemLongClick(View view, int position) {
+                Log.e("ttt", "onItemLongClick: "+position );
+                if (isCancel)
+                    ToastUtils.showShortToast(MyCollectAcitivity.this, getResources().getString(R.string.order_is_cancel));
+                else {
+                    if (!TextUtils.isEmpty(list.get(position).getShop_spot_id()+""))
+                        new CommomDialog(getApplicationContext(), R.style.progress_dialog, "您确定取消此订单？", new CommomDialog.OnCloseListener() {
+                            @Override
+                            public void onClick(Dialog dialog, boolean confirm) {
+                                if (confirm) {
+                                    dialog.dismiss();
+//                                    new deleteCollect().execute(orderId);
+                                }
+                            }
+                        })
+                                .setTitle("提示").show();
+                }
             }
         });
     }

@@ -156,7 +156,8 @@
     <string name="order_detail_pay">立即支付</string>
     <string name="order_detail_apply_refund">申请退款</string>
     <string name="order_detail_huiqu_phone">惠趣客服热线</string>
-    <string name="account_msg">联系人信息</string>
+    <string name="account_msg">起/份</string>
+    <string name="account_address">长沙</string>
     <string name="account_phone">手机号：</string>
     <string name="account_name">姓名：</string>
 

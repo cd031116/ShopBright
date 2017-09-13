@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="36px"
-                android:text="周末有"
+                android:background="@drawable/bg_urlike_text"
                 android:textColor="@color/white" />
 
             <TextView
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@id/ur_like_img"
                 android:layout_margin="36px"
-                android:text="47点评"
+                android:background="@drawable/bg_urlike_text"
                 android:textColor="@color/white" />
 
             <TextView
@@ -47,7 +47,6 @@
                 android:layout_marginTop="18px"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="@string/account_msg"
                 android:textColor="@color/black_text" />
 
             <TextView
@@ -77,7 +76,7 @@
                 android:layout_below="@id/ms_tourist_text"
                 android:layout_marginRight="18px"
                 android:layout_marginTop="18px"
-                android:text="@string/account_msg"
+                android:text="@string/account_address"
                 android:textColor="@color/gray_text" />
         </RelativeLayout>
 

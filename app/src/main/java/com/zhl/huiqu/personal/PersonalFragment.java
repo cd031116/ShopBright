@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.telephony.TelephonyManager;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,23 +16,24 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseFragment;
+import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.login.LoginActivity;
 import com.zhl.huiqu.login.entity.RegisterEntity;
-import com.zhl.huiqu.main.ticket.GridViewAdapter;
-import com.zhl.huiqu.main.ticket.Model;
-import com.zhl.huiqu.main.ticket.TicketListActivity;
+import com.zhl.huiqu.main.ProductDetailActivity;
 import com.zhl.huiqu.main.ticket.ViewPagerAdapter;
+import com.zhl.huiqu.personal.bean.UrLikeBean;
+import com.zhl.huiqu.personal.bean.UrLikeEntity;
+import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.Constants;
-import com.zhl.huiqu.utils.GlideCircleTransform;
 import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
+import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.utils.ToastUtils;
-import com.zhl.huiqu.utils.Utils;
 
+import org.aisen.android.network.task.TaskException;
+import org.aisen.android.network.task.WorkTask;
 import org.aisen.android.support.inject.OnClick;
 import org.aisen.android.support.inject.ViewInject;
 import org.aisen.android.ui.activity.container.FragmentArgs;
@@ -73,14 +73,21 @@ public class PersonalFragment extends BaseFragment {
      */
     private int curIndex = 0;
 
+    @ViewInject(id = R.id.your_like_layout)
+    RelativeLayout urLikeLayout;
+    @ViewInject(id = R.id.viewpager)
+    ViewPager viewpager;
+    @ViewInject(id = R.id.ll_dot)
+    LinearLayout ll_dot;
 
     @ViewInject(id = R.id.personal_head_img)
     ImageView headImg;
     @ViewInject(id = R.id.personal_tel_text)
     TextView nameText;
 
-    RegisterEntity account;
-
+    private RegisterEntity account;
+    private GridView gridView;
+    private LayoutInflater inflater;
 
     public static PersonalFragment newInstance() {
         return new PersonalFragment();
@@ -112,7 +119,10 @@ public class PersonalFragment extends BaseFragment {
     @Override
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate) {
         super.layoutInit(inflater, savedInstanceSate);
+        this.inflater=inflater;
         inflater_d = LayoutInflater.from(getActivity());
+        initDatas();
+
     }
 
     @OnClick({R.id.row_collect_layout, R.id.row_look_his_layout, R.id.row_normal_msg_layout, R.id.row_kefu_center_layout,
@@ -132,31 +142,123 @@ public class PersonalFragment extends BaseFragment {
                 } else
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 break;
+            case R.id.row_look_his_layout:
+                Log.e("dddd", "onClick: row_look_his_layout");
+                startActivity(new Intent(getActivity(), LookHistoryActivity.class));
+                break;
             default:
                 otherClickEvent(view);
                 break;
         }
     }
 
+    /**
+     * 初始化数据源
+     */
+    private void initDatas() {
+        TelephonyManager tm = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+        String deviceId = tm.getDeviceId();
+        new obtainUrLiskeData().execute(deviceId);
+    }
+
+    /**
+     * 设置圆点
+     */
+    public void setOvalLayout() {
+        for (int i = 0; i < pageCount; i++) {
+            ll_dot.addView(inflater_d.inflate(R.layout.dot, null));
+        }
+        // 默认显示第一页
+        ll_dot.getChildAt(0).findViewById(R.id.v_dot)
+                .setBackgroundResource(R.drawable.dot_selected);
+        viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            public void onPageSelected(int position) {
+                // 取消圆点选中
+                ll_dot.getChildAt(curIndex)
+                        .findViewById(R.id.v_dot)
+                        .setBackgroundResource(R.drawable.dot_normal);
+                // 圆点选中
+                ll_dot.getChildAt(position)
+                        .findViewById(R.id.v_dot)
+                        .setBackgroundResource(R.drawable.dot_selected);
+                curIndex = position;
+            }
+
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+            }
+
+            public void onPageScrollStateChanged(int arg0) {
+            }
+        });
+    }
+
+    //TODO 保存邮箱
+    class obtainUrLiskeData extends WorkTask<String, Void, UrLikeBean> {
+
+        @Override
+        protected void onPrepare() {
+            super.onPrepare();
+            showAlert("", false);
+        }
+
+        @Override
+        public UrLikeBean workInBackground(String... params) throws TaskException {
+            return SDK.newInstance(getActivity()).getYouLike(params[0]);
+        }
+
+        @Override
+        protected void onSuccess(UrLikeBean info) {
+            super.onSuccess(info);
+            dismissAlert();
+            mDatas = new ArrayList<UrLikeEntity>();
+            if (info.getCode().equals("1")) {
+                mDatas.addAll(info.getBody());
+                setUrLikeView();
+            }
+
+        }
+
+        @Override
+        protected void onFailure(TaskException exception) {
+            dismissAlert();
+        }
+    }
+
+    private void setUrLikeView() {
+        pageCount = (int) Math.ceil(mDatas.size() * 1.0 / pageSize);
+        mPagerList = new ArrayList<View>();
+        for (int i = 0; i < pageCount; i++) {
+            //每个页面都是inflate出一个新实例
+            GridView gridView = (GridView) inflater.inflate(R.layout.urlike_gridview, viewpager, false);
+            gridView.setAdapter(new UrLikeGridViewAdapter(getActivity(), mDatas, i, pageSize));
+            mPagerList.add(gridView);
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
+                    intent.putExtra("shop_spot_id", mDatas.get(position).getShop_spot_id() + "");
+                    startActivity(intent);
+                }
+            });
+        }
+        //设置适配器
+        viewpager.setAdapter(new ViewPagerAdapter(mPagerList));
+        //设置圆点
+        setOvalLayout();
+    }
 
     private void otherClickEvent(View view) {
 
         FragmentArgs args = new FragmentArgs();
-//        if (account == null) {
-//            startActivity(new Intent(getActivity(), LoginActivity.class));
-//            ToastUtils.showShortToast(getActivity(), getResources().getString(R.string.should_account_login));
-//        } else {
+        if (account == null) {
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+            ToastUtils.showShortToast(getActivity(), getResources().getString(R.string.should_account_login));
+        } else {
             switch (view.getId()) {
                 case R.id.row_collect_layout:
                     Intent intent = new Intent(getActivity(), MyCollectAcitivity.class);
                     intent.putExtra("memberId", account.getBody().getMember_id());
                     startActivity(intent);
-                    break;
-                case R.id.row_look_his_layout:
-                    Log.e("dddd", "onClick: row_look_his_layout");
-
-//                    ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
-                startActivity(new Intent(getActivity(), LookHistoryActivity.class));
                     break;
                 case R.id.row_normal_msg_layout:
                     ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
@@ -181,7 +283,7 @@ public class PersonalFragment extends BaseFragment {
                     args.add("productId", getResources().getString(R.string.personal_tuikuan_order));
                     OrderAllListFragment.launch(getActivity(), args);
                     break;
-//            }
+            }
         }
     }
 }

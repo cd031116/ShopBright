@@ -21,16 +21,21 @@ import java.util.List;
  * Created by Administrator on 2017/8/14.
  */
 
-public class CollectRecyclerViewAdapter extends RecyclerView.Adapter<CollectRecyclerViewAdapter.MyViewHolder> implements View.OnClickListener {
+public class CollectRecyclerViewAdapter extends RecyclerView.Adapter<CollectRecyclerViewAdapter.MyViewHolder> implements View.OnClickListener, View.OnLongClickListener {
 
     private LayoutInflater mLayoutInflater;
     private Context mContext;
     private List<CollectEntity> dataList = new ArrayList<>();
 
     private OnItemClickListener mOnItemClickListener = null;
+    private OnItemLongClickListener mOnItemLongClickListener = null;
 
-    public static interface OnItemClickListener {
+    public interface OnItemClickListener {
         void onItemClick(View view, int position);
+    }
+
+    public interface OnItemLongClickListener {
+        void onItemLongClick(View view, int position);
     }
 
     public CollectRecyclerViewAdapter(Context context, List<CollectEntity> dataList) {
@@ -49,7 +54,7 @@ public class CollectRecyclerViewAdapter extends RecyclerView.Adapter<CollectRecy
         notifyItemInserted(position);
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
 
         TextView collectWhere;
         TextView collectMs;
@@ -71,6 +76,11 @@ public class CollectRecyclerViewAdapter extends RecyclerView.Adapter<CollectRecy
             collectTag = (TextView) itemView.findViewById(R.id.tourist_tag);
             mHead = (ImageView) itemView.findViewById(R.id.tourist_view);
         }
+
+        @Override
+        public boolean onLongClick(View view) {
+            return false;
+        }
     }
 
     @Override
@@ -79,6 +89,7 @@ public class CollectRecyclerViewAdapter extends RecyclerView.Adapter<CollectRecy
         SupportMultipleScreensUtil.scale(view);
         CollectRecyclerViewAdapter.MyViewHolder vh = new CollectRecyclerViewAdapter.MyViewHolder(view);
         view.setOnClickListener(this);
+        view.setOnLongClickListener(this);
         return vh;
     }
 
@@ -90,7 +101,7 @@ public class CollectRecyclerViewAdapter extends RecyclerView.Adapter<CollectRecy
         holder.collectAddress.setText(dataList.get(position).getCity());
         holder.collectJb.setText(dataList.get(position).getGrade());
 //        holder.collectPf.setText(dataList.get(position).getCollectPf());
-        holder.collectPrice.setText("￥"+dataList.get(position).getShop_price());
+        holder.collectPrice.setText("￥" + dataList.get(position).getShop_price());
         holder.collectTag.setText(dataList.get(position).getTheme());
 //        if (!TextUtils.isEmpty(dataList.get(position).getImgUrl())) {
 //            Glide.with(holder.mHead.getContext()).load(dataList.get(position).getImgUrl()).apply(RequestOptions.centerCropTransform())
@@ -115,7 +126,23 @@ public class CollectRecyclerViewAdapter extends RecyclerView.Adapter<CollectRecy
         }
     }
 
+    @Override
+    public boolean onLongClick(View view) {
+        Log.e("ttt", "onLongClick: "+ (int) view.getTag());
+        if (mOnItemLongClickListener != null) {
+            //注意这里使用getTag方法获取position
+            Log.e("ttt", "onLongClick: "+ (int) view.getTag());
+            mOnItemLongClickListener.onItemLongClick(view, (int) view.getTag());
+            return true;
+        }
+        return false;
+    }
+
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.mOnItemClickListener = listener;
+    }
+
+    public void setOnItemLongClickListener(OnItemLongClickListener listener) {
+        this.mOnItemLongClickListener = listener;
     }
 }

@@ -396,11 +396,10 @@ public class OrderWriteActivity extends BaseActivity {
             dismissAlert();
             TLog.log("tttt", "info=" + info.getBody().getMobile() + ",status:" + info.getBody().getStatus());
 
-            if (info.getBody().getStatus() == 0) {
+            if (info.getBody().getMemberInfo()!=null) {
                 new LoginTask().execute(info.getBody().getMemberInfo().getMobile(), info.getBody().getMemberInfo().getPassword());
             }
             commitSuccess(info.getBody());
-
         }
 
         @Override

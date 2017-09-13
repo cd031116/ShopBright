@@ -9,7 +9,6 @@ import java.io.Serializable;
 public class CollectEntity implements Serializable{
 
     /**
-     * product_id : 1
      * type : ZHL
      * city : 长沙
      * grade : 4A景区
@@ -21,7 +20,6 @@ public class CollectEntity implements Serializable{
      * shop_price : 90.00
      */
 
-    private int product_id;
     private String type;
     private String city;
     private String grade;
@@ -31,14 +29,13 @@ public class CollectEntity implements Serializable{
     private String desc;
     private int add_time;
     private String shop_price;
+    /**
+     * shop_spot_id : 1
+     * csr : 1
+     */
 
-    public int getProduct_id() {
-        return product_id;
-    }
-
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
-    }
+    private int shop_spot_id;
+    private int csr;
 
     public String getType() {
         return type;
@@ -110,5 +107,21 @@ public class CollectEntity implements Serializable{
 
     public void setShop_price(String shop_price) {
         this.shop_price = shop_price;
+    }
+
+    public int getShop_spot_id() {
+        return shop_spot_id;
+    }
+
+    public void setShop_spot_id(int shop_spot_id) {
+        this.shop_spot_id = shop_spot_id;
+    }
+
+    public int getCsr() {
+        return csr;
+    }
+
+    public void setCsr(int csr) {
+        this.csr = csr;
     }
 }

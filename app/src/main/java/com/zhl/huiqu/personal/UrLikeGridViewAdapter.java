@@ -10,7 +10,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zhl.huiqu.R;
-import com.zhl.huiqu.main.ticket.Model;
+import com.zhl.huiqu.personal.bean.UrLikeEntity;
+import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 
 import java.util.List;
 
@@ -62,6 +63,7 @@ public class UrLikeGridViewAdapter extends BaseAdapter {
         ViewHolder viewHolder = null;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.item_ur_like, parent, false);
+            SupportMultipleScreensUtil.scale(convertView);
             viewHolder = new ViewHolder();
             viewHolder.tag = (TextView) convertView.findViewById(R.id.ur_like_tag);
             viewHolder.dpNum = (TextView) convertView.findViewById(R.id.ur_like_dp);
@@ -77,12 +79,12 @@ public class UrLikeGridViewAdapter extends BaseAdapter {
          * 在给View绑定显示的数据时，计算正确的position = position + curIndex * pageSize，
          */
         int pos = position + curIndex * pageSize;
-        viewHolder.tag.setText(mDatas.get(pos).tag);
-        viewHolder.dpNum.setText(mDatas.get(pos).dpNum);
-        viewHolder.price.setText(mDatas.get(pos).price);
-        viewHolder.address.setText(mDatas.get(pos).address);
-        viewHolder.touristMs.setText(mDatas.get(pos).touristMs);
-        Glide.with(viewHolder.iv.getContext()).load(mDatas.get(position).getImgUrl()).into(viewHolder.iv);
+        viewHolder.tag.setText(mDatas.get(pos).getTheme());
+        viewHolder.dpNum.setText(mDatas.get(pos).getComment_num()+"条点评");
+        viewHolder.price.setText(mDatas.get(pos).getShop_price());
+        viewHolder.address.setText(mDatas.get(pos).getCity());
+        viewHolder.touristMs.setText(mDatas.get(pos).getDesc());
+        Glide.with(viewHolder.iv.getContext()).load(mDatas.get(position).getThumb()).into(viewHolder.iv);
         return convertView;
     }
 

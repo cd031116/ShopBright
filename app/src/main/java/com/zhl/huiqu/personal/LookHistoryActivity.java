@@ -2,6 +2,7 @@ package com.zhl.huiqu.personal;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.telephony.TelephonyManager;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zhl.huiqu.BuildConfig;
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.main.ProductDetailActivity;
 import com.zhl.huiqu.main.bean.SearchBean;
 import com.zhl.huiqu.main.bean.SearchEntity;
@@ -31,6 +33,7 @@ import com.zhl.huiqu.pull.layoutmanager.ILayoutManager;
 import com.zhl.huiqu.pull.layoutmanager.MyLinearLayoutManager;
 import com.zhl.huiqu.pull.section.SectionData;
 import com.zhl.huiqu.sdk.SDK;
+import com.zhl.huiqu.utils.ToastUtils;
 import com.zhl.huiqu.widget.TagCloudView;
 
 import org.aisen.android.network.task.TaskException;
@@ -57,7 +60,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LookHistoryActivity extends BaseSectionListActivity<TickInfo> {
     private ImageView backBtn;
-    private ImageView image;
+    private TextView top_right_text;
     private TextView titleText;
     private String deviceId;
     private int page = 1;
@@ -68,7 +71,10 @@ public class LookHistoryActivity extends BaseSectionListActivity<TickInfo> {
         TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
         deviceId = tm.getDeviceId();
         backBtn = (ImageView) findViewById(R.id.top_image);
-        image = (ImageView) findViewById(R.id.image);
+        top_right_text = (TextView) findViewById(R.id.top_right_text);
+        top_right_text.setTextColor(Color.BLACK);
+        top_right_text.setVisibility(View.VISIBLE);
+        top_right_text.setText("删除");
         titleText = (TextView) findViewById(R.id.top_title);
         titleText.setText(getResources().getString(R.string.personal_look_history));
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -77,13 +83,41 @@ public class LookHistoryActivity extends BaseSectionListActivity<TickInfo> {
                 finish();
             }
         });
-        image.setOnClickListener(new View.OnClickListener() {
+        top_right_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                deleteHisList();
             }
         });
         recycler.setRefreshing();
+    }
+
+    private void deleteHisList() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BuildConfig.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        BaseApi api = retrofit.create(BaseApi.class);
+        Call<BaseInfo> call = api.clearbrowserhistory(deviceId);
+
+        call.enqueue(new Callback<BaseInfo>() {
+
+            @Override
+            public void onResponse(Call<BaseInfo> call, Response<BaseInfo> response) {
+                if (response.body().getCode().equals("1")) {
+                    mDataList.clear();
+                    adapter.notifyDataSetChanged();
+                } else {
+                    ToastUtils.showShortToast(LookHistoryActivity.this, response.body().getMsg());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseInfo> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
@@ -105,6 +139,7 @@ public class LookHistoryActivity extends BaseSectionListActivity<TickInfo> {
         }
 
         if (action == PullRecycler.ACTION_PULL_TO_REFRESH) {
+            mDataList.clear();
             page = 1;
         }
 

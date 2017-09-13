@@ -26,6 +26,8 @@ import com.zhl.huiqu.personal.bean.OrderBean;
 import com.zhl.huiqu.personal.bean.OrderDetailBean;
 import com.zhl.huiqu.personal.bean.OrderDetailEntity;
 import com.zhl.huiqu.personal.bean.OrderEntity;
+import com.zhl.huiqu.personal.bean.UrLikeBean;
+import com.zhl.huiqu.personal.bean.UrLikeEntity;
 import com.zhl.huiqu.sdk.http.DTODataParseHttp;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SaveObjectUtils;
@@ -247,7 +249,7 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public DetailMainBean getGoodsDetail(String id,String device_num) throws TaskException {
+    public DetailMainBean getGoodsDetail(String id, String device_num) throws TaskException {
         Setting action = newSetting("getGoodsDetail", "appapi/Goods/getGoodsDetail", "获取商品详情");
         Params params = new Params();
         RegisterEntity info = SaveObjectUtils.getInstance(context).getObject(Constants.USER_INFO, RegisterEntity.class);
@@ -360,7 +362,7 @@ public class SDK extends ABizLogic {
         Params params = new Params();
         params.addParameter("condition", condition);
         params.addParameter("device_num", device_num);
-        params.addParameter("page", page );
+        params.addParameter("page", page);
         return doGet(action, basicParams(params), SearchTickEntity.class);
     }
 
@@ -374,7 +376,7 @@ public class SDK extends ABizLogic {
         Setting action = newSetting("getbrowserhistory", "appapi/personalcenter/getbrowserhistory", "获取浏览历史");
         Params params = new Params();
         params.addParameter("device_num", device_num);
-        params.addParameter("page", page );
+        params.addParameter("page", page);
         return doGet(action, basicParams(params), SearchBean.class);
     }
 
@@ -703,6 +705,35 @@ public class SDK extends ABizLogic {
 //        params.addParameter("page", page+"");
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?member_id=" + member_id);
         return doGet(configHttpConfig(), action, params, CollectBean.class);
+    }
+
+    /**
+     * 删除收藏
+     *
+     * @return
+     * @throws TaskException
+     */
+    public BaseInfo deleteCollect(String member_id, String shop_spot_id) throws TaskException {
+        Setting action = newSetting("deleteCollect", "appapi/Personalcenter/deleteCollect", "删除收藏");
+        Params params = new Params();
+        params.addParameter("member_id", member_id);
+        params.addParameter("shop_spot_id", shop_spot_id);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?member_id=" + member_id + "&shop_spot_id:" + shop_spot_id);
+        return doGet(configHttpConfig(), action, params, BaseInfo.class);
+    }
+
+    /**
+     * 获取猜你喜欢
+     *
+     * @return
+     * @throws TaskException
+     */
+    public UrLikeBean getYouLike(String device_num) throws TaskException {
+        Setting action = newSetting("getYouLike", "appapi/personalcenter/getYouLike", "获取猜你喜欢");
+        Params params = new Params();
+        params.addParameter("device_num", device_num);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?device_num=" + device_num);
+        return doGet(configHttpConfig(), action, params, UrLikeBean.class);
     }
 
 
