@@ -12,12 +12,19 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <ImageView
+
+
+        <TextView
             android:id="@+id/main_mp"
             android:layout_width="0dp"
             android:layout_height="262px"
             android:layout_weight="1"
-            android:background="@drawable/hp_mp" />
+            android:background="@drawable/ticket"
+            android:textSize="@dimen/t_size"
+            android:padding="45px"
+            android:text="门票"
+            android:textColor="@color/white" />
+
 
         <LinearLayout
             android:layout_width="0dp"
@@ -32,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#FF5058"
+                android:background="@drawable/ticket1"
                 android:gravity="center"
                 android:textSize="@dimen/t_size"
                 android:padding="30px"
@@ -46,7 +53,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="5px"
                 android:layout_weight="1"
-                android:background="#FF5058"
+                android:background="@drawable/ticket1"
                 android:gravity="center"
                 android:padding="30px"
                 android:textSize="@dimen/t_size"
@@ -66,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/mian_right_top"
+                android:background="@drawable/ticket2"
                 android:gravity="center"
                 android:padding="30px"
                 android:text="风景名胜"
@@ -80,7 +87,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="5px"
                 android:layout_weight="1"
-                android:background="#FF5058"
+                android:background="@drawable/ticket3"
                 android:gravity="center"
                 android:padding="30px"
                 android:textSize="@dimen/t_size"
@@ -98,12 +105,17 @@
         android:visibility="visible"
         android:orientation="horizontal">
 
-        <ImageView
+
+        <TextView
             android:id="@+id/imageView2"
             android:layout_width="0dp"
             android:layout_height="262px"
             android:layout_weight="1"
-            android:background="@drawable/hp_jd" />
+            android:background="@drawable/hotel"
+            android:textSize="@dimen/t_size"
+            android:padding="45px"
+            android:text="酒店"
+            android:textColor="@color/white" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -118,7 +130,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#47ADFF"
+                android:background="@drawable/hotel1"
                 android:gravity="center"
                 android:padding="30px"
                 android:textSize="@dimen/t_size"
@@ -132,7 +144,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="5px"
                 android:layout_weight="1"
-                android:background="#47ADFF"
+                android:background="@drawable/hotel1"
                 android:gravity="center"
                 android:textSize="@dimen/t_size"
                 android:padding="30px"
@@ -152,7 +164,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#47ADFF"
+                android:background="@drawable/hotel2"
                 android:gravity="center"
                 android:padding="30px"
                 android:textSize="@dimen/t_size"
@@ -166,7 +178,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="5px"
                 android:layout_weight="1"
-                android:background="#47ADFF"
+                android:background="@drawable/hotel2"
                 android:gravity="center"
                 android:padding="30px"
                 android:text="民宿客栈"
@@ -183,12 +195,17 @@
         android:visibility="visible"
         android:orientation="horizontal">
 
-        <ImageView
+
+        <TextView
             android:id="@+id/gentuan_image"
             android:layout_width="0dp"
             android:layout_height="262px"
             android:layout_weight="1"
-            android:background="@drawable/hp_gty" />
+            android:background="@drawable/group"
+            android:textSize="@dimen/t_size"
+            android:padding="45px"
+            android:text="跟团游"
+            android:textColor="@color/white" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -204,7 +221,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="262px"
                 android:layout_weight="1"
-                android:background="#11BE64"
+                android:background="@drawable/group1"
                 android:gravity="center"
                 android:padding="30px"
                 android:textSize="@dimen/t_size"
@@ -218,7 +235,7 @@
                 android:layout_height="262px"
                 android:layout_marginTop="5px"
                 android:layout_weight="1"
-                android:background="#11BE64"
+                android:background="@drawable/group1"
                 android:textSize="@dimen/t_size"
                 android:gravity="center"
                 android:padding="30px"
@@ -238,7 +255,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="262px"
                 android:layout_weight="1"
-                android:background="#11BE64"
+                android:background="@drawable/group2"
                 android:gravity="center"
                 android:padding="30px"
                 android:text="目的地"
@@ -252,7 +269,7 @@
                 android:layout_height="262px"
                 android:layout_marginTop="5px"
                 android:layout_weight="1"
-                android:background="@drawable/main_bottem_right"
+                android:background="@drawable/group3"
                 android:gravity="center"
                 android:padding="30px"
                 android:textSize="@dimen/t_size"

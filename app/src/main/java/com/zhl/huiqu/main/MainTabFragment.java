@@ -195,13 +195,12 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         if (getTabItems().size() <= 3) {
             getTablayout().setTabMode(TabLayout.MODE_FIXED);
         }
-        getTablayout().setTabTextColors(Color.parseColor("#333333"), Color.parseColor("#333333"));
+        getTablayout().setTabTextColors(Color.parseColor("#333333"), Color.parseColor("#59C2DE"));
     }
 
 
     @Override
     protected Fragment newFragment(TabItem tabItem) {
-        TLog.log("mmmm","tabItem="+tabItem.getType());
         return MainProductListFragment.newInstance(tabItem.getType());
     }
 

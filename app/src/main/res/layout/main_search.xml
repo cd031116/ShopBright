@@ -3,62 +3,68 @@
     android:id="@+id/main_search"
     android:layout_width="match_parent"
     android:layout_height="150px"
-    android:padding="30px"
-    android:background="#ffffff">
+    android:background="#ffffff"
+    android:padding="30px">
 
-<TextView
-    android:id="@+id/address"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="长沙"
-    android:drawablePadding="9px"
-    android:gravity="center_vertical"
-    android:layout_centerVertical="true"
-    android:textSize="32px"
-    android:layout_marginLeft="30px"
-    android:layout_marginRight="20px"
-    android:drawableRight="@drawable/mpxq_down"/>
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="20px"
+        android:drawablePadding="9px"
+        android:drawableRight="@drawable/down_local"
+        android:gravity="center_vertical"
+        android:text="长沙"
+        android:textSize="32px" />
 
     <RelativeLayout
         android:id="@+id/searh_line"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/search_bg"
-        android:layout_toLeftOf="@+id/info"
-        android:layout_toRightOf="@+id/address">
-
-        <ImageView
-            android:id="@+id/scan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dip"
-            android:padding="20px"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/search_sm" />
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/address"
+        android:layout_toLeftOf="@+id/line_d"
+        android:background="@drawable/search_bg">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:drawableLeft="@drawable/search_ss"
-            android:drawablePadding="30px"
             android:layout_centerVertical="true"
             android:layout_marginLeft="30px"
+            android:drawableLeft="@drawable/search_ss"
+            android:drawablePadding="30px"
+            android:gravity="center_vertical"
             android:text="输入您要搜索的景点/地区"
             android:textColor="#666666"
             android:textSize="32px" />
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/info"
-        android:layout_width="70px"
-        android:layout_height="70px"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="45px"
-        android:layout_marginRight="45px"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/hp_gray_msg"/>
+    <RelativeLayout
+        android:id="@+id/line_d"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:layout_alignParentRight="true">
+
+        <ImageView
+            android:id="@+id/scan"
+            android:layout_width="wrap_content"
+            android:layout_height="49px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:src="@drawable/search_sm" />
+
+
+        <ImageView
+            android:id="@+id/info"
+            android:layout_width="wrap_content"
+            android:layout_height="49px"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/scan"
+            android:layout_marginRight="20px"
+            android:src="@drawable/hp_gray_msg" />
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -159,7 +159,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         initFoot();
         if(select==0){
             mTabs.get(0).setSelected(true);
-            mText.get(0).setTextColor(Color.parseColor("#e11818"));
+            mText.get(0).setTextColor(Color.parseColor("#59C2DE"));
             changeFrament("aFragment",0);
             Logger.d("select==0");
         }else if(select==1){
@@ -168,11 +168,11 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
             changeFrament("bFragment",1);
         }else if(select==2){
             mTabs.get(2).setSelected(true);
-            mText.get(2).setTextColor(Color.parseColor("#e11818"));
+            mText.get(2).setTextColor(Color.parseColor("#59C2DE"));
             changeFrament("cFragment",2);
         }else if(select==3){
             mTabs.get(3).setSelected(true);
-            mText.get(3).setTextColor(Color.parseColor("#e11818"));
+            mText.get(3).setTextColor(Color.parseColor("#59C2DE"));
             changeFrament("dFragment",3);
             Logger.d("select==3");
         }
@@ -183,10 +183,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         mTabs.get(1).setSelected(false);
         mTabs.get(2).setSelected(false);
         mTabs.get(3).setSelected(false);
-        mText.get(0).setTextColor(Color.parseColor("#494949"));
-        mText.get(1).setTextColor(Color.parseColor("#494949"));
-        mText.get(2).setTextColor(Color.parseColor("#494949"));
-        mText.get(3).setTextColor(Color.parseColor("#494949"));
+        mText.get(0).setTextColor(Color.parseColor("#666666"));
+        mText.get(1).setTextColor(Color.parseColor("#666666"));
+        mText.get(2).setTextColor(Color.parseColor("#666666"));
+        mText.get(3).setTextColor(Color.parseColor("#666666"));
     }
     @Override
     public void onResume(){

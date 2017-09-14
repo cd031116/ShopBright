@@ -11,8 +11,8 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="15px"
-        android:visibility="visible"
-        android:paddingRight="15px">
+        android:paddingRight="15px"
+        android:visibility="visible">
 
         <ImageView
             android:id="@+id/jfsc_ima"
@@ -22,13 +22,11 @@
             android:src="@drawable/hp_jfsc" />
 
 
-
         <ImageView
             android:id="@+id/xrzq_ima"
             android:layout_width="0dp"
             android:layout_height="331px"
             android:layout_weight="1"
-            android:layout_marginLeft="1px"
             android:src="@drawable/hp_xrzq" />
 
 
@@ -37,7 +35,6 @@
             android:layout_width="0dp"
             android:layout_height="331px"
             android:layout_weight="1"
-            android:layout_marginLeft="1px"
             android:src="@drawable/hp_yjgn" />
 
     </LinearLayout>
@@ -46,12 +43,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="1px"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:layout_marginTop="1px"
-        android:visibility="visible"
+        android:paddingLeft="15px"
         android:paddingRight="15px"
-        android:paddingLeft="15px">
+        android:visibility="visible">
 
         <ImageView
             android:id="@+id/rmtj_ima"
@@ -63,38 +60,50 @@
         <ImageView
             android:id="@+id/yyqg_ima"
             android:layout_width="0dp"
-            android:layout_height="331px"
+            android:layout_height="328px"
             android:layout_weight="1"
-            android:layout_marginLeft="1px"
             android:src="@drawable/hp_1yqg" />
 
 
         <ImageView
             android:id="@+id/djms_ima"
             android:layout_width="0dp"
-            android:layout_height="331px"
+            android:layout_height="328px"
             android:layout_weight="1"
-            android:layout_marginLeft="1px"
             android:src="@drawable/hp_djms" />
 
 
         <ImageView
             android:id="@+id/hdmk_ima"
             android:layout_width="0dp"
-            android:layout_height="331px"
+            android:layout_height="328px"
             android:layout_weight="1"
-            android:layout_marginLeft="1px"
             android:src="@drawable/hp_hdbk" />
     </LinearLayout>
 
 
-    <ImageView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100px"
         android:layout_marginBottom="10px"
-        android:layout_marginTop="10px"
-        android:src="@drawable/hp_rmht" />
+        android:layout_marginTop="30px"
+        android:background="#ffffff"
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/hp_rmht"
+            android:textColor="#333333"
+            android:gravity="center_vertical"
+            android:drawablePadding="10px"
+            android:text="热销商品"
+            android:padding="20px"
+            android:textSize="50px"/>
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -107,9 +116,9 @@
             android:id="@+id/hot_1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="2"
             android:scaleType="fitXY"
-            android:src="@mipmap/error"
-            android:layout_weight="2"/>
+            android:src="@mipmap/error" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -124,18 +133,18 @@
                 android:id="@+id/hot_2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_weight="1"
                 android:scaleType="fitXY"
-                android:src="@mipmap/error"
-                android:layout_weight="1"/>
+                android:src="@mipmap/error" />
 
             <ImageView
                 android:id="@+id/hot_3"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:scaleType="fitXY"
-                android:src="@mipmap/error"
                 android:layout_marginTop="2px"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                android:src="@mipmap/error" />
 
 
         </LinearLayout>

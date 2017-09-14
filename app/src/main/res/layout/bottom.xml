@@ -31,8 +31,8 @@
             android:orientation="vertical">
             <ImageButton
                 android:id="@+id/image_home"
-                android:layout_width="88px"
-                android:layout_height="88px"
+                android:layout_width="69px"
+                android:layout_height="72px"
                 android:button="@null"
                 android:gravity="center"
                 android:background="@drawable/main_bg"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="首页"
                 android:textSize="@dimen/t_size"
-                android:textColor="#e11818"
+                android:textColor="#59C2DE"
                 />
         </LinearLayout>
         <!--2-->
@@ -58,8 +58,8 @@
 
             <ImageButton
                 android:id="@+id/image_service"
-                android:layout_width="88px"
-                android:layout_height="88px"
+                android:layout_width="69px"
+                android:layout_height="72px"
                 android:button="@null"
                 android:gravity="center"
                 android:background="@drawable/service_bg"
@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:text="客服"
                 android:textSize="@dimen/t_size"
-                android:textColor="#494949"
+                android:textColor="#666666"
                 />
         </LinearLayout>
 
@@ -85,8 +85,8 @@
             android:orientation="vertical">
             <ImageButton
                 android:id="@+id/image_rim"
-                android:layout_width="88px"
-                android:layout_height="88px"
+                android:layout_width="69px"
+                android:layout_height="72px"
                 android:button="@null"
                 android:gravity="center"
                 android:background="@drawable/circum_bg"
@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:text="周边"
                 android:textSize="@dimen/t_size"
-                android:textColor="#494949"
+                android:textColor="#666666"
                 />
         </LinearLayout>
         <!--3-->
@@ -110,8 +110,8 @@
             android:orientation="vertical">
             <ImageButton
                 android:id="@+id/image_my"
-                android:layout_width="88px"
-                android:layout_height="88px"
+                android:layout_width="69px"
+                android:layout_height="72px"
                 android:button="@null"
                 android:gravity="center"
                 android:background="@drawable/personal_bg"
@@ -122,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:text="个人中心"
                 android:textSize="@dimen/t_size"
-                android:textColor="#494949"
+                android:textColor="#666666"
                 />
         </LinearLayout>
     </LinearLayout>

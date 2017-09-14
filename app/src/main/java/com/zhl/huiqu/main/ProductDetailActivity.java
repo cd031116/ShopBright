@@ -136,7 +136,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
     private String shop_spot_id = "";
 
     @Override
-    protected int getLayoutId() {
+    protected int getLayoutId(){
         return R.layout.fragment_detail_profuct;
     }
 

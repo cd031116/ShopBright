@@ -744,7 +744,7 @@ public class SDK extends ABizLogic {
     }
 
     @Override
-    protected HttpConfig configHttpConfig() {
+    protected HttpConfig configHttpConfig(){
         HttpConfig config = new HttpConfig();
         // 服务端请求地址
         config.baseUrl = BuildConfig.BASE_URL;

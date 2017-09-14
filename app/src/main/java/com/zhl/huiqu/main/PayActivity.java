@@ -150,7 +150,6 @@ public class PayActivity extends BaseActivity {
             if (info.getBody() != null) {
                 ToBuyUtils.lunchWeChat(PayActivity.this, Consts.PayType.Pay_Product_Buy, info.getBody());
             }
-
         }
 
         @Override
