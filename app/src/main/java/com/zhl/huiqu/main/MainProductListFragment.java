@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.interfaces.ItemCallback;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.Utils;
 import com.zhl.huiqu.widget.SimpleDividerItemDecoration;
@@ -35,7 +36,7 @@ import java.util.List;
  * Created by lyj on 17/2/12.
  */
 
-public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<ProductPartBean, ProductPartListBean, Serializable> {
+public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<ProductPartBean, ProductPartListBean, Serializable> implements ItemCallback{
     public static MainProductListFragment newInstance(String type) {
         Bundle args = new Bundle();
         args.putString("type", type);
@@ -86,7 +87,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
 
             @Override
             public IITemView<ProductPartBean> newItemView(View view, int i) {
-                return new ProductPartItemView(getActivity(), view);
+                return new ProductPartItemView(getActivity(), view,MainProductListFragment.this);
             }
         };
     }
@@ -123,6 +124,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate){
         super.layoutInit(inflater, savedInstanceSate);
         getSwipeRefreshLayout().setEnabled(false);
+        recycleview.getItemAnimator().setChangeDuration(0);
 //        recycleview.addItemDecoration(new SimpleDividerItemDecoration(getActivity(), null, 1));
 //        scrollView.setFillViewport(true);
     }
@@ -130,6 +132,22 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
     @Override
     public void requestData(RefreshMode refreshMode) {
         new Task(refreshMode != RefreshMode.update ? RefreshMode.reset : RefreshMode.update).execute();
+    }
+
+    @Override
+    public void onClickItem(int position) {
+
+
+    }
+
+    @Override
+    public void onClickItemBean(ProductPartBean bean,int position) {
+        if(bean.isup()){
+            bean.setIsup(false);
+        }else {
+            bean.setIsup(true);
+        }
+        recycleview.getAdapter().notifyItemChanged(position);
     }
 
     class Task extends APagingTask<Void, Void, ProductPartListBean> {

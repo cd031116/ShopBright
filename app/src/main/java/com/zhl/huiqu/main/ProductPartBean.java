@@ -27,6 +27,16 @@ public class ProductPartBean implements Serializable {
 
     private String csr;
 
+    private boolean isup;
+
+    public boolean isup() {
+        return isup;
+    }
+
+    public void setIsup(boolean isup) {
+        this.isup = isup;
+    }
+
     public int getShop_spot_id() {
         return shop_spot_id;
     }
