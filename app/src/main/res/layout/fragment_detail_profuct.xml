@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/top_layout"
+        android:fillViewport="true"
         android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -600,8 +601,8 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/nearly_jd"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
+                android:layout_height="wrap_content"
+                android:visibility="visible"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

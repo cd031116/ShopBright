@@ -187,6 +187,7 @@
     <string name="take_person_fymx">费用明细</string>
 
     <string name="scan_tips">将二维码图片对准扫描框即可自动扫描</string>
+    <string name="title_activity_team_detail">TeamDetailActivity</string>
 
 
 </resources>

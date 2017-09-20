@@ -9,7 +9,7 @@
     <color name="red_text">#e11818</color>
     <color name="gray_text">#666666</color>
     <color name="black_text">#333333</color>
-
+    <color name="black">#000000</color>
     <color name="personal_bg">#e9e9e9</color>
     <color name="new_tourist_bg">#f7f3f7</color>
     <color name="personal_row_text">#999999</color>
@@ -28,4 +28,5 @@
     <color name="back_bg">#E9E9E9</color>
     <color name="mp_s_black">#2D2D2D</color>
     <color name="mp_s_gray">#5A5963</color>
+    <color name="t_blue">#59c2de</color>
 </resources>

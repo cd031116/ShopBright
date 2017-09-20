@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    tools:context="com.zhl.huiqu.main.team.TeamListActivity">
+
+
+    <include layout="@layout/team_list_search" />
+
+    <LinearLayout
+        android:id="@+id/tab_mian"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#ffffff"
+        android:layout_below="@+id/main_search">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#f0f0f0"/>
+        <include layout="@layout/team_list_tab"/>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/saix"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tab_mian"
+        android:orientation="horizontal">
+
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:layout_below="@+id/saix"/>
+</RelativeLayout>

@@ -1,5 +1,8 @@
 package com.zhl.huiqu.main;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -136,7 +139,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
     private String shop_spot_id = "";
 
     @Override
-    protected int getLayoutId(){
+    protected int getLayoutId() {
         return R.layout.fragment_detail_profuct;
     }
 
@@ -474,5 +477,6 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
         banner.start();
 
     }
+
 
 }

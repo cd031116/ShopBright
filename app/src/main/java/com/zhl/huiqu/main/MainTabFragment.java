@@ -3,6 +3,7 @@ package com.zhl.huiqu.main;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,11 +12,13 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -34,6 +37,7 @@ import com.zhl.huiqu.main.bean.MainBean;
 import com.zhl.huiqu.main.bean.MainTopInfo;
 import com.zhl.huiqu.main.bean.TicketsInfo;
 import com.zhl.huiqu.main.search.SearchFragment;
+import com.zhl.huiqu.main.team.MainTeamActivity;
 import com.zhl.huiqu.main.ticket.TicketListActivity;
 import com.zhl.huiqu.main.ticket.TicketMainFragment;
 import com.zhl.huiqu.main.ticket.TixkSearchActivity;
@@ -60,6 +64,7 @@ import org.aisen.android.support.inject.OnClick;
 import org.aisen.android.support.inject.ViewInject;
 import org.aisen.android.ui.fragment.ATabsTabLayoutFragment;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,6 +112,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     private List<String> titles = new ArrayList<>();
     private ShowMsgDialog progressDialog;
     private MainTopInfo mainInfo;
+
     public static MainTabFragment newInstance() {
         return new MainTabFragment();
     }
@@ -133,7 +139,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceState) {
         super.layoutInit(inflater, savedInstanceState);
         int width = SystemUtils.getScreenWidth(getActivity());
-        mainInfo=   SaveObjectUtils.getInstance(getActivity()).getObject(Constants.MAIN_DATA,null);
+        mainInfo = SaveObjectUtils.getInstance(getActivity()).getObject(Constants.MAIN_DATA, null);
         settopView(mainInfo);
         setBanner();
     }
@@ -143,7 +149,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         public void onEvent(CityEvent v) {
             BaseConfig bg = new BaseConfig(getActivity());
             String addre = bg.getStringValue(Constants.Address, "");
-            address.setText(TextUtils.isEmpty(addre)?"长沙":addre);
+            address.setText(TextUtils.isEmpty(addre) ? "长沙" : addre);
 
         }
     };
@@ -210,6 +216,12 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         new getTopTask().execute();
         setTabItems(generateTabs());
         setTabInit(null);
+        getTablayout().post(new Runnable() {
+            @Override
+            public void run() {
+                setIndicator(getTablayout(), 10, 10);
+            }
+        });
     }
 
     private void setBanner() {
@@ -234,13 +246,13 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
             @Override
             public void OnBannerClick(int position) {
                 Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
-                intent.putExtra("shop_spot_id",mainInfo.getNav().get(position).getShop_spot_id());
+                intent.putExtra("shop_spot_id", mainInfo.getNav().get(position).getShop_spot_id());
                 startActivity(intent);
             }
         });
     }
 
-    @OnClick({R.id.scan, R.id.searh_line, R.id.main_mp, R.id.mp_1, R.id.mp_2, R.id.mp_3, R.id.mp_4, R.id.hot_1, R.id.hot_2, R.id.hot_3,R.id.info})
+    @OnClick({R.id.scan, R.id.searh_line, R.id.main_mp, R.id.mp_1, R.id.mp_2, R.id.mp_3, R.id.mp_4, R.id.hot_1, R.id.hot_2, R.id.hot_3, R.id.info,R.id.gentuan_image})
     void onclik(View v) {
         switch (v.getId()) {
             case R.id.scan:
@@ -281,56 +293,59 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
                 break;
             case R.id.hot_1:
                 Intent intent5 = new Intent(getActivity(), ProductDetailActivity.class);
-                if(mainInfo!=null){
-                    intent5.putExtra("shop_spot_id",mainInfo.getHot().get(0).getShop_spot_id());
+                if (mainInfo != null) {
+                    intent5.putExtra("shop_spot_id", mainInfo.getHot().get(0).getShop_spot_id());
                 }
                 startActivity(intent5);
                 break;
             case R.id.hot_2:
                 Intent intent6 = new Intent(getActivity(), ProductDetailActivity.class);
-                if(mainInfo!=null){
-                    intent6.putExtra("shop_spot_id",mainInfo.getHot().get(1).getShop_spot_id());
+                if (mainInfo != null) {
+                    intent6.putExtra("shop_spot_id", mainInfo.getHot().get(1).getShop_spot_id());
                 }
                 startActivity(intent6);
                 break;
             case R.id.hot_3:
                 Intent intent7 = new Intent(getActivity(), ProductDetailActivity.class);
-                if(mainInfo!=null){
-                    intent7.putExtra("shop_spot_id",mainInfo.getHot().get(2).getShop_spot_id());
+                if (mainInfo != null) {
+                    intent7.putExtra("shop_spot_id", mainInfo.getHot().get(2).getShop_spot_id());
                 }
                 startActivity(intent7);
                 break;
             case R.id.info:
                 ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
                 break;
+            case R.id.gentuan_image:
+                    startActivity(new Intent(getActivity(), MainTeamActivity.class));
+                break;
         }
     }
 
-    @OnClick({R.id.imageView2,R.id.jd_1,R.id.jd_2,R.id.jd_3,R.id.jd_4})
-    void jiudian(View v){
-            switch (v.getId()){
-                case R.id.imageView2:
-                    ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
-                    break;
-                case R.id.jd_1:
-                    ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
-                    break;
-                case R.id.jd_2:
-                    ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
-                    break;
-                case R.id.jd_3:
-                    ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
-                    break;
-                case R.id.jd_4:
-                    ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
-                    break;
-            }
+    @OnClick({R.id.imageView2, R.id.jd_1, R.id.jd_2, R.id.jd_3, R.id.jd_4})
+    void jiudian(View v) {
+        switch (v.getId()) {
+            case R.id.imageView2:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+            case R.id.jd_1:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+            case R.id.jd_2:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+            case R.id.jd_3:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+            case R.id.jd_4:
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+        }
     }
 
 
-    @OnClick({R.id.gentuan_image,R.id.gt_one,R.id.gt_two,R.id.gt_three,R.id.gt_four})
-    void gentuan(View v){
-        switch (v.getId()){
+    @OnClick({R.id.gentuan_image, R.id.gt_one, R.id.gt_two, R.id.gt_three, R.id.gt_four})
+    void gentuan(View v) {
+        switch (v.getId()) {
             case R.id.gentuan_image:
                 ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
                 break;
@@ -349,9 +364,9 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         }
     }
 
-    @OnClick({R.id.jfsc_ima,R.id.xrzq_ima,R.id.yjgl_ima,R.id.rmtj_ima,R.id.yyqg_ima,R.id.djms_ima,R.id.hdmk_ima})
-    void genClick(View v){
-        switch (v.getId()){
+    @OnClick({R.id.jfsc_ima, R.id.xrzq_ima, R.id.yjgl_ima, R.id.rmtj_ima, R.id.yyqg_ima, R.id.djms_ima, R.id.hdmk_ima})
+    void genClick(View v) {
+        switch (v.getId()) {
             case R.id.jfsc_ima:
                 ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
                 break;
@@ -383,7 +398,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         @Override
         protected void onPrepare() {
             super.onPrepare();
-            if(mainInfo==null){
+            if (mainInfo == null) {
                 showAlert("..正在加载..", false);
             }
         }
@@ -397,8 +412,8 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         protected void onSuccess(MainBean info) {
             super.onSuccess(info);
             dismissAlert();
-            mainInfo=info.getBody();
-            SaveObjectUtils.getInstance(getActivity()).setObject(Constants.MAIN_DATA,mainInfo);
+            mainInfo = info.getBody();
+            SaveObjectUtils.getInstance(getActivity()).setObject(Constants.MAIN_DATA, mainInfo);
             settopView(mainInfo);
         }
 
@@ -412,7 +427,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         if (info == null) {
             return;
         }
-        if(images!=null){
+        if (images != null) {
             images.clear();
         }
         for (int i = 0; i < info.getNav().size(); i++) {
@@ -493,6 +508,37 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     public void dismissAlert() {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
+        }
+    }
+
+    public void setIndicator(TabLayout tabs, int leftDip, int rightDip) {
+        Class<?> tabLayout = tabs.getClass();
+        Field tabStrip = null;
+        try {
+            tabStrip = tabLayout.getDeclaredField("mTabStrip");
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+
+        tabStrip.setAccessible(true);
+        LinearLayout llTab = null;
+        try {
+            llTab = (LinearLayout) tabStrip.get(tabs);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        int left = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, leftDip, Resources.getSystem().getDisplayMetrics());
+        int right = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, rightDip, Resources.getSystem().getDisplayMetrics());
+
+        for (int i = 0; i < llTab.getChildCount(); i++) {
+            View child = llTab.getChildAt(i);
+            child.setPadding(0, 0, 0, 0);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1);
+            params.leftMargin = left;
+            params.rightMargin = right;
+            child.setLayoutParams(params);
+            child.invalidate();
         }
     }
 }

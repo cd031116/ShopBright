@@ -65,7 +65,7 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.prolificinteractive:material-calendarview:1.4.3'
     compile 'pub.devrel:easypermissions:0.1.9'
-    compile "org.apache.commons:commons-lang3:3.4"
+    compile 'org.apache.commons:commons-lang3:3.4'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
 }

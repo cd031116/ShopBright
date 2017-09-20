@@ -180,6 +180,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/hotel2"
                 android:gravity="center"
+                android:textSize="@dimen/t_size"
                 android:padding="30px"
                 android:text="民宿客栈"
                 android:textColor="@color/white" />

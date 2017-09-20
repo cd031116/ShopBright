@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="false">
+        <shape android:shape="rectangle">
+            <!-- 圆角 -->
+            <!--填充颜色为白色-->
+            <corners android:radius="30dp"/>
+            <solid android:color="#ffffff" />
+        </shape>
+    </item>
+    <!--单击时是一个带圆角,白色背景,绿色边框的矩形-->
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <!--圆角-->
+            <!--填充颜色为白色-->
+            <corners android:radius="30dp"/>
+            <solid android:color="#59c2de" />
+        </shape>
+    </item>
+</selector>
