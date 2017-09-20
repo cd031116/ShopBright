@@ -27,7 +27,7 @@ public class TeamListActivity extends BaseActivity {
     TextView tab3_t;
     @Bind(R.id.tab3_v)
     TextView tab3_v;
-    private int select;
+    private int select=1;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_team_list;
