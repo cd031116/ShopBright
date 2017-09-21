@@ -144,6 +144,8 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".main.hotelTour.MainHotelTourActivity" />
+        <activity android:name=".main.hotelTour.HotelDetailActivity" />
         <activity android:name=".main.team.MainTeamActivity" />
         <activity
             android:name=".main.team.TeamDetailActivity"

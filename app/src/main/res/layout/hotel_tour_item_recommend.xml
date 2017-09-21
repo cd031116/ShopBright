@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="28px"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:id="@+id/recommend_img"
+        android:layout_width="match_parent"
+        android:layout_height="462px"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/recommend_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/hotel_label"
+        android:text="酒店+景点"
+        android:textColor="@color/white"
+        android:textSize="37px" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="106px"
+        android:layout_marginTop="356px"
+        android:background="@drawable/hotel_shadow"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/recommend_pl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="42px"
+            android:text="1242条pinglun"
+            android:textColor="@color/white"
+            android:textSize="40px" />
+
+        <TextView
+            android:id="@+id/recommend_my"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="42px"
+            android:layout_toRightOf="@id/recommend_pl"
+            android:text="80%满意"
+            android:textColor="@color/white"
+            android:textSize="40px" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/recommend_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recommend_img"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:paddingLeft="42px"
+        android:paddingRight="42px"
+        android:paddingTop="28px"
+        android:textColor="@color/black"
+        android:textSize="43px" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/recommend_title"
+        android:layout_marginBottom="42px"
+        android:layout_marginRight="42px"
+        android:layout_marginTop="42px"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:text="￥"
+            android:textColor="@color/red_text"
+            android:textSize="42px" />
+
+        <TextView
+            android:id="@+id/recommend_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:text="788"
+            android:textColor="@color/red_text"
+            android:textSize="64px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:text="起/份"
+            android:textColor="#666666"
+            android:textSize="34px" />
+    </LinearLayout>
+
+</RelativeLayout>

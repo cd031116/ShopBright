@@ -36,6 +36,7 @@ import com.zhl.huiqu.main.bean.HotelInfo;
 import com.zhl.huiqu.main.bean.MainBean;
 import com.zhl.huiqu.main.bean.MainTopInfo;
 import com.zhl.huiqu.main.bean.TicketsInfo;
+import com.zhl.huiqu.main.hotelTour.MainHotelTourActivity;
 import com.zhl.huiqu.main.search.SearchFragment;
 import com.zhl.huiqu.main.team.MainTeamActivity;
 import com.zhl.huiqu.main.ticket.TicketListActivity;
@@ -350,7 +351,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
                 ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
                 break;
             case R.id.gt_one:
-                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                startActivity(new Intent(getActivity(), MainHotelTourActivity.class));
                 break;
             case R.id.gt_two:
                 ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");

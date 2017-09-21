@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:background="@color/comm_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="30px">
+
+        <LinearLayout
+            android:id="@+id/line_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="60px"
+                android:paddingRight="16dip"
+                android:src="@drawable/login_arrow_left" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="详情"
+            android:textColor="@color/t_blue"
+            android:textSize="51px" />
+
+        <ImageView
+            android:id="@+id/info"
+            android:layout_width="wrap_content"
+            android:layout_height="49px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:src="@drawable/fenxiang" />
+    </RelativeLayout>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/layoutContentd"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/main_search"
+        android:fitsSystemWindows="true"
+        android:visibility="visible">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:fitsSystemWindows="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/personal_bg"
+                android:orientation="vertical"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="540px" />
+
+                <TextView
+                    android:id="@+id/hotel_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:paddingLeft="42px"
+                    android:paddingRight="42px"
+                    android:paddingTop="28px"
+                    android:textColor="@color/black"
+                    android:textSize="51px" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:paddingLeft="42px"
+                    android:paddingRight="42px"
+                    android:paddingTop="42px">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="bottom"
+                        android:text="￥"
+                        android:textColor="@color/red_text"
+                        android:textSize="42px" />
+
+                    <TextView
+                        android:id="@+id/hotel_detail_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="bottom"
+                        android:text="788"
+                        android:textColor="@color/red_text"
+                        android:textSize="64px" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="bottom"
+                        android:text="起/份"
+                        android:textColor="#666666"
+                        android:textSize="34px" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28px"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/hoteldetail_selfselect"
+                        android:drawablePadding="28px"
+                        android:paddingBottom="56px"
+                        android:paddingLeft="42px"
+                        android:paddingTop="56px"
+                        android:text="自选景区+自选酒店"
+                        android:textColor="@color/black"
+                        android:textSize="46px" />
+
+                    <TextView
+                        android:id="@+id/hoteldetail_tour"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/hoteldetail_scenic"
+                        android:drawablePadding="24px"
+                        android:paddingLeft="42px"
+                        android:textColor="@color/black_text"
+                        android:textSize="40px" />
+
+                    <TextView
+                        android:id="@+id/hoteldetail_hotel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="42px"
+                        android:drawableLeft="@drawable/hoteldetail_hotel"
+                        android:drawablePadding="24px"
+                        android:paddingLeft="42px"
+                        android:textColor="@color/black_text"
+                        android:textSize="40px" />
+
+                    <TextView
+                        android:layout_width="346px"
+                        android:layout_height="116px"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="42px"
+                        android:background="@drawable/bg_hotel_detail_btn"
+                        android:gravity="center"
+                        android:text="自由组合"
+                        android:textColor="@color/white"
+                        android:textSize="46px" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/hoteldetail_choose_recy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28px" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/layTabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    app:tabIndicatorColor="#59C2DE"
+                    app:tabIndicatorHeight="2dip"
+                    app:tabMode="fixed"
+                    app:tabTextColor="@color/white"
+                    app:tabTextAppearance="@style/MyTabLayoutTextAppearance" />
+            </RelativeLayout>
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

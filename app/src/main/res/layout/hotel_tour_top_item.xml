@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/hotel_driving"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/hotel_driving"
+            android:gravity="center"
+            android:drawablePadding="24px"
+            android:paddingTop="56px"
+            android:textSize="28px"
+            android:text="自驾游"/>
+
+        <TextView
+            android:id="@+id/hotel_follow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/hotel_follow"
+            android:gravity="center"
+            android:drawablePadding="24px"
+            android:paddingTop="56px"
+            android:textSize="28px"
+            android:text="跟团游"/>
+
+        <TextView
+            android:id="@+id/hotel_spring"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/hotel_spring"
+            android:gravity="center"
+            android:drawablePadding="24px"
+            android:paddingTop="56px"
+            android:textSize="28px"
+            android:text="温泉"/>
+
+        <TextView
+            android:id="@+id/hotel_park"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/hotel_park"
+            android:gravity="center"
+            android:drawablePadding="24px"
+            android:paddingTop="56px"
+            android:text="主题乐园"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17px"
+        android:layout_marginBottom="56px"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/hotel_zhagnjiajie"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/hotel_zhagnjiajie"
+            android:gravity="center"
+            android:drawablePadding="24px"
+            android:paddingTop="56px"
+            android:textSize="28px"
+            android:text="张家界"/>
+
+        <TextView
+            android:id="@+id/hotel_city"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/hotel_city"
+            android:gravity="center"
+            android:drawablePadding="24px"
+            android:paddingTop="56px"
+            android:textSize="28px"
+            android:text="城市观光"/>
+
+        <TextView
+            android:id="@+id/hotel_parenting"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/hotel_parenting"
+            android:gravity="center"
+            android:drawablePadding="24px"
+            android:paddingTop="56px"
+            android:textSize="28px"
+            android:text="亲子"/>
+
+        <TextView
+            android:id="@+id/hotel_all"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/hotel_all"
+            android:gravity="center"
+            android:drawablePadding="24px"
+            android:paddingTop="56px"
+            android:text="全部"/>
+
+    </LinearLayout>
+</LinearLayout>

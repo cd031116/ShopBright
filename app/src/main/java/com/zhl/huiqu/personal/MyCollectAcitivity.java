@@ -131,10 +131,10 @@ public class MyCollectAcitivity extends BaseActivity {
             public void onItemLongClick(View view, int position) {
                 Log.e("ttt", "onItemLongClick: "+position );
                 if (isCancel)
-                    ToastUtils.showShortToast(MyCollectAcitivity.this, getResources().getString(R.string.order_is_cancel));
+                    ToastUtils.showShortToast(MyCollectAcitivity.this, getResources().getString(R.string.collect_is_cancel));
                 else {
                     if (!TextUtils.isEmpty(list.get(position).getShop_spot_id()+""))
-                        new CommomDialog(getApplicationContext(), R.style.progress_dialog, "您确定取消此订单？", new CommomDialog.OnCloseListener() {
+                        new CommomDialog(getApplicationContext(), R.style.progress_dialog, "您确定取消此收藏？", new CommomDialog.OnCloseListener() {
                             @Override
                             public void onClick(Dialog dialog, boolean confirm) {
                                 if (confirm) {
