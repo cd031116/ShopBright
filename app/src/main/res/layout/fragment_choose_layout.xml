@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/next_step"
+        android:layout_width="match_parent"
+        android:layout_height="142px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/btn_orange"
+        android:gravity="center"
+        android:text="下一步"
+        android:textColor="@color/white"
+        android:textSize="51px" />
+
+    <android.support.design.widget.TabLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_below="@id/head_layout"
+        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabIndicatorHeight="1dp"
+        app:tabSelectedTextColor="@color/colorPrimary" />
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/mViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/next_step"
+        android:layout_below="@id/tabs" />
+</RelativeLayout>

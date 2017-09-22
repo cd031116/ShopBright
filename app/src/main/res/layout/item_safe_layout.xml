@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30px"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/baoxian_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40px"
+            android:layout_marginTop="40px"
+            android:drawableLeft="@drawable/gmbaox"
+            android:drawablePadding="12px"
+            android:text="购买保险"
+            android:textColor="@color/login_text_color"
+            android:textSize="40px" />
+
+        <TextView
+            android:id="@+id/baoxian_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/baoxian_text"
+            android:layout_marginBottom="40px"
+            android:layout_marginLeft="40px"
+            android:layout_marginTop="60px"
+            android:text="出游意外险"
+            android:textColor="@color/all_order_text"
+            android:textSize="37px" />
+
+        <TextView
+            android:id="@+id/baoxian_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/baoxian_name"
+            android:layout_marginLeft="86px"
+            android:layout_toRightOf="@id/baoxian_name"
+            android:textColor="@color/red_text"
+            android:textSize="51px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/baoxian_name"
+            android:layout_toRightOf="@id/baoxian_price"
+            android:text="/人"
+            android:textColor="@color/black"
+            android:textSize="37px" />
+
+
+        <CheckBox
+            android:id="@+id/baoxian_choose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/baoxian_name"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40px"
+            android:button="@null"
+            android:background="@drawable/check_choose_style" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="142px"
+        android:background="@color/white"
+        android:layout_marginTop="30px"
+        android:layout_marginBottom="30px"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/hetong_choose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40px"
+            android:background="@drawable/check_choose_style"
+            android:button="@null" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/tab_ckeck"
+            android:text="我已阅读并接受"
+            android:textSize="37px"/>
+        <TextView
+            android:id="@+id/hetong_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hetong_color"
+            android:text="旅行合同"
+            android:textSize="37px"/>
+    </LinearLayout>
+</LinearLayout>

@@ -145,6 +145,10 @@
         </service>
 
         <activity android:name=".main.hotelTour.MainHotelTourActivity" />
+        <activity android:name=".main.hotelTour.CombActivity" />
+        <activity android:name=".main.hotelTour.ChooseDetailActivity" />
+        <activity android:name=".main.hotelTour.ChooseHotelTourActivity" />
+        <activity android:name=".main.hotelTour.HotelTourTcChooseActivity" />
         <activity android:name=".main.hotelTour.HotelDetailActivity" />
         <activity android:name=".main.team.MainTeamActivity" />
         <activity

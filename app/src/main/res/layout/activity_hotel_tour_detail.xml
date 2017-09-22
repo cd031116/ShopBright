@@ -69,8 +69,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/personal_bg"
                 android:orientation="vertical"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                android:fitsSystemWindows="true"
+                app:layout_scrollFlags="scroll">
 
                 <com.youth.banner.Banner
                     android:id="@+id/banner"
@@ -166,6 +166,7 @@
                         android:textSize="40px" />
 
                     <TextView
+                        android:id="@+id/comb_btn"
                         android:layout_width="346px"
                         android:layout_height="116px"
                         android:layout_gravity="right"
@@ -173,6 +174,7 @@
                         android:background="@drawable/bg_hotel_detail_btn"
                         android:gravity="center"
                         android:text="自由组合"
+                        android:layout_marginBottom="42px"
                         android:textColor="@color/white"
                         android:textSize="46px" />
                 </LinearLayout>
@@ -198,7 +200,6 @@
                     app:tabIndicatorColor="#59C2DE"
                     app:tabIndicatorHeight="2dip"
                     app:tabMode="fixed"
-                    app:tabTextColor="@color/white"
                     app:tabTextAppearance="@style/MyTabLayoutTextAppearance" />
             </RelativeLayout>
         </android.support.design.widget.AppBarLayout>

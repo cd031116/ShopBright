@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="14px"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/choose_type_img"
+        android:layout_width="302px"
+        android:layout_height="216px"
+        android:layout_marginBottom="28px"
+        android:layout_marginLeft="42px"
+        android:layout_marginTop="28px" />
+
+    <TextView
+        android:id="@+id/choose_type_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28px"
+        android:layout_marginTop="42px"
+        android:layout_toRightOf="@id/choose_type_img"
+        android:text="高级大床房"
+        android:textColor="#222222"
+        android:textSize="48px" />
+
+    <LinearLayout
+        android:id="@+id/choose_type_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/choose_type_text"
+        android:layout_marginLeft="28px"
+        android:layout_marginTop="14px"
+        android:layout_toRightOf="@id/choose_type_img"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/choose_type_my"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="80%"
+            android:textColor="@color/btn_orange"
+            android:textSize="40px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="满意"
+            android:textColor="@color/text_normal_color"
+            android:textSize="40px" />
+
+        <TextView
+            android:id="@+id/choose_type_pl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28px"
+            android:text="200"
+            android:textColor="@color/btn_orange"
+            android:textSize="40px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="条点评"
+            android:textColor="@color/text_normal_color"
+            android:textSize="40px" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/choose_arrow"
+        android:layout_width="22px"
+        android:layout_height="42px"
+        android:layout_marginRight="42px"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/into"/>
+    
+    <TextView
+        android:id="@+id/choose_type_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/choose_type_img"
+        android:layout_below="@id/choose_type_l"
+        android:layout_marginLeft="28px"
+        android:layout_toLeftOf="@id/choose_arrow"
+        android:layout_toRightOf="@id/choose_type_img"
+        android:ellipsize="end"
+        android:gravity="bottom"
+        android:maxLines="1"
+        android:text="￥"
+        android:textColor="@color/personal_row_text"
+        android:textSize="42px" />
+
+</RelativeLayout>

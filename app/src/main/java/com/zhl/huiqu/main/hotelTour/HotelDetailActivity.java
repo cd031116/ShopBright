@@ -1,7 +1,11 @@
 package com.zhl.huiqu.main.hotelTour;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -9,14 +13,21 @@ import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.main.bean.HotelDetailChooseEntity;
+import com.zhl.huiqu.main.hotelTour.adapter.HotelDetailChooseAdapter;
+import com.zhl.huiqu.main.hotelTour.adapter.MyFragmentPagerAdapter;
+import com.zhl.huiqu.pull.layoutmanager.MyLinearLayoutManager;
 import com.zhl.huiqu.widget.GlideImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 /**
+ * 跟团游详情页
+ *
  * Created by Administrator on 2017/9/21.
  */
 
@@ -29,6 +40,10 @@ public class HotelDetailActivity extends BaseActivity {
     ViewPager viewPager;
     @Bind(R.id.tabLayout)
     TabLayout tabLayout;
+    @Bind(R.id.comb_btn)
+    TextView comb_btn;
+    @Bind(R.id.hoteldetail_choose_recy)
+    RecyclerView choose_recy;
 
     @Override
     protected int getLayoutId() {
@@ -39,12 +54,13 @@ public class HotelDetailActivity extends BaseActivity {
     public void initView() {
         super.initView();
         setBanner();
+        setRecy();
         setViewPager();
     }
 
     private void setViewPager() {
-        String[] titles = new String[]{"产品特色","xiangqing","yuding"};
-        MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(this.getSupportFragmentManager(),titles);
+        String[] titles = new String[]{"产品特色", "xiangqing", "yuding"};
+        MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(this.getSupportFragmentManager(), titles);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }
@@ -85,6 +101,37 @@ public class HotelDetailActivity extends BaseActivity {
             }
         });
     }
+
+    /**
+     * 设置套餐
+     */
+    private void setRecy() {
+        List<HotelDetailChooseEntity> hotelTourList = new ArrayList<>();
+        HotelDetailChooseEntity hotelDetailChooseEntity = new HotelDetailChooseEntity();
+        hotelDetailChooseEntity.setContent("爱离开饭店和会计法皇室典范卡收到后付款了案说法了哈里森");
+        hotelDetailChooseEntity.setName("精选套餐A");
+        hotelDetailChooseEntity.setPrice("700");
+        hotelTourList.add(hotelDetailChooseEntity);
+        HotelDetailChooseEntity hotelDetailChooseEntity1 = new HotelDetailChooseEntity();
+        hotelDetailChooseEntity1.setContent("爱离开饭店和会计法皇室典范卡收到后付款了案说法了哈里森");
+        hotelDetailChooseEntity1.setName("精选套餐b");
+        hotelDetailChooseEntity1.setPrice("500");
+        hotelTourList.add(hotelDetailChooseEntity1);
+
+        HotelDetailChooseAdapter adapter = new HotelDetailChooseAdapter(this, hotelTourList);
+        choose_recy.setLayoutManager(new MyLinearLayoutManager(this));
+        choose_recy.setAdapter(adapter);
+    }
+
+    @OnClick({R.id.comb_btn})
+    void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.comb_btn:
+                startActivity(new Intent(this, CombActivity.class));
+                break;
+        }
+    }
+
 
     @Override
     public void initData() {

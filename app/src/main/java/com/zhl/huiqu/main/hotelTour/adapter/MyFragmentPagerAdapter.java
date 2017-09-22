@@ -1,8 +1,10 @@
-package com.zhl.huiqu.main.hotelTour;
+package com.zhl.huiqu.main.hotelTour.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.zhl.huiqu.main.hotelTour.GoodsFragment;
 
 /**
  * Created by dawn4it on 2017/6/28.

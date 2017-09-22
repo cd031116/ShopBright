@@ -23,7 +23,10 @@
     <color name="white">#ffffff</color>
     <color name="tab_ckeck">#333333</color>
     <color name="tab_no">#333333</color>
+    <color name="hetong_color">#cf7b00</color>
+    <color name="text_normal_color">#222222</color>
     <color name="btn_orange">#fcad3a</color>
+    <color name="line_bg">#ededed</color>
 
     <color name="all_order_text">#5a5963</color>
     <color name="back_bg">#E9E9E9</color>

@@ -2,7 +2,6 @@ package com.zhl.huiqu.main.hotelTour;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,9 @@ import android.view.ViewGroup;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.main.bean.HotelTourEntity;
+import com.zhl.huiqu.main.hotelTour.adapter.HotelRecommendAdapter;
 import com.zhl.huiqu.pull.layoutmanager.MyLinearLayoutManager;
+import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,9 @@ public class GoodsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hotel_viewpager, null);
+
+        SupportMultipleScreensUtil.init(getActivity().getApplication());
+        SupportMultipleScreensUtil.scale(view);
         lv = (RecyclerView) view.findViewById(R.id.lv);
         // 创建一个线性布局管理器
 

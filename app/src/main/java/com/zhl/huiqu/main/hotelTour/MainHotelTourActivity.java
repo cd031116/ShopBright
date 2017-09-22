@@ -14,8 +14,8 @@ import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
-import com.zhl.huiqu.main.ProductDetailActivity;
 import com.zhl.huiqu.main.bean.HotelTourEntity;
+import com.zhl.huiqu.main.hotelTour.adapter.HotelRecommendAdapter;
 import com.zhl.huiqu.pull.layoutmanager.MyLinearLayoutManager;
 import com.zhl.huiqu.widget.GlideImageLoader;
 
@@ -26,6 +26,8 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
+ * 跟团游首页
+ *
  * Created by Administrator on 2017/9/21.
  */
 
@@ -88,7 +90,7 @@ public class MainHotelTourActivity extends BaseActivity {
         banner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-                startActivity(new Intent(MainHotelTourActivity.this,HotelDetailActivity.class));
+                startActivity(new Intent(MainHotelTourActivity.this, HotelDetailActivity.class));
             }
         });
     }

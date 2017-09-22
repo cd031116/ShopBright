@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/line_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="147px"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/qprxinxi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@drawable/qprxinxi"
+            android:drawablePadding="12px"
+            android:paddingLeft="40px"
+            android:text="取票人信息"
+            android:textColor="@color/tab_ckeck"
+            android:textSize="40px" />
+
+        <TextView
+            android:id="@+id/outing_people"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="40px"
+            android:background="@drawable/tongxunlu"
+            android:drawablePadding="12px"
+            android:drawableRight="@drawable/xuanze"
+            android:text="选择出游人"
+            android:textColor="@color/personal_row_text"
+            android:textSize="37px" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="142px"
+        android:layout_marginTop="2px"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="270px"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40px"
+            android:text="姓名"
+            android:textColor="@color/login_text_color"
+            android:textSize="40px" />
+
+        <EditText
+            android:id="@+id/name_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入姓名"
+            android:textColor="@color/black"
+            android:textSize="40px" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="142px"
+        android:layout_marginTop="2px"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="270px"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40px"
+            android:text="手机号码"
+            android:textColor="@color/login_text_color"
+            android:textSize="40px" />
+
+
+        <EditText
+            android:id="@+id/phone_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入手机号码"
+            android:textColor="@color/black"
+            android:textSize="40px" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="142px"
+        android:layout_marginTop="2px"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="270px"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40px"
+            android:text="身份证"
+            android:textColor="@color/login_text_color"
+            android:textSize="40px" />
+
+        <EditText
+            android:id="@+id/idcard_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入身份证号"
+            android:textColor="@color/black"
+            android:textSize="40px" />
+    </LinearLayout>
+</LinearLayout>
