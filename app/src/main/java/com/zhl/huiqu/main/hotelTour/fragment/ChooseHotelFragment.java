@@ -1,4 +1,4 @@
-package com.zhl.huiqu.main.hotelTour;
+package com.zhl.huiqu.main.hotelTour.fragment;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -14,21 +14,21 @@ import com.zhl.huiqu.main.hotelTour.adapter.ChooseFragmentPagerAdapter;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 
 /**
- * 景点详情页 换门票
+ * 酒店详情页 换房型
  * Created by Administrator on 2017/9/22.
  */
 
-public class ChooseTourFragment extends Fragment implements View.OnClickListener {
+public class ChooseHotelFragment extends Fragment implements View.OnClickListener{
 
     TextView next_step;
     TabLayout tabs;
     ViewPager mViewPager;
     private int tag = 0;
 
-    public static ChooseTourFragment newInstance(int tag) {
+    public static ChooseHotelFragment newInstance(int tag) {
         Bundle args = new Bundle();
         args.putInt("tag", tag);
-        ChooseTourFragment fragment = new ChooseTourFragment();
+        ChooseHotelFragment fragment = new ChooseHotelFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,6 +55,7 @@ public class ChooseTourFragment extends Fragment implements View.OnClickListener
         mViewPager.setAdapter(adapter);
         tabs.setupWithViewPager(mViewPager);
     }
+
 
     @Override
     public void onClick(View view) {

@@ -34,7 +34,7 @@
         android:id="@+id/order_pay_layout"
         layout="@layout/item_order_pay_layout"
         android:layout_width="match_parent"
-        android:layout_height="147px"
+        android:layout_height="142px"
         android:layout_alignParentBottom="true" />
 
     <android.support.v4.widget.NestedScrollView

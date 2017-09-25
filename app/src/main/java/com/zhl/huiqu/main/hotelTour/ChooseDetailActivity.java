@@ -1,11 +1,12 @@
 package com.zhl.huiqu.main.hotelTour;
 
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.main.hotelTour.fragment.ChooseHotelFragment;
+import com.zhl.huiqu.main.hotelTour.fragment.ChooseTourFragment;
 
 import butterknife.OnClick;
 

@@ -18,6 +18,7 @@ import com.zhl.huiqu.main.bean.HotelTourEntity;
 import com.zhl.huiqu.main.hotelTour.adapter.HotelRecommendAdapter;
 import com.zhl.huiqu.pull.layoutmanager.MyLinearLayoutManager;
 import com.zhl.huiqu.widget.GlideImageLoader;
+import com.zhl.huiqu.widget.calendar.CalendarActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ import butterknife.OnClick;
 
 /**
  * 跟团游首页
- *
+ * <p>
  * Created by Administrator on 2017/9/21.
  */
 
@@ -152,6 +153,7 @@ public class MainHotelTourActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.hotel_driving:
+                startActivity(new Intent(this, CalendarActivity.class));
                 break;
             case R.id.hotel_follow:
                 break;

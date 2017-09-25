@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.zhl.huiqu.main.hotelTour.GoodsFragment;
+import com.zhl.huiqu.main.hotelTour.fragment.GoodsFragment;
 
 /**
  * Created by dawn4it on 2017/6/28.
