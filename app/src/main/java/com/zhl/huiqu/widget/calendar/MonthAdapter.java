@@ -158,30 +158,30 @@ public class MonthAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 }
             }
         }
-//        if (selectedPosition == position) {
-//            if (!TextUtils.isEmpty(dataList.get(position).date)) {
-//                if (dataList.get(position).isToday) {
-//                    ((MyViewHolder) holder).bg.setBackgroundResource(R.drawable.select_green_bg);
-//                    ((MyViewHolder) holder).recommendtTitle.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
-//                    ((MyViewHolder) holder).recommendPrice.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
-//                } else {
-//                    ((MyViewHolder) holder).bg.setBackgroundResource(R.drawable.select_bg);
-//                    ((MyViewHolder) holder).recommendtTitle.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
-//                    ((MyViewHolder) holder).recommendPrice.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
-//                }
-//            }
-//        } else {
-//            if (dataList.get(position).isToday) {
-//                ((MyViewHolder) holder).bg.setBackgroundResource(R.drawable.select_green_bg);
-//                ((MyViewHolder) holder).recommendtTitle.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
-//                ((MyViewHolder) holder).recommendPrice.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
-//            } else {
-//                ((MyViewHolder) holder).bg.setBackgroundColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
-//                ((MyViewHolder) holder).recommendtTitle.setTextColor(ContextCompat.getColor(mContext, R.color.color_666666));
-//                ((MyViewHolder) holder).recommendPrice.setTextColor(ContextCompat.getColor(mContext, R.color.color_999999));
-//            }
-//
-//        }
+        if (selectedPosition == position) {
+            if (!TextUtils.isEmpty(dataList.get(position).date)) {
+                if (dataList.get(position).isToday) {
+                    ((MyViewHolder) holder).bg.setBackgroundResource(R.drawable.select_green_bg);
+                    ((MyViewHolder) holder).recommendtTitle.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
+                    ((MyViewHolder) holder).recommendPrice.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
+                } else {
+                    ((MyViewHolder) holder).bg.setBackgroundResource(R.drawable.select_bg);
+                    ((MyViewHolder) holder).recommendtTitle.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
+                    ((MyViewHolder) holder).recommendPrice.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
+                }
+            }
+        } else {
+            if (dataList.get(position).isToday) {
+                ((MyViewHolder) holder).bg.setBackgroundResource(R.drawable.select_green_bg);
+                ((MyViewHolder) holder).recommendtTitle.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
+                ((MyViewHolder) holder).recommendPrice.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
+            } else {
+                ((MyViewHolder) holder).bg.setBackgroundColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
+                ((MyViewHolder) holder).recommendtTitle.setTextColor(ContextCompat.getColor(mContext, R.color.color_666666));
+                ((MyViewHolder) holder).recommendPrice.setTextColor(ContextCompat.getColor(mContext, R.color.color_999999));
+            }
+
+        }
     }
 
     @Override
