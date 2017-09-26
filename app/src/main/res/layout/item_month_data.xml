@@ -4,26 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_ffffff"
+    android:descendantFocusability="blocksDescendants"
     android:gravity="center"
-    android:padding="2dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="2dp">
 
     <TextView
         android:id="@+id/data"
         android:layout_width="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@color/color_999999"
+        android:layout_height="wrap_content"
+        android:background="@null"
         android:gravity="center"
         android:text=""
-        android:background="@null"
-        android:layout_height="wrap_content" />
+        android:textColor="@color/color_666666"
+        android:textSize="43px" />
+
     <TextView
         android:id="@+id/luna"
         android:layout_width="match_parent"
-        android:textSize="10sp"
-        android:textColor="@color/color_d81e06"
+        android:layout_height="wrap_content"
+        android:background="@null"
         android:gravity="center"
         android:text=""
-        android:background="@null"
-        android:layout_height="wrap_content" />
+        android:textColor="@color/color_999999"
+        android:textSize="31px" />
 </com.zhl.huiqu.widget.calendar.SquareLayout>

@@ -19,6 +19,7 @@ import com.zhl.huiqu.main.hotelTour.adapter.HotelRecommendAdapter;
 import com.zhl.huiqu.pull.layoutmanager.MyLinearLayoutManager;
 import com.zhl.huiqu.widget.GlideImageLoader;
 import com.zhl.huiqu.widget.calendar.CalendarActivity;
+import com.zhl.huiqu.widget.calendar.CombCalendarActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -156,8 +157,10 @@ public class MainHotelTourActivity extends BaseActivity {
                 startActivity(new Intent(this, CalendarActivity.class));
                 break;
             case R.id.hotel_follow:
+                startActivity(new Intent(this, CombCalendarActivity.class));
                 break;
             case R.id.hotel_spring:
+                startActivity(new Intent(this, CalendarActivity.class));
                 break;
             case R.id.hotel_park:
                 break;

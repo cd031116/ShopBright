@@ -19,21 +19,21 @@ import com.zhl.huiqu.pull.layoutmanager.MyGridLayoutManager;
 import java.util.Calendar;
 
 /**
- * Created by Administrator on 2017/9/23.
+ * Created by dw on 2017/9/23.
  */
 
 public class CalendarActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private RecyclerView riliList;
+    private MyRecylerView riliList;
     private TextView frontMonthTv;
     private TextView nextMonthTv;
     private TextView currentDateTv;
     private MonthAdapter adapter;
     private TextView ok;
-    public String date;
-    private int currentPosition = -1;
-    final int RIGHT = 0;
-    final int LEFT = 1;
+    private String date;
+    private int year;
+    private final int RIGHT = 0;
+    private final int LEFT = 1;
     private GestureDetector gestureDetector;
 
     @Override
@@ -44,7 +44,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initView() {
-        riliList = (RecyclerView) findViewById(R.id.list);
+        riliList = (MyRecylerView) findViewById(R.id.list);
         frontMonthTv = (TextView) findViewById(R.id.front_month);
         frontMonthTv.setOnClickListener(this);
         nextMonthTv = (TextView) findViewById(R.id.next_month);
@@ -54,38 +54,29 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         gestureDetector = new GestureDetector(this, onGestureListener);
         currentDateTv = (TextView) findViewById(R.id.now_month);
 
-
         Calendar calendar = Calendar.getInstance();
         int month = calendar.getTime().getMonth() + 1;
-        int year = calendar.getTime().getYear() + 1900;
+        year = calendar.getTime().getYear() + 1900;
         int day = calendar.getTime().getDate();
         this.date = year + "-" + month + "-" + day;
 
         if (TextUtils.isEmpty(date)) {
             this.date = DataUtils.getCurrDate("yyyy-MM-dd");
         }
-        currentDateTv.setText("当前月份：" + DataUtils.formatDate(date, "yyyy-MM"));
+        currentDateTv.setText(DataUtils.formatDate(date, "yyyy-MM"));
         adapter = new MonthAdapter(this, DataUtils.getMonth(date));
         adapter.setDateString(date);
         adapter.setSelectedPosition(DataUtils.getSelectPosition());
-        riliList.setLayoutManager(new MyGridLayoutManager(this, 7));
+        riliList.setLayoutManager(new RiliGridLayoutManager(this, 7));
         riliList.setAdapter(adapter);
         onitemClick();
-        riliList.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                return gestureDetector.onTouchEvent(event);
-            }
-        });
-
-
+        riliList.setGestureDetector(gestureDetector);
     }
 
     private void onitemClick() {
         adapter.setOnItemClickListener(new MonthAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Log.e("ttt", "onItemClick: " + position);
                 adapter.setSelectedPosition(position);
             }
         });
@@ -96,22 +87,29 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         int id = view.getId();
         if (id == frontMonthTv.getId()) {
             date = DataUtils.getSomeMonthDay(date, -1);
-            adapter = new MonthAdapter(this, DataUtils.getMonth(date));
-            adapter.setDateString(date);
-            adapter.notifyDataSetChanged();
-            onitemClick();
-            riliList.setAdapter(adapter);
-//            adapter.setSelectedPosition(DataUtils.getSelectPosition());
-            currentDateTv.setText("当前月份：" + DataUtils.formatDate(date, "yyyy-MM"));
+            if (Integer.parseInt(date.substring(0, 4)) != (year - 1)) {
+                adapter = new MonthAdapter(this, DataUtils.getMonth(date));
+                adapter.setDateString(date);
+                Log.e("ddd", "onClick: " + date);
+                adapter.notifyDataSetChanged();
+                onitemClick();
+                riliList.setAdapter(adapter);
+                currentDateTv.setText(DataUtils.formatDate(date, "yyyy-MM"));
+            } else
+                date = year + "-" + 1 + "-" + 1;
         } else if (id == nextMonthTv.getId()) {
             date = DataUtils.getSomeMonthDay(date, +1);
-            adapter = new MonthAdapter(this, DataUtils.getMonth(date));
-            adapter.setDateString(date);
-            adapter.notifyDataSetChanged();
-            onitemClick();
-            riliList.setAdapter(adapter);
-//            adapter.setSelectedPosition(DataUtils.getSelectPosition());
-            currentDateTv.setText("当前月份：" + DataUtils.formatDate(date, "yyyy-MM"));
+            Log.e("ddd", "onClick: " + date.substring(0, 4));
+            if (Integer.parseInt(date.substring(0, 4)) != (year + 2)) {
+                adapter = new MonthAdapter(this, DataUtils.getMonth(date));
+                adapter.setDateString(date);
+                Log.e("ddd", "onClick: " + date);
+                adapter.notifyDataSetChanged();
+                onitemClick();
+                riliList.setAdapter(adapter);
+                currentDateTv.setText(DataUtils.formatDate(date, "yyyy-MM"));
+            } else
+                date = (year + 1) + "-" + 12 + "-" + 1;
         } else if (id == ok.getId()) {
             if (onItemClick != null) {
                 onItemClick.onItemClick(date);
@@ -152,13 +150,18 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
                                        float velocityY) {
                     float x = e2.getX() - e1.getX();
                     float y = e2.getY() - e1.getY();
-
                     if (x > 100) {
                         doResult(RIGHT);
                     } else if (x < -100) {
                         doResult(LEFT);
                     }
                     return true;
+                }
+
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+
+                    return super.onSingleTapUp(e);
                 }
             };
 
@@ -167,25 +170,27 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         switch (action) {
             case RIGHT:
                 date = DataUtils.getSomeMonthDay(date, -1);
-                Log.e("ttt", "doResult: " + date);
-                adapter = new MonthAdapter(this, DataUtils.getMonth(date));
-                adapter.setDateString(date);
-                adapter.notifyDataSetChanged();
-                onitemClick();
-                riliList.setAdapter(adapter);
-//                adapter.setSelectedPosition(DataUtils.getSelectPosition());
-                currentDateTv.setText("当前月份：" + DataUtils.formatDate(date, "yyyy-MM"));
+                if (Integer.parseInt(date.substring(0, 4)) != (year - 1)) {
+                    adapter = new MonthAdapter(this, DataUtils.getMonth(date));
+                    adapter.setDateString(date);
+                    adapter.notifyDataSetChanged();
+                    onitemClick();
+                    riliList.setAdapter(adapter);
+                    currentDateTv.setText(DataUtils.formatDate(date, "yyyy-MM"));
+                } else
+                    date = year + "-" + 1 + "-" + 1;
                 break;
             case LEFT:
                 date = DataUtils.getSomeMonthDay(date, +1);
-                Log.e("ttt", "doResult: " + date);
-                adapter = new MonthAdapter(this, DataUtils.getMonth(date));
-                adapter.setDateString(date);
-                adapter.notifyDataSetChanged();
-                onitemClick();
-                riliList.setAdapter(adapter);
-//                adapter.setSelectedPosition(DataUtils.getSelectPosition());
-                currentDateTv.setText("当前月份：" + DataUtils.formatDate(date, "yyyy-MM"));
+                if (Integer.parseInt(date.substring(0, 4)) != (year + 2)) {
+                    adapter = new MonthAdapter(this, DataUtils.getMonth(date));
+                    adapter.setDateString(date);
+                    adapter.notifyDataSetChanged();
+                    onitemClick();
+                    riliList.setAdapter(adapter);
+                    currentDateTv.setText(DataUtils.formatDate(date, "yyyy-MM"));
+                } else
+                    date = (year + 1) + "-" + 12 + "-" + 1;
                 break;
 
         }

@@ -9,12 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.zhl.huiqu.R;
-import com.zhl.huiqu.main.bean.HotelTourEntity;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.widget.calendar.bean.DateEntity;
 
@@ -29,11 +26,10 @@ import java.util.List;
  * Created by dw on 2017/9/21.
  */
 
-public class MonthAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
+public class DayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
 
     private LayoutInflater mLayoutInflater;
     private Context mContext;
-    private String dateString;
     private List<DateEntity> dataList = new ArrayList<>();
 
     private OnItemClickListener mOnItemClickListener = null;
@@ -42,7 +38,7 @@ public class MonthAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         void onItemClick(View view, int position);
     }
 
-    public MonthAdapter(Context context, List<DateEntity> dataList) {
+    public DayAdapter(Context context, List<DateEntity> dataList) {
         this.mContext = context;
         this.dataList = dataList;
         mLayoutInflater = LayoutInflater.from(context);
@@ -55,11 +51,6 @@ public class MonthAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private int selectedPosition = -1;// 选中的位置
 
-
-    public void setDateString(String dateString) {
-        this.dateString = dateString;
-    }
-
     public void setSelectedPosition(int position) {
         selectedPosition = position;
         notifyDataSetChanged();
@@ -67,7 +58,6 @@ public class MonthAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public void add(DateEntity dateEntity, int position) {
         dataList.add(position, dateEntity);
-        notifyItemInserted(position);
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -89,7 +79,7 @@ public class MonthAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = mLayoutInflater.inflate(R.layout.item_month_data, parent, false);
-        MonthAdapter.MyViewHolder vhNormal = new MonthAdapter.MyViewHolder(view);
+        DayAdapter.MyViewHolder vhNormal = new DayAdapter.MyViewHolder(view);
         SupportMultipleScreensUtil.scale(view);
         view.setOnClickListener(this);
         return vhNormal;
@@ -100,7 +90,6 @@ public class MonthAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ((MyViewHolder) holder).recommendtTitle.setText(dataList.get(position).day);
         ((MyViewHolder) holder).recommendPrice.setText(dataList.get(position).luna);
-        //        //将position保存在itemView的Tag中，以便点击时进行获取
 
         if (TextUtils.isEmpty(dataList.get(position).date)) {
             ((MyViewHolder) holder).recommendtTitle.setText("");
@@ -112,7 +101,7 @@ public class MonthAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             int month = calendar.getTime().getMonth();
             int year = calendar.getTime().getYear() + 1900;
             int day = calendar.getTime().getDate();
-            if (obtaindata(dataList.get(position).million / 1000 + "").getYear()+ 1900 == year) {
+            if (obtaindata(dataList.get(position).million / 1000 + "").getYear() + 1900 == year) {
                 if (obtaindata(dataList.get(position).million / 1000 + "").getMonth() == (month)) {
                     if (obtaindata(dataList.get(position).million / 1000 + "").getDate() >= day) {
                         ((MyViewHolder) holder).recommendPrice.setVisibility(View.VISIBLE);
@@ -134,18 +123,19 @@ public class MonthAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     ((MyViewHolder) holder).recommendtTitle.setText(dataList.get(position).day);
                     ((MyViewHolder) holder).recommendtTitle.setTextColor(mContext.getResources().getColor(R.color.color_999999));
                 }
-            } else if (obtaindata(dataList.get(position).million / 1000 + "").getYear()+ 1900 > (year)) {
+            } else if (obtaindata(dataList.get(position).million / 1000 + "").getYear() + 1900 > (year)) {
                 ((MyViewHolder) holder).recommendPrice.setVisibility(View.VISIBLE);
                 ((MyViewHolder) holder).recommendPrice.setText(dataList.get(position).luna);
                 ((MyViewHolder) holder).recommendtTitle.setText(dataList.get(position).day);
                 ((MyViewHolder) holder).recommendPrice.setTextColor(Color.RED);
-            }else{
+            } else {
                 ((MyViewHolder) holder).recommendPrice.setVisibility(View.GONE);
                 ((MyViewHolder) holder).recommendtTitle.setText(dataList.get(position).day);
                 ((MyViewHolder) holder).recommendtTitle.setTextColor(mContext.getResources().getColor(R.color.color_999999));
             }
             holder.itemView.setTag(position);
         }
+        Log.e("ddd", "onBindViewHolder: "+selectedPosition );
         if (selectedPosition == position) {
             if (!TextUtils.isEmpty(dataList.get(position).date)) {
                 ((MyViewHolder) holder).bg.setBackgroundResource(R.drawable.select_bg);
@@ -170,11 +160,15 @@ public class MonthAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         int position = (int) v.getTag();
         if (mOnItemClickListener != null) {
-            if (obtaindata(dataList.get(position).million / 1000 + "").getMonth() == (month)) {
-                if (obtaindata(dataList.get(position).million / 1000 + "").getDate() >= day) {
+            if (obtaindata(dataList.get(position).million / 1000 + "").getYear() + 1900 == (year)) {
+                if (obtaindata(dataList.get(position).million / 1000 + "").getMonth() == (month)) {
+                    if (obtaindata(dataList.get(position).million / 1000 + "").getDate() >= day) {
+                        mOnItemClickListener.onItemClick(v, (int) v.getTag());
+                    }
+                } else if (obtaindata(dataList.get(position).million / 1000 + "").getMonth() > (month)) {
                     mOnItemClickListener.onItemClick(v, (int) v.getTag());
                 }
-            } else if (obtaindata(dataList.get(position).million / 1000 + "").getMonth() > (month)) {
+            } else if (obtaindata(dataList.get(position).million / 1000 + "").getYear() + 1900 > (year)) {
                 mOnItemClickListener.onItemClick(v, (int) v.getTag());
             }
         }

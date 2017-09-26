@@ -25,6 +25,7 @@
     <color name="tab_no">#333333</color>
     <color name="hetong_color">#cf7b00</color>
     <color name="text_normal_color">#222222</color>
+    <color name="normal_bg">#f5f5f5</color>
     <color name="btn_orange">#fcad3a</color>
     <color name="line_bg">#ededed</color>
 
@@ -46,4 +47,5 @@
     <color name="color_b0b8b2">#b0b8b2</color>
     <color name="color_28d19d">#28d19d</color>
     <color name="color_000000">#000000</color>
+    <color name="color_yellow">#ffa037</color>
 </resources>

@@ -145,6 +145,7 @@
         </service>
 
         <activity android:name=".widget.calendar.CalendarActivity" />
+        <activity android:name=".widget.calendar.CombCalendarActivity" />
         <activity android:name=".main.hotelTour.MainHotelTourActivity" />
         <activity android:name=".main.hotelTour.CombActivity" />
         <activity android:name=".main.hotelTour.ChooseDetailActivity" />
