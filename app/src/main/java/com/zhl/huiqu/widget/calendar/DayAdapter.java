@@ -58,6 +58,7 @@ public class DayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> im
 
     public void add(DateEntity dateEntity, int position) {
         dataList.add(position, dateEntity);
+        notifyItemInserted(position);
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {

@@ -86,8 +86,6 @@ public class CalendarMonthAdapter extends RecyclerView.Adapter<RecyclerView.View
             public void onItemClick(View view, int position) {
                 Log.e("ddd", "onItemClick: "+position );
                 adapter.setSelectedPosition(position);
-                adapter.notifyDataSetChanged();
-                ((MyViewHolder) holder).list.setAdapter(adapter);
             }
         });
 
