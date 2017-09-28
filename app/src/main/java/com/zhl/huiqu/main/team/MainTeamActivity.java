@@ -100,7 +100,8 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
      * 当前显示的是第几页
      */
     private int curIndex = 0;
-    private TeamTop t_info=null;
+    private TeamTop t_info = null;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main_team;
@@ -112,10 +113,10 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
         myscroview.setOnScrollListener(this);
         BaseConfig bg = BaseConfig.getInstance(this);
         topHeight = bg.getIntValue(Constants.TEAM_HIGHT, 0);
-        t_info=(TeamTop)SaveObjectUtils.getInstance(MainTeamActivity.this).getObject(Constants.TEAM_INFO, null);
-       if(t_info!=null){
-           showview(t_info);
-       }
+        t_info = (TeamTop) SaveObjectUtils.getInstance(MainTeamActivity.this).getObject(Constants.TEAM_INFO, null);
+        if (t_info != null) {
+            showview(t_info);
+        }
 
     }
 
@@ -213,7 +214,7 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
         topHeight = bg.getIntValue(Constants.TEAM_HIGHT, 0);
     }
 
-    @OnClick({R.id.all_line,R.id.search_re})
+    @OnClick({R.id.all_line, R.id.search_re})
     void enter(View v) {
         switch (v.getId()) {
             case R.id.all_line:
@@ -336,8 +337,8 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
         }
     }
 
-    private void  showview(TeamTop data){
-        mDatas=data.getCity_list();
+    private void showview(TeamTop data) {
+        mDatas = data.getCity_list();
         initDatas();
         List<HotInfo> list = data.getHot();
         if (!TextUtils.isEmpty(list.get(0).getThumb())) {
@@ -364,7 +365,7 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
         @Override
         protected void onPrepare() {
             super.onPrepare();
-            if(t_info==null){
+            if (t_info == null) {
                 showAlert("..正在加载..", false);
             }
         }
@@ -378,9 +379,9 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
         protected void onSuccess(TeamTopMain info) {
             super.onSuccess(info);
             dismissAlert();
-            if(info.getBody()!=null){
+            if (info.getBody() != null) {
                 SaveObjectUtils.getInstance(MainTeamActivity.this).setObject(Constants.TEAM_INFO, info.getBody());
-                if(t_info==null){
+                if (t_info == null) {
                     showview(info.getBody());
                 }
             }
@@ -404,17 +405,17 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
 
         @Override
         public TeamBase workInBackground(Void... voids) throws TaskException {
-            return SDK.newInstance(MainTeamActivity.this).getListTop(select+"");
+            return SDK.newInstance(MainTeamActivity.this).getListTop(select + "");
         }
 
         @Override
         protected void onSuccess(TeamBase info) {
             super.onSuccess(info);
-            if(info.getBody().getSpot()!=null){
+            if (info.getBody().getSpot() != null) {
                 showrecy(0);
-                mList=info.getBody().getSpot();
+                mList = info.getBody().getSpot();
                 showList();
-            }else {
+            } else {
                 showrecy(1);
             }
 
@@ -428,16 +429,16 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
     }
 
 
-    private void  showrecy(int curIndex){
-        if(curIndex==1){
+    private void showrecy(int curIndex) {
+        if (curIndex == 1) {
             recycleview.setVisibility(View.GONE);
             view_empty.setVisibility(View.VISIBLE);
             view_progress.setVisibility(View.GONE);
-        }else  if(curIndex==2){
+        } else if (curIndex == 2) {
             recycleview.setVisibility(View.GONE);
             view_progress.setVisibility(View.VISIBLE);
             view_empty.setVisibility(View.GONE);
-        }else {
+        } else {
             recycleview.setVisibility(View.VISIBLE);
             view_empty.setVisibility(View.GONE);
             view_progress.setVisibility(View.GONE);
@@ -445,45 +446,53 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
     }
 
 
-    private void  showList(){
-        madapter=new CommonAdapter<TeamListInfo>(MainTeamActivity.this,R.layout.team_list_item,mList) {
+    private void showList() {
+        madapter = new CommonAdapter<TeamListInfo>(MainTeamActivity.this, R.layout.team_list_item, mList) {
             @Override
             protected void convert(ViewHolder holder, final TeamListInfo info, final int position) {
-                if(info.getThumb()!=null){
-                   holder.setRunderWithUrl(R.id.photo,info.getThumb());
+                if (info.getThumb() != null) {
+                    holder.setRunderWithUrl(R.id.photo, info.getThumb());
                 }
-                holder.setText(R.id.title,info.getTitle());
-                holder.setText(R.id.price,"￥"+info.getShop_price());
-                holder.setText(R.id.manyidu,info.getCsr());
+                holder.setText(R.id.title, info.getTitle());
+                holder.setText(R.id.price, "￥" + info.getShop_price());
+                holder.setText(R.id.manyidu, info.getCsr());
 
-                holder.setText(R.id.address,info.getCity()+"→"+info.getOut());
-                holder.setText(R.id.day_time,info.getDay_time()+"日游");
+                holder.setText(R.id.address, info.getCity() + "→" + info.getOut());
+                holder.setText(R.id.day_time, info.getDay_time() + "日游");
                 if (TextUtils.isEmpty(info.getDesc())) {
-                    holder.setVisible(R.id.arrow,false);
-                    holder.setEnableds(R.id.u_click,false);
+                    holder.setVisible(R.id.arrow, false);
+                    holder.setEnableds(R.id.u_click, false);
                 } else {
-                    holder.setVisible(R.id.arrow,true);
-                    holder.setEnableds(R.id.u_click,true);
+                    holder.setVisible(R.id.arrow, true);
+                    holder.setEnableds(R.id.u_click, true);
                 }
                 if (info.isup()) {
-                    holder.setText(R.id.neirong,info.getDesc());
-                    holder.setImageResource(R.id.arrow,R.drawable.mpxq_up);
-                    holder.setVisible(R.id.nei_line,true);
+                    holder.setText(R.id.neirong, info.getDesc());
+                    holder.setImageResource(R.id.arrow, R.drawable.mpxq_up);
+                    holder.setVisible(R.id.nei_line, true);
                 } else {
-                    holder.setText(R.id.neirong,"");
-                    holder.setImageResource(R.id.arrow,R.drawable.mpxq_down);
-                    holder.setVisible(R.id.nei_line,false);
+                    holder.setText(R.id.neirong, "");
+                    holder.setImageResource(R.id.arrow, R.drawable.mpxq_down);
+                    holder.setVisible(R.id.nei_line, false);
                 }
 
                 holder.setOnClickListener(R.id.u_click, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(info.isup()){
+                        if (info.isup()) {
                             info.setIsup(false);
-                        }else {
+                        } else {
                             info.setIsup(true);
                         }
                         madapter.notifyItemChanged(position);
+                    }
+                });
+                holder.setOnClickListener(R.id.main_top, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(MainTeamActivity.this, TeamDetailActivity.class);
+                        intent.putExtra("spot_team_id", info.getSpot_team_id());
+                        startActivity(intent);
                     }
                 });
 
@@ -494,7 +503,6 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
         recycleview.addItemDecoration(new SimpleDividerItemDecoration(this, null, 1));
         recycleview.setAdapter(madapter);
     }
-
 
 
 }

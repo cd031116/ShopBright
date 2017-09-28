@@ -7,16 +7,18 @@
     android:clipToPadding="true"
     android:fitsSystemWindows="true">
 
-    <include layout="@layout/view_top" />
+    <include layout="@layout/view_top"
+        android:id="@+id/include" />
 
 
     <com.zhl.huiqu.widget.MyScroview
         android:id="@+id/myscroview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/top_layout"
-        android:layout_marginBottom="142px"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:layout_below="@+id/include"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,6 +65,7 @@
                     android:textSize="37px" />
 
                 <TextView
+                    android:id="@+id/group_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30px"
@@ -484,7 +487,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30px"
-                        android:text="如何预定"
+                        android:text="发票说明"
                         android:textColor="#333333"
                         android:textSize="40px" />
 

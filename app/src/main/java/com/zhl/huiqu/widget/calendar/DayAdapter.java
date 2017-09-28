@@ -53,6 +53,7 @@ public class DayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> im
 
     public void setSelectedPosition(int position) {
         selectedPosition = position;
+        Log.e("ddd", "setSelectedPosition: "+selectedPosition );
         notifyDataSetChanged();
     }
 
@@ -136,7 +137,7 @@ public class DayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> im
             }
             holder.itemView.setTag(position);
         }
-        Log.e("ddd", "onBindViewHolder: "+selectedPosition );
+        Log.e("ddd", "onBindViewHolder: "+selectedPosition+"\t,position:" +position);
         if (selectedPosition == position) {
             if (!TextUtils.isEmpty(dataList.get(position).date)) {
                 ((MyViewHolder) holder).bg.setBackgroundResource(R.drawable.select_bg);

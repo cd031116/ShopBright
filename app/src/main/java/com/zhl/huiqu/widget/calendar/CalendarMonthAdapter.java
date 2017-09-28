@@ -79,13 +79,14 @@ public class CalendarMonthAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         adapter = new DayAdapter(mContext, dataList.get(position).getDateList());
         adapter.setOnItemClickListener(new DayAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
-                Log.e("ddd", "onItemClick: "+position );
-                adapter.setSelectedPosition(position);
+            public void onItemClick(View view, int pos) {
+                Log.e("ddd", "onItemClick: "+pos );
+                adapter.setSelectedPosition(pos);
+//                notifyItemChanged(position);
             }
         });
 

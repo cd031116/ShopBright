@@ -17,7 +17,10 @@ import com.zhl.huiqu.main.bean.MainBean;
 import com.zhl.huiqu.main.bean.SearchBean;
 import com.zhl.huiqu.main.bean.SearchEntity;
 import com.zhl.huiqu.main.bean.SearchTickEntity;
+import com.zhl.huiqu.main.team.bean.LikeEntity;
 import com.zhl.huiqu.main.team.bean.TeamBase;
+import com.zhl.huiqu.main.team.bean.TeamDetailBean;
+import com.zhl.huiqu.main.team.bean.TeamDetailEntity;
 import com.zhl.huiqu.main.team.bean.TeamTopMain;
 import com.zhl.huiqu.main.ticket.CityInfo;
 import com.zhl.huiqu.main.ticket.SpotTBean;
@@ -253,6 +256,29 @@ public class SDK extends ABizLogic {
         return doGet(action, basicParams(params), ProductPartListBean.class);
     }
 
+    /**
+     * 	跟团游详情页面
+     *
+     * @param spot_team_id //	跟团游id
+     * @return
+     * @throws TaskException
+     */
+    public TeamDetailEntity obtainGroupDetail(String spot_team_id) throws TaskException {
+        Setting action = newSetting("getGoodsDetail", "Api/Group/getGoodsDetail", "跟团游详情页面");
+        Params params = new Params();
+        params.addParameter("spot_team_id", spot_team_id);
+        return doGet(action, basicParams(params), TeamDetailEntity.class);
+    }
+    /**
+     * 	跟团游详情页面底部数据
+     *
+     * @return
+     * @throws TaskException
+     */
+    public LikeEntity obtainLike() throws TaskException {
+        Setting action = newSetting("getLike", "Api/Group/getLike", "跟团游详情页面底部数据");
+        return doGet(action, null, LikeEntity.class);
+    }
 
     /**
      * 根据经纬度获取周边
