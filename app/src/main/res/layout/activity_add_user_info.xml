@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    tools:context="com.zhl.huiqu.personal.AddUserInfoActivity">
+
+    <LinearLayout
+        android:id="@+id/top_main"
+        android:layout_width="match_parent"
+        android:layout_height="128px"
+        android:background="#ffffff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ledt_image"
+            android:layout_width="wrap_content"
+            android:layout_height="60px"
+            android:layout_marginLeft="40px"
+            android:src="@drawable/login_arrow_left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40px"
+            android:text="新增出行人信息"
+            android:textColor="#59c2de"
+            android:textSize="51px" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/top_main"
+        android:background="#F5F5F5"
+        android:orientation="vertical"
+        android:paddingBottom="10px"
+        android:paddingTop="1px">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="144px"
+            android:layout_marginTop="28px"
+            android:paddingLeft="40px"
+            android:background="#ffffff"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#333333"
+                android:text="中文姓名"
+                android:textSize="43px" />
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_marginLeft="114px"
+                android:textColor="#333333"
+                android:textSize="40px"
+                android:textColorHighlight="#999999"
+                android:hint="与证件保持一致"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#ededed"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="144px"
+            android:layout_marginTop="28px"
+            android:paddingLeft="40px"
+            android:background="#ffffff"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#333333"
+                android:text="证件号码"
+                android:textSize="43px" />
+
+            <EditText
+                android:id="@+id/number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_marginLeft="114px"
+                android:textColor="#333333"
+                android:textSize="40px"
+                android:textColorHighlight="#999999"
+                android:hint="请输入正确的证件号码"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#ededed"/>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="144px"
+            android:layout_marginTop="28px"
+            android:paddingLeft="40px"
+            android:background="#ffffff"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#333333"
+                android:text="手机号码"
+                android:textSize="43px" />
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_marginLeft="114px"
+                android:textColor="#333333"
+                android:textSize="40px"
+                android:textColorHighlight="#999999"
+                android:hint="请输入正确的手机号码"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#ededed"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="144px"
+            android:layout_marginTop="28px"
+            android:paddingLeft="40px"
+            android:background="#ffffff"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#333333"
+                android:text="性        别"
+                android:textSize="43px" />
+
+
+            <ImageView
+                android:id="@+id/man"
+                android:layout_width="46px"
+                android:layout_height="46px"
+                android:button="@null"
+                android:layout_marginLeft="114px"
+                android:background="@drawable/sex_bg"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_marginLeft="50px"
+                android:textColor="#333333"
+                android:text="男"/>
+
+
+            <ImageView
+                android:id="@+id/woman"
+                android:layout_width="46px"
+                android:layout_height="46px"
+                android:button="@null"
+                android:layout_marginLeft="144px"
+                android:background="@drawable/sex_bg"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"  android:layout_marginLeft="50px"
+                android:textColor="#333333"
+                android:text="女"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#ededed"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="144px"
+            android:layout_marginTop="28px"
+            android:paddingLeft="40px"
+            android:background="#ffffff"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#333333"
+                android:text="电子邮件"
+                android:textSize="43px" />
+
+            <EditText
+                android:id="@+id/youxiang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_marginLeft="114px"
+                android:textColor="#333333"
+                android:textSize="40px"
+                android:textColorHighlight="#999999"
+                android:hint="选填"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#ededed"/>
+
+
+
+
+        <TextView
+            android:id="@+id/submit"
+            android:layout_width="864px"
+            android:layout_height="145px"
+            android:layout_marginTop="84px"
+            android:textColor="#ffffff"
+            android:layout_gravity="center_horizontal"
+            android:text="保存"
+            android:gravity="center"
+            android:textSize="48px"
+            android:background="@drawable/add_user_info_bg"/>
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

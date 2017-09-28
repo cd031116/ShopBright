@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    tools:context="com.zhl.huiqu.personal.UseInfoActivity">
+
+    <LinearLayout
+        android:id="@+id/top_main"
+        android:layout_width="match_parent"
+        android:layout_height="128px"
+        android:background="#ffffff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ledt_image"
+            android:layout_width="wrap_content"
+            android:layout_height="60px"
+            android:layout_marginLeft="40px"
+            android:src="@drawable/login_arrow_left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40px"
+            android:text="常用游客信息"
+            android:textColor="#59c2de"
+            android:textSize="51px" />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/top_main"
+        android:layout_marginBottom="142px"
+        android:paddingBottom="10px"
+        android:paddingTop="1px"
+        android:background="#F5F5F5">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F5F5F5"/>
+    </RelativeLayout>
+
+
+
+
+
+
+    <TextView
+        android:id="@+id/add_t"
+        android:layout_width="match_parent"
+        android:layout_height="142px"
+        android:background="#ffa037"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="51px"
+        android:layout_alignParentBottom="true"
+        android:text="新增"/>
+
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

@@ -19,7 +19,7 @@ import com.zhl.huiqu.pull.layoutmanager.MyGridLayoutManager;
 import java.util.Calendar;
 
 /**
- * Created by dw on 2017/9/23.
+ * Created by Administrator on 2017/9/23.
  */
 
 public class CalendarActivity extends AppCompatActivity implements View.OnClickListener {
@@ -30,12 +30,12 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
     private TextView currentDateTv;
     private MonthAdapter adapter;
     private TextView ok;
-    private String date;
-    private int year;
-    private final int RIGHT = 0;
-    private final int LEFT = 1;
+    public String date;
+    private int currentPosition = -1;
+    final int RIGHT = 0;
+    final int LEFT = 1;
     private GestureDetector gestureDetector;
-
+    private  int year;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +54,10 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         gestureDetector = new GestureDetector(this, onGestureListener);
         currentDateTv = (TextView) findViewById(R.id.now_month);
 
+
         Calendar calendar = Calendar.getInstance();
         int month = calendar.getTime().getMonth() + 1;
-        year = calendar.getTime().getYear() + 1900;
+         year = calendar.getTime().getYear() + 1900;
         int day = calendar.getTime().getDate();
         this.date = year + "-" + month + "-" + day;
 
@@ -150,6 +151,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
                                        float velocityY) {
                     float x = e2.getX() - e1.getX();
                     float y = e2.getY() - e1.getY();
+
                     if (x > 100) {
                         doResult(RIGHT);
                     } else if (x < -100) {
@@ -170,15 +172,14 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         switch (action) {
             case RIGHT:
                 date = DataUtils.getSomeMonthDay(date, -1);
-                if (Integer.parseInt(date.substring(0, 4)) != (year - 1)) {
-                    adapter = new MonthAdapter(this, DataUtils.getMonth(date));
-                    adapter.setDateString(date);
-                    adapter.notifyDataSetChanged();
-                    onitemClick();
-                    riliList.setAdapter(adapter);
-                    currentDateTv.setText(DataUtils.formatDate(date, "yyyy-MM"));
-                } else
-                    date = year + "-" + 1 + "-" + 1;
+                Log.e("ttt", "doResult: " + date);
+                adapter = new MonthAdapter(this, DataUtils.getMonth(date));
+                adapter.setDateString(date);
+                adapter.notifyDataSetChanged();
+                onitemClick();
+                riliList.setAdapter(adapter);
+//                adapter.setSelectedPosition(DataUtils.getSelectPosition());
+                currentDateTv.setText("当前月份：" + DataUtils.formatDate(date, "yyyy-MM"));
                 break;
             case LEFT:
                 date = DataUtils.getSomeMonthDay(date, +1);

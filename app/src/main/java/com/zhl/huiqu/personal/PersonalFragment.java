@@ -261,7 +261,7 @@ public class PersonalFragment extends BaseFragment {
                     startActivity(intent);
                     break;
                 case R.id.row_normal_msg_layout:
-                    ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                    startActivity(new Intent(getActivity(),UseInfoActivity.class));
                     break;
                 //所有订单
                 case R.id.all_order_btn:

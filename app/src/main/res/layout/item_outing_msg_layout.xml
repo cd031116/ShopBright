@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:layout_marginTop="30px"
     android:background="@color/line_bg"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="147px"
+        android:layout_height="142px"
         android:background="@color/white">
 
         <TextView
@@ -18,7 +20,7 @@
             android:drawableLeft="@drawable/qprxinxi"
             android:drawablePadding="12px"
             android:paddingLeft="40px"
-            android:text="取票人信息"
+            android:text="出游人信息"
             android:textColor="@color/tab_ckeck"
             android:textSize="40px" />
 
@@ -29,7 +31,6 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="40px"
-            android:background="@drawable/tongxunlu"
             android:drawablePadding="12px"
             android:drawableRight="@drawable/xuanze"
             android:text="选择出游人"
@@ -50,11 +51,11 @@
             android:layout_width="270px"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40px"
-            android:text="姓名"
+            android:text="成人1"
             android:textColor="@color/login_text_color"
             android:textSize="40px" />
 
-        <EditText
+        <TextView
             android:id="@+id/name_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -80,12 +81,12 @@
             android:layout_width="270px"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40px"
-            android:text="手机号码"
+            android:text="成人2"
             android:textColor="@color/login_text_color"
             android:textSize="40px" />
 
 
-        <EditText
+        <TextView
             android:id="@+id/phone_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -108,11 +109,11 @@
             android:layout_width="270px"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40px"
-            android:text="身份证"
+            android:text="儿童1"
             android:textColor="@color/login_text_color"
             android:textSize="40px" />
 
-        <EditText
+        <TextView
             android:id="@+id/idcard_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

@@ -24,8 +24,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.Utils;
+import com.zhl.huiqu.widget.GlideRoundTransform;
 
 
 public class ViewHolder extends RecyclerView.ViewHolder
@@ -143,14 +145,27 @@ public class ViewHolder extends RecyclerView.ViewHolder
         return this;
     }
 
-    public ViewHolder setImageWithUrl(int viewId, String url) {
+    public ViewHolder setRunderWithUrl(int viewId, String url) {
+        RequestOptions myOptions = new RequestOptions()
+                .centerCrop()
+                .transform(new GlideRoundTransform(mContext, 8));
         ImageView view = getView(viewId);
         Glide.with(mContext)
                 .load(Utils.getImageUrl(url))
+                .apply(myOptions)
                 .into(view);
-
         return this;
     }
+
+
+    public ViewHolder setEnableds(int viewId, boolean visible)
+    {
+        View view = getView(viewId);
+        view.setEnabled(visible);
+        return this;
+    }
+
+
 
     public ViewHolder setBitmapWithUrl(int viewId, String url) {
         ImageView view = getView(viewId);

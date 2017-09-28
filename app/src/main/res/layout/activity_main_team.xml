@@ -95,6 +95,7 @@
 
 
         <RelativeLayout
+            android:id="@+id/search_re"
             android:layout_width="match_parent"
             android:layout_height="180px"
             android:background="@drawable/team_search_bg"
@@ -597,13 +598,21 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="1900px"
             android:layout_marginTop="1px">
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycleview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
-            <include layout="@layout/view_empty"/>
+            <include
+                android:id="@+id/view_empty"
+                android:visibility="gone"
+                layout="@layout/view_empty"/>
+
+            <include
+                android:id="@+id/view_progress"
+                layout="@layout/view_progress"
+                android:visibility="gone"/>
 
         </RelativeLayout>
 

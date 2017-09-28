@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.main.team.bean.CityList;
 import com.zhl.huiqu.main.ticket.Model;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 
@@ -18,7 +19,7 @@ import java.util.List;
  */
 
 public class GridViewsAdapter extends BaseAdapter {
-    private List<String> mDatas;
+    private List<CityList> mDatas;
     private LayoutInflater inflater;
     /**
      * 页数下标,从0开始(当前是第几页)
@@ -29,7 +30,7 @@ public class GridViewsAdapter extends BaseAdapter {
      */
     private int pageSize;
     private Context mContext;
-    public GridViewsAdapter(Context context, List<String> mDatas, int curIndex, int pageSize) {
+    public GridViewsAdapter(Context context, List<CityList> mDatas, int curIndex, int pageSize) {
         this.mContext=context;
         inflater = LayoutInflater.from(context);
         this.mDatas = mDatas;
@@ -73,7 +74,7 @@ public class GridViewsAdapter extends BaseAdapter {
          * 在给View绑定显示的数据时，计算正确的position = position + curIndex * pageSize，
          */
         int pos = position + curIndex * pageSize;
-        viewHolder.tv.setText(mDatas.get(pos));
+        viewHolder.tv.setText(mDatas.get(pos).getCity());
         return convertView;
     }
 

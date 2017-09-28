@@ -43,4 +43,6 @@ public class Constants {
     public static final String Base_URL="http://doptest.api.dfyoo.com";
 
     public static final String TEAM_HIGHT="team_hight";
+
+    public static final String TEAM_INFO="team_info";
 }

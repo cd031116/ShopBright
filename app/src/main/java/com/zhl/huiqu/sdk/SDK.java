@@ -17,6 +17,8 @@ import com.zhl.huiqu.main.bean.MainBean;
 import com.zhl.huiqu.main.bean.SearchBean;
 import com.zhl.huiqu.main.bean.SearchEntity;
 import com.zhl.huiqu.main.bean.SearchTickEntity;
+import com.zhl.huiqu.main.team.bean.TeamBase;
+import com.zhl.huiqu.main.team.bean.TeamTopMain;
 import com.zhl.huiqu.main.ticket.CityInfo;
 import com.zhl.huiqu.main.ticket.SpotTBean;
 import com.zhl.huiqu.main.ticket.TickMainBean;
@@ -28,6 +30,7 @@ import com.zhl.huiqu.personal.bean.OrderDetailEntity;
 import com.zhl.huiqu.personal.bean.OrderEntity;
 import com.zhl.huiqu.personal.bean.UrLikeBean;
 import com.zhl.huiqu.personal.bean.UrLikeEntity;
+import com.zhl.huiqu.personal.bean.UsePersonBean;
 import com.zhl.huiqu.sdk.http.DTODataParseHttp;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SaveObjectUtils;
@@ -205,6 +208,32 @@ public class SDK extends ABizLogic {
     public MainBean getMainTop() throws TaskException {
         Setting action = newSetting("getMainTop", "appapi/Index/getShopTop", "获取app首页上方数据");
         return doGet(action, null, MainBean.class);
+    }
+
+    /**
+     * 获取跟团游上方数据
+     *
+     * @return
+     * @throws TaskException
+     */
+    public TeamTopMain getTeamTop() throws TaskException {
+        Setting action = newSetting("getMainTop", "api/Group/getSpotTheme", "获取跟团游首页上方数据");
+        return doPost(configHttpConfig(), action, null, null, null, TeamTopMain.class);
+    }
+
+
+    /**
+     * 获取跟团游列表数据
+     *
+     * @return
+     * @throws TaskException
+     */
+    public TeamBase getListTop(String type) throws TaskException {
+        Setting action = newSetting("getHotSpot", "api/Group/getHotSpot", "获取跟团游首页列表");
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?type=" + type );
+        Params params = new Params();
+        params.addParameter("type",type);
+        return doPost(configHttpConfig(), action, params, null, null, TeamBase.class);
     }
 
 
@@ -735,6 +764,48 @@ public class SDK extends ABizLogic {
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?device_num=" + device_num);
         return doGet(configHttpConfig(), action, params, UrLikeBean.class);
     }
+
+    /**
+     * 获取常用联系人信息
+     *
+     * @return
+     * @throws TaskException
+     */
+    public UsePersonBean getContactInfo(String member_id) throws TaskException {
+        Setting action = newSetting("getContactInfo", "appapi/Personalcenter/getContactInfo", "获取常用联系人信息");
+        Params params = new Params();
+        params.addParameter("member_id", member_id);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?member_id=" + member_id);
+        return doGet(configHttpConfig(), action, params, UsePersonBean.class);
+    }
+
+    /**
+     * 添加联系人信息
+     *
+     * @return
+     * @throws TaskException
+     */
+    public String addContact(String member_id,String name,String certificate,String mobile,String sex,String email,String type,String contact_id) throws TaskException {
+        Setting action = newSetting("addContact", "appapi/Personalcenter/addContact", "获取常用联系人信息");
+        Params params = new Params();
+        params.addParameter("member_id", member_id);
+        params.addParameter("name", name);
+        params.addParameter("certificate", certificate);
+        params.addParameter("mobile", mobile);
+        params.addParameter("type", type);
+        params.addParameter("sex", sex);
+        if("1".equals(type)){
+            params.addParameter("contact_id", contact_id);
+        }
+        if(TextUtils.isEmpty(email)){
+            params.addParameter("email", email);
+        }
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?member_id=" + member_id);
+        return doGet(configHttpConfig(), action, params, String.class);
+    }
+
+
+
 
 
     @Override

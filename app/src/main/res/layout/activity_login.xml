@@ -115,6 +115,7 @@
                     android:hint="密码"
                     android:padding="20px"
                     android:textColor="#ffffff"
+                    android:inputType="textPassword"
                     android:textSize="36px"
                     android:textColorHint="#ffffff" />
             </RelativeLayout>
@@ -179,6 +180,7 @@
                     android:hint="请填写您的手机号码"
                     android:padding="20px"
                     android:textColor="#ffffff"
+                    android:inputType="number"
                     android:textSize="36px"
                     android:textColorHint="#ffffff" />
 

@@ -1,5 +1,6 @@
 package com.zhl.huiqu.main.team;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -73,7 +74,7 @@ public class TeamDetailActivity extends BaseActivity  implements MyScroview.OnSc
         image.setImageResource(R.drawable.fenxiang);
     }
 
-    @OnClick({R.id.top_left, R.id.image,R.id.tab1_mian,R.id.tab2_mian,R.id.tab3_mian})
+    @OnClick({R.id.top_left, R.id.image,R.id.tab1_mian,R.id.tab2_mian,R.id.tab3_mian,R.id.submit})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.top_left:
@@ -93,6 +94,9 @@ public class TeamDetailActivity extends BaseActivity  implements MyScroview.OnSc
             case R.id.tab3_mian:
                 select = 3;
                 changeview(select);
+                break;
+            case R.id.submit:
+                startActivity(new Intent(TeamDetailActivity.this,TeamOrderActivity.class));
                 break;
         }
     }
