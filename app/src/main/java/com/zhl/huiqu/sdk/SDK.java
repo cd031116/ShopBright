@@ -267,6 +267,7 @@ public class SDK extends ABizLogic {
         Setting action = newSetting("getGoodsDetail", "Api/Group/getGoodsDetail", "跟团游详情页面");
         Params params = new Params();
         params.addParameter("spot_team_id", spot_team_id);
+
         return doGet(action, basicParams(params), TeamDetailEntity.class);
     }
     /**
