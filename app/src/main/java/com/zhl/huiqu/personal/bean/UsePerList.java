@@ -14,6 +14,15 @@ public class UsePerList implements Serializable{
     private String certificate;
     private String sex;
     private String email;
+    private boolean isCheck;
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
+    }
 
     public String getContact_id() {
         return contact_id;

@@ -17,6 +17,7 @@ import com.zhl.huiqu.main.bean.MainBean;
 import com.zhl.huiqu.main.bean.SearchBean;
 import com.zhl.huiqu.main.bean.SearchEntity;
 import com.zhl.huiqu.main.bean.SearchTickEntity;
+import com.zhl.huiqu.main.team.bean.GroupListBase;
 import com.zhl.huiqu.main.team.bean.LikeEntity;
 import com.zhl.huiqu.main.team.bean.TeamBase;
 import com.zhl.huiqu.main.team.bean.TeamDetailBean;
@@ -832,7 +833,38 @@ public class SDK extends ABizLogic {
     }
 
 
+    /**
+     * 获取常用联系人信息
+     *
+     * @return
+     * @throws TaskException
+     */
+    public String getDeleteInfo(String member_id,String contact_id) throws TaskException {
+        Setting action = newSetting("getContactInfo", "appapi/Personalcenter/delContact", "获取常用联系人信息");
+        Params params = new Params();
+        params.addParameter("member_id", member_id);
+        params.addParameter("contact_id", contact_id);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?member_id=" + member_id);
+        return doGet(configHttpConfig(), action, params, String.class);
+    }
 
+
+
+    /**
+     *
+     *
+     * @return
+     * @throws TaskException
+     */
+    public GroupListBase getPackList(String type,String theme_id ,String city_id) throws TaskException {
+        Setting action = newSetting("getPackList", "api/alist/getPackList", "获取常用联系人信息");
+        Params params = new Params();
+        params.addParameter("member_id", type);
+        params.addParameter("contact_id", theme_id);
+        params.addParameter("city_id", city_id);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?theme_id=" + theme_id);
+        return doPost(configHttpConfig(), action, params, null, null, GroupListBase.class);
+    }
 
 
     @Override

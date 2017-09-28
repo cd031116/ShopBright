@@ -39,41 +39,32 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/top_main"
         android:layout_marginBottom="142px"
+        android:background="#F5F5F5"
         android:paddingBottom="10px"
-        android:paddingTop="1px"
-        android:background="#F5F5F5">
+        android:paddingTop="1px">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycleview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#F5F5F5"/>
+            android:background="#F5F5F5" />
+        <include
+            android:id="@+id/view_empty"
+            android:visibility="gone"
+            layout="@layout/view_empty"/>
     </RelativeLayout>
-
-
-
-
 
 
     <TextView
         android:id="@+id/add_t"
         android:layout_width="match_parent"
         android:layout_height="142px"
+        android:layout_alignParentBottom="true"
         android:background="#ffa037"
         android:gravity="center"
+        android:text="新增"
         android:textColor="#ffffff"
-        android:textSize="51px"
-        android:layout_alignParentBottom="true"
-        android:text="新增"/>
-
-
-
-
-
-
-
-
-
+        android:textSize="51px" />
 
 
 </RelativeLayout>

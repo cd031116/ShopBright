@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+    <RelativeLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!--<android.support.v4.widget.NestedScrollView-->
+        <!--android:id="@+id/scrollView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:descendantFocusability="blocksDescendants"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+        <!--android:scrollbars="none">-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@id/layoutContent" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
+
+                <android.support.v4.widget.SwipeRefreshLayout
+                    android:id="@id/swipeRefreshLayout" android:layout_width="match_parent" android:layout_height="match_parent">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@id/recycleview" android:layout_width="match_parent"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        android:overScrollMode="never"
+                        android:layout_height="match_parent"
+                        android:background="#f0f0f0"/>
+                </android.support.v4.widget.SwipeRefreshLayout>
+            </LinearLayout>
+
+            <!--<include-->
+            <!--android:id="@id/layoutLoading" layout="@layout/ui_common_empty" android:layout_width="fill_parent" android:layout_height="fill_parent"-->
+            <!--android:visibility="gone"/>-->
+
+            <include
+                android:id="@id/layoutLoadFailed" layout="@layout/ui_common_failed" android:layout_width="match_parent" android:layout_height="match_parent"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+        <!--</android.support.v4.widget.NestedScrollView>-->
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+
+        <!--  </android.support.v4.widget.NestedScrollView>-->
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+</LinearLayout>

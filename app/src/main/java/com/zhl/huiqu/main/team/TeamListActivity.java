@@ -2,6 +2,7 @@ package com.zhl.huiqu.main.team;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.TextView;
 
@@ -9,12 +10,13 @@ import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.utils.Constants;
-
+import android.app.FragmentManager;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class TeamListActivity extends BaseActivity {
+import static com.zhl.huiqu.R.id.mViewPager;
 
+public class TeamListActivity extends BaseActivity {
     @Bind(R.id.tab1_t)
     TextView tab1_t;
     @Bind(R.id.tab1_v)
@@ -27,19 +29,44 @@ public class TeamListActivity extends BaseActivity {
     TextView tab3_t;
     @Bind(R.id.tab3_v)
     TextView tab3_v;
-    private int select=1;
+
+    @Bind(R.id.viepager)
+    ViewPager viepager;
+    MyFragmentPageAdapter mAdapter;
+    private int select=0;
     @Override
-    protected int getLayoutId() {
+    protected int getLayoutId(){
         return R.layout.activity_team_list;
     }
 
     @Override
     public void initView() {
         super.initView();
+        FragmentManager fm = getFragmentManager();
+        //初始化自定义适配器
+        mAdapter =  new MyFragmentPageAdapter(fm);
+        //绑定自定义适配器
+        viepager.setAdapter(mAdapter);
+        viepager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                changeview(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
-    public void initData() {
+    public void initData(){
         super.initData();
     }
 
@@ -53,16 +80,19 @@ public class TeamListActivity extends BaseActivity {
 
                 break;
             case R.id.tab1_mian:
-                select = 1;
+                select = 0;
                 changeview(select);
+                viepager.setCurrentItem(select);
                 break;
             case R.id.tab2_mian:
-                select = 2;
+                select = 1;
                 changeview(select);
+                viepager.setCurrentItem(select);
                 break;
             case R.id.tab3_mian:
-                select = 3;
+                select = 2;
                 changeview(select);
+                viepager.setCurrentItem(select);
                 break;
         }
     }

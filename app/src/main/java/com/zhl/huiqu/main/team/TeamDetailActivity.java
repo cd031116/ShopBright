@@ -177,7 +177,6 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
             if (info.getCode().equals("1")) {
                 Log.e("ddd", "onSuccess: " + true);
                 setView(info.getBody());
-                topHeight = search02.getBottom() - search02.getHeight();
             }
 
         }
@@ -307,5 +306,6 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
                 Log.e("ttt", "OnBannerClick: " + body.getGoodsImg().get(position).getTeam_img_id());
             }
         });
+        topHeight = search02.getBottom() - search02.getHeight();
     }
 }

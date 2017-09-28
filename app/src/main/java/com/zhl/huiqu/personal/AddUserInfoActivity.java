@@ -5,16 +5,21 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.login.entity.RegisterEntity;
+import com.zhl.huiqu.personal.bean.UsePerList;
 import com.zhl.huiqu.sdk.SDK;
+import com.zhl.huiqu.sdk.eventbus.CityEvent;
+import com.zhl.huiqu.sdk.eventbus.UseInfoRefreshEvent;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.ToastUtils;
 
+import org.aisen.android.component.eventbus.NotificationCenter;
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
 
@@ -31,6 +36,8 @@ public class AddUserInfoActivity extends BaseActivity {
     EditText phone;
     @Bind(R.id.youxiang)
     EditText youxiang;
+    @Bind(R.id.title)
+    TextView title;
 
     @Bind(R.id.man)
     ImageView man;
@@ -38,7 +45,8 @@ public class AddUserInfoActivity extends BaseActivity {
     ImageView woman;
     private RegisterEntity account;
     private String se_t = "";
-
+    private String type="0";
+    UsePerList mPerson;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_add_user_info;
@@ -47,6 +55,25 @@ public class AddUserInfoActivity extends BaseActivity {
     @Override
     public void initView() {
         super.initView();
+        Bundle bd=getIntent().getExtras();
+        if(bd!=null){
+            type=bd.getString("type");
+            if("1".equals(type)){
+                title.setText("修改出行人信息");
+                mPerson = (UsePerList)getIntent().getSerializableExtra("infos");
+                name.setText(mPerson.getName());
+                number.setText(mPerson.getCertificate());
+                phone.setText(mPerson.getMobile());
+                youxiang.setText(mPerson.getEmail());
+                if("男".equals(mPerson.getSex())){
+                    setselect(0);
+                }else {
+                    setselect(1);
+                }
+            }else {
+                title.setText("新增出行人信息");
+            }
+        }
     }
 
     @Override
@@ -122,7 +149,12 @@ public class AddUserInfoActivity extends BaseActivity {
             } else {
                 se_t = "女";
             }
-            return SDK.newInstance(AddUserInfoActivity.this).addContact(account.getBody().getMember_id(), name_t, id_card, t_phone, se_t, emails, "0", "");
+            if("1".equals(type)){
+                return SDK.newInstance(AddUserInfoActivity.this).addContact(account.getBody().getMember_id(), name_t, id_card, t_phone, se_t, emails, type, mPerson.getContact_id());
+            }else {
+
+                return SDK.newInstance(AddUserInfoActivity.this).addContact(account.getBody().getMember_id(), name_t, id_card, t_phone, se_t, emails, type, "");
+            }
         }
 
         @Override
@@ -130,12 +162,14 @@ public class AddUserInfoActivity extends BaseActivity {
             super.onSuccess(info);
             dismissAlert();
             ToastUtils.showShortToast(AddUserInfoActivity.this, "提交成功");
+            NotificationCenter.defaultCenter().publish(new UseInfoRefreshEvent());
             AddUserInfoActivity.this.finish();
         }
 
         @Override
         protected void onFailure(TaskException exception) {
             dismissAlert();
+            ToastUtils.showShortToast(AddUserInfoActivity.this,exception.getMessage());
         }
     }
 }
