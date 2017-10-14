@@ -157,13 +157,14 @@
             android:name=".main.team.TeamDetailActivity"
             android:label="@string/title_activity_team_detail"
             android:theme="@style/AppTheme" />
-        <activity android:name=".main.team.TeamListActivity" />
+        <activity
+            android:name=".main.team.TeamListActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".main.team.TeamOrderActivity" />
         <activity android:name=".main.team.TeamAddressActivity" />
-        <activity android:name=".main.team.TeamBournActivity" />
         <activity android:name=".personal.UseInfoActivity" />
-        <activity android:name=".main.team.TeamSearchActivity" />
-        <activity android:name=".personal.AddUserInfoActivity"></activity>
+        <activity android:name=".personal.AddUserInfoActivity" />
+        <activity android:name=".main.team.SelecTeamActivity"></activity>
     </application>
 
 </manifest>

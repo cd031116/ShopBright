@@ -179,7 +179,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:src="@drawable/mpxq_up" />
 
 
@@ -189,6 +189,7 @@
                 android:id="@+id/nei_line"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="match_parent"

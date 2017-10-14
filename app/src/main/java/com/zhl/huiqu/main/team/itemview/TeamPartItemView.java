@@ -11,8 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.zhl.huiqu.R;
-import com.zhl.huiqu.interfaces.ItemCallback;
-import com.zhl.huiqu.main.ProductPartBean;
+import com.zhl.huiqu.interfaces.ItemTeamCallback;
 import com.zhl.huiqu.main.team.bean.TeamListInfo;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.widget.GlideRoundTransform;
@@ -52,11 +51,11 @@ public class TeamPartItemView extends ARecycleViewItemView<TeamListInfo> {
     @ViewInject(id = R.id.u_click)
     RelativeLayout u_click;
 
-    private ItemCallback callback;
+    private ItemTeamCallback callback;
     private Activity activity;
     private int posiiton=0;
     //
-    public TeamPartItemView(Activity context, View itemView, ItemCallback callback) {
+    public TeamPartItemView(Activity context, View itemView, ItemTeamCallback callback) {
         super(context, itemView);
         this.activity = context;
         this.callback = callback;
@@ -64,12 +63,12 @@ public class TeamPartItemView extends ARecycleViewItemView<TeamListInfo> {
 
     @OnClick({R.id.u_click})
     void onclick(View v) {
-        callback.onClickItemBean((ProductPartBean)v.getTag(),posiiton);
+        callback.onClickItemBean((TeamListInfo)v.getTag(),posiiton);
     }
 
     @OnClick(R.id.neirong)
     void onclickd(View v) {
-        callback.onClickItemBean((ProductPartBean)v.getTag(),posiiton);
+        callback.onClickItemBean((TeamListInfo)v.getTag(),posiiton);
     }
 
 
@@ -99,7 +98,22 @@ public class TeamPartItemView extends ARecycleViewItemView<TeamListInfo> {
         }
         title.setText(bean.getTitle());
 
-
+        if (TextUtils.isEmpty(bean.getDesc())) {
+            arrow.setVisibility(View.GONE);
+            u_click.setEnabled(false);
+        } else {
+            arrow.setVisibility(View.VISIBLE);
+            u_click.setEnabled(true);
+        }
+        if (bean.isup()) {
+            neirong.setText(bean.getDesc().trim().toString());
+            arrow.setImageResource(R.drawable.mpxq_up);
+            nei_line.setVisibility(View.VISIBLE);
+        } else {
+            neirong.setText("");
+            arrow.setImageResource(R.drawable.mpxq_down);
+            nei_line.setVisibility(View.GONE);
+        }
 
         if (itemPosition() == 0) {
             view.setPadding(0, 0, 0, 0);

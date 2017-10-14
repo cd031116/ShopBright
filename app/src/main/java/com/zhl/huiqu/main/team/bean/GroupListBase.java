@@ -1,7 +1,8 @@
 package com.zhl.huiqu.main.team.bean;
 
 import com.zhl.huiqu.bean.ASResultBean;
-import com.zhl.huiqu.main.team.GroupListInfo;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/9/28.
@@ -9,13 +10,13 @@ import com.zhl.huiqu.main.team.GroupListInfo;
 
 public class GroupListBase extends ASResultBean {
 
-    private GroupListInfo body;
+    private List<TeamListInfo> body;
 
-    public GroupListInfo getBody() {
+    public List<TeamListInfo> getBody() {
         return body;
     }
 
-    public void setBody(GroupListInfo body) {
+    public void setBody(List<TeamListInfo> body) {
         this.body = body;
     }
 }

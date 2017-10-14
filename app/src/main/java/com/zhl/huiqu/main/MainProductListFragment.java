@@ -136,7 +136,7 @@ public class MainProductListFragment extends ARecycleViewSwipeRefreshFragment<Pr
     }
 
     @Override
-    public void onClickItem(int position) {
+    public void onClickItem(int position){
 
 
     }

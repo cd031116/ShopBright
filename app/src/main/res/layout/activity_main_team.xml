@@ -57,7 +57,7 @@
                     android:gravity="center"
                     android:text="跟团游"
                     android:textColor="#ffffff"
-                    android:textSize="34px" />
+                    android:textSize="43px" />
             </RelativeLayout>
 
             <ImageView

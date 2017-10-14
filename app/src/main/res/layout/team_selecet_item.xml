@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_top"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5px"
+    android:padding="10px">
+
+    <TextView
+        android:id="@+id/contents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20px"
+        android:paddingBottom="20px"
+        android:background="@drawable/team_select_item_bg"
+        android:gravity="center"
+        android:textSize="43px"/>
+
+    <ImageView
+        android:id="@+id/iamge"
+        android:layout_width="71px"
+        android:layout_height="54px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        android:src="@drawable/douxuanjb"/>
+
+</RelativeLayout>

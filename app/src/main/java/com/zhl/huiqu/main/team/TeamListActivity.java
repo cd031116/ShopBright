@@ -47,6 +47,7 @@ public class TeamListActivity extends BaseActivity {
         mAdapter =  new MyFragmentPageAdapter(fm);
         //绑定自定义适配器
         viepager.setAdapter(mAdapter);
+        viepager.setCurrentItem(0);
         viepager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -118,10 +119,10 @@ public class TeamListActivity extends BaseActivity {
         tab1_v.setSelected(false);
         tab2_v.setSelected(false);
         tab3_v.setSelected(false);
-        if (index == 1) {
+        if (index == 0) {
             tab1_t.setTextColor(Color.parseColor("#59c2de"));
             tab1_v.setSelected(true);
-        } else if (index == 2) {
+        } else if (index == 1) {
             tab2_t.setTextColor(Color.parseColor("#59c2de"));
             tab2_v.setSelected(true);
         } else {

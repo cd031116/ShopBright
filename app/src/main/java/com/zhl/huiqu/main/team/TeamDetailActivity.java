@@ -276,7 +276,6 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
      * @param body
      */
     private void setBanner(final TeamDetailBean body) {
-
         List<String> titles = new ArrayList<>();
         if (body.getGoodsImg() != null && body.getGoodsImg().size() > 0) {
             for (int i = 0; i < body.getGoodsImg().size(); i++) {
@@ -307,5 +306,19 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
             }
         });
         topHeight = search02.getBottom() - search02.getHeight();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        banner.startAutoPlay();
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        //结束轮播
+        banner.stopAutoPlay();
     }
 }

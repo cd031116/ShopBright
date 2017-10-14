@@ -21,7 +21,7 @@ import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.main.bean.HotInfo;
 import com.zhl.huiqu.main.team.bean.CityList;
 import com.zhl.huiqu.main.team.bean.TeamBase;
-import com.zhl.huiqu.main.team.bean.TeamListInfo;
+import com.zhl.huiqu.main.team.bean.TeamMainList;
 import com.zhl.huiqu.main.team.bean.TeamTop;
 import com.zhl.huiqu.main.team.bean.TeamTopMain;
 import com.zhl.huiqu.main.ticket.ViewPagerAdapter;
@@ -80,8 +80,8 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
     LinearLayout view_progress;
     @ViewInject(id = R.id.recycleview)
     RecyclerView recycleview;
-    private CommonAdapter<TeamListInfo> madapter;
-    private List<TeamListInfo> mList;
+    private CommonAdapter<TeamMainList> madapter;
+    private List<TeamMainList> mList;
     private int topHeight = 0;
     private int select = 0;
     //热门城市
@@ -170,7 +170,7 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
         // 默认显示第一页
         ll_dot.getChildAt(0).findViewById(R.id.v_dot)
                 .setBackgroundResource(R.drawable.team_dot_select);
-        viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             public void onPageSelected(int position) {
                 // 取消圆点选中
                 ll_dot.getChildAt(curIndex)
@@ -411,9 +411,9 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
         @Override
         protected void onSuccess(TeamBase info) {
             super.onSuccess(info);
-            if (info.getBody().getSpot() != null) {
+            if (info.getBody()!= null) {
                 showrecy(0);
-                mList = info.getBody().getSpot();
+                mList = info.getBody();
                 showList();
             } else {
                 showrecy(1);
@@ -447,36 +447,36 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
 
 
     private void showList() {
-        madapter = new CommonAdapter<TeamListInfo>(MainTeamActivity.this, R.layout.team_list_item, mList) {
+        madapter = new CommonAdapter<TeamMainList>(MainTeamActivity.this, R.layout.team_list_item, mList){
             @Override
-            protected void convert(ViewHolder holder, final TeamListInfo info, final int position) {
+            protected void convert(ViewHolder holder, final TeamMainList info, final int position){
                 if (info.getThumb() != null) {
                     holder.setRunderWithUrl(R.id.photo, info.getThumb());
                 }
-                holder.setText(R.id.title, info.getTitle());
-                holder.setText(R.id.price, "￥" + info.getShop_price());
+                holder.setText(R.id.title, info.getProductName());
+                holder.setText(R.id.price, "￥" + info.getPriceAdultMin());
                 holder.setText(R.id.manyidu, info.getCsr());
 
-                holder.setText(R.id.address, info.getCity() + "→" + info.getOut());
-                holder.setText(R.id.day_time, info.getDay_time() + "日游");
-                if (TextUtils.isEmpty(info.getDesc())) {
-                    holder.setVisible(R.id.arrow, false);
-                    holder.setEnableds(R.id.u_click, false);
-                } else {
-                    holder.setVisible(R.id.arrow, true);
-                    holder.setEnableds(R.id.u_click, true);
-                }
-                if (info.isup()) {
-                    holder.setText(R.id.neirong, info.getDesc());
-                    holder.setImageResource(R.id.arrow, R.drawable.mpxq_up);
-                    holder.setVisible(R.id.nei_line, true);
-                } else {
-                    holder.setText(R.id.neirong, "");
-                    holder.setImageResource(R.id.arrow, R.drawable.mpxq_down);
-                    holder.setVisible(R.id.nei_line, false);
-                }
+                holder.setText(R.id.address, "→" + info.getDepartCitysName());
+                holder.setText(R.id.day_time, info.getDuration() + "日游");
+//                if (TextUtils.isEmpty(info.get)) {
+//                    holder.setVisible(R.id.arrow, false);
+//                    holder.setEnableds(R.id.u_click, false);
+//                } else {
+//                    holder.setVisible(R.id.arrow, true);
+//                    holder.setEnableds(R.id.u_click, true);
+//                }
+//                if (info.isup()) {
+//                    holder.setText(R.id.neirong, info.getDesc());
+//                    holder.setImageResource(R.id.arrow, R.drawable.mpxq_up);
+//                    holder.setVisible(R.id.nei_line, true);
+//                } else {
+//                    holder.setText(R.id.neirong, "");
+//                    holder.setImageResource(R.id.arrow, R.drawable.mpxq_down);
+//                    holder.setVisible(R.id.nei_line, false);
+//                }
 
-                holder.setOnClickListener(R.id.u_click, new View.OnClickListener() {
+                holder.setOnClickListener(R.id.u_click, new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
                         if (info.isup()) {
@@ -487,22 +487,18 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
                         madapter.notifyItemChanged(position);
                     }
                 });
-                holder.setOnClickListener(R.id.main_top, new View.OnClickListener() {
+                holder.setOnClickListener(R.id.main_top, new View.OnClickListener(){
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(MainTeamActivity.this, TeamDetailActivity.class);
-                        intent.putExtra("spot_team_id", info.getSpot_team_id());
+                        intent.putExtra("spot_team_id", info.getProductId());
                         startActivity(intent);
                     }
                 });
-
             }
-
         };
         recycleview.setLayoutManager(new LinearLayoutManager(MainTeamActivity.this));
         recycleview.addItemDecoration(new SimpleDividerItemDecoration(this, null, 1));
         recycleview.setAdapter(madapter);
     }
-
-
 }
