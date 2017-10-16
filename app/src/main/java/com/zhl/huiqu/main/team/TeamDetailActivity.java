@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -23,13 +24,19 @@ import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.main.ProductDetailActivity;
 import com.zhl.huiqu.main.hotelTour.HotelDetailActivity;
 import com.zhl.huiqu.main.hotelTour.MainHotelTourActivity;
+import com.zhl.huiqu.main.team.bean.LikeBean;
 import com.zhl.huiqu.main.team.bean.LikeEntity;
 import com.zhl.huiqu.main.team.bean.TeamBase;
 import com.zhl.huiqu.main.team.bean.TeamDetailBean;
 import com.zhl.huiqu.main.team.bean.TeamDetailEntity;
+import com.zhl.huiqu.main.team.bean.TeamListInfo;
+import com.zhl.huiqu.pull.layoutmanager.MyGridLayoutManager;
+import com.zhl.huiqu.recyclebase.CommonAdapter;
+import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.widget.GlideImageLoader;
 import com.zhl.huiqu.widget.MyScroview;
+import com.zhl.huiqu.widget.SimpleDividerItemDecoration;
 
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
@@ -92,6 +99,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
     private int select = 1;
     private int topHeight;
     private String spot_team_id;
+    private CommonAdapter<LikeBean> madapter;
 
     @Override
     protected int getLayoutId() {
@@ -108,7 +116,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
     @Override
     public void initData() {
         new obtainGroupDetail().execute();
-//        new obtainGroupDetail().execute();
+        new obtainLike().execute();
         super.initData();
     }
 
@@ -208,7 +216,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
             dismissAlert();
             if (info.getCode().equals("1")) {
                 Log.e("ddd", "onSuccess: " + true);
-
+                setListView(info.getBody());
             }
 
         }
@@ -218,6 +226,29 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
             dismissAlert();
         }
     }
+
+    private void setListView(List<LikeBean> likeList) {
+        madapter = new CommonAdapter<LikeBean>(TeamDetailActivity.this, R.layout.team_like_layout_item, likeList) {
+
+            @Override
+            protected void convert(ViewHolder holder, LikeBean likeBean, int position) {
+                    holder.setText(R.id.like_price,likeBean.getShop_price());
+                    holder.setText(R.id.like_title,likeBean.getTitle());
+                    holder.setText(R.id.out_address,likeBean.getCity());
+                    holder.setText(R.id.go_address,likeBean.getOut());
+                    holder.setText(R.id.like_tag,likeBean.getDay_time()+"日游");
+                    holder.setText(R.id.like_pl,"评论："+likeBean.getFavor());
+                    holder.setText(R.id.like_my,"满意度："+likeBean.getCsr());
+                    holder.setBitmapWithUrl(R.id.like_img,"http://www.zhonghuilv.net"+likeBean.getThumb());
+            }
+        };
+        like_list.setLayoutManager(new MyGridLayoutManager(TeamDetailActivity.this,2));
+        like_list.addItemDecoration(new SimpleDividerItemDecoration(this, null, 1));
+        like_list.setAdapter(madapter);
+    }
+
+
+
 
     /**
      * @param body

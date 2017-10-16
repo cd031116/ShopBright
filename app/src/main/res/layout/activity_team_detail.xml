@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
+        android:layout_marginBottom="143px"
         android:layout_below="@+id/top_layout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -68,7 +69,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30px"
-                    android:text="2449"
+                    android:text="249"
                     android:textColor="#ff0000"
                     android:textSize="69px" />
 
@@ -572,7 +573,10 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/like_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingRight="42px"
+                android:paddingLeft="42px"/>
 
         </LinearLayout>
 

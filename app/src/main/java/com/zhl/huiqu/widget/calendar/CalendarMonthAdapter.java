@@ -35,6 +35,10 @@ public class CalendarMonthAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private DayAdapter adapter;
 
+    private int isclick = 1;
+    private long onTime;
+    private long leaveTime;
+
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
@@ -80,13 +84,28 @@ public class CalendarMonthAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-        adapter = new DayAdapter(mContext, dataList.get(position).getDateList());
+        Log.e("ddd1", "onClick onTime: "+onTime + ";leaveTime:" + leaveTime+",clickNum:"+isclick);
+        adapter = new DayAdapter(mContext, dataList.get(position).getDateList(), onTime, leaveTime, isclick);
         adapter.setOnItemClickListener(new DayAdapter.OnItemClickListener() {
+
             @Override
-            public void onItemClick(View view, int pos) {
-                Log.e("ddd", "onItemClick: "+pos );
-                adapter.setSelectedPosition(pos);
-//                notifyItemChanged(position);
+            public void onItemClick(int clickNum, long time, long lTime) {
+
+                onTime = time;
+                leaveTime = lTime;
+                Log.e("ddd2", "onClick onTime: "+onTime + ";leaveTime:" + leaveTime+",clickNum:"+clickNum);
+                if (clickNum == 3) {
+                    isclick = 1;
+                    notifyDataSetChanged();
+                }
+                if (clickNum == 2) {
+                    isclick = 3;
+                    adapter = new DayAdapter(mContext, dataList.get(position).getDateList(), onTime, leaveTime, isclick);
+                }
+                if (clickNum == 1) {
+                    isclick = 2;
+                    adapter = new DayAdapter(mContext, dataList.get(position).getDateList(), onTime, leaveTime, isclick);
+                }
             }
         });
 

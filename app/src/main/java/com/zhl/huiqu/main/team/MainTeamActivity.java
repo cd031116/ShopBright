@@ -277,7 +277,10 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
                 break;
             case R.id.line_back:
             case R.id.btnBack:
-                MainTeamActivity.this.finish();
+//                MainTeamActivity.this.finish();
+                Intent intent = new Intent(MainTeamActivity.this, TeamDetailActivity.class);
+                intent.putExtra("spot_team_id", "6");
+                startActivity(intent);
                 break;
         }
     }

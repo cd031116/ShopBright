@@ -1,6 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="483px"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="28px"
+    android:background="@color/white"
+    app:cardCornerRadius="5px"
+    app:cardElevation="5px"
+    android:orientation="vertical">
 
-</LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/like_img"
+        android:layout_width="match_parent"
+        android:layout_height="375px"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/like_tag"
+        android:layout_width="166px"
+        android:layout_height="53px"
+        android:paddingLeft="10px"
+        android:background="@drawable/jiryou"
+        android:text="1日游"
+        android:textColor="@color/white"
+        android:textSize="34px" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="75px"
+        android:layout_marginTop="300px"
+        android:background="@drawable/hotel_shadow"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/like_pl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="42px"
+            android:textColor="@color/white"
+            android:textSize="34px" />
+
+        <TextView
+            android:id="@+id/like_my"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="42px"
+            android:layout_toRightOf="@id/recommend_pl"
+            android:text="80%满意"
+            android:textColor="@color/white"
+            android:textSize="34px" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/like_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/like_img"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:paddingLeft="18px"
+        android:paddingRight="18px"
+        android:paddingTop="26px"
+        android:textColor="@color/black"
+        android:textSize="43px" />
+
+    <LinearLayout
+        android:id="@+id/price_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/like_title"
+        android:layout_marginBottom="42px"
+        android:layout_marginRight="18px"
+        android:layout_marginTop="26px"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:text="￥"
+            android:textColor="@color/red_text"
+            android:textSize="42px" />
+
+        <TextView
+            android:id="@+id/like_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:text="788"
+            android:textColor="@color/red_text"
+            android:textSize="51px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:text="起"
+            android:textColor="#666666"
+            android:textSize="34px" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/out_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/price_layout"
+        android:layout_marginRight="18px"
+        android:textColor="@color/color_999999"
+        android:layout_marginTop="26px"
+        android:textSize="34px"
+        android:text="株洲"/>
+    <TextView
+        android:id="@+id/go_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/out_address"
+        android:layout_alignBottom="@id/price_layout"
+        android:textColor="@color/color_999999"
+        android:textSize="34px"
+        android:text="→"/>
+
+    <TextView
+        android:id="@+id/go_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/go_arrow"
+        android:layout_alignBottom="@id/price_layout"
+        android:textColor="@color/color_999999"
+        android:textSize="34px"
+        android:text="株洲"/>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

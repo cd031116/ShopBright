@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
+import com.zhl.huiqu.utils.ToastUtils;
 import com.zhl.huiqu.widget.calendar.bean.DateEntity;
 
 import java.text.ParseException;
@@ -26,21 +27,27 @@ import java.util.List;
  * Created by dw on 2017/9/21.
  */
 
-public class DayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
+public class DayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private LayoutInflater mLayoutInflater;
     private Context mContext;
     private List<DateEntity> dataList = new ArrayList<>();
+    private int isclick ;
+    private long onTime;
+    private long leaveTime;
 
     private OnItemClickListener mOnItemClickListener = null;
 
     public interface OnItemClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(int clickNum, long onTime,long leaveTime);
     }
 
-    public DayAdapter(Context context, List<DateEntity> dataList) {
+    public DayAdapter(Context context, List<DateEntity> dataList,long onTime,long leaveTime,int isclick) {
         this.mContext = context;
         this.dataList = dataList;
+        this.onTime = onTime;
+        this.leaveTime = leaveTime;
+        this.isclick = isclick;
         mLayoutInflater = LayoutInflater.from(context);
     }
 
@@ -53,7 +60,7 @@ public class DayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> im
 
     public void setSelectedPosition(int position) {
         selectedPosition = position;
-        Log.e("ddd", "setSelectedPosition: "+selectedPosition );
+        Log.e("ddd", "setSelectedPosition: " + selectedPosition);
         notifyDataSetChanged();
     }
 
@@ -83,15 +90,57 @@ public class DayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> im
         View view = mLayoutInflater.inflate(R.layout.item_month_data, parent, false);
         DayAdapter.MyViewHolder vhNormal = new DayAdapter.MyViewHolder(view);
         SupportMultipleScreensUtil.scale(view);
-        view.setOnClickListener(this);
+//        view.setOnClickListener(this);
         return vhNormal;
 
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         ((MyViewHolder) holder).recommendtTitle.setText(dataList.get(position).day);
         ((MyViewHolder) holder).recommendPrice.setText(dataList.get(position).luna);
+
+        Calendar calendar = Calendar.getInstance();
+        int month = calendar.getTime().getMonth();
+        int year = calendar.getTime().getYear() + 1900;
+        int day = calendar.getTime().getDate();
+
+        ((MyViewHolder) holder).bg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("ddd", "onClick onTime: "+onTime + ";leaveTime:" + leaveTime+",clickNum:"+isclick);
+                if (!TextUtils.isEmpty(dataList.get(position).date)) {
+                    if (isclick == 1) {
+                        isclick++;
+                        onTime = dataList.get(position).million/1000;
+                        setBg();
+                        ((MyViewHolder) holder).recommendPrice.setText("入住");
+                        mOnItemClickListener.onItemClick(1,onTime,0);
+                    } else if (isclick == 2) {
+                        leaveTime = dataList.get(position).million/1000;
+                        if (onTime > leaveTime)
+                            ToastUtils.showShortToast(mContext, "离开日期不能早于入住时间");
+                        if (onTime == leaveTime)
+                            ToastUtils.showShortToast(mContext, "离开日期与入住时间不能为同一天");
+                        else  if (onTime < leaveTime){
+                            setBg();
+                            ((MyViewHolder) holder).recommendPrice.setText("离开");
+                            mOnItemClickListener.onItemClick(2,onTime,leaveTime);
+                            isclick++;
+                        }
+                    } else {
+                        mOnItemClickListener.onItemClick(isclick,0,0);
+                        isclick = 1;
+                    }
+                }
+            }
+
+            private void setBg() {
+                ((MyViewHolder) holder).bg.setBackgroundResource(R.drawable.select_bg);
+                ((MyViewHolder) holder).recommendtTitle.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
+                ((MyViewHolder) holder).recommendPrice.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
+            }
+        });
 
         if (TextUtils.isEmpty(dataList.get(position).date)) {
             ((MyViewHolder) holder).recommendtTitle.setText("");
@@ -99,10 +148,6 @@ public class DayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> im
             ((MyViewHolder) holder).bg.setBackgroundColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
         } else {
 
-            Calendar calendar = Calendar.getInstance();
-            int month = calendar.getTime().getMonth();
-            int year = calendar.getTime().getYear() + 1900;
-            int day = calendar.getTime().getDate();
             if (obtaindata(dataList.get(position).million / 1000 + "").getYear() + 1900 == year) {
                 if (obtaindata(dataList.get(position).million / 1000 + "").getMonth() == (month)) {
                     if (obtaindata(dataList.get(position).million / 1000 + "").getDate() >= day) {
@@ -137,14 +182,14 @@ public class DayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> im
             }
             holder.itemView.setTag(position);
         }
-        Log.e("ddd", "onBindViewHolder: "+selectedPosition+"\t,position:" +position);
-        if (selectedPosition == position) {
-            if (!TextUtils.isEmpty(dataList.get(position).date)) {
-                ((MyViewHolder) holder).bg.setBackgroundResource(R.drawable.select_bg);
-                ((MyViewHolder) holder).recommendtTitle.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
-                ((MyViewHolder) holder).recommendPrice.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
-            }
-        }
+        Log.e("ddd", "onBindViewHolder: " + selectedPosition + "\t,position:" + position);
+//        if (selectedPosition == position) {
+//            if (!TextUtils.isEmpty(dataList.get(position).date)) {
+//                ((MyViewHolder) holder).bg.setBackgroundResource(R.drawable.select_bg);
+//                ((MyViewHolder) holder).recommendtTitle.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
+//                ((MyViewHolder) holder).recommendPrice.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
+//            }
+//        }
     }
 
     @Override
@@ -152,29 +197,29 @@ public class DayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> im
         return dataList == null ? 0 : dataList.size();
     }
 
-    @Override
-    public void onClick(View v) {
-
-        Calendar calendar = Calendar.getInstance();
-        int month = calendar.getTime().getMonth();
-        int year = calendar.getTime().getYear() + 1900;
-        int day = calendar.getTime().getDate();
-
-        int position = (int) v.getTag();
-        if (mOnItemClickListener != null) {
-            if (obtaindata(dataList.get(position).million / 1000 + "").getYear() + 1900 == (year)) {
-                if (obtaindata(dataList.get(position).million / 1000 + "").getMonth() == (month)) {
-                    if (obtaindata(dataList.get(position).million / 1000 + "").getDate() >= day) {
-                        mOnItemClickListener.onItemClick(v, (int) v.getTag());
-                    }
-                } else if (obtaindata(dataList.get(position).million / 1000 + "").getMonth() > (month)) {
-                    mOnItemClickListener.onItemClick(v, (int) v.getTag());
-                }
-            } else if (obtaindata(dataList.get(position).million / 1000 + "").getYear() + 1900 > (year)) {
-                mOnItemClickListener.onItemClick(v, (int) v.getTag());
-            }
-        }
-    }
+//    @Override
+//    public void onClick(View v) {
+//
+//        Calendar calendar = Calendar.getInstance();
+//        int month = calendar.getTime().getMonth();
+//        int year = calendar.getTime().getYear() + 1900;
+//        int day = calendar.getTime().getDate();
+//
+//        int position = (int) v.getTag();
+//        if (mOnItemClickListener != null) {
+//            if (obtaindata(dataList.get(position).million / 1000 + "").getYear() + 1900 == (year)) {
+//                if (obtaindata(dataList.get(position).million / 1000 + "").getMonth() == (month)) {
+//                    if (obtaindata(dataList.get(position).million / 1000 + "").getDate() >= day) {
+//                        mOnItemClickListener.onItemClick(v, (int) v.getTag());
+//                    }
+//                } else if (obtaindata(dataList.get(position).million / 1000 + "").getMonth() > (month)) {
+//                    mOnItemClickListener.onItemClick(v, (int) v.getTag());
+//                }
+//            } else if (obtaindata(dataList.get(position).million / 1000 + "").getYear() + 1900 > (year)) {
+//                mOnItemClickListener.onItemClick(v, (int) v.getTag());
+//            }
+//        }
+//    }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.mOnItemClickListener = listener;
