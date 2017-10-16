@@ -38,10 +38,4 @@ public class TeamAddressActivity extends BaseActivity {
     public void initData() {
         super.initData();
     }
-
-
-
-
-
-
 }

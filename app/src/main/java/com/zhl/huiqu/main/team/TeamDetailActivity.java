@@ -330,7 +330,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         banner.setIndicatorGravity(BannerConfig.CENTER);
         //banner设置方法全部调用完毕时最后调用
         banner.start();
-        banner.setOnBannerListener(new OnBannerListener() {
+        banner.setOnBannerListener(new OnBannerListener(){
             @Override
             public void OnBannerClick(int position) {
                 Log.e("ttt", "OnBannerClick: " + body.getGoodsImg().get(position).getTeam_img_id());

@@ -137,7 +137,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     }
 
     @Override
-    protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceState) {
+    protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceState){
         super.layoutInit(inflater, savedInstanceState);
         int width = SystemUtils.getScreenWidth(getActivity());
         mainInfo = SaveObjectUtils.getInstance(getActivity()).getObject(Constants.MAIN_DATA, null);

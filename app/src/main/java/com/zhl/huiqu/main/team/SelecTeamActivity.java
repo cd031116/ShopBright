@@ -50,7 +50,7 @@ public class SelecTeamActivity extends BaseActivity {
     private List<FilterDest> tlist;
 
     @Override
-    protected int getLayoutId() {
+    protected int getLayoutId(){
         return R.layout.activity_selec_team;
     }
 
@@ -199,12 +199,10 @@ public class SelecTeamActivity extends BaseActivity {
         }
 
         @Override
-        protected void onFailure(TaskException exception) {
+        protected void onFailure(TaskException exception){
             dismissAlert();
             view_empty.setVisibility(View.VISIBLE);
             empty_text.setText(exception.getMessage());
         }
     }
-
-
 }
