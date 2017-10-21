@@ -45,4 +45,6 @@ public class Constants {
     public static final String TEAM_HIGHT="team_hight";
 
     public static final String TEAM_INFO="team_info";
+
+    public static final String TEAM_ADDRESS="team_address";
 }

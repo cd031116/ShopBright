@@ -18,6 +18,7 @@ import com.zhl.huiqu.main.bean.SearchBean;
 import com.zhl.huiqu.main.bean.SearchEntity;
 import com.zhl.huiqu.main.bean.SearchTickEntity;
 import com.zhl.huiqu.main.team.bean.FilterBase;
+import com.zhl.huiqu.main.team.bean.GoalBean;
 import com.zhl.huiqu.main.team.bean.GroupListBase;
 import com.zhl.huiqu.main.team.bean.LikeEntity;
 import com.zhl.huiqu.main.team.bean.TeamBase;
@@ -255,7 +256,6 @@ public class SDK extends ABizLogic {
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() );
         return doPost(configHttpConfig(), action, null, null, null, FilterBase.class);
     }
-
 
 
 
@@ -882,6 +882,24 @@ public class SDK extends ABizLogic {
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?member_id=" + member_id);
         return doGet(configHttpConfig(), action, params, String.class);
     }
+
+
+    /**
+     *
+     *
+     * @return
+     * @throws TaskException
+     */
+    public GoalBean getDestination(String desProvinceId) throws TaskException {
+        Setting action = newSetting("getDestination", "appapi/Team/getDestination", "获取常用联系人信息");
+        Params params = new Params();
+        if(!TextUtils.isEmpty(desProvinceId)){
+            params.addParameter("desProvinceId", desProvinceId);
+        }
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?desProvinceId=" + desProvinceId);
+        return doGet(configHttpConfig(), action, params, GoalBean.class);
+    }
+
 
 
 

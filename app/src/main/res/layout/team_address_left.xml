@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mian_top"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:paddingTop="20px"
+    android:paddingBottom="20px"
+    android:gravity="center_vertical"
+    >
+
+    <TextView
+        android:id="@+id/left_bg"
+        android:layout_width="8px"
+        android:layout_height="72px"
+        android:layout_gravity="center_vertical"
+        android:layout_alignParentLeft="true"
+        android:background="#e11818"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="热门"
+        android:textSize="51px"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20px"
+        android:textColor="#333333"/>
+
+</RelativeLayout>
