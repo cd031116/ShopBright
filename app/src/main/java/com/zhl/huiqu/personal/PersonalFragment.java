@@ -20,6 +20,7 @@ import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseFragment;
 import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.login.LoginActivity;
+import com.zhl.huiqu.login.RegisterActivity;
 import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.main.ProductDetailActivity;
 import com.zhl.huiqu.main.ticket.ViewPagerAdapter;
@@ -48,15 +49,6 @@ import java.util.List;
 
 public class PersonalFragment extends BaseFragment {
 
-    private String[] img_url = {"http://wechats.zhonghuilv.net/uploads/news/20170816/40bc39a08ed923964380761592010d6c.jpg",
-            "http://wechats.zhonghuilv.net/uploads/news/20170816/15cb0e5f02fa67020342af35e97c0f1c.jpg",
-            "http://wechats.zhonghuilv.net/uploads/news/20170816/4182a75d53f3840d4603f5182f4b1336.jpg",
-            "http://wechats.zhonghuilv.net/uploads/news/20170816/15cb0e5f02fa67020342af35e97c0f1c.jpg"};
-    private String[] tags = {"石燕湖", "石燕湖", "石燕湖", "石燕湖"};
-    private String[] dpNum = {"石燕湖", "石燕湖", "石燕湖", "石燕湖"};
-    private String[] price = {"12ss", "12ss", "12ss", "12ss"};
-    private String[] address = {"石燕湖", "石燕湖", "石燕湖", "石燕湖"};
-    private String[] touristMs = {"石燕湖", "石燕湖", "石燕湖", "石燕湖"};
     private List<UrLikeEntity> mDatas;
     private LayoutInflater inflater_d;
     private List<View> mPagerList;
@@ -75,6 +67,10 @@ public class PersonalFragment extends BaseFragment {
 
     @ViewInject(id = R.id.your_like_layout)
     RelativeLayout urLikeLayout;
+    @ViewInject(id = R.id.personal_msg_layout)
+    RelativeLayout urMsgLayout;
+    @ViewInject(id = R.id.personal_login_layout)
+    RelativeLayout urLoginLayout;
     @ViewInject(id = R.id.viewpager)
     ViewPager viewpager;
     @ViewInject(id = R.id.ll_dot)
@@ -110,23 +106,28 @@ public class PersonalFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         account = SaveObjectUtils.getInstance(getActivity()).getObject(Constants.USER_INFO, RegisterEntity.class);
-        if (account != null)
+        if (account != null) {
             nameText.setText(account.getBody().getNickname());
-        else
-            nameText.setText(getResources().getString(R.string.should_account_login));
+            urMsgLayout.setVisibility(View.VISIBLE);
+            urLoginLayout.setVisibility(View.GONE);
+        } else {
+            urLoginLayout.setVisibility(View.VISIBLE);
+            urMsgLayout.setVisibility(View.GONE);
+        }
     }
 
     @Override
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate) {
         super.layoutInit(inflater, savedInstanceSate);
-        this.inflater=inflater;
+        this.inflater = inflater;
         inflater_d = LayoutInflater.from(getActivity());
         initDatas();
 
     }
 
     @OnClick({R.id.row_collect_layout, R.id.row_look_his_layout, R.id.row_normal_msg_layout, R.id.row_kefu_center_layout,
-            R.id.refund_order_btn, R.id.goout_order_btn, R.id.pay_order_btn, R.id.all_order_btn, R.id.personal_msg_layout})
+            R.id.refund_order_btn, R.id.goout_order_btn, R.id.pay_order_btn, R.id.all_order_btn, R.id.personal_msg_layout,
+            R.id.personal_login_btn, R.id.personal_register_btn})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.row_kefu_center_layout:
@@ -143,8 +144,13 @@ public class PersonalFragment extends BaseFragment {
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 break;
             case R.id.row_look_his_layout:
-                Log.e("dddd", "onClick: row_look_his_layout");
                 startActivity(new Intent(getActivity(), LookHistoryActivity.class));
+                break;
+            case R.id.personal_login_btn:
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+                break;
+            case R.id.personal_register_btn:
+                startActivity(new Intent(getActivity(), RegisterActivity.class));
                 break;
             default:
                 otherClickEvent(view);
@@ -192,7 +198,7 @@ public class PersonalFragment extends BaseFragment {
         });
     }
 
-    //TODO 保存邮箱
+    //猜你喜欢
     class obtainUrLiskeData extends WorkTask<String, Void, UrLikeBean> {
 
         @Override
@@ -213,13 +219,17 @@ public class PersonalFragment extends BaseFragment {
             mDatas = new ArrayList<UrLikeEntity>();
             if (info.getCode().equals("1")) {
                 mDatas.addAll(info.getBody());
+                urLikeLayout.setVisibility(View.VISIBLE);
                 setUrLikeView();
+            } else {
+                urLikeLayout.setVisibility(View.GONE);
             }
 
         }
 
         @Override
         protected void onFailure(TaskException exception) {
+            urLikeLayout.setVisibility(View.GONE);
             dismissAlert();
         }
     }
@@ -261,7 +271,8 @@ public class PersonalFragment extends BaseFragment {
                     startActivity(intent);
                     break;
                 case R.id.row_normal_msg_layout:
-                    startActivity(new Intent(getActivity(),UseInfoActivity.class));
+//                    startActivity(new Intent(getActivity(), UseInfoActivity.class));
+                    startActivity(new Intent(getActivity(), ChooseTourerActivity.class));
                     break;
                 //所有订单
                 case R.id.all_order_btn:

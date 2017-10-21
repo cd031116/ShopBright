@@ -2,79 +2,85 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/personal_bg"
+    android:background="@color/black"
     android:clipToPadding="true"
     android:fitsSystemWindows="true">
 
-    <include
-        android:id="@+id/view_top"
-        layout="@layout/view_top" />
-
     <RelativeLayout
-        android:id="@+id/call_kefu_layout"
         android:layout_width="match_parent"
-        android:layout_height="141px"
-        android:layout_alignParentBottom="true"
-        android:background="@color/comm_white"
-        android:gravity="center">
+        android:layout_height="match_parent"
+        android:paddingTop="75px"
+        android:background="@color/personal_bg">
 
-        <TextView
-            android:id="@+id/call_kefu"
+        <include
+            android:id="@+id/view_top"
+            layout="@layout/view_top" />
+
+        <RelativeLayout
+            android:id="@+id/call_kefu_layout"
             android:layout_width="match_parent"
-            android:layout_height="90px"
-            android:layout_marginLeft="93px"
-            android:layout_marginRight="93px"
-            android:background="@drawable/personal_kefu_phone"
-            android:gravity="center"
-            android:text="@string/call_kefu_phone"
-            android:textColor="@color/comm_white" />
+            android:layout_height="141px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/comm_white"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/call_kefu"
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:layout_marginLeft="93px"
+                android:layout_marginRight="93px"
+                android:background="@drawable/personal_kefu_phone"
+                android:gravity="center"
+                android:text="@string/call_kefu_phone"
+                android:textColor="@color/comm_white" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view_top"
+            android:layout_marginTop="2px"
+            android:background="@color/white"
+            android:paddingBottom="40px"
+            android:paddingLeft="50px"
+            android:paddingTop="40px">
+
+            <TextView
+                android:id="@+id/kefu_cpzx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kefu_cpzx" />
+
+            <TextView
+                android:id="@+id/kefu_sqzx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/kefu_cpzx"
+                android:layout_marginTop="24px"
+                android:text="@string/kefu_sqzx" />
+
+            <TextView
+                android:id="@+id/kefu_order_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/kefu_sqzx"
+                android:layout_marginTop="24px"
+                android:text="@string/kefu_order_question" />
+
+            <TextView
+                android:id="@+id/kefu_phone_text"
+                android:layout_width="wrap_content"
+                android:layout_height="90px"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="201px"
+                android:layout_toRightOf="@id/kefu_cpzx"
+                android:drawableLeft="@drawable/kefu_phone"
+                android:drawablePadding="24px"
+                android:text="@string/kefu_phone_text" />
+
+        </RelativeLayout>
     </RelativeLayout>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/view_top"
-        android:layout_marginTop="2px"
-        android:background="@color/white"
-        android:paddingBottom="40px"
-        android:paddingLeft="50px"
-        android:paddingTop="40px">
-
-        <TextView
-            android:id="@+id/kefu_cpzx"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/kefu_cpzx" />
-
-        <TextView
-            android:id="@+id/kefu_sqzx"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/kefu_cpzx"
-            android:layout_marginTop="24px"
-            android:text="@string/kefu_sqzx" />
-
-        <TextView
-            android:id="@+id/kefu_order_question"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/kefu_sqzx"
-            android:layout_marginTop="24px"
-            android:text="@string/kefu_order_question" />
-
-        <TextView
-            android:id="@+id/kefu_phone_text"
-            android:layout_width="wrap_content"
-            android:layout_height="90px"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="201px"
-            android:layout_toRightOf="@id/kefu_cpzx"
-            android:drawableLeft="@drawable/kefu_phone"
-            android:drawablePadding="24px"
-            android:text="@string/kefu_phone_text" />
-
-    </RelativeLayout>
-
 
 </RelativeLayout>

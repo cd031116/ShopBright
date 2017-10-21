@@ -204,13 +204,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/t_blue"
-        android:paddingLeft="36px"
-        android:paddingRight="36px" />
-
     <RelativeLayout
         android:id="@+id/re_layout"
         android:layout_width="match_parent"
@@ -234,6 +227,13 @@
             android:verticalSpacing="1dp" />
 
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/t_blue"
+        android:paddingLeft="36px"
+        android:paddingRight="36px" />
 
     <include
         android:id="@+id/rili_choose_people"

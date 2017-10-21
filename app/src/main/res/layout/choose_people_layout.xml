@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     android:padding="42px"
     android:weightSum="2">
 
@@ -14,9 +14,8 @@
         android:weightSum="2">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="356px"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
@@ -43,10 +42,11 @@
                 android:textSize="40px" />
         </LinearLayout>
 
+
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="356px"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginLeft="187px"
             android:orientation="horizontal">
 
             <TextView
@@ -83,79 +83,104 @@
         android:weightSum="2">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="306px"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:background="@drawable/btn_down_bg"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/normal_down_btn"
+            <LinearLayout
                 android:layout_width="100px"
                 android:layout_height="88px"
-                android:background="@drawable/btn_down_bg"
-                android:gravity="center"
-                android:text="—"
-                android:textColor="@color/gray_text"
-                android:textSize="40px" />
+                android:gravity="center">
 
+                <TextView
+                    android:id="@+id/normal_down_btn"
+                    android:layout_width="32px"
+                    android:layout_height="6px"
+                    android:background="@drawable/reduce_not" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="3px"
+                android:layout_height="88px"
+                android:background="@color/personal_row_text" />
 
             <TextView
                 android:id="@+id/normal_num_btn"
                 android:layout_width="100px"
                 android:layout_height="88px"
-                android:background="@drawable/btn_num_bg"
                 android:gravity="center"
-                android:text="—"
-                android:textColor="@color/gray_text"
+                android:text="1"
+                android:textColor="@color/black_text"
                 android:textSize="40px" />
 
-            <TextView
-                android:id="@+id/normal_add_btn"
+            <View
+                android:layout_width="3px"
+                android:layout_height="88px"
+                android:background="@color/personal_row_text" />
+
+            <LinearLayout
                 android:layout_width="100px"
                 android:layout_height="88px"
-                android:background="@drawable/btn_add_bg"
-                android:gravity="center"
-                android:text=" + "
-                android:textColor="@color/t_blue"
-                android:textSize="40px" />
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/normal_add_btn"
+                    android:layout_width="32px"
+                    android:layout_height="32px"
+                    android:background="@drawable/add" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="306px"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginLeft="237px"
+            android:background="@drawable/btn_down_bg"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/child_down_btn"
+            <LinearLayout
                 android:layout_width="100px"
                 android:layout_height="88px"
-                android:background="@drawable/btn_down_bg"
-                android:gravity="center"
-                android:text="—"
-                android:textColor="@color/gray_text"
-                android:textSize="40px" />
+                android:gravity="center">
 
+                <TextView
+                    android:id="@+id/child_down_btn"
+                    android:layout_width="32px"
+                    android:layout_height="6px"
+                    android:background="@drawable/reduce" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="3px"
+                android:layout_height="88px"
+                android:background="@color/personal_row_text" />
 
             <TextView
                 android:id="@+id/child_num_btn"
                 android:layout_width="100px"
                 android:layout_height="88px"
-                android:background="@drawable/btn_num_bg"
                 android:gravity="center"
-                android:text="—"
+                android:text="1"
                 android:textColor="@color/gray_text"
                 android:textSize="40px" />
 
-            <TextView
-                android:id="@+id/child_add_btn"
+            <View
+                android:layout_width="3px"
+                android:layout_height="88px"
+                android:background="@color/personal_row_text" />
+
+            <LinearLayout
                 android:layout_width="100px"
                 android:layout_height="88px"
-                android:background="@drawable/btn_add_bg"
-                android:gravity="center"
-                android:text=" + "
-                android:textColor="@color/t_blue"
-                android:textSize="40px" />
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/child_add_btn"
+                    android:layout_width="32px"
+                    android:layout_height="32px"
+                    android:background="@drawable/add" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

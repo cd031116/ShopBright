@@ -75,7 +75,7 @@ public class ResetPswActivity extends BaseActivity {
                 else if (!PhoneFormatCheckUtils.isChinaPhoneLegal(phone))
                     ToastUtils.showShortToast(this, getResources().getString(R.string.register_phone));
                 else
-                    new checkCodeTask().execute(phone);
+                    new checkCodeTask().execute(phone,"resetPassword");
                 break;
             case R.id.zhifubao:
                 break;

@@ -98,99 +98,99 @@
                     android:background="#F5F5F5" />
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#ffffff"
-                    android:orientation="horizontal"
-                    android:padding="42px">
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="#ffffff"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:padding="42px">-->
 
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:gravity="center"-->
+                        <!--android:orientation="horizontal">-->
 
-                        <ImageView
-                            android:layout_width="40px"
-                            android:layout_height="40px"
-                            android:src="@drawable/t_zhutits" />
+                        <!--<ImageView-->
+                            <!--android:layout_width="40px"-->
+                            <!--android:layout_height="40px"-->
+                            <!--android:src="@drawable/t_zhutits" />-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15px"
-                            android:text="人文古迹"
-                            android:textColor="#999999"
-                            android:textSize="37px" />
-                    </LinearLayout>
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="15px"-->
+                            <!--android:text="人文古迹"-->
+                            <!--android:textColor="#999999"-->
+                            <!--android:textSize="37px" />-->
+                    <!--</LinearLayout>-->
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:gravity="center"-->
+                        <!--android:orientation="horizontal">-->
 
-                        <ImageView
-                            android:layout_width="40px"
-                            android:layout_height="40px"
-                            android:src="@drawable/t_zhutits" />
+                        <!--<ImageView-->
+                            <!--android:layout_width="40px"-->
+                            <!--android:layout_height="40px"-->
+                            <!--android:src="@drawable/t_zhutits" />-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15px"
-                            android:text="历史遗迹"
-                            android:textColor="#999999"
-                            android:textSize="37px" />
-                    </LinearLayout>
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="15px"-->
+                            <!--android:text="历史遗迹"-->
+                            <!--android:textColor="#999999"-->
+                            <!--android:textSize="37px" />-->
+                    <!--</LinearLayout>-->
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:gravity="center"-->
+                        <!--android:orientation="horizontal">-->
 
-                        <ImageView
-                            android:layout_width="40px"
-                            android:layout_height="40px"
-                            android:src="@drawable/t_zhutits" />
+                        <!--<ImageView-->
+                            <!--android:layout_width="40px"-->
+                            <!--android:layout_height="40px"-->
+                            <!--android:src="@drawable/t_zhutits" />-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15px"
-                            android:text="春秋踏青"
-                            android:textColor="#999999"
-                            android:textSize="37px" />
-                    </LinearLayout>
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="15px"-->
+                            <!--android:text="春秋踏青"-->
+                            <!--android:textColor="#999999"-->
+                            <!--android:textSize="37px" />-->
+                    <!--</LinearLayout>-->
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:gravity="center"-->
+                        <!--android:orientation="horizontal">-->
 
-                        <ImageView
-                            android:layout_width="40px"
-                            android:layout_height="40px"
-                            android:src="@drawable/t_zhutits" />
+                        <!--<ImageView-->
+                            <!--android:layout_width="40px"-->
+                            <!--android:layout_height="40px"-->
+                            <!--android:src="@drawable/t_zhutits" />-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15px"
-                            android:text="旅游胜地"
-                            android:textColor="#999999"
-                            android:textSize="37px" />
-                    </LinearLayout>
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="15px"-->
+                            <!--android:text="旅游胜地"-->
+                            <!--android:textColor="#999999"-->
+                            <!--android:textSize="37px" />-->
+                    <!--</LinearLayout>-->
 
-                </LinearLayout>
+                <!--</LinearLayout>-->
             </LinearLayout>
 
             <!--团期-->
@@ -271,6 +271,7 @@
 
             <!--费用包含-->
             <LinearLayout
+                android:id="@+id/pay_know_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30px"
@@ -419,7 +420,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30px"
-                        android:text="如何预定"
+                        android:text="预定须知"
                         android:textColor="#333333"
                         android:textSize="40px" />
 
@@ -434,6 +435,39 @@
                     android:textSize="40px" />
 
 
+                <!--差价说明-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30px"
+                    android:background="#ffffff"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="42px">
+
+                    <TextView
+                        android:layout_width="8px"
+                        android:layout_height="49px"
+                        android:background="#59C2DE" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30px"
+                        android:text="差价说明"
+                        android:textColor="#333333"
+                        android:textSize="40px" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/w_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="32px"
+                    android:textColor="#666666"
+                    android:textSize="40px" />
                 <!--温馨提示-->
 
                 <LinearLayout
@@ -455,39 +489,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30px"
                         android:text="温馨提示"
-                        android:textColor="#333333"
-                        android:textSize="40px" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/w_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="32px"
-                    android:textColor="#666666"
-                    android:textSize="40px" />
-                <!--发票说明-->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30px"
-                    android:background="#ffffff"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="42px">
-
-                    <TextView
-                        android:layout_width="8px"
-                        android:layout_height="49px"
-                        android:background="#59C2DE" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30px"
-                        android:text="发票说明"
                         android:textColor="#333333"
                         android:textSize="40px" />
 

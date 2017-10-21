@@ -278,14 +278,14 @@ public class SDK extends ABizLogic {
     /**
      * 	跟团游详情页面
      *
-     * @param spot_team_id //	跟团游id
+     * @param productId //	跟团游id
      * @return
      * @throws TaskException
      */
-    public TeamDetailEntity obtainGroupDetail(String spot_team_id) throws TaskException {
-        Setting action = newSetting("getGoodsDetail", "Api/Group/getGoodsDetail", "跟团游详情页面");
+    public TeamDetailEntity obtainGroupDetail(String productId) throws TaskException {
+        Setting action = newSetting("getGoodsDetail", "appapi/Team/getTeamDetail", "跟团游详情页面");
         Params params = new Params();
-        params.addParameter("spot_team_id", spot_team_id);
+        params.addParameter("productId", productId);
 
         return doGet(action, basicParams(params), TeamDetailEntity.class);
     }

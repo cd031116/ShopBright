@@ -44,7 +44,6 @@
             android:paddingTop="56px"
             android:textSize="28px"
             android:text="温泉"/>
-
         <TextView
             android:id="@+id/hotel_park"
             android:layout_width="0dp"
@@ -54,6 +53,7 @@
             android:gravity="center"
             android:drawablePadding="24px"
             android:paddingTop="56px"
+            android:textSize="28px"
             android:text="主题乐园"/>
 
     </LinearLayout>
@@ -109,6 +109,7 @@
             android:gravity="center"
             android:drawablePadding="24px"
             android:paddingTop="56px"
+            android:textSize="28px"
             android:text="全部"/>
 
     </LinearLayout>

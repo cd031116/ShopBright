@@ -6,6 +6,6 @@
         android:height="40dp"
         />
     <solid
-         android:color="@color/color_yellow"
+         android:color="@color/color_choose"
         />
 </shape>

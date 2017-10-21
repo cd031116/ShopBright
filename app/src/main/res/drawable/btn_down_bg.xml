@@ -5,6 +5,5 @@
         android:width="3px"
         android:color="@color/personal_row_text" />
     <corners
-        android:bottomLeftRadius="12px"
-        android:topLeftRadius="12px" />
+        android:radius="12px" />
 </shape>

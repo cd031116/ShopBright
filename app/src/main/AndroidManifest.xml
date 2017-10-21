@@ -163,6 +163,7 @@
         <activity android:name=".main.team.TeamOrderActivity" />
         <activity android:name=".main.team.TeamAddressActivity" />
         <activity android:name=".personal.UseInfoActivity" />
+        <activity android:name=".personal.ChooseTourerActivity" />
         <activity android:name=".personal.AddUserInfoActivity" />
         <activity android:name=".main.team.SelecTeamActivity"></activity>
         <activity

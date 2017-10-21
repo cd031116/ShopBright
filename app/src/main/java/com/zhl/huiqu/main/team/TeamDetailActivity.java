@@ -3,6 +3,7 @@ package com.zhl.huiqu.main.team;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -30,7 +31,9 @@ import com.zhl.huiqu.main.team.bean.TeamBase;
 import com.zhl.huiqu.main.team.bean.TeamDetailBean;
 import com.zhl.huiqu.main.team.bean.TeamDetailEntity;
 import com.zhl.huiqu.main.team.bean.TeamListInfo;
+import com.zhl.huiqu.main.team.teamdetailadapter.JourneyAdapter;
 import com.zhl.huiqu.pull.layoutmanager.MyGridLayoutManager;
+import com.zhl.huiqu.pull.layoutmanager.MyLinearLayoutManager;
 import com.zhl.huiqu.recyclebase.CommonAdapter;
 import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.sdk.SDK;
@@ -58,6 +61,8 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
     LinearLayout search02;// 在MyScrollView里面的购买布局
     @Bind(R.id.search01)
     LinearLayout search01;
+    @Bind(R.id.pay_know_layout)
+    LinearLayout payKnowLayout;
 
     @Bind(R.id.banner)
     Banner banner;
@@ -65,6 +70,8 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
     LinearLayout tab_mian;
     @Bind(R.id.like_list)
     RecyclerView like_list;
+    @Bind(R.id.recycleview)
+    RecyclerView recycleview;
     //切换
     @Bind(R.id.contents)
     TextView contents;
@@ -98,8 +105,11 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
     TextView tab3_v;
     private int select = 1;
     private int topHeight;
+    private int journeyHeight;
+    private int payknowHeight;
     private String spot_team_id;
     private CommonAdapter<LikeBean> madapter;
+    private JourneyAdapter journeyAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -111,12 +121,13 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         super.initView();
         myscroview.setOnScrollListener(this);
         spot_team_id = getIntent().getStringExtra("spot_team_id");
+        Log.e("ddd", "initView: " + spot_team_id);
     }
 
     @Override
     public void initData() {
         new obtainGroupDetail().execute();
-        new obtainLike().execute();
+//        new obtainLike().execute();
         super.initData();
     }
 
@@ -141,26 +152,21 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
             case R.id.tab1_mian:
                 select = 1;
                 changeview(select);
+                myscroview.scrollTo(0,topHeight);
                 break;
             case R.id.tab2_mian:
                 select = 2;
                 changeview(select);
+                myscroview.scrollTo(0,journeyHeight);
                 break;
             case R.id.tab3_mian:
                 select = 3;
                 changeview(select);
+                myscroview.scrollTo(0,payknowHeight);
                 break;
             case R.id.submit:
                 startActivity(new Intent(TeamDetailActivity.this, TeamOrderActivity.class));
                 break;
-        }
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            topHeight = search02.getBottom() - search02.getHeight();
         }
     }
 
@@ -179,7 +185,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         }
 
         @Override
-        protected void onSuccess(TeamDetailEntity info){
+        protected void onSuccess(TeamDetailEntity info) {
             super.onSuccess(info);
             dismissAlert();
             if (info.getCode().equals("1")) {
@@ -190,7 +196,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         }
 
         @Override
-        protected void onFailure(TaskException exception){
+        protected void onFailure(TaskException exception) {
             dismissAlert();
         }
     }
@@ -232,17 +238,17 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
 
             @Override
             protected void convert(ViewHolder holder, LikeBean likeBean, int position) {
-                    holder.setText(R.id.like_price,likeBean.getShop_price());
-                    holder.setText(R.id.like_title,likeBean.getTitle());
-                    holder.setText(R.id.out_address,likeBean.getCity());
-                    holder.setText(R.id.go_address,likeBean.getOut());
-                    holder.setText(R.id.like_tag,likeBean.getDay_time()+"日游");
-                    holder.setText(R.id.like_pl,"评论："+likeBean.getFavor());
-                    holder.setText(R.id.like_my,"满意度："+likeBean.getCsr());
-                    holder.setBitmapWithUrl(R.id.like_img,"http://www.zhonghuilv.net"+likeBean.getThumb());
+                holder.setText(R.id.like_price, likeBean.getShop_price());
+                holder.setText(R.id.like_title, likeBean.getTitle());
+                holder.setText(R.id.out_address, likeBean.getCity());
+                holder.setText(R.id.go_address, likeBean.getOut());
+                holder.setText(R.id.like_tag, likeBean.getDay_time() + "日游");
+                holder.setText(R.id.like_pl, "评论：" + likeBean.getFavor());
+                holder.setText(R.id.like_my, "满意度：" + likeBean.getCsr());
+                holder.setBitmapWithUrl(R.id.like_img, "http://www.zhonghuilv.net" + likeBean.getThumb());
             }
         };
-        like_list.setLayoutManager(new MyGridLayoutManager(TeamDetailActivity.this,2));
+        like_list.setLayoutManager(new MyGridLayoutManager(TeamDetailActivity.this, 2));
         like_list.addItemDecoration(new SimpleDividerItemDecoration(this, null, 1));
         like_list.setAdapter(madapter);
     }
@@ -252,16 +258,36 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
      * @param body
      */
     private void setView(TeamDetailBean body) {
-        group_price.setText(body.getGoods().getShop_price());
-        tese_content.setText(body.getGoods().getDesc());
-        contents.setText(body.getGoods().getTitle());
-        w_text.setText(body.getGoods().getPrompt());
-        a_text.setText(body.getGoods().getSecur());
-        contain_text.setText(body.getGoods().getT_cost());
-        zili_text.setText(body.getGoods().getP_cost());
-        fu_text.setText(body.getGoods().getReserve());
-        fp_text.setText(body.getGoods().getInvo());
-        setBanner(body);
+        group_price.setText(body.getTeamInfo().getPriceAdultMin()+"");
+        contain_text.setText(body.getCostNotice().getCostInclude());
+        tese_content.setText(body.getProductFeature().getContent());
+        contents.setText(body.getTeamInfo().getProductName());
+//        a_text.setText(body.getGoods().getSecur());
+        w_text.setText(body.getBookNotice().getDiffPrice());
+        zili_text.setText(body.getCostNotice().getCostExclude());
+        fu_text.setText("交通信息：" + body.getBookNotice().getTrafficInfos() +
+                "\n住宿信息：" + body.getBookNotice().getAccInfos() +
+                "\n购物信息：" + body.getBookNotice().getShopping() +
+                "\n游览信息：" + body.getBookNotice().getTour());
+
+        journeyAdapter = new JourneyAdapter(TeamDetailActivity.this, body.getJourneyInfo());
+        recycleview.setLayoutManager(new MyLinearLayoutManager(TeamDetailActivity.this));
+        recycleview.addItemDecoration(new SimpleDividerItemDecoration(this, null, 1));
+        recycleview.setAdapter(journeyAdapter);
+        journeyAdapter.setOnDrawFinishListener(new JourneyAdapter.OnDrawListener() {
+            @Override
+            public void onDrawFinish(int position) {
+                new Handler().postDelayed(new Runnable(){
+
+                    public void run() {
+                        journeyHeight = recycleview.getBottom()-120;
+                        payknowHeight = payKnowLayout.getBottom()-120;
+                    }
+
+                }, 500);
+            }
+        });
+        setBanner(body.getImg());
     }
 
 
@@ -285,37 +311,48 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
     }
 
     @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            topHeight = search02.getBottom() - search02.getHeight();
+        }
+    }
+
+    @Override
     public void onScroll(int scrollY) {
+        Log.e("ddd", "onScroll: "+scrollY+",journeyHeight:"+journeyHeight+",payknowHeight:"+payknowHeight);
         if (scrollY >= topHeight) {
             if (tab_mian.getParent() != search01) {
                 search02.removeView(tab_mian);
                 search01.addView(tab_mian);
+            }
+            changeview(1);
+            if (scrollY >= journeyHeight && scrollY <= payknowHeight) {
+                changeview(2);
+            }
+            if (scrollY >= payknowHeight) {
+                changeview(3);
             }
         } else {
             if (tab_mian.getParent() != search02) {
                 search01.removeView(tab_mian);
                 search02.addView(tab_mian);
             }
+
         }
     }
 
     /**
      * 设置轮播图
      *
-     * @param body
+     * @param imgSrc
      */
-    private void setBanner(final TeamDetailBean body) {
-        List<String> titles = new ArrayList<>();
-        if (body.getGoodsImg() != null && body.getGoodsImg().size() > 0) {
-            for (int i = 0; i < body.getGoodsImg().size(); i++) {
-                titles.add("http://www.zhonghuilv.net" + body.getGoodsImg().get(i).getImg());
-            }
-        }
+    private void setBanner(List<String> imgSrc) {
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         //设置图片加载器
         banner.setImageLoader(new GlideImageLoader());
         //设置图片集合
-        banner.setImages(titles);
+        banner.setImages(imgSrc);
         //设置banner动画效果
         banner.setBannerAnimation(Transformer.Default);
 //        设置标题集合（当banner样式有显示title时）
@@ -328,12 +365,6 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         banner.setIndicatorGravity(BannerConfig.CENTER);
         //banner设置方法全部调用完毕时最后调用
         banner.start();
-        banner.setOnBannerListener(new OnBannerListener(){
-            @Override
-            public void OnBannerClick(int position) {
-                Log.e("ttt", "OnBannerClick: " + body.getGoodsImg().get(position).getTeam_img_id());
-            }
-        });
         topHeight = search02.getBottom() - search02.getHeight();
     }
 
