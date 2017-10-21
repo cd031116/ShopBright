@@ -8,6 +8,15 @@ import java.io.Serializable;
 
 public class CityList implements Serializable {
     private String desCityName;
+    private String desCityId;
+
+    public String getDesCityId() {
+        return desCityId;
+    }
+
+    public void setDesCityId(String desCityId) {
+        this.desCityId = desCityId;
+    }
 
     public String getDesCityName() {
         return desCityName;

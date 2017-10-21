@@ -5,9 +5,7 @@ import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,8 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.jcodecraeer.xrecyclerview.ProgressStyle;
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.BaseConfig;
@@ -89,6 +85,7 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
     RecyclerView recycleview;
     private CommonAdapter<TeamMainList> madapter;
     private List<TeamMainList> mList=new ArrayList<>();
+    List<TeamHot> hlist=new ArrayList<>();
     private int topHeight = 0;
     private int select = 0;
     //热门城市
@@ -159,8 +156,8 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     int pos = position + curIndex * pageSize;
                     Intent intent=new Intent(MainTeamActivity.this,TeamListActivity.class);
-                    intent.putExtra("","");
-
+                    intent.putExtra("city_id",mDatas.get(pos).getDesCityId());
+                    startActivity(intent);
                 }
             });
         }
@@ -227,14 +224,44 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
         topHeight = bg.getIntValue(Constants.TEAM_HIGHT, 0);
     }
 
-    @OnClick({R.id.all_line, R.id.search_re})
+    @OnClick({R.id.all_line, R.id.search_re,R.id.all_city,R.id.all_rute,R.id.hot_1,R.id.hot_2,R.id.hot_3})
     void enter(View v) {
         switch (v.getId()) {
+            case R.id.hot_1:
+                if(hlist==null||hlist.size()<=0){
+                    return;
+                }
+                Intent intent = new Intent(MainTeamActivity.this, TeamDetailActivity.class);
+                intent.putExtra("spot_team_id",hlist.get(0).getProductId());
+                startActivity(intent);
+                break;
+            case R.id.hot_2:
+                if(hlist==null||hlist.size()<=0){
+                    return;
+                }
+                Intent intent1 = new Intent(MainTeamActivity.this, TeamDetailActivity.class);
+                intent1.putExtra("spot_team_id",hlist.get(1).getProductId());
+                startActivity(intent1);
+                break;
+            case R.id.hot_3:
+                if(hlist==null||hlist.size()<=0){
+                    return;
+                }
+                Intent intent2 = new Intent(MainTeamActivity.this, TeamDetailActivity.class);
+                intent2.putExtra("spot_team_id",hlist.get(2).getProductId());
+                startActivity(intent2);
+                break;
             case R.id.all_line:
                 startActivity(new Intent(MainTeamActivity.this, TeamListActivity.class));
                 break;
             case R.id.search_re:
                 TeamSearchFragment.launch(this);
+                break;
+            case  R.id.all_city:
+                startActivity(new Intent(MainTeamActivity.this, TeamAddressActivity.class));
+                break;
+            case R.id.all_rute:
+                startActivity(new Intent(MainTeamActivity.this, TeamListActivity.class));
                 break;
         }
     }
@@ -310,10 +337,7 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
                 break;
             case R.id.line_back:
             case R.id.btnBack:
-//                MainTeamActivity.this.finish();
-                Intent intent = new Intent(MainTeamActivity.this, TeamDetailActivity.class);
-                intent.putExtra("spot_team_id", "6");
-                startActivity(intent);
+                MainTeamActivity.this.finish();
                 break;
         }
     }
@@ -380,20 +404,20 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
     private void showview(TeamTop data) {
         mDatas = data.getDestination();
         initDatas();
-        List<TeamHot> list = data.getHot();
-        if (!TextUtils.isEmpty(list.get(0).getThumb())) {
+        hlist = data.getHot();
+        if (!TextUtils.isEmpty(hlist.get(0).getThumb())) {
             Glide.with(this)
-                    .load(list.get(0).getThumb())
+                    .load(hlist.get(0).getThumb())
                     .into(hot_1);
         }
-        if (!TextUtils.isEmpty(list.get(1).getThumb())) {
+        if (!TextUtils.isEmpty(hlist.get(1).getThumb())) {
             Glide.with(this)
-                    .load(list.get(1).getThumb())
+                    .load(hlist.get(1).getThumb())
                     .into(hot_2);
         }
-        if (!TextUtils.isEmpty(list.get(2).getThumb())) {
+        if (!TextUtils.isEmpty(hlist.get(2).getThumb())) {
             Glide.with(this)
-                    .load(list.get(2).getThumb())
+                    .load(hlist.get(2).getThumb())
                     .into(hot_3);
         }
     }
