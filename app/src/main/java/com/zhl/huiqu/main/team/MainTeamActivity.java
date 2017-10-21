@@ -474,7 +474,7 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
 
         @Override
         public TeamBase workInBackground(Void... voids) throws TaskException {
-            return SDK.newInstance(MainTeamActivity.this).getListTop(select + "",page+"");
+            return SDK.newInstance(MainTeamActivity.this).getListTop(select +"",page+"");
         }
 
         @Override

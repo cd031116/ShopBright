@@ -236,7 +236,7 @@ public class SDK extends ABizLogic {
      */
     public TeamBase getListTop(String type,String page) throws TaskException {
         Setting action = newSetting("getTeamIndexBottom", "appapi/Team/getTeamIndexBottom", "获取跟团游首页列表");
-        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?type=" + type+ "?page=" + page );
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?type=" + type+ "page=" + page );
         Params params = new Params();
         params.addParameter("type",type);
         params.addParameter("page",page);

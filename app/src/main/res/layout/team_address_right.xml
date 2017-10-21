@@ -3,20 +3,20 @@
     android:id="@+id/main_line"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="210px"
+    android:layout_height="270px"
     android:layout_marginLeft="8px"
     android:layout_marginRight="8px"
     android:layout_marginBottom="30px">
     <ImageView
         android:id="@+id/city_p"
-        android:layout_width="242px"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"/>
     <TextView
         android:id="@+id/city_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20px"
+        android:padding="10px"
         android:textColor="#010101"
         android:background="@drawable/team_address_right"
         android:layout_alignParentBottom="true"
