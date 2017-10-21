@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40px"
             android:text="填写订单"
-            android:textColor="#59c2de"
+            android:textColor="#333333"
             android:textSize="51px" />
     </LinearLayout>
 
@@ -95,7 +95,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="出游人数"
-                    android:textColor="#999999" />
+                    android:textColor="#999999"/>
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40px"
             android:text="常用游客信息"
-            android:textColor="#59c2de"
+            android:textColor="#333333"
             android:textSize="51px" />
     </LinearLayout>
 
@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="142px"
         android:layout_alignParentBottom="true"
-        android:background="#ffa037"
+        android:background="#E11818"
         android:gravity="center"
         android:text="新增"
         android:textColor="#ffffff"

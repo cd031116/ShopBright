@@ -598,12 +598,24 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1900px"
+            android:layout_height="match_parent"
             android:layout_marginTop="1px">
+
+            <!--<com.jcodecraeer.xrecyclerview.XRecyclerView-->
+                <!--android:id="@+id/recycleview"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--/>-->
+
+         <!---->
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycleview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
+            <include
+                android:id="@+id/view_more"
+                android:visibility="gone"
+                layout="@layout/lay_footerview"/>
             <include
                 android:id="@+id/view_empty"
                 android:visibility="gone"

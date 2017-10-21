@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="14px"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/main_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="290px">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"/>
+
+            <TextView
+                android:id="@+id/comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10px"
+                android:textColor="#ffffff" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28px"
+            android:singleLine="true"
+            android:textColor="#222222" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥50"
+                android:textColor="@color/red_text"
+                android:textSize="40px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:text="起"
+                android:textColor="#999999"
+                android:textSize="34px" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/more_line"
+        android:layout_width="match_parent"
+        android:layout_height="290px"
+        android:background="#e11818"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="更多\n景点"
+            android:textColor="#ffffff"
+            android:textSize="48px" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:src="@drawable/more" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

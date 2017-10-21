@@ -179,7 +179,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         }
 
         @Override
-        protected void onSuccess(TeamDetailEntity info) {
+        protected void onSuccess(TeamDetailEntity info){
             super.onSuccess(info);
             dismissAlert();
             if (info.getCode().equals("1")) {
@@ -190,7 +190,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         }
 
         @Override
-        protected void onFailure(TaskException exception) {
+        protected void onFailure(TaskException exception){
             dismissAlert();
         }
     }
@@ -246,8 +246,6 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         like_list.addItemDecoration(new SimpleDividerItemDecoration(this, null, 1));
         like_list.setAdapter(madapter);
     }
-
-
 
 
     /**

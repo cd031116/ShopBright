@@ -14,6 +14,24 @@ public class MainTopInfo implements Serializable{
     private List<TicketsInfo>  ticket;
 
     private List<HotInfo>  hot;
+    private List<MainSpotBean>  spot;
+    private List<MainTeamBean>  team;
+
+    public List<MainSpotBean> getSpot() {
+        return spot;
+    }
+
+    public void setSpot(List<MainSpotBean> spot) {
+        this.spot = spot;
+    }
+
+    public List<MainTeamBean> getTeam() {
+        return team;
+    }
+
+    public void setTeam(List<MainTeamBean> team) {
+        this.team = team;
+    }
 
     public List<HotelInfo> getHotel() {
         return hotel;

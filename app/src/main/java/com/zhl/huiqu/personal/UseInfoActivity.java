@@ -39,6 +39,12 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+/*
+*
+* @author lyj
+* @describe 常用联系人
+* @data 2017/10/16
+* */
 
 public class UseInfoActivity extends BaseActivity {
     @Bind(R.id.recycleview)

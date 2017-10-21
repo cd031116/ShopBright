@@ -32,7 +32,7 @@ public class MyApplication extends GlobalContext {
         locationService = new LocationService(getApplicationContext());
         activityManager = ActivityManagerd.getScreenManager();
         SearchHistoryManager.setup(this);
-        getOkHttpClient().setConnectTimeout((long)20000,TimeUnit.MILLISECONDS);
+        getOkHttpClient().setConnectTimeout((long)8000,TimeUnit.MILLISECONDS);
         getOkHttpClient().setCookieHandler(new CookieManager(null, CookiePolicy.ACCEPT_ORIGINAL_SERVER));
 
     }

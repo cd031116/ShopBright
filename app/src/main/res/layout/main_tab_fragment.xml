@@ -5,100 +5,138 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <include layout="@layout/main_search"/>
 
+    <include layout="@layout/main_search" />
 
-        <android.support.design.widget.CoordinatorLayout
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/main_search"
+        android:scrollbars="none">
+
+        <LinearLayout
             android:id="@+id/layoutContentd"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/main_search"
+            android:background="#F5F5F5"
             android:fitsSystemWindows="true"
+            android:orientation="vertical"
             android:visibility="visible">
 
-            <android.support.design.widget.AppBarLayout
-                android:id="@+id/appbar"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#00000000"
-                android:fitsSystemWindows="true"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-                <!--
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"-->
-                <!--<android.support.design.widget.CollapsingToolbarLayout-->
-                    <!--android:id="@+id/collapsingToolbar"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-                    <!--app:contentScrim="#00000000"-->
-                    <!--app:layout_scrollFlags="scroll|exitUntilCollapsed"-->
-                    <!--app:statusBarScrim="#00000000">-->
+                android:background="#ffffff"
+                android:orientation="vertical"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_scrollFlags="scroll">
 
-
-                <!--   app:layout_collapseMode="pin"
-                        app:layout_collapseParallaxMultiplier="1"-->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:background="#ffffff"
-                        app:layout_scrollFlags="scroll"
-                        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-                        <com.youth.banner.Banner
-                            android:id="@+id/banner"
-                            android:layout_width="match_parent"
-                            android:layout_height="350px" />
-
-                           <include layout="@layout/mian_top_item"/>
-                            <include layout="@layout/main_center"/>
-                    </LinearLayout>
-
-
-                <!--</android.support.design.widget.CollapsingToolbarLayout>-->
-
-                <RelativeLayout
-                    android:id="@+id/layTabs"
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="350px" />
 
-                    <android.support.design.widget.TabLayout
-                        android:id="@+id/tabLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:tabMode="fixed"
-                        android:background="@color/white"
-                        app:tabIndicatorColor="#59C2DE"
-                        app:tabIndicatorHeight="2dip"
-                        app:tabTextAppearance="@style/MyTabLayoutTextAppearance" />
-                </RelativeLayout>
-            </android.support.design.widget.AppBarLayout>
+                <include layout="@layout/mian_top_item" />
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/viewPager"
+                <include layout="@layout/main_center" />
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-        </android.support.design.widget.CoordinatorLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28px"
+                android:background="#ffffff"
+                android:orientation="vertical">
 
-    <!--<include-->
-        <!--android:id="@id/layoutLoading"-->
-        <!--layout="@layout/comm_lay_loading"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="fill_parent"-->
-        <!--android:visibility="gone" />-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="50px"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:padding="10px">
 
-    <!--<include-->
-        <!--android:id="@id/layoutLoadFailed"-->
-        <!--layout="@layout/ui_common_failed"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:visibility="gone" />-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="精选"
+                        android:textColor="#333333"
+                        android:textSize="51px" />
 
-    <!--<include-->
-        <!--android:id="@id/layoutEmpty"-->
-        <!--layout="@layout/ui_common_empty"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:visibility="gone" />-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="景点"
+                        android:textColor="#e11818"
+                        android:textSize="51px" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/menpiao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50px" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28px"
+                android:background="#ffffff"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="50px"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:padding="10px">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="精选"
+                        android:textColor="#333333"
+                        android:textSize="51px" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="跟团游"
+                        android:textColor="#e11818"
+                        android:textSize="51px" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/gentuan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50px" />
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#F5F5F5" />
+
+            <TextView
+                android:id="@+id/tuan_more"
+                android:layout_width="match_parent"
+                android:layout_height="114px"
+                android:layout_marginBottom="28px"
+                android:background="#ffffff"
+                android:gravity="center"
+                android:text="查看更多"
+                android:textColor="#e11818"
+                android:textSize="40px" />
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </RelativeLayout>

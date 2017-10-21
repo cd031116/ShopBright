@@ -5,7 +5,9 @@ import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,12 +17,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.jcodecraeer.xrecyclerview.ProgressStyle;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.BaseConfig;
-import com.zhl.huiqu.main.bean.HotInfo;
 import com.zhl.huiqu.main.team.bean.CityList;
 import com.zhl.huiqu.main.team.bean.TeamBase;
+import com.zhl.huiqu.main.team.bean.TeamHot;
 import com.zhl.huiqu.main.team.bean.TeamMainList;
 import com.zhl.huiqu.main.team.bean.TeamTop;
 import com.zhl.huiqu.main.team.bean.TeamTopMain;
@@ -43,7 +47,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrollListener {
+public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrollListener{
     @Bind(R.id.search02)
     LinearLayout search02;// 在MyScrollView里面的购买布局
     @Bind(R.id.search01)
@@ -62,7 +66,7 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
     TextView tab4_t;
     @Bind(R.id.tab5_t)
     TextView tab5_t;
-    //
+
     @Bind(R.id.viewpager)
     ViewPager viewpager;
     @Bind(R.id.ll_dot)
@@ -78,10 +82,13 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
     LinearLayout view_empty;
     @ViewInject(id = R.id.view_progress)
     LinearLayout view_progress;
+    @ViewInject(id = R.id.view_more)
+    LinearLayout view_more;
+
     @ViewInject(id = R.id.recycleview)
     RecyclerView recycleview;
     private CommonAdapter<TeamMainList> madapter;
-    private List<TeamMainList> mList;
+    private List<TeamMainList> mList=new ArrayList<>();
     private int topHeight = 0;
     private int select = 0;
     //热门城市
@@ -101,6 +108,9 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
      */
     private int curIndex = 0;
     private TeamTop t_info = null;
+    private int page=1;
+    private LinearLayoutManager mLayoutManager;
+    private boolean ismore=false;
 
     @Override
     protected int getLayoutId() {
@@ -110,6 +120,7 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
     @Override
     public void initView() {
         super.initView();
+        view_progress.setVisibility(View.VISIBLE);
         myscroview.setOnScrollListener(this);
         BaseConfig bg = BaseConfig.getInstance(this);
         topHeight = bg.getIntValue(Constants.TEAM_HIGHT, 0);
@@ -117,12 +128,12 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
         if (t_info != null) {
             showview(t_info);
         }
-
     }
 
     @Override
     public void initData() {
         super.initData();
+        showList();
         new getTopTask().execute();
         new getListTask().execute();
         initDatas();
@@ -147,6 +158,8 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     int pos = position + curIndex * pageSize;
+                    Intent intent=new Intent(MainTeamActivity.this,TeamListActivity.class);
+                    intent.putExtra("","");
 
                 }
             });
@@ -234,6 +247,10 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
                 if (select == 0) {
                     return;
                 }
+                if(mList.size()>0){
+                    mList.clear();
+                }
+                page=1;
                 select = 0;
                 changeview(select);
                 tpscoll(topHeight);
@@ -243,6 +260,10 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
                 if (select == 1) {
                     return;
                 }
+                if(mList.size()>0){
+                    mList.clear();
+                }
+                page=1;
                 select = 1;
                 changeview(select);
                 tpscoll(topHeight);
@@ -252,6 +273,10 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
                 if (select == 2) {
                     return;
                 }
+                if(mList.size()>0){
+                    mList.clear();
+                }
+                page=1;
                 select = 2;
                 changeview(select);
                 tpscoll(topHeight);
@@ -261,6 +286,10 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
                 if (select == 3) {
                     return;
                 }
+                if(mList.size()>0){
+                    mList.clear();
+                }
+                page=1;
                 select = 3;
                 changeview(select);
                 tpscoll(topHeight);
@@ -270,6 +299,10 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
                 if (select == 4) {
                     return;
                 }
+                if(mList.size()>0){
+                    mList.clear();
+                }
+                page=1;
                 select = 4;
                 changeview(select);
                 tpscoll(topHeight);
@@ -336,14 +369,18 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
             }
         }
         if (y == (myscroview.getChildAt(0).getMeasuredHeight() - myscroview.getMeasuredHeight())) {
-
+            if(mList!=null&&mList.size()>19&&(mList.size()%10)==0&&!ismore){
+                view_more.setVisibility(View.VISIBLE);
+                page++;
+                new getListTask().execute();
+            }
         }
     }
 
     private void showview(TeamTop data) {
-        mDatas = data.getCity_list();
+        mDatas = data.getDestination();
         initDatas();
-        List<HotInfo> list = data.getHot();
+        List<TeamHot> list = data.getHot();
         if (!TextUtils.isEmpty(list.get(0).getThumb())) {
             Glide.with(this)
                     .load(list.get(0).getThumb())
@@ -403,31 +440,38 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
         @Override
         protected void onPrepare() {
             super.onPrepare();
-            showrecy(2);
+            if(mList!=null&&mList.size()>19){
+                view_more.setVisibility(View.VISIBLE);
+            }else {
+                showrecy(2);
+            }
+            ismore=true;
         }
 
         @Override
         public TeamBase workInBackground(Void... voids) throws TaskException {
-            return SDK.newInstance(MainTeamActivity.this).getListTop(select + "");
+            return SDK.newInstance(MainTeamActivity.this).getListTop(select + "",page+"");
         }
 
         @Override
-        protected void onSuccess(TeamBase info) {
+        protected void onSuccess(TeamBase info){
             super.onSuccess(info);
             if (info.getBody()!= null) {
                 showrecy(0);
-                mList = info.getBody();
-                showList();
+                mList.addAll(info.getBody());
+               madapter.notifyDataSetChanged();
             } else {
                 showrecy(1);
             }
-
-
+            ismore=false;
+            view_more.setVisibility(View.GONE);
         }
 
         @Override
         protected void onFailure(TaskException exception) {
             showrecy(1);
+            ismore=false;
+            view_more.setVisibility(View.GONE);
         }
     }
 
@@ -462,23 +506,6 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
 
                 holder.setText(R.id.address, "→" + info.getDepartCitysName());
                 holder.setText(R.id.day_time, info.getDuration() + "日游");
-//                if (TextUtils.isEmpty(info.get)) {
-//                    holder.setVisible(R.id.arrow, false);
-//                    holder.setEnableds(R.id.u_click, false);
-//                } else {
-//                    holder.setVisible(R.id.arrow, true);
-//                    holder.setEnableds(R.id.u_click, true);
-//                }
-//                if (info.isup()) {
-//                    holder.setText(R.id.neirong, info.getDesc());
-//                    holder.setImageResource(R.id.arrow, R.drawable.mpxq_up);
-//                    holder.setVisible(R.id.nei_line, true);
-//                } else {
-//                    holder.setText(R.id.neirong, "");
-//                    holder.setImageResource(R.id.arrow, R.drawable.mpxq_down);
-//                    holder.setVisible(R.id.nei_line, false);
-//                }
-
                 holder.setOnClickListener(R.id.u_click, new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
@@ -500,7 +527,9 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
                 });
             }
         };
-        recycleview.setLayoutManager(new LinearLayoutManager(MainTeamActivity.this));
+
+        mLayoutManager=new LinearLayoutManager(MainTeamActivity.this);
+        recycleview.setLayoutManager(mLayoutManager);
         recycleview.addItemDecoration(new SimpleDividerItemDecoration(this, null, 1));
         recycleview.setAdapter(madapter);
     }

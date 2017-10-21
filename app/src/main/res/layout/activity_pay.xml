@@ -135,47 +135,6 @@
             android:orientation="vertical"
             android:paddingTop="10px">
 
-            <RelativeLayout
-                android:id="@+id/zfb_rela"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                android:padding="20px">
-
-                <TextView
-                    android:id="@+id/zhifubao"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/zhifubao"
-                    android:drawablePadding="10px"
-                    android:gravity="center_vertical"
-                    android:text="支付宝支付" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5px"
-                    android:layout_toRightOf="@+id/zhifubao"
-                    android:background="@drawable/pay_tj"
-                    android:padding="2px"
-                    android:text="推荐"
-                    android:textColor="#ffffff"
-                    android:textSize="32px" />
-
-                <ImageView
-                    android:id="@+id/image_zfb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="20px"
-                    android:src="@drawable/order_pay_red_gou" />
-
-            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/wechat_rela"
@@ -217,6 +176,49 @@
                     android:layout_marginRight="20px"
                     android:src="@drawable/order_pay_red_gou" />
             </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/zfb_rela"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:padding="20px">
+
+                <TextView
+                    android:id="@+id/zhifubao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/zhifubao"
+                    android:drawablePadding="10px"
+                    android:gravity="center_vertical"
+                    android:text="支付宝支付" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5px"
+                    android:layout_toRightOf="@+id/zhifubao"
+                    android:background="@drawable/pay_tj"
+                    android:padding="2px"
+                    android:text="推荐"
+                    android:textColor="#ffffff"
+                    android:textSize="32px" />
+
+                <ImageView
+                    android:id="@+id/image_zfb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20px"
+                    android:src="@drawable/order_pay_gray_gou" />
+
+            </RelativeLayout>
+
         </LinearLayout>
 
 

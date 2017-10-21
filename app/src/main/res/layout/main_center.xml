@@ -12,7 +12,7 @@
         android:orientation="horizontal"
         android:paddingLeft="15px"
         android:paddingRight="15px"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/jfsc_ima"
@@ -48,7 +48,7 @@
         android:orientation="horizontal"
         android:paddingLeft="15px"
         android:paddingRight="15px"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/rmtj_ima"
@@ -100,7 +100,7 @@
             android:drawablePadding="10px"
             android:text="热销商品"
             android:padding="20px"
-            android:textSize="50px"/>
+            android:textSize="51px"/>
 
 
     </LinearLayout>
@@ -109,6 +109,7 @@
         android:layout_width="match_parent"
         android:layout_height="600px"
         android:orientation="horizontal"
+        android:paddingBottom="10px"
         android:paddingLeft="15px"
         android:paddingRight="15px">
 

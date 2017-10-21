@@ -1,45 +1,23 @@
-package com.zhl.huiqu.main.team.bean;
+package com.zhl.huiqu.main.bean;
 
 import java.io.Serializable;
 
 /**
- * Created by lyj on 2017/9/29.
+ * Created by Administrator on 2017/10/16.
  */
 
-public class TeamMainList implements Serializable{
-    private String productId ;
-    private String productName ;
+public class MainTeamBean implements Serializable {
+    private String productId;
 
-    private String priceAdultMin ;
+    private String productName;
+    private String priceAdultMin;
+    private String duration;
+    private String departCitysName;
+    private String thumb;
 
-    private String duration ;
-    private String departCitysName ;
+    private String commentNum;
 
-    private String thumb ;
-
-    private String commentNum ;
-
-    private String characteristic ;
-
-    private String csr ;
-
-    public String getCharacteristic() {
-        return characteristic;
-    }
-
-    public void setCharacteristic(String characteristic) {
-        this.characteristic = characteristic;
-    }
-
-    private boolean isup;
-
-    public boolean isup() {
-        return isup;
-    }
-
-    public void setIsup(boolean isup) {
-        this.isup = isup;
-    }
+    private String csr;
 
     public String getProductId() {
         return productId;

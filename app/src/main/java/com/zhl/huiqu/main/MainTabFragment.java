@@ -1,71 +1,59 @@
 package com.zhl.huiqu.main;
 
-import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.TabLayout;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
-import com.zhl.huiqu.MainActivity;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseConfig;
-import com.zhl.huiqu.base.MyApplication;
+import com.zhl.huiqu.base.BaseFragment;
 import com.zhl.huiqu.main.bean.HotInfo;
 import com.zhl.huiqu.main.bean.HotelInfo;
 import com.zhl.huiqu.main.bean.MainBean;
+import com.zhl.huiqu.main.bean.MainSpotBean;
+import com.zhl.huiqu.main.bean.MainTeamBean;
 import com.zhl.huiqu.main.bean.MainTopInfo;
 import com.zhl.huiqu.main.bean.TicketsInfo;
 import com.zhl.huiqu.main.hotelTour.MainHotelTourActivity;
 import com.zhl.huiqu.main.search.SearchFragment;
 import com.zhl.huiqu.main.team.MainTeamActivity;
+import com.zhl.huiqu.main.team.TeamAddressActivity;
 import com.zhl.huiqu.main.ticket.TicketListActivity;
 import com.zhl.huiqu.main.ticket.TicketMainFragment;
-import com.zhl.huiqu.main.ticket.TixkSearchActivity;
-import com.zhl.huiqu.scan.CaptureActivity;
+import com.zhl.huiqu.recyclebase.CommonAdapter;
+import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.sdk.eventbus.CityEvent;
 import com.zhl.huiqu.sdk.eventbus.CitySubscriber;
 import com.zhl.huiqu.utils.Constants;
-import com.zhl.huiqu.utils.GlideCircleTransform;
 import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
-import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.utils.ToastUtils;
 import com.zhl.huiqu.widget.GlideImageLoader;
 import com.zhl.huiqu.widget.ShowMsgDialog;
 
-import org.aisen.android.common.utils.Logger;
 import org.aisen.android.common.utils.SystemUtils;
 import org.aisen.android.component.eventbus.NotificationCenter;
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
-import org.aisen.android.support.bean.TabItem;
 import org.aisen.android.support.inject.OnClick;
 import org.aisen.android.support.inject.ViewInject;
-import org.aisen.android.ui.fragment.ATabsTabLayoutFragment;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,7 +64,7 @@ import java.util.List;
 * @data 2017/8/12
 * */
 
-public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
+public class MainTabFragment extends BaseFragment{
     @ViewInject(id = R.id.banner)
     Banner banner;
     @ViewInject(id = R.id.mp_1)
@@ -107,31 +95,38 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     @ViewInject(id = R.id.hot_3)
     ImageView hot_3;
 
-    @ViewInject(id = R.id.layoutContentd)
-    CoordinatorLayout scro;
+    @ViewInject(id=R.id.menpiao)
+    RecyclerView mRecycle;
+    @ViewInject(id=R.id.gentuan)
+    RecyclerView gRecycle;
     private List<String> images = new ArrayList<>();
     private List<String> titles = new ArrayList<>();
     private ShowMsgDialog progressDialog;
     private MainTopInfo mainInfo;
 
-    public static MainTabFragment newInstance() {
+    private CommonAdapter<MainSpotBean> mAdapter;
+    private List<MainSpotBean> mList;
+
+    private CommonAdapter<MainTeamBean> gAdapter;
+    private List<MainTeamBean> gList;
+    public static MainTabFragment newInstance(){
         return new MainTabFragment();
     }
 
     @Override
-    public void setContentView(ViewGroup view) {
+    public void setContentView(ViewGroup view){
         super.setContentView(view);
         SupportMultipleScreensUtil.init(getActivity());
         SupportMultipleScreensUtil.scale(view);
     }
 
     @Override
-    public int inflateContentView() {
+    public int inflateContentView(){
         return R.layout.main_tab_fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         NotificationCenter.defaultCenter().subscriber(CityEvent.class, cityEvent);
     }
@@ -145,13 +140,89 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         setBanner();
     }
 
+    private void setmenpiao(){
+            if(mList!=null){
+                for (int i=0;i<mList.size();i++){
+                    mList.get(i).setMore(false);
+                }
+                MainSpotBean bean=new MainSpotBean();
+                bean.setMore(true);
+                mList.add(bean);
+            }
+
+        mAdapter = new CommonAdapter<MainSpotBean>(getActivity(), R.layout.main_menpiao_item, mList) {
+            @Override
+            protected void convert(ViewHolder holder, final MainSpotBean data, int position) {
+                holder.setBitmapWithUrl(R.id.image,data.getThumb());
+                if(TextUtils.isEmpty(data.getCsr())||("暂无评价").equals(data.getCsr())){
+                    holder.setText(R.id.comment,data.getCsr()+"") ;
+                }else {
+                    holder.setText(R.id.comment,data.getCsr()+"满意") ;
+                }
+
+                holder.setText(R.id.title,data.getTitle()) ;
+                holder.setText(R.id.price,"￥"+data.getShop_price());
+                if (data.isMore()){
+                    holder.setVisible(R.id.main_top,false);
+                    holder.setVisible(R.id.more_line,true);
+                }else {
+                    holder.setVisible(R.id.main_top,true);
+                    holder.setVisible(R.id.more_line,false);
+                }
+
+                holder.setOnClickListener(R.id.main_top, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
+                        intent.putExtra("shop_spot_id",data.getShop_spot_id());
+                        startActivity(intent);
+                    }
+                });
+                holder.setOnClickListener(R.id.more_line, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        TicketMainFragment.launch(getActivity());
+                    }
+                });
+
+
+            }
+        };
+        mRecycle.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        mRecycle.setAdapter(mAdapter);
+        mRecycle.setNestedScrollingEnabled(false);
+    }
+
+
+    private void settuan(){
+        gAdapter = new CommonAdapter<MainTeamBean>(getActivity(), R.layout.team_list_item, gList) {
+            @Override
+            protected void convert(ViewHolder holder, final MainTeamBean data, int position) {
+                    holder.setRunderWithUrl(R.id.photo,data.getThumb());
+                String title=data.getProductName();
+                if(!TextUtils.isEmpty(title)){
+                    holder.setText(R.id.title,title.substring(title.indexOf(">")+1,title.length()));
+                }
+                holder.setText(R.id.price,"￥"+data.getPriceAdultMin());
+                holder.setText(R.id.comment,data.getCommentNum());
+                holder.setText(R.id.manyidu,data.getCsr());
+                holder.setText(R.id.address,data.getDepartCitysName());
+                holder.setText(R.id.day_time,data.getDuration()+"日游");
+            }
+        };
+        gRecycle.setLayoutManager(new  LinearLayoutManager(getActivity()));
+        gRecycle.setAdapter(gAdapter);
+        gRecycle.setNestedScrollingEnabled(false);
+    }
+
+
+
     CitySubscriber cityEvent = new CitySubscriber() {
         @Override
         public void onEvent(CityEvent v) {
             BaseConfig bg = new BaseConfig(getActivity());
             String addre = bg.getStringValue(Constants.Address, "");
             address.setText(TextUtils.isEmpty(addre) ? "长沙" : addre);
-
         }
     };
 
@@ -165,7 +236,6 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     public void onStart() {
         super.onStart();
         banner.startAutoPlay();
-
     }
 
     @Override
@@ -183,46 +253,8 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
 
 
     @Override
-    protected boolean asyncTabInit() {
-        return true;
-    }
-
-    @Override
-    protected ArrayList<TabItem> generateTabs() {
-        ArrayList<TabItem> tabs = new ArrayList<>();
-        tabs.add(new TabItem("1", "景区门票"));
-        tabs.add(new TabItem("2", "跟团游"));
-        tabs.add(new TabItem("3", "酒店+景点"));
-        return tabs;
-    }
-
-    @Override
-    protected void setupTabLayout(Bundle savedInstanceSate) {
-        super.setupTabLayout(savedInstanceSate);
-        if (getTabItems().size() <= 3) {
-            getTablayout().setTabMode(TabLayout.MODE_FIXED);
-        }
-        getTablayout().setTabTextColors(Color.parseColor("#333333"), Color.parseColor("#59C2DE"));
-    }
-
-
-    @Override
-    protected Fragment newFragment(TabItem tabItem) {
-        return MainProductListFragment.newInstance(tabItem.getType());
-    }
-
-    @Override
     public void requestData() {
-//        throw new TaskException(TaskException.TaskError.resultIllegal + "");
         new getTopTask().execute();
-        setTabItems(generateTabs());
-        setTabInit(null);
-        getTablayout().post(new Runnable() {
-            @Override
-            public void run() {
-                setIndicator(getTablayout(), 10, 10);
-            }
-        });
     }
 
     private void setBanner() {
@@ -344,7 +376,7 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     }
 
 
-    @OnClick({R.id.gentuan_image, R.id.gt_one, R.id.gt_two, R.id.gt_three, R.id.gt_four})
+    @OnClick({R.id.gentuan_image, R.id.gt_one, R.id.gt_two, R.id.gt_three, R.id.gt_four,R.id.tuan_more})
     void gentuan(View v) {
         switch (v.getId()) {
             case R.id.gentuan_image:
@@ -357,10 +389,13 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
                 ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
                 break;
             case R.id.gt_three:
-                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                startActivity(new Intent(getActivity(), TeamAddressActivity.class));
                 break;
             case R.id.gt_four:
                 ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                break;
+            case R.id.tuan_more:
+                startActivity(new Intent(getActivity(), MainTeamActivity.class));
                 break;
         }
     }
@@ -434,6 +469,10 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
         for (int i = 0; i < info.getNav().size(); i++) {
             images.add(info.getNav().get(i).getBig_img());
         }
+        mList=info.getSpot();
+        setmenpiao();
+        gList=info.getTeam();
+        settuan();
         setBanner();
         List<HotInfo> list = info.getHot();
         if (!TextUtils.isEmpty(list.get(0).getThumb())) {
@@ -509,37 +548,6 @@ public class MainTabFragment extends ATabsTabLayoutFragment<TabItem> {
     public void dismissAlert() {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
-        }
-    }
-
-    public void setIndicator(TabLayout tabs, int leftDip, int rightDip) {
-        Class<?> tabLayout = tabs.getClass();
-        Field tabStrip = null;
-        try {
-            tabStrip = tabLayout.getDeclaredField("mTabStrip");
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        }
-
-        tabStrip.setAccessible(true);
-        LinearLayout llTab = null;
-        try {
-            llTab = (LinearLayout) tabStrip.get(tabs);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-
-        int left = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, leftDip, Resources.getSystem().getDisplayMetrics());
-        int right = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, rightDip, Resources.getSystem().getDisplayMetrics());
-
-        for (int i = 0; i < llTab.getChildCount(); i++) {
-            View child = llTab.getChildAt(i);
-            child.setPadding(0, 0, 0, 0);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1);
-            params.leftMargin = left;
-            params.rightMargin = right;
-            child.setLayoutParams(params);
-            child.invalidate();
         }
     }
 }

@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="首页"
                 android:textSize="@dimen/t_size"
-                android:textColor="#59C2DE"
+                android:textColor="#e11818"
                 />
         </LinearLayout>
         <!--2-->
@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:text="客服"
                 android:textSize="@dimen/t_size"
-                android:textColor="#666666"
+                android:textColor="#333333"
                 />
         </LinearLayout>
 
@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:text="周边"
                 android:textSize="@dimen/t_size"
-                android:textColor="#666666"
+                android:textColor="#333333"
                 />
         </LinearLayout>
         <!--3-->
@@ -122,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:text="个人中心"
                 android:textSize="@dimen/t_size"
-                android:textColor="#666666"
+                android:textColor="#333333"
                 />
         </LinearLayout>
     </LinearLayout>

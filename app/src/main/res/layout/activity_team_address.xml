@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#59C2DE"
+    android:background="#e11818"
     android:clipToPadding="true"
     android:fitsSystemWindows="true"
     tools:context="com.zhl.huiqu.main.team.TeamAddressActivity">
@@ -14,7 +14,7 @@
         android:id="@+id/top_search"
         android:layout_width="match_parent"
         android:layout_height="150px"
-        android:background="#59C2DE"
+        android:background="#e11818"
         android:padding="30px">
 
         <ImageView

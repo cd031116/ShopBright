@@ -25,6 +25,12 @@ import org.aisen.android.network.task.WorkTask;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+/*
+*
+* @author lyj
+* @describe 新增出行人信息he修改
+* @data 2017/10/16
+* */
 
 public class AddUserInfoActivity extends BaseActivity {
 

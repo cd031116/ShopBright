@@ -10,23 +10,23 @@ import java.util.List;
  */
 
 public class TeamTop implements Serializable{
-    private List<CityList> city_list;
+    private List<CityList> destination;
 
-    private List<HotInfo> hot;
+    private List<TeamHot> hot;
 
-    public List<CityList> getCity_list() {
-        return city_list;
+    public List<CityList> getDestination() {
+        return destination;
     }
 
-    public void setCity_list(List<CityList> city_list) {
-        this.city_list = city_list;
+    public void setDestination(List<CityList> destination) {
+        this.destination = destination;
     }
 
-    public List<HotInfo> getHot() {
+    public List<TeamHot> getHot() {
         return hot;
     }
 
-    public void setHot(List<HotInfo> hot) {
+    public void setHot(List<TeamHot> hot) {
         this.hot = hot;
     }
 }

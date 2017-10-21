@@ -21,7 +21,7 @@
     <dimen name="s17">17sp</dimen>
     <dimen name="s18">18sp</dimen>
     <dimen name="s20">20sp</dimen>
-    <dimen name="t_size">32px</dimen>
+    <dimen name="t_size">48px</dimen>
     <dimen name="tab_size">37px</dimen>
     <dimen name="fab_margin">16dp</dimen>
 

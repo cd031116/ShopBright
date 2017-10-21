@@ -7,22 +7,13 @@ import java.io.Serializable;
  */
 
 public class CityList implements Serializable {
-    private String city_id;
-    private String city;
+    private String desCityName;
 
-    public String getCity_id() {
-        return city_id;
+    public String getDesCityName() {
+        return desCityName;
     }
 
-    public void setCity_id(String city_id) {
-        this.city_id = city_id;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
+    public void setDesCityName(String desCityName) {
+        this.desCityName = desCityName;
     }
 }

@@ -20,6 +20,7 @@ import com.zhl.huiqu.main.ProductDetailActivity;
 import com.zhl.huiqu.main.ProductPartBean;
 import com.zhl.huiqu.main.ProductPartListBean;
 import com.zhl.huiqu.main.bean.SearchBean;
+import com.zhl.huiqu.main.search.SearchListFragment;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.Utils;
@@ -29,6 +30,7 @@ import org.aisen.android.network.task.TaskException;
 import org.aisen.android.support.inject.ViewInject;
 import org.aisen.android.support.paging.IPaging;
 import org.aisen.android.support.paging.PageIndexPaging;
+import org.aisen.android.ui.activity.container.FragmentArgs;
 import org.aisen.android.ui.fragment.ARecycleViewSwipeRefreshFragment;
 import org.aisen.android.ui.fragment.itemview.IITemView;
 import org.aisen.android.ui.fragment.itemview.IItemViewCreator;
@@ -49,6 +51,13 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
         TickListFragment fragment = new TickListFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+
+    public static void launch(Activity from, String theme_id) {
+        FragmentArgs args = new FragmentArgs();
+        args.add("theme_id", theme_id);
+        ContainerActivity.launch(from, TickListFragment.class, args);
     }
 
     @ViewInject(id = R.id.error_text)

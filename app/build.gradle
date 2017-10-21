@@ -30,7 +30,7 @@ android {
         debug {
             buildConfigField "boolean", "LOG_DEBUG", "true"
 //            buildConfigField "String", "BASE_URL", "\"http://192.168.18.234/\""
-            buildConfigField "String", "BASE_URL", "\"http://192.168.18.66/\""
+            buildConfigField "String", "BASE_URL", "\"http://192.168.18.234/\""
 //            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -69,4 +69,6 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.4'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
+    compile 'com.jcodecraeer:xrecyclerview:1.2.6'
+    compile files('libs/alipaySdk-20170922.jar')
 }

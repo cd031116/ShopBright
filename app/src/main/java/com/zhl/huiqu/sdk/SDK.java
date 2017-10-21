@@ -211,7 +211,7 @@ public class SDK extends ABizLogic {
      * @throws TaskException
      */
     public MainBean getMainTop() throws TaskException {
-        Setting action = newSetting("getMainTop", "appapi/Index/getShopTop", "获取app首页上方数据");
+        Setting action = newSetting("getMainTop", "appapi/Index/getShopIndex", "获取app首页上方数据");
         return doGet(action, null, MainBean.class);
     }
 
@@ -222,7 +222,7 @@ public class SDK extends ABizLogic {
      * @throws TaskException
      */
     public TeamTopMain getTeamTop() throws TaskException {
-        Setting action = newSetting("getMainTop", "api/Group/getSpotTheme", "获取跟团游首页上方数据");
+        Setting action = newSetting("getTeamIndexTop", "appapi/Team/getTeamIndexTop", "获取跟团游首页上方数据");
         return doPost(configHttpConfig(), action, null, null, null, TeamTopMain.class);
     }
 
@@ -233,11 +233,12 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public TeamBase getListTop(String type) throws TaskException {
-        Setting action = newSetting("getHotSpot", "api/Group/getHotSpot", "获取跟团游首页列表");
-        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?type=" + type );
+    public TeamBase getListTop(String type,String page) throws TaskException {
+        Setting action = newSetting("getTeamIndexBottom", "appapi/Team/getTeamIndexBottom", "获取跟团游首页列表");
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?type=" + type+ "?page=" + page );
         Params params = new Params();
         params.addParameter("type",type);
+        params.addParameter("page",page);
         return doPost(configHttpConfig(), action, params, null, null, TeamBase.class);
     }
 
@@ -734,6 +735,23 @@ public class SDK extends ABizLogic {
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "&out_trade_no=" + out_trade_no);
         return doGet(configHttpConfig(), action, params, BaseInfo.class);
     }
+
+    /**
+     * 调用支付宝下单接口
+     *
+     * @return
+     * @throws TaskException
+     */
+    public String getAliPay( String order_sn) throws TaskException {
+        Setting action = newSetting("public", "tp5/public", "调用支付宝下单接口");
+        Params params = new Params();
+        params.addParameter("order_sn", order_sn);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?order_sn=" + order_sn );
+        return doGet(configHttpConfig(), action, params, String.class);
+    }
+
+
+
 
     /**
      * 获取订单详情

@@ -40,19 +40,19 @@
 
             <ImageView
                 android:id="@+id/scan"
-                android:layout_width="wrap_content"
-                android:layout_height="49px"
+                android:layout_width="42px"
+                android:layout_height="42px"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dip"
-                android:padding="20px"
+                android:visibility="gone"
                 android:scaleType="centerCrop"
                 android:src="@drawable/search_sm" />
 
             <EditText
                 android:id="@+id/editSearch"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="30px"
                 android:background="@null"
@@ -61,7 +61,7 @@
                 android:gravity="center_vertical"
                 android:hint="输入您要搜索的景点/地区"
                 android:textColor="#666666"
-                android:textSize="32px" />
+                android:textSize="40px" />
         </RelativeLayout>
 
         <TextView
@@ -73,6 +73,8 @@
             android:layout_marginLeft="20px"
             android:layout_marginRight="10px"
             android:gravity="center_vertical"
+            android:textSize="40px"
+            android:textColor="#e11818"
             android:src="@drawable/hp_gray_msg"
             android:text="搜索" />
     </RelativeLayout>

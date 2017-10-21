@@ -74,7 +74,7 @@ public class GridViewsAdapter extends BaseAdapter {
          * 在给View绑定显示的数据时，计算正确的position = position + curIndex * pageSize，
          */
         int pos = position + curIndex * pageSize;
-        viewHolder.tv.setText(mDatas.get(pos).getCity());
+        viewHolder.tv.setText(mDatas.get(pos).getDesCityName());
         return convertView;
     }
 
