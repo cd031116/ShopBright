@@ -28,15 +28,15 @@ public class TrafficAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private LayoutInflater mLayoutInflater;
     private Context mContext;
-    private List<TeamDetailBean.JourneyInfoBean.TrafficBean> dataList = new ArrayList<>();
+    private List<TeamDetailBean.JourneyInfoBean.SmallTrafficBean> dataList = new ArrayList<>();
 
-    private CommonAdapter<TeamDetailBean.JourneyInfoBean.TrafficBean.trafficImgBean> trafficImgBeanCommonAdapter;
+    private CommonAdapter<TeamDetailBean.JourneyInfoBean.SmallTrafficBean.SmallTrafficImgBean> trafficImgBeanCommonAdapter;
 
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
 
-    public TrafficAdapter(Context context, List<TeamDetailBean.JourneyInfoBean.TrafficBean> dataList) {
+    public TrafficAdapter(Context context, List<TeamDetailBean.JourneyInfoBean.SmallTrafficBean> dataList) {
         this.mContext = context;
         this.dataList = dataList;
         mLayoutInflater = LayoutInflater.from(context);
@@ -48,7 +48,7 @@ public class TrafficAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
 
-    public void add(TeamDetailBean.JourneyInfoBean.TrafficBean dateEntity, int position) {
+    public void add(TeamDetailBean.JourneyInfoBean.SmallTrafficBean dateEntity, int position) {
         dataList.add(position, dateEntity);
         notifyItemInserted(position);
     }
@@ -83,15 +83,15 @@ public class TrafficAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (dataList.get(position) != null) {
-            trafficImgBeanCommonAdapter = new CommonAdapter<TeamDetailBean.JourneyInfoBean.TrafficBean.trafficImgBean>(mContext, R.layout.journey_traficc_img_item, dataList.get(position).getTrafficImg()) {
+            trafficImgBeanCommonAdapter = new CommonAdapter<TeamDetailBean.JourneyInfoBean.SmallTrafficBean.SmallTrafficImgBean>(mContext, R.layout.journey_traficc_img_item, dataList.get(position).getTrafficImg()) {
 
                 @Override
-                protected void convert(ViewHolder holder, TeamDetailBean.JourneyInfoBean.TrafficBean.trafficImgBean journeyScenicImgBean, int pos) {
+                protected void convert(ViewHolder holder, TeamDetailBean.JourneyInfoBean.SmallTrafficBean.SmallTrafficImgBean journeyScenicImgBean, int pos) {
                     holder.setRunderWithUrl(R.id.journey_traffic_img_item, journeyScenicImgBean.getImg());
                     holder.setText(R.id.img_title, journeyScenicImgBean.getImgName());
                 }
             };
-            if (dataList.get(position).getTrafficImg() != null && dataList.get(position).getTrafficImg().size() >= 3)
+            if (dataList.get(position).getTrafficImg() != null && (dataList.get(position).getTrafficImg().size() >= 3&&dataList.get(position).getTrafficImg().size()!=4))
                 ((MyViewHolder) holder).journey_traffic_list.setLayoutManager(new MyGridLayoutManager(mContext, 3));
             else
                 ((MyViewHolder) holder).journey_traffic_list.setLayoutManager(new MyGridLayoutManager(mContext, 2));
@@ -104,23 +104,23 @@ public class TrafficAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             } else
                 ((MyViewHolder) holder).traffic_from.setVisibility(View.GONE);
 
-            if (!TextUtils.isEmpty(dataList.get(position).getMeans())) {
-                if ("汽车".equals(dataList.get(position).getMeans()))
-                    ((MyViewHolder) holder).traffic_means.setBackgroundResource(R.drawable.dabache);
-                else if ("火车".equals(dataList.get(position).getMeans()))
-                    ((MyViewHolder) holder).traffic_means.setBackgroundResource(R.drawable.huoche);
-                else if ("飞机".equals(dataList.get(position).getMeans()))
-                    ((MyViewHolder) holder).traffic_means.setBackgroundResource(R.drawable.feiji);
-                else if ("轮船".equals(dataList.get(position).getMeans()))
-                    ((MyViewHolder) holder).traffic_means.setBackgroundResource(R.drawable.lunc);
-            } else
-                ((MyViewHolder) holder).traffic_means.setBackgroundResource(R.drawable.dabache);
-
-            if (!TextUtils.isEmpty(dataList.get(position).getFrom())) {
-                ((MyViewHolder) holder).traffic_to.setVisibility(View.VISIBLE);
-                ((MyViewHolder) holder).traffic_to.setText(dataList.get(position).getTo());
-            } else
-                ((MyViewHolder) holder).traffic_to.setVisibility(View.GONE);
+//            if (!TextUtils.isEmpty(dataList.get(position).getMeans())) {
+//                if ("汽车".equals(dataList.get(position).getMeans()))
+//                    ((MyViewHolder) holder).traffic_means.setBackgroundResource(R.drawable.dabache);
+//                else if ("火车".equals(dataList.get(position).getMeans()))
+//                    ((MyViewHolder) holder).traffic_means.setBackgroundResource(R.drawable.huoche);
+//                else if ("飞机".equals(dataList.get(position).getMeans()))
+//                    ((MyViewHolder) holder).traffic_means.setBackgroundResource(R.drawable.feiji);
+//                else if ("轮船".equals(dataList.get(position).getMeans()))
+//                    ((MyViewHolder) holder).traffic_means.setBackgroundResource(R.drawable.lunc);
+//            } else
+//                ((MyViewHolder) holder).traffic_means.setBackgroundResource(R.drawable.dabache);
+//
+//            if (!TextUtils.isEmpty(dataList.get(position).getFrom())) {
+//                ((MyViewHolder) holder).traffic_to.setVisibility(View.VISIBLE);
+//                ((MyViewHolder) holder).traffic_to.setText(dataList.get(position).getTo());
+//            } else
+//                ((MyViewHolder) holder).traffic_to.setVisibility(View.GONE);
 
             if (!TextUtils.isEmpty(dataList.get(position).getDescription())) {
                 ((MyViewHolder) holder).traffic_content.setVisibility(View.VISIBLE);

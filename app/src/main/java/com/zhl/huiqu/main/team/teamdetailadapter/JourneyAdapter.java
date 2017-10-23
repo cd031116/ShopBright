@@ -1,7 +1,11 @@
 package com.zhl.huiqu.main.team.teamdetailadapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +20,7 @@ import com.zhl.huiqu.pull.layoutmanager.MyLinearLayoutManager;
 import com.zhl.huiqu.recyclebase.CommonAdapter;
 import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
+import com.zhl.huiqu.utils.TrafficParser;
 import com.zhl.huiqu.widget.SimpleDividerItemDecoration;
 import com.zhl.huiqu.widget.calendar.RiliGridLayoutManager;
 
@@ -74,6 +79,7 @@ public class JourneyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         RecyclerView journey_shopping_list;
         RecyclerView journey_reminder_list;
         TextView j_day;
+        TextView traffic_text;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -85,6 +91,7 @@ public class JourneyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             journey_shopping_list = (RecyclerView) itemView.findViewById(R.id.journey_shopping_list);
             journey_reminder_list = (RecyclerView) itemView.findViewById(R.id.journey_reminder_list);
             j_day = (TextView) itemView.findViewById(R.id.j_day);
+            traffic_text = (TextView) itemView.findViewById(R.id.traffic_text);
         }
     }
 
@@ -98,12 +105,29 @@ public class JourneyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     }
 
+    private void setTrafficText(List<TeamDetailBean.JourneyInfoBean.BigTrafficBean> bigTraffic, RecyclerView.ViewHolder holder) {
+        StringBuffer trafficStr = new StringBuffer();
+        TrafficParser parser = new TrafficParser(mContext);
+        for (int i = 0; i < bigTraffic.size(); i++) {
+            String from = bigTraffic.get(i).getFrom();
+            String to = bigTraffic.get(i).getTo();
+            if (i == 0)
+                trafficStr.append(from + "\t" + bigTraffic.get(i).getMeans() + "\t" + to);
+            else
+                trafficStr.append("\t" + bigTraffic.get(i).getMeans() + "\t" + to);
+        }
+        ((MyViewHolder) holder).traffic_text.setText(parser.replace(trafficStr));
+    }
+
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 
         ((MyViewHolder) holder).j_day.setText("第" + (position + 1) + "天");
+        if (dataList.get(position).getBigTraffic() != null && dataList.get(position).getBigTraffic().size() > 0) {
+            setTrafficText(dataList.get(position).getBigTraffic(), holder);
+        }
 
-        trafficAdapter = new TrafficAdapter(mContext, dataList.get(position).getTraffic());
+        trafficAdapter = new TrafficAdapter(mContext, dataList.get(position).getSmallTraffic());
         ((MyViewHolder) holder).journey_traffic_list.setLayoutManager(new MyLinearLayoutManager(mContext));
         ((MyViewHolder) holder).journey_traffic_list.setAdapter(trafficAdapter);
 
@@ -131,7 +155,7 @@ public class JourneyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         ((MyViewHolder) holder).journey_food_list.setLayoutManager(new MyLinearLayoutManager(mContext));
         ((MyViewHolder) holder).journey_food_list.setAdapter(foodAdapter);
 
-        if (position == (dataList.size()-1)) {
+        if (position == (dataList.size() - 1)) {
             mOnDrawListener.onDrawFinish(position);
         }
     }

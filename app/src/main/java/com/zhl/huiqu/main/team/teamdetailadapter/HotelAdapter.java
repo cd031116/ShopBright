@@ -88,7 +88,7 @@ public class HotelAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     holder.setText(R.id.img_title, journeyScenicImgBean.getImgName());
                 }
             };
-            if (dataList.get(position).getHotelImg() != null && dataList.get(position).getHotelImg().size() >= 3)
+            if (dataList.get(position).getHotelImg() != null && dataList.get(position).getHotelImg().size() >= 3 && dataList.get(position).getHotelImg().size() != 4)
                 ((MyViewHolder) holder).journey_hotel_img.setLayoutManager(new MyGridLayoutManager(mContext, 3));
             else
                 ((MyViewHolder) holder).journey_hotel_img.setLayoutManager(new MyGridLayoutManager(mContext, 2));

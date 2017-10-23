@@ -9,8 +9,22 @@
     <TextView
         android:id="@+id/j_day"
         android:layout_width="wrap_content"
+        android:paddingLeft="42px"
+        android:gravity="center_vertical"
         android:layout_height="wrap_content"
+        android:background="@drawable/day_bg"
+        android:textColor="@color/white"
         android:text="第一天" />
+
+    <TextView
+        android:id="@+id/traffic_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100px"
+        android:layout_marginRight="100px"
+        android:textSize="63px"
+        android:textColor="@color/black_text"
+        android:gravity="center" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/journey_traffic_list"

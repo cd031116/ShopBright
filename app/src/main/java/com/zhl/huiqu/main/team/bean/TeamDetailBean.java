@@ -142,6 +142,24 @@ public class TeamDetailBean implements Serializable {
         private String mealInfos;
         private String activityArrangment;
         private String orderAttentions;
+        private String warmAttention;
+        private String abroadNotice;
+
+        public String getWarmAttention() {
+            return warmAttention;
+        }
+
+        public void setWarmAttention(String warmAttention) {
+            this.warmAttention = warmAttention;
+        }
+
+        public String getAbroadNotice() {
+            return abroadNotice;
+        }
+
+        public void setAbroadNotice(String abroadNotice) {
+            this.abroadNotice = abroadNotice;
+        }
 
         public String getTrafficInfos() {
             return trafficInfos;
@@ -243,8 +261,8 @@ public class TeamDetailBean implements Serializable {
         private List<FoodBean> food;
         private List<ReminderBean> reminder;
         private List<ShoppingBean> shopping;
-        private List<TrafficBean> traffic;
-
+        private List<BigTrafficBean> bigTraffic;
+        private List<SmallTrafficBean> smallTraffic;
 
         public int getDay() {
             return day;
@@ -302,13 +320,22 @@ public class TeamDetailBean implements Serializable {
             this.shopping = shopping;
         }
 
-        public List<TrafficBean> getTraffic() {
-            return traffic;
+        public List<BigTrafficBean> getBigTraffic() {
+            return bigTraffic;
         }
 
-        public void setTraffic(List<TrafficBean> traffic) {
-            this.traffic = traffic;
+        public void setBigTraffic(List<BigTrafficBean> bigTraffic) {
+            this.bigTraffic = bigTraffic;
         }
+
+        public List<SmallTrafficBean> getSmallTraffic() {
+            return smallTraffic;
+        }
+
+        public void setSmallTraffic(List<SmallTrafficBean> smallTraffic) {
+            this.smallTraffic = smallTraffic;
+        }
+
 
         public static class ScenicBean {
             /**
@@ -744,8 +771,43 @@ public class TeamDetailBean implements Serializable {
             }
         }
 
+        public static class BigTrafficBean {
+            /**
+             * from : 上海
+             * to : 太原
+             * means : 火车
+             */
 
-        public static class TrafficBean {
+            private String from;
+            private String to;
+            private String means;
+
+            public String getFrom() {
+                return from;
+            }
+
+            public void setFrom(String from) {
+                this.from = from;
+            }
+
+            public String getTo() {
+                return to;
+            }
+
+            public void setTo(String to) {
+                this.to = to;
+            }
+
+            public String getMeans() {
+                return means;
+            }
+
+            public void setMeans(String means) {
+                this.means = means;
+            }
+        }
+
+        public static class SmallTrafficBean {
             /**
              * moment : 15:00
              * description : （参考时间）指定车站乘硬卧赴山西省省会—太原（车程约1300公里，运行时间15小时左右）。本产品同步支持苏州/无锡出发的客人报名，对应参考车次如下：参考车次：上海站——太原南站 Z268次（14:55-07:09）或 上海站——太原站 Z196次（18:51-08:28）苏州站——太原南站 Z268次（15:48-07:09）无锡站——太原南站 Z268次（16:1
@@ -760,7 +822,7 @@ public class TeamDetailBean implements Serializable {
             private String from;
             private String to;
             private String means;
-            private List<trafficImgBean> trafficImg;
+            private List<SmallTrafficImgBean> trafficImg;
 
             public String getMoment() {
                 return moment;
@@ -802,19 +864,18 @@ public class TeamDetailBean implements Serializable {
                 this.means = means;
             }
 
-            public List<trafficImgBean> getTrafficImg() {
+            public List<SmallTrafficImgBean> getTrafficImg() {
                 return trafficImg;
             }
 
-            public void setTrafficImg(List<trafficImgBean> trafficImg) {
+            public void setTrafficImg(List<SmallTrafficImgBean> trafficImg) {
                 this.trafficImg = trafficImg;
             }
 
-            public static class trafficImgBean {
-
+            public static class SmallTrafficImgBean {
                 /**
-                 * img : http://m.tuniucdn.com/fb2/t1/G2/M00/AC/FF/Cii-T1kS4-2IFBmUAAhxk_ehX9QAAJwNAPWGK8ACHGr070_w320_h240_c1_t0.jpg
-                 * imgName : 福昇花园酒店
+                 * img : http://m.tuniucdn.com/fb2/t1/G1/M00/AA/71/Cii9EFjLf1GITnq_AAJjuacsjCMAAI6xABeT6EAAmPR780_w320_h240_c1_t0.jpg
+                 * imgName : 火盆烧烤
                  */
 
                 private String img;
@@ -836,7 +897,6 @@ public class TeamDetailBean implements Serializable {
                     this.imgName = imgName;
                 }
             }
-
         }
     }
 
@@ -889,15 +949,15 @@ public class TeamDetailBean implements Serializable {
     public static class ProductFeatureBean {
         /**
          * content : 景点游览时间更充裕，讲解更详细 保证游得尽兴玩得开心；
-         ✿累计2万+销量，已有4000+好评。全心全意只为追求更好的品质，品质出游，您值得拥有；
-         ✿参加旅游享矿泉水一瓶；
-         ✿兵马俑景区、华清宫景区、特别免费使用无线耳麦，抛开嘈杂的环境让您清晰倾听导游讲解；
-         ✿模范导游带您看奇迹，我们的专业，只为您的满意；
-         ✿导游全程贴心管家式服务，随时为您解决身边遇到的各种问题。让您了解西安的吃喝玩乐；
-         ✿车载WiFi随时上网，随时随地晒美图，分享旅途好心情；（部分新车辆未安装完成，特殊路段信号不好如有连接不上敬请谅解！）
-         全面提升舒适度，更有每车10%的空座率（节假日、7月-8月暑期不适用请知晓）；
-         特别推出参加行程即免费拼车接机、接火车（西安南站除外）、接高铁服务一次（西安咸阳机场拼车接机、西安火车站（西安南站除外）、西安高铁站至西安市二环内酒店）；免费接时间段为09：00——21:00（当天和其他时间段不予免费）。如需此项服务请您提前一天致电告知客服具体航班/车次信息及抵达时间，当天告知的无法安排，如有需要，需提前1天18点前来电告知专属客服。【预约成功后当地旅行社会提前1天联系您，十一期间必须提前1天15:00前预约接机，否则无法安排】拼车接机服务：需要等待时间不超过50分钟左右。如出现飞机晚点,司机师傅等待30分钟，超30分钟后无法安排接机，您可选择乘机场大巴到达市区费用需自理。敬请谅解！
-         此项服务仅限成人，儿童价、仅含车位和导服费等不参与此活动，需另补30元/人请知晓！
+         * ✿累计2万+销量，已有4000+好评。全心全意只为追求更好的品质，品质出游，您值得拥有；
+         * ✿参加旅游享矿泉水一瓶；
+         * ✿兵马俑景区、华清宫景区、特别免费使用无线耳麦，抛开嘈杂的环境让您清晰倾听导游讲解；
+         * ✿模范导游带您看奇迹，我们的专业，只为您的满意；
+         * ✿导游全程贴心管家式服务，随时为您解决身边遇到的各种问题。让您了解西安的吃喝玩乐；
+         * ✿车载WiFi随时上网，随时随地晒美图，分享旅途好心情；（部分新车辆未安装完成，特殊路段信号不好如有连接不上敬请谅解！）
+         * 全面提升舒适度，更有每车10%的空座率（节假日、7月-8月暑期不适用请知晓）；
+         * 特别推出参加行程即免费拼车接机、接火车（西安南站除外）、接高铁服务一次（西安咸阳机场拼车接机、西安火车站（西安南站除外）、西安高铁站至西安市二环内酒店）；免费接时间段为09：00——21:00（当天和其他时间段不予免费）。如需此项服务请您提前一天致电告知客服具体航班/车次信息及抵达时间，当天告知的无法安排，如有需要，需提前1天18点前来电告知专属客服。【预约成功后当地旅行社会提前1天联系您，十一期间必须提前1天15:00前预约接机，否则无法安排】拼车接机服务：需要等待时间不超过50分钟左右。如出现飞机晚点,司机师傅等待30分钟，超30分钟后无法安排接机，您可选择乘机场大巴到达市区费用需自理。敬请谅解！
+         * 此项服务仅限成人，儿童价、仅含车位和导服费等不参与此活动，需另补30元/人请知晓！
          * imgpath :
          */
 

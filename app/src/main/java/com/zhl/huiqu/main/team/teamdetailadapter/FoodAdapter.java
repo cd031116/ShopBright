@@ -39,6 +39,9 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.mContext = context;
         this.dataList = dataList;
         mLayoutInflater = LayoutInflater.from(context);
+        foodMap.put("bre", false);
+        foodMap.put("lun", false);
+        foodMap.put("din", false);
     }
 
     public void remove(int position) {
@@ -75,6 +78,7 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return vhNormal;
     }
 
+
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (dataList.get(position) != null) {
@@ -82,18 +86,12 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             for (TeamDetailBean.JourneyInfoBean.FoodBean foodBean : dataList) {
                 if (foodBean.getHasBre() == 1) {
                     foodMap.put("bre", true);
-                } else {
-                    foodMap.put("bre", false);
                 }
                 if (foodBean.getHasLun() == 1) {
                     foodMap.put("lun", true);
-                } else {
-                    foodMap.put("lun", false);
                 }
                 if (foodBean.getHasDin() == 1) {
                     foodMap.put("din", true);
-                } else {
-                    foodMap.put("din", false);
                 }
             }
 

@@ -2,6 +2,7 @@ package com.zhl.huiqu.main.team;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -63,6 +67,13 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
     LinearLayout search01;
     @Bind(R.id.pay_know_layout)
     LinearLayout payKnowLayout;
+
+    @Bind(R.id.reminder_layout)
+    LinearLayout reminder_layout;
+    @Bind(R.id.diff_layout)
+    LinearLayout diff_layout;
+    @Bind(R.id.safe_layout)
+    LinearLayout safe_layout;
 
     @Bind(R.id.banner)
     Banner banner;
@@ -137,7 +148,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         changeview(select);
         top_title.setText("详情");
         image.setVisibility(View.VISIBLE);
-        image.setImageResource(R.drawable.fenxiang);
+        image.setImageResource(R.drawable.share);
     }
 
     @OnClick({R.id.top_left, R.id.image, R.id.tab1_mian, R.id.tab2_mian, R.id.tab3_mian, R.id.submit})
@@ -152,17 +163,17 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
             case R.id.tab1_mian:
                 select = 1;
                 changeview(select);
-                myscroview.scrollTo(0,topHeight);
+                myscroview.scrollTo(0, topHeight);
                 break;
             case R.id.tab2_mian:
                 select = 2;
                 changeview(select);
-                myscroview.scrollTo(0,journeyHeight);
+                myscroview.scrollTo(0, journeyHeight);
                 break;
             case R.id.tab3_mian:
                 select = 3;
                 changeview(select);
-                myscroview.scrollTo(0,payknowHeight);
+                myscroview.scrollTo(0, payknowHeight);
                 break;
             case R.id.submit:
                 startActivity(new Intent(TeamDetailActivity.this, TeamOrderActivity.class));
@@ -170,8 +181,9 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         }
     }
 
-    /*列表数据
-   * */
+    /**
+     * 行程数据
+     */
     class obtainGroupDetail extends WorkTask<Void, Void, TeamDetailEntity> {
         @Override
         protected void onPrepare() {
@@ -255,20 +267,17 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
 
 
     /**
+     * 设置详情页View
      * @param body
      */
     private void setView(TeamDetailBean body) {
-        group_price.setText(body.getTeamInfo().getPriceAdultMin()+"");
+
+        group_price.setText(body.getTeamInfo().getPriceAdultMin() + "");
         contain_text.setText(body.getCostNotice().getCostInclude());
         tese_content.setText(body.getProductFeature().getContent());
         contents.setText(body.getTeamInfo().getProductName());
-//        a_text.setText(body.getGoods().getSecur());
-        w_text.setText(body.getBookNotice().getDiffPrice());
         zili_text.setText(body.getCostNotice().getCostExclude());
-        fu_text.setText("交通信息：" + body.getBookNotice().getTrafficInfos() +
-                "\n住宿信息：" + body.getBookNotice().getAccInfos() +
-                "\n购物信息：" + body.getBookNotice().getShopping() +
-                "\n游览信息：" + body.getBookNotice().getTour());
+        setBookNoticeView(body);
 
         journeyAdapter = new JourneyAdapter(TeamDetailActivity.this, body.getJourneyInfo());
         recycleview.setLayoutManager(new MyLinearLayoutManager(TeamDetailActivity.this));
@@ -277,17 +286,40 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         journeyAdapter.setOnDrawFinishListener(new JourneyAdapter.OnDrawListener() {
             @Override
             public void onDrawFinish(int position) {
-                new Handler().postDelayed(new Runnable(){
+                new Handler().postDelayed(new Runnable() {
 
                     public void run() {
-                        journeyHeight = recycleview.getBottom()-120;
-                        payknowHeight = payKnowLayout.getBottom()-120;
+                        journeyHeight = recycleview.getBottom() - 120;
+                        payknowHeight = payKnowLayout.getBottom() - 120;
                     }
 
                 }, 500);
             }
         });
         setBanner(body.getImg());
+    }
+
+    /**
+     * 设置预定须知
+     * @param body
+     */
+    private void setBookNoticeView(TeamDetailBean body) {
+        fu_text.setText("交通信息：" + body.getBookNotice().getTrafficInfos() +
+                "\n住宿信息：" + body.getBookNotice().getAccInfos() +
+                "\n购物信息：" + body.getBookNotice().getShopping() +
+                "\n游览信息：" + body.getBookNotice().getTour());
+        if (body.getBookNotice().getDiffPrice() != null) {
+            diff_layout.setVisibility(View.VISIBLE);
+            w_text.setText(body.getBookNotice().getDiffPrice());
+        } else diff_layout.setVisibility(View.GONE);
+        if (body.getBookNotice().getWarmAttention() != null) {
+            reminder_layout.setVisibility(View.VISIBLE);
+            fp_text.setText(body.getBookNotice().getWarmAttention());
+        } else reminder_layout.setVisibility(View.GONE);
+        if (body.getBookNotice().getAbroadNotice() != null) {
+            safe_layout.setVisibility(View.VISIBLE);
+            a_text.setText(body.getBookNotice().getAbroadNotice());
+        } else safe_layout.setVisibility(View.GONE);
     }
 
 
@@ -299,13 +331,13 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         tab2_v.setSelected(false);
         tab3_v.setSelected(false);
         if (index == 1) {
-            tab1_t.setTextColor(Color.parseColor("#59c2de"));
+            tab1_t.setTextColor(Color.parseColor("#e11818"));
             tab1_v.setSelected(true);
         } else if (index == 2) {
-            tab2_t.setTextColor(Color.parseColor("#59c2de"));
+            tab2_t.setTextColor(Color.parseColor("#e11818"));
             tab2_v.setSelected(true);
         } else {
-            tab3_t.setTextColor(Color.parseColor("#59c2de"));
+            tab3_t.setTextColor(Color.parseColor("#e11818"));
             tab3_v.setSelected(true);
         }
     }
@@ -320,7 +352,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
 
     @Override
     public void onScroll(int scrollY) {
-        Log.e("ddd", "onScroll: "+scrollY+",journeyHeight:"+journeyHeight+",payknowHeight:"+payknowHeight);
+        Log.e("ddd", "onScroll: " + scrollY + ",journeyHeight:" + journeyHeight + ",payknowHeight:" + payknowHeight);
         if (scrollY >= topHeight) {
             if (tab_mian.getParent() != search01) {
                 search02.removeView(tab_mian);

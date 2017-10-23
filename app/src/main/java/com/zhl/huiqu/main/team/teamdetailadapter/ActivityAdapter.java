@@ -85,7 +85,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     holder.setText(R.id.img_title, journeyScenicImgBean.getImgName());
                 }
             };
-            if (dataList.get(position).getActivityImg() != null && dataList.get(position).getActivityImg().size() >= 3)
+            if (dataList.get(position).getActivityImg() != null && dataList.get(position).getActivityImg().size() >= 3 && dataList.get(position).getActivityImg().size() != 4)
                 ((MyViewHolder) holder).journey_activity_list.setLayoutManager(new MyGridLayoutManager(mContext, 3));
             else
                 ((MyViewHolder) holder).journey_activity_list.setLayoutManager(new MyGridLayoutManager(mContext, 2));

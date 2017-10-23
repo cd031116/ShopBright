@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="42px"
-        android:background="@drawable/canying" />
+        android:background="@drawable/eating" />
 
     <LinearLayout
         android:layout_width="match_parent"

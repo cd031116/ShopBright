@@ -14,7 +14,12 @@
         android:id="@+id/img_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black_text"
-        android:padding="10px"/>
+        android:layout_alignBottom="@id/journey_traffic_img_item"
+        android:paddingLeft="30px"
+        android:paddingBottom="10px"
+        android:singleLine="true"
+        android:background="@drawable/address_bg_roun"
+        android:ellipsize="end"
+        android:textColor="@color/white"/>
 
 </RelativeLayout>
