@@ -50,13 +50,14 @@ public class TeamListActivity extends BaseActivity {
         Bundle bd=getIntent().getExtras();
         if(bd!=null){
             desCityId=bd.getString("desCityId");
+            select=bd.getInt("select");
         }
         FragmentManager fm = getFragmentManager();
         //初始化自定义适配器
         mAdapter =  new MyFragmentPageAdapter(fm,desCityId);
         //绑定自定义适配器
         viepager.setAdapter(mAdapter);
-        viepager.setCurrentItem(0);
+        viepager.setCurrentItem(select);
         viepager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

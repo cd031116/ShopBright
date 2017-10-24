@@ -157,6 +157,7 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
                     int pos = position + curIndex * pageSize;
                     Intent intent=new Intent(MainTeamActivity.this,TeamListActivity.class);
                     intent.putExtra("desCityId",mDatas.get(pos).getDesCityId());
+                    intent.putExtra("select",0);
                     startActivity(intent);
                 }
             });

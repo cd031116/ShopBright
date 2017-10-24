@@ -174,6 +174,7 @@ public class TeamAddressActivity extends BaseActivity {
                     public void onClick(View v) {
                         Intent intent = new Intent(TeamAddressActivity.this, TeamListActivity.class);
                         intent.putExtra("desCityId",unfo.getDesCityId());
+                        intent.putExtra("select",0);
                         startActivity(intent);
                     }
                 });

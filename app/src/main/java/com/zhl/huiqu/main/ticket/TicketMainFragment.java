@@ -27,6 +27,8 @@ import com.zhl.huiqu.base.BaseFragment;
 import com.zhl.huiqu.base.ContainerActivity;
 import com.zhl.huiqu.main.ProductDetailActivity;
 import com.zhl.huiqu.main.search.SearchFragment;
+import com.zhl.huiqu.main.team.MainTeamActivity;
+import com.zhl.huiqu.main.team.TeamListActivity;
 import com.zhl.huiqu.recyclebase.CommonAdapter;
 import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.sdk.SDK;
@@ -392,12 +394,15 @@ public class TicketMainFragment extends BaseFragment {
     private void setCity(){
         mdapter=new CommonAdapter<CityData>(getActivity(),R.layout.city_item,mcity) {
             @Override
-            protected void convert(ViewHolder holder, CityData cityData, int position) {
+            protected void convert(ViewHolder holder,final CityData cityData, int position) {
                 holder.setText(R.id.city,cityData.getCity());
                 holder.setOnClickListener(R.id.main_line, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+                        Intent  intent=new Intent(getActivity(), TeamListActivity.class);
+                        intent.putExtra("desCityId",cityData.getCity_id());
+                        intent.putExtra("select",1);
+                        startActivity(intent);
                     }
                 });
             }
