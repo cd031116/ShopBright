@@ -10,17 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.ContainerActivity;
 import com.zhl.huiqu.main.ProductDetailActivity;
-import com.zhl.huiqu.main.ProductPartBean;
-import com.zhl.huiqu.main.ProductPartListBean;
 import com.zhl.huiqu.main.bean.SearchBean;
-import com.zhl.huiqu.main.search.SearchListFragment;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.Utils;
@@ -36,19 +31,18 @@ import org.aisen.android.ui.fragment.itemview.IITemView;
 import org.aisen.android.ui.fragment.itemview.IItemViewCreator;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by lyj on 2017/8/15.
  */
 
-public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo, SearchBean, Serializable> {
+public class TicksListFragment extends ARecycleViewSwipeRefreshFragment<TickInfo, SearchBean, Serializable> {
 
-    public static TickListFragment newInstance(String theme_id) {
+    public static TicksListFragment newInstance(String theme_id) {
         Bundle args = new Bundle();
         args.putString("theme_id", theme_id);
-        TickListFragment fragment = new TickListFragment();
+        TicksListFragment fragment = new TicksListFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,7 +51,7 @@ public class TickListFragment  extends ARecycleViewSwipeRefreshFragment<TickInfo
     public static void launch(Activity from, String theme_id) {
         FragmentArgs args = new FragmentArgs();
         args.add("theme_id", theme_id);
-        ContainerActivity.launch(from, TickListFragment.class, args);
+        ContainerActivity.launch(from, TicksListFragment.class, args);
     }
 
     @ViewInject(id = R.id.error_text)

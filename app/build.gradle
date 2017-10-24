@@ -57,6 +57,7 @@ dependencies {
     compile "com.squareup.okhttp:okhttp:${rootProject.ext.okhttpLibVersion}"
     compile "com.android.support:cardview-v7:${rootProject.ext.supportLibVersion}"
     compile files('libs/BaiduLBS_Android.jar')
+    compile files('libs/alipaySdk-20170922.jar')
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -69,5 +70,4 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.4'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
-    compile files('libs/alipaySdk-20170922.jar')
 }

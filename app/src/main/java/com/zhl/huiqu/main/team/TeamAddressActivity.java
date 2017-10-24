@@ -77,7 +77,7 @@ public class TeamAddressActivity extends BaseActivity {
                 break;
             case R.id.city_p:
                 Intent intent = new Intent(TeamAddressActivity.this, TeamListActivity.class);
-//                intent.putExtra("",);
+                intent.putExtra("desCityId",(String) city_p.getTag(R.id.TAG_IMAGE));
                 startActivity(intent);
                 break;
         }
@@ -166,14 +166,14 @@ public class TeamAddressActivity extends BaseActivity {
     private void setCityData() {
         nAdapter = new CommonAdapter<GoalHot>(TeamAddressActivity.this, R.layout.team_address_right, nList) {
             @Override
-            protected void convert(ViewHolder holder, GoalHot unfo, int position) {
+            protected void convert(ViewHolder holder,final GoalHot unfo, int position) {
                 holder.setRunderWithUrl(R.id.city_p, unfo.getCityImg());
                 holder.setText(R.id.city_name, unfo.getDesCityName());
                 holder.setOnClickListener(R.id.main_line, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(TeamAddressActivity.this, TeamListActivity.class);
-//                intent.putExtra("",);
+                        intent.putExtra("desCityId",unfo.getDesCityId());
                         startActivity(intent);
                     }
                 });

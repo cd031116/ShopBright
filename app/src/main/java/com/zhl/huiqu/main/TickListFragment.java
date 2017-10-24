@@ -1,4 +1,4 @@
-package com.zhl.huiqu.main.team;
+package com.zhl.huiqu.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,22 +14,13 @@ import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.interfaces.ItemCallback;
-import com.zhl.huiqu.interfaces.ItemTeamCallback;
-import com.zhl.huiqu.main.MainProductListFragment;
-import com.zhl.huiqu.main.ProductDetailActivity;
-import com.zhl.huiqu.main.ProductPartBean;
-import com.zhl.huiqu.main.ProductPartItemView;
-import com.zhl.huiqu.main.ProductPartListBean;
-import com.zhl.huiqu.main.team.bean.GroupListBase;
-import com.zhl.huiqu.main.team.bean.TeamListInfo;
-import com.zhl.huiqu.main.team.itemview.TeamPartItemView;
+import com.zhl.huiqu.main.team.SelecTeamActivity;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.sdk.eventbus.TeamEvent;
 import com.zhl.huiqu.sdk.eventbus.TeamEventSubscriber;
-import com.zhl.huiqu.sdk.eventbus.TickSearchEvent;
-import com.zhl.huiqu.sdk.eventbus.TickSearchSubscriber;
+import com.zhl.huiqu.sdk.eventbus.TickEvent;
+import com.zhl.huiqu.sdk.eventbus.TickEventSubscriber;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
-import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.utils.Utils;
 
 import org.aisen.android.component.eventbus.NotificationCenter;
@@ -38,7 +29,6 @@ import org.aisen.android.support.inject.OnClick;
 import org.aisen.android.support.inject.ViewInject;
 import org.aisen.android.support.paging.IPaging;
 import org.aisen.android.support.paging.PageIndexPaging;
-import org.aisen.android.ui.fragment.APagingFragment;
 import org.aisen.android.ui.fragment.ARecycleViewSwipeRefreshFragment;
 import org.aisen.android.ui.fragment.itemview.IITemView;
 import org.aisen.android.ui.fragment.itemview.IItemViewCreator;
@@ -46,25 +36,21 @@ import org.aisen.android.ui.fragment.itemview.IItemViewCreator;
 import java.io.Serializable;
 import java.util.List;
 
-/*
-*
-* @author lyj
-* @describe  跟团游列表价筛选
-* @data 2017/10/23
-* */
+/**
+ * Created by Administrator on 2017/10/23.
+ */
 
+public class TickListFragment extends ARecycleViewSwipeRefreshFragment<ProductPartBean, ProductPartListBean, Serializable> implements ItemCallback {
+    private String themeId = "";
+    private String gradeId = "";
+    private String desCityId = "";
+    private String price = "";
+    private String sales = "";
 
-public class TeamListFragment extends ARecycleViewSwipeRefreshFragment<TeamListInfo, GroupListBase, Serializable> implements ItemTeamCallback {
-    private String themeId="";
-    private String gradeId="";
-    private String desCityId="";
-    private String price="";
-    private String sales="";
-
-    public static TeamListFragment newInstance(String desCityId) {
+    public static TickListFragment newInstance(String type) {
         Bundle args = new Bundle();
-        args.putString("desCityId", desCityId);
-        TeamListFragment fragment = new TeamListFragment();
+        args.putString("type", type);
+        TickListFragment fragment = new TickListFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -89,7 +75,7 @@ public class TeamListFragment extends ARecycleViewSwipeRefreshFragment<TeamListI
     ImageView xiao_up;
     @ViewInject(id = R.id.xiao_down)
     ImageView xiao_down;
-    private String type="team";//ticket
+    private String type = "ticket";
 
     @Override
     public int inflateContentView() {
@@ -99,20 +85,18 @@ public class TeamListFragment extends ARecycleViewSwipeRefreshFragment<TeamListI
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        NotificationCenter.defaultCenter().subscriber(TeamEvent.class, teamEvent);
+        NotificationCenter.defaultCenter().subscriber(TickEvent.class, teamEvent);
     }
 
 
-
-    TeamEventSubscriber teamEvent = new TeamEventSubscriber(){
+    TickEventSubscriber teamEvent = new TickEventSubscriber() {
         @Override
-        public void onEvent(TeamEvent info){
-            desCityId=info.getDesCityId();
-            themeId=info.getThemeId();
+        public void onEvent(TickEvent info) {
+            gradeId = info.getGradeId();
+            themeId = info.getThemeId();
             requestData(RefreshMode.reset);
         }
     };
-
 
 
     @Override
@@ -123,17 +107,17 @@ public class TeamListFragment extends ARecycleViewSwipeRefreshFragment<TeamListI
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         super.onItemClick(parent, view, position, id);
-        String a = getAdapterItems().get(position).getProductId();
+        String a = getAdapterItems().get(position).getShop_spot_id() + "";
         if (position < getAdapterItems().size()) {
-            Intent intent = new Intent(getActivity(), TeamDetailActivity.class);
-            intent.putExtra("spot_team_id", a + "");
+            Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
+            intent.putExtra("shop_spot_id", a);
             startActivity(intent);
         }
     }
 
-    @OnClick({R.id.xiaoliang,R.id.down_image,R.id.up_image,R.id.jiage,R.id.xiao_up,R.id.xiao_down,R.id.t_shaixuan,R.id.i_shaixuan})
+    @OnClick({R.id.xiaoliang, R.id.down_image, R.id.up_image, R.id.jiage, R.id.xiao_up, R.id.xiao_down, R.id.t_shaixuan, R.id.i_shaixuan})
     void onlciu(View v) {
         switch (v.getId()) {
             case R.id.jiage:
@@ -148,8 +132,8 @@ public class TeamListFragment extends ARecycleViewSwipeRefreshFragment<TeamListI
                 break;
             case R.id.t_shaixuan:
             case R.id.i_shaixuan:
-                Intent intent=new Intent(getActivity(), SelecTeamActivity.class);
-                intent.putExtra("type","team");
+                Intent intent = new Intent(getActivity(), SelectTickActivity.class);
+                intent.putExtra("type", "ticket");
                 startActivity(intent);
                 break;
         }
@@ -162,28 +146,27 @@ public class TeamListFragment extends ARecycleViewSwipeRefreshFragment<TeamListI
             if (xiao_down.isSelected()) {
                 xiao_up.setSelected(true);
                 xiao_down.setSelected(false);
-                price="";
+                price = "";
                 sales = "1";
 
             } else {
                 xiao_down.setSelected(true);
                 xiao_up.setSelected(false);
-                price="";
+                price = "";
                 sales = "2";
-
             }
         } else {
             xiao_up.setSelected(false);
             xiao_down.setSelected(false);
             if (up_image.isSelected()) {
-                sales="";
+                sales = "";
                 price = "1";
                 up_image.setSelected(false);
                 down_image.setSelected(true);
             } else {
                 down_image.setSelected(false);
                 up_image.setSelected(true);
-                sales="";
+                sales = "";
                 price = "2";
             }
         }
@@ -192,27 +175,27 @@ public class TeamListFragment extends ARecycleViewSwipeRefreshFragment<TeamListI
 
 
     @Override
-    public IItemViewCreator<TeamListInfo> configItemViewCreator() {
-        return new IItemViewCreator<TeamListInfo>() {
+    public IItemViewCreator<ProductPartBean> configItemViewCreator() {
+        return new IItemViewCreator<ProductPartBean>() {
             @Override
             public View newContentView(LayoutInflater layoutInflater, ViewGroup viewGroup, int i) {
-                return layoutInflater.inflate(TeamPartItemView.LAYOUT_RES, viewGroup, false);
+                return layoutInflater.inflate(ProductPartItemView.LAYOUT_RES, viewGroup, false);
             }
 
             @Override
-            public IITemView<TeamListInfo> newItemView(View view, int i) {
-                return new TeamPartItemView(getActivity(), view, TeamListFragment.this);
+            public IITemView<ProductPartBean> newItemView(View view, int i) {
+                return new ProductPartItemView(getActivity(), view, TickListFragment.this);
             }
         };
     }
 
     @Override
-    protected IItemViewCreator<TeamListInfo> configFooterViewCreator() {
+    protected IItemViewCreator<ProductPartBean> configFooterViewCreator() {
         return Utils.configFooterViewCreator(getActivity(), this);
     }
 
     @Override
-    protected IPaging<TeamListInfo, GroupListBase> newPaging() {
+    protected IPaging<ProductPartBean, ProductPartListBean> newPaging() {
         return new PageIndexPaging<>();
     }
 
@@ -237,7 +220,6 @@ public class TeamListFragment extends ARecycleViewSwipeRefreshFragment<TeamListI
     @Override
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate) {
         super.layoutInit(inflater, savedInstanceSate);
-        desCityId=getArguments().getString("desCityId");
 //        recycleview.addItemDecoration(new SimpleDividerItemDecoration(getActivity(), null, 1));
 //        scrollView.setFillViewport(true);
     }
@@ -249,7 +231,12 @@ public class TeamListFragment extends ARecycleViewSwipeRefreshFragment<TeamListI
 
 
     @Override
-    public void onClickItemBean(TeamListInfo bean, int position) {
+    public void onClickItem(int position) {
+
+    }
+
+    @Override
+    public void onClickItemBean(ProductPartBean bean, int position) {
 //        if (bean.isup()) {
 //            bean.setIsup(false);
 //        } else {
@@ -258,18 +245,18 @@ public class TeamListFragment extends ARecycleViewSwipeRefreshFragment<TeamListI
         recycleview.getAdapter().notifyItemChanged(position);
     }
 
-    class Task extends APagingTask<Void, Void, GroupListBase> {
+    class Task extends APagingTask<Void, Void, ProductPartListBean> {
         public Task(RefreshMode mode) {
             super(mode);
         }
 
         @Override
-        protected List<TeamListInfo> parseResult(GroupListBase productPartListBean) {
+        protected List<ProductPartBean> parseResult(ProductPartListBean productPartListBean) {
             return productPartListBean.getBody();
         }
 
         @Override
-        protected GroupListBase workInBackground(RefreshMode refreshMode, String s, String nextPage, Void... voids) throws TaskException {
+        protected ProductPartListBean workInBackground(RefreshMode refreshMode, String s, String nextPage, Void... voids) throws TaskException {
             int start = 1;
             if (mode == RefreshMode.update && !TextUtils.isEmpty(nextPage)) {
                 try {
@@ -279,7 +266,7 @@ public class TeamListFragment extends ARecycleViewSwipeRefreshFragment<TeamListI
                 }
             }
 
-            GroupListBase beans = queryList(start);
+            ProductPartListBean beans = queryList(start);
 
             if (beans != null && beans.getBody() != null) {
                 beans.setEndPaging(beans.getBody().size() <= 5);
@@ -291,14 +278,14 @@ public class TeamListFragment extends ARecycleViewSwipeRefreshFragment<TeamListI
         protected void onFailure(TaskException exception) {
             super.onFailure(exception);
             error_text.setText(exception.getMessage());
-//            if ("noneNetwork".equals(exception.getCode())) {
+//            if ("noneNetwork".equals(exception.getCode())){
 //                error_image.setImageResource(R.mipmap.no_net);
 //            }
         }
     }
 
-    protected GroupListBase queryList(int start) throws TaskException {
-        return SDK.newInstance(getActivity()).getProductByCondition(type,themeId, gradeId,desCityId,price,sales,start+"");
+    protected ProductPartListBean queryList(int start) throws TaskException {
+        return SDK.newInstance(getActivity()).getTickByCondition(type, themeId, gradeId, desCityId, price, sales, start + "");
     }
 
     @Override
@@ -306,5 +293,6 @@ public class TeamListFragment extends ARecycleViewSwipeRefreshFragment<TeamListI
         super.onDestroy();
         NotificationCenter.defaultCenter().unsubscribe(TeamEvent.class, teamEvent);
     }
+
 
 }

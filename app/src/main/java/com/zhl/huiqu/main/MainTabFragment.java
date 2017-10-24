@@ -33,6 +33,8 @@ import com.zhl.huiqu.main.hotelTour.MainHotelTourActivity;
 import com.zhl.huiqu.main.search.SearchFragment;
 import com.zhl.huiqu.main.team.MainTeamActivity;
 import com.zhl.huiqu.main.team.TeamAddressActivity;
+import com.zhl.huiqu.main.team.TeamDetailActivity;
+import com.zhl.huiqu.main.team.TeamListActivity;
 import com.zhl.huiqu.main.ticket.TicketListActivity;
 import com.zhl.huiqu.main.ticket.TicketMainFragment;
 import com.zhl.huiqu.recyclebase.CommonAdapter;
@@ -208,6 +210,14 @@ public class MainTabFragment extends BaseFragment{
                 holder.setText(R.id.manyidu,data.getCsr());
                 holder.setText(R.id.address,data.getDepartCitysName());
                 holder.setText(R.id.day_time,data.getDuration()+"日游");
+                holder.setOnClickListener(R.id.main_top, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), TeamDetailActivity.class);
+                        intent.putExtra("spot_team_id",data.getProductId());
+                        startActivity(intent);
+                    }
+                });
             }
         };
         gRecycle.setLayoutManager(new  LinearLayoutManager(getActivity()));
@@ -293,8 +303,7 @@ public class MainTabFragment extends BaseFragment{
 //                startActivity(new Intent(getActivity(), CaptureActivity.class));
                 break;
             case R.id.searh_line:
-                SearchFragment.launch(getActivity());
-//                startActivity(new Intent(getActivity(), TixkSearchActivity.class));
+                startActivity(new Intent(getActivity(), TeamListActivity.class));
                 break;
             case R.id.main_mp:
                 TicketMainFragment.launch(getActivity());

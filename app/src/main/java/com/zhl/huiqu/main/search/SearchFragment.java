@@ -1,15 +1,11 @@
 package com.zhl.huiqu.main.search;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,21 +16,13 @@ import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseFragment;
 import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.base.ContainerActivity;
-import com.zhl.huiqu.main.MainTabFragment;
 import com.zhl.huiqu.main.bean.SearchEntity;
 import com.zhl.huiqu.main.bean.SearchInfo;
-import com.zhl.huiqu.main.ticket.TickListFragment;
-import com.zhl.huiqu.personal.KefuCenterFragment;
-import com.zhl.huiqu.personal.PersonalFragment;
 import com.zhl.huiqu.scan.CaptureActivity;
 import com.zhl.huiqu.sdk.SDK;
-import com.zhl.huiqu.sdk.eventbus.ISearchSubscriber;
-import com.zhl.huiqu.sdk.eventbus.SearchEvent;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.widget.TagCloudView;
 
-import org.aisen.android.common.utils.Logger;
-import org.aisen.android.component.eventbus.NotificationCenter;
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
 import org.aisen.android.support.inject.OnClick;

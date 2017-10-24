@@ -42,6 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
                 android:layout_toLeftOf="@+id/go_search"
                 android:layout_toRightOf="@+id/line_back">
 
@@ -68,6 +69,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10px"
                 android:layout_marginRight="10px"
+                android:visibility="invisible"
                 android:gravity="center_vertical"
                 android:src="@drawable/xiaoxi_bai" />
 
@@ -125,7 +127,6 @@
                         android:textColor="#ffffff"
                         android:textSize="32px" />
 
-
                     <TextView
                         android:id="@+id/line_t"
                         android:layout_width="1px"
@@ -133,7 +134,7 @@
                         android:layout_marginLeft="28px"
                         android:layout_marginRight="28px"
                         android:layout_toRightOf="@+id/address"
-                        android:background="#949393" />
+                        android:background="#DC3B3B" />
 
 
                     <TextView
@@ -154,242 +155,19 @@
 
 
             <!--1-->
-            <LinearLayout
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:orientation="horizontal"
-                android:paddingTop="55px">
-
-                <LinearLayout
-                    android:id="@+id/all_line"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="86px"
-                        android:layout_height="86px"
-                        android:src="@drawable/t_quanbu" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="22px"
-                        android:text="全部"
-                        android:textColor="@color/black_text"
-                        android:textSize="28px" />
-                </LinearLayout>
+                android:layout_height="460px" />
 
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="95px"
-                        android:layout_height="86px"
-                        android:src="@drawable/t_lmhj" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="22px"
-                        android:text="浪漫海景"
-                        android:textColor="@color/black_text"
-                        android:textSize="28px" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="88px"
-                        android:layout_height="86px"
-                        android:src="@drawable/t_gjms" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="22px"
-                        android:text="风景名胜"
-                        android:textColor="@color/black_text"
-                        android:textSize="28px" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="95px"
-                        android:layout_height="86px"
-                        android:src="@drawable/t_ssly" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="22px"
-                        android:text="水上乐园"
-                        android:textColor="@color/black_text"
-                        android:textSize="28px" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="92px"
-                        android:layout_height="86px"
-                        android:src="@drawable/t_csgg" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="22px"
-                        android:text="城市观光"
-                        android:textColor="@color/black_text"
-                        android:textSize="28px" />
-                </LinearLayout>
-            </LinearLayout>
-            <!--2-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:orientation="horizontal"
-                android:paddingBottom="55px"
-                android:paddingTop="74px">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="91px"
-                        android:layout_height="86px"
-                        android:src="@drawable/t_ylsj" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="22px"
-                        android:text="游乐世界"
-                        android:textColor="@color/black_text"
-                        android:textSize="28px" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="82px"
-                        android:layout_height="86px"
-                        android:src="@drawable/t_lsrw" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="22px"
-                        android:text="历史人文"
-                        android:textColor="@color/black_text"
-                        android:textSize="28px" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="89px"
-                        android:layout_height="86px"
-                        android:src="@drawable/t_jkys" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="22px"
-                        android:text="健康养生"
-                        android:textColor="@color/black_text"
-                        android:textSize="28px" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="86px"
-                        android:layout_height="86px"
-                        android:src="@drawable/t_ysjd" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="22px"
-                        android:text="影视基地"
-                        android:textColor="@color/black_text"
-                        android:textSize="28px" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="86px"
-                        android:layout_height="86px"
-                        android:src="@drawable/t_fsmq" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="22px"
-                        android:text="风俗民情"
-                        android:textColor="@color/black_text"
-                        android:textSize="28px" />
-                </LinearLayout>
-            </LinearLayout>
 
 
             <!--热门-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30px"
+                android:layout_marginTop="28px"
                 android:background="#ffffff"
                 android:orientation="vertical">
 
@@ -405,7 +183,8 @@
                         android:id="@+id/zb_lv"
                         android:layout_width="8px"
                         android:layout_height="wrap_content"
-                        android:background="#50D7F9"
+                        android:background="#e11818"
+                        android:layout_centerVertical="true"
                         android:padding="10px"
                         android:textColor="#343434" />
 
@@ -416,6 +195,7 @@
                         android:layout_toRightOf="@+id/zb_lv"
                         android:padding="10px"
                         android:text="热门目的地"
+                        android:layout_centerVertical="true"
                         android:textColor="@color/black"
                         android:textSize="48px" />
 
@@ -428,10 +208,11 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="30px"
                         android:drawablePadding="30px"
+
                         android:drawableRight="@drawable/team_into_lan"
                         android:gravity="center_vertical"
                         android:text="全部"
-                        android:textColor="#59c2de"
+                        android:textColor="#e11818"
                         android:textSize="32px" />
                 </RelativeLayout>
 
@@ -457,10 +238,94 @@
 
             </LinearLayout>
 
+
+            <!--主题-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30px"
+                android:layout_marginTop="28px"
+                android:background="#ffffff"
+                android:orientation="horizontal"
+                android:paddingBottom="20px"
+                android:paddingTop="20px">
+
+                <TextView
+                    android:id="@+id/zt_lv"
+                    android:layout_width="8px"
+                    android:layout_height="wrap_content"
+                    android:background="#e11818"
+                    android:layout_centerVertical="true"
+                    android:padding="10px"
+                    android:textColor="#343434" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10px"
+                    android:layout_toRightOf="@+id/zt_lv"
+                    android:layout_centerVertical="true"
+                    android:padding="10px"
+                    android:text="主题跟团"
+                    android:textColor="@color/black"
+                    android:textSize="48px" />
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:textSize="48px"
+                    android:paddingBottom="28px"
+                    android:drawableTop="@drawable/qz_you"
+                    android:drawablePadding="28px"
+                    android:gravity="center"
+                    android:text="亲子游"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:textSize="48px"
+                    android:paddingBottom="28px"
+                    android:gravity="center"
+                    android:drawableTop="@drawable/pm_you"
+                    android:drawablePadding="28px"
+                    android:text="爸妈游"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:gravity="center"
+                    android:paddingBottom="28px"
+                    android:drawableTop="@drawable/confidante"
+                    android:drawablePadding="28px"
+                    android:textSize="48px"
+                    android:text="闺蜜游"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+
+
+
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28px"
                 android:background="#ffffff"
                 android:orientation="horizontal"
                 android:paddingBottom="20px"
@@ -470,7 +335,8 @@
                     android:id="@+id/dj_lv"
                     android:layout_width="8px"
                     android:layout_height="wrap_content"
-                    android:background="#50D7F9"
+                    android:background="#e11818"
+                    android:layout_centerVertical="true"
                     android:padding="10px"
                     android:textColor="#343434" />
 
@@ -479,6 +345,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10px"
                     android:layout_toRightOf="@+id/dj_lv"
+                    android:layout_centerVertical="true"
                     android:padding="10px"
                     android:text="当季热卖"
                     android:textColor="@color/black"
@@ -551,8 +418,9 @@
                         android:id="@+id/jx_lv"
                         android:layout_width="8px"
                         android:layout_height="wrap_content"
-                        android:background="#50D7F9"
+                        android:background="#e11818"
                         android:padding="10px"
+                        android:layout_centerVertical="true"
                         android:textColor="#343434" />
 
                     <TextView
@@ -561,6 +429,7 @@
                         android:layout_marginLeft="10px"
                         android:layout_toRightOf="@+id/jx_lv"
                         android:padding="10px"
+                        android:layout_centerVertical="true"
                         android:text="精选推荐"
                         android:textColor="@color/black"
                         android:textSize="48px" />
@@ -577,7 +446,7 @@
                         android:drawableRight="@drawable/team_into_lan"
                         android:gravity="center_vertical"
                         android:text="所有路线"
-                        android:textColor="#59c2de"
+                        android:textColor="#e11818"
                         android:textSize="32px" />
                 </RelativeLayout>
             </LinearLayout>

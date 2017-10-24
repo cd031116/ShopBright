@@ -27,7 +27,7 @@ import org.aisen.android.ui.fragment.adapter.ARecycleViewItemView;
  */
 
 public class TeamPartItemView extends ARecycleViewItemView<TeamListInfo> {
-    public static final int LAYOUT_RES = R.layout.item_product_part;
+    public static final int LAYOUT_RES = R.layout.team_list_item;
 
     @ViewInject(id = R.id.photo)
     ImageView photo;
@@ -37,12 +37,12 @@ public class TeamPartItemView extends ARecycleViewItemView<TeamListInfo> {
     TextView comment;
     @ViewInject(id = R.id.price)
     TextView price;
-    @ViewInject(id = R.id.desc)
-    TextView desc;
+    @ViewInject(id = R.id.address)
+    TextView address;
     @ViewInject(id = R.id.manyidu)
     TextView manyidu;
-    @ViewInject(id = R.id.neirong)
-    TextView neirong;
+    @ViewInject(id = R.id.day_time)
+    TextView day_time;
     @ViewInject(id = R.id.nei_line)
     LinearLayout nei_line;
 
@@ -84,7 +84,7 @@ public class TeamPartItemView extends ARecycleViewItemView<TeamListInfo> {
     public void onBindData(View view, TeamListInfo bean, int i) {
         this.posiiton=i;
         u_click.setTag(bean);
-        neirong.setTag(bean);
+//        neirong.setTag(bean);
         RequestOptions myOptions = new RequestOptions()
                 .centerCrop()
                 .transform(new GlideRoundTransform(activity, 8));
@@ -96,23 +96,15 @@ public class TeamPartItemView extends ARecycleViewItemView<TeamListInfo> {
                     .into(photo);
             photo.setTag(R.id.indexTag,bean.getThumb());
         }
-        title.setText(bean.getTitle());
+        price.setText("￥"+bean.getPriceAdultMin());
 
-        if (TextUtils.isEmpty(bean.getDesc())) {
-            arrow.setVisibility(View.GONE);
-            u_click.setEnabled(false);
-        } else {
-            arrow.setVisibility(View.VISIBLE);
-            u_click.setEnabled(true);
-        }
-        if (bean.isup()) {
-            neirong.setText(bean.getDesc().trim().toString());
-            arrow.setImageResource(R.drawable.mpxq_up);
-            nei_line.setVisibility(View.VISIBLE);
-        } else {
-            neirong.setText("");
-            arrow.setImageResource(R.drawable.mpxq_down);
-            nei_line.setVisibility(View.GONE);
+
+        manyidu.setText(bean.getCsr());
+        address.setText(bean.getDepartCitysName());
+        day_time.setText(bean.getDuration()+"日游");
+         String stitle=bean.getProductName();
+        if(!TextUtils.isEmpty(stitle)){
+            title.setText(stitle.substring(stitle.indexOf(">")+1,stitle.length()));
         }
 
         if (itemPosition() == 0) {

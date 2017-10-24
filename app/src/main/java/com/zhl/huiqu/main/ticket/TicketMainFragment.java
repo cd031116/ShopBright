@@ -26,6 +26,7 @@ import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.base.BaseFragment;
 import com.zhl.huiqu.base.ContainerActivity;
 import com.zhl.huiqu.main.ProductDetailActivity;
+import com.zhl.huiqu.main.search.SearchFragment;
 import com.zhl.huiqu.recyclebase.CommonAdapter;
 import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.sdk.SDK;
@@ -300,7 +301,7 @@ public class TicketMainFragment extends BaseFragment {
                 break;
             case R.id.searh_line:
             case R.id.editSearch:
-                startActivity(new Intent(getActivity(), TixkSearchActivity.class));
+                SearchFragment.launch(getActivity());
                 break;
             case R.id.temai:
                 ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");

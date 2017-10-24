@@ -21,12 +21,15 @@ import com.zhl.huiqu.main.team.bean.FilterBase;
 import com.zhl.huiqu.main.team.bean.GoalBean;
 import com.zhl.huiqu.main.team.bean.GroupListBase;
 import com.zhl.huiqu.main.team.bean.LikeEntity;
+import com.zhl.huiqu.main.team.bean.SearBase;
 import com.zhl.huiqu.main.team.bean.TeamBase;
 import com.zhl.huiqu.main.team.bean.TeamDetailBean;
 import com.zhl.huiqu.main.team.bean.TeamDetailEntity;
+import com.zhl.huiqu.main.team.bean.TeamSearchInfo;
 import com.zhl.huiqu.main.team.bean.TeamTopMain;
 import com.zhl.huiqu.main.ticket.CityInfo;
 import com.zhl.huiqu.main.ticket.SpotTBean;
+import com.zhl.huiqu.main.ticket.TickBase;
 import com.zhl.huiqu.main.ticket.TickMainBean;
 import com.zhl.huiqu.personal.bean.AllOrderBean;
 import com.zhl.huiqu.personal.bean.CollectBean;
@@ -251,12 +254,27 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public FilterBase getFilter() throws TaskException {
-        Setting action = newSetting("getFilter", "api/alist/getFilter", "获取筛选条件");
+    public FilterBase getCondition(String type) throws TaskException {
+        Setting action = newSetting("getFilter", "appapi/Common/getCondition", "获取筛选条件");
+        Params params = new Params();
+        params.addParameter("type",type);
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() );
-        return doPost(configHttpConfig(), action, null, null, null, FilterBase.class);
+        return doPost(configHttpConfig(), action, params, null, null, FilterBase.class);
     }
 
+    /**
+     * 筛选条件
+     *
+     * @return
+     * @throws TaskException
+     */
+    public TickBase getTickTheme(String type) throws TaskException {
+        Setting action = newSetting("getFilter", "appapi/Common/getCondition", "获取筛选条件");
+        Params params = new Params();
+        params.addParameter("type",type);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() );
+        return doPost(configHttpConfig(), action, params, null, null, TickBase.class);
+    }
 
 
     /**
@@ -439,6 +457,63 @@ public class SDK extends ABizLogic {
         params.addParameter("device_num", device_num);
         params.addParameter("page", page);
         return doGet(action, basicParams(params), SearchTickEntity.class);
+    }
+
+
+
+
+    /**
+     * 获取热门搜索(跟团游)
+     *
+     * @return
+     * @throws TaskException
+     */
+    public SearBase getTeamgetHotSearch() throws TaskException {
+        Setting action = newSetting("getHotSearch", "appapi/Team/getHotSearch", "获取热门搜索");
+        return doGet(action, null, SearBase.class);
+    }
+
+    /**
+     * 获取搜索历史(跟团游)
+     *
+     * @param device_num //手机设备号
+     * @return
+     * @throws TaskException
+     */
+    public SearBase getTeamSearchHistory(String device_num) throws TaskException {
+        Setting action = newSetting("getSearchHistory", "appapi/Team/getSearchHistory", "获取搜索历史");
+        Params params = new Params();
+        params.addParameter("deviceNum", device_num);
+        return doGet(action, basicParams(params), SearBase.class);
+    }
+
+
+    /**
+     * 清空搜索历史(跟团游)
+     *
+     * @return
+     * @throws TaskException
+     */
+    public BaseInfo clearTeamSearchHistory(String device_num) throws TaskException {
+        Setting action = newSetting("clearSearchHistory", "appapi/Team/clearSearchHistory", "清空搜索历史");
+        Params params = new Params();
+        params.addParameter("deviceNum", device_num);
+        return doGet(action, basicParams(params), BaseInfo.class);
+    }
+
+    /**
+     * 通过搜索条件获取跟团游
+     *
+     * @return
+     * @throws TaskException
+     */
+    public TeamSearchInfo getSearchTeamByCondition(String condition, String device_num, String page) throws TaskException {
+        Setting action = newSetting("getSearchInfoByCondition", "appapi/Team/getSearchInfoByCondition", "通过搜索条件获取景点");
+        Params params = new Params();
+        params.addParameter("condition", condition);
+        params.addParameter("deviceNum", device_num);
+        params.addParameter("page", page);
+        return doGet(action, basicParams(params), TeamSearchInfo.class);
     }
 
     /**
@@ -902,20 +977,62 @@ public class SDK extends ABizLogic {
 
 
 
-
     /**
      *
      *
      * @return
-     * @throws TaskException
+     * @throws TaskException 获取门票游列表页数据
      */
-    public GroupListBase getPackList(String type,String theme_id ,String city_id) throws TaskException {
-        Setting action = newSetting("getPackList", "api/alist/getPackList", "获取常用联系人信息");
+    public ProductPartListBean getTickByCondition(String type,String themeId ,String gradeId ,String desCityId,String price,String sales,String page) throws TaskException {
+        Setting action = newSetting("getProductByCondition", "appapi/Common/getProductByCondition", "获取跟团游列表页数据");
         Params params = new Params();
         params.addParameter("type", type);
-        params.addParameter("theme_id", theme_id);
-        params.addParameter("city_id", city_id);
-        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?theme_id=" + theme_id);
+        if(!TextUtils.isEmpty(themeId)){
+            params.addParameter("themeId", themeId);
+        }
+        if(!TextUtils.isEmpty(gradeId)){
+            params.addParameter("gradeId", gradeId);
+        }
+        if(!TextUtils.isEmpty(desCityId)){
+            params.addParameter("desCityId", desCityId);
+        }
+        if(!TextUtils.isEmpty(price)){
+            params.addParameter("price", price);
+        }
+        if(!TextUtils.isEmpty(sales)){
+            params.addParameter("sales", sales);
+        }
+        params.addParameter("page", page);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?themeId=" + themeId+ "gradeId=" + gradeId+ "desCityId=" + desCityId+ "price=" + price+ "sales=" + sales+ "page=" + page);
+        return doPost(configHttpConfig(), action, params, null, null, ProductPartListBean.class);
+    }
+    /**
+     *
+     *
+     * @return
+     * @throws TaskException 获取跟团游列表页数据
+     */
+    public GroupListBase getProductByCondition(String type,String themeId ,String gradeId ,String desCityId,String price,String sales,String page) throws TaskException {
+        Setting action = newSetting("getProductByCondition", "appapi/Common/getProductByCondition", "获取跟团游列表页数据");
+        Params params = new Params();
+        params.addParameter("type", type);
+        if(!TextUtils.isEmpty(themeId)){
+            params.addParameter("themeId", themeId);
+        }
+        if(!TextUtils.isEmpty(gradeId)){
+            params.addParameter("gradeId", gradeId);
+        }
+        if(!TextUtils.isEmpty(desCityId)){
+            params.addParameter("desCityId", desCityId);
+        }
+        if(!TextUtils.isEmpty(price)){
+            params.addParameter("price", price);
+        }
+        if(!TextUtils.isEmpty(sales)){
+            params.addParameter("sales", sales);
+        }
+        params.addParameter("page", page);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?themeId=" + themeId+ "gradeId=" + gradeId+ "desCityId=" + desCityId+ "price=" + price+ "sales=" + sales+ "page=" + page);
         return doPost(configHttpConfig(), action, params, null, null, GroupListBase.class);
     }
 

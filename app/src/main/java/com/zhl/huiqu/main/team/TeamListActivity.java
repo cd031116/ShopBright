@@ -1,20 +1,24 @@
 package com.zhl.huiqu.main.team;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
-import com.zhl.huiqu.base.BaseConfig;
-import com.zhl.huiqu.utils.Constants;
-import android.app.FragmentManager;
+
 import butterknife.Bind;
 import butterknife.OnClick;
-
-import static com.zhl.huiqu.R.id.mViewPager;
+/*
+*
+* @author lyj
+* @describe  总列表加搜索
+* @data 2017/10/24
+* */
 
 public class TeamListActivity extends BaseActivity {
     @Bind(R.id.tab1_t)
@@ -34,6 +38,7 @@ public class TeamListActivity extends BaseActivity {
     ViewPager viepager;
     MyFragmentPageAdapter mAdapter;
     private int select=0;
+    private String desCityId="";
     @Override
     protected int getLayoutId(){
         return R.layout.activity_team_list;
@@ -42,9 +47,13 @@ public class TeamListActivity extends BaseActivity {
     @Override
     public void initView() {
         super.initView();
+        Bundle bd=getIntent().getExtras();
+        if(bd!=null){
+            desCityId=bd.getString("desCityId");
+        }
         FragmentManager fm = getFragmentManager();
         //初始化自定义适配器
-        mAdapter =  new MyFragmentPageAdapter(fm);
+        mAdapter =  new MyFragmentPageAdapter(fm,desCityId);
         //绑定自定义适配器
         viepager.setAdapter(mAdapter);
         viepager.setCurrentItem(0);
@@ -91,9 +100,10 @@ public class TeamListActivity extends BaseActivity {
                 viepager.setCurrentItem(select);
                 break;
             case R.id.tab3_mian:
-                select = 2;
-                changeview(select);
-                viepager.setCurrentItem(select);
+//
+//                select = 2;
+//                changeview(select);
+//                viepager.setCurrentItem(select);
                 break;
         }
     }
@@ -120,13 +130,13 @@ public class TeamListActivity extends BaseActivity {
         tab2_v.setSelected(false);
         tab3_v.setSelected(false);
         if (index == 0) {
-            tab1_t.setTextColor(Color.parseColor("#59c2de"));
+            tab1_t.setTextColor(Color.parseColor("#e11818"));
             tab1_v.setSelected(true);
         } else if (index == 1) {
-            tab2_t.setTextColor(Color.parseColor("#59c2de"));
+            tab2_t.setTextColor(Color.parseColor("#e11818"));
             tab2_v.setSelected(true);
         } else {
-            tab3_t.setTextColor(Color.parseColor("#59c2de"));
+            tab3_t.setTextColor(Color.parseColor("#e11818"));
             tab3_v.setSelected(true);
         }
     }

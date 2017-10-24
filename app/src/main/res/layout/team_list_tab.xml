@@ -20,7 +20,7 @@
             android:layout_centerInParent="true"
             android:padding="10px"
             android:text="跟团游"
-            android:textColor="#59c2de"
+            android:textColor="#e11818"
             android:textSize="46px" />
 
         <TextView

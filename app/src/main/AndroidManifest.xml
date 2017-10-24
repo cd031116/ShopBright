@@ -143,7 +143,7 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".main.PayActivity"/>
+        <activity android:name=".main.PayActivity" />
         <activity android:name=".widget.calendar.CalendarActivity" />
         <activity android:name=".widget.calendar.CombCalendarActivity" />
         <activity android:name=".main.hotelTour.MainHotelTourActivity" />
@@ -165,21 +165,20 @@
         <activity android:name=".personal.UseInfoActivity" />
         <activity android:name=".personal.ChooseTourerActivity" />
         <activity android:name=".personal.AddUserInfoActivity" />
-        <activity android:name=".main.team.SelecTeamActivity"></activity>
+        <activity android:name=".main.team.SelecTeamActivity" />
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
         <activity
             android:name="com.alipay.sdk.app.H5AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+        <activity android:name=".main.SelectTickActivity"></activity>
     </application>
 
 </manifest>

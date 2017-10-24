@@ -7,9 +7,8 @@ import java.io.Serializable;
  */
 
 public class FilterDest implements Serializable{
-    private String destination_id;
-    private String city;
-    private String city_id;
+    private String desCityName;
+    private String desCityId;
     private  boolean select;
 
     public boolean isSelect() {
@@ -20,27 +19,19 @@ public class FilterDest implements Serializable{
         this.select = select;
     }
 
-    public String getDestination_id() {
-        return destination_id;
+    public String getDesCityName() {
+        return desCityName;
     }
 
-    public void setDestination_id(String destination_id) {
-        this.destination_id = destination_id;
+    public void setDesCityName(String desCityName) {
+        this.desCityName = desCityName;
     }
 
-    public String getCity() {
-        return city;
+    public String getDesCityId() {
+        return desCityId;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCity_id() {
-        return city_id;
-    }
-
-    public void setCity_id(String city_id) {
-        this.city_id = city_id;
+    public void setDesCityId(String desCityId) {
+        this.desCityId = desCityId;
     }
 }

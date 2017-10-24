@@ -7,56 +7,64 @@ import java.io.Serializable;
  */
 
 public class TeamListInfo implements Serializable{
-    private String spot_team_id;
-    private String city;
-    private String out;
-    private String title;
+    private String productId;
+    private String productName;
+    private String priceAdultMin;
+    private String duration;
+    private String departCitysName;
+    private String desCityName;
     private String thumb;
-    private String desc;
-    private String shop_price;
-    private String theme;
-    private String day_time;
+    private String commentNum;
+    private String characteristic;
     private String csr;
-    private boolean isup;
 
-    public boolean isup() {
-        return isup;
+
+    public String getProductId() {
+        return productId;
     }
 
-    public void setIsup(boolean isup) {
-        this.isup = isup;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
-    public String getSpot_team_id() {
-        return spot_team_id;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setSpot_team_id(String spot_team_id) {
-        this.spot_team_id = spot_team_id;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public String getCity() {
-        return city;
+    public String getPriceAdultMin() {
+        return priceAdultMin;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setPriceAdultMin(String priceAdultMin) {
+        this.priceAdultMin = priceAdultMin;
     }
 
-    public String getOut() {
-        return out;
+    public String getDuration() {
+        return duration;
     }
 
-    public void setOut(String out) {
-        this.out = out;
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
-    public String getTitle() {
-        return title;
+    public String getDepartCitysName() {
+        return departCitysName;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setDepartCitysName(String departCitysName) {
+        this.departCitysName = departCitysName;
+    }
+
+    public String getDesCityName() {
+        return desCityName;
+    }
+
+    public void setDesCityName(String desCityName) {
+        this.desCityName = desCityName;
     }
 
     public String getThumb() {
@@ -67,36 +75,20 @@ public class TeamListInfo implements Serializable{
         this.thumb = thumb;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getCommentNum() {
+        return commentNum;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setCommentNum(String commentNum) {
+        this.commentNum = commentNum;
     }
 
-    public String getShop_price() {
-        return shop_price;
+    public String getCharacteristic() {
+        return characteristic;
     }
 
-    public void setShop_price(String shop_price) {
-        this.shop_price = shop_price;
-    }
-
-    public String getTheme() {
-        return theme;
-    }
-
-    public void setTheme(String theme) {
-        this.theme = theme;
-    }
-
-    public String getDay_time() {
-        return day_time;
-    }
-
-    public void setDay_time(String day_time) {
-        this.day_time = day_time;
+    public void setCharacteristic(String characteristic) {
+        this.characteristic = characteristic;
     }
 
     public String getCsr() {

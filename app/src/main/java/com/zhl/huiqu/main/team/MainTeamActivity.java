@@ -156,7 +156,7 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     int pos = position + curIndex * pageSize;
                     Intent intent=new Intent(MainTeamActivity.this,TeamListActivity.class);
-                    intent.putExtra("city_id",mDatas.get(pos).getDesCityId());
+                    intent.putExtra("desCityId",mDatas.get(pos).getDesCityId());
                     startActivity(intent);
                 }
             });
@@ -224,7 +224,7 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
         topHeight = bg.getIntValue(Constants.TEAM_HIGHT, 0);
     }
 
-    @OnClick({R.id.all_line, R.id.search_re,R.id.all_city,R.id.all_rute,R.id.hot_1,R.id.hot_2,R.id.hot_3})
+    @OnClick({R.id.search_re,R.id.all_city,R.id.all_rute,R.id.hot_1,R.id.hot_2,R.id.hot_3})
     void enter(View v) {
         switch (v.getId()) {
             case R.id.hot_1:
@@ -251,9 +251,7 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
                 intent2.putExtra("spot_team_id",hlist.get(2).getProductId());
                 startActivity(intent2);
                 break;
-            case R.id.all_line:
-                startActivity(new Intent(MainTeamActivity.this, TeamListActivity.class));
-                break;
+
             case R.id.search_re:
                 TeamSearchFragment.launch(this);
                 break;
@@ -492,7 +490,7 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
         }
 
         @Override
-        protected void onFailure(TaskException exception) {
+        protected void onFailure(TaskException exception){
             showrecy(1);
             ismore=false;
             view_more.setVisibility(View.GONE);
@@ -527,8 +525,8 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
                 holder.setText(R.id.title, info.getProductName());
                 holder.setText(R.id.price, "￥" + info.getPriceAdultMin());
                 holder.setText(R.id.manyidu, info.getCsr());
-
-                holder.setText(R.id.address, "→" + info.getDepartCitysName());
+//                holder.setText(R.id.address, "→" + info.getDepartCitysName());
+                holder.setText(R.id.address,info.getDepartCitysName());
                 holder.setText(R.id.day_time, info.getDuration() + "日游");
                 holder.setOnClickListener(R.id.u_click, new View.OnClickListener(){
                     @Override

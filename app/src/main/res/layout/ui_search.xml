@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EFEFEF"
+    android:background="#ffffff"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -61,7 +61,7 @@
                 android:gravity="center_vertical"
                 android:hint="输入您要搜索的景点/地区"
                 android:textColor="#666666"
-                android:textSize="40px" />
+                android:textSize="32px" />
         </RelativeLayout>
 
         <TextView

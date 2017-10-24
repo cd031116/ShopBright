@@ -57,7 +57,6 @@ public class SearchHistoryManager {
     public static void clear() {
         mHistoryList.clear();
         SearchHistoryDB.getDB().deleteAll(null, SearchHistoryBean.class);
-
         NotificationCenter.defaultCenter().publish(new SearchEvent());
     }
 

@@ -22,18 +22,14 @@ import android.widget.TextView;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.ContainerActivity;
 import com.zhl.huiqu.main.ProductDetailActivity;
-import com.zhl.huiqu.main.bean.SearchBean;
 import com.zhl.huiqu.main.bean.SearchTickEntity;
 import com.zhl.huiqu.main.ticket.TickInfo;
 import com.zhl.huiqu.main.ticket.TickItemView;
-import com.zhl.huiqu.main.ticket.TickListFragment;
 import com.zhl.huiqu.scan.CaptureActivity;
 import com.zhl.huiqu.sdk.SDK;
-import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.Utils;
 import com.zhl.huiqu.widget.SimpleDividerItemDecoration;
-import com.zhl.huiqu.widget.TagCloudView;
 
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.support.inject.OnClick;
@@ -46,7 +42,6 @@ import org.aisen.android.ui.fragment.itemview.IITemView;
 import org.aisen.android.ui.fragment.itemview.IItemViewCreator;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 
 /**

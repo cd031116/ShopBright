@@ -1,9 +1,9 @@
-package com.zhl.huiqu.main.team;
+package com.zhl.huiqu.main;
 
 import android.graphics.Color;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,14 +13,18 @@ import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.main.team.SelecTeamActivity;
 import com.zhl.huiqu.main.team.bean.FilterBase;
 import com.zhl.huiqu.main.team.bean.FilterDest;
 import com.zhl.huiqu.main.team.bean.FilterTheme;
+import com.zhl.huiqu.main.ticket.TickBase;
+import com.zhl.huiqu.main.ticket.TickGraeld;
+import com.zhl.huiqu.main.ticket.TickTheme;
 import com.zhl.huiqu.recyclebase.CommonAdapter;
 import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.sdk.eventbus.TeamEvent;
-import com.zhl.huiqu.sdk.eventbus.TickSearchEvent;
+import com.zhl.huiqu.sdk.eventbus.TickEvent;
 
 import org.aisen.android.component.eventbus.NotificationCenter;
 import org.aisen.android.network.task.TaskException;
@@ -31,7 +35,7 @@ import java.util.List;
 
 import butterknife.Bind;
 
-public class SelecTeamActivity extends BaseActivity {
+public class SelectTickActivity extends BaseActivity {
     @Bind(R.id.top_image)
     ImageView top_image;
     @Bind(R.id.top_left_text)
@@ -48,15 +52,16 @@ public class SelecTeamActivity extends BaseActivity {
     RecyclerView theme_list;
     @Bind(R.id.address_list)
     RecyclerView address_list;
-    private CommonAdapter<FilterTheme> mAdapter;
-    private List<FilterTheme> mlist;
-    private CommonAdapter<FilterDest> tAdapter;
-    private List<FilterDest> tlist;
-    private String desCityId="";
-    private String themeId="";
-    private String type="";
+    private CommonAdapter<TickTheme> mAdapter;
+    private List<TickTheme> mlist;
+    private CommonAdapter<TickGraeld> tAdapter;
+    private List<TickGraeld> tlist;
+    private String gradeId = "";
+    private String themeId = "";
+    private String type = "";
+
     @Override
-    protected int getLayoutId(){
+    protected int getLayoutId() {
         return R.layout.activity_selec_team;
     }
 
@@ -64,9 +69,9 @@ public class SelecTeamActivity extends BaseActivity {
     public void initView() {
         super.initView();
 
-        Bundle bd=getIntent().getExtras();
-        if(bd!=null){
-            type=bd.getString("type");
+        Bundle bd = getIntent().getExtras();
+        if (bd != null) {
+            type = bd.getString("type");
         }
 
         top_image.setVisibility(View.GONE);
@@ -83,11 +88,11 @@ public class SelecTeamActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.top_left_text,R.id.reset,R.id.sure})
-    void onclicks(View v){
-        switch (v.getId()){
+    @OnClick({R.id.top_left_text, R.id.reset, R.id.sure})
+    void onclicks(View v) {
+        switch (v.getId()) {
             case R.id.top_left_text:
-                SelecTeamActivity.this.finish();
+                SelectTickActivity.this.finish();
                 break;
             case R.id.reset:
                 setflase();
@@ -96,23 +101,23 @@ public class SelecTeamActivity extends BaseActivity {
                 tAdapter.notifyDataSetChanged();
                 break;
             case R.id.sure:
-                NotificationCenter.defaultCenter().publish(new TeamEvent(desCityId,themeId));//主题
-                SelecTeamActivity.this.finish();
+                NotificationCenter.defaultCenter().publish(new TickEvent(gradeId, themeId));//主题
+                SelectTickActivity.this.finish();
                 break;
         }
     }
 
     private void themeview() {
-        mAdapter = new CommonAdapter<FilterTheme>(SelecTeamActivity.this, R.layout.team_selecet_item, mlist) {
+        mAdapter = new CommonAdapter<TickTheme>(SelectTickActivity.this, R.layout.team_selecet_item, mlist) {
             @Override
-            protected void convert(ViewHolder holder, final FilterTheme data, int position) {
+            protected void convert(ViewHolder holder, final TickTheme data, int position) {
                 holder.setText(R.id.contents, data.getName());
                 if (data.isSelect()) {
                     holder.setSesect(R.id.contents, true);
-                    holder.setVisible(R.id.iamge,true);
+                    holder.setVisible(R.id.iamge, true);
                 } else {
                     holder.setSesect(R.id.contents, false);
-                    holder.setVisible(R.id.iamge,false);
+                    holder.setVisible(R.id.iamge, false);
                 }
                 holder.setOnClickListener(R.id.item_top, new View.OnClickListener() {
                     @Override
@@ -123,6 +128,7 @@ public class SelecTeamActivity extends BaseActivity {
                         } else {
                             setflase();
                             data.setSelect(true);
+                            themeId = data.getThemeId();
                         }
                         mAdapter.notifyDataSetChanged();
                     }
@@ -136,18 +142,18 @@ public class SelecTeamActivity extends BaseActivity {
 
 
     private void destview() {
-        tAdapter = new CommonAdapter<FilterDest>(SelecTeamActivity.this, R.layout.team_selecet_item, tlist) {
+        tAdapter = new CommonAdapter<TickGraeld>(SelectTickActivity.this, R.layout.team_selecet_item, tlist) {
             @Override
-            protected void convert(ViewHolder holder, final FilterDest info, int position) {
-                if(!TextUtils.isEmpty(info.getDesCityName())){
-                    holder.setText(R.id.contents, info.getDesCityName());
+            protected void convert(ViewHolder holder, final TickGraeld info, int position) {
+                if (!TextUtils.isEmpty(info.getName())) {
+                    holder.setText(R.id.contents, info.getName());
                 }
                 if (info.isSelect()) {
                     holder.setSesect(R.id.contents, true);
-                    holder.setVisible(R.id.iamge,true);
+                    holder.setVisible(R.id.iamge, true);
                 } else {
                     holder.setSesect(R.id.contents, false);
-                    holder.setVisible(R.id.iamge,false);
+                    holder.setVisible(R.id.iamge, false);
                 }
 
                 holder.setOnClickListener(R.id.item_top, new View.OnClickListener() {
@@ -159,7 +165,7 @@ public class SelecTeamActivity extends BaseActivity {
                         } else {
                             setDesflase();
                             info.setSelect(true);
-                            desCityId=info.getDesCityId();
+                            gradeId = info.getGradeId();
                         }
                         tAdapter.notifyDataSetChanged();
                     }
@@ -171,49 +177,51 @@ public class SelecTeamActivity extends BaseActivity {
         address_list.setNestedScrollingEnabled(false);
     }
 
-    private void setflase(){
-        for (int i=0;i<mlist.size();i++){
+    private void setflase() {
+        for (int i = 0; i < mlist.size(); i++) {
             mlist.get(i).setSelect(false);
         }
     }
+
     private void setDesflase() {
-        for (int i=0;i<tlist.size();i++){
+        for (int i = 0; i < tlist.size(); i++) {
             tlist.get(i).setSelect(false);
         }
     }
+
     /*列表数据
   * */
-    class getListTask extends WorkTask<Void, Void, FilterBase> {
+    class getListTask extends WorkTask<Void, Void, TickBase> {
         @Override
         protected void onPrepare() {
             super.onPrepare();
-            showAlert("..正在加载..",false);
+            showAlert("..正在加载..", false);
         }
 
         @Override
-        public FilterBase workInBackground(Void... voids) throws TaskException {
-            return SDK.newInstance(SelecTeamActivity.this).getCondition(type);
+        public TickBase workInBackground(Void... voids) throws TaskException {
+            return SDK.newInstance(SelectTickActivity.this).getTickTheme(type);
         }
 
         @Override
-        protected void onSuccess(FilterBase info) {
+        protected void onSuccess(TickBase info) {
             super.onSuccess(info);
             dismissAlert();
             if (info.getBody().getTheme() != null) {
                 mlist = info.getBody().getTheme();
                 themeview();
             }
-            if (info.getBody().getDestination() != null) {
-                tlist = info.getBody().getDestination();
+            if (info.getBody().getGrade() != null) {
+                tlist = info.getBody().getGrade();
                 destview();
             }
-            if(info.getBody()==null){
+            if (info.getBody() == null) {
                 view_empty.setVisibility(View.VISIBLE);
             }
         }
 
         @Override
-        protected void onFailure(TaskException exception){
+        protected void onFailure(TaskException exception) {
             dismissAlert();
             view_empty.setVisibility(View.VISIBLE);
             empty_text.setText(exception.getMessage());

@@ -2,7 +2,6 @@ package com.zhl.huiqu.main.ticket;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -54,7 +53,7 @@ public class TicketListActivity extends BaseActivity {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         //步骤二：用add()方法加上Fragment的对象rightFragment
-        TickListFragment rightFragment = TickListFragment.newInstance(theme_id);
+        TicksListFragment rightFragment = TicksListFragment.newInstance(theme_id);
         transaction.add(R.id.content, rightFragment);
         //步骤三：调用commit()方法使得FragmentTransaction实例的改变生效
         transaction.commit();
