@@ -131,7 +131,7 @@ public class MonthAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         if (selectedPosition == position) {
             if (!TextUtils.isEmpty(dataList.get(position).date)) {
                 ((MyViewHolder) holder).bg.setBackgroundResource(R.color.color_choose);
-                Log.e("sss", "onBindViewHolder: "+position );
+                Log.e("sss", "onBindViewHolder: "+position+",selectedPosition:"+selectedPosition );
                 ((MyViewHolder) holder).recommendtTitle.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
                 ((MyViewHolder) holder).recommendPrice.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
             }

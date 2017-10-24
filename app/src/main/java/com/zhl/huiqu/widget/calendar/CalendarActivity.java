@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
@@ -29,13 +30,10 @@ import java.util.List;
 public class CalendarActivity extends AppCompatActivity implements View.OnClickListener {
 
     private MyRecylerView riliList;
-    private TextView frontMonthTv;
-    private TextView nextMonthTv;
-    private TextView currentDateTv;
+    private TextView frontMonthTv, nextMonthTv, currentDateTv, child_price, normal_num_btn, normal_price, child_num_btn, ok;
+    private LinearLayout normal_down_btn, normal_add_btn, child_down_btn, child_add_btn;
     private MonthAdapter adapter;
-    private TextView ok;
     public String date;
-    //    private int currentPosition = -1;
     final int RIGHT = 0;
     final int LEFT = 1;
     private GestureDetector gestureDetector;
@@ -43,6 +41,8 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
     private List<TeamPriceBean> body;
     private TeamOrderPriceBean teamOrderPriceBean;
     private String spot_team_id;
+    private int adultPrice, childPrice;
+    private int adultNum, childNum;
 
 
     @Override
@@ -57,6 +57,22 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
 
     private void initView() {
         riliList = (MyRecylerView) findViewById(R.id.list);
+        child_price = (TextView) findViewById(R.id.child_price);
+        normal_num_btn = (TextView) findViewById(R.id.normal_num_btn);
+        normal_price = (TextView) findViewById(R.id.normal_price);
+        child_num_btn = (TextView) findViewById(R.id.child_num_btn);
+        normal_down_btn = (LinearLayout) findViewById(R.id.normal_down_btn);
+        normal_add_btn = (LinearLayout) findViewById(R.id.normal_add_btn);
+        child_down_btn = (LinearLayout) findViewById(R.id.child_down_btn);
+        child_add_btn = (LinearLayout) findViewById(R.id.child_add_btn);
+        normal_down_btn.setOnClickListener(this);
+        normal_add_btn.setOnClickListener(this);
+        child_down_btn.setOnClickListener(this);
+        child_add_btn.setOnClickListener(this);
+
+        normal_num_btn.setText(adultNum + "");
+        child_num_btn.setText(childNum + "");
+
         frontMonthTv = (TextView) findViewById(R.id.front_month);
         frontMonthTv.setOnClickListener(this);
         nextMonthTv = (TextView) findViewById(R.id.next_month);
@@ -95,6 +111,8 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
                 adapter.notifyDataSetChanged();
                 teamOrderPriceBean.setProductId(spot_team_id);
                 teamOrderPriceBean.setProductAdultPrice(dataList.get(position).luna);
+                normal_price.setText("￥" + dataList.get(position).luna);
+                child_price.setText("￥" + dataList.get(position).childLuna);
             }
         });
     }
@@ -131,6 +149,26 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
             if (onItemClick != null) {
                 onItemClick.onItemClick(date);
             }
+        }
+        switch (id) {
+            case R.id.normal_down_btn:
+                if (adultNum > 1)
+                    adultNum--;
+                normal_num_btn.setText(adultNum + "");
+                break;
+            case R.id.normal_add_btn:
+                adultNum++;
+                normal_num_btn.setText(adultNum + "");
+                break;
+            case R.id.child_down_btn:
+                if (childNum > 0)
+                    childNum--;
+                child_num_btn.setText(childNum + "");
+                break;
+            case R.id.child_add_btn:
+                childNum++;
+                child_num_btn.setText(childNum + "");
+                break;
         }
     }
 

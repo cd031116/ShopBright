@@ -1,6 +1,7 @@
 package com.zhl.huiqu.widget.calendar;
 
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.zhl.huiqu.main.team.bean.TeamPriceBean;
@@ -92,6 +93,8 @@ public class DataUtils {
                 if (entity.date.equals(tPriceBean.getDepartDate())) {
                     entity.isHasPrice = true;
                     entity.luna = tPriceBean.getRetailAdultPrice();
+                    if (tPriceBean.getRetailChildPrice()!=0)
+                        entity.childLuna = tPriceBean.getRetailChildPrice();
                 }
             }
             result.add(entity);
