@@ -139,7 +139,7 @@ public class TicksListFragment extends ARecycleViewSwipeRefreshFragment<TickInfo
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate) {
         super.layoutInit(inflater, savedInstanceSate);
 //        getSwipeRefreshLayout().setEnabled(false);
-        recycleview.addItemDecoration(new SimpleDividerItemDecoration(getActivity(), null, 1));
+//        recycleview.addItemDecoration(new SimpleDividerItemDecoration(getActivity(), null, 1));
 //        scrollView.setFillViewport(true);
     }
 

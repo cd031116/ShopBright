@@ -11,11 +11,19 @@
 
     <include layout="@layout/view_top" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/line"
+        android:layout_height="1px"
+        android:background="#f0f0f0"
+        android:layout_below="@+id/top_layout"/>
+
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_t"
-        android:layout_below="@+id/top_layout"
+       android:layout_below="@+id/line"
         android:background="#ffffff"
         android:scrollbars="none">
 
@@ -51,6 +59,7 @@
 
 
             <TextView
+                android:id="@+id/name_t"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="景点级别"

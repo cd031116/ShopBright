@@ -3,7 +3,6 @@ package com.zhl.huiqu.main.team;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,6 +12,7 @@ import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.main.team.bean.FilterBase;
 import com.zhl.huiqu.main.team.bean.FilterDest;
 import com.zhl.huiqu.main.team.bean.FilterTheme;
@@ -20,16 +20,17 @@ import com.zhl.huiqu.recyclebase.CommonAdapter;
 import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.sdk.eventbus.TeamEvent;
-import com.zhl.huiqu.sdk.eventbus.TickSearchEvent;
+import com.zhl.huiqu.utils.Constants;
 
 import org.aisen.android.component.eventbus.NotificationCenter;
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
-import org.aisen.android.support.inject.OnClick;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 public class SelecTeamActivity extends BaseActivity {
     @Bind(R.id.top_image)
@@ -38,7 +39,8 @@ public class SelecTeamActivity extends BaseActivity {
     TextView top_left_text;
     @Bind(R.id.top_title)
     TextView top_title;
-
+    @Bind(R.id.name_t)
+    TextView name_t;
     @Bind(R.id.text)
     TextView empty_text;
 
@@ -49,9 +51,9 @@ public class SelecTeamActivity extends BaseActivity {
     @Bind(R.id.address_list)
     RecyclerView address_list;
     private CommonAdapter<FilterTheme> mAdapter;
-    private List<FilterTheme> mlist;
+    private List<FilterTheme> mlist=new ArrayList<>();
     private CommonAdapter<FilterDest> tAdapter;
-    private List<FilterDest> tlist;
+    private List<FilterDest> tlist=new ArrayList<>();
     private String desCityId="";
     private String themeId="";
     private String type="";
@@ -68,7 +70,7 @@ public class SelecTeamActivity extends BaseActivity {
         if(bd!=null){
             type=bd.getString("type");
         }
-
+        name_t.setText("目的地");
         top_image.setVisibility(View.GONE);
         top_left_text.setTextColor(Color.parseColor("#333333"));
         top_left_text.setText("取消");
@@ -79,6 +81,8 @@ public class SelecTeamActivity extends BaseActivity {
     @Override
     public void initData() {
         super.initData();
+        themeview();
+        destview();
         new getListTask().execute();
     }
 
@@ -92,6 +96,9 @@ public class SelecTeamActivity extends BaseActivity {
             case R.id.reset:
                 setflase();
                 setDesflase();
+                BaseConfig bg=BaseConfig.getInstance(SelecTeamActivity.this);
+                bg.setStringValue(Constants.TEAM_GradeId,"");
+                bg.setStringValue(Constants.TEAM_ThemeId,"");
                 mAdapter.notifyDataSetChanged();
                 tAdapter.notifyDataSetChanged();
                 break;
@@ -156,10 +163,14 @@ public class SelecTeamActivity extends BaseActivity {
                         if (info.isSelect()) {
                             setDesflase();
                             info.setSelect(false);
+                            BaseConfig bg=BaseConfig.getInstance(SelecTeamActivity.this);
+                            bg.setStringValue(Constants.TEAM_GradeId,"");
                         } else {
                             setDesflase();
                             info.setSelect(true);
                             desCityId=info.getDesCityId();
+                            BaseConfig bg=BaseConfig.getInstance(SelecTeamActivity.this);
+                            bg.setStringValue(Constants.TEAM_GradeId,desCityId);
                         }
                         tAdapter.notifyDataSetChanged();
                     }
@@ -200,11 +211,27 @@ public class SelecTeamActivity extends BaseActivity {
             super.onSuccess(info);
             dismissAlert();
             if (info.getBody().getTheme() != null) {
-                mlist = info.getBody().getTheme();
-                themeview();
+                mlist.addAll(info.getBody().getTheme());
+
+                BaseConfig bg=BaseConfig.getInstance(SelecTeamActivity.this);
+                themeId= bg.getStringValue(Constants.TEAM_ThemeId,"");
+                for(FilterTheme tdata: mlist){
+                    if(themeId.equals(tdata.getTeam_attr_id())){
+                        tdata.setSelect(true);
+                    }
+                }
+                mAdapter.notifyDataSetChanged();
             }
             if (info.getBody().getDestination() != null) {
-                tlist = info.getBody().getDestination();
+                tlist.addAll(info.getBody().getDestination());
+                BaseConfig bg=BaseConfig.getInstance(SelecTeamActivity.this);
+                desCityId= bg.getStringValue(Constants.TEAM_GradeId,"");
+                for(FilterDest tdata: tlist){
+                    if(desCityId.equals(tdata.getDesCityId())){
+                        tdata.setSelect(true);
+                    }
+                }
+                tAdapter.notifyDataSetChanged();
                 destview();
             }
             if(info.getBody()==null){

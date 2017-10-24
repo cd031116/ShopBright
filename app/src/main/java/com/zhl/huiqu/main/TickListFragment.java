@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,6 +95,7 @@ public class TickListFragment extends ARecycleViewSwipeRefreshFragment<ProductPa
         public void onEvent(TickEvent info) {
             gradeId = info.getGradeId();
             themeId = info.getThemeId();
+            Log.i("dddd","TickEventSubscriber");
             requestData(RefreshMode.reset);
         }
     };

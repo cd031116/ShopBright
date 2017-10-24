@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.base.BaseConfig;
+import com.zhl.huiqu.utils.Constants;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -142,4 +144,14 @@ public class TeamListActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        BaseConfig bg=BaseConfig.getInstance(TeamListActivity.this);
+        bg.setStringValue(Constants.TEAM_GradeId,"");
+        bg.setStringValue(Constants.TEAM_ThemeId,"");
+        bg.setStringValue(Constants.TICK_ThemeId,"");
+        bg.setStringValue(Constants.TICK_GradeId,"");
+
+    }
 }

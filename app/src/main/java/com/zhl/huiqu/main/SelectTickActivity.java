@@ -1,11 +1,11 @@
 package com.zhl.huiqu.main;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,27 +13,25 @@ import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
-import com.zhl.huiqu.main.team.SelecTeamActivity;
-import com.zhl.huiqu.main.team.bean.FilterBase;
-import com.zhl.huiqu.main.team.bean.FilterDest;
-import com.zhl.huiqu.main.team.bean.FilterTheme;
+import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.main.ticket.TickBase;
 import com.zhl.huiqu.main.ticket.TickGraeld;
 import com.zhl.huiqu.main.ticket.TickTheme;
 import com.zhl.huiqu.recyclebase.CommonAdapter;
 import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.sdk.SDK;
-import com.zhl.huiqu.sdk.eventbus.TeamEvent;
 import com.zhl.huiqu.sdk.eventbus.TickEvent;
+import com.zhl.huiqu.utils.Constants;
 
 import org.aisen.android.component.eventbus.NotificationCenter;
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
-import org.aisen.android.support.inject.OnClick;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 public class SelectTickActivity extends BaseActivity {
     @Bind(R.id.top_image)
@@ -53,9 +51,9 @@ public class SelectTickActivity extends BaseActivity {
     @Bind(R.id.address_list)
     RecyclerView address_list;
     private CommonAdapter<TickTheme> mAdapter;
-    private List<TickTheme> mlist;
+    private List<TickTheme> mlist=new ArrayList<>();
     private CommonAdapter<TickGraeld> tAdapter;
-    private List<TickGraeld> tlist;
+    private List<TickGraeld> tlist=new ArrayList<>();
     private String gradeId = "";
     private String themeId = "";
     private String type = "";
@@ -84,11 +82,13 @@ public class SelectTickActivity extends BaseActivity {
     @Override
     public void initData() {
         super.initData();
+        themeview();
+        destview();
         new getListTask().execute();
     }
 
 
-    @OnClick({R.id.top_left_text, R.id.reset, R.id.sure})
+    @OnClick({R.id.top_left_text,R.id.reset,R.id.sure})
     void onclicks(View v) {
         switch (v.getId()) {
             case R.id.top_left_text:
@@ -97,6 +97,9 @@ public class SelectTickActivity extends BaseActivity {
             case R.id.reset:
                 setflase();
                 setDesflase();
+                BaseConfig bg=BaseConfig.getInstance(SelectTickActivity.this);
+                bg.setStringValue(Constants.TICK_ThemeId,"");
+                bg.setStringValue(Constants.TICK_GradeId,"");
                 mAdapter.notifyDataSetChanged();
                 tAdapter.notifyDataSetChanged();
                 break;
@@ -125,10 +128,14 @@ public class SelectTickActivity extends BaseActivity {
                         if (data.isSelect()) {
                             setflase();
                             data.setSelect(false);
+                            BaseConfig bg=BaseConfig.getInstance(SelectTickActivity.this);
+                            bg.setStringValue(Constants.TICK_ThemeId,"");
                         } else {
                             setflase();
                             data.setSelect(true);
                             themeId = data.getThemeId();
+                            BaseConfig bg=BaseConfig.getInstance(SelectTickActivity.this);
+                            bg.setStringValue(Constants.TICK_ThemeId,themeId);
                         }
                         mAdapter.notifyDataSetChanged();
                     }
@@ -162,10 +169,14 @@ public class SelectTickActivity extends BaseActivity {
                         if (info.isSelect()) {
                             setDesflase();
                             info.setSelect(false);
+                            BaseConfig bg=BaseConfig.getInstance(SelectTickActivity.this);
+                            bg.setStringValue(Constants.TICK_GradeId,"");
                         } else {
                             setDesflase();
                             info.setSelect(true);
                             gradeId = info.getGradeId();
+                            BaseConfig bg=BaseConfig.getInstance(SelectTickActivity.this);
+                            bg.setStringValue(Constants.TICK_GradeId,gradeId);
                         }
                         tAdapter.notifyDataSetChanged();
                     }
@@ -178,6 +189,7 @@ public class SelectTickActivity extends BaseActivity {
     }
 
     private void setflase() {
+
         for (int i = 0; i < mlist.size(); i++) {
             mlist.get(i).setSelect(false);
         }
@@ -208,12 +220,26 @@ public class SelectTickActivity extends BaseActivity {
             super.onSuccess(info);
             dismissAlert();
             if (info.getBody().getTheme() != null) {
-                mlist = info.getBody().getTheme();
-                themeview();
+                mlist.addAll(info.getBody().getTheme());
+                BaseConfig bg=BaseConfig.getInstance(SelectTickActivity.this);
+                themeId= bg.getStringValue(Constants.TICK_ThemeId,"");
+                for(TickTheme tdata: mlist){
+                    if(themeId.equals(tdata.getThemeId())){
+                        tdata.setSelect(true);
+                    }
+                }
+                mAdapter.notifyDataSetChanged();
             }
             if (info.getBody().getGrade() != null) {
-                tlist = info.getBody().getGrade();
-                destview();
+                tlist.addAll( info.getBody().getGrade());
+                BaseConfig bg=BaseConfig.getInstance(SelectTickActivity.this);
+                gradeId= bg.getStringValue(Constants.TICK_GradeId,"");
+                for(TickGraeld tdata: tlist){
+                    if(gradeId.equals(tdata.getGradeId())){
+                        tdata.setSelect(true);
+                    }
+                }
+                tAdapter.notifyDataSetChanged();
             }
             if (info.getBody() == null) {
                 view_empty.setVisibility(View.VISIBLE);

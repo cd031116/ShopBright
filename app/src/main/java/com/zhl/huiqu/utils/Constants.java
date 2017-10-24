@@ -47,4 +47,12 @@ public class Constants {
     public static final String TEAM_INFO="team_info";
 
     public static final String TEAM_ADDRESS="team_address";
+
+    public static final String TICK_ThemeId="tick_themeld";
+
+    public static final String TICK_GradeId="tick_gradeId";
+
+    public static final String TEAM_ThemeId="team_themeld";
+
+    public static final String TEAM_GradeId="team_gradeId";
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -107,6 +108,7 @@ public class TeamListFragment extends ARecycleViewSwipeRefreshFragment<TeamListI
     TeamEventSubscriber teamEvent = new TeamEventSubscriber(){
         @Override
         public void onEvent(TeamEvent info){
+            Log.i("dddd","TeamEventSubscriber");
             desCityId=info.getDesCityId();
             themeId=info.getThemeId();
             requestData(RefreshMode.reset);
