@@ -14,9 +14,13 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.main.team.bean.TeamOrderPriceBean;
+import com.zhl.huiqu.main.team.bean.TeamPriceBean;
 import com.zhl.huiqu.pull.layoutmanager.MyGridLayoutManager;
+import com.zhl.huiqu.widget.calendar.bean.DateEntity;
 
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/9/23.
@@ -31,15 +35,23 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
     private MonthAdapter adapter;
     private TextView ok;
     public String date;
-    private int currentPosition = -1;
+    //    private int currentPosition = -1;
     final int RIGHT = 0;
     final int LEFT = 1;
     private GestureDetector gestureDetector;
-    private  int year;
+    private int year;
+    private List<TeamPriceBean> body;
+    private TeamOrderPriceBean teamOrderPriceBean;
+    private String spot_team_id;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rili);
+        body = (List<TeamPriceBean>) getIntent().getSerializableExtra("body");
+         spot_team_id = getIntent().getStringExtra("spot_team_id");
+        teamOrderPriceBean = new TeamOrderPriceBean();
         initView();
     }
 
@@ -57,7 +69,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
 
         Calendar calendar = Calendar.getInstance();
         int month = calendar.getTime().getMonth() + 1;
-         year = calendar.getTime().getYear() + 1900;
+        year = calendar.getTime().getYear() + 1900;
         int day = calendar.getTime().getDate();
         this.date = year + "-" + month + "-" + day;
 
@@ -65,9 +77,9 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
             this.date = DataUtils.getCurrDate("yyyy-MM-dd");
         }
         currentDateTv.setText(DataUtils.formatDate(date, "yyyy-MM"));
-        adapter = new MonthAdapter(this, DataUtils.getMonth(date));
+        adapter = new MonthAdapter(this, DataUtils.getMonth(date, body));
         adapter.setDateString(date);
-        adapter.setSelectedPosition(DataUtils.getSelectPosition());
+//        adapter.setSelectedPosition(DataUtils.getSelectPosition());
         riliList.setLayoutManager(new RiliGridLayoutManager(this, 7));
         riliList.setAdapter(adapter);
         onitemClick();
@@ -77,8 +89,11 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
     private void onitemClick() {
         adapter.setOnItemClickListener(new MonthAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(View view, int position, List<DateEntity> dataList) {
+                Log.e("sss", "onItemClick: "+position );
                 adapter.setSelectedPosition(position);
+                teamOrderPriceBean.setProductId(spot_team_id);
+                teamOrderPriceBean.setProductAdultPrice(dataList.get(position).luna);
             }
         });
     }
@@ -89,7 +104,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         if (id == frontMonthTv.getId()) {
             date = DataUtils.getSomeMonthDay(date, -1);
             if (Integer.parseInt(date.substring(0, 4)) != (year - 1)) {
-                adapter = new MonthAdapter(this, DataUtils.getMonth(date));
+                adapter = new MonthAdapter(this, DataUtils.getMonth(date, body));
                 adapter.setDateString(date);
                 Log.e("ddd", "onClick: " + date);
                 adapter.notifyDataSetChanged();
@@ -102,7 +117,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
             date = DataUtils.getSomeMonthDay(date, +1);
             Log.e("ddd", "onClick: " + date.substring(0, 4));
             if (Integer.parseInt(date.substring(0, 4)) != (year + 2)) {
-                adapter = new MonthAdapter(this, DataUtils.getMonth(date));
+                adapter = new MonthAdapter(this, DataUtils.getMonth(date, body));
                 adapter.setDateString(date);
                 Log.e("ddd", "onClick: " + date);
                 adapter.notifyDataSetChanged();
@@ -173,7 +188,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
             case RIGHT:
                 date = DataUtils.getSomeMonthDay(date, -1);
                 Log.e("ttt", "doResult: " + date);
-                adapter = new MonthAdapter(this, DataUtils.getMonth(date));
+                adapter = new MonthAdapter(this, DataUtils.getMonth(date, body));
                 adapter.setDateString(date);
                 adapter.notifyDataSetChanged();
                 onitemClick();
@@ -184,7 +199,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
             case LEFT:
                 date = DataUtils.getSomeMonthDay(date, +1);
                 if (Integer.parseInt(date.substring(0, 4)) != (year + 2)) {
-                    adapter = new MonthAdapter(this, DataUtils.getMonth(date));
+                    adapter = new MonthAdapter(this, DataUtils.getMonth(date, body));
                     adapter.setDateString(date);
                     adapter.notifyDataSetChanged();
                     onitemClick();

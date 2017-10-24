@@ -30,19 +30,7 @@
                 android:layout_height="wrap_content"
                 android:text="出发" />
 
-            <ImageView
-                android:id="@+id/traffic_means"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="14px"
-                android:src="@drawable/dabache" />
 
-            <TextView
-                android:id="@+id/traffic_to"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="14px"
-                android:text="终点" />
 
         </LinearLayout>
 

@@ -96,33 +96,16 @@
                 </RelativeLayout>
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/my_order_layout"
-                android:layout_width="match_parent"
-                android:layout_height="276px"
-                android:layout_below="@id/personal_head_layout"
-                android:layout_marginTop="15px"
-                android:background="@color/comm_white">
-
-                <TextView
-                    android:id="@+id/personal_my_order"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/personal_order"
-                    android:drawablePadding="18px"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="27px"
-                    android:paddingTop="12px"
-                    android:text="@string/personal_my_order"
-                    android:textSize="42px" />
 
                 <LinearLayout
+                    android:id="@+id/my_order_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/personal_my_order"
+                    android:layout_height="230px"
+                    android:layout_below="@id/personal_head_layout"
+                    android:layout_marginTop="15px"
                     android:paddingBottom="15px"
-                    android:paddingLeft="66px"
-                    android:paddingRight="66px"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
                     android:paddingTop="15px"
                     android:weightSum="4">
 
@@ -132,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:drawablePadding="12px"
-                        android:drawableTop="@drawable/personal_all_order"
+                        android:drawableTop="@drawable/all"
                         android:gravity="center_horizontal"
                         android:text="@string/personal_all_order" />
 
@@ -142,7 +125,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:drawablePadding="12px"
-                        android:drawableTop="@drawable/personal_pay"
+                        android:drawableTop="@drawable/unpaid"
                         android:gravity="center_horizontal"
                         android:text="@string/personal_pay" />
 
@@ -152,7 +135,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:drawablePadding="12px"
-                        android:drawableTop="@drawable/personal_goout"
+                        android:drawableTop="@drawable/unused"
                         android:gravity="center_horizontal"
                         android:text="@string/personal_out" />
 
@@ -162,11 +145,10 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:drawablePadding="12px"
-                        android:drawableTop="@drawable/personal_tuikuan"
+                        android:drawableTop="@drawable/refund"
                         android:gravity="center_horizontal"
                         android:text="@string/personal_tuikuan" />
                 </LinearLayout>
-            </RelativeLayout>
 
             <include
                 android:id="@+id/personal_rowview"

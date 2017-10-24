@@ -29,42 +29,42 @@ public class CombCalendarActivity  extends AppCompatActivity implements View.OnC
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rili_recy_layout);
-        initView();
+//        initView();
     }
 
-    private void initView() {
-        riliList = (RecyclerView) findViewById(R.id.rili_recy);
-
-//        Calendar calendar = Calendar.getInstance();
-//        int month = calendar.getTime().getMonth() + 1;
-//        year = calendar.getTime().getYear() + 1900;
-//        int day = calendar.getTime().getDate();
-//        date = year + "-" + month + "-" + day;
-
-        if (TextUtils.isEmpty(date)) {
-            this.date = DataUtils.getCurrDate("yyyy-MM-dd");
-        }
-
-        List<CalendarBean> CalendarList=new ArrayList<CalendarBean>();
-        CalendarBean calendarEntity=new CalendarBean();
-        ArrayList<DateEntity> dataArrList= DataUtils.getMonth(date);
-        calendarEntity.setDateList(dataArrList);
-        calendarEntity.setMonth(DataUtils.formatDate(date, "yyyy-MM"));
-        CalendarList.add(calendarEntity);
-
-        for (int i = 0; i <11 ; i++) {
-            date = DataUtils.getSomeMonthDay(date, +1);
-            CalendarBean calendarEntitys=new CalendarBean();
-            ArrayList<DateEntity> dataEntityList= DataUtils.getMonth(date);
-            calendarEntitys.setDateList(dataEntityList);
-            calendarEntitys.setMonth(DataUtils.formatDate(date, "yyyy-MM"));
-            CalendarList.add(calendarEntitys);
-        }
-
-        adapter = new CalendarMonthAdapter(this, CalendarList);
-        riliList.setLayoutManager(new MyLinearLayoutManager(this));
-        riliList.setAdapter(adapter);
-    }
+//    private void initView() {
+//        riliList = (RecyclerView) findViewById(R.id.rili_recy);
+//
+////        Calendar calendar = Calendar.getInstance();
+////        int month = calendar.getTime().getMonth() + 1;
+////        year = calendar.getTime().getYear() + 1900;
+////        int day = calendar.getTime().getDate();
+////        date = year + "-" + month + "-" + day;
+//
+//        if (TextUtils.isEmpty(date)) {
+//            this.date = DataUtils.getCurrDate("yyyy-MM-dd");
+//        }
+//
+//        List<CalendarBean> CalendarList=new ArrayList<CalendarBean>();
+//        CalendarBean calendarEntity=new CalendarBean();
+//        ArrayList<DateEntity> dataArrList= DataUtils.getMonth(date);
+//        calendarEntity.setDateList(dataArrList);
+//        calendarEntity.setMonth(DataUtils.formatDate(date, "yyyy-MM"));
+//        CalendarList.add(calendarEntity);
+//
+//        for (int i = 0; i <11 ; i++) {
+//            date = DataUtils.getSomeMonthDay(date, +1);
+//            CalendarBean calendarEntitys=new CalendarBean();
+//            ArrayList<DateEntity> dataEntityList= DataUtils.getMonth(date);
+//            calendarEntitys.setDateList(dataEntityList);
+//            calendarEntitys.setMonth(DataUtils.formatDate(date, "yyyy-MM"));
+//            CalendarList.add(calendarEntitys);
+//        }
+//
+//        adapter = new CalendarMonthAdapter(this, CalendarList);
+//        riliList.setLayoutManager(new MyLinearLayoutManager(this));
+//        riliList.setAdapter(adapter);
+//    }
 
 
     @Override

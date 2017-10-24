@@ -57,16 +57,16 @@ public class TrafficAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         RecyclerView journey_traffic_list;
         TextView traffic_from;
-        TextView traffic_to;
+//        TextView traffic_to;
         TextView traffic_content;
-        ImageView traffic_means;
+//        ImageView traffic_means;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             journey_traffic_list = (RecyclerView) itemView.findViewById(R.id.journey_traffic_list);
             traffic_from = (TextView) itemView.findViewById(R.id.traffic_from);
-            traffic_to = (TextView) itemView.findViewById(R.id.traffic_to);
-            traffic_means = (ImageView) itemView.findViewById(R.id.traffic_means);
+//            traffic_to = (TextView) itemView.findViewById(R.id.traffic_to);
+//            traffic_means = (ImageView) itemView.findViewById(R.id.traffic_means);
             traffic_content = (TextView) itemView.findViewById(R.id.traffic_content);
         }
     }

@@ -1,5 +1,6 @@
 package com.zhl.huiqu.main.team;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -11,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
@@ -26,6 +28,7 @@ import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.main.ProductDetailActivity;
 import com.zhl.huiqu.main.hotelTour.HotelDetailActivity;
 import com.zhl.huiqu.main.hotelTour.MainHotelTourActivity;
@@ -35,19 +38,25 @@ import com.zhl.huiqu.main.team.bean.TeamBase;
 import com.zhl.huiqu.main.team.bean.TeamDetailBean;
 import com.zhl.huiqu.main.team.bean.TeamDetailEntity;
 import com.zhl.huiqu.main.team.bean.TeamListInfo;
+import com.zhl.huiqu.main.team.bean.TeamPriceBean;
+import com.zhl.huiqu.main.team.bean.TeamPriceEntity;
 import com.zhl.huiqu.main.team.teamdetailadapter.JourneyAdapter;
 import com.zhl.huiqu.pull.layoutmanager.MyGridLayoutManager;
 import com.zhl.huiqu.pull.layoutmanager.MyLinearLayoutManager;
 import com.zhl.huiqu.recyclebase.CommonAdapter;
 import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.sdk.SDK;
+import com.zhl.huiqu.utils.Constants;
+import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.widget.GlideImageLoader;
 import com.zhl.huiqu.widget.MyScroview;
 import com.zhl.huiqu.widget.SimpleDividerItemDecoration;
+import com.zhl.huiqu.widget.calendar.CalendarActivity;
 
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +90,10 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
     LinearLayout tab_mian;
     @Bind(R.id.like_list)
     RecyclerView like_list;
+    @Bind(R.id.t_calender)
+    RecyclerView t_calender;
+    @Bind(R.id.more_calender)
+    TextView more_calender;
     @Bind(R.id.recycleview)
     RecyclerView recycleview;
     //切换
@@ -119,8 +132,11 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
     private int journeyHeight;
     private int payknowHeight;
     private String spot_team_id;
-    private CommonAdapter<LikeBean> madapter;
+    private CommonAdapter<TeamDetailBean.GetYouLikeBean> madapter;
+    private CommonAdapter<TeamPriceBean> teamPriceAdapter;
     private JourneyAdapter journeyAdapter;
+    private String deviceId;
+    private String memberId;
 
     @Override
     protected int getLayoutId() {
@@ -131,21 +147,29 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
     public void initView() {
         super.initView();
         myscroview.setOnScrollListener(this);
+        TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+        deviceId = tm.getDeviceId();
         spot_team_id = getIntent().getStringExtra("spot_team_id");
+        RegisterEntity account = SaveObjectUtils.getInstance(this).getObject(Constants.USER_INFO, RegisterEntity.class);
+        if (account != null) {
+            memberId = account.getBody().getMember_id();
+        }
         Log.e("ddd", "initView: " + spot_team_id);
     }
 
     @Override
     public void initData() {
         new obtainGroupDetail().execute();
-//        new obtainLike().execute();
+        new obtainProductPrice().execute();
         super.initData();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        changeview(select);
+        initData();
+//        changeview(select);
+        myscroview.scrollTo(0, 120);
         top_title.setText("详情");
         image.setVisibility(View.VISIBLE);
         image.setImageResource(R.drawable.share);
@@ -193,7 +217,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
 
         @Override
         public TeamDetailEntity workInBackground(Void... voids) throws TaskException {
-            return SDK.newInstance(TeamDetailActivity.this).obtainGroupDetail(spot_team_id);
+            return SDK.newInstance(TeamDetailActivity.this).obtainGroupDetail(spot_team_id, deviceId);
         }
 
         @Override
@@ -214,9 +238,9 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
     }
 
     /**
-     * 列表数据
-     **/
-    class obtainLike extends WorkTask<Void, Void, LikeEntity> {
+     * 行程数据
+     */
+    class obtainProductPrice extends WorkTask<Void, Void, TeamPriceEntity> {
         @Override
         protected void onPrepare() {
             super.onPrepare();
@@ -224,19 +248,17 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         }
 
         @Override
-        public LikeEntity workInBackground(Void... voids) throws TaskException {
-            return SDK.newInstance(TeamDetailActivity.this).obtainLike();
+        public TeamPriceEntity workInBackground(Void... voids) throws TaskException {
+            return SDK.newInstance(TeamDetailActivity.this).obtainProductPrice(spot_team_id);
         }
 
         @Override
-        protected void onSuccess(LikeEntity info) {
+        protected void onSuccess(TeamPriceEntity info) {
             super.onSuccess(info);
             dismissAlert();
             if (info.getCode().equals("1")) {
-                Log.e("ddd", "onSuccess: " + true);
-                setListView(info.getBody());
+                setPriceView(info.getBody());
             }
-
         }
 
         @Override
@@ -245,19 +267,57 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         }
     }
 
-    private void setListView(List<LikeBean> likeList) {
-        madapter = new CommonAdapter<LikeBean>(TeamDetailActivity.this, R.layout.team_like_layout_item, likeList) {
+    /**
+     * 设置跟团游日历价格
+     *
+     * @param body
+     */
+    private void setPriceView(final List<TeamPriceBean> body) {
+        teamPriceAdapter = new CommonAdapter<TeamPriceBean>(TeamDetailActivity.this, R.layout.item_calender_price, body) {
+            @Override
+            protected void convert(ViewHolder holder, TeamPriceBean teamPriceBean, int position) {
+                if (position <= 2) {
+                    holder.setText(R.id.calender_text, teamPriceBean.getDepartDate());
+                    holder.setText(R.id.price_text, "￥" + teamPriceBean.getRetailAdultPrice());
+                }
+            }
+        };
+        t_calender.setLayoutManager(new MyGridLayoutManager(TeamDetailActivity.this, 3));
+        t_calender.setAdapter(teamPriceAdapter);
+        more_calender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TeamDetailActivity.this, CalendarActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("body", (Serializable) body);
+                intent.putExtra("spot_team_id", spot_team_id);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+    }
+
+
+    private void setListView(List<TeamDetailBean.GetYouLikeBean> likeList) {
+        madapter = new CommonAdapter<TeamDetailBean.GetYouLikeBean>(TeamDetailActivity.this, R.layout.team_like_layout_item, likeList) {
 
             @Override
-            protected void convert(ViewHolder holder, LikeBean likeBean, int position) {
-                holder.setText(R.id.like_price, likeBean.getShop_price());
-                holder.setText(R.id.like_title, likeBean.getTitle());
-                holder.setText(R.id.out_address, likeBean.getCity());
-                holder.setText(R.id.go_address, likeBean.getOut());
-                holder.setText(R.id.like_tag, likeBean.getDay_time() + "日游");
-                holder.setText(R.id.like_pl, "评论：" + likeBean.getFavor());
-                holder.setText(R.id.like_my, "满意度：" + likeBean.getCsr());
-                holder.setBitmapWithUrl(R.id.like_img, "http://www.zhonghuilv.net" + likeBean.getThumb());
+            protected void convert(ViewHolder holder, final TeamDetailBean.GetYouLikeBean getYouLikeBean, int position) {
+                holder.setText(R.id.like_price, "￥" + getYouLikeBean.getPriceAdultMin());
+                holder.setText(R.id.like_title, getYouLikeBean.getProductName());
+                holder.setText(R.id.out_address, getYouLikeBean.getDepartCitysName());
+                holder.setText(R.id.go_address, getYouLikeBean.getDesCityName());
+                holder.setText(R.id.like_tag, getYouLikeBean.getDuration() + "日游");
+                holder.setText(R.id.like_pl, "评论：" + getYouLikeBean.getCommentNum());
+                holder.setText(R.id.like_my, "满意度：" + getYouLikeBean.getCsr());
+                holder.setBitmapWithUrl(R.id.like_img, getYouLikeBean.getThumb());
+                holder.setOnClickListener(R.id.your_like_layout, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        spot_team_id = getYouLikeBean.getProductId() + "";
+                        onResume();
+                    }
+                });
             }
         };
         like_list.setLayoutManager(new MyGridLayoutManager(TeamDetailActivity.this, 2));
@@ -268,6 +328,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
 
     /**
      * 设置详情页View
+     *
      * @param body
      */
     private void setView(TeamDetailBean body) {
@@ -278,6 +339,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         contents.setText(body.getTeamInfo().getProductName());
         zili_text.setText(body.getCostNotice().getCostExclude());
         setBookNoticeView(body);
+        setListView(body.getGetYouLike());
 
         journeyAdapter = new JourneyAdapter(TeamDetailActivity.this, body.getJourneyInfo());
         recycleview.setLayoutManager(new MyLinearLayoutManager(TeamDetailActivity.this));
@@ -301,6 +363,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
 
     /**
      * 设置预定须知
+     *
      * @param body
      */
     private void setBookNoticeView(TeamDetailBean body) {

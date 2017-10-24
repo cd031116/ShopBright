@@ -26,6 +26,7 @@ import com.zhl.huiqu.main.team.bean.TeamBase;
 import com.zhl.huiqu.main.team.bean.TeamDetailBean;
 import com.zhl.huiqu.main.team.bean.TeamDetailEntity;
 import com.zhl.huiqu.main.team.bean.TeamSearchInfo;
+import com.zhl.huiqu.main.team.bean.TeamPriceEntity;
 import com.zhl.huiqu.main.team.bean.TeamTopMain;
 import com.zhl.huiqu.main.ticket.CityInfo;
 import com.zhl.huiqu.main.ticket.SpotTBean;
@@ -237,15 +238,14 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public TeamBase getListTop(String type,String page) throws TaskException {
+    public TeamBase getListTop(String type, String page) throws TaskException {
         Setting action = newSetting("getTeamIndexBottom", "appapi/Team/getTeamIndexBottom", "获取跟团游首页列表");
-        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?type=" + type+ "page=" + page );
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?type=" + type + "page=" + page);
         Params params = new Params();
-        params.addParameter("type",type);
-        params.addParameter("page",page);
+        params.addParameter("type", type);
+        params.addParameter("page", page);
         return doPost(configHttpConfig(), action, params, null, null, TeamBase.class);
     }
-
 
 
     /**
@@ -257,8 +257,8 @@ public class SDK extends ABizLogic {
     public FilterBase getCondition(String type) throws TaskException {
         Setting action = newSetting("getFilter", "appapi/Common/getCondition", "获取筛选条件");
         Params params = new Params();
-        params.addParameter("type",type);
-        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() );
+        params.addParameter("type", type);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue());
         return doPost(configHttpConfig(), action, params, null, null, FilterBase.class);
     }
 
@@ -271,8 +271,8 @@ public class SDK extends ABizLogic {
     public TickBase getTickTheme(String type) throws TaskException {
         Setting action = newSetting("getFilter", "appapi/Common/getCondition", "获取筛选条件");
         Params params = new Params();
-        params.addParameter("type",type);
-        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() );
+        params.addParameter("type", type);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue());
         return doPost(configHttpConfig(), action, params, null, null, TickBase.class);
     }
 
@@ -294,21 +294,23 @@ public class SDK extends ABizLogic {
     }
 
     /**
-     * 	跟团游详情页面
+     * 跟团游详情页面
      *
      * @param productId //	跟团游id
      * @return
      * @throws TaskException
      */
-    public TeamDetailEntity obtainGroupDetail(String productId) throws TaskException {
+    public TeamDetailEntity obtainGroupDetail(String productId, String deviceId) throws TaskException {
         Setting action = newSetting("getGoodsDetail", "appapi/Team/getTeamDetail", "跟团游详情页面");
         Params params = new Params();
         params.addParameter("productId", productId);
+        params.addParameter("deviceNum", deviceId);
 
         return doGet(action, basicParams(params), TeamDetailEntity.class);
     }
+
     /**
-     * 	跟团游详情页面底部数据
+     * 跟团游详情页面底部数据
      *
      * @return
      * @throws TaskException
@@ -316,6 +318,21 @@ public class SDK extends ABizLogic {
     public LikeEntity obtainLike() throws TaskException {
         Setting action = newSetting("getLike", "Api/Group/getLike", "跟团游详情页面底部数据");
         return doGet(action, null, LikeEntity.class);
+    }
+
+    /**
+     * 跟团游产品价格日历
+     *
+     * @param productId //	跟团游id
+     * @return
+     * @throws TaskException
+     */
+    public TeamPriceEntity obtainProductPrice(String productId) throws TaskException {
+        Setting action = newSetting("obtainProductPrice", "appapi/Team/getProductPrice", "跟团游产品价格日历");
+        Params params = new Params();
+        params.addParameter("productId", productId);
+
+        return doGet(action, basicParams(params), TeamPriceEntity.class);
     }
 
     /**
@@ -458,8 +475,6 @@ public class SDK extends ABizLogic {
         params.addParameter("page", page);
         return doGet(action, basicParams(params), SearchTickEntity.class);
     }
-
-
 
 
     /**
@@ -817,15 +832,13 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public String getAliPay( String order_sn) throws TaskException {
+    public String getAliPay(String order_sn) throws TaskException {
         Setting action = newSetting("public", "tp5/public", "调用支付宝下单接口");
         Params params = new Params();
         params.addParameter("order_sn", order_sn);
-        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?order_sn=" + order_sn );
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?order_sn=" + order_sn);
         return doGet(configHttpConfig(), action, params, String.class);
     }
-
-
 
 
     /**
@@ -923,7 +936,7 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public String addContact(String member_id,String name,String certificate,String mobile,String sex,String email,String type,String contact_id) throws TaskException {
+    public String addContact(String member_id, String name, String certificate, String mobile, String sex, String email, String type, String contact_id) throws TaskException {
         Setting action = newSetting("addContact", "appapi/Personalcenter/addContact", "获取常用联系人信息");
         Params params = new Params();
         params.addParameter("member_id", member_id);
@@ -932,10 +945,10 @@ public class SDK extends ABizLogic {
         params.addParameter("mobile", mobile);
         params.addParameter("type", type);
         params.addParameter("sex", sex);
-        if("1".equals(type)){
+        if ("1".equals(type)) {
             params.addParameter("contact_id", contact_id);
         }
-        if(TextUtils.isEmpty(email)){
+        if (TextUtils.isEmpty(email)) {
             params.addParameter("email", email);
         }
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?member_id=" + member_id);
@@ -949,7 +962,7 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public String getDeleteInfo(String member_id,String contact_id) throws TaskException {
+    public String getDeleteInfo(String member_id, String contact_id) throws TaskException {
         Setting action = newSetting("getContactInfo", "appapi/Personalcenter/delContact", "获取常用联系人信息");
         Params params = new Params();
         params.addParameter("member_id", member_id);
@@ -960,15 +973,13 @@ public class SDK extends ABizLogic {
 
 
     /**
-     *
-     *
      * @return
      * @throws TaskException
      */
     public GoalBean getDestination(String desProvinceId) throws TaskException {
         Setting action = newSetting("getDestination", "appapi/Team/getDestination", "获取常用联系人信息");
         Params params = new Params();
-        if(!TextUtils.isEmpty(desProvinceId)){
+        if (!TextUtils.isEmpty(desProvinceId)) {
             params.addParameter("desProvinceId", desProvinceId);
         }
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?desProvinceId=" + desProvinceId);
@@ -976,63 +987,59 @@ public class SDK extends ABizLogic {
     }
 
 
-
     /**
-     *
-     *
      * @return
      * @throws TaskException 获取门票游列表页数据
      */
-    public ProductPartListBean getTickByCondition(String type,String themeId ,String gradeId ,String desCityId,String price,String sales,String page) throws TaskException {
+    public ProductPartListBean getTickByCondition(String type, String themeId, String gradeId, String desCityId, String price, String sales, String page) throws TaskException {
         Setting action = newSetting("getProductByCondition", "appapi/Common/getProductByCondition", "获取跟团游列表页数据");
         Params params = new Params();
         params.addParameter("type", type);
-        if(!TextUtils.isEmpty(themeId)){
+        if (!TextUtils.isEmpty(themeId)) {
             params.addParameter("themeId", themeId);
         }
-        if(!TextUtils.isEmpty(gradeId)){
+        if (!TextUtils.isEmpty(gradeId)) {
             params.addParameter("gradeId", gradeId);
         }
-        if(!TextUtils.isEmpty(desCityId)){
+        if (!TextUtils.isEmpty(desCityId)) {
             params.addParameter("desCityId", desCityId);
         }
-        if(!TextUtils.isEmpty(price)){
+        if (!TextUtils.isEmpty(price)) {
             params.addParameter("price", price);
         }
-        if(!TextUtils.isEmpty(sales)){
+        if (!TextUtils.isEmpty(sales)) {
             params.addParameter("sales", sales);
         }
         params.addParameter("page", page);
-        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?themeId=" + themeId+ "gradeId=" + gradeId+ "desCityId=" + desCityId+ "price=" + price+ "sales=" + sales+ "page=" + page);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?themeId=" + themeId + "gradeId=" + gradeId + "desCityId=" + desCityId + "price=" + price + "sales=" + sales + "page=" + page);
         return doPost(configHttpConfig(), action, params, null, null, ProductPartListBean.class);
     }
+
     /**
-     *
-     *
      * @return
      * @throws TaskException 获取跟团游列表页数据
      */
-    public GroupListBase getProductByCondition(String type,String themeId ,String gradeId ,String desCityId,String price,String sales,String page) throws TaskException {
+    public GroupListBase getProductByCondition(String type, String themeId, String gradeId, String desCityId, String price, String sales, String page) throws TaskException {
         Setting action = newSetting("getProductByCondition", "appapi/Common/getProductByCondition", "获取跟团游列表页数据");
         Params params = new Params();
         params.addParameter("type", type);
-        if(!TextUtils.isEmpty(themeId)){
+        if (!TextUtils.isEmpty(themeId)) {
             params.addParameter("themeId", themeId);
         }
-        if(!TextUtils.isEmpty(gradeId)){
+        if (!TextUtils.isEmpty(gradeId)) {
             params.addParameter("gradeId", gradeId);
         }
-        if(!TextUtils.isEmpty(desCityId)){
+        if (!TextUtils.isEmpty(desCityId)) {
             params.addParameter("desCityId", desCityId);
         }
-        if(!TextUtils.isEmpty(price)){
+        if (!TextUtils.isEmpty(price)) {
             params.addParameter("price", price);
         }
-        if(!TextUtils.isEmpty(sales)){
+        if (!TextUtils.isEmpty(sales)) {
             params.addParameter("sales", sales);
         }
         params.addParameter("page", page);
-        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?themeId=" + themeId+ "gradeId=" + gradeId+ "desCityId=" + desCityId+ "price=" + price+ "sales=" + sales+ "page=" + page);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?themeId=" + themeId + "gradeId=" + gradeId + "desCityId=" + desCityId + "price=" + price + "sales=" + sales + "page=" + page);
         return doPost(configHttpConfig(), action, params, null, null, GroupListBase.class);
     }
 
@@ -1044,7 +1051,7 @@ public class SDK extends ABizLogic {
     }
 
     @Override
-    protected HttpConfig configHttpConfig(){
+    protected HttpConfig configHttpConfig() {
         HttpConfig config = new HttpConfig();
         // 服务端请求地址
         config.baseUrl = BuildConfig.BASE_URL;

@@ -39,7 +39,7 @@ public class MonthAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private OnItemClickListener mOnItemClickListener = null;
 
     public interface OnItemClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(View view, int position, List<DateEntity> dataList);
     }
 
     public MonthAdapter(Context context, List<DateEntity> dataList) {
@@ -99,9 +99,9 @@ public class MonthAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ((MyViewHolder) holder).recommendtTitle.setText(dataList.get(position).day);
-        ((MyViewHolder) holder).recommendPrice.setText(dataList.get(position).luna);
+        ((MyViewHolder) holder).recommendPrice.setText("￥" + dataList.get(position).luna);
         //        //将position保存在itemView的Tag中，以便点击时进行获取
-
+        Log.e("eee", "onBindViewHolder: " + dataList.get(position).date);
         if (TextUtils.isEmpty(dataList.get(position).date)) {
             ((MyViewHolder) holder).recommendtTitle.setText("");
             ((MyViewHolder) holder).recommendPrice.setText("");
@@ -112,47 +112,50 @@ public class MonthAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             int month = calendar.getTime().getMonth();
             int year = calendar.getTime().getYear() + 1900;
             int day = calendar.getTime().getDate();
-            if (obtaindata(dataList.get(position).million / 1000 + "").getYear()+ 1900 == year) {
+            if (obtaindata(dataList.get(position).million / 1000 + "").getYear() + 1900 == year) {
                 if (obtaindata(dataList.get(position).million / 1000 + "").getMonth() == (month)) {
-                    if (obtaindata(dataList.get(position).million / 1000 + "").getDate() >= day) {
-                        ((MyViewHolder) holder).recommendPrice.setVisibility(View.VISIBLE);
-                        ((MyViewHolder) holder).recommendPrice.setText(dataList.get(position).luna);
-                        ((MyViewHolder) holder).recommendPrice.setTextColor(Color.RED);
-                        ((MyViewHolder) holder).recommendtTitle.setText(dataList.get(position).day);
-                    } else {
-                        ((MyViewHolder) holder).recommendPrice.setVisibility(View.GONE);
-                        ((MyViewHolder) holder).recommendtTitle.setText(dataList.get(position).day);
-                        ((MyViewHolder) holder).recommendtTitle.setTextColor(mContext.getResources().getColor(R.color.color_999999));
-                    }
-                } else if (obtaindata(dataList.get(position).million / 1000 + "").getMonth() > (month)) {
-                    ((MyViewHolder) holder).recommendPrice.setVisibility(View.VISIBLE);
-                    ((MyViewHolder) holder).recommendPrice.setText(dataList.get(position).luna);
-                    ((MyViewHolder) holder).recommendtTitle.setText(dataList.get(position).day);
-                    ((MyViewHolder) holder).recommendPrice.setTextColor(Color.RED);
-                } else {
-                    ((MyViewHolder) holder).recommendPrice.setVisibility(View.GONE);
-                    ((MyViewHolder) holder).recommendtTitle.setText(dataList.get(position).day);
-                    ((MyViewHolder) holder).recommendtTitle.setTextColor(mContext.getResources().getColor(R.color.color_999999));
-                }
-            } else if (obtaindata(dataList.get(position).million / 1000 + "").getYear()+ 1900 > (year)) {
-                ((MyViewHolder) holder).recommendPrice.setVisibility(View.VISIBLE);
-                ((MyViewHolder) holder).recommendPrice.setText(dataList.get(position).luna);
-                ((MyViewHolder) holder).recommendtTitle.setText(dataList.get(position).day);
-                ((MyViewHolder) holder).recommendPrice.setTextColor(Color.RED);
-            }else{
-                ((MyViewHolder) holder).recommendPrice.setVisibility(View.GONE);
-                ((MyViewHolder) holder).recommendtTitle.setText(dataList.get(position).day);
-                ((MyViewHolder) holder).recommendtTitle.setTextColor(mContext.getResources().getColor(R.color.color_999999));
-            }
+                    if (obtaindata(dataList.get(position).million / 1000 + "").getDate() >= day)
+                        isPriceShoudeVisible((MyViewHolder) holder, position);
+                    else
+                        setPriceVisibleGone((MyViewHolder) holder, position);
+                } else if (obtaindata(dataList.get(position).million / 1000 + "").getMonth() > (month))
+                    isPriceShoudeVisible((MyViewHolder) holder, position);
+                else
+                    setPriceVisibleGone((MyViewHolder) holder, position);
+            } else if (obtaindata(dataList.get(position).million / 1000 + "").getYear() + 1900 > (year))
+                isPriceShoudeVisible((MyViewHolder) holder, position);
+            else
+                setPriceVisibleGone((MyViewHolder) holder, position);
             holder.itemView.setTag(position);
         }
         if (selectedPosition == position) {
             if (!TextUtils.isEmpty(dataList.get(position).date)) {
                 ((MyViewHolder) holder).bg.setBackgroundResource(R.drawable.select_bg);
+                Log.e("sss", "onBindViewHolder: "+position );
                 ((MyViewHolder) holder).recommendtTitle.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
                 ((MyViewHolder) holder).recommendPrice.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
             }
         }
+    }
+
+    private void isPriceShoudeVisible(MyViewHolder holder, int position) {
+        if (dataList.get(position).isHasPrice)
+            setPriceVisible(holder, position);
+        else
+            setPriceVisibleGone(holder, position);
+    }
+
+    private void setPriceVisibleGone(MyViewHolder holder, int position) {
+        holder.recommendPrice.setVisibility(View.GONE);
+        holder.recommendtTitle.setText(dataList.get(position).day);
+        holder.recommendtTitle.setTextColor(mContext.getResources().getColor(R.color.color_999999));
+    }
+
+    private void setPriceVisible(MyViewHolder holder, int position) {
+        holder.recommendPrice.setVisibility(View.VISIBLE);
+        holder.recommendPrice.setText("￥" + dataList.get(position).luna);
+        holder.recommendPrice.setTextColor(Color.RED);
+        holder.recommendtTitle.setText(dataList.get(position).day);
     }
 
     @Override
@@ -172,10 +175,12 @@ public class MonthAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         if (mOnItemClickListener != null) {
             if (obtaindata(dataList.get(position).million / 1000 + "").getMonth() == (month)) {
                 if (obtaindata(dataList.get(position).million / 1000 + "").getDate() >= day) {
-                    mOnItemClickListener.onItemClick(v, (int) v.getTag());
+                    if (dataList.get(position).isHasPrice)
+                        mOnItemClickListener.onItemClick(v, (int) v.getTag(), dataList);
                 }
             } else if (obtaindata(dataList.get(position).million / 1000 + "").getMonth() > (month)) {
-                mOnItemClickListener.onItemClick(v, (int) v.getTag());
+                if (dataList.get(position).isHasPrice)
+                    mOnItemClickListener.onItemClick(v, (int) v.getTag(), dataList);
             }
         }
     }

@@ -10,7 +10,8 @@ public class DateEntity {
     public String date; //日期
     public boolean isToday;  //是否今天
     public String day;  //天
-    public String luna;  //阴历
+    public int luna;  //jiage
+    public boolean isHasPrice;  //jiage
 
     @Override
     public String toString() {
