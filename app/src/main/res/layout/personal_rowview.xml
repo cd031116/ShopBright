@@ -5,17 +5,46 @@
     android:background="@color/line"
     android:orientation="vertical">
 
+
     <RelativeLayout
-        android:id="@+id/row_collect_layout"
+        android:id="@+id/row_normal_msg_layout"
         android:layout_width="match_parent"
         android:layout_height="111px"
+        android:layout_marginTop="1dp"
         android:background="@color/comm_white">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="27px"
-            android:drawableLeft="@drawable/personal_collect"
+            android:drawableLeft="@drawable/common_message"
+            android:drawablePadding="27px"
+            android:gravity="center_vertical"
+            android:paddingBottom="17px"
+            android:paddingTop="17px"
+            android:text="@string/personal_normal_msg" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="39px"
+            android:background="@drawable/personal_right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/row_collect_layout"
+        android:layout_width="match_parent"
+        android:layout_height="111px"
+        android:layout_below="@id/row_normal_msg_layout"
+        android:background="@color/comm_white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="27px"
+            android:drawableLeft="@drawable/collection"
             android:drawablePadding="27px"
             android:gravity="center_vertical"
             android:paddingBottom="17px"
@@ -43,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="27px"
-            android:drawableLeft="@drawable/personal_history"
+            android:drawableLeft="@drawable/history"
             android:drawablePadding="27px"
             android:gravity="center_vertical"
             android:paddingBottom="17px"
@@ -59,8 +88,9 @@
             android:background="@drawable/personal_right" />
     </RelativeLayout>
 
+
     <RelativeLayout
-        android:id="@+id/row_normal_msg_layout"
+        android:id="@+id/row_kefu_center_layout"
         android:layout_width="match_parent"
         android:layout_height="111px"
         android:layout_below="@+id/row_look_his_layout"
@@ -71,35 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="27px"
-            android:drawableLeft="@drawable/personal_msg"
-            android:drawablePadding="27px"
-            android:gravity="center_vertical"
-            android:paddingBottom="17px"
-            android:paddingTop="17px"
-            android:text="@string/personal_normal_msg" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="39px"
-            android:background="@drawable/personal_right" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/row_kefu_center_layout"
-        android:layout_width="match_parent"
-        android:layout_height="111px"
-        android:layout_below="@id/row_normal_msg_layout"
-        android:layout_marginTop="1dp"
-        android:background="@color/comm_white">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="27px"
-            android:drawableLeft="@drawable/personal_service"
+            android:drawableLeft="@drawable/server"
             android:drawablePadding="27px"
             android:gravity="center_vertical"
             android:paddingBottom="17px"

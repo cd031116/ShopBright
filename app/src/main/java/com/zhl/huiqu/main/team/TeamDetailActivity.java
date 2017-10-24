@@ -26,6 +26,7 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
+import com.zhl.huiqu.MainActivity;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.login.entity.RegisterEntity;
@@ -167,9 +168,9 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
     @Override
     public void onResume() {
         super.onResume();
-        initData();
-//        changeview(select);
-        myscroview.scrollTo(0, 120);
+//        initData();
+        changeview(select);
+//        myscroview.scrollTo(0, 120);
         top_title.setText("详情");
         image.setVisibility(View.VISIBLE);
         image.setImageResource(R.drawable.share);
@@ -315,7 +316,10 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
                     @Override
                     public void onClick(View view) {
                         spot_team_id = getYouLikeBean.getProductId() + "";
-                        onResume();
+                        Intent intent= new Intent(TeamDetailActivity.this, TeamDetailActivity.class);
+                        intent.putExtra("spot_team_id",spot_team_id);
+                        startActivity(intent);
+                        finish();
                     }
                 });
             }

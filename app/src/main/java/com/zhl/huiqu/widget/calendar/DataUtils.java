@@ -104,11 +104,11 @@ public class DataUtils {
             DateEntity entity = new DateEntity();
             result.add(0, entity);
         }
-        for (int i = 0; i < result.size(); i++) {
-            if (date.equals(result.get(i).date)) {
-                selectPosition = i;
-            }
-        }
+//        for (int i = 0; i < result.size(); i++) {
+//            if (date.equals(result.get(i).date)) {
+//                selectPosition = i;
+//            }
+//        }
         return result;
 
     }

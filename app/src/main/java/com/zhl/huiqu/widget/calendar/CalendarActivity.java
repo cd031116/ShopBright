@@ -50,7 +50,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rili);
         body = (List<TeamPriceBean>) getIntent().getSerializableExtra("body");
-         spot_team_id = getIntent().getStringExtra("spot_team_id");
+        spot_team_id = getIntent().getStringExtra("spot_team_id");
         teamOrderPriceBean = new TeamOrderPriceBean();
         initView();
     }
@@ -90,8 +90,9 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         adapter.setOnItemClickListener(new MonthAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position, List<DateEntity> dataList) {
-                Log.e("sss", "onItemClick: "+position );
+                Log.e("sss", "onItemClick: " + position);
                 adapter.setSelectedPosition(position);
+                adapter.notifyDataSetChanged();
                 teamOrderPriceBean.setProductId(spot_team_id);
                 teamOrderPriceBean.setProductAdultPrice(dataList.get(position).luna);
             }
