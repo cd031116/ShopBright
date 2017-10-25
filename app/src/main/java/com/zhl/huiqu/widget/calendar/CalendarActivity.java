@@ -113,16 +113,26 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onItemClick(View view, int position, List<DateEntity> dataList) {
                 Log.e("sss", "onItemClick: " + position);
-                adapter.setSelectedPosition(position);
-                adapter.notifyDataSetChanged();
-                adultPrice = dataList.get(position).luna;
-                outingDate = dataList.get(position).date;
-                childPrice = dataList.get(position).childLuna;
-                normal_price.setText("￥" + adultPrice);
-                child_price.setText("￥" + childPrice);
+
+                   if(dataList.get(position).ischeck){
+
+                   } else {
+                       for(int i=0;i<dataList.size();i++){
+                           dataList.get(i).ischeck=false;
+                       }
+                       dataList.get(position).ischeck=true;
+                       adultPrice = dataList.get(position).luna;
+                       outingDate = dataList.get(position).date;
+                       childPrice = dataList.get(position).childLuna;
+                       normal_price.setText("￥" + adultPrice);
+                       child_price.setText("￥" + childPrice);
+                       adapter.notifyDataSetChanged();
+                   }
             }
         });
     }
+
+
 
     @Override
     public void onClick(View view) {

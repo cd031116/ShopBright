@@ -60,7 +60,7 @@ public class MonthAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.dateString = dateString;
     }
 
-    public void setSelectedPosition(int position) {
+    public void setSelectedPosition(int position){
         selectedPosition = position;
 //        notifyDataSetChanged();
     }
@@ -128,10 +128,10 @@ public class MonthAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 setPriceVisibleGone((MyViewHolder) holder, position);
             holder.itemView.setTag(position);
         }
-        if (selectedPosition == position) {
+        if (dataList.get(position).ischeck) {
+            Log.e("sss", "selectedPosition=" + selectedPosition+"position="+position);
             if (!TextUtils.isEmpty(dataList.get(position).date)) {
                 ((MyViewHolder) holder).bg.setBackgroundResource(R.color.color_choose);
-                Log.e("sss", "onBindViewHolder: "+position+",selectedPosition:"+selectedPosition );
                 ((MyViewHolder) holder).recommendtTitle.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
                 ((MyViewHolder) holder).recommendPrice.setTextColor(ContextCompat.getColor(mContext, R.color.color_ffffff));
             }

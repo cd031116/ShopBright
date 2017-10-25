@@ -13,7 +13,7 @@ public class DateEntity {
     public int luna;  //jiage
     public int childLuna;  //jiage
     public boolean isHasPrice;  //jiage
-
+    public boolean ischeck;
     @Override
     public String toString() {
         return "DateEntity{" +
@@ -26,4 +26,6 @@ public class DateEntity {
                 ", luna='" + luna + '\'' +
                 '}';
     }
+
+
 }
