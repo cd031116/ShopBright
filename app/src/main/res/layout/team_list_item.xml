@@ -53,6 +53,7 @@
                         android:layout_alignParentTop="true"
                         android:gravity="center_vertical"
                         android:paddingLeft="10px"
+                        android:background="@drawable/label"
                         android:textColor="#ffffff"
                         android:textSize="32px" />
 

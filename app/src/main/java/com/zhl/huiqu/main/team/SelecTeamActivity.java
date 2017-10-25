@@ -127,9 +127,14 @@ public class SelecTeamActivity extends BaseActivity {
                         if (data.isSelect()) {
                             setflase();
                             data.setSelect(false);
+                            BaseConfig bg=BaseConfig.getInstance(SelecTeamActivity.this);
+                            bg.setStringValue(Constants.TEAM_ThemeId,"");
                         } else {
                             setflase();
                             data.setSelect(true);
+                            themeId=data.getTeam_attr_id();
+                            BaseConfig bg=BaseConfig.getInstance(SelecTeamActivity.this);
+                            bg.setStringValue(Constants.TEAM_ThemeId,themeId);
                         }
                         mAdapter.notifyDataSetChanged();
                     }

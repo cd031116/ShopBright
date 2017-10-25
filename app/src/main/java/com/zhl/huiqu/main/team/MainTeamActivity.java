@@ -15,9 +15,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.BaseConfig;
+import com.zhl.huiqu.main.ProductDetailActivity;
 import com.zhl.huiqu.main.team.bean.CityList;
 import com.zhl.huiqu.main.team.bean.TeamBase;
 import com.zhl.huiqu.main.team.bean.TeamHot;
@@ -30,6 +35,7 @@ import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SaveObjectUtils;
+import com.zhl.huiqu.widget.GlideImageLoader;
 import com.zhl.huiqu.widget.MyScroview;
 import com.zhl.huiqu.widget.SimpleDividerItemDecoration;
 
@@ -83,6 +89,8 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
 
     @ViewInject(id = R.id.recycleview)
     RecyclerView recycleview;
+    @ViewInject(id = R.id.banner)
+    Banner banner;
     private CommonAdapter<TeamMainList> madapter;
     private List<TeamMainList> mList=new ArrayList<>();
     List<TeamHot> hlist=new ArrayList<>();
@@ -108,7 +116,8 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
     private int page=1;
     private LinearLayoutManager mLayoutManager;
     private boolean ismore=false;
-
+    private List<String> images = new ArrayList<>();
+    private List<String> titles = new ArrayList<>();
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main_team;
@@ -135,6 +144,33 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
         new getListTask().execute();
         initDatas();
     }
+
+    private void setBanner() {
+        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+        //设置图片加载器
+        banner.setImageLoader(new GlideImageLoader());
+        //设置图片集合
+        banner.setImages(images);
+        //设置banner动画效果
+        banner.setBannerAnimation(Transformer.Default);
+        //设置标题集合（当banner样式有显示title时）
+        banner.setBannerTitles(titles);
+        //设置自动轮播，默认为true
+        banner.isAutoPlay(true);
+        //设置轮播时间
+        banner.setDelayTime(2500);
+        //设置指示器位置（当banner模式中有指示器时）
+        banner.setIndicatorGravity(BannerConfig.CENTER);
+        //banner设置方法全部调用完毕时最后调用
+        banner.start();
+        banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+
+            }
+        });
+    }
+
 
     /**
      * 初始化数据源
@@ -402,6 +438,13 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
 
     private void showview(TeamTop data) {
         mDatas = data.getDestination();
+        if (images != null) {
+            images.clear();
+        }
+        for (int i = 0; i < data.getImg().size(); i++) {
+            images.add(data.getImg().get(i).getPath());
+        }
+        setBanner();
         initDatas();
         hlist = data.getHot();
         if (!TextUtils.isEmpty(hlist.get(0).getThumb())) {

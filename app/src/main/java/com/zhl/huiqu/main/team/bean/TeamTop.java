@@ -13,7 +13,7 @@ public class TeamTop implements Serializable{
     private List<CityList> destination;
 
     private List<TeamHot> hot;
-
+    private List<TeamImage> img;
     public List<CityList> getDestination() {
         return destination;
     }
@@ -28,5 +28,13 @@ public class TeamTop implements Serializable{
 
     public void setHot(List<TeamHot> hot) {
         this.hot = hot;
+    }
+
+    public List<TeamImage> getImg() {
+        return img;
+    }
+
+    public void setImg(List<TeamImage> img) {
+        this.img = img;
     }
 }
