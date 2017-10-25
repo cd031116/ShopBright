@@ -19,7 +19,7 @@ import java.util.List;
  * Created by dw on 2017/9/21.
  */
 
-public class ReminderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class  ReminderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private LayoutInflater mLayoutInflater;
     private Context mContext;

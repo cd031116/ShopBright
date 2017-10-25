@@ -14,6 +14,15 @@ public class TeamOrderPriceBean implements Serializable {
     private int productChildNum;
     private int productAdultPrice;
     private int productChildPrice;
+    private int roomChargeprice;
+
+    public int getRoomChargeprice() {
+        return roomChargeprice;
+    }
+
+    public void setRoomChargeprice(int roomChargeprice) {
+        this.roomChargeprice = roomChargeprice;
+    }
 
     public String getProductId() {
         return productId;

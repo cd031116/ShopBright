@@ -117,6 +117,8 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
     TextView fp_text;
     @Bind(R.id.fu_text)
     TextView fu_text;
+    @Bind(R.id.submit)
+    TextView submit;
     @Bind(R.id.tab1_t)
     TextView tab1_t;
     @Bind(R.id.tab1_v)
@@ -177,7 +179,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         image.setImageResource(R.drawable.share);
     }
 
-    @OnClick({R.id.top_left, R.id.image, R.id.tab1_mian, R.id.tab2_mian, R.id.tab3_mian, R.id.submit})
+    @OnClick({R.id.top_left, R.id.image, R.id.tab1_mian, R.id.tab2_mian, R.id.tab3_mian})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.top_left:
@@ -200,9 +202,6 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
                 select = 3;
                 changeview(select);
                 myscroview.scrollTo(0, payknowHeight);
-                break;
-            case R.id.submit:
-                startActivity(new Intent(TeamDetailActivity.this, TeamOrderActivity.class));
                 break;
         }
     }
@@ -279,8 +278,8 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
             @Override
             protected void convert(ViewHolder holder, TeamPriceBean teamPriceBean, int position) {
                 if (position <= 2) {
-                    holder.setText(R.id.calender_text, teamPriceBean.getDepartDate());
-                    holder.setText(R.id.price_text, "￥" + teamPriceBean.getRetailAdultPrice());
+                    holder.setText(R.id.calender_text, teamPriceBean.getYear() + "-" + teamPriceBean.getMonth() + "-" + teamPriceBean.getDay());
+                    holder.setText(R.id.price_text, "￥" + teamPriceBean.getTicketPrice());
                 }
             }
         };
@@ -289,15 +288,25 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         more_calender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TeamDetailActivity.this, CalendarActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("body", (Serializable) body);
-                intent.putExtra("spot_team_id", spot_team_id);
-                intent.putExtra("team_title", title);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                toCalenderView((Serializable) body);
             }
         });
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toCalenderView((Serializable) body);
+            }
+        });
+    }
+
+    private void toCalenderView(Serializable body) {
+        Intent intent = new Intent(TeamDetailActivity.this, CalendarActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("body", body);
+        intent.putExtra("spot_team_id", spot_team_id);
+        intent.putExtra("team_title", title);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
 

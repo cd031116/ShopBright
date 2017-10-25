@@ -223,7 +223,6 @@
                 android:layout_height="173px"
                 android:layout_marginTop="1px"
                 android:background="@color/white"
-                android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingLeft="42px"
                 android:paddingRight="42px">
@@ -231,8 +230,10 @@
                 <TextView
                     android:id="@+id/more_calender"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
+                    android:gravity="center_vertical"
+                    android:padding="24px"
                     android:text="更多\n日期"
                     android:textColor="@color/black_text"
                     android:textSize="27px" />
@@ -241,6 +242,7 @@
                     android:id="@+id/t_calender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_toLeftOf="@id/more_calender" />
             </RelativeLayout>
 

@@ -9,36 +9,76 @@ import java.io.Serializable;
 public class TeamPriceBean implements Serializable{
 
     /**
-     * departDate : 2017-10-24
-     * retailAdultPrice : 2438
-     * retailChildPrice : 636
+     * year : 2017
+     * month : 11
+     * day : 08
+     * ticketCount : 20
+     * ticketPrice : 3306
+     * childTicketPrice : 935
+     * roomChargeprice : 540
      */
 
-    private String departDate;
-    private int retailAdultPrice;
-    private int retailChildPrice;
+    private String year;
+    private String month;
+    private String day;
+    private int ticketCount;
+    private int ticketPrice;
+    private int childTicketPrice;
+    private int roomChargeprice;
 
-    public String getDepartDate() {
-        return departDate;
+    public String getYear() {
+        return year;
     }
 
-    public void setDepartDate(String departDate) {
-        this.departDate = departDate;
+    public void setYear(String year) {
+        this.year = year;
     }
 
-    public int getRetailAdultPrice() {
-        return retailAdultPrice;
+    public String getMonth() {
+        return month;
     }
 
-    public void setRetailAdultPrice(int retailAdultPrice) {
-        this.retailAdultPrice = retailAdultPrice;
+    public void setMonth(String month) {
+        this.month = month;
     }
 
-    public int getRetailChildPrice() {
-        return retailChildPrice;
+    public String getDay() {
+        return day;
     }
 
-    public void setRetailChildPrice(int retailChildPrice) {
-        this.retailChildPrice = retailChildPrice;
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public int getTicketCount() {
+        return ticketCount;
+    }
+
+    public void setTicketCount(int ticketCount) {
+        this.ticketCount = ticketCount;
+    }
+
+    public int getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(int ticketPrice) {
+        this.ticketPrice = ticketPrice;
+    }
+
+    public int getChildTicketPrice() {
+        return childTicketPrice;
+    }
+
+    public void setChildTicketPrice(int childTicketPrice) {
+        this.childTicketPrice = childTicketPrice;
+    }
+
+    public int getRoomChargeprice() {
+        return roomChargeprice;
+    }
+
+    public void setRoomChargeprice(int roomChargeprice) {
+        this.roomChargeprice = roomChargeprice;
     }
 }

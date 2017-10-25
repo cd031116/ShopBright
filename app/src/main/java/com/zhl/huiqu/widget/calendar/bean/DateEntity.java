@@ -11,6 +11,7 @@ public class DateEntity {
     public boolean isToday;  //是否今天
     public String day;  //天
     public int luna;  //jiage
+    public int roomChargeprice;  //jiage
     public int childLuna;  //jiage
     public boolean isHasPrice;  //jiage
     public boolean ischeck;

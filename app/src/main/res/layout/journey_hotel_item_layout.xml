@@ -7,8 +7,8 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="49px"
+        android:layout_height="49px"
         android:layout_marginLeft="42px"
         android:background="@drawable/zhusu" />
 

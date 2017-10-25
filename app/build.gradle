@@ -29,7 +29,7 @@ android {
         }
         debug {
             buildConfigField "boolean", "LOG_DEBUG", "true"
-//            buildConfigField "String", "BASE_URL", "\"xmcs.zhonghuilv.net/\""
+//            buildConfigField "String", "BASE_URL", "\"http://xmcs.zhonghuilv.net/\""
             buildConfigField "String", "BASE_URL", "\"http://192.168.18.234/\""
 //            signingConfig signingConfigs.release
             minifyEnabled false

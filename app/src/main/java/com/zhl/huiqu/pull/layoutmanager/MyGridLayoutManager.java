@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.View;
 
 import com.zhl.huiqu.pull.BaseListAdapter;
 import com.zhl.huiqu.pull.FooterSpanSizeLookup;
@@ -27,6 +28,12 @@ public class MyGridLayoutManager extends GridLayoutManager implements ILayoutMan
         super(context, spanCount, orientation, reverseLayout);
     }
 
+    @Override
+    public void onMeasure(RecyclerView.Recycler recycler, RecyclerView.State state, int widthSpec, int heightSpec) {
+        int expandSpec = View.MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,
+                View.MeasureSpec.AT_MOST);
+        super.onMeasure(recycler,state,widthSpec, expandSpec);
+    }
 
     @Override
     public RecyclerView.LayoutManager getLayoutManager() {

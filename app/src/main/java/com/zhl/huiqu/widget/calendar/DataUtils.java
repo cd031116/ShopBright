@@ -90,11 +90,13 @@ public class DataUtils {
 
             cal.add(Calendar.DATE, 1);
             for (TeamPriceBean tPriceBean : body) {
-                if (entity.date.equals(tPriceBean.getDepartDate())) {
+                String time=tPriceBean.getYear()+"-"+tPriceBean.getMonth()+"-"+tPriceBean.getDay();
+                if (entity.date.equals(time)) {
                     entity.isHasPrice = true;
-                    entity.luna = tPriceBean.getRetailAdultPrice();
-                    if (tPriceBean.getRetailChildPrice()!=0)
-                        entity.childLuna = tPriceBean.getRetailChildPrice();
+                    entity.luna = tPriceBean.getTicketPrice();
+                    entity.roomChargeprice = tPriceBean.getRoomChargeprice();
+                    if (tPriceBean.getChildTicketPrice()!=0)
+                        entity.childLuna = tPriceBean.getChildTicketPrice();
                 }
             }
             result.add(entity);

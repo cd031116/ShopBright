@@ -20,6 +20,7 @@ import com.zhl.huiqu.main.team.TeamOrderActivity;
 import com.zhl.huiqu.main.team.bean.TeamOrderPriceBean;
 import com.zhl.huiqu.main.team.bean.TeamPriceBean;
 import com.zhl.huiqu.pull.layoutmanager.MyGridLayoutManager;
+import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.ToastUtils;
 import com.zhl.huiqu.widget.calendar.bean.DateEntity;
 
@@ -46,6 +47,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
     private String spot_team_id;
     private int adultPrice, childPrice;
     private int adultNum, childNum;
+    private int roomChargeprice;
     private String outingDate;
     private String title;
 
@@ -54,6 +56,9 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rili);
+        View rootView = findViewById(android.R.id.content);
+        SupportMultipleScreensUtil.init(getApplication());
+        SupportMultipleScreensUtil.scale(rootView);
         body = (List<TeamPriceBean>) getIntent().getSerializableExtra("body");
         spot_team_id = getIntent().getStringExtra("spot_team_id");
         title = getIntent().getStringExtra("team_title");
@@ -114,24 +119,24 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
             public void onItemClick(View view, int position, List<DateEntity> dataList) {
                 Log.e("sss", "onItemClick: " + position);
 
-                   if(dataList.get(position).ischeck){
+                if (dataList.get(position).ischeck) {
 
-                   } else {
-                       for(int i=0;i<dataList.size();i++){
-                           dataList.get(i).ischeck=false;
-                       }
-                       dataList.get(position).ischeck=true;
-                       adultPrice = dataList.get(position).luna;
-                       outingDate = dataList.get(position).date;
-                       childPrice = dataList.get(position).childLuna;
-                       normal_price.setText("￥" + adultPrice);
-                       child_price.setText("￥" + childPrice);
-                       adapter.notifyDataSetChanged();
-                   }
+                } else {
+                    for (int i = 0; i < dataList.size(); i++) {
+                        dataList.get(i).ischeck = false;
+                    }
+                    dataList.get(position).ischeck = true;
+                    adultPrice = dataList.get(position).luna;
+                    outingDate = dataList.get(position).date;
+                    childPrice = dataList.get(position).childLuna;
+                    roomChargeprice = dataList.get(position).roomChargeprice;
+                    normal_price.setText("￥" + adultPrice);
+                    child_price.setText("￥" + childPrice);
+                    adapter.notifyDataSetChanged();
+                }
             }
         });
     }
-
 
 
     @Override
@@ -202,6 +207,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         teamOrderPriceBean.setProductChildPrice(childPrice);
         teamOrderPriceBean.setProductTime(outingDate);
         teamOrderPriceBean.setProductTitle(title);
+        teamOrderPriceBean.setRoomChargeprice(roomChargeprice);
         Intent intent = new Intent(CalendarActivity.this, TeamOrderActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("t_order_price", teamOrderPriceBean);

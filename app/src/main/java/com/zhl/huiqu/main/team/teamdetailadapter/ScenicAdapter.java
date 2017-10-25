@@ -92,7 +92,7 @@ public class ScenicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     holder.setText(R.id.img_title, journeyScenicImgBean.getImgTitle());
                 }
             };
-            if (dataList.get(position).getScenicImg() != null && dataList.get(position).getScenicImg().size() >= 3)
+            if (dataList.get(position).getScenicImg() != null && dataList.get(position).getScenicImg().size() >= 3 && dataList.get(position).getScenicImg().size() != 4)
                 ((MyViewHolder) holder).journey_scenic_list.setLayoutManager(new MyGridLayoutManager(mContext, 3));
             else
                 ((MyViewHolder) holder).journey_scenic_list.setLayoutManager(new MyGridLayoutManager(mContext, 2));
