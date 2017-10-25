@@ -243,7 +243,7 @@
         android:id="@+id/ok"
         android:layout_width="match_parent"
         android:layout_height="142px"
-        android:background="@color/color_yellow"
+        android:background="@color/red_text"
         android:gravity="center"
         android:text="下一步"
         android:textColor="@color/white"

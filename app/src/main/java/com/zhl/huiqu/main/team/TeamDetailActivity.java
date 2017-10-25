@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.View;
@@ -138,6 +139,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
     private JourneyAdapter journeyAdapter;
     private String deviceId;
     private String memberId;
+    private String title;
 
     @Override
     protected int getLayoutId() {
@@ -155,7 +157,6 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         if (account != null) {
             memberId = account.getBody().getMember_id();
         }
-        Log.e("ddd", "initView: " + spot_team_id);
     }
 
     @Override
@@ -292,6 +293,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("body", (Serializable) body);
                 intent.putExtra("spot_team_id", spot_team_id);
+                intent.putExtra("team_title", title);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -316,8 +318,8 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
                     @Override
                     public void onClick(View view) {
                         spot_team_id = getYouLikeBean.getProductId() + "";
-                        Intent intent= new Intent(TeamDetailActivity.this, TeamDetailActivity.class);
-                        intent.putExtra("spot_team_id",spot_team_id);
+                        Intent intent = new Intent(TeamDetailActivity.this, TeamDetailActivity.class);
+                        intent.putExtra("spot_team_id", spot_team_id);
                         startActivity(intent);
                         finish();
                     }
@@ -340,7 +342,10 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         group_price.setText(body.getTeamInfo().getPriceAdultMin() + "");
         contain_text.setText(body.getCostNotice().getCostInclude());
         tese_content.setText(body.getProductFeature().getContent());
-        contents.setText(body.getTeamInfo().getProductName());
+        if (!TextUtils.isEmpty(body.getTeamInfo().getProductName())) {
+            title = body.getTeamInfo().getProductName();
+            contents.setText(body.getTeamInfo().getProductName());
+        }
         zili_text.setText(body.getCostNotice().getCostExclude());
         setBookNoticeView(body);
         setListView(body.getGetYouLike());

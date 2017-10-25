@@ -74,6 +74,7 @@
                     android:textColor="#999999" />
 
                 <TextView
+                    android:id="@+id/outing_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40px"
@@ -98,6 +99,7 @@
                     android:textColor="#999999"/>
 
                 <TextView
+                    android:id="@+id/outing_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40px"

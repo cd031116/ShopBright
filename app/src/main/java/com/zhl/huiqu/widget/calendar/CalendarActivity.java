@@ -1,5 +1,6 @@
 package com.zhl.huiqu.widget.calendar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +16,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.main.team.TeamOrderActivity;
 import com.zhl.huiqu.main.team.bean.TeamOrderPriceBean;
 import com.zhl.huiqu.main.team.bean.TeamPriceBean;
 import com.zhl.huiqu.pull.layoutmanager.MyGridLayoutManager;
+import com.zhl.huiqu.utils.ToastUtils;
 import com.zhl.huiqu.widget.calendar.bean.DateEntity;
 
 import java.util.Calendar;
@@ -43,6 +46,8 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
     private String spot_team_id;
     private int adultPrice, childPrice;
     private int adultNum, childNum;
+    private String outingDate;
+    private String title;
 
 
     @Override
@@ -51,6 +56,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.rili);
         body = (List<TeamPriceBean>) getIntent().getSerializableExtra("body");
         spot_team_id = getIntent().getStringExtra("spot_team_id");
+        title = getIntent().getStringExtra("team_title");
         teamOrderPriceBean = new TeamOrderPriceBean();
         initView();
     }
@@ -109,10 +115,11 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
                 Log.e("sss", "onItemClick: " + position);
                 adapter.setSelectedPosition(position);
                 adapter.notifyDataSetChanged();
-                teamOrderPriceBean.setProductId(spot_team_id);
-                teamOrderPriceBean.setProductAdultPrice(dataList.get(position).luna);
-                normal_price.setText("￥" + dataList.get(position).luna);
-                child_price.setText("￥" + dataList.get(position).childLuna);
+                adultPrice = dataList.get(position).luna;
+                outingDate = dataList.get(position).date;
+                childPrice = dataList.get(position).childLuna;
+                normal_price.setText("￥" + adultPrice);
+                child_price.setText("￥" + childPrice);
             }
         });
     }
@@ -145,10 +152,6 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
                 currentDateTv.setText(DataUtils.formatDate(date, "yyyy-MM"));
             } else
                 date = (year + 1) + "-" + 12 + "-" + 1;
-        } else if (id == ok.getId()) {
-            if (onItemClick != null) {
-                onItemClick.onItemClick(date);
-            }
         }
         switch (id) {
             case R.id.normal_down_btn:
@@ -169,7 +172,31 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
                 childNum++;
                 child_num_btn.setText(childNum + "");
                 break;
+            case R.id.ok:
+                if (adultPrice != 0) {
+                    if (adultNum > 0) {
+                        nextStep();
+                    } else
+                        ToastUtils.showShortToast(CalendarActivity.this, "请选择出游人数");
+                } else
+                    ToastUtils.showShortToast(CalendarActivity.this, "请选择出游日期");
+
         }
+    }
+
+    private void nextStep() {
+        teamOrderPriceBean.setProductId(spot_team_id);
+        teamOrderPriceBean.setProductAdultPrice(adultPrice);
+        teamOrderPriceBean.setProductAdultNum(adultNum);
+        teamOrderPriceBean.setProductChildNum(childNum);
+        teamOrderPriceBean.setProductChildPrice(childPrice);
+        teamOrderPriceBean.setProductTime(outingDate);
+        teamOrderPriceBean.setProductTitle(title);
+        Intent intent = new Intent(CalendarActivity.this, TeamOrderActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("t_order_price", teamOrderPriceBean);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
 
