@@ -30,12 +30,16 @@
             android:id="@+id/activity_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="43px"
+            android:textColor="@color/black_text"
             android:layout_marginTop="30px" />
 
         <TextView
             android:id="@+id/activity_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="37px"
+            android:textColor="@color/color_999999"
             android:layout_marginTop="30px" />
 
         <android.support.v7.widget.RecyclerView

@@ -336,6 +336,22 @@ public class SDK extends ABizLogic {
     }
 
     /**
+     * 加入收藏/取消收藏
+     *
+     * @param productId //	跟团游id
+     * @return
+     * @throws TaskException
+     */
+    public TeamPriceEntity setProductcollect(String productId,String type) throws TaskException {
+        Setting action = newSetting("setProductcollect", "appapi/Common/collect", "加入收藏/取消收藏");
+        Params params = new Params();
+        params.addParameter("productId", productId);
+        params.addParameter("type", type);
+
+        return doGet(action, basicParams(params), TeamPriceEntity.class);
+    }
+
+    /**
      * 根据经纬度获取周边
      *
      * @param longitude //页码数

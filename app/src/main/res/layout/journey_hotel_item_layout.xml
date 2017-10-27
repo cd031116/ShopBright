@@ -23,7 +23,9 @@
             android:id="@+id/hotel_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="景点" />
+            android:textSize="43px"
+            android:textColor="@color/black_text"
+            android:text="住宿" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/journey_alternative_hotel"

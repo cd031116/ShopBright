@@ -280,6 +280,12 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
                 if (position <= 2) {
                     holder.setText(R.id.calender_text, teamPriceBean.getYear() + "-" + teamPriceBean.getMonth() + "-" + teamPriceBean.getDay());
                     holder.setText(R.id.price_text, "￥" + teamPriceBean.getTicketPrice());
+                    holder.setOnClickListener(R.id.price_layout, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            toCalenderView((Serializable) body);
+                        }
+                    });
                 }
             }
         };

@@ -30,6 +30,8 @@
             android:id="@+id/shopping_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black_text"
+            android:textSize="43px"
             android:layout_marginTop="30px" />
 
         <TextView
@@ -37,6 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30px"
+            android:textSize="37px"
             android:textColor="@color/personal_row_text" />
 
         <TextView
@@ -44,6 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30px"
+            android:textSize="37px"
             android:textColor="@color/personal_row_text" />
 
         <TextView

@@ -97,100 +97,6 @@
                     android:layout_marginRight="42px"
                     android:background="#F5F5F5" />
 
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="#ffffff"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:padding="42px">-->
-
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:gravity="center"-->
-                <!--android:orientation="horizontal">-->
-
-                <!--<ImageView-->
-                <!--android:layout_width="40px"-->
-                <!--android:layout_height="40px"-->
-                <!--android:src="@drawable/t_zhutits" />-->
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="15px"-->
-                <!--android:text="人文古迹"-->
-                <!--android:textColor="#999999"-->
-                <!--android:textSize="37px" />-->
-                <!--</LinearLayout>-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:gravity="center"-->
-                <!--android:orientation="horizontal">-->
-
-                <!--<ImageView-->
-                <!--android:layout_width="40px"-->
-                <!--android:layout_height="40px"-->
-                <!--android:src="@drawable/t_zhutits" />-->
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="15px"-->
-                <!--android:text="历史遗迹"-->
-                <!--android:textColor="#999999"-->
-                <!--android:textSize="37px" />-->
-                <!--</LinearLayout>-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:gravity="center"-->
-                <!--android:orientation="horizontal">-->
-
-                <!--<ImageView-->
-                <!--android:layout_width="40px"-->
-                <!--android:layout_height="40px"-->
-                <!--android:src="@drawable/t_zhutits" />-->
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="15px"-->
-                <!--android:text="春秋踏青"-->
-                <!--android:textColor="#999999"-->
-                <!--android:textSize="37px" />-->
-                <!--</LinearLayout>-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:gravity="center"-->
-                <!--android:orientation="horizontal">-->
-
-                <!--<ImageView-->
-                <!--android:layout_width="40px"-->
-                <!--android:layout_height="40px"-->
-                <!--android:src="@drawable/t_zhutits" />-->
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="15px"-->
-                <!--android:text="旅游胜地"-->
-                <!--android:textColor="#999999"-->
-                <!--android:textSize="37px" />-->
-                <!--</LinearLayout>-->
-
-                <!--</LinearLayout>-->
             </LinearLayout>
 
             <!--团期-->
@@ -242,7 +148,6 @@
                     android:id="@+id/t_calender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_toLeftOf="@id/more_calender" />
             </RelativeLayout>
 

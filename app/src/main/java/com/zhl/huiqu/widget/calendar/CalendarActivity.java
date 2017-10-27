@@ -16,10 +16,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.login.LoginActivity;
+import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.main.team.TeamOrderActivity;
 import com.zhl.huiqu.main.team.bean.TeamOrderPriceBean;
 import com.zhl.huiqu.main.team.bean.TeamPriceBean;
 import com.zhl.huiqu.pull.layoutmanager.MyGridLayoutManager;
+import com.zhl.huiqu.utils.Constants;
+import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.ToastUtils;
 import com.zhl.huiqu.widget.calendar.bean.DateEntity;
@@ -50,6 +54,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
     private int roomChargeprice;
     private String outingDate;
     private String title;
+    private RegisterEntity account;
 
 
     @Override
@@ -62,6 +67,8 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         body = (List<TeamPriceBean>) getIntent().getSerializableExtra("body");
         spot_team_id = getIntent().getStringExtra("spot_team_id");
         title = getIntent().getStringExtra("team_title");
+        account = SaveObjectUtils.getInstance(this).getObject(Constants.USER_INFO, RegisterEntity.class);
+
         teamOrderPriceBean = new TeamOrderPriceBean();
         initView();
     }
@@ -188,14 +195,16 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
                 child_num_btn.setText(childNum + "");
                 break;
             case R.id.ok:
-                if (adultPrice != 0) {
-                    if (adultNum > 0) {
-                        nextStep();
+                if (account != null) {
+                    if (adultPrice != 0) {
+                        if (adultNum > 0) {
+                            nextStep();
+                        } else
+                            ToastUtils.showShortToast(CalendarActivity.this, "请选择出游人数");
                     } else
-                        ToastUtils.showShortToast(CalendarActivity.this, "请选择出游人数");
+                        ToastUtils.showShortToast(CalendarActivity.this, "请选择出游日期");
                 } else
-                    ToastUtils.showShortToast(CalendarActivity.this, "请选择出游日期");
-
+                    startActivity(new Intent(this, LoginActivity.class));
         }
     }
 

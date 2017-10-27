@@ -57,16 +57,16 @@ public class TrafficAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         RecyclerView journey_traffic_list;
         TextView traffic_from;
-//        TextView traffic_to;
+        TextView traffic_to;
         TextView traffic_content;
-//        ImageView traffic_means;
+        ImageView traffic_means;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             journey_traffic_list = (RecyclerView) itemView.findViewById(R.id.journey_traffic_list);
             traffic_from = (TextView) itemView.findViewById(R.id.traffic_from);
-//            traffic_to = (TextView) itemView.findViewById(R.id.traffic_to);
-//            traffic_means = (ImageView) itemView.findViewById(R.id.traffic_means);
+            traffic_to = (TextView) itemView.findViewById(R.id.traffic_to);
+            traffic_means = (ImageView) itemView.findViewById(R.id.traffic_means);
             traffic_content = (TextView) itemView.findViewById(R.id.traffic_content);
         }
     }
@@ -91,7 +91,7 @@ public class TrafficAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     holder.setText(R.id.img_title, journeyScenicImgBean.getImgName());
                 }
             };
-            if (dataList.get(position).getTrafficImg() != null && (dataList.get(position).getTrafficImg().size() >= 3&&dataList.get(position).getTrafficImg().size()!=4))
+            if (dataList.get(position).getTrafficImg() != null && (dataList.get(position).getTrafficImg().size() >= 3 && dataList.get(position).getTrafficImg().size() != 4))
                 ((MyViewHolder) holder).journey_traffic_list.setLayoutManager(new MyGridLayoutManager(mContext, 3));
             else
                 ((MyViewHolder) holder).journey_traffic_list.setLayoutManager(new MyGridLayoutManager(mContext, 2));
@@ -104,23 +104,26 @@ public class TrafficAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             } else
                 ((MyViewHolder) holder).traffic_from.setVisibility(View.GONE);
 
-//            if (!TextUtils.isEmpty(dataList.get(position).getMeans())) {
-//                if ("汽车".equals(dataList.get(position).getMeans()))
-//                    ((MyViewHolder) holder).traffic_means.setBackgroundResource(R.drawable.dabache);
-//                else if ("火车".equals(dataList.get(position).getMeans()))
-//                    ((MyViewHolder) holder).traffic_means.setBackgroundResource(R.drawable.huoche);
-//                else if ("飞机".equals(dataList.get(position).getMeans()))
-//                    ((MyViewHolder) holder).traffic_means.setBackgroundResource(R.drawable.feiji);
-//                else if ("轮船".equals(dataList.get(position).getMeans()))
-//                    ((MyViewHolder) holder).traffic_means.setBackgroundResource(R.drawable.lunc);
-//            } else
-//                ((MyViewHolder) holder).traffic_means.setBackgroundResource(R.drawable.dabache);
-//
-//            if (!TextUtils.isEmpty(dataList.get(position).getFrom())) {
-//                ((MyViewHolder) holder).traffic_to.setVisibility(View.VISIBLE);
-//                ((MyViewHolder) holder).traffic_to.setText(dataList.get(position).getTo());
-//            } else
-//                ((MyViewHolder) holder).traffic_to.setVisibility(View.GONE);
+            if (!TextUtils.isEmpty(dataList.get(position).getMeans())) {
+                ((MyViewHolder) holder).traffic_means.setVisibility(View.VISIBLE);
+                if ("汽车".equals(dataList.get(position).getMeans()))
+                    ((MyViewHolder) holder).traffic_means.setBackgroundResource(R.drawable.dabache);
+                else if ("火车".equals(dataList.get(position).getMeans()))
+                    ((MyViewHolder) holder).traffic_means.setBackgroundResource(R.drawable.huoche);
+                else if ("飞机".equals(dataList.get(position).getMeans()))
+                    ((MyViewHolder) holder).traffic_means.setBackgroundResource(R.drawable.feiji);
+                else if ("轮船".equals(dataList.get(position).getMeans()))
+                    ((MyViewHolder) holder).traffic_means.setBackgroundResource(R.drawable.lunc);
+                else
+                    ((MyViewHolder) holder).traffic_means.setBackgroundResource(R.drawable.dabache);
+            } else
+                ((MyViewHolder) holder).traffic_means.setVisibility(View.GONE);
+
+            if (!TextUtils.isEmpty(dataList.get(position).getTo())) {
+                ((MyViewHolder) holder).traffic_to.setVisibility(View.VISIBLE);
+                ((MyViewHolder) holder).traffic_to.setText(dataList.get(position).getTo());
+            } else
+                ((MyViewHolder) holder).traffic_to.setVisibility(View.GONE);
 
             if (!TextUtils.isEmpty(dataList.get(position).getDescription())) {
                 ((MyViewHolder) holder).traffic_content.setVisibility(View.VISIBLE);
