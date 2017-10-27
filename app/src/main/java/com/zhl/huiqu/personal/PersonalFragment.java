@@ -126,7 +126,7 @@ public class PersonalFragment extends BaseFragment {
     }
 
     @OnClick({R.id.row_collect_layout, R.id.row_look_his_layout, R.id.row_normal_msg_layout, R.id.row_kefu_center_layout,
-            R.id.refund_order_btn, R.id.goout_order_btn, R.id.pay_order_btn, R.id.all_order_btn, R.id.personal_msg_layout,
+            R.id.refund_order_btn, R.id.goout_order_btn, R.id.pay_order_btn, R.id.all_order_btn, R.id.personal_set,
             R.id.personal_login_btn, R.id.personal_register_btn})
     void onClick(View view) {
         switch (view.getId()) {
@@ -135,7 +135,7 @@ public class PersonalFragment extends BaseFragment {
                 args.add("tag", 0);
                 KefuCenterFragment.launch(getActivity(), args);
                 break;
-            case R.id.personal_msg_layout:
+            case R.id.personal_set:
                 if (account != null) {
                     Intent intent = new Intent(getActivity(), SettingActivity.class);
                     intent.putExtra("memberId", account.getBody().getMember_id());

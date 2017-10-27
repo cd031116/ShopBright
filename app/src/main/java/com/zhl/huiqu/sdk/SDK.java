@@ -342,7 +342,7 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public TeamPriceEntity setProductcollect(String productId,String type) throws TaskException {
+    public TeamPriceEntity setProductcollect(String productId, String type) throws TaskException {
         Setting action = newSetting("setProductcollect", "appapi/Common/collect", "加入收藏/取消收藏");
         Params params = new Params();
         params.addParameter("productId", productId);
@@ -886,6 +886,25 @@ public class SDK extends ABizLogic {
         params.addParameter("shop_spot_id", shop_spot_id);
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?member_id=" + member_id + "&shop_spot_id=" + shop_spot_id);
         return doGet(configHttpConfig(), action, params, String.class);
+    }
+
+    /**
+     * 加入收藏
+     *
+     * @param memberId  会员id
+     * @param productId 产品id
+     * @param type      产品类型 ticket 景点门票 team 跟团游
+     * @return
+     * @throws TaskException
+     */
+    public BaseInfo getTeamCollect(String memberId, String productId, String type) throws TaskException {
+        Setting action = newSetting("getTeamCollect", "appapi/Common/collect", "加入收藏");
+        Params params = new Params();
+        params.addParameter("productId", productId);
+        params.addParameter("type", type);
+        params.addParameter("memberId", memberId);
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?member_id=" + memberId + "&&shop_spot_id=" + productId + "&&type=" + type);
+        return doGet(configHttpConfig(), action, params, BaseInfo.class);
     }
 
     /**

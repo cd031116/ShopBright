@@ -29,7 +29,7 @@
     <string name="reset_register_phone">请填写注册的手机号码</string>
 
     <string name="personal_my_order">我的订单</string>
-    <string name="personal_all_order">全部订单</string>
+    <string name="personal_all_order">全部</string>
     <string name="personal_pay">待付款</string>
     <string name="personal_pay_order">待付款订单</string>
     <string name="personal_out">待出行</string>

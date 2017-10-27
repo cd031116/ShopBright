@@ -30,6 +30,7 @@ import com.youth.banner.listener.OnBannerListener;
 import com.zhl.huiqu.MainActivity;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.main.ProductDetailActivity;
 import com.zhl.huiqu.main.hotelTour.HotelDetailActivity;
@@ -50,6 +51,7 @@ import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SaveObjectUtils;
+import com.zhl.huiqu.utils.ToastUtils;
 import com.zhl.huiqu.widget.GlideImageLoader;
 import com.zhl.huiqu.widget.MyScroview;
 import com.zhl.huiqu.widget.SimpleDividerItemDecoration;
@@ -179,7 +181,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         image.setImageResource(R.drawable.share);
     }
 
-    @OnClick({R.id.top_left, R.id.image, R.id.tab1_mian, R.id.tab2_mian, R.id.tab3_mian})
+    @OnClick({R.id.top_left, R.id.image, R.id.tab1_mian, R.id.tab2_mian, R.id.tab3_mian, R.id.collect_layout})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.top_left:
@@ -203,8 +205,43 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
                 changeview(select);
                 myscroview.scrollTo(0, payknowHeight);
                 break;
+            case R.id.collect_layout:
+                new obtainCollectDate().execute();
+                break;
         }
     }
+
+    /**
+     * 行程数据
+     */
+    class obtainCollectDate extends WorkTask<Void, Void, BaseInfo> {
+        @Override
+        protected void onPrepare() {
+            super.onPrepare();
+            showAlert("正在加载中。。", false);
+        }
+
+        @Override
+        public BaseInfo workInBackground(Void... voids) throws TaskException {
+            return SDK.newInstance(TeamDetailActivity.this).getTeamCollect(memberId, spot_team_id, "team");
+        }
+
+        @Override
+        protected void onSuccess(BaseInfo info) {
+            super.onSuccess(info);
+            dismissAlert();
+            if (info.getCode().equals("1")) {
+                ToastUtils.showShortToast(TeamDetailActivity.this, "收藏成功");
+            }
+
+        }
+
+        @Override
+        protected void onFailure(TaskException exception) {
+            dismissAlert();
+        }
+    }
+
 
     /**
      * 行程数据
@@ -321,11 +358,12 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
 
             @Override
             protected void convert(ViewHolder holder, final TeamDetailBean.GetYouLikeBean getYouLikeBean, int position) {
-                holder.setText(R.id.like_price, "￥" + getYouLikeBean.getPriceAdultMin());
+                holder.setText(R.id.like_price, getYouLikeBean.getPriceAdultMin() + "");
                 holder.setText(R.id.like_title, getYouLikeBean.getProductName());
                 holder.setText(R.id.out_address, getYouLikeBean.getDepartCitysName());
                 holder.setText(R.id.go_address, getYouLikeBean.getDesCityName());
                 holder.setText(R.id.like_tag, getYouLikeBean.getDuration() + "日游");
+                holder.setBackgroundRes(R.id.like_tag,R.drawable.label);
                 holder.setText(R.id.like_pl, "评论：" + getYouLikeBean.getCommentNum());
                 holder.setText(R.id.like_my, "满意度：" + getYouLikeBean.getCsr());
                 holder.setBitmapWithUrl(R.id.like_img, getYouLikeBean.getThumb());

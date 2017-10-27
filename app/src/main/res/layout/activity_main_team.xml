@@ -34,7 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingRight="16dip"
-                    android:src="@drawable/login_arrow_left" />
+                    android:src="@drawable/fanhui_bai" />
             </LinearLayout>
 
             <RelativeLayout
@@ -117,15 +117,15 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginBottom="10px"
-                        android:layout_marginLeft="50px"
+                        android:layout_marginLeft="70px"
                         android:layout_marginRight="20px"
                         android:layout_marginTop="10px"
-                        android:drawablePadding="9px"
+                        android:drawablePadding="12px"
                         android:drawableRight="@drawable/team_down_local"
                         android:gravity="center_vertical"
                         android:text="长沙"
                         android:textColor="#ffffff"
-                        android:textSize="32px" />
+                        android:textSize="43px" />
 
                     <TextView
                         android:id="@+id/line_t"
@@ -148,7 +148,7 @@
                         android:gravity="center_vertical"
                         android:text="输入您要搜索的景点/地区"
                         android:textColor="#ffffff"
-                        android:textSize="32px" />
+                        android:textSize="43px" />
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -182,7 +182,7 @@
                     <TextView
                         android:id="@+id/zb_lv"
                         android:layout_width="8px"
-                        android:layout_height="wrap_content"
+                        android:layout_height="53px"
                         android:background="#e11818"
                         android:layout_centerVertical="true"
                         android:padding="10px"
@@ -209,11 +209,11 @@
                         android:layout_marginRight="30px"
                         android:drawablePadding="30px"
 
-                        android:drawableRight="@drawable/team_into_lan"
+                        android:drawableRight="@drawable/enter"
                         android:gravity="center_vertical"
                         android:text="全部"
                         android:textColor="#e11818"
-                        android:textSize="32px" />
+                        android:textSize="43px" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -252,7 +252,7 @@
                 <TextView
                     android:id="@+id/zt_lv"
                     android:layout_width="8px"
-                    android:layout_height="wrap_content"
+                    android:layout_height="53px"
                     android:background="#e11818"
                     android:layout_centerVertical="true"
                     android:padding="10px"
@@ -317,11 +317,6 @@
             </LinearLayout>
 
 
-
-
-
-
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -334,7 +329,7 @@
                 <TextView
                     android:id="@+id/dj_lv"
                     android:layout_width="8px"
-                    android:layout_height="wrap_content"
+                    android:layout_height="53px"
                     android:background="#e11818"
                     android:layout_centerVertical="true"
                     android:padding="10px"
@@ -417,7 +412,7 @@
                     <TextView
                         android:id="@+id/jx_lv"
                         android:layout_width="8px"
-                        android:layout_height="wrap_content"
+                        android:layout_height="53px"
                         android:background="#e11818"
                         android:padding="10px"
                         android:layout_centerVertical="true"
@@ -443,7 +438,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="30px"
                         android:drawablePadding="30px"
-                        android:drawableRight="@drawable/team_into_lan"
+                        android:drawableRight="@drawable/enter"
                         android:gravity="center_vertical"
                         android:text="所有路线"
                         android:textColor="#e11818"

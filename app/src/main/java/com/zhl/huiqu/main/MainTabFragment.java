@@ -48,6 +48,7 @@ import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.ToastUtils;
 import com.zhl.huiqu.widget.GlideImageLoader;
 import com.zhl.huiqu.widget.ShowMsgDialog;
+import com.zhl.huiqu.widget.SimpleDividerItemDecoration;
 
 import org.aisen.android.common.utils.SystemUtils;
 import org.aisen.android.component.eventbus.NotificationCenter;
@@ -66,7 +67,7 @@ import java.util.List;
 * @data 2017/8/12
 * */
 
-public class MainTabFragment extends BaseFragment{
+public class MainTabFragment extends BaseFragment {
     @ViewInject(id = R.id.banner)
     Banner banner;
     @ViewInject(id = R.id.mp_1)
@@ -97,9 +98,9 @@ public class MainTabFragment extends BaseFragment{
     @ViewInject(id = R.id.hot_3)
     ImageView hot_3;
 
-    @ViewInject(id=R.id.menpiao)
+    @ViewInject(id = R.id.menpiao)
     RecyclerView mRecycle;
-    @ViewInject(id=R.id.gentuan)
+    @ViewInject(id = R.id.gentuan)
     RecyclerView gRecycle;
     private List<String> images = new ArrayList<>();
     private List<String> titles = new ArrayList<>();
@@ -111,30 +112,31 @@ public class MainTabFragment extends BaseFragment{
 
     private CommonAdapter<MainTeamBean> gAdapter;
     private List<MainTeamBean> gList;
-    public static MainTabFragment newInstance(){
+
+    public static MainTabFragment newInstance() {
         return new MainTabFragment();
     }
 
     @Override
-    public void setContentView(ViewGroup view){
+    public void setContentView(ViewGroup view) {
         super.setContentView(view);
         SupportMultipleScreensUtil.init(getActivity());
         SupportMultipleScreensUtil.scale(view);
     }
 
     @Override
-    public int inflateContentView(){
+    public int inflateContentView() {
         return R.layout.main_tab_fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         NotificationCenter.defaultCenter().subscriber(CityEvent.class, cityEvent);
     }
 
     @Override
-    protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceState){
+    protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceState) {
         super.layoutInit(inflater, savedInstanceState);
         int width = SystemUtils.getScreenWidth(getActivity());
         mainInfo = SaveObjectUtils.getInstance(getActivity()).getObject(Constants.MAIN_DATA, null);
@@ -142,41 +144,41 @@ public class MainTabFragment extends BaseFragment{
         setBanner();
     }
 
-    private void setmenpiao(){
-            if(mList!=null){
-                for (int i=0;i<mList.size();i++){
-                    mList.get(i).setMore(false);
-                }
-                MainSpotBean bean=new MainSpotBean();
-                bean.setMore(true);
-                mList.add(bean);
+    private void setmenpiao() {
+        if (mList != null) {
+            for (int i = 0; i < mList.size(); i++) {
+                mList.get(i).setMore(false);
             }
+            MainSpotBean bean = new MainSpotBean();
+            bean.setMore(true);
+            mList.add(bean);
+        }
 
         mAdapter = new CommonAdapter<MainSpotBean>(getActivity(), R.layout.main_menpiao_item, mList) {
             @Override
             protected void convert(ViewHolder holder, final MainSpotBean data, int position) {
-                holder.setBitmapWithUrl(R.id.image,data.getThumb());
-                if(TextUtils.isEmpty(data.getCsr())||("暂无评价").equals(data.getCsr())){
-                    holder.setText(R.id.comment,data.getCsr()+"") ;
-                }else {
-                    holder.setText(R.id.comment,data.getCsr()+"满意") ;
+                holder.setBitmapWithUrl(R.id.image, data.getThumb());
+                if (TextUtils.isEmpty(data.getCsr()) || ("暂无评价").equals(data.getCsr())) {
+                    holder.setText(R.id.comment, data.getCsr() + "");
+                } else {
+                    holder.setText(R.id.comment, data.getCsr() + "满意");
                 }
 
-                holder.setText(R.id.title,data.getTitle()) ;
-                holder.setText(R.id.price,"￥"+data.getShop_price());
-                if (data.isMore()){
-                    holder.setVisible(R.id.main_top,false);
-                    holder.setVisible(R.id.more_line,true);
-                }else {
-                    holder.setVisible(R.id.main_top,true);
-                    holder.setVisible(R.id.more_line,false);
+                holder.setText(R.id.title, data.getTitle());
+                holder.setText(R.id.price, "￥" + data.getShop_price());
+                if (data.isMore()) {
+                    holder.setVisible(R.id.main_top, false);
+                    holder.setVisible(R.id.more_line, true);
+                } else {
+                    holder.setVisible(R.id.main_top, true);
+                    holder.setVisible(R.id.more_line, false);
                 }
 
                 holder.setOnClickListener(R.id.main_top, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
-                        intent.putExtra("shop_spot_id",data.getShop_spot_id());
+                        intent.putExtra("shop_spot_id", data.getShop_spot_id());
                         startActivity(intent);
                     }
                 });
@@ -196,35 +198,35 @@ public class MainTabFragment extends BaseFragment{
     }
 
 
-    private void settuan(){
+    private void settuan() {
         gAdapter = new CommonAdapter<MainTeamBean>(getActivity(), R.layout.team_list_item, gList) {
             @Override
             protected void convert(ViewHolder holder, final MainTeamBean data, int position) {
-                    holder.setRunderWithUrl(R.id.photo,data.getThumb());
-                String title=data.getProductName();
-                if(!TextUtils.isEmpty(title)){
-                    holder.setText(R.id.title,title.substring(title.indexOf(">")+1,title.length()));
+                holder.setRunderWithUrl(R.id.photo, data.getThumb());
+                String title = data.getProductName();
+                if (!TextUtils.isEmpty(title)) {
+                    holder.setText(R.id.title, title.substring(title.indexOf(">") + 1, title.length()));
                 }
-                holder.setText(R.id.price,"￥"+data.getPriceAdultMin());
-                holder.setText(R.id.comment,data.getCommentNum());
-                holder.setText(R.id.manyidu,data.getCsr());
-                holder.setText(R.id.address,data.getDepartCitysName());
-                holder.setText(R.id.day_time,data.getDuration()+"日游");
+                holder.setText(R.id.price, "￥" + data.getPriceAdultMin());
+                holder.setText(R.id.comment, data.getCommentNum());
+                holder.setText(R.id.manyidu, data.getCsr());
+                holder.setText(R.id.address, data.getDepartCitysName());
+                holder.setText(R.id.day_time, data.getDuration() + "日游");
                 holder.setOnClickListener(R.id.main_top, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getActivity(), TeamDetailActivity.class);
-                        intent.putExtra("spot_team_id",data.getProductId());
+                        intent.putExtra("spot_team_id", data.getProductId());
                         startActivity(intent);
                     }
                 });
             }
         };
-        gRecycle.setLayoutManager(new  LinearLayoutManager(getActivity()));
+        gRecycle.setLayoutManager(new LinearLayoutManager(getActivity()));
+        gRecycle.addItemDecoration(new SimpleDividerItemDecoration(getActivity(), null, 1));
         gRecycle.setAdapter(gAdapter);
         gRecycle.setNestedScrollingEnabled(false);
     }
-
 
 
     CitySubscriber cityEvent = new CitySubscriber() {
@@ -295,7 +297,7 @@ public class MainTabFragment extends BaseFragment{
         });
     }
 
-    @OnClick({R.id.scan, R.id.searh_line, R.id.main_mp, R.id.mp_1, R.id.mp_2, R.id.mp_3, R.id.mp_4, R.id.hot_1, R.id.hot_2, R.id.hot_3, R.id.info,R.id.gentuan_image})
+    @OnClick({R.id.scan, R.id.searh_line, R.id.main_mp, R.id.mp_1, R.id.mp_2, R.id.mp_3, R.id.mp_4, R.id.hot_1, R.id.hot_2, R.id.hot_3, R.id.info, R.id.gentuan_image})
     void onclik(View v) {
         switch (v.getId()) {
             case R.id.scan:
@@ -358,7 +360,7 @@ public class MainTabFragment extends BaseFragment{
                 ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
                 break;
             case R.id.gentuan_image:
-                    startActivity(new Intent(getActivity(), MainTeamActivity.class));
+                startActivity(new Intent(getActivity(), MainTeamActivity.class));
                 break;
         }
     }
@@ -385,7 +387,7 @@ public class MainTabFragment extends BaseFragment{
     }
 
 
-    @OnClick({R.id.gentuan_image, R.id.gt_one, R.id.gt_two, R.id.gt_three, R.id.gt_four,R.id.tuan_more})
+    @OnClick({R.id.gentuan_image, R.id.gt_one, R.id.gt_two, R.id.gt_three, R.id.gt_four, R.id.tuan_more})
     void gentuan(View v) {
         switch (v.getId()) {
             case R.id.gentuan_image:
@@ -478,9 +480,9 @@ public class MainTabFragment extends BaseFragment{
         for (int i = 0; i < info.getNav().size(); i++) {
             images.add(info.getNav().get(i).getBig_img());
         }
-        mList=info.getSpot();
+        mList = info.getSpot();
         setmenpiao();
-        gList=info.getTeam();
+        gList = info.getTeam();
         settuan();
         setBanner();
         List<HotInfo> list = info.getHot();

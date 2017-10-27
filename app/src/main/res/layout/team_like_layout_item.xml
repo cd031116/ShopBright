@@ -35,6 +35,7 @@
             android:layout_height="75px"
             android:layout_marginTop="300px"
             android:background="@drawable/hotel_shadow"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView

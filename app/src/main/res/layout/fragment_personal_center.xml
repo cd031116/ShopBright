@@ -22,11 +22,12 @@
                 android:paddingTop="75px">
 
                 <TextView
+                    android:id="@+id/personal_set"
                     android:layout_width="51px"
                     android:layout_height="51px"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="45px"
-                    android:background="@drawable/personal_msg_gray" />
+                    android:background="@drawable/personal_set" />
 
                 <RelativeLayout
                     android:id="@+id/personal_msg_layout"
@@ -62,9 +63,9 @@
                     android:layout_height="258px"
                     android:layout_centerVertical="true"
                     android:gravity="center_vertical"
-                    android:visibility="gone"
                     android:paddingLeft="130px"
-                    android:paddingRight="130px">
+                    android:paddingRight="130px"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/personal_login_btn"
@@ -82,8 +83,8 @@
                         android:id="@+id/personal_register_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="130px"
-                        android:background="@drawable/bg_login_btn"
                         android:layout_alignParentRight="true"
+                        android:background="@drawable/bg_login_btn"
                         android:paddingBottom="36px"
                         android:paddingLeft="128px"
                         android:paddingRight="128px"
@@ -94,58 +95,57 @@
             </RelativeLayout>
 
 
-                <LinearLayout
-                    android:id="@+id/my_order_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="230px"
-                    android:layout_below="@id/personal_head_layout"
-                    android:layout_marginTop="15px"
-                    android:paddingBottom="15px"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:paddingTop="15px"
-                    android:weightSum="4">
+            <LinearLayout
+                android:id="@+id/my_order_layout"
+                android:layout_width="match_parent"
+                android:layout_height="230px"
+                android:layout_below="@id/personal_head_layout"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingBottom="15px"
+                android:paddingTop="15px"
+                android:weightSum="4">
 
-                    <TextView
-                        android:id="@+id/all_order_btn"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:drawablePadding="12px"
-                        android:drawableTop="@drawable/all"
-                        android:gravity="center_horizontal"
-                        android:text="@string/personal_all_order" />
+                <TextView
+                    android:id="@+id/all_order_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="12px"
+                    android:drawableTop="@drawable/all"
+                    android:gravity="center_horizontal"
+                    android:text="@string/personal_all_order" />
 
-                    <TextView
-                        android:id="@+id/pay_order_btn"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:drawablePadding="12px"
-                        android:drawableTop="@drawable/unpaid"
-                        android:gravity="center_horizontal"
-                        android:text="@string/personal_pay" />
+                <TextView
+                    android:id="@+id/pay_order_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="12px"
+                    android:drawableTop="@drawable/unpaid"
+                    android:gravity="center_horizontal"
+                    android:text="@string/personal_pay" />
 
-                    <TextView
-                        android:id="@+id/goout_order_btn"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:drawablePadding="12px"
-                        android:drawableTop="@drawable/unused"
-                        android:gravity="center_horizontal"
-                        android:text="@string/personal_out" />
+                <TextView
+                    android:id="@+id/goout_order_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="12px"
+                    android:drawableTop="@drawable/unused"
+                    android:gravity="center_horizontal"
+                    android:text="@string/personal_out" />
 
-                    <TextView
-                        android:id="@+id/refund_order_btn"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:drawablePadding="12px"
-                        android:drawableTop="@drawable/refund"
-                        android:gravity="center_horizontal"
-                        android:text="@string/personal_tuikuan" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/refund_order_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="12px"
+                    android:drawableTop="@drawable/refund"
+                    android:gravity="center_horizontal"
+                    android:text="@string/personal_tuikuan" />
+            </LinearLayout>
 
             <include
                 android:id="@+id/personal_rowview"
@@ -153,14 +153,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/my_order_layout"
-                android:layout_marginTop="15px" />
+                android:layout_marginTop="28px" />
 
             <RelativeLayout
                 android:id="@+id/your_like_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/personal_rowview"
-                android:layout_marginTop="15px"
+                android:layout_marginTop="28px"
                 android:background="@color/comm_white">
 
                 <TextView

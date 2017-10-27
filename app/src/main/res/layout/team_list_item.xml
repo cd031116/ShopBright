@@ -20,6 +20,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="42px"
+            android:paddingBottom="42px"
             android:orientation="vertical">
 
 
@@ -27,9 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingBottom="20px"
-                android:paddingTop="20px">
+                android:orientation="horizontal">
 
                 <RelativeLayout
                     android:id="@+id/photo_r"
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/photo_r"
                     android:orientation="vertical"
-                    android:padding="20px">
+                    android:paddingLeft="14px">
 
                     <TextView
                         android:id="@+id/title"
@@ -85,7 +85,7 @@
                         android:maxLines="2"
                         android:text="溱湖国家湿地公园"
                         android:textColor="#333333"
-                        android:textSize="40px" />
+                        android:textSize="48px" />
 
                     <TextView
                         android:id="@+id/desc"
@@ -94,7 +94,7 @@
                         android:layout_below="@+id/title"
                         android:layout_marginTop="20px"
                         android:textColor="#999999"
-                        android:textSize="@dimen/t_size" />
+                        android:textSize="37px" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -110,14 +110,14 @@
                             android:layout_height="wrap_content"
                             android:text="￥50"
                             android:textColor="@color/red_text"
-                            android:textSize="40px" />
+                            android:textSize="72px" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="起"
                             android:textColor="#999999"
-                            android:textSize="34px" />
+                            android:textSize="43px" />
 
                     </LinearLayout>
                 </RelativeLayout>
@@ -129,7 +129,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="20px">
+                android:paddingLeft="26px"
+                android:paddingRight="26px"
+                android:paddingTop="44px">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -142,7 +144,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/comment_ima"
-                        android:drawablePadding="10px"
+                        android:drawablePadding="12px"
                         android:gravity="center_vertical"
                         android:text="评论:"
                         android:textColor="#999999"
@@ -162,10 +164,10 @@
                         android:id="@+id/text_m"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20px"
+                        android:layout_marginLeft="48px"
                         android:layout_toRightOf="@+id/comment"
                         android:drawableLeft="@drawable/satisfaction"
-                        android:drawablePadding="10px"
+                        android:drawablePadding="12px"
                         android:gravity="center_vertical"
                         android:text="满意度:"
                         android:textColor="#999999"
