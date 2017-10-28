@@ -5,13 +5,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.zhl.huiqu.MainActivity;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.BaseConfig;
-import com.zhl.huiqu.base.MyApplication;
-import com.zhl.huiqu.login.LoginActivity;
-import com.zhl.huiqu.login.RegisterActivity;
 import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.login.entity.RegisterInfo;
 import com.zhl.huiqu.sdk.SDK;

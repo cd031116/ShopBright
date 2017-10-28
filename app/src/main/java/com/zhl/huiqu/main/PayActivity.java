@@ -13,22 +13,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
-import com.zhl.huiqu.MainActivity;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.Consts;
 import com.zhl.huiqu.bean.WeiChatBean;
-import com.zhl.huiqu.login.LoginActivity;
-import com.zhl.huiqu.login.entity.RegisterEntity;
-import com.zhl.huiqu.main.bean.DitalTickList;
 import com.zhl.huiqu.main.team.bean.AlipayBase;
 import com.zhl.huiqu.personal.bean.OrderEntity;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.MapUtil;
-import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.ToBuyUtils;
 import com.zhl.huiqu.widget.RushBuyCountDownTimerView;
 

@@ -7,10 +7,6 @@ import android.widget.ImageView;
 
 import com.zhl.huiqu.MainActivity;
 import com.zhl.huiqu.R;
-import com.zhl.huiqu.login.LoginActivity;
-import com.zhl.huiqu.login.entity.RegisterEntity;
-import com.zhl.huiqu.utils.Constants;
-import com.zhl.huiqu.utils.SaveObjectUtils;
 
 import butterknife.Bind;
 

@@ -158,6 +158,7 @@ public class PersonalFragment extends BaseFragment {
         }
     }
 
+
     /**
      * 初始化数据源
      */

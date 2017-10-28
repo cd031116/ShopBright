@@ -69,10 +69,10 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         spot_team_id = getIntent().getStringExtra("spot_team_id");
         title = getIntent().getStringExtra("team_title");
         account = SaveObjectUtils.getInstance(this).getObject(Constants.USER_INFO, RegisterEntity.class);
-
         teamOrderPriceBean = new TeamOrderPriceBean();
         initView();
     }
+
 
     private void initView() {
         riliList = (MyRecylerView) findViewById(R.id.list);
@@ -211,6 +211,12 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
                 } else
                     startActivity(new Intent(this, LoginActivity.class));
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        account = SaveObjectUtils.getInstance(this).getObject(Constants.USER_INFO, RegisterEntity.class);
     }
 
     private void nextStep() {

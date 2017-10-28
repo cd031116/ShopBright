@@ -13,16 +13,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.zhl.huiqu.MainActivity;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
-import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SaveObjectUtils;
-
 
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
@@ -172,7 +169,7 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         public BaseInfo workInBackground(Void... voids) throws TaskException {
-            return SDK.newInstance(LoginActivity.this).getCode(shouji.getText().toString(),Constants.TYPE_LOGIN);
+            return SDK.newInstance(LoginActivity.this).getCode(shouji.getText().toString(), Constants.TYPE_LOGIN);
         }
 
         @Override
@@ -191,7 +188,7 @@ public class LoginActivity extends BaseActivity {
     /*
     *登录
     * */
-    class LoginTask extends WorkTask<Void, Void, RegisterEntity>{
+    class LoginTask extends WorkTask<Void, Void, RegisterEntity> {
         @Override
         protected void onPrepare() {
             super.onPrepare();
@@ -213,11 +210,12 @@ public class LoginActivity extends BaseActivity {
         }
 
         @Override
-        protected void onSuccess(RegisterEntity info){
+        protected void onSuccess(RegisterEntity info) {
             super.onSuccess(info);
             dismissAlert();
-            SaveObjectUtils.getInstance(LoginActivity.this).setObject(Constants.USER_INFO,info);
-            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+            SaveObjectUtils.getInstance(LoginActivity.this).setObject(Constants.USER_INFO, info);
+//            NotificationCenter.defaultCenter().publish(new LoginRefreshEvent());
+            LoginActivity.this.finish();
         }
 
         @Override

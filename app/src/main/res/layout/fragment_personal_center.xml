@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="448px"
                 android:background="@drawable/personal_setting_bg"
-                android:paddingTop="75px">
+                android:paddingTop="55px">
 
                 <TextView
                     android:id="@+id/personal_set"

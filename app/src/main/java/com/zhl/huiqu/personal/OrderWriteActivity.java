@@ -159,6 +159,18 @@ public class OrderWriteActivity extends BaseActivity {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        RegisterEntity account = SaveObjectUtils.getInstance(this).getObject(Constants.USER_INFO, RegisterEntity.class);
+        if (account != null) {
+            isLoginText.setVisibility(View.GONE);
+            memberId = account.getBody().getMember_id();
+        } else {
+            settingLoginText();
+        }
+    }
+
+    @Override
     public void initData() {
         super.initData();
         RegisterEntity account = SaveObjectUtils.getInstance(this).getObject(Constants.USER_INFO, RegisterEntity.class);

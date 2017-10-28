@@ -15,8 +15,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="120px"
-            android:background="@drawable/team_top_bg"
+            android:layout_height="126px"
+            android:background="@drawable/team_search_g"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="30px">
@@ -90,16 +90,11 @@
             android:orientation="vertical">
 
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="80px"
-                android:background="@drawable/team_search_g" />
-
 
             <RelativeLayout
                 android:id="@+id/search_re"
                 android:layout_width="match_parent"
-                android:layout_height="180px"
+                android:layout_height="219px"
                 android:background="@drawable/team_search_bg"
                 android:padding="30px">
 
