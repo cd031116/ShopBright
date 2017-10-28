@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_top"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26px"
+            android:padding="20px"
+            android:text="费用说明"
+            android:textColor="#333333"
+            android:textSize="43px" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26px"
+            android:gravity="center_vertical"
+            android:padding="20px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="成人价"
+                android:textColor="#333333"
+                android:textSize="43px" />
+
+            <TextView
+                android:id="@+id/chengr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text=""
+                android:textColor="#333333"
+                android:textSize="43px" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26px"
+            android:gravity="center_vertical"
+            android:padding="20px">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="儿童价"
+                android:textColor="#333333"
+                android:textSize="43px" />
+
+            <TextView
+                android:id="@+id/er_tong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text=""
+                android:textColor="#333333"
+                android:textSize="43px" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26px"
+            android:gravity="center_vertical"
+            android:padding="20px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="保险"
+                android:textColor="#333333"
+                android:textSize="43px" />
+
+            <TextView
+                android:id="@+id/baoxian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text=""
+                android:textColor="#333333"
+                android:textSize="43px" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/order_pay_layout"
+            android:layout_width="match_parent"
+            android:layout_height="142px"
+            android:visibility="gone"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/order_pay_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="46px"
+                android:text="订单金额:"
+                android:textColor="@color/black"
+                android:textSize="46px" />
+
+            <TextView
+                android:id="@+id/order_pay_s"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/order_pay_text"
+                android:text="￥"
+                android:textColor="@color/red_text"
+                android:textSize="37px" />
+
+            <TextView
+                android:id="@+id/order_pay_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/order_pay_s"
+                android:textColor="@color/red_text"
+                android:textSize="51px" />
+
+            <TextView
+                android:id="@+id/commit_pay"
+                android:layout_width="346px"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@color/red_text"
+                android:gravity="center"
+                android:text="签约支付"
+                android:textColor="@color/white"
+                android:textSize="51px" />
+
+
+            <ImageView
+                android:id="@+id/order_pay_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="56px"
+                android:layout_toLeftOf="@id/commit_pay"
+                android:background="@drawable/dijian" />
+
+            <TextView
+                android:id="@+id/detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="14px"
+                android:layout_toLeftOf="@id/order_pay_arrow"
+                android:text="明细"
+                android:textColor="@color/t_blue"
+                android:textSize="37px" />
+        </RelativeLayout>
+
+    </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -222,14 +222,14 @@ public class PersonalFragment extends BaseFragment {
                 urLikeLayout.setVisibility(View.VISIBLE);
                 setUrLikeView();
             } else {
-                urLikeLayout.setVisibility(View.GONE);
+                urLikeLayout.setVisibility(View.VISIBLE);
             }
 
         }
 
         @Override
         protected void onFailure(TaskException exception) {
-            urLikeLayout.setVisibility(View.GONE);
+            urLikeLayout.setVisibility(View.VISIBLE);
             dismissAlert();
         }
     }

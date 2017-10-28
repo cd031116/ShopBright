@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
@@ -16,11 +16,13 @@
         <include layout="@layout/view_top" />
 
         <LinearLayout
+            android:id="@+id/top_info"
             android:layout_width="match_parent"
             android:layout_height="120px"
             android:layout_marginTop="1px"
             android:background="@color/white"
             android:gravity="center"
+            android:visibility="visible"
             android:orientation="horizontal">
 
             <TextView
@@ -39,26 +41,44 @@
                 android:id="@+id/normal_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="/2成人," />
+                android:text="/0成人," />
 
             <TextView
                 android:id="@+id/choose_child_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
+                android:text="0"
                 android:textColor="@color/color_yellow" />
 
             <TextView
                 android:id="@+id/child_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="/2儿童" />
+                android:text="/0儿童" />
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/choose_tour_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="120px"
             android:layout_marginTop="30px" />
     </LinearLayout>
-</LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:padding="10px"
+        android:textColor="#ffffff"
+        android:layout_alignParentBottom="true"
+        android:background="#e11818"
+        android:gravity="center"
+        android:visibility="visible"
+        android:textSize="51px"
+        android:text="确定"
+        />
+
+</RelativeLayout>

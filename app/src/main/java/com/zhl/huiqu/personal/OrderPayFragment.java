@@ -119,6 +119,7 @@ public class OrderPayFragment extends BaseFragment {
                 Bundle mBundle = new Bundle();
                 mBundle.putSerializable("body", entity);
                 intent.putExtras(mBundle);
+                intent.putExtra("type","ticket");
                 startActivity(intent);
             } else
                 ToastUtils.showShortToast(getActivity(), getResources().getString(R.string.order_detail_msg));

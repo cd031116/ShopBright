@@ -30,7 +30,6 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@id/order_pay_s"
-        android:text="200"
         android:textColor="@color/red_text"
         android:textSize="51px" />
 
@@ -39,7 +38,7 @@
         android:layout_width="346px"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
-        android:background="@color/t_blue"
+        android:background="@color/red_text"
         android:gravity="center"
         android:text="签约支付"
         android:textColor="@color/white"
@@ -56,6 +55,7 @@
         android:background="@drawable/dizeng" />
 
     <TextView
+        android:id="@+id/detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"

@@ -112,7 +112,42 @@
 
             <include layout="@layout/item_qp_msg_layout" />
 
-            <include layout="@layout/item_outing_msg_layout" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="142px"
+                android:layout_marginTop="30px"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/qprxinxi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/qprxinxi"
+                    android:drawablePadding="12px"
+                    android:paddingLeft="40px"
+                    android:text="出游人信息"
+                    android:textColor="@color/tab_ckeck"
+                    android:textSize="40px" />
+
+                <TextView
+                    android:id="@+id/outing_people"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="40px"
+                    android:drawablePadding="12px"
+                    android:drawableRight="@drawable/xuanze"
+                    android:text="选择出游人"
+                    android:textColor="@color/personal_row_text"
+                    android:textSize="37px" />
+            </RelativeLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/out_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"/>
 
 
             <include layout="@layout/item_safe_layout" />
@@ -121,12 +156,75 @@
 
     </ScrollView>
 
-    <include
+
+    <RelativeLayout
         android:id="@+id/order_pay_layout"
-        layout="@layout/item_order_pay_layout"
         android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
         android:layout_height="142px"
-        android:layout_alignParentBottom="true" />
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/order_pay_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="46px"
+            android:text="订单金额:"
+            android:textColor="@color/black"
+            android:textSize="46px" />
+
+        <TextView
+            android:id="@+id/order_pay_s"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/order_pay_text"
+            android:text="￥"
+            android:textColor="@color/red_text"
+            android:textSize="37px" />
+
+        <TextView
+            android:id="@+id/order_pay_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/order_pay_s"
+            android:textColor="@color/red_text"
+            android:textSize="51px" />
+
+        <TextView
+            android:id="@+id/commit_pay"
+            android:layout_width="346px"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@color/red_text"
+            android:gravity="center"
+            android:text="签约支付"
+            android:textColor="@color/white"
+            android:textSize="51px" />
+
+
+        <ImageView
+            android:id="@+id/order_pay_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="56px"
+            android:layout_toLeftOf="@id/commit_pay"
+            android:background="@drawable/dizeng"/>
+
+        <TextView
+            android:id="@+id/detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="14px"
+            android:layout_toLeftOf="@id/order_pay_arrow"
+            android:text="明细"
+            android:textColor="@color/t_blue"
+            android:textSize="37px" />
+    </RelativeLayout>
 
 
 </RelativeLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    tools:context="com.zhl.huiqu.main.team.SignTeamActivity">
+    <LinearLayout
+        android:id="@+id/top_main"
+        android:layout_width="match_parent"
+        android:layout_height="128px"
+        android:background="#ffffff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/top_left"
+            android:layout_width="wrap_content"
+            android:layout_height="60px"
+            android:layout_marginLeft="40px"
+            android:src="@drawable/login_arrow_left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40px"
+            android:text="签约电子合同"
+            android:textColor="#333333"
+            android:textSize="51px" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/top_main"
+        android:background="#ffffff"
+        android:orientation="vertical">
+
+
+
+    </LinearLayout>
+
+
+<TextView
+    android:id="@+id/submit"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="同意签约"
+    android:textColor="#ffffff"
+    android:padding="40px"
+    android:gravity="center"
+    android:textSize="51px"
+    android:layout_alignParentBottom="true"
+    android:background="#e11818"/>
+
+</RelativeLayout>

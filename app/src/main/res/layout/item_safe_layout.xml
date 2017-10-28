@@ -23,47 +23,14 @@
             android:textColor="@color/login_text_color"
             android:textSize="40px" />
 
-        <TextView
-            android:id="@+id/baoxian_name"
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/b_list"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/baoxian_text"
-            android:layout_marginBottom="40px"
-            android:layout_marginLeft="40px"
-            android:layout_marginTop="60px"
-            android:text="出游意外险"
-            android:textColor="@color/all_order_text"
-            android:textSize="37px" />
-
-        <TextView
-            android:id="@+id/baoxian_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/baoxian_name"
-            android:layout_marginLeft="86px"
-            android:layout_toRightOf="@id/baoxian_name"
-            android:textColor="@color/red_text"
-            android:textSize="51px" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/baoxian_name"
-            android:layout_toRightOf="@id/baoxian_price"
-            android:text="/人"
-            android:textColor="@color/black"
-            android:textSize="37px" />
+            android:layout_below="@+id/baoxian_text"/>
 
 
-        <CheckBox
-            android:id="@+id/baoxian_choose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/baoxian_name"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="40px"
-            android:button="@null"
-            android:background="@drawable/check_choose_style" />
+
 
     </RelativeLayout>
 

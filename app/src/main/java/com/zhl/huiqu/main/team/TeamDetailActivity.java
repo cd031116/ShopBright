@@ -266,7 +266,6 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
                 Log.e("ddd", "onSuccess: " + true);
                 setView(info.getBody());
             }
-
         }
 
         @Override

@@ -115,7 +115,6 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         }
     }
 
-
     @OnClick({R.id.home_line, R.id.service_line, R.id.rim_line, R.id.my_line,R.id.image_home,R.id.image_service,R.id.image_rim,R.id.image_my})
     void onclick(View v) {
         switch (v.getId()) {
@@ -316,7 +315,6 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         } else if (type == 1) {
             locationService.setLocationOption(locationService.getOption());
         }
-
         locationService.start();
     }
 

@@ -2,6 +2,7 @@ package com.zhl.huiqu.main;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
@@ -22,6 +23,7 @@ import com.zhl.huiqu.bean.WeiChatBean;
 import com.zhl.huiqu.login.LoginActivity;
 import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.main.bean.DitalTickList;
+import com.zhl.huiqu.main.team.bean.AlipayBase;
 import com.zhl.huiqu.personal.bean.OrderEntity;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.Constants;
@@ -60,7 +62,7 @@ public class PayActivity extends BaseActivity {
     TextView order_money;
     @Bind(R.id.pay_total)
     TextView pay_total;
-
+    private String type="";
     private int select = 1;
     private OrderEntity mPerson;
     private static final int SDK_PAY_FLAG = 1;
@@ -73,7 +75,13 @@ public class PayActivity extends BaseActivity {
     @Override
     public void initView() {
         super.initView();
-//        mPerson = (OrderEntity) getIntent().getSerializableExtra("body");
+        Bundle bd=getIntent().getExtras();
+        if(bd!=null){
+            type=bd.getString("type");
+        }
+
+
+        mPerson = (OrderEntity) getIntent().getSerializableExtra("body");
         if (mPerson != null) {
             price.setText("￥" + mPerson.getOrder_total());
             order_num.setText("订单号:" + mPerson.getOrder_sn());
@@ -154,7 +162,7 @@ public class PayActivity extends BaseActivity {
             MapUtil.sharedInstance().putDefaultValue(Constants.ORDER_ID, mPerson.getOrder_id());
             //支付的金钱
             MapUtil.sharedInstance().putDefaultValue(Constants.PAY_MONEY, mPerson.getOrder_total());
-            return SDK.newInstance(PayActivity.this).getPrePayOrder(mPerson.getName(), mPerson.getOrder_sn(), mPerson.getOrder_total());
+            return SDK.newInstance(PayActivity.this).getPrePayOrder(mPerson.getName(), mPerson.getOrder_sn(),type);
         }
 
         @Override
@@ -178,7 +186,7 @@ public class PayActivity extends BaseActivity {
 /*支付宝下单接口
 * */
 
-    class aliPayOrderTask extends WorkTask<Void, Void, String> {
+    class aliPayOrderTask extends WorkTask<Void, Void, AlipayBase> {
         @Override
         protected void onPrepare() {
             super.onPrepare();
@@ -186,7 +194,7 @@ public class PayActivity extends BaseActivity {
         }
 
         @Override
-        public String workInBackground(Void... voids) throws TaskException {
+        public AlipayBase workInBackground(Void... voids) throws TaskException {
             //产品编号
             MapUtil.sharedInstance().putDefaultValue(Constants.PAY_PRODUCT_ID, mPerson.getOrder_sn());
             MapUtil.sharedInstance().putDefaultValue(Constants.ORDER_ID, mPerson.getOrder_id());
@@ -196,11 +204,12 @@ public class PayActivity extends BaseActivity {
         }
 
         @Override
-        protected void onSuccess(String info) {
+        protected void onSuccess(AlipayBase info) {
             super.onSuccess(info);
             dismissAlert();
             if (info != null) {
-                Topay(info);
+                Log.i("hhhh","info="+info.getBody().getResponse());
+                Topay(info.getBody().getResponse());
             }
         }
 

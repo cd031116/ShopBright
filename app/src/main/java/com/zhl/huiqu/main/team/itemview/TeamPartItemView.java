@@ -98,15 +98,15 @@ public class TeamPartItemView extends ARecycleViewItemView<TeamListInfo> {
         }
         price.setText("￥"+bean.getPriceAdultMin());
 
-
         manyidu.setText(bean.getCsr());
         address.setText(bean.getDepartCitysName());
         day_time.setText(bean.getDuration()+"日游");
          String stitle=bean.getProductName();
-        if(!TextUtils.isEmpty(stitle)){
-            title.setText(stitle.substring(stitle.indexOf(">")+1,stitle.length()));
+        if(!TextUtils.isEmpty(stitle)&&stitle.contains("<")){
+            title.setText(stitle.substring(stitle.indexOf("<")+1,stitle.indexOf(">")));
+        }else {
+            title.setText(stitle);
         }
-
         if (itemPosition() == 0) {
             view.setPadding(0, 0, 0, 0);
         } else {

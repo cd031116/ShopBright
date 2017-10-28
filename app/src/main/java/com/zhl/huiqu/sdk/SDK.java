@@ -17,10 +17,15 @@ import com.zhl.huiqu.main.bean.MainBean;
 import com.zhl.huiqu.main.bean.SearchBean;
 import com.zhl.huiqu.main.bean.SearchEntity;
 import com.zhl.huiqu.main.bean.SearchTickEntity;
+import com.zhl.huiqu.main.team.bean.AlipayBase;
 import com.zhl.huiqu.main.team.bean.FilterBase;
 import com.zhl.huiqu.main.team.bean.GoalBean;
 import com.zhl.huiqu.main.team.bean.GroupListBase;
+import com.zhl.huiqu.main.team.bean.InsuranceBase;
 import com.zhl.huiqu.main.team.bean.LikeEntity;
+import com.zhl.huiqu.main.team.bean.OrderBuyBase;
+import com.zhl.huiqu.main.team.bean.OrderCountBase;
+import com.zhl.huiqu.main.team.bean.OrderPut;
 import com.zhl.huiqu.main.team.bean.SearBase;
 import com.zhl.huiqu.main.team.bean.TeamBase;
 import com.zhl.huiqu.main.team.bean.TeamDetailBean;
@@ -818,10 +823,11 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public WeiChatBean getPrePayOrder(String body, String out_trade_no, String total_free) throws TaskException {
+    public WeiChatBean getPrePayOrder(String body, String out_trade_no, String type) throws TaskException {
         Setting action = newSetting("getPrePayOrder", "appapi/Wx/getPrePayOrder", "调用微信下单接口");
         Params params = new Params();
         params.addParameter("body", body);
+        params.addParameter("type", type);
         params.addParameter("out_trade_no", out_trade_no);
         params.addParameter("app_name", context.getResources().getString(R.string.app_name));
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?body=" + body + "&out_trade_no=" + out_trade_no);
@@ -848,14 +854,13 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public String getAliPay(String order_sn) throws TaskException {
-        Setting action = newSetting("public", "tp5/public", "调用支付宝下单接口");
+    public AlipayBase getAliPay(String order_sn) throws TaskException {
+        Setting action = newSetting("public", "appapi/Alipay/pay", "调用支付宝下单接口");
         Params params = new Params();
         params.addParameter("order_sn", order_sn);
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?order_sn=" + order_sn);
-        return doGet(configHttpConfig(), action, params, String.class);
+        return doGet(configHttpConfig(), action, params, AlipayBase.class);
     }
-
 
     /**
      * 获取订单详情
@@ -871,7 +876,6 @@ public class SDK extends ABizLogic {
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "&member_id=" + member_id + "&order_id=" + order_id);
         return doGet(configHttpConfig(), action, params, OrderDetailBean.class);
     }
-
 
     /**
      * 收藏
@@ -972,7 +976,7 @@ public class SDK extends ABizLogic {
      * @throws TaskException
      */
     public String addContact(String member_id, String name, String certificate, String mobile, String sex, String email, String type, String contact_id) throws TaskException {
-        Setting action = newSetting("addContact", "appapi/Personalcenter/addContact", "获取常用联系人信息");
+        Setting action = newSetting("addContact", "appapi/Personalcenter/addContact", "添加联系人信息");
         Params params = new Params();
         params.addParameter("member_id", member_id);
         params.addParameter("name", name);
@@ -1005,6 +1009,130 @@ public class SDK extends ABizLogic {
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?member_id=" + member_id);
         return doGet(configHttpConfig(), action, params, String.class);
     }
+
+
+    /**
+     * @return
+     * @throws TaskException
+     */
+    public InsuranceBase getInsuranceInfo(String productId,String departDate,String childTicketPrice,String childCount,String adultTicketPrice,String adultCount,String roomChargePrice) throws TaskException {
+        Setting action = newSetting("getDestination", "appapi/Team/getInsuranceInfo", "获取保险信息 初步计算订单总价");
+        Params params = new Params();
+        if (!TextUtils.isEmpty(productId)) {
+            params.addParameter("productId", productId);
+        }
+        if (!TextUtils.isEmpty(departDate)) {
+            params.addParameter("departDate", departDate);
+        }
+        if (!TextUtils.isEmpty(childTicketPrice)) {
+            params.addParameter("childTicketPrice", childTicketPrice);
+        }
+        if (!TextUtils.isEmpty(childCount)) {
+            params.addParameter("childCount", childCount);
+        }
+        if (!TextUtils.isEmpty(adultTicketPrice)) {
+            params.addParameter("adultTicketPrice", adultTicketPrice);
+        }
+        if (!TextUtils.isEmpty(adultCount)) {
+            params.addParameter("adultCount", adultCount);
+        }
+        if (!TextUtils.isEmpty(roomChargePrice)) {
+            params.addParameter("roomChargePrice", roomChargePrice);
+        }
+        return doGet(configHttpConfig(), action, params, InsuranceBase.class);
+    }
+
+    /** 选取保险后获得价格
+     * @return
+     * @throws TaskException
+     */
+    public OrderCountBase changeOrderCount(String oldOrderCount, String insuranceId, String childTicketPrice, String childCount, String adultTicketPrice, String adultCount, String roomChargePrice) throws TaskException {
+        Setting action = newSetting("changeOrderCount", "appapi/team/changeOrderCount", "选取保险后获得价格");
+        Params params = new Params();
+        if (!TextUtils.isEmpty(oldOrderCount)) {
+            params.addParameter("oldOrderCount", oldOrderCount);
+        }
+        if (!TextUtils.isEmpty(insuranceId)) {
+            params.addParameter("insuranceId", insuranceId);
+        }
+        if (!TextUtils.isEmpty(childTicketPrice)) {
+            params.addParameter("childTicketPrice", childTicketPrice);
+        }
+        if (!TextUtils.isEmpty(childCount)) {
+            params.addParameter("childCount", childCount);
+        }
+        if (!TextUtils.isEmpty(adultTicketPrice)) {
+            params.addParameter("adultTicketPrice", adultTicketPrice);
+        }
+        if (!TextUtils.isEmpty(adultCount)) {
+            params.addParameter("adultCount", adultCount);
+        }
+        if (!TextUtils.isEmpty(roomChargePrice)) {
+            params.addParameter("roomChargePrice", roomChargePrice);
+        }
+        return doGet(configHttpConfig(), action, params, OrderCountBase.class);
+    }
+
+
+    /** 创建订单
+     * @return
+     * @throws TaskException
+     */
+    public OrderBuyBase CreateOrder(OrderPut data) throws TaskException {
+        Setting action = newSetting("creatOrder", "appapi/Team/creatOrder", "创建订单");
+        Params params = new Params();
+        if (!TextUtils.isEmpty(data.getProductId())) {
+            params.addParameter("productId", data.getProductId());
+        }
+        if (!TextUtils.isEmpty(data.getMemberId())) {
+            params.addParameter("memberId", data.getMemberId());
+        }
+        if (!TextUtils.isEmpty(data.getDepartDate())) {
+            params.addParameter("departDate", data.getDepartDate());
+        }
+        if (!TextUtils.isEmpty(data.getAdultCount())) {
+            params.addParameter("adultCount", data.getAdultCount());
+        }
+        if (!TextUtils.isEmpty(data.getAdultTicketPrice())) {
+            params.addParameter("adultTicketPrice", data.getAdultTicketPrice());
+        }
+        if (!TextUtils.isEmpty(data.getChildCount())) {
+            params.addParameter("childCount", data.getChildCount());
+        }
+        if (!TextUtils.isEmpty(data.getChildTicketPrice())) {
+            params.addParameter("childTicketPrice", data.getChildTicketPrice());
+        }
+        if (!TextUtils.isEmpty(data.getRoomChargePrice())) {
+            params.addParameter("roomChargePrice", data.getRoomChargePrice());
+        }
+        if (!TextUtils.isEmpty(data.getInsurancePriceCount())) {
+            params.addParameter("insurancePriceCount", data.getInsurancePriceCount());
+        }
+        if (!TextUtils.isEmpty(data.getInsuranceIdList())) {
+            params.addParameter("insuranceIdList", data.getInsuranceIdList());
+        }
+        if (!TextUtils.isEmpty(data.getOrderCount())) {
+            params.addParameter("orderCount", data.getOrderCount());
+        }
+
+        if (!TextUtils.isEmpty(data.getGetTicketName())) {
+            params.addParameter("getTicketName", data.getGetTicketName());
+        }
+
+        if (!TextUtils.isEmpty(data.getGetTicketMobile())) {
+            params.addParameter("getTicketMobile", data.getGetTicketMobile());
+        }
+
+        if (!TextUtils.isEmpty(data.getGetTicketCard())) {
+            params.addParameter("getTicketCard", data.getGetTicketCard());
+        }
+        if (!TextUtils.isEmpty(data.getContactIds())) {
+            params.addParameter("contactIds", data.getContactIds());
+        }
+        return doPost(configHttpConfig(), action, params, null, null, OrderBuyBase.class);
+    }
+
+
 
 
     /**

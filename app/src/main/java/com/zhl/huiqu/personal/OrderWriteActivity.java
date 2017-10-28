@@ -412,6 +412,7 @@ public class OrderWriteActivity extends BaseActivity {
         Intent intent = new Intent(OrderWriteActivity.this, PayActivity.class);
         Bundle mBundle = new Bundle();
         mBundle.putSerializable("body", info);
+        intent.putExtra("type","ticket");
         intent.putExtras(mBundle);
         startActivity(intent);
     }

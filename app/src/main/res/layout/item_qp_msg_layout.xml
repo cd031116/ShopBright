@@ -145,11 +145,13 @@
                 android:textColor="@color/red_text" />
         </LinearLayout>
 
+
         <EditText
             android:id="@+id/idcard_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:digits="0123456789x"
             android:background="@null"
             android:hint="请输入身份证号"
             android:textColor="@color/black"

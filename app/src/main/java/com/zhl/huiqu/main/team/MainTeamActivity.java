@@ -566,7 +566,12 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
                 if (info.getThumb() != null) {
                     holder.setRunderWithUrl(R.id.photo, info.getThumb());
                 }
-                holder.setText(R.id.title, info.getProductName());
+                String stitle=info.getProductName();
+                if(!TextUtils.isEmpty(stitle)&&stitle.contains("<")){
+                    holder.setText(R.id.title,stitle.substring(stitle.indexOf("<")+1,stitle.indexOf(">")));
+                }else {
+                    holder.setText(R.id.title,stitle);
+                }
                 holder.setText(R.id.price, "￥" + info.getPriceAdultMin());
                 holder.setText(R.id.manyidu, info.getCsr());
 //                holder.setText(R.id.address, "→" + info.getDepartCitysName());
