@@ -3,6 +3,8 @@ package com.zhl.huiqu.main.popupWindow;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 
 /**
  * Created by Administrator on 2017/10/27.
@@ -21,13 +24,13 @@ import com.zhl.huiqu.R;
 public class DetailWindow extends PopupWindow {
     private Activity mContext;
     private View view;
-    private TextView chengr;
-    private TextView er_tong;
+    private TextView chengr,cheng_jiage;
+    private TextView er_tong,er_jiage;
     private TextView baoxian;
     private TextView order_pay_price,commit_pay;
     private ItemInclick itemsOnClick;
     private LinearLayout main_top;
-    public DetailWindow(Activity mContext,String cr,String rt,String bx,String total,ItemInclick itemsOnClickd) {
+    public DetailWindow(Activity mContext,String cr,String adultCount,String rt,String childCount,String bx,String total,ItemInclick itemsOnClickd) {
         this.mContext=mContext;
         this.itemsOnClick = itemsOnClickd;
         this.view = LayoutInflater.from(mContext).inflate(R.layout.detail_window, null);
@@ -37,9 +40,25 @@ public class DetailWindow extends PopupWindow {
         order_pay_price= (TextView) view.findViewById(R.id.order_pay_price);
         commit_pay= (TextView) view.findViewById(R.id.commit_pay);
         main_top= (LinearLayout) view.findViewById(R.id.main_top);
-        chengr.setText(cr);
-        er_tong.setText(rt);
-        baoxian.setText(bx);
+        cheng_jiage= (TextView) view.findViewById(R.id.cheng_jiage);
+
+        er_jiage= (TextView) view.findViewById(R.id.er_jiage);
+
+        if(!TextUtils.isEmpty(adultCount)){
+            cheng_jiage.setText("￥"+cr);
+            chengr.setText("×"+adultCount);
+        }else {
+            chengr.setText(adultCount);
+        }
+      if(!TextUtils.isEmpty(childCount)){
+          er_jiage.setText("￥"+rt);
+          er_tong.setText("×"+childCount);
+      }else {
+          er_tong.setText(childCount);
+      }
+
+
+        baoxian.setText("￥"+bx);
         order_pay_price.setText(total);
         main_top.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +85,7 @@ public class DetailWindow extends PopupWindow {
         this.setWidth(RelativeLayout.LayoutParams.MATCH_PARENT);
         this.setContentView(view);
         // 设置弹出窗体可点击
+        SupportMultipleScreensUtil.scale(view);
         this.setFocusable(true);
         // 实例化一个ColorDrawable颜色为半透明
         ColorDrawable dw = new ColorDrawable(0xb0000000);
@@ -87,10 +107,9 @@ public class DetailWindow extends PopupWindow {
      * 设置显示在v上方（以v的中心位置为开始位置）
      * @param v
      */
-    public void showUp2(View v,int popupWidth,int popupHeights) {
+    public void showUp2(View v,int popupWidth,int popupHeight) {
         //获取需要在其上方显示的控件的位置信息
         int[] location = new int[2];
-         int   popupHeight=  px2dip(mContext,popupHeights);
         v.getLocationOnScreen(location);
         //在控件上方显示
         showAtLocation(v, Gravity.NO_GRAVITY, (location[0] + v.getWidth() / 2) - popupWidth / 2, location[1] - popupHeight);

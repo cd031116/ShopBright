@@ -210,8 +210,7 @@ public class TeamOrderActivity extends BaseActivity {
                 break;
             case R.id.detail:
                 if(!isshow){
-                    mopupWindow = new DetailWindow(TeamOrderActivity.this,adultTicketPrice,childTicketPrice,"",order_pay_price.getText().toString(),itemsOnClick);
-
+                    mopupWindow = new DetailWindow(TeamOrderActivity.this,adultTicketPrice,adultCount,childTicketPrice,childCount,insuranprice,order_pay_price.getText().toString(),itemsOnClick);
                     mopupWindow. showUp2(bottom_r,1080,142);
                     isshow=true;
                 }else {
@@ -278,21 +277,34 @@ public class TeamOrderActivity extends BaseActivity {
         if(mList.size()<=0){
             return "";
         }
+
+
+        Log.i("hhhh","mList="+mList.size());
         StringBuilder sb=new StringBuilder();
         for(int i=0;i<mList.size();i++){
             if(mList.get(i).ischeck()){
                 sb.append(mList.get(i).getResId()+",");
             }
         }
+        if(sb.toString().length()<=0){
+            return "";
+        }
+
         return  sb.substring(0,sb.toString().length()-1);
     }
 
     private float getbaoprice(){
+        if(mList.size()<=0){
+            return 0;
+        }
        float price=0;
         for(int i=0;i<mList.size();i++){
             if(mList.get(i).ischeck()){
                 price=price+Float.valueOf(mList.get(i).getPrice());
             }
+        }
+        if(price<=0){
+            return 0;
         }
         return  price;
     }
