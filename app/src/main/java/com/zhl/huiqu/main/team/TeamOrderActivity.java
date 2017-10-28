@@ -104,16 +104,16 @@ public class TeamOrderActivity extends BaseActivity {
     public void initView() {
         super.initView();
         account = SaveObjectUtils.getInstance(TeamOrderActivity.this).getObject(Constants.USER_INFO, RegisterEntity.class);
-//        teamOrderPriceBean = (TeamOrderPriceBean) getIntent().getSerializableExtra("t_order_price");
-//        if (!TextUtils.isEmpty(teamOrderPriceBean.getProductTitle())) {
-//            desc.setText(teamOrderPriceBean.getProductTitle());
-//        }
-//
-//        outing_time.setText(teamOrderPriceBean.getProductTime());
-//        if (teamOrderPriceBean.getProductChildNum() != 0)
-//            outing_num.setText("成人：" + teamOrderPriceBean.getProductAdultNum() + "人,儿童:" + teamOrderPriceBean.getProductChildNum() + "人");
-//        else
-//            outing_num.setText("成人：" + teamOrderPriceBean.getProductAdultNum() + "人");
+        teamOrderPriceBean = (TeamOrderPriceBean) getIntent().getSerializableExtra("t_order_price");
+        if (!TextUtils.isEmpty(teamOrderPriceBean.getProductTitle())) {
+            desc.setText(teamOrderPriceBean.getProductTitle());
+        }
+
+        outing_time.setText(teamOrderPriceBean.getProductTime());
+        if (teamOrderPriceBean.getProductChildNum() != 0)
+            outing_num.setText("成人：" + teamOrderPriceBean.getProductAdultNum() + "人,儿童:" + teamOrderPriceBean.getProductChildNum() + "人");
+        else
+            outing_num.setText("成人：" + teamOrderPriceBean.getProductAdultNum() + "人");
     }
 
     @Override

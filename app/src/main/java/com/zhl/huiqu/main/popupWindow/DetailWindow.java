@@ -90,7 +90,7 @@ public class DetailWindow extends PopupWindow {
     public void showUp2(View v,int popupWidth,int popupHeights) {
         //获取需要在其上方显示的控件的位置信息
         int[] location = new int[2];
-     int   popupHeight=  px2dip(mContext,popupHeights);
+         int   popupHeight=  px2dip(mContext,popupHeights);
         v.getLocationOnScreen(location);
         //在控件上方显示
         showAtLocation(v, Gravity.NO_GRAVITY, (location[0] + v.getWidth() / 2) - popupWidth / 2, location[1] - popupHeight);

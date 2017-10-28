@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -55,7 +56,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
     private String outingDate;
     private String title;
     private RegisterEntity account;
-
+    private ImageView btnBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,11 +84,12 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         normal_add_btn = (LinearLayout) findViewById(R.id.normal_add_btn);
         child_down_btn = (LinearLayout) findViewById(R.id.child_down_btn);
         child_add_btn = (LinearLayout) findViewById(R.id.child_add_btn);
+        btnBack= (ImageView) findViewById(R.id.btnBack);
         normal_down_btn.setOnClickListener(this);
         normal_add_btn.setOnClickListener(this);
         child_down_btn.setOnClickListener(this);
         child_add_btn.setOnClickListener(this);
-
+        btnBack.setOnClickListener(this);
         normal_num_btn.setText(adultNum + "");
         child_num_btn.setText(childNum + "");
 
@@ -193,6 +195,9 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
             case R.id.child_add_btn:
                 childNum++;
                 child_num_btn.setText(childNum + "");
+                break;
+            case R.id.btnBack:
+                CalendarActivity.this.finish();
                 break;
             case R.id.ok:
                 if (account != null) {

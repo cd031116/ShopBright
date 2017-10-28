@@ -272,7 +272,7 @@ public class PersonalFragment extends BaseFragment {
                     break;
                 case R.id.row_normal_msg_layout:
 //                    startActivity(new Intent(getActivity(), UseInfoActivity.class));
-                    startActivity(new Intent(getActivity(), ChooseTourerActivity.class));
+                    startActivity(new Intent(getActivity(), UseInfoActivity.class));
                     break;
                 //所有订单
                 case R.id.all_order_btn:

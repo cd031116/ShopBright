@@ -16,7 +16,7 @@
         <ImageView
             android:id="@+id/btnBack"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60px"
             android:layout_gravity="center_vertical"
             android:paddingLeft="42px"
             android:paddingRight="42px"
