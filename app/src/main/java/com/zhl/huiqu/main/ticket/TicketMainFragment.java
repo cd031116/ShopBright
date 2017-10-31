@@ -134,7 +134,7 @@ public class TicketMainFragment extends BaseFragment {
     }
 
 
-    CitySubscriber cityEvent = new CitySubscriber() {
+    CitySubscriber cityEvent = new CitySubscriber(){
         @Override
         public void onEvent(CityEvent v) {
             BaseConfig bg = new BaseConfig(getActivity());
@@ -144,7 +144,7 @@ public class TicketMainFragment extends BaseFragment {
     };
 
     @Override
-    protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate) {
+    protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate){
         super.layoutInit(inflater, savedInstanceSate);
         this.minflater = inflater;
         tickInfo = SaveObjectUtils.getInstance(getActivity()).getObject(Constants.TICK_DATA, null);

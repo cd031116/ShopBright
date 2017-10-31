@@ -65,6 +65,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10px"
                     android:layout_marginRight="10px"
+                    android:visibility="invisible"
                     android:gravity="center_vertical"
                     android:src="@drawable/hp_gray_msg" />
 
@@ -73,20 +74,20 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="150px"
                 android:background="#ffffff"
                 android:gravity="center"
+                android:paddingTop="30px"
+                android:paddingBottom="30px"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/searh_line"
                     android:layout_width="match_parent"
-                    android:layout_height="72px"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
-                    android:layout_marginBottom="10px"
                     android:layout_marginLeft="20px"
                     android:layout_marginRight="20px"
-                    android:layout_marginTop="10px"
                     android:background="@drawable/search_bg"
                     android:gravity="center"
                     android:paddingLeft="200px"
@@ -104,7 +105,7 @@
                         android:gravity="center"
                         android:text="输入您要搜索的景点/地区"
                         android:textColor="#666666"
-                        android:textSize="32px" />
+                        android:textSize="37px" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -221,12 +222,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5px"
-                    android:layout_marginLeft="20px"
-                    android:layout_marginTop="5px"
+                    android:layout_marginLeft="5px"
+                    android:layout_marginTop="10px"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="6px"
+                        android:layout_width="8px"
                         android:layout_height="wrap_content"
                         android:background="#F9508C"
                         android:padding="10px"
@@ -268,7 +269,7 @@
 
                     <TextView
                         android:id="@+id/zb_lv"
-                        android:layout_width="6px"
+                        android:layout_width="8px"
                         android:layout_height="wrap_content"
                         android:background="#50D7F9"
                         android:padding="10px"
@@ -326,7 +327,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="6px"
+                        android:layout_width="8px"
                         android:layout_height="wrap_content"
                         android:background="#5350F9"
                         android:padding="10px"

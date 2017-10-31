@@ -39,7 +39,7 @@ public class ChooseTourerActivity extends BaseActivity {
     RecyclerView recycleview;
     private RegisterEntity account;
     private CommonAdapter<UsePerList> mAdapter;
-    private List<UsePerList> madatas;
+    private List<UsePerList> madatas=new ArrayList<>();
     private int normalChooseNum = 0;
     @Bind(R.id.top_left_text)
     TextView title;
@@ -57,11 +57,10 @@ public class ChooseTourerActivity extends BaseActivity {
     TextView submit;
     @Bind(R.id.top_info)
     LinearLayout top_info;
-
+    private List<UsePerList> oList=new ArrayList<>();
     private int adultCount = 0;
     private int childCount = 0;
     private int chose = 0;
-
     @Override
     protected int getLayoutId() {
         return R.layout.choose_tourer;
@@ -77,6 +76,7 @@ public class ChooseTourerActivity extends BaseActivity {
             Log.i("gggg","adultCount="+adultCount);
             Log.i("gggg","childCount="+childCount);
             chose = bd.getInt("chose");
+            oList.addAll((ArrayList<UsePerList>)bd.getSerializable("olist"));
         }
         NotificationCenter.defaultCenter().subscriber(UseInfoRefreshEvent.class, freshEvent);
         account = SaveObjectUtils.getInstance(this).getObject(Constants.USER_INFO, RegisterEntity.class);
@@ -93,12 +93,29 @@ public class ChooseTourerActivity extends BaseActivity {
             submit.setVisibility(View.GONE);
             top_info.setVisibility(View.GONE);
         }
-
+        show();
     }
+
+    private  void show(){
+        int fu=0;
+        int child=0;
+        for(UsePerList infos:oList){
+            if(infos.isCheck()&&"1".equals(infos.getTypes())){
+                fu=fu+1;
+            }else if(infos.isCheck()&&"0".equals(infos.getTypes())){
+                child=child+1;
+            }
+        }
+        choose_normal_num.setText(fu+"");
+        choose_child_num.setText(child+"");
+    }
+
+
 
     @Override
     public void initData() {
         super.initData();
+        showview();
         new getTopTask().execute();
     }
 
@@ -158,7 +175,9 @@ public class ChooseTourerActivity extends BaseActivity {
             super.onSuccess(info);
             dismissAlert();
             if (info.getBody() != null) {
-                showview(info);
+                madatas.addAll(info.getBody());
+                setda();
+                mAdapter.notifyDataSetChanged();
             }
         }
 
@@ -168,8 +187,23 @@ public class ChooseTourerActivity extends BaseActivity {
         }
     }
 
-    private void showview(UsePersonBean info) {
-        madatas = info.getBody();
+    private void setda(){
+        for (UsePerList infdo:oList){
+            if(infdo.isCheck()){
+                for(UsePerList ins:madatas){
+                    if(infdo.getContact_id().equals(ins.getContact_id())){
+                        ins.setCheck(true);
+                    }
+                }
+
+            }
+        }
+
+    }
+
+
+
+    private void showview() {
         mAdapter = new CommonAdapter<UsePerList>(ChooseTourerActivity.this, R.layout.choose_tourer_item, madatas) {
             @Override
             protected void convert(ViewHolder holder, final UsePerList infos, final int position) {
@@ -203,7 +237,7 @@ public class ChooseTourerActivity extends BaseActivity {
                         startActivity(intent);
                     }
                 });
-                holder.setOnClickListener(R.id.tour_choose, new View.OnClickListener() {
+                holder.setOnClickListener(R.id.main_s, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (infos.isCheck()) {

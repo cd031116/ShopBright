@@ -394,7 +394,8 @@ public class MainTabFragment extends BaseFragment {
                 ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
                 break;
             case R.id.gt_one:
-                startActivity(new Intent(getActivity(), MainHotelTourActivity.class));
+                ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");
+//                startActivity(new Intent(getActivity(), MainHotelTourActivity.class));
                 break;
             case R.id.gt_two:
                 ToastUtils.showLongToast(getActivity(), "正在开发中,敬请期待下一个版本");

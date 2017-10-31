@@ -2,6 +2,10 @@ package com.zhl.huiqu.main.team;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -13,6 +17,7 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
@@ -42,8 +47,12 @@ import org.aisen.android.component.eventbus.NotificationCenter;
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -194,7 +203,22 @@ public class TeamOrderActivity extends BaseActivity {
                 }
                 break;
             case R.id.outing_people:
-                Intent intent=new Intent(TeamOrderActivity.this, ChooseTourerActivity.class);
+                int total=0;
+                if(!TextUtils.isEmpty(adultCount)){
+                    total=total+Integer.parseInt(adultCount);
+                }
+                if(!TextUtils.isEmpty(childCount)){
+                    total=total+Integer.parseInt(childCount);
+                }
+                if(oList.size()>=total){
+                    Toast.makeText(TeamOrderActivity.this,"已选"+total+"人",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("olist", (Serializable) oList);
+                intent.setClass(TeamOrderActivity.this, ChooseTourerActivity.class);
+                intent.putExtras(bundle);
                 if(TextUtils.isEmpty(adultCount)){
                     intent.putExtra("adultCount",0);
                 }else {
@@ -222,7 +246,6 @@ public class TeamOrderActivity extends BaseActivity {
     }
 
     private DetailWindow.ItemInclick itemsOnClick = new DetailWindow.ItemInclick(){
-
         @Override
         public void ItemClick() {
             commit_pay.performClick();
@@ -313,13 +336,22 @@ public class TeamOrderActivity extends BaseActivity {
     private void setOutadapter() {
         oAdapter = new CommonAdapter<UsePerList>(this, R.layout.team_order_item, oList) {
             @Override
-            protected void convert(ViewHolder holder, final UsePerList info, int position) {
+            protected void convert(ViewHolder holder, final UsePerList info, final int position) {
                 if("1".equals(info.getTypes())){
                     holder.setText(R.id.type, "成人");
                 }else {
                     holder.setText(R.id.type, "儿童");
                 }
                 holder.setText(R.id.id_card,"姓名:"+info.getName());
+
+                holder.setOnClickListener(R.id.delete, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                         oList.remove(position)  ;
+                        oAdapter.notifyDataSetChanged();
+                    }
+                });
+
             }
         };
         out_list.setLayoutManager(new LinearLayoutManager(TeamOrderActivity.this));
@@ -398,11 +430,23 @@ public class TeamOrderActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
+                Log.i("yyyy","oList1="+oList.size());
                 oList.addAll((ArrayList<UsePerList>)data.getSerializableExtra("plist"));
+                removeDuplicateUser();
+                Log.i("yyyy","oList2="+oList.size());
                 oAdapter.notifyDataSetChanged();
             }
         }
+    }
 
+    private void removeDuplicateUser() {
+        for (int i = 0; i < oList.size()-1; i++) {
+            for (int j = oList.size()-1; j > i; j--) {
+                if (oList.get(j).getContact_id().equals(oList.get(i).getContact_id()) ) {
+                    oList.remove(j);
+                }
+            }
+        }
     }
 
 
