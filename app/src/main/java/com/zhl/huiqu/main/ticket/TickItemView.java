@@ -6,12 +6,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.zhl.huiqu.R;
-import com.zhl.huiqu.main.ProductPartBean;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.widget.GlideRoundTransform;
 
@@ -25,29 +25,32 @@ import org.aisen.android.ui.fragment.adapter.ARecycleViewItemView;
  */
 
 public class TickItemView extends ARecycleViewItemView<TickInfo> {
-    public static final int LAYOUT_RES = R.layout.item_tourist_point;
+    public static final int LAYOUT_RES = R.layout.item_product_part;
 
-    @ViewInject(id = R.id.tourist_view)
-    ImageView image;
-    @ViewInject(id = R.id.tourist_area)
-    TextView tname;
 
-    @ViewInject(id = R.id.tourist_area)
-    TextView tourist_area;
-    @ViewInject(id = R.id.tourist_ms)
-    TextView tourist_ms;
 
-    @ViewInject(id = R.id.tourist_place)
-    TextView tourist_place;
-    @ViewInject(id = R.id.tourist_place_score)
-    TextView tourist_place_score;
-    @ViewInject(id = R.id.tourist_place_jibie)
-    TextView tourist_place_jibie;
+    //------------------------------------------
+    @ViewInject(id = R.id.photo)
+    ImageView photo;
+    @ViewInject(id = R.id.title)
+    TextView title;
+    @ViewInject(id = R.id.comment)
+    TextView comment;
+    @ViewInject(id = R.id.price)
+    TextView price;
+    @ViewInject(id = R.id.desc)
+    TextView desc;
+    @ViewInject(id = R.id.manyidu)
+    TextView manyidu;
+    @ViewInject(id = R.id.neirong)
+    TextView neirong;
+    @ViewInject(id = R.id.nei_line)
+    LinearLayout nei_line;
 
-    @ViewInject(id = R.id.tourist_tag)
-    TextView tourist_tag;
-    @ViewInject(id = R.id.tourist_price)
-    TextView tourist_price;
+    @ViewInject(id = R.id.arrow)
+    ImageView arrow;
+    @ViewInject(id = R.id.u_click)
+    RelativeLayout u_click;
 
     private Activity activity;
 
@@ -71,27 +74,20 @@ public class TickItemView extends ARecycleViewItemView<TickInfo> {
     @Override
     public void onBindData(View view, TickInfo bean, int i) {
 
-        tourist_area.setText(bean.getTitle());
-        tourist_ms.setText(bean.getDesc());
-        tourist_place.setText(bean.getCity());
-        tourist_place_score.setText(bean.getCsr());
-        tourist_place_jibie.setText(bean.getGrade());
-        tourist_tag.setText("风景名胜");
+        title.setText(bean.getTitle());
+        desc.setText(bean.getDesc());
+        price.setText("￥" +bean.getShop_price());
+        manyidu.setText(bean.getCsr());
 
-        String textStr = "<strong><font color='#e11818'>" + "￥"+bean.getShop_price() + "</font></strong>起";
-        String charSequence="";
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            charSequence = Html.fromHtml(textStr, Html.FROM_HTML_MODE_LEGACY).toString();
-        } else {
-            charSequence = Html.fromHtml(textStr).toString();
-        }
-        tourist_price.setText(charSequence);
 
-        try {
-            tname.setText(bean.getTitle() + "");
-        } catch (Exception e) {
-            Log.i("tttt", "tname=" + e.toString());
-        }
+//        String textStr = "<strong><font color='#e11818'>" + "￥"+bean.getShop_price() + "</font></strong>起";
+//        String charSequence="";
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+//            charSequence = Html.fromHtml(textStr, Html.FROM_HTML_MODE_LEGACY).toString();
+//        } else {
+//            charSequence = Html.fromHtml(textStr).toString();
+//        }
+//        tourist_price.setText(charSequence);
 
         RequestOptions myOptions = new RequestOptions()
                 .centerCrop()
@@ -99,7 +95,7 @@ public class TickItemView extends ARecycleViewItemView<TickInfo> {
         Glide.with(activity)
                 .load(bean.getThumb())
                 .apply(myOptions)
-                .into(image);
+                .into(photo);
 
         if (itemPosition() == 0) {
             view.setPadding(0, 0, 0, 0);

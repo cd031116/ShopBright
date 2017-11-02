@@ -93,7 +93,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="重置"
-            android:textColor="#59c2de"
+            android:textColor="#333333"
             android:textSize="51px" />
 
         <TextView

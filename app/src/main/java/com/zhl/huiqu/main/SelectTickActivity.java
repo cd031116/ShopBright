@@ -74,7 +74,6 @@ public class SelectTickActivity extends BaseActivity {
         top_image.setVisibility(View.GONE);
         top_left_text.setTextColor(Color.parseColor("#333333"));
         top_left_text.setText("取消");
-        top_title.setTextColor(Color.parseColor("#59c2de"));
         top_title.setText("筛选");
     }
 
