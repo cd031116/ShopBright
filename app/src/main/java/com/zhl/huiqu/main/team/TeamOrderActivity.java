@@ -75,6 +75,10 @@ public class TeamOrderActivity extends BaseActivity {
     CheckBox hetong_choose;
     @Bind(R.id.order_pay_price)
     TextView order_pay_price;
+    @Bind(R.id.room_charge_price)
+    TextView room_charge_price;
+    @Bind(R.id.room_charge_layout)
+    RelativeLayout room_charge_layout;
 
     @Bind(R.id.name_text)
     TextView name_text;//取票人姓名
@@ -86,7 +90,7 @@ public class TeamOrderActivity extends BaseActivity {
     RelativeLayout bottom_r;//取票人身份证
 
     private DetailWindow mopupWindow;
-    private boolean isshow=false;
+    private boolean isshow = false;
     private CommonAdapter<InsuranData> mAdapter;
     private List<InsuranData> mList = new ArrayList<>();
     private CommonAdapter<UsePerList> oAdapter;
@@ -101,9 +105,10 @@ public class TeamOrderActivity extends BaseActivity {
     private TeamOrderPriceBean teamOrderPriceBean;
     private String insuranceId = "";
     private String orderCount = "";
-    private int REQUEST_CODE=101;
+    private int REQUEST_CODE = 101;
     private RegisterEntity account;
-    private String insuranprice="";
+    private String insuranprice = "";
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_team_order;
@@ -123,6 +128,11 @@ public class TeamOrderActivity extends BaseActivity {
             outing_num.setText("成人：" + teamOrderPriceBean.getProductAdultNum() + "人,儿童:" + teamOrderPriceBean.getProductChildNum() + "人");
         else
             outing_num.setText("成人：" + teamOrderPriceBean.getProductAdultNum() + "人");
+        if (teamOrderPriceBean.getProductAdultNum() % 2 != 0) {
+            room_charge_layout.setVisibility(View.VISIBLE);
+            room_charge_price.setText("￥" + teamOrderPriceBean.getRoomChargeprice());
+        } else
+            room_charge_layout.setVisibility(View.GONE);
     }
 
     @Override
@@ -144,7 +154,7 @@ public class TeamOrderActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.top_main, R.id.commit_pay,R.id.outing_people,R.id.detail})
+    @OnClick({R.id.top_main, R.id.commit_pay, R.id.outing_people, R.id.detail})
     void onclicj(View v) {
         switch (v.getId()) {
             case R.id.top_main:
@@ -169,16 +179,16 @@ public class TeamOrderActivity extends BaseActivity {
                         ToastUtils.showShortToast(TeamOrderActivity.this, "请输入取票人身份证号码");
                         return;
                     }
-                    if(!isIdNum.isIdNum(idcard_text_t)){
+                    if (!isIdNum.isIdNum(idcard_text_t)) {
                         ToastUtils.showShortToast(TeamOrderActivity.this, "身份证号码格式不正确");
                         return;
                     }
-                    if(oList.size()<=0){
+                    if (oList.size() <= 0) {
                         ToastUtils.showShortToast(TeamOrderActivity.this, "请选择出游人");
                         return;
                     }
 
-                    OrderPut info=new OrderPut();
+                    OrderPut info = new OrderPut();
                     info.setProductId(productId);
                     info.setOrderCount(order_pay_price.getText().toString());
                     info.setAdultCount(adultCount);
@@ -192,26 +202,26 @@ public class TeamOrderActivity extends BaseActivity {
                     info.setGetTicketName(name_text_t);
                     info.setRoomChargePrice(roomChargePrice);
                     info.setInsuranceIdList(getbaoxian());
-                    info.setInsurancePriceCount(getbaoprice()+"");
+                    info.setInsurancePriceCount(getbaoprice() + "");
                     info.setMemberId(account.getBody().getMember_id());
-                    Intent mIntent = new Intent(this,SignTeamActivity.class);
+                    Intent mIntent = new Intent(this, SignTeamActivity.class);
                     Bundle mBundle = new Bundle();
-                    mBundle.putSerializable("info",info);
+                    mBundle.putSerializable("info", info);
                     mIntent.putExtras(mBundle);
 
                     startActivity(mIntent);
                 }
                 break;
             case R.id.outing_people:
-                int total=0;
-                if(!TextUtils.isEmpty(adultCount)){
-                    total=total+Integer.parseInt(adultCount);
+                int total = 0;
+                if (!TextUtils.isEmpty(adultCount)) {
+                    total = total + Integer.parseInt(adultCount);
                 }
-                if(!TextUtils.isEmpty(childCount)){
-                    total=total+Integer.parseInt(childCount);
+                if (!TextUtils.isEmpty(childCount)) {
+                    total = total + Integer.parseInt(childCount);
                 }
-                if(oList.size()>=total){
-                    Toast.makeText(TeamOrderActivity.this,"已选"+total+"人",Toast.LENGTH_SHORT).show();
+                if (oList.size() >= total) {
+                    Toast.makeText(TeamOrderActivity.this, "已选" + total + "人", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Intent intent = new Intent();
@@ -219,33 +229,33 @@ public class TeamOrderActivity extends BaseActivity {
                 bundle.putSerializable("olist", (Serializable) oList);
                 intent.setClass(TeamOrderActivity.this, ChooseTourerActivity.class);
                 intent.putExtras(bundle);
-                if(TextUtils.isEmpty(adultCount)){
-                    intent.putExtra("adultCount",0);
-                }else {
-                    intent.putExtra("adultCount",adultCount);
+                if (TextUtils.isEmpty(adultCount)) {
+                    intent.putExtra("adultCount", 0);
+                } else {
+                    intent.putExtra("adultCount", adultCount);
                 }
-                if(TextUtils.isEmpty(childCount)){
-                    intent.putExtra("childCount",0);
-                }else {
-                    intent.putExtra("childCount",childCount);
+                if (TextUtils.isEmpty(childCount)) {
+                    intent.putExtra("childCount", 0);
+                } else {
+                    intent.putExtra("childCount", childCount);
                 }
-                intent.putExtra("chose",1);
+                intent.putExtra("chose", 1);
                 startActivityForResult(intent, REQUEST_CODE);
                 break;
             case R.id.detail:
-                if(!isshow){
-                    mopupWindow = new DetailWindow(TeamOrderActivity.this,adultTicketPrice,adultCount,childTicketPrice,childCount,insuranprice,order_pay_price.getText().toString(),itemsOnClick);
-                    mopupWindow. showUp2(bottom_r,1080,142);
-                    isshow=true;
-                }else {
+                if (!isshow) {
+                    mopupWindow = new DetailWindow(TeamOrderActivity.this, adultTicketPrice, adultCount, childTicketPrice, childCount, insuranprice, order_pay_price.getText().toString(), itemsOnClick);
+                    mopupWindow.showUp2(bottom_r, 1080, 142);
+                    isshow = true;
+                } else {
                     mopupWindow.dismiss();
-                    isshow=false;
+                    isshow = false;
                 }
                 break;
         }
     }
 
-    private DetailWindow.ItemInclick itemsOnClick = new DetailWindow.ItemInclick(){
+    private DetailWindow.ItemInclick itemsOnClick = new DetailWindow.ItemInclick() {
         @Override
         public void ItemClick() {
             commit_pay.performClick();
@@ -265,7 +275,7 @@ public class TeamOrderActivity extends BaseActivity {
                     holder.setSesect(R.id.baoxian_choose, false);
                 }
 
-                holder.setOnClickListener(R.id.main_line, new View.OnClickListener(){
+                holder.setOnClickListener(R.id.main_line, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (info.ischeck()) {
@@ -286,50 +296,50 @@ public class TeamOrderActivity extends BaseActivity {
     }
 
 
-    private String getchuyou(){
-        StringBuilder sb=new StringBuilder();
-        for(int i=0;i<oList.size();i++){
-            if(oList.get(i).isCheck()){
-                sb.append(oList.get(i).getContact_id()+",");
+    private String getchuyou() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < oList.size(); i++) {
+            if (oList.get(i).isCheck()) {
+                sb.append(oList.get(i).getContact_id() + ",");
             }
         }
-        return  sb.substring(0,sb.toString().length()-1);
+        return sb.substring(0, sb.toString().length() - 1);
     }
 
-    private String getbaoxian(){
-        if(mList.size()<=0){
+    private String getbaoxian() {
+        if (mList.size() <= 0) {
             return "";
         }
 
 
-        Log.i("hhhh","mList="+mList.size());
-        StringBuilder sb=new StringBuilder();
-        for(int i=0;i<mList.size();i++){
-            if(mList.get(i).ischeck()){
-                sb.append(mList.get(i).getResId()+",");
+        Log.i("hhhh", "mList=" + mList.size());
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < mList.size(); i++) {
+            if (mList.get(i).ischeck()) {
+                sb.append(mList.get(i).getResId() + ",");
             }
         }
-        if(sb.toString().length()<=0){
+        if (sb.toString().length() <= 0) {
             return "";
         }
 
-        return  sb.substring(0,sb.toString().length()-1);
+        return sb.substring(0, sb.toString().length() - 1);
     }
 
-    private float getbaoprice(){
-        if(mList.size()<=0){
+    private float getbaoprice() {
+        if (mList.size() <= 0) {
             return 0;
         }
-       float price=0;
-        for(int i=0;i<mList.size();i++){
-            if(mList.get(i).ischeck()){
-                price=price+Float.valueOf(mList.get(i).getPrice());
+        float price = 0;
+        for (int i = 0; i < mList.size(); i++) {
+            if (mList.get(i).ischeck()) {
+                price = price + Float.valueOf(mList.get(i).getPrice());
             }
         }
-        if(price<=0){
+        if (price <= 0) {
             return 0;
         }
-        return  price;
+        return price;
     }
 
 
@@ -337,17 +347,17 @@ public class TeamOrderActivity extends BaseActivity {
         oAdapter = new CommonAdapter<UsePerList>(this, R.layout.team_order_item, oList) {
             @Override
             protected void convert(ViewHolder holder, final UsePerList info, final int position) {
-                if("1".equals(info.getTypes())){
+                if ("1".equals(info.getTypes())) {
                     holder.setText(R.id.type, "成人");
-                }else {
+                } else {
                     holder.setText(R.id.type, "儿童");
                 }
-                holder.setText(R.id.id_card,"姓名:"+info.getName());
+                holder.setText(R.id.id_card, "姓名:" + info.getName());
 
                 holder.setOnClickListener(R.id.delete, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                         oList.remove(position)  ;
+                        oList.remove(position);
                         oAdapter.notifyDataSetChanged();
                     }
                 });
@@ -358,8 +368,6 @@ public class TeamOrderActivity extends BaseActivity {
         out_list.setAdapter(oAdapter);
         out_list.setNestedScrollingEnabled(false);
     }
-
-
 
 
     /*
@@ -412,9 +420,9 @@ public class TeamOrderActivity extends BaseActivity {
         protected void onSuccess(OrderCountBase info) {
             super.onSuccess(info);
             dismissAlert();
-            if (info.getBody()!= null) {
+            if (info.getBody() != null) {
                 order_pay_price.setText("" + info.getBody().getOrderCount());
-                insuranprice=info.getBody().getInsuranceInfo().getInsuranceCount();
+                insuranprice = info.getBody().getInsuranceInfo().getInsuranceCount();
             }
 
         }
@@ -428,9 +436,9 @@ public class TeamOrderActivity extends BaseActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==REQUEST_CODE) {
+        if (requestCode == REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                oList.addAll((ArrayList<UsePerList>)data.getSerializableExtra("plist"));
+                oList.addAll((ArrayList<UsePerList>) data.getSerializableExtra("plist"));
                 removeDuplicateUser();
                 oAdapter.notifyDataSetChanged();
             }
@@ -438,9 +446,9 @@ public class TeamOrderActivity extends BaseActivity {
     }
 
     private void removeDuplicateUser() {
-        for (int i = 0; i < oList.size()-1; i++) {
-            for (int j = oList.size()-1; j > i; j--) {
-                if (oList.get(j).getContact_id().equals(oList.get(i).getContact_id()) ) {
+        for (int i = 0; i < oList.size() - 1; i++) {
+            for (int j = oList.size() - 1; j > i; j--) {
+                if (oList.get(j).getContact_id().equals(oList.get(i).getContact_id())) {
                     oList.remove(j);
                 }
             }

@@ -35,8 +35,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/order_pay_layout"
         android:layout_below="@+id/top_main"
-       android:layout_above="@+id/order_pay_layout"
         android:scrollbars="none">
 
         <LinearLayout
@@ -96,7 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="出游人数"
-                    android:textColor="#999999"/>
+                    android:textColor="#999999" />
 
                 <TextView
                     android:id="@+id/outing_num"
@@ -143,12 +143,59 @@
                     android:textColor="@color/personal_row_text"
                     android:textSize="37px" />
             </RelativeLayout>
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/out_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#ffffff"/>
+                android:background="#ffffff" />
 
+            <RelativeLayout
+                android:id="@+id/room_charge_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30px"
+                android:background="@color/personal_bg">
+
+                <TextView
+                    android:id="@+id/room_charge_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="142px"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="40px"
+                    android:text="全程单房差"
+                    android:textColor="@color/black_text"
+                    android:textSize="43px" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="142px"
+                    android:layout_marginTop="1px"
+                    android:layout_below="@id/room_charge_text"
+                    android:gravity="center_vertical"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="40px"
+                        android:text="预付单房差"
+                        android:textColor="@color/color_999999"
+                        android:textSize="37px" />
+
+                    <TextView
+                        android:id="@+id/room_charge_price"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|right"
+                        android:paddingRight="40px"
+                        android:text="￥0"
+                        android:textColor="@color/red_text" />
+                </LinearLayout>
+            </RelativeLayout>
 
             <include layout="@layout/item_safe_layout" />
 
@@ -160,8 +207,8 @@
     <RelativeLayout
         android:id="@+id/order_pay_layout"
         android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
         android:layout_height="142px"
+        android:layout_alignParentBottom="true"
         android:background="@color/white">
 
         <TextView
@@ -212,7 +259,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="56px"
             android:layout_toLeftOf="@id/commit_pay"
-            android:background="@drawable/dizeng"/>
+            android:background="@drawable/dizeng" />
 
         <TextView
             android:id="@+id/detail"

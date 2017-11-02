@@ -51,7 +51,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
     private TeamOrderPriceBean teamOrderPriceBean;
     private String spot_team_id;
     private int adultPrice, childPrice;
-    private int adultNum, childNum;
+    private int adultNum = 1, childNum;
     private int roomChargeprice;
     private String outingDate;
     private String title;
@@ -84,7 +84,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         normal_add_btn = (LinearLayout) findViewById(R.id.normal_add_btn);
         child_down_btn = (LinearLayout) findViewById(R.id.child_down_btn);
         child_add_btn = (LinearLayout) findViewById(R.id.child_add_btn);
-        btnBack= (ImageView) findViewById(R.id.btnBack);
+        btnBack = (ImageView) findViewById(R.id.btnBack);
         normal_down_btn.setOnClickListener(this);
         normal_add_btn.setOnClickListener(this);
         child_down_btn.setOnClickListener(this);
