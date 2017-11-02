@@ -430,10 +430,8 @@ public class TeamOrderActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                Log.i("yyyy","oList1="+oList.size());
                 oList.addAll((ArrayList<UsePerList>)data.getSerializableExtra("plist"));
                 removeDuplicateUser();
-                Log.i("yyyy","oList2="+oList.size());
                 oAdapter.notifyDataSetChanged();
             }
         }

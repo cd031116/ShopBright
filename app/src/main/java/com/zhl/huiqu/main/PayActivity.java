@@ -1,6 +1,8 @@
 package com.zhl.huiqu.main;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,12 +21,14 @@ import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.Consts;
 import com.zhl.huiqu.bean.WeiChatBean;
 import com.zhl.huiqu.main.team.bean.AlipayBase;
+import com.zhl.huiqu.personal.OrderDetailActivity;
 import com.zhl.huiqu.personal.bean.OrderEntity;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.MapUtil;
 import com.zhl.huiqu.utils.ToBuyUtils;
 import com.zhl.huiqu.widget.RushBuyCountDownTimerView;
+import com.zhl.huiqu.wxapi.WXPayEntryActivity;
 
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
@@ -259,10 +263,8 @@ public class PayActivity extends BaseActivity {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-
-
+                        dialogs("支付成功");
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-                        Toast.makeText(PayActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                         Toast.makeText(PayActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
@@ -277,4 +279,31 @@ public class PayActivity extends BaseActivity {
         ;
     };
 
+    private void dialogs(String title) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);  //先得到构造器
+        builder.setMessage(title); //设置内容
+        builder.setCancelable(false);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener(){ //设置确定按钮
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss(); //关闭dialog
+//                MapUtil.sharedInstance().getDefaultValue(Constants.PAY_PRODUCT_ID).toString();
+                Intent intent=new Intent(PayActivity.this,OrderDetailActivity.class);
+                intent.putExtra("order_state", getResources().getString(R.string.personal_out_order));
+                intent.putExtra("order_id",MapUtil.sharedInstance().getDefaultValue(Constants.ORDER_ID).toString());
+                startActivity(intent);
+                PayActivity.this.finish();
+            }
+        });
+        //参数都设置完成了，创建并显示出来
+        builder.create().show();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(select == 2){
+            MapUtil.sharedInstance().clear();
+        }
+    }
 }

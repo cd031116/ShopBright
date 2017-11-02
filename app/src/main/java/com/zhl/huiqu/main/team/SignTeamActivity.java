@@ -2,6 +2,7 @@ package com.zhl.huiqu.main.team;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -79,7 +80,9 @@ public class SignTeamActivity extends BaseActivity {
                 mPerson.setOrder_sn(info.getBody().getOrderSn());
                 mPerson.setName(info.getBody().getProductName());
                 mPerson.setUse_date(info.getBody().getDepartureTime());
-
+                if(!TextUtils.isEmpty(info.getBody().getOrderId())){
+                    mPerson.setOrder_id(Integer.parseInt(info.getBody().getOrderId()));
+                }
                 Intent intent = new Intent(SignTeamActivity.this, PayActivity.class);
                 Bundle mBundle = new Bundle();
                 mBundle.putSerializable("body", mPerson);

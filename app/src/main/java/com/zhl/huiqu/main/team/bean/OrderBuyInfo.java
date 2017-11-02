@@ -18,6 +18,15 @@ public class OrderBuyInfo implements Serializable{
     private String amoutPrice;
     private String departureTime;
     private String returnTime;
+    private String orderId;
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
 
     private List<BuyInsuran> insurance;
 
