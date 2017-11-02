@@ -20,6 +20,7 @@ import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.base.DoubleClickExitHelper;
 import com.zhl.huiqu.base.MyApplication;
 import com.zhl.huiqu.main.MainTabFragment;
+import com.zhl.huiqu.main.NearlyFragment;
 import com.zhl.huiqu.main.location.LocationService;
 import com.zhl.huiqu.main.ticket.TicksListFragment;
 import com.zhl.huiqu.personal.KefuCenterFragment;
@@ -94,7 +95,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
                        mCurrentFragment = KefuCenterFragment.newInstance(1);//子Fragment实例
                         break;
                     case 2:
-                        mCurrentFragment = TicksListFragment.newInstance("0");;//子Fragment实例
+                        mCurrentFragment = NearlyFragment.newInstance("0");;//子Fragment实例
                         break;
                     case 3:
                         mCurrentFragment = PersonalFragment.newInstance();//子Fragment实例
