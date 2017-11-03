@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:padding="10px"
         android:singleLine="true"
-        android:textSize="38px"
+        android:textSize="46px"
         android:layout_marginLeft="5px"
         android:textColor="#333333" />
 
@@ -114,7 +114,7 @@
             android:gravity="right"
             android:padding="10px"
             android:textColor="@color/red_text"
-            android:textSize="32px" />
+            android:textSize="51px" />
 
 
         <TextView
@@ -126,7 +126,7 @@
             android:gravity="right"
             android:padding="10px"
             android:textColor="#666666"
-            android:textSize="28px" />
+            android:textSize="46px" />
 
           <TextView
             android:id="@+id/submit"
@@ -138,7 +138,7 @@
             android:padding="10px"
             android:text="预定"
             android:textColor="#ffffff"
-            android:textSize="32px" />
+            android:textSize="46px" />
 
     </LinearLayout>
 

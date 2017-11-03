@@ -239,7 +239,7 @@
                         android:padding="10px"
                         android:layout_marginLeft="10px"
                         android:text="热门推荐"
-                        android:textSize="40px"
+                        android:textSize="46px"
                         android:textColor="#343434" />
                 </LinearLayout>
 
@@ -280,7 +280,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10px"
                         android:layout_toRightOf="@+id/zb_lv"
-                        android:textSize="40px"
+                        android:textSize="46px"
                         android:padding="10px"
                         android:text="周边景点"
                         android:textColor="#343434" />
@@ -339,7 +339,7 @@
                         android:padding="10px"
                         android:layout_marginLeft="10px"
                         android:text="周边城市"
-                        android:textSize="40px"
+                        android:textSize="46px"
                         android:textColor="#343434" />
                 </LinearLayout>
 
@@ -366,7 +366,7 @@
                         android:drawableLeft="@drawable/jdmp_zby"
                         android:drawablePadding="20px"
                         android:gravity="center_vertical"
-                        android:textSize="40px"
+                        android:textSize="46px"
                         android:text="查看更多周边跟团游"/>
 
             </LinearLayout>

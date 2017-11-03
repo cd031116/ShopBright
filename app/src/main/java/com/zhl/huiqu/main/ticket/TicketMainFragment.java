@@ -50,14 +50,12 @@ import org.aisen.android.support.inject.ViewInject;
 
 import java.util.ArrayList;
 import java.util.List;
-
 /*
 *
 * @author lyj
 * @describe  门票首页
 * @data 2017/8/12
 * */
-
 
 public class TicketMainFragment extends BaseFragment {
     private List<String> imaged = new ArrayList<>();
@@ -77,7 +75,6 @@ public class TicketMainFragment extends BaseFragment {
      * 当前显示的是第几页
      */
     private int curIndex = 0;
-
 
     @ViewInject(id = R.id.viewpager)
     ViewPager viewpager;

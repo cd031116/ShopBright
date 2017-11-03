@@ -53,7 +53,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="20px"
                         android:textColor="@color/white"
-                        android:textSize="40px" />
+                        android:textSize="51px" />
 
                     <TextView
                         android:id="@+id/num"
@@ -62,6 +62,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="20px"
+                        android:textSize="46px"
                         android:drawableLeft="@drawable/mpxq_tp"
                         android:gravity="center_vertical"
                         android:textColor="#ffffff" />
@@ -86,7 +87,7 @@
                     android:gravity="center_vertical"
                     android:padding="10px"
                     android:textColor="#333333"
-                    android:textSize="32px" />
+                    android:textSize="46px" />
 
                 <ImageView
                     android:layout_width="48px"
@@ -115,7 +116,7 @@
                     android:gravity="center_vertical"
                     android:padding="10px"
                     android:textColor="#333333"
-                    android:textSize="32px" />
+                    android:textSize="46px" />
 
                 <ImageView
                     android:layout_width="48px"
@@ -144,7 +145,7 @@
                     android:padding="10px"
                     android:text="预定须知"
                     android:textColor="#333333"
-                    android:textSize="32px" />
+                    android:textSize="46px" />
 
                 <ImageView
                     android:layout_width="48px"
@@ -192,7 +193,7 @@
                         android:padding="10px"
                         android:text="门票"
                         android:textColor="#333333"
-                        android:textSize="32px" />
+                        android:textSize="46px" />
 
                     <ImageView
                         android:layout_width="48px"
@@ -412,7 +413,7 @@
                         android:padding="10px"
                         android:text="景点介绍"
                         android:textColor="#333333"
-                        android:textSize="32px" />
+                        android:textSize="46px" />
 
                     <ImageView
                         android:layout_width="48px"
@@ -458,7 +459,7 @@
                     android:padding="10px"
                     android:text="查看详情介绍"
                     android:textColor="#333333"
-                    android:textSize="32px" />
+                    android:textSize="46px" />
 
                 <ImageView
                     android:layout_width="48px"
@@ -570,7 +571,7 @@
                 android:paddingLeft="20px"
                 android:text="预定须知"
                 android:textColor="#333333"
-                android:textSize="32px" />
+                android:textSize="46px" />
 
 
             <TextView
@@ -581,7 +582,7 @@
                 android:background="#ffffff"
                 android:padding="20px"
                 android:textColor="#333333"
-                android:textSize="32px" />
+                android:textSize="46px" />
 
 
             <TextView
@@ -595,7 +596,7 @@
                 android:paddingLeft="20px"
                 android:text="周边景点"
                 android:textColor="#333333"
-                android:textSize="32px" />
+                android:textSize="46px" />
 
 
             <android.support.v7.widget.RecyclerView

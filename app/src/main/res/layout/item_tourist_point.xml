@@ -25,9 +25,8 @@
         android:layout_toRightOf="@id/tourist_view"
         android:ellipsize="end"
         android:singleLine="true"
-        android:text="@string/register_title"
         android:textColor="@color/black_text"
-        android:textSize="42px" />
+        android:textSize="40px" />
 
     <TextView
         android:id="@+id/tourist_ms"
@@ -39,9 +38,8 @@
         android:layout_toRightOf="@id/tourist_view"
         android:ellipsize="end"
         android:singleLine="true"
-        android:text="@string/register_title"
         android:textColor="@color/gray_text"
-        android:textSize="33px" />
+        android:textSize="35px" />
 
     <TextView
         android:id="@+id/tourist_place"
@@ -53,17 +51,15 @@
         android:layout_toRightOf="@id/tourist_view"
         android:ellipsize="end"
         android:singleLine="true"
-        android:text="@string/register_title"
         android:textColor="@color/gray_text"
-        android:textSize="33px" />
+        android:textSize="35px" />
 
     <TextView
         android:id="@+id/tourist_place_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/register_title"
         android:textColor="@color/red_text"
-        android:textSize="33px"
+        android:textSize="35px"
         android:layout_alignBaseline="@+id/tourist_place_jibie"
         android:layout_alignBottom="@+id/tourist_place_jibie"
         android:layout_toRightOf="@+id/tourist_tag"
@@ -77,9 +73,8 @@
         android:layout_marginLeft="27px"
         android:layout_marginTop="24px"
         android:layout_toRightOf="@id/tourist_place_score"
-        android:text="@string/register_title"
         android:textColor="@color/gray_text"
-        android:textSize="33px" />
+        android:textSize="35px" />
 
     <TextView
         android:id="@+id/tourist_tag"
@@ -94,9 +89,8 @@
         android:paddingLeft="15px"
         android:paddingRight="15px"
         android:singleLine="true"
-        android:text="@string/register_title"
         android:textColor="@color/comm_white"
-        android:textSize="33px" />
+        android:textSize="35px" />
 
     <TextView
         android:id="@+id/tourist_price"
@@ -106,7 +100,6 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="36px"
         android:gravity="center"
-        android:text="@string/register_title"
-        android:textSize="36px" />
+        android:textSize="46px" />
 
 </RelativeLayout>

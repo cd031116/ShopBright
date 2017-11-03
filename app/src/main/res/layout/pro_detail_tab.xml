@@ -22,7 +22,7 @@
             android:padding="10px"
             android:text="订票"
             android:textColor="#333333"
-            android:textSize="32px" />
+            android:textSize="46px" />
 
         <TextView
             android:id="@+id/tab1_v"
@@ -51,7 +51,7 @@
             android:padding="10px"
             android:text="景点介绍"
             android:textColor="#333333"
-            android:textSize="32px" />
+            android:textSize="46px" />
 
         <TextView
             android:id="@+id/tab2_v"
@@ -80,7 +80,7 @@
             android:padding="10px"
             android:text="点评"
             android:textColor="#333333"
-            android:textSize="32px" />
+            android:textSize="46px" />
 
         <TextView
             android:id="@+id/tab3_v"

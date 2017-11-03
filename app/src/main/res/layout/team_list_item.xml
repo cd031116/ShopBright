@@ -85,7 +85,7 @@
                         android:maxLines="2"
                         android:text="溱湖国家湿地公园"
                         android:textColor="#333333"
-                        android:textSize="48px" />
+                        android:textSize="46px" />
 
                     <TextView
                         android:id="@+id/desc"

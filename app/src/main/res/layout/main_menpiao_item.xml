@@ -40,12 +40,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28px"
             android:singleLine="true"
+            android:textSize="40px"
             android:textColor="#222222" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28px"
+            android:layout_marginTop="8px"
             android:orientation="horizontal">
 
             <TextView
@@ -62,7 +63,7 @@
                 android:layout_marginLeft="10px"
                 android:text="起"
                 android:textColor="#999999"
-                android:textSize="34px" />
+                android:textSize="40px" />
 
         </LinearLayout>
 

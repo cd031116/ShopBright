@@ -27,6 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="36px"
+                android:textSize="40px"
                 android:text="周末有"
                 android:textColor="@color/white" />
 
@@ -36,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@id/ur_like_img"
                 android:layout_margin="36px"
+                android:textSize="40px"
                 android:text="47点评"
                 android:textColor="@color/white" />
 
@@ -47,6 +49,7 @@
                 android:layout_marginRight="18px"
                 android:layout_marginTop="18px"
                 android:ellipsize="end"
+                android:textSize="40px"
                 android:maxLines="2"
                 android:textColor="@color/black_text" />
 
@@ -61,6 +64,7 @@
                 android:id="@+id/price_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="40px"
                 android:textColor="@color/red_text" />
 
             <TextView
@@ -69,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/price_text"
                 android:layout_marginLeft="10px"
+                android:textSize="40px"
                 android:textColor="@color/gray_text" />
 
                     <View
@@ -81,6 +86,7 @@
                 android:id="@+id/address_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="40px"
                 android:layout_marginLeft="10px"
                 android:textColor="@color/gray_text"
                 />
