@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.ContainerActivity;
 import com.zhl.huiqu.main.bean.SearchBean;
@@ -21,7 +20,6 @@ import com.zhl.huiqu.main.ticket.TicksListFragment;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.Utils;
-
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.support.inject.ViewInject;
 import org.aisen.android.support.paging.IPaging;
