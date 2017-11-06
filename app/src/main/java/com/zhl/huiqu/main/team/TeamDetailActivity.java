@@ -177,7 +177,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         changeview(select);
 //        myscroview.scrollTo(0, 120);
         top_title.setText("详情");
-        image.setVisibility(View.VISIBLE);
+        image.setVisibility(View.GONE);
         image.setImageResource(R.drawable.share);
     }
 

@@ -24,8 +24,16 @@
         <LinearLayout
             android:id="@id/layoutContent" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
 
-            <android.support.v4.widget.SwipeRefreshLayout
-                android:id="@id/swipeRefreshLayout" android:layout_width="match_parent" android:layout_height="match_parent">
+            <!--<android.support.v4.widget.SwipeRefreshLayout-->
+                <!--android:id="@id/swipeRefreshLayout" android:layout_width="match_parent" android:layout_height="match_parent">-->
+
+
+                <com.jwenfeng.library.pulltorefresh.PullToRefreshLayout
+                    android:id="@+id/fresh_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#f0f0f0"
+                    android:layout_below="@+id/main_search">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@id/recycleview" android:layout_width="match_parent"
@@ -33,7 +41,10 @@
                     android:overScrollMode="never"
                     android:layout_height="match_parent"
                     android:background="#f0f0f0"/>
-            </android.support.v4.widget.SwipeRefreshLayout>
+                </com.jwenfeng.library.pulltorefresh.PullToRefreshLayout>
+
+
+            <!--</android.support.v4.widget.SwipeRefreshLayout>-->
         </LinearLayout>
 
         <!--<include-->

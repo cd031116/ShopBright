@@ -28,6 +28,7 @@ import com.zhl.huiqu.main.ticket.TickItemView;
 import com.zhl.huiqu.scan.CaptureActivity;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
+import com.zhl.huiqu.utils.ToastUtils;
 import com.zhl.huiqu.utils.Utils;
 import com.zhl.huiqu.widget.SimpleDividerItemDecoration;
 
@@ -158,10 +159,12 @@ public class SearchListFragment extends ARecycleViewSwipeRefreshFragment<TickInf
     void onSearchClicked(View view) {
         String text = editSearch.getText().toString();
         Log.e("ttt", "onSearchClicked: " + text + "refresh" + tickInfoList.size());
-        list_layout.setVisibility(View.GONE);
         if (!TextUtils.isEmpty(text)) {
+            list_layout.setVisibility(View.GONE);
             content = text;
             new SearchListFragment.Task(RefreshMode.reset).execute();
+        } else {
+            ToastUtils.showShortToast(getActivity(), "请输入搜索关键字");
         }
     }
 

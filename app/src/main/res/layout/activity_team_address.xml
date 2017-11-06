@@ -66,6 +66,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="56px"
                 android:layout_marginRight="12px"
+                android:visibility="gone"
                 android:layout_toRightOf="@+id/scan"
                 android:src="@drawable/xiaoxi_bai" />
         </RelativeLayout>

@@ -154,10 +154,10 @@ public class TeamListSearchFragment extends ARecycleViewSwipeRefreshFragment<Tea
                 Log.e("tttt", "onSearchClicked:" );
                 String text = editSearch.getText().toString();
                 Log.e("tttt", "onSearchClicked: " + text );
-                list_layout.setVisibility(View.GONE);
                 if (!TextUtils.isEmpty(text)) {
                     content = text;
 //                    new Task(RefreshMode.reset).execute();
+                    list_layout.setVisibility(View.GONE);
                     requestData(RefreshMode.reset);
                 } else {
                     ToastUtils.showShortToast(getActivity(), "请输入搜索关键字");

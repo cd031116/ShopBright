@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.jwenfeng.library.pulltorefresh.BaseRefreshListener;
+import com.jwenfeng.library.pulltorefresh.PullToRefreshLayout;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.ContainerActivity;
 import com.zhl.huiqu.main.bean.SearchBean;
@@ -25,6 +28,7 @@ import org.aisen.android.support.inject.ViewInject;
 import org.aisen.android.support.paging.IPaging;
 import org.aisen.android.support.paging.PageIndexPaging;
 import org.aisen.android.ui.activity.container.FragmentArgs;
+import org.aisen.android.ui.fragment.ARecycleViewFragment;
 import org.aisen.android.ui.fragment.ARecycleViewSwipeRefreshFragment;
 import org.aisen.android.ui.fragment.itemview.IITemView;
 import org.aisen.android.ui.fragment.itemview.IItemViewCreator;
@@ -36,7 +40,7 @@ import java.util.List;
  * Created by Administrator on 2017/11/2.
  */
 
-public class NearlyFragment extends ARecycleViewSwipeRefreshFragment<TickInfo, SearchBean, Serializable> {
+public class NearlyFragment extends ARecycleViewFragment<TickInfo, SearchBean, Serializable> {
 
     public static NearlyFragment newInstance(String theme_id) {
         Bundle args = new Bundle();
@@ -64,6 +68,10 @@ public class NearlyFragment extends ARecycleViewSwipeRefreshFragment<TickInfo, S
 
     @ViewInject(id = R.id.top_title)
     TextView top_title;
+    @ViewInject(id = R.id.fresh_main)
+    PullToRefreshLayout fresh_main;
+
+
     private String theme_id;
     @Override
     public void setContentView(ViewGroup view){
@@ -142,6 +150,18 @@ public class NearlyFragment extends ARecycleViewSwipeRefreshFragment<TickInfo, S
         super.layoutInit(inflater, savedInstanceSate);
         top_title.setText("周边");
         top_image.setVisibility(View.GONE);
+        fresh_main.setCanLoadMore(false);
+        fresh_main.setRefreshListener(new BaseRefreshListener() {
+            @Override
+            public void refresh() {
+               new Task(RefreshMode.reset).execute() ;
+            }
+
+            @Override
+            public void loadMore() {
+
+            }
+        });
 //        getSwipeRefreshLayout().setEnabled(false);
 //        recycleview.addItemDecoration(new SimpleDividerItemDecoration(getActivity(), null, 1));
 //        scrollView.setFillViewport(true);
@@ -159,6 +179,7 @@ public class NearlyFragment extends ARecycleViewSwipeRefreshFragment<TickInfo, S
 
         @Override
         protected List<TickInfo> parseResult(SearchBean bean) {
+            fresh_main.finishRefresh();
             return bean.getBody();
         }
 

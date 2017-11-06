@@ -94,7 +94,7 @@
             <RelativeLayout
                 android:id="@+id/search_re"
                 android:layout_width="match_parent"
-                android:layout_height="219px"
+                android:layout_height="150px"
                 android:background="@drawable/team_search_bg"
                 android:padding="30px">
 
@@ -102,7 +102,6 @@
                     android:id="@+id/searh_line"
                     android:layout_width="match_parent"
                     android:layout_height="120px"
-                    android:layout_marginBottom="30px"
                     android:layout_toLeftOf="@+id/line_d"
                     android:background="@drawable/team_search_bg_r">
 
