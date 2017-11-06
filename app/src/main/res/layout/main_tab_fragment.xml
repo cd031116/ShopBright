@@ -11,10 +11,16 @@
 
     <include layout="@layout/main_search" />
 
+    <com.jwenfeng.library.pulltorefresh.PullToRefreshLayout
+        android:id="@+id/fresh_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f0f0f0"
+        android:layout_below="@+id/main_search">
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/main_search"
         android:scrollbars="none">
 
         <LinearLayout
@@ -142,4 +148,5 @@
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+    </com.jwenfeng.library.pulltorefresh.PullToRefreshLayout>
 </RelativeLayout>

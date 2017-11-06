@@ -98,9 +98,9 @@ public class TeamOrderActivity extends BaseActivity {
     private String productId = "";
     private String departDate = "";
     private String childTicketPrice = "";
-    private String childCount = "";
+    private String childCount = "0";
     private String adultTicketPrice = "";
-    private String adultCount = "";
+    private String adultCount = "0";
     private String roomChargePrice = "";
     private TeamOrderPriceBean teamOrderPriceBean;
     private String insuranceId = "";
@@ -150,11 +150,10 @@ public class TeamOrderActivity extends BaseActivity {
             roomChargePrice = teamOrderPriceBean.getRoomChargeprice() + "";
             new getListTask().execute();
         }
-
     }
 
 
-    @OnClick({R.id.top_main, R.id.commit_pay, R.id.outing_people, R.id.detail})
+    @OnClick({R.id.top_main, R.id.commit_pay, R.id.outing_people, R.id.detail,R.id.order_pay_arrow})
     void onclicj(View v) {
         switch (v.getId()) {
             case R.id.top_main:
@@ -202,7 +201,7 @@ public class TeamOrderActivity extends BaseActivity {
                     info.setGetTicketName(name_text_t);
                     info.setRoomChargePrice(roomChargePrice);
                     info.setInsuranceIdList(getbaoxian());
-                    info.setInsurancePriceCount(getbaoprice() + "");
+                    info.setInsurancePriceCount(getbaoprice()*((Integer.parseInt(adultCount)+Integer.parseInt(childCount))) + "");
                     info.setMemberId(account.getBody().getMember_id());
                     Intent mIntent = new Intent(this, SignTeamActivity.class);
                     Bundle mBundle = new Bundle();
@@ -243,9 +242,12 @@ public class TeamOrderActivity extends BaseActivity {
                 startActivityForResult(intent, REQUEST_CODE);
                 break;
             case R.id.detail:
+            case R.id.order_pay_arrow:
                 if (!isshow) {
                     mopupWindow = new DetailWindow(TeamOrderActivity.this, adultTicketPrice, adultCount, childTicketPrice, childCount, insuranprice, order_pay_price.getText().toString(), itemsOnClick);
-                    mopupWindow.showUp2(bottom_r, 1080, 142);
+                    mopupWindow.showAtLocation(TeamOrderActivity.this.findViewById(R.id.detail),
+                            Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+//                    mopupWindow.showUp2(bottom_r, 1080, 142);
                     isshow = true;
                 } else {
                     mopupWindow.dismiss();

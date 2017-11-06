@@ -21,7 +21,7 @@ android {
     buildTypes {
         release {
             buildConfigField "boolean", "LOG_DEBUG", "false"
-            buildConfigField "String", "BASE_URL", "\"http://xmcs.zhonghuilv.net/\""
+            buildConfigField "String", "BASE_URL", "\"http://www.zhonghuilv.net/\""
 //            buildConfigField "String", "BASE_URL", "\"http://192.168.18.234/\""
 //            signingConfig signingConfigs.release
             minifyEnabled false
@@ -29,8 +29,8 @@ android {
         }
         debug {
             buildConfigField "boolean", "LOG_DEBUG", "true"
-            buildConfigField "String", "BASE_URL", "\"http://www.zhonghuilv.net/\""
-//            buildConfigField "String", "BASE_URL", "\"http://192.168.18.234/\""
+//            buildConfigField "String", "BASE_URL", "\"http://www.zhonghuilv.net/\""
+            buildConfigField "String", "BASE_URL", "\"http://192.168.18.234/\""
 //            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -70,4 +70,5 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.4'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
+    compile 'com.jwenfeng.pulltorefresh:library:1.0.3'
 }

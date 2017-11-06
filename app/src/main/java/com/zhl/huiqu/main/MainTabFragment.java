@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.jwenfeng.library.pulltorefresh.BaseRefreshListener;
+import com.jwenfeng.library.pulltorefresh.PullToRefreshLayout;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -98,6 +100,8 @@ public class MainTabFragment extends BaseFragment {
     @ViewInject(id = R.id.hot_3)
     ImageView hot_3;
 
+    @ViewInject(id = R.id.fresh_main)
+    PullToRefreshLayout fresh_main;
     @ViewInject(id = R.id.menpiao)
     RecyclerView mRecycle;
     @ViewInject(id = R.id.gentuan)
@@ -142,6 +146,19 @@ public class MainTabFragment extends BaseFragment {
         mainInfo = SaveObjectUtils.getInstance(getActivity()).getObject(Constants.MAIN_DATA, null);
         settopView(mainInfo);
         setBanner();
+        fresh_main.setRefreshListener(new BaseRefreshListener() {
+            @Override
+            public void refresh() {
+                new getTopTaskfresh().execute();
+
+            }
+
+            @Override
+            public void loadMore() {
+
+            }
+        });
+        fresh_main.setCanLoadMore(false);
     }
 
     private void setmenpiao() {
@@ -470,6 +487,39 @@ public class MainTabFragment extends BaseFragment {
             dismissAlert();
         }
     }
+
+    /*上部分数据
+   * */
+    class getTopTaskfresh extends WorkTask<Void, Void, MainBean> {
+        @Override
+        protected void onPrepare() {
+            super.onPrepare();
+            if (mainInfo == null) {
+            }
+        }
+
+        @Override
+        public MainBean workInBackground(Void... voids) throws TaskException {
+            return SDK.newInstance(getActivity()).getMainTop();
+        }
+
+        @Override
+        protected void onSuccess(MainBean info) {
+            super.onSuccess(info);
+            fresh_main.finishRefresh();
+            mainInfo = info.getBody();
+            SaveObjectUtils.getInstance(getActivity()).setObject(Constants.MAIN_DATA, mainInfo);
+            settopView(mainInfo);
+        }
+
+        @Override
+        protected void onFailure(TaskException exception) {
+            fresh_main.finishRefresh();
+        }
+    }
+
+
+
 
     private void settopView(MainTopInfo info) {
         if (info == null) {

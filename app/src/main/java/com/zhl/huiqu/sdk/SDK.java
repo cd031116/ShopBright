@@ -1105,9 +1105,9 @@ public class SDK extends ABizLogic {
         if (!TextUtils.isEmpty(data.getRoomChargePrice())) {
             params.addParameter("roomChargePrice", data.getRoomChargePrice());
         }
-        if (!TextUtils.isEmpty(data.getInsurancePriceCount())) {
-            params.addParameter("insurancePriceCount", data.getInsurancePriceCount());
-        }
+//        if (!TextUtils.isEmpty(data.getInsurancePriceCount())) {
+//            params.addParameter("insurancePriceCount", data.getInsurancePriceCount());
+//        }
         if (!TextUtils.isEmpty(data.getInsuranceIdList())) {
             params.addParameter("insuranceIdList", data.getInsuranceIdList());
         }

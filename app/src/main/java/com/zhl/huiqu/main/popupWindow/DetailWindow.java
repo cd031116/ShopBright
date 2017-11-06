@@ -74,9 +74,6 @@ public class DetailWindow extends PopupWindow {
                 dismiss();
             }
         });
-
-
-
     /* 设置弹出窗口特征 */
         // 设置视图
         this.setOutsideTouchable(true);
@@ -94,9 +91,6 @@ public class DetailWindow extends PopupWindow {
         // 设置弹出窗体显示时的动画，从底部向上弹出
         this.setAnimationStyle(R.style.select_anim);
         this.getContentView().measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-        int with=this.getContentView().getWidth();
-        int hight=this.getContentView().getHeight();
-        Log.i("bbbb","hight="+hight);
     }
 
     public interface ItemInclick {
