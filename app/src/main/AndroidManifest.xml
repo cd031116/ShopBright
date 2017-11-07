@@ -160,7 +160,8 @@
         <activity
             android:name=".main.team.TeamListActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".main.team.TeamOrderActivity"
+        <activity
+            android:name=".main.team.TeamOrderActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".main.team.TeamAddressActivity" />
         <activity android:name=".personal.UseInfoActivity" />
@@ -180,7 +181,8 @@
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".main.SelectTickActivity" />
-        <activity android:name=".main.team.SignTeamActivity"></activity>
+        <activity android:name=".main.team.SignTeamActivity" />
+        <activity android:name=".personal.OrderTotalActivity"></activity>
     </application>
 
 </manifest>

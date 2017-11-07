@@ -719,7 +719,6 @@ public class SDK extends ABizLogic {
         params.addParameter("member_id", member_id);
         params.addParameter("page", page + "");
         params.addParameter("status", status + "");
-
         return doPost(configHttpConfig(), action, params, null, null, AllOrderBean.class);
     }
 

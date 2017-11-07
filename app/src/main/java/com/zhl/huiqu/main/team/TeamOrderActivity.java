@@ -108,7 +108,7 @@ public class TeamOrderActivity extends BaseActivity {
     private int REQUEST_CODE = 101;
     private RegisterEntity account;
     private String insuranprice = "";
-
+    private String roomPrice="";
     @Override
     protected int getLayoutId() {
         return R.layout.activity_team_order;
@@ -129,6 +129,7 @@ public class TeamOrderActivity extends BaseActivity {
         else
             outing_num.setText("成人：" + teamOrderPriceBean.getProductAdultNum() + "人");
         if (teamOrderPriceBean.getProductAdultNum() % 2 != 0) {
+            roomPrice=teamOrderPriceBean.getRoomChargeprice()+"";
             room_charge_layout.setVisibility(View.VISIBLE);
             room_charge_price.setText("￥" + teamOrderPriceBean.getRoomChargeprice());
         } else
@@ -244,7 +245,7 @@ public class TeamOrderActivity extends BaseActivity {
             case R.id.detail:
             case R.id.order_pay_arrow:
                 if (!isshow) {
-                    mopupWindow = new DetailWindow(TeamOrderActivity.this, adultTicketPrice, adultCount, childTicketPrice, childCount, insuranprice, order_pay_price.getText().toString(), itemsOnClick);
+                    mopupWindow = new DetailWindow(TeamOrderActivity.this, adultTicketPrice, adultCount, childTicketPrice, childCount, insuranprice, order_pay_price.getText().toString(),roomPrice, itemsOnClick);
                     mopupWindow.showAtLocation(TeamOrderActivity.this.findViewById(R.id.detail),
                             Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
 //                    mopupWindow.showUp2(bottom_r, 1080, 142);

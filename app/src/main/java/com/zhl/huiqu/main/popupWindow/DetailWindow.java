@@ -25,12 +25,13 @@ public class DetailWindow extends PopupWindow {
     private Activity mContext;
     private View view;
     private TextView chengr,cheng_jiage;
-    private TextView er_tong,er_jiage;
+    private TextView er_tong,er_jiage,df_jiage;
     private TextView baoxian;
     private TextView order_pay_price,commit_pay;
     private ItemInclick itemsOnClick;
     private LinearLayout main_top;
-    public DetailWindow(Activity mContext,String cr,String adultCount,String rt,String childCount,String bx,String total,ItemInclick itemsOnClickd) {
+    private RelativeLayout rela_danf;
+    public DetailWindow(Activity mContext,String cr,String adultCount,String rt,String childCount,String bx,String total,String roomPrice,ItemInclick itemsOnClickd) {
         this.mContext=mContext;
         this.itemsOnClick = itemsOnClickd;
         this.view = LayoutInflater.from(mContext).inflate(R.layout.detail_window, null);
@@ -41,9 +42,15 @@ public class DetailWindow extends PopupWindow {
         commit_pay= (TextView) view.findViewById(R.id.commit_pay);
         main_top= (LinearLayout) view.findViewById(R.id.main_top);
         cheng_jiage= (TextView) view.findViewById(R.id.cheng_jiage);
-
+        rela_danf= (RelativeLayout) view.findViewById(R.id.rela_danf);
         er_jiage= (TextView) view.findViewById(R.id.er_jiage);
-
+        df_jiage= (TextView) view.findViewById(R.id.df_jiage);
+        if(!TextUtils.isEmpty(roomPrice)){
+            rela_danf.setVisibility(View.VISIBLE);
+            df_jiage.setText("￥"+roomPrice);
+        }else {
+            rela_danf.setVisibility(View.GONE);
+        }
         if(!TextUtils.isEmpty(adultCount)){
             cheng_jiage.setText("￥"+cr);
             chengr.setText("×"+adultCount);
@@ -56,7 +63,6 @@ public class DetailWindow extends PopupWindow {
       }else {
           er_tong.setText(childCount);
       }
-
 
         baoxian.setText("￥"+bx);
         order_pay_price.setText(total);

@@ -277,23 +277,27 @@ public class PersonalFragment extends BaseFragment {
                     break;
                 //所有订单
                 case R.id.all_order_btn:
-                    args.add("productId", getResources().getString(R.string.personal_all_order));
-                    OrderAllListFragment.launch(getActivity(), args);
+                    Intent intent1 = new Intent(getActivity(), OrderTotalActivity.class);
+                    intent1.putExtra("stats", -1);
+                    startActivity(intent1);
                     break;
                 //待付款
                 case R.id.pay_order_btn:
-                    args.add("productId", getResources().getString(R.string.personal_pay_order));
-                    OrderAllListFragment.launch(getActivity(), args);
+                    Intent intent2= new Intent(getActivity(), OrderTotalActivity.class);
+                    intent2.putExtra("stats",0);
+                    startActivity(intent2);
                     break;
                 //待出行
                 case R.id.goout_order_btn:
-                    args.add("productId", getResources().getString(R.string.personal_out_order));
-                    OrderAllListFragment.launch(getActivity(), args);
+                    Intent intent3= new Intent(getActivity(), OrderTotalActivity.class);
+                    intent3.putExtra("stats",1);
+                    startActivity(intent3);
                     break;
                 //退款
                 case R.id.refund_order_btn:
-                    args.add("productId", getResources().getString(R.string.personal_tuikuan_order));
-                    OrderAllListFragment.launch(getActivity(), args);
+                    Intent intent4= new Intent(getActivity(), OrderTotalActivity.class);
+                    intent4.putExtra("stats",4);
+                    startActivity(intent4);
                     break;
             }
         }

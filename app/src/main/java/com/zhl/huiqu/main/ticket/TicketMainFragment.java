@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -148,7 +149,7 @@ public class TicketMainFragment extends BaseFragment {
         if (tickInfo != null) {
             aData = tickInfo.getBody().getHot();
             jData = tickInfo.getBody().getAround();
-            mDatas = tickInfo.getBody().getTheme();
+            mDatas=tickInfo.getBody().getTheme();
             initDatas();
             setlist();
             sethot();
@@ -377,7 +378,7 @@ public class TicketMainFragment extends BaseFragment {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
-                        intent.putExtra("shop_spot_id", ircum.getSpot_team_id());
+                        intent.putExtra("shop_spot_id", ircum.getShop_spot_id());
                         startActivity(intent);
                     }
                 });
@@ -411,7 +412,6 @@ public class TicketMainFragment extends BaseFragment {
     }
 
 
-
     /*门票首页
   * */
     class getData extends WorkTask<Void, Void, TickMainBean> {
@@ -437,6 +437,9 @@ public class TicketMainFragment extends BaseFragment {
             aData = info.getBody().getHot();
             jData = info.getBody().getAround();
             mDatas = info.getBody().getTheme();
+            Log.i("kkkk","mDatas="+mDatas.size());
+            Log.i("kkkk","jData="+jData.size());
+            Log.i("kkkk","aData="+aData.size());
             if (!isdestory) {
                 initDatas();
                 setlist();
@@ -446,7 +449,7 @@ public class TicketMainFragment extends BaseFragment {
         }
 
         @Override
-        protected void onFailure(TaskException exception) {
+        protected void onFailure(TaskException exception){
             dismissAlert();
         }
     }

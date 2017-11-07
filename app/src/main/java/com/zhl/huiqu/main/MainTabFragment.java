@@ -304,9 +304,9 @@ public class MainTabFragment extends BaseFragment {
         banner.setIndicatorGravity(BannerConfig.CENTER);
         //banner设置方法全部调用完毕时最后调用
         banner.start();
-        banner.setOnBannerListener(new OnBannerListener() {
+        banner.setOnBannerListener(new OnBannerListener(){
             @Override
-            public void OnBannerClick(int position) {
+            public void OnBannerClick(int position){
                 Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
                 intent.putExtra("shop_spot_id", mainInfo.getNav().get(position).getShop_spot_id());
                 startActivity(intent);

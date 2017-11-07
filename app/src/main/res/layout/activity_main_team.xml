@@ -32,7 +32,7 @@
                 <ImageView
                     android:id="@+id/btnBack"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="49px"
                     android:paddingRight="16dip"
                     android:src="@drawable/fanhui_bai" />
             </LinearLayout>

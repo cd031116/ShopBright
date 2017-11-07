@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class TickCircum implements Serializable{
 
-    private String spot_team_id;
+    private String shop_spot_id;
     private String city;
     private String title;
     private String thumb;
@@ -17,14 +17,16 @@ public class TickCircum implements Serializable{
     private String theme;
     private String level;
     private String csr;
+    private String grade;
 
+    private String comment_num;
 
-    public String getSpot_team_id() {
-        return spot_team_id;
+    public String getShop_spot_id() {
+        return shop_spot_id;
     }
 
-    public void setSpot_team_id(String spot_team_id) {
-        this.spot_team_id = spot_team_id;
+    public void setShop_spot_id(String shop_spot_id) {
+        this.shop_spot_id = shop_spot_id;
     }
 
     public String getCity() {
@@ -89,5 +91,21 @@ public class TickCircum implements Serializable{
 
     public void setCsr(String csr) {
         this.csr = csr;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getComment_num() {
+        return comment_num;
+    }
+
+    public void setComment_num(String comment_num) {
+        this.comment_num = comment_num;
     }
 }

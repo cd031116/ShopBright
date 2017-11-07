@@ -231,7 +231,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
             super.onSuccess(info);
             dismissAlert();
             if (info.getCode().equals("1")) {
-                ToastUtils.showShortToast(TeamDetailActivity.this, "收藏成功");
+                ToastUtils.showShortToast(TeamDetailActivity.this, info.getMsg());
             }
 
         }

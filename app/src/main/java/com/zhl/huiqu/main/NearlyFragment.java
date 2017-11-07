@@ -205,6 +205,7 @@ public class NearlyFragment extends ARecycleViewFragment<TickInfo, SearchBean, S
         protected void onFailure(TaskException exception){
             super.onFailure(exception);
             error_text.setText(exception.getMessage());
+            fresh_main.finishRefresh();
 //            if ("noneNetwork".equals(exception.getCode())) {
 //                error_image.setImageResource(R.mipmap.no_net);
 //            }
