@@ -77,7 +77,7 @@
     <string name="setting_email_text">邮箱将接收相关通知和旅行合同，请谨慎填写正确的邮箱</string>
     <string name="setting_name_text">昵称要求为2-20个汉字或2-40个英文，不能中英文混搭</string>
     <string name="setting_nick_text">昵称要求为4-16个字符，支持中文、英文、"-"、"_"。</string>
-    <string name="personal_setting_cache">清楚缓存</string>
+    <string name="personal_setting_cache">清除缓存</string>
     <string name="personal_setting_out">退出登录账号</string>
 
     <string name="new_tourist_name_text">中文姓名</string>

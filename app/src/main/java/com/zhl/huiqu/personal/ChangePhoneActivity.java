@@ -62,7 +62,7 @@ public class ChangePhoneActivity extends BaseActivity {
         super.initData();
     }
 
-    @OnClick({R.id.obtain_code_text, R.id.save_btn})
+    @OnClick({R.id.obtain_code_text, R.id.save_btn,R.id.top_image})
     void onClick(View view) {
         String phone = phoneText.getText().toString().trim();
         String code = pswText.getText().toString().trim();
@@ -86,6 +86,9 @@ public class ChangePhoneActivity extends BaseActivity {
                     ToastUtils.showShortToast(this, getResources().getString(R.string.register_check_msg_code));
                 else
                     new changeMobileTask().execute(phone, code);
+                break;
+            case R.id.top_image:
+                ChangePhoneActivity.this.finish();
                 break;
         }
     }

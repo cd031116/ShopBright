@@ -17,7 +17,7 @@ public class Constants {
 
     public static final String PAY_MONEY="payMoney";
 
-    public static final String PAY_PRODUCTS_ARRAY="payProducts";
+    public static final String PAY_PRODUCTS_TYPE="payProducts";
 
     public static final String PAY_PRODUCT_ID="payProductId";
 

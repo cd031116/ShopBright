@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -46,7 +47,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/9/27.
+ * Created by lyj on 2017/9/27.
  */
 
 public class TeamListSearchFragment extends ARecycleViewSwipeRefreshFragment<TeamListInfo, TeamSearchInfo, Serializable> implements ItemTeamCallback {
@@ -68,6 +69,9 @@ public class TeamListSearchFragment extends ARecycleViewSwipeRefreshFragment<Tea
     RecyclerView recycleview;
     @ViewInject(id = R.id.list_layout)
     RelativeLayout list_layout;
+
+    @ViewInject(id = R.id.progress)
+    ProgressBar progress;
 
     private String content;
     private String deviceId;
@@ -194,6 +198,7 @@ public class TeamListSearchFragment extends ARecycleViewSwipeRefreshFragment<Tea
     @Override
     public void requestData(RefreshMode refreshMode) {
         if(!TextUtils.isEmpty(content)){
+            progress.setVisibility(View.VISIBLE);
             new Task(refreshMode != RefreshMode.update ? RefreshMode.reset : RefreshMode.update).execute();
         }
     }
@@ -211,6 +216,7 @@ public class TeamListSearchFragment extends ARecycleViewSwipeRefreshFragment<Tea
         @Override
         protected List<TeamListInfo> parseResult(TeamSearchInfo bean) {
             list_layout.setVisibility(View.VISIBLE);
+            progress.setVisibility(View.GONE);
             return bean.getBody();
         }
 
@@ -236,6 +242,7 @@ public class TeamListSearchFragment extends ARecycleViewSwipeRefreshFragment<Tea
         @Override
         protected void onFailure(TaskException exception) {
             super.onFailure(exception);
+            progress.setVisibility(View.GONE);
             error_text.setText(exception.getMessage());
         }
     }

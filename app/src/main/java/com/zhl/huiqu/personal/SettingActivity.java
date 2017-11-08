@@ -66,7 +66,7 @@ public class SettingActivity extends BaseActivity {
         new settingTask().execute(memberId);
     }
 
-    @OnClick({R.id.change_nickname, R.id.setting_name, R.id.setting_psw, R.id.setting_phone, R.id.setting_email, R.id.top_left, R.id.out_huiqu})
+    @OnClick({R.id.change_nickname, R.id.setting_name, R.id.setting_psw, R.id.setting_phone, R.id.setting_email, R.id.top_left, R.id.out_huiqu,R.id.setting_sex,R.id.setting_bir})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.change_nickname:
@@ -99,6 +99,12 @@ public class SettingActivity extends BaseActivity {
                 SaveObjectUtils.getInstance(this).setObject(Constants.USER_INFO, null);
 //                MyApplication.getInstance().getActivityManager().popAllActivity();
                 finish();
+                break;
+            case R.id.setting_sex:
+                ToastUtils.showShortToast(SettingActivity.this,"暂时不支持修改");
+                break;
+            case R.id.setting_bir:
+                ToastUtils.showShortToast(SettingActivity.this,"暂时不支持修改");
                 break;
         }
     }

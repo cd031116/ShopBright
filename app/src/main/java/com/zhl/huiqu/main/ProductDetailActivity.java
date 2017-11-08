@@ -25,6 +25,7 @@ import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.main.bean.DetailBean;
 import com.zhl.huiqu.main.bean.DetailMainBean;
@@ -380,7 +381,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
 
     /*收藏
     * */
-    class toTask extends WorkTask<Void, Void, String> {
+    class toTask extends WorkTask<Void, Void, BaseInfo> {
         @Override
         protected void onPrepare() {
             super.onPrepare();
@@ -388,23 +389,24 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
         }
 
         @Override
-        public String workInBackground(Void... voids) throws TaskException {
+        public BaseInfo workInBackground(Void... voids) throws TaskException {
             RegisterEntity data = (RegisterEntity) SaveObjectUtils.getInstance(ProductDetailActivity.this).getObject(Constants.USER_INFO, null);
-            return SDK.newInstance(ProductDetailActivity.this).getCollect(data.getBody().getMember_id(), shop_spot_id);
+            return SDK.newInstance(ProductDetailActivity.this).getCollect(data.getBody().getMember_id(), shop_spot_id,"ticket");
         }
 
         @Override
-        protected void onSuccess(String infot) {
+        protected void onSuccess(BaseInfo infot) {
             super.onSuccess(infot);
             dismissAlert();
-            if ("1".equals(info.getSpot_info().getCollect_status())) {
-                info.getSpot_info().setCollect_status("0");
-                ToastUtils.showShortToast(ProductDetailActivity.this, "取消收藏");
-            } else {
-                info.getSpot_info().setCollect_status("1");
-                ToastUtils.showShortToast(ProductDetailActivity.this, "收藏成功");
+            ToastUtils.showShortToast(ProductDetailActivity.this, infot.getMsg());
+            if(info!=null){
+                if ("1".equals(info.getSpot_info().getCollect_status())) {
+                    info.getSpot_info().setCollect_status("0");
+                } else {
+                    info.getSpot_info().setCollect_status("1");
+                }
+                showcollection(info);
             }
-            showcollection(info);
         }
 
         @Override

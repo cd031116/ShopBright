@@ -77,8 +77,6 @@ public class PayActivity extends BaseActivity {
         if(bd!=null){
             type=bd.getString("type");
         }
-
-
         mPerson = (OrderEntity) getIntent().getSerializableExtra("body");
         if (mPerson != null) {
             price.setText("￥" + mPerson.getOrder_total());
@@ -156,6 +154,7 @@ public class PayActivity extends BaseActivity {
         @Override
         public WeiChatBean workInBackground(Void... voids) throws TaskException {
             //产品编号
+            MapUtil.sharedInstance().putDefaultValue(Constants.PAY_PRODUCTS_TYPE,type);
             MapUtil.sharedInstance().putDefaultValue(Constants.PAY_PRODUCT_ID, mPerson.getOrder_sn());
             MapUtil.sharedInstance().putDefaultValue(Constants.ORDER_ID, mPerson.getOrder_id());
             //支付的金钱

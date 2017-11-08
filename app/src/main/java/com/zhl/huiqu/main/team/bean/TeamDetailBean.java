@@ -22,7 +22,7 @@ public class TeamDetailBean implements Serializable {
     private CostNoticeBean costNotice;
     private BookNoticeBean bookNotice;
     private List<JourneyInfoBean> journeyInfo;
-
+    private String collectStatus;
     private TeamInfoBean teamInfo;
     private ProductFeatureBean productFeature;
     private List<String> img;
@@ -30,6 +30,14 @@ public class TeamDetailBean implements Serializable {
 
     public CostNoticeBean getCostNotice() {
         return costNotice;
+    }
+
+    public String getCollectStatus() {
+        return collectStatus;
+    }
+
+    public void setCollectStatus(String collectStatus) {
+        this.collectStatus = collectStatus;
     }
 
     public void setCostNotice(CostNoticeBean costNotice) {

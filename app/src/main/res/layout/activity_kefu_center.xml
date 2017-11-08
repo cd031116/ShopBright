@@ -15,19 +15,24 @@
         <RelativeLayout
             android:id="@+id/call_kefu_layout"
             android:layout_width="match_parent"
-            android:layout_height="141px"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/comm_white"
+            android:paddingBottom="20px"
+            android:paddingTop="20px"
             android:gravity="center">
 
             <TextView
                 android:id="@+id/call_kefu"
                 android:layout_width="match_parent"
-                android:layout_height="90px"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="93px"
                 android:layout_marginRight="93px"
+                android:paddingBottom="20px"
+                android:paddingTop="20px"
                 android:background="@drawable/personal_kefu_phone"
                 android:gravity="center"
+                android:textSize="38px"
                 android:text="@string/call_kefu_phone"
                 android:textColor="@color/comm_white" />
         </RelativeLayout>
@@ -47,6 +52,7 @@
                 android:id="@+id/kefu_cpzx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="38px"
                 android:text="@string/kefu_cpzx" />
 
             <TextView
@@ -54,6 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/kefu_cpzx"
+                android:textSize="38px"
                 android:layout_marginTop="24px"
                 android:text="@string/kefu_sqzx" />
 
@@ -63,16 +70,18 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/kefu_sqzx"
                 android:layout_marginTop="24px"
+                android:textSize="38px"
                 android:text="@string/kefu_order_question" />
 
             <TextView
                 android:id="@+id/kefu_phone_text"
                 android:layout_width="wrap_content"
-                android:layout_height="90px"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="201px"
                 android:layout_toRightOf="@id/kefu_cpzx"
                 android:drawableLeft="@drawable/kefu_phone"
+                android:textSize="38px"
                 android:drawablePadding="24px"
                 android:text="@string/kefu_phone_text" />
 

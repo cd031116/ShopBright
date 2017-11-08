@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -70,6 +71,9 @@ public class SearchListFragment extends ARecycleViewSwipeRefreshFragment<TickInf
     RecyclerView recycleview;
     @ViewInject(id = R.id.list_layout)
     RelativeLayout list_layout;
+
+    @ViewInject(id = R.id.progress)
+    ProgressBar progress;
 
     private String content;
 
@@ -195,6 +199,7 @@ public class SearchListFragment extends ARecycleViewSwipeRefreshFragment<TickInf
 
     @Override
     public void requestData(RefreshMode refreshMode) {
+        progress.setVisibility(View.VISIBLE);
         new SearchListFragment.Task(refreshMode != RefreshMode.update ? RefreshMode.reset : RefreshMode.update).execute();
     }
 
@@ -206,6 +211,7 @@ public class SearchListFragment extends ARecycleViewSwipeRefreshFragment<TickInf
         @Override
         protected List<TickInfo> parseResult(SearchTickEntity bean) {
             list_layout.setVisibility(View.VISIBLE);
+            progress.setVisibility(View.GONE);
             return bean.getBody();
         }
 
@@ -232,6 +238,7 @@ public class SearchListFragment extends ARecycleViewSwipeRefreshFragment<TickInf
         protected void onFailure(TaskException exception) {
             super.onFailure(exception);
             error_text.setText(exception.getMessage());
+            progress.setVisibility(View.GONE);
         }
     }
 

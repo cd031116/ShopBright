@@ -33,6 +33,7 @@ import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.main.ProductDetailActivity;
+import com.zhl.huiqu.main.bean.DetailBean;
 import com.zhl.huiqu.main.hotelTour.HotelDetailActivity;
 import com.zhl.huiqu.main.hotelTour.MainHotelTourActivity;
 import com.zhl.huiqu.main.team.bean.LikeBean;
@@ -133,6 +134,8 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
     TextView tab3_t;
     @Bind(R.id.tab3_v)
     TextView tab3_v;
+    @Bind(R.id.collect_ima)
+    ImageView collect_ima;
     private int select = 1;
     private int topHeight;
     private int journeyHeight;
@@ -144,7 +147,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
     private String deviceId;
     private String memberId;
     private String title;
-
+    private TeamDetailBean beans;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_team_detail;
@@ -212,7 +215,7 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
     }
 
     /**
-     * 行程数据
+     * 收藏
      */
     class obtainCollectDate extends WorkTask<Void, Void, BaseInfo> {
         @Override
@@ -223,17 +226,24 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
 
         @Override
         public BaseInfo workInBackground(Void... voids) throws TaskException {
-            return SDK.newInstance(TeamDetailActivity.this).getTeamCollect(memberId, spot_team_id, "team");
+            return SDK.newInstance(TeamDetailActivity.this).getCollect(memberId, spot_team_id, "team");
         }
 
         @Override
         protected void onSuccess(BaseInfo info) {
             super.onSuccess(info);
             dismissAlert();
-            if (info.getCode().equals("1")) {
-                ToastUtils.showShortToast(TeamDetailActivity.this, info.getMsg());
-            }
+            ToastUtils.showShortToast(TeamDetailActivity.this, info.getMsg());
+            if(beans==null){
 
+            }else {
+                if ("1".equals(beans.getCollectStatus())) {
+                    beans.setCollectStatus("0");
+                } else {
+                    beans.setCollectStatus("1");
+                }
+                showcollection(beans);
+            }
         }
 
         @Override
@@ -241,6 +251,26 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
             dismissAlert();
         }
     }
+
+
+    private void showcollection(TeamDetailBean info) {
+        if (info.getCollectStatus()== null) {
+            collect_ima.setBackgroundResource(R.drawable.mpxq_sc);
+            return;
+        }
+        String ss = info.getCollectStatus();
+        if (!TextUtils.isEmpty(ss)) {
+            if ("1".equals(ss)) {
+                collect_ima.setBackgroundResource(R.drawable.mpxq_sc_red);
+            } else {
+                collect_ima.setBackgroundResource(R.drawable.mpxq_sc);
+            }
+        } else {
+            collect_ima.setBackgroundResource(R.drawable.mpxq_sc);
+        }
+
+    }
+
 
 
     /**
@@ -265,6 +295,8 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
             if (info.getCode().equals("1")) {
                 Log.e("ddd", "onSuccess: " + true);
                 setView(info.getBody());
+                beans=info.getBody();
+                showcollection(beans);
             }
         }
 

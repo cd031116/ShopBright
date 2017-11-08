@@ -182,7 +182,8 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".main.SelectTickActivity" />
         <activity android:name=".main.team.SignTeamActivity" />
-        <activity android:name=".personal.OrderTotalActivity"></activity>
+        <activity android:name=".personal.OrderTotalActivity" />
+        <activity android:name=".main.team.TeamOrderDetailActivity"></activity>
     </application>
 
 </manifest>

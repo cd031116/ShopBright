@@ -70,7 +70,7 @@
                     <TextView
                         android:id="@+id/personal_login_btn"
                         android:layout_width="wrap_content"
-                        android:layout_height="130px"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/bg_login_btn"
                         android:paddingBottom="36px"
                         android:paddingLeft="128px"
@@ -82,7 +82,7 @@
                     <TextView
                         android:id="@+id/personal_register_btn"
                         android:layout_width="wrap_content"
-                        android:layout_height="130px"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:background="@drawable/bg_login_btn"
                         android:paddingBottom="36px"
@@ -171,6 +171,7 @@
                     android:drawableLeft="@drawable/personal_u_like"
                     android:drawablePadding="15px"
                     android:gravity="center_vertical"
+                    android:textColor="@color/black_text"
                     android:paddingTop="17px"
                     android:text="@string/personal_your_like"
                     android:textSize="42px" />

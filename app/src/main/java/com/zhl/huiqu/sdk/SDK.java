@@ -25,6 +25,7 @@ import com.zhl.huiqu.main.team.bean.InsuranceBase;
 import com.zhl.huiqu.main.team.bean.LikeEntity;
 import com.zhl.huiqu.main.team.bean.OrderBuyBase;
 import com.zhl.huiqu.main.team.bean.OrderCountBase;
+import com.zhl.huiqu.main.team.bean.OrderDetailBase;
 import com.zhl.huiqu.main.team.bean.OrderPut;
 import com.zhl.huiqu.main.team.bean.SearBase;
 import com.zhl.huiqu.main.team.bean.TeamBase;
@@ -707,6 +708,22 @@ public class SDK extends ABizLogic {
     }
 
 
+
+    /**
+     * 查看跟团游订单详情
+     *
+     * @return
+     * @throws TaskException
+     */
+    public OrderDetailBase getOrderInfo(String member_id, String order_sn) throws TaskException {
+        Setting action = newSetting("getAllOrder", "appapi/Team/getOrderInfo", "查看全部订单");
+        Params params = new Params();
+        params.addParameter("member_id", member_id);
+        params.addParameter("order_sn",order_sn);
+        return doPost(configHttpConfig(), action, params, null, null, OrderDetailBase.class);
+    }
+
+
     /**
      * 查看全部订单
      *
@@ -882,13 +899,14 @@ public class SDK extends ABizLogic {
      * @return
      * @throws TaskException
      */
-    public String getCollect(String member_id, String shop_spot_id) throws TaskException {
-        Setting action = newSetting("getOrderinfo", "appapi/Goods/collect", "获取订单详情");
+    public BaseInfo getCollect(String member_id, String shop_spot_id,String type) throws TaskException {
+        Setting action = newSetting("collect", "appapi/Common/collect", "获取订单详情");
         Params params = new Params();
-        params.addParameter("member_id", member_id);
-        params.addParameter("shop_spot_id", shop_spot_id);
+        params.addParameter("memberId", member_id);
+        params.addParameter("productId", shop_spot_id);
+        params.addParameter("type",type);
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?member_id=" + member_id + "&shop_spot_id=" + shop_spot_id);
-        return doGet(configHttpConfig(), action, params, String.class);
+        return doGet(configHttpConfig(), action, params, BaseInfo.class);
     }
 
     /**

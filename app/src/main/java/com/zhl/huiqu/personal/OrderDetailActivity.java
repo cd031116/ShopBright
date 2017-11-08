@@ -18,7 +18,7 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
- * 订单详情
+ * 订单详情 门票
  * Created by dw on 2017/8/11.
  */
 

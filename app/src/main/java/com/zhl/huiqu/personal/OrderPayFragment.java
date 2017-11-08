@@ -162,7 +162,7 @@ public class OrderPayFragment extends BaseFragment {
         protected void onSuccess(OrderDetailBean info) {
             super.onSuccess(info);
             dismissAlert();
-            Log.e("ttt", "onSuccess: info.getPrice():" + info.getBody().getPrice());
+            Log.e("tttt", "onSuccess: info.getPrice():" + info.getBody().getPrice());
             settingView(info.getBody());
         }
 

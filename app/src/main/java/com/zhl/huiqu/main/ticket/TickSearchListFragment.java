@@ -99,9 +99,6 @@ public class TickSearchListFragment extends ARecycleViewSwipeRefreshFragment<Tic
             theme_id = info.getTheme_id();
             grade=info.getGrade();
             order=info.getOrder();
-            TLog.log("mmmm","theme_id="+theme_id);
-            TLog.log("mmmm","grade="+grade);
-            TLog.log("mmmm","order="+order);
             progress.setVisibility(View.VISIBLE);
             requestData(RefreshMode.reset);
         }
