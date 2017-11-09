@@ -142,7 +142,7 @@ public class ResetPswActivity extends BaseActivity {
 
         @Override
         public String workInBackground(String... params) throws TaskException {
-            return SDK.newInstance(ResetPswActivity.this).resetCommit(params[0], params[1], params[2], params[3]);
+            return SDK.newInstance(ResetPswActivity.this).forgetPassword(params[0], params[1], params[2], params[3]);
         }
     }
 

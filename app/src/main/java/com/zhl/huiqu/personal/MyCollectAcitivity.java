@@ -11,13 +11,22 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.jwenfeng.library.pulltorefresh.BaseRefreshListener;
+import com.jwenfeng.library.pulltorefresh.PullToRefreshLayout;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.main.ProductDetailActivity;
+import com.zhl.huiqu.main.team.TeamDetailActivity;
+import com.zhl.huiqu.main.team.TeamOrderDetailActivity;
 import com.zhl.huiqu.personal.bean.CollectBean;
 import com.zhl.huiqu.personal.bean.CollectEntity;
+import com.zhl.huiqu.personal.bean.CollectTick;
+import com.zhl.huiqu.personal.bean.ColletTeam;
+import com.zhl.huiqu.recyclebase.CommonAdapter;
+import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.CommomDialog;
 import com.zhl.huiqu.utils.Constants;
@@ -46,11 +55,18 @@ public class MyCollectAcitivity extends BaseActivity {
     TextView his_is_null;
     @Bind(R.id.top_title)
     TextView top_title;
+    @Bind(R.id.mp_list)
+    RecyclerView mp_list;
 
-    List<CollectEntity> list = new ArrayList<>();
+    @Bind(R.id.fresh_main)
+    PullToRefreshLayout fresh_main;
+
+    List<CollectTick> list = new ArrayList<>();
     private CollectRecyclerViewAdapter mRecyclerViewAdapter;
     private boolean isCancel;
-
+    private String memberId="";
+    private CommonAdapter<ColletTeam> mAdapter;
+    private List<ColletTeam> mlist = new ArrayList<>();
     @Override
     protected int getLayoutId() {
         return R.layout.activity_my_collect;
@@ -61,12 +77,24 @@ public class MyCollectAcitivity extends BaseActivity {
         super.initView();
         recyclerView.setVisibility(View.VISIBLE);
         top_title.setText(getResources().getString(R.string.personal_my_collect));
+        fresh_main.setRefreshListener(new BaseRefreshListener() {
+            @Override
+            public void refresh() {
+                new queryCollect().execute(memberId, "1");
+            }
+
+            @Override
+            public void loadMore() {
+
+            }
+        });
+        fresh_main.setCanLoadMore(false);
     }
 
     @Override
     public void initData() {
         super.initData();
-        String memberId = getIntent().getStringExtra("memberId");
+         memberId = getIntent().getStringExtra("memberId");
         new queryCollect().execute(memberId, "1");
         if (list != null) {
             his_is_null.setVisibility(View.GONE);
@@ -102,18 +130,28 @@ public class MyCollectAcitivity extends BaseActivity {
         protected void onSuccess(CollectBean info) {
             super.onSuccess(info);
             dismissAlert();
+            fresh_main.finishRefresh();
             TLog.log("tttt", "info=" + info);
-            list.addAll(info.getBody());
+            if(list!=null){
+                list.clear();
+            }
+            if(mlist!=null){
+                mlist.clear();
+            }
+            list.addAll(info.getBody().getTicket());
+            mlist.addAll(info.getBody().getTeam());
             setReListView(list);
+            setrelist();
         }
 
         @Override
         protected void onFailure(TaskException exception) {
             dismissAlert();
+            fresh_main.finishRefresh();
         }
     }
 
-    private void setReListView(final List<CollectEntity> collectEntityList) {
+    private void setReListView(final List<CollectTick> collectEntityList) {
         mRecyclerViewAdapter = new CollectRecyclerViewAdapter(MyCollectAcitivity.this, collectEntityList);
         recyclerView.setLayoutManager(new LinearLayoutManager(MyCollectAcitivity.this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(mRecyclerViewAdapter);
@@ -147,5 +185,48 @@ public class MyCollectAcitivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    private void setrelist(){
+        mAdapter=new CommonAdapter<ColletTeam>(MyCollectAcitivity.this,R.layout.item_tourist_point,mlist) {
+            @Override
+            protected void convert(ViewHolder holder, final ColletTeam bean, int position) {
+
+                holder.setText(R.id.tourist_area,bean.getProductName());
+                holder.setBitmapWithUrl(R.id.tourist_view,bean.getThumb());
+                holder.setText(R.id.tourist_tag,bean.getDuration()+"日游");
+                holder.setText(R.id.tourist_place,bean.getDesCityName());
+                holder.setText(R.id.tourist_price,"￥" +bean.getPriceAdultMin());
+                holder.setText(R.id.tourist_ms,bean.getDepartCitysName()+"-->"+bean.getDesCityName());
+
+                 holder.setOnClickListener(R.id.main_top, new View.OnClickListener() {
+                     @Override
+                     public void onClick(View v) {
+                         Intent intent = new Intent(MyCollectAcitivity.this, TeamDetailActivity.class);
+                         intent.putExtra("spot_team_id", bean.getProductId());
+                         startActivity(intent);
+                     }
+                 }) ;
+                holder.setOnLongClickListener(R.id.main_top, new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        new CommomDialog(getApplicationContext(), R.style.progress_dialog, "您确定取消此收藏？", new CommomDialog.OnCloseListener() {
+                            @Override
+                            public void onClick(Dialog dialog, boolean confirm) {
+                                if (confirm) {
+                                    dialog.dismiss();
+//                                    new deleteCollect().execute(orderId);
+                                }
+                            }
+                        })
+                                .setTitle("提示").show();
+                        return false;
+                    }
+                });
+            }
+        };
+        mp_list.setLayoutManager(new LinearLayoutManager(MyCollectAcitivity.this));
+        mp_list.setAdapter(mAdapter);
+        mp_list.setNestedScrollingEnabled(false);
     }
 }

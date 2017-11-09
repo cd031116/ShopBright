@@ -397,7 +397,7 @@ public class SDK extends ABizLogic {
     }
 
     /**
-     * TODO 重置密码接口
+     * TODO
      *
      * @param phone
      * @param code
@@ -416,6 +416,25 @@ public class SDK extends ABizLogic {
         return doPost(configHttpConfig(), action, null, null, null, String.class);
     }
 
+    /**
+     * TODO 重置密码接口
+     *
+     * @param phone
+     * @param code
+     * @param psw
+     * @param pswSure
+     * @return
+     * @throws TaskException
+     */
+    public String forgetPassword(String phone, String code, String psw, String pswSure) throws TaskException {
+        Setting action = newSetting("insertMemberInfo", "appapi/Memberpub/forgetPassword", "重置密码接口");
+        Params params = new Params();
+        params.addParameter("mobile", phone);
+        params.addParameter("code", code);
+        params.addParameter("password1", psw);
+        params.addParameter("password2", pswSure);
+        return doPost(configHttpConfig(), action, null, null, null, String.class);
+    }
 
     /**
      * 景点主题
@@ -885,10 +904,10 @@ public class SDK extends ABizLogic {
      * @throws TaskException
      */
     public OrderDetailBean getOrderinfo(String member_id, String order_id) throws TaskException {
-        Setting action = newSetting("getOrderinfo", "appapi/Personalcenter/getOrderInfo", "获取订单详情");
+        Setting action = newSetting("getOrderinfo", "appapi/order1/getOrderInfo", "获取订单详情");
         Params params = new Params();
         params.addParameter("member_id", member_id);
-        params.addParameter("order_id", order_id);
+        params.addParameter("order_sn", order_id);
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "&member_id=" + member_id + "&order_id=" + order_id);
         return doGet(configHttpConfig(), action, params, OrderDetailBean.class);
     }

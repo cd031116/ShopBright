@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.personal.bean.CollectEntity;
+import com.zhl.huiqu.personal.bean.CollectTick;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class CollectRecyclerViewAdapter extends RecyclerView.Adapter<CollectRecy
 
     private LayoutInflater mLayoutInflater;
     private Context mContext;
-    private List<CollectEntity> dataList = new ArrayList<>();
+    private List<CollectTick> dataList = new ArrayList<>();
 
     private OnItemClickListener mOnItemClickListener = null;
     private OnItemLongClickListener mOnItemLongClickListener = null;
@@ -38,7 +39,7 @@ public class CollectRecyclerViewAdapter extends RecyclerView.Adapter<CollectRecy
         void onItemLongClick(View view, int position);
     }
 
-    public CollectRecyclerViewAdapter(Context context, List<CollectEntity> dataList) {
+    public CollectRecyclerViewAdapter(Context context, List<CollectTick> dataList) {
         this.mContext = context;
         this.dataList = dataList;
         mLayoutInflater = LayoutInflater.from(context);
@@ -49,7 +50,7 @@ public class CollectRecyclerViewAdapter extends RecyclerView.Adapter<CollectRecy
         notifyItemRemoved(position);
     }
 
-    public void add(CollectEntity collectEntity, int position) {
+    public void add(CollectTick collectEntity, int position) {
         dataList.add(position, collectEntity);
         notifyItemInserted(position);
     }

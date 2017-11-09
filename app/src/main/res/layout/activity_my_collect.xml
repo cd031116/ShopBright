@@ -9,20 +9,37 @@
         android:id="@+id/view_top"
         layout="@layout/view_top" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/my_collect_list"
+    <com.jwenfeng.library.pulltorefresh.PullToRefreshLayout
+        android:id="@+id/fresh_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/personal_bg"
-        android:layout_below="@id/view_top" />
+        android:layout_below="@id/view_top"
+        android:background="#f0f0f0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/my_collect_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/personal_bg" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/mp_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/personal_bg" />
+        </LinearLayout>
+    </com.jwenfeng.library.pulltorefresh.PullToRefreshLayout>
 
     <TextView
         android:id="@+id/his_is_null"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:visibility="gone"
+        android:layout_below="@id/view_top"
         android:background="@color/personal_bg"
+        android:gravity="center"
         android:text="@string/history_is_null"
-        android:layout_below="@id/view_top" />
+        android:visibility="gone" />
 </RelativeLayout>

@@ -10,13 +10,13 @@ import java.util.List;
 
 public class CollectBean extends ASResultBean {
 
-    List<CollectEntity> body;
+ private    CollectInfo body;
 
-        public List<CollectEntity> getBody() {
+    public CollectInfo getBody() {
         return body;
     }
 
-    public void setBody(List<CollectEntity> body) {
+    public void setBody(CollectInfo body) {
         this.body = body;
     }
 }
