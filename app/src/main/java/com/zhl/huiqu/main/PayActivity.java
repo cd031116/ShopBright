@@ -20,6 +20,7 @@ import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.Consts;
 import com.zhl.huiqu.bean.WeiChatBean;
+import com.zhl.huiqu.main.team.TeamOrderDetailActivity;
 import com.zhl.huiqu.main.team.bean.AlipayBase;
 import com.zhl.huiqu.personal.OrderDetailActivity;
 import com.zhl.huiqu.personal.bean.OrderEntity;
@@ -37,13 +38,18 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+/*
+*
+* @author lyj
+* @describe 支付页面
+* @data 2017/11/9
+* */
 
 public class PayActivity extends BaseActivity {
     @Bind(R.id.top_title)
     TextView top_title;
     @Bind(R.id.count_down)
     RushBuyCountDownTimerView count_down;
-
     @Bind(R.id.price)
     TextView price;
     @Bind(R.id.image_zfb)
@@ -77,6 +83,7 @@ public class PayActivity extends BaseActivity {
         if(bd!=null){
             type=bd.getString("type");
         }
+        MapUtil.sharedInstance().putDefaultValue(Constants.PAY_PRODUCTS_TYPE,type);
         mPerson = (OrderEntity) getIntent().getSerializableExtra("body");
         if (mPerson != null) {
             price.setText("￥" + mPerson.getOrder_total());
@@ -154,7 +161,6 @@ public class PayActivity extends BaseActivity {
         @Override
         public WeiChatBean workInBackground(Void... voids) throws TaskException {
             //产品编号
-            MapUtil.sharedInstance().putDefaultValue(Constants.PAY_PRODUCTS_TYPE,type);
             MapUtil.sharedInstance().putDefaultValue(Constants.PAY_PRODUCT_ID, mPerson.getOrder_sn());
             MapUtil.sharedInstance().putDefaultValue(Constants.ORDER_ID, mPerson.getOrder_id());
             //支付的金钱
@@ -286,11 +292,18 @@ public class PayActivity extends BaseActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss(); //关闭dialog
-//                MapUtil.sharedInstance().getDefaultValue(Constants.PAY_PRODUCT_ID).toString();
-                Intent intent=new Intent(PayActivity.this,OrderDetailActivity.class);
-                intent.putExtra("order_state", getResources().getString(R.string.personal_out_order));
-                intent.putExtra("order_id",MapUtil.sharedInstance().getDefaultValue(Constants.ORDER_ID).toString());
-                startActivity(intent);
+                String type=MapUtil.sharedInstance().getDefaultValue(Constants.PAY_PRODUCTS_TYPE).toString();
+                if("team".equals(type)){
+                    Intent intent=new Intent(PayActivity.this,TeamOrderDetailActivity.class);
+                    intent.putExtra("order_state", getResources().getString(R.string.personal_out_order));
+                    intent.putExtra("order_sn",MapUtil.sharedInstance().getDefaultValue(Constants.PAY_PRODUCT_ID).toString());
+                    startActivity(intent);
+                }else {
+                    Intent intent=new Intent(PayActivity.this,OrderDetailActivity.class);
+                    intent.putExtra("order_state", getResources().getString(R.string.personal_out_order));
+                    intent.putExtra("order_sn",MapUtil.sharedInstance().getDefaultValue(Constants.PAY_PRODUCT_ID).toString());
+                    startActivity(intent);
+                }
                 PayActivity.this.finish();
             }
         });

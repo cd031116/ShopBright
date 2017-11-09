@@ -54,7 +54,7 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
- * Created by dw on 2017/8/15.
+ * Created by dw on 2017/8/15. 订单填写
  */
 
 public class OrderWriteActivity extends BaseActivity {

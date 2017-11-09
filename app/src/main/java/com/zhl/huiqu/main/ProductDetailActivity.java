@@ -55,9 +55,13 @@ import java.util.TimerTask;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-/**
- * Created by lyj on 2017/8/12.
- */
+/*
+*
+* @author lyj
+* @describe  门票详情
+* @data 2017/11/9
+* */
+
 
 public class ProductDetailActivity extends BaseActivity implements MyScroview.OnScrollListener {
     @Bind(R.id.top_title)

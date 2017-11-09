@@ -43,7 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 个人中心
+ * 个人中心 Fragment
  * Created by dw on 2017/8/11.
  */
 

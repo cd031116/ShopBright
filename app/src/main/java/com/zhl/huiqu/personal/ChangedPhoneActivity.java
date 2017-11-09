@@ -24,9 +24,13 @@ import org.aisen.android.network.task.WorkTask;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-/**
- * Created by Administrator on 2017/8/29.
- */
+/*
+*
+* @author lyj
+* @describe 修改密码
+* @data 2017/11/9
+* */
+
 
 public class ChangedPhoneActivity extends BaseActivity {
 

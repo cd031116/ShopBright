@@ -54,27 +54,26 @@ public class OrderDetailActivity extends BaseActivity {
     public void initData() {
         super.initData();
         String orderState = getIntent().getStringExtra("order_state");
-        String orderId = getIntent().getStringExtra("order_id");
-        Log.e("tttt", "initData: " + orderState+",orderId:"+orderId);
-        showDetailView(orderState, orderId);
+        String order_sn = getIntent().getStringExtra("order_sn");
+        showDetailView(orderState, order_sn);
     }
 
-    private void showDetailView(String orderState, String orderId) {
+    private void showDetailView(String orderState, String order_sn) {
         if (getResources().getString(R.string.personal_pay_order).equals(orderState)) {
-            changeFragment(orderPayFragment, R.drawable.order_detail_gray3, R.color.gray_text,orderId);
+            changeFragment(orderPayFragment, R.drawable.order_detail_gray3, R.color.gray_text,order_sn);
         } else if (getResources().getString(R.string.personal_out_order).equals(orderState)) {
-            changeFragment(orderGoOutFragment, R.drawable.order_detail_red3, R.color.red_text,orderId);
+            changeFragment(orderGoOutFragment, R.drawable.order_detail_red3, R.color.red_text,order_sn);
         }
 //        else if (getResources().getString(R.string.all_order_complete).equals(orderState)) {
 //            changeFragment(orderGoOutFragment, R.drawable.order_detail_red3, R.color.red_text);
 //        }
     }
 
-    private void changeFragment(Fragment fragment, int drawableId, int colorId, String orderId) {
+    private void changeFragment(Fragment fragment, int drawableId, int colorId, String order_sn) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Bundle bundle = new Bundle();
-        bundle.putString("orderId", orderId);
+        bundle.putString("order_sn", order_sn);
         fragment.setArguments(bundle);
         fragmentTransaction.add(R.id.order_detail_frame, fragment);
         fragmentTransaction.addToBackStack(null);

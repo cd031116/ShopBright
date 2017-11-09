@@ -70,7 +70,7 @@ public class OrderGoOutFragment extends BaseFragment implements View.OnClickList
         Bundle bundle = getArguments();//从activity传过来的Bundle
         RegisterEntity registerInfo = SaveObjectUtils.getInstance(getActivity()).getObject(Constants.USER_INFO, RegisterEntity.class);
         if (bundle != null) {
-            orderId = bundle.getString("orderId");
+            orderId = bundle.getString("order_sn");
         }
         ticketToWhere = (TextView) view.findViewById(R.id.order_where);
         ticket_type = (TextView) view.findViewById(R.id.ticket_type);

@@ -11,7 +11,7 @@ import com.zhl.huiqu.R;
 import butterknife.Bind;
 
 /*
-*开始页面 lyj
+*开始启动页面 lyj
 * */
 public class StartActivity extends BaseActivity {
     @Bind(R.id.start_bg)
@@ -51,13 +51,6 @@ public class StartActivity extends BaseActivity {
 
     private void redirectTo() {
         startActivity(new Intent(StartActivity.this,MainActivity.class));
-
-//        RegisterEntity info=  SaveObjectUtils.getInstance(StartActivity.this).getObject(Constants.USER_INFO,RegisterEntity.class);
-//        if(info!=null){
-//            startActivity(new Intent(StartActivity.this,MainActivity.class));
-//        }else {
-//            startActivity(new Intent(StartActivity.this,LoginActivity.class));
-//        }
         StartActivity.this.finish();
 
     }

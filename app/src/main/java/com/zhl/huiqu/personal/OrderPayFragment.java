@@ -75,7 +75,7 @@ public class OrderPayFragment extends BaseFragment {
         Bundle bundle = getArguments();//从activity传过来的Bundle
         RegisterEntity registerInfo = SaveObjectUtils.getInstance(getActivity()).getObject(Constants.USER_INFO, RegisterEntity.class);
         if (bundle != null) {
-            orderId = bundle.getString("orderId");
+            orderId = bundle.getString("order_sn");
         }
         ticketToWhere = (TextView) view.findViewById(R.id.order_to_where);
         ticket_type = (TextView) view.findViewById(R.id.ticket_type);

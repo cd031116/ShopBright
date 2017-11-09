@@ -190,5 +190,9 @@
     <string name="scan_tips">将二维码图片对准扫描框即可自动扫描</string>
     <string name="title_activity_team_detail">TeamDetailActivity</string>
 
+    <string name="total_price">总&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;额</string>
+
+
+
     <item name="TAG_IMAGE" type="id"></item>
 </resources>

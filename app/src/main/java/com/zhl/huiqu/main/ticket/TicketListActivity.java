@@ -11,6 +11,12 @@ import com.zhl.huiqu.base.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+/*
+*
+* @author lyj
+* @describe  门票列表页载体
+* @data 2017/11/9
+* */
 
 public class TicketListActivity extends BaseActivity {
     @Bind(R.id.top_title)

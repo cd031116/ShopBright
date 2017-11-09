@@ -27,9 +27,13 @@ import com.zhl.huiqu.widget.ShowMsgDialog;
 import butterknife.ButterKnife;
 
 
-/**
- * Created by lyj on 2017/2/6 0006.
- */
+/*
+*
+* @author lyj
+* @describe Activity基类
+* @data 2017/11/9
+* */
+
 
 public class BaseActivity extends org.aisen.android.ui.activity.basic.BaseActivity implements BaseViewInterface {
     protected View contentView;

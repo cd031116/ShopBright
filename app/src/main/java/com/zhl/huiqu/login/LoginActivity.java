@@ -26,6 +26,12 @@ import org.aisen.android.network.task.WorkTask;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+/*
+*
+* @author lyj
+* @describe  登录页面
+* @data 2017/11/9
+* */
 
 public class LoginActivity extends BaseActivity {
     @Bind(R.id.top_layout)

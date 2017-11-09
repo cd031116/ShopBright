@@ -37,6 +37,12 @@ import butterknife.Bind;
 import butterknife.OnClick;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
+/*
+*
+* @author lyj
+* @describe  主界面载体
+* @data 2017/11/9
+* */
 
 public class MainActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks{
     private DoubleClickExitHelper mDoubleClickExit;
@@ -72,7 +78,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         super.initData();
     }
 
-    // 3. 先进第二个或第三个的子模块，再返回首页，加载不出数据
+    // 3. 先进第二个或第三个的子模块，再返回首页
     private String lastFragmentTag = null;
     private void changeFrament(String tag,int index){
         if (mFragmentMan != null) {

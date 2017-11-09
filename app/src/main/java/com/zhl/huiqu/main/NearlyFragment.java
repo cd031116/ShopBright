@@ -36,9 +36,13 @@ import org.aisen.android.ui.fragment.itemview.IItemViewCreator;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/11/2.
- */
+
+/*
+*
+* @author lyj
+* @describe  周边
+* @data 2017/11/9
+* */
 
 public class NearlyFragment extends ARecycleViewFragment<TickInfo, SearchBean, Serializable> {
 

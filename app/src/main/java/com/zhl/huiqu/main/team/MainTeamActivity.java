@@ -48,6 +48,12 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+/*
+*
+* @author lyj
+* @describe 跟团游首页
+* @data 2017/11/9
+* */
 
 public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrollListener{
     @Bind(R.id.search02)

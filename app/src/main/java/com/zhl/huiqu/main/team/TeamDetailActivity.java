@@ -67,6 +67,12 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+/*
+*
+* @author lyj
+* @describe 跟团游详情
+* @data 2017/11/9
+* */
 
 public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScrollListener {
     @Bind(R.id.top_title)

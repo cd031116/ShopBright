@@ -22,7 +22,7 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
- * Created by dw on 2017/8/15.
+ * Created by dw on 2017/8/15. 设置界面
  */
 
 public class SettingActivity extends BaseActivity {

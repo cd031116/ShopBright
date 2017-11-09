@@ -65,7 +65,7 @@ import java.util.List;
 /*
 *
 * @author lyj
-* @describe 首页
+* @describe 首页Fragment
 * @data 2017/8/12
 * */
 

@@ -33,9 +33,13 @@ import org.aisen.android.ui.fragment.itemview.IItemViewCreator;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by lyj on 2017/8/15.
- */
+/*
+*
+* @author lyj
+* @describe 门票列表
+* @data 2017/11/9
+* */
+
 
 public class TicksListFragment extends ARecycleViewSwipeRefreshFragment<TickInfo, SearchBean, Serializable> {
 

@@ -31,6 +31,12 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+/*
+*
+* @author lyj
+* @describe 筛选条件页面
+* @data 2017/11/9
+* */
 
 public class SelectTickActivity extends BaseActivity {
     @Bind(R.id.top_image)

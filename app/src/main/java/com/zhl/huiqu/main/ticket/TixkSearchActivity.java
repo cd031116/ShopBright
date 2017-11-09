@@ -20,6 +20,12 @@ import org.aisen.android.component.eventbus.NotificationCenter;
 import butterknife.Bind;
 import butterknife.OnClick;
 
+/*
+*
+* @author lyj
+* @describe 门票搜索
+* @data 2017/11/9
+* */
 
 public class TixkSearchActivity extends BaseActivity {
     @Bind(R.id.content)

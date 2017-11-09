@@ -46,9 +46,13 @@ import org.aisen.android.ui.fragment.itemview.IItemViewCreator;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by lyj on 2017/9/27.
- */
+/*
+*
+* @author lyj
+* @describe  跟团游搜索结果
+* @data 2017/11/9
+* */
+
 
 public class TeamListSearchFragment extends ARecycleViewSwipeRefreshFragment<TeamListInfo, TeamSearchInfo, Serializable> implements ItemTeamCallback {
     private List<TeamListInfo> tickInfoList;

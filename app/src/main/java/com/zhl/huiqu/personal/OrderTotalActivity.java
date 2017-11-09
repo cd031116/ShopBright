@@ -17,6 +17,7 @@ import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.main.team.TeamOrderActivity;
+import com.zhl.huiqu.main.team.TeamOrderDetailActivity;
 import com.zhl.huiqu.personal.bean.AllOrderBean;
 import com.zhl.huiqu.personal.bean.OrderTeam;
 import com.zhl.huiqu.personal.bean.OrderTick;
@@ -37,6 +38,12 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+/*
+*
+* @author lyj
+* @describe 我的订单
+* @data 2017/11/9
+* */
 
 public class OrderTotalActivity extends BaseActivity {
     private String member_id;
@@ -166,12 +173,12 @@ public class OrderTotalActivity extends BaseActivity {
                         if ("0".equals(data.getStatus())) {
                             Intent intent = new Intent(OrderTotalActivity.this, OrderDetailActivity.class);
                             intent.putExtra("order_state", getResources().getString(R.string.personal_pay_order));
-                            intent.putExtra("order_id",data.getOrder_id()+"");
+                            intent.putExtra("order_sn",data.getOrder_sn()+"");
                             startActivity(intent);
                         } else if ("1".equals(data.getStatus())) {
                             Intent intent = new Intent(OrderTotalActivity.this, OrderDetailActivity.class);
                             intent.putExtra("order_state", getResources().getString(R.string.personal_out_order));
-                            intent.putExtra("order_id", data.getOrder_id()+"");
+                            intent.putExtra("order_sn", data.getOrder_sn()+"");
                             startActivity(intent);
                         }
                     }
@@ -228,7 +235,15 @@ public class OrderTotalActivity extends BaseActivity {
                         new deleteOrder(info.getOrderId()).execute();
                     }
                 });
-
+                holder.setOnClickListener(R.id.main_item, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                            Intent intent = new Intent(OrderTotalActivity.this, TeamOrderDetailActivity.class);
+                            intent.putExtra("order_state", getResources().getString(R.string.personal_pay_order));
+                            intent.putExtra("order_sn",info.getOrderSn());
+                            startActivity(intent);
+                    }
+                });
             }
         };
         gt_list.setLayoutManager(new LinearLayoutManager(OrderTotalActivity.this));

@@ -33,6 +33,12 @@ import java.util.ArrayList;
 import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
+/*
+*
+* @author lyj
+* @describe 选择常用联系人
+* @data 2017/11/9
+* */
 
 public class ChooseTourerActivity extends BaseActivity {
     @Bind(R.id.choose_tour_list)
