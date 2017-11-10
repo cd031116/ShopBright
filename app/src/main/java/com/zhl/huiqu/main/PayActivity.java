@@ -294,7 +294,6 @@ public class PayActivity extends BaseActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss(); //关闭dialog
                 String type=MapUtil.sharedInstance().getDefaultValue(Constants.PAY_PRODUCTS_TYPE).toString();
-                ToastUtils.showShortToast(PayActivity.this,"type="+type);
                 if("team".equals(type)){
                     Intent intent=new Intent(PayActivity.this,TeamOrderDetailActivity.class);
                     intent.putExtra("order_state", getResources().getString(R.string.personal_out_order));

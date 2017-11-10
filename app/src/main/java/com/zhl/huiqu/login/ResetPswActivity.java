@@ -1,6 +1,7 @@
 package com.zhl.huiqu.login;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -36,7 +37,9 @@ public class ResetPswActivity extends BaseActivity {
     EditText register_phone;
     @Bind(R.id.top_title)
     TextView top_title;
-
+    @Bind(R.id.register_push_code)
+     TextView push_code;
+    TimerCount timerCount;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_reset_psw;
@@ -46,6 +49,7 @@ public class ResetPswActivity extends BaseActivity {
     public void initView() {
         super.initView();
         top_title.setText(getResources().getString(R.string.reset_psw));
+        timerCount = new TimerCount(60000, 1000, push_code);
     }
 
     @Override
@@ -165,12 +169,39 @@ public class ResetPswActivity extends BaseActivity {
         @Override
         protected void onSuccess(BaseInfo info) {
             super.onSuccess(info);
+            timerCount.start();
             dismissAlert();
         }
 
         @Override
         protected void onFailure(TaskException exception) {
             dismissAlert();
+        }
+    }
+
+    public class TimerCount extends CountDownTimer {
+        private TextView bnt;
+
+        public TimerCount(long millisInFuture, long countDownInterval,
+                          TextView bnt) {
+            super(millisInFuture, countDownInterval);
+            this.bnt = bnt;
+        }
+
+        @Override
+        public void onFinish() {
+            bnt.setClickable(true);
+            bnt.setText("重获验证码");
+            bnt.setEnabled(true);
+        }
+
+        @Override
+        public void onTick(long arg0) {
+            // if(bnt!=null){
+            bnt.setClickable(false);
+            bnt.setText("验证码" + arg0 / 1000 + "S");
+            bnt.setEnabled(false);
+            // }
         }
     }
 }

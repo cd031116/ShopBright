@@ -92,7 +92,7 @@ public class MainSearchActivity extends BaseActivity {
                 MainSearchActivity.this.finish();
                 break;
             case R.id.go_search:
-                String keyd = editSearch.getText().toString();
+                 keyd = editSearch.getText().toString();
                 if (TextUtils.isEmpty(keyd)) {
                     ToastUtils.showShortToast(MainSearchActivity.this, "请输入关键字!");
                     return;

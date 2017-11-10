@@ -429,12 +429,13 @@ public class SDK extends ABizLogic {
      */
     public String forgetPassword(String phone, String code, String psw, String pswSure) throws TaskException {
         Setting action = newSetting("insertMemberInfo", "appapi/Memberpub/forgetPassword", "重置密码接口");
+        TLog.log("BizLogic", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?mobile=" +phone + "&code=" + code+ "&code=" + code+ "&psw=" + psw);
         Params params = new Params();
         params.addParameter("mobile", phone);
         params.addParameter("code", code);
         params.addParameter("password1", psw);
         params.addParameter("password2", pswSure);
-        return doPost(configHttpConfig(), action, null, null, null, String.class);
+        return doPost(configHttpConfig(), action, params, null, null, String.class);
     }
 
     /**
