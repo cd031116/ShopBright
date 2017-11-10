@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.BaseConfig;
+import com.zhl.huiqu.main.MainSearchActivity;
 import com.zhl.huiqu.utils.Constants;
 
 import butterknife.Bind;
@@ -83,7 +84,7 @@ public class TeamListActivity extends BaseActivity {
         super.initData();
     }
 
-    @OnClick({R.id.address,R.id.tab1_mian,R.id.tab2_mian,R.id.tab3_mian})
+    @OnClick({R.id.address,R.id.tab1_mian,R.id.tab2_mian,R.id.tab3_mian,R.id.searh_line})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.address:
@@ -103,10 +104,13 @@ public class TeamListActivity extends BaseActivity {
                 viepager.setCurrentItem(select);
                 break;
             case R.id.tab3_mian:
-//
+
 //                select = 2;
 //                changeview(select);
 //                viepager.setCurrentItem(select);
+                break;
+            case R.id.searh_line:
+                startActivity(new Intent(TeamListActivity.this, MainSearchActivity.class));
                 break;
         }
     }

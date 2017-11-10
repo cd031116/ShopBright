@@ -92,7 +92,6 @@
                 android:layout_alignParentRight="true"
                 android:textSize="48px"
                 android:layout_marginLeft="42px"
-                android:text="待支付"
                 android:textColor="#e11818"/>
 
         </RelativeLayout>

@@ -14,6 +14,7 @@ import com.zhl.huiqu.main.bean.DetailBean;
 import com.zhl.huiqu.main.bean.DetailMainBean;
 import com.zhl.huiqu.main.bean.GradeBean;
 import com.zhl.huiqu.main.bean.MainBean;
+import com.zhl.huiqu.main.bean.MainSearchBean;
 import com.zhl.huiqu.main.bean.SearchBean;
 import com.zhl.huiqu.main.bean.SearchEntity;
 import com.zhl.huiqu.main.bean.SearchTickEntity;
@@ -960,6 +961,23 @@ public class SDK extends ABizLogic {
 //        params.addParameter("page", page+"");
         TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?member_id=" + member_id);
         return doGet(configHttpConfig(), action, params, CollectBean.class);
+    }
+
+    /**
+     * 查看收藏商品
+     *
+     * @return
+     * @throws TaskException
+     */
+    public MainSearchBean getSearchInfo(String condition,String device_num,String page) throws TaskException {
+        Setting action = newSetting("getSearchInfo", "appapi/Common/getSearchInfo", "搜索");
+        Params params = new Params();
+        params.addParameter("condition", condition);
+        params.addParameter("device_num", device_num);
+        params.addParameter("page", page);
+//        params.addParameter("page", page+"");
+        TLog.log("tttt", "--url:" + configHttpConfig().baseUrl + action.getValue() + "?device_num=" + device_num);
+        return doGet(configHttpConfig(), action, params, MainSearchBean.class);
     }
 
     /**

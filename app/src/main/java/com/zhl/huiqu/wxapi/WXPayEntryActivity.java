@@ -18,6 +18,8 @@ import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.base.Consts;
 import com.zhl.huiqu.interfaces.ITaskResultListener;
+import com.zhl.huiqu.main.PayActivity;
+import com.zhl.huiqu.main.team.TeamOrderDetailActivity;
 import com.zhl.huiqu.personal.OrderDetailActivity;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.MapUtil;
@@ -128,10 +130,18 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss(); //关闭dialog
 //                MapUtil.sharedInstance().getDefaultValue(Constants.PAY_PRODUCT_ID).toString();
-                Intent intent=new Intent(WXPayEntryActivity.this,OrderDetailActivity.class);
-                intent.putExtra("order_state", getResources().getString(R.string.personal_out_order));
-                intent.putExtra("order_id",MapUtil.sharedInstance().getDefaultValue(Constants.ORDER_ID).toString());
-                startActivity(intent);
+                String type=MapUtil.sharedInstance().getDefaultValue(Constants.PAY_PRODUCTS_TYPE).toString();
+                if("team".equals(type)){
+                    Intent intent=new Intent(WXPayEntryActivity.this,TeamOrderDetailActivity.class);
+                    intent.putExtra("order_state", getResources().getString(R.string.personal_out_order));
+                    intent.putExtra("order_sn",MapUtil.sharedInstance().getDefaultValue(Constants.PAY_PRODUCT_ID).toString());
+                    startActivity(intent);
+                }else {
+                    Intent intent=new Intent(WXPayEntryActivity.this,OrderDetailActivity.class);
+                    intent.putExtra("order_state", getResources().getString(R.string.personal_out_order));
+                    intent.putExtra("order_id",MapUtil.sharedInstance().getDefaultValue(Constants.PAY_PRODUCT_ID).toString());
+                    startActivity(intent);
+                }
                 WXPayEntryActivity.this.finish();
             }
         });

@@ -183,7 +183,8 @@
         <activity android:name=".main.SelectTickActivity" />
         <activity android:name=".main.team.SignTeamActivity" />
         <activity android:name=".personal.OrderTotalActivity" />
-        <activity android:name=".main.team.TeamOrderDetailActivity"></activity>
+        <activity android:name=".main.team.TeamOrderDetailActivity" />
+        <activity android:name=".main.MainSearchActivity"></activity>
     </application>
 
 </manifest>

@@ -35,6 +35,7 @@ import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SaveObjectUtils;
+import com.zhl.huiqu.utils.ToastUtils;
 import com.zhl.huiqu.widget.GlideImageLoader;
 import com.zhl.huiqu.widget.MyScroview;
 import com.zhl.huiqu.widget.SimpleDividerItemDecoration;
@@ -267,7 +268,7 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
         topHeight = bg.getIntValue(Constants.TEAM_HIGHT, 0);
     }
 
-    @OnClick({R.id.search_re,R.id.all_city,R.id.all_rute,R.id.hot_1,R.id.hot_2,R.id.hot_3})
+    @OnClick({R.id.search_re,R.id.all_city,R.id.all_rute,R.id.hot_1,R.id.hot_2,R.id.hot_3,R.id.qinzi,R.id.bama,R.id.guimi})
     void enter(View v) {
         switch (v.getId()) {
             case R.id.hot_1:
@@ -303,6 +304,15 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
                 break;
             case R.id.all_rute:
                 startActivity(new Intent(MainTeamActivity.this, TeamListActivity.class));
+                break;
+            case R.id.qinzi:
+                ToastUtils.showLongToast(MainTeamActivity.this, "正在开发中,敬请期待下一个版本");
+                break;
+            case R.id.bama:
+                ToastUtils.showLongToast(MainTeamActivity.this, "正在开发中,敬请期待下一个版本");
+                break;
+            case R.id.guimi:
+                ToastUtils.showLongToast(MainTeamActivity.this, "正在开发中,敬请期待下一个版本");
                 break;
         }
     }

@@ -594,6 +594,7 @@
                 android:drawableLeft="@drawable/mpxq_jd_red"
                 android:drawablePadding="20px"
                 android:gravity="center_vertical"
+                android:visibility="gone"
                 android:paddingLeft="20px"
                 android:text="周边景点"
                 android:textColor="#333333"

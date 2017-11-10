@@ -190,8 +190,7 @@ public class TeamOrderDetailActivity extends BaseActivity {
         if ("0".equals(data.getStatus())) {
             state.setText("未支付");
         } else {
-
-
+            state.setText("已支付");
         }
         total_m.setText("￥" + data.getAmoutPrice());
         order_num.setText(data.getOrderSn());
@@ -208,7 +207,8 @@ public class TeamOrderDetailActivity extends BaseActivity {
         cAdapter = new CommonAdapter<OrderContect>(TeamOrderDetailActivity.this, R.layout.order_detal_team, cList) {
             @Override
             protected void convert(ViewHolder holder, OrderContect datas, int position) {
-            holder.setText(R.id.num,"出游人信息"+"("+position+1+")");
+                int a=position+1;
+            holder.setText(R.id.num,"出游人信息"+"("+String.valueOf(a)+")");
                 holder.setText(R.id.name,datas.getName());
                 holder.setText(R.id.id_card,datas.getCertificate());
 
@@ -223,7 +223,7 @@ public class TeamOrderDetailActivity extends BaseActivity {
         oAdapter = new CommonAdapter<OrderInsuran>(TeamOrderDetailActivity.this, R.layout.order_insuran_item, oList) {
             @Override
             protected void convert(ViewHolder holder, OrderInsuran info, int position) {
-                holder.setText(R.id.nmae, info.getInstruction());
+                holder.setText(R.id.nmae, info.getType());
                 holder.setText(R.id.price, "￥"+info.getPrice());
             }
         };

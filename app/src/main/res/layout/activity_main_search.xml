@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    tools:context="com.zhl.huiqu.main.MainSearchActivity">
+
+    <RelativeLayout
+        android:id="@+id/search_main"
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:background="@color/comm_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="30px">
+
+        <LinearLayout
+            android:id="@+id/line_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="60px"
+                android:paddingRight="16dip"
+                android:src="@drawable/login_arrow_left" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/searh_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/go_search"
+            android:layout_toRightOf="@+id/line_back"
+            android:background="@drawable/search_bg">
+
+            <ImageView
+                android:id="@+id/scan"
+                android:layout_width="42px"
+                android:layout_height="42px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dip"
+                android:scaleType="centerCrop"
+                android:src="@drawable/search_sm"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/editSearch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="30px"
+                android:background="@null"
+                android:drawableLeft="@drawable/search_ss"
+                android:drawablePadding="30px"
+                android:gravity="center_vertical"
+                android:hint="输入您要搜索的景点/地区"
+                android:textColor="#666666"
+                android:textSize="32px" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/go_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="10px"
+            android:gravity="center_vertical"
+            android:src="@drawable/hp_gray_msg"
+            android:text="搜索"
+            android:textColor="#e11818"
+            android:textSize="40px" />
+    </RelativeLayout>
+
+
+        <com.jwenfeng.library.pulltorefresh.PullToRefreshLayout
+            android:id="@+id/fresh_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/search_main"
+            android:background="#ffffff"
+          >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/mrecycle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/jrecycle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </com.jwenfeng.library.pulltorefresh.PullToRefreshLayout>
+
+</RelativeLayout>
