@@ -85,13 +85,17 @@
     </RelativeLayout>
 
 
-        <com.jwenfeng.library.pulltorefresh.PullToRefreshLayout
-            android:id="@+id/fresh_main"
+    <com.jwenfeng.library.pulltorefresh.PullToRefreshLayout
+        android:id="@+id/fresh_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/search_main"
+        android:background="#ffffff">
+
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/search_main"
-            android:background="#ffffff"
-          >
+            android:layout_height="match_parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -108,7 +112,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
-
-        </com.jwenfeng.library.pulltorefresh.PullToRefreshLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </com.jwenfeng.library.pulltorefresh.PullToRefreshLayout>
 
 </RelativeLayout>

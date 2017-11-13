@@ -1,4 +1,4 @@
-package com.zhl.huiqu.main;
+package com.zhl.huiqu.personal;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,14 +7,14 @@ import android.support.v7.widget.RecyclerView;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.jwenfeng.library.pulltorefresh.BaseRefreshListener;
 import com.jwenfeng.library.pulltorefresh.PullToRefreshLayout;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
+import com.zhl.huiqu.main.MainSearchActivity;
+import com.zhl.huiqu.main.ProductDetailActivity;
 import com.zhl.huiqu.main.bean.MainSearchBean;
 import com.zhl.huiqu.main.bean.MainTeam;
 import com.zhl.huiqu.main.bean.MainTick;
@@ -24,7 +24,6 @@ import com.zhl.huiqu.recyclebase.ViewHolder;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.utils.ToastUtils;
-import com.zhl.huiqu.widget.GlideRoundTransform;
 
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
@@ -35,35 +34,45 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class MainSearchActivity extends BaseActivity {
-
+public class HistoryActivity extends BaseActivity {
     @Bind(R.id.mrecycle)
     RecyclerView mrecycle;
     @Bind(R.id.jrecycle)
     RecyclerView jrecycle;
     @Bind(R.id.fresh_main)
     PullToRefreshLayout fresh_main;
-    @Bind(R.id.editSearch)
-    EditText editSearch;
 
+    @Bind(R.id.top_title)
+    TextView top_title;
     List<MainTick> jlist = new ArrayList<>();
     private CommonAdapter<MainTick> jAdapter;
-
+    private  String deviceId;
     private int page = 1;
     private CommonAdapter<MainTeam> mAdapter;
     private List<MainTeam> mlist = new ArrayList<>();
-    private String deviceId = "";
-    private String keyd="";
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_main_search;
+        return R.layout.activity_history;
     }
 
+    @OnClick({R.id.top_image})
+    void onclick(View v) {
+        switch (v.getId()) {
+            case R.id.top_image:
+                HistoryActivity.this.finish();
+                break;
+
+
+
+        }
+    }
     @Override
     public void initView() {
         super.initView();
+        top_title.setText("浏览历史");
         TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
         deviceId = tm.getDeviceId();
+        new querySearch(deviceId).execute();
     }
 
     @Override
@@ -73,56 +82,34 @@ public class MainSearchActivity extends BaseActivity {
             @Override
             public void refresh() {
                 page = 1;
-                new querySearch(keyd, deviceId).execute();
+                new querySearch(deviceId).execute();
             }
 
             @Override
             public void loadMore() {
                 page++;
-                new querySearchmore(keyd, deviceId).execute();
+                new querySearchmore(deviceId).execute();
             }
         });
     }
 
-
-    @OnClick({R.id.btnBack, R.id.go_search})
-    void onclick(View v) {
-        switch (v.getId()) {
-            case R.id.btnBack:
-                MainSearchActivity.this.finish();
-                break;
-            case R.id.go_search:
-                 keyd = editSearch.getText().toString();
-                if (TextUtils.isEmpty(keyd)) {
-                    ToastUtils.showShortToast(MainSearchActivity.this, "请输入关键字!");
-                    return;
-                }
-                new querySearch(keyd, deviceId).execute();
-                break;
-
-
-        }
-    }
-
     class querySearch extends WorkTask<String, Void, MainSearchBean> {
-        private String keys;
         private String nujm;
 
-        public querySearch(String keys, String num) {
-            this.keys = keys;
+        public querySearch(String num) {
             this.nujm = num;
         }
 
         @Override
         protected void onPrepare() {
             super.onPrepare();
-            showAlert("", false);
+            showAlert("正在加载..", false);
         }
 
         @Override
         public MainSearchBean workInBackground(String... params) throws TaskException {
 
-            return SDK.newInstance(MainSearchActivity.this).getSearchInfo(keys, nujm, page + "");
+            return SDK.newInstance(HistoryActivity.this).getbrowserhistoryd(nujm, page + "");
         }
 
         @Override
@@ -147,34 +134,29 @@ public class MainSearchActivity extends BaseActivity {
         protected void onFailure(TaskException exception) {
             dismissAlert();
             fresh_main.finishRefresh();
+
         }
     }
-
     class querySearchmore extends WorkTask<String, Void, MainSearchBean> {
-        private String keys;
         private String nujm;
-
-        public querySearchmore(String keys, String num) {
-            this.keys = keys;
+        public querySearchmore( String num) {
             this.nujm = num;
         }
 
         @Override
         protected void onPrepare() {
             super.onPrepare();
-            showAlert("", false);
         }
 
         @Override
         public MainSearchBean workInBackground(String... params) throws TaskException {
 
-            return SDK.newInstance(MainSearchActivity.this).getSearchInfo(keys, nujm, page + "");
+            return SDK.newInstance(HistoryActivity.this).getbrowserhistoryd(nujm, page + "");
         }
 
         @Override
         protected void onSuccess(MainSearchBean info) {
             super.onSuccess(info);
-            dismissAlert();
             fresh_main.finishLoadMore();
             TLog.log("tttt", "info=" + info);
             jlist.addAll(info.getBody().getTicket());
@@ -185,14 +167,13 @@ public class MainSearchActivity extends BaseActivity {
 
         @Override
         protected void onFailure(TaskException exception) {
-            dismissAlert();
             fresh_main.finishLoadMore();
         }
     }
 
     //门票
     private void setReListView() {
-        jAdapter = new CommonAdapter<MainTick>(MainSearchActivity.this, R.layout.item_product_part, jlist) {
+        jAdapter = new CommonAdapter<MainTick>(HistoryActivity.this, R.layout.item_product_part, jlist) {
             @Override
             protected void convert(ViewHolder holder, final  MainTick bean, int position) {
 
@@ -206,21 +187,21 @@ public class MainSearchActivity extends BaseActivity {
                 holder.setOnClickListener(R.id.main_top, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(MainSearchActivity.this,ProductDetailActivity.class);
+                        Intent intent=new Intent(HistoryActivity.this,ProductDetailActivity.class);
                         intent.putExtra("shop_spot_id", bean.getShop_spot_id());
                         startActivity(intent);
                     }
                 });
             }
         };
-        jrecycle.setLayoutManager(new LinearLayoutManager(MainSearchActivity.this));
+        jrecycle.setLayoutManager(new LinearLayoutManager(HistoryActivity.this));
         jrecycle.setAdapter(jAdapter);
         jrecycle.setNestedScrollingEnabled(false);
     }
 
     //跟团游
     private void setrelist() {
-        mAdapter = new CommonAdapter<MainTeam>(MainSearchActivity.this, R.layout.team_list_item, mlist) {
+        mAdapter = new CommonAdapter<MainTeam>(HistoryActivity.this, R.layout.team_list_item, mlist) {
             @Override
             protected void convert(ViewHolder holder, final MainTeam bean, int position) {
                 holder.setRunderWithUrl(R.id.photo, bean.getThumb());
@@ -237,7 +218,7 @@ public class MainSearchActivity extends BaseActivity {
                 holder.setOnClickListener(R.id.main_top, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                    Intent intent=new Intent(MainSearchActivity.this,TeamDetailActivity.class);
+                        Intent intent=new Intent(HistoryActivity.this,TeamDetailActivity.class);
                         intent.putExtra("spot_team_id", bean.getProductId());
                         startActivity(intent);
 
@@ -245,7 +226,7 @@ public class MainSearchActivity extends BaseActivity {
                 });
             }
         };
-        mrecycle.setLayoutManager(new LinearLayoutManager(MainSearchActivity.this));
+        mrecycle.setLayoutManager(new LinearLayoutManager(HistoryActivity.this));
         mrecycle.setAdapter(mAdapter);
         mrecycle.setNestedScrollingEnabled(false);
     }

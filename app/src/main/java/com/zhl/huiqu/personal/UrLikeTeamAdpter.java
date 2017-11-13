@@ -11,17 +11,21 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.personal.bean.CollectTick;
-import com.zhl.huiqu.personal.bean.UrLikeEntity;
+import com.zhl.huiqu.personal.bean.UrLikeTeam;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 
 import java.util.List;
 
 /**
- * Created by lijuan on 2016/9/12.
+ * Created by Administrator on 2017/11/11.
  */
-public class UrLikeGridViewAdapter extends BaseAdapter {
-    private List<CollectTick> mDatas;
+
+public class UrLikeTeamAdpter extends BaseAdapter{
+
+    private List<UrLikeTeam> mDatas;
     private LayoutInflater inflater;
+
+
     /**
      * 页数下标,从0开始(当前是第几页)
      */
@@ -31,7 +35,7 @@ public class UrLikeGridViewAdapter extends BaseAdapter {
      */
     private int pageSize;
 
-    public UrLikeGridViewAdapter(Context context, List<CollectTick> mDatas, int curIndex, int pageSize) {
+    public UrLikeTeamAdpter(Context context, List<UrLikeTeam> mDatas, int curIndex, int pageSize) {
         inflater = LayoutInflater.from(context);
         this.mDatas = mDatas;
         this.curIndex = curIndex;
@@ -61,11 +65,11 @@ public class UrLikeGridViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder = null;
+        UrLikeTeamAdpter.ViewHolder viewHolder = null;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.item_ur_like, parent, false);
             SupportMultipleScreensUtil.scale(convertView);
-            viewHolder = new ViewHolder();
+            viewHolder = new UrLikeTeamAdpter.ViewHolder();
             viewHolder.tag = (TextView) convertView.findViewById(R.id.ur_like_tag);
             viewHolder.dpNum = (TextView) convertView.findViewById(R.id.ur_like_dp);
             viewHolder.price = (TextView) convertView.findViewById(R.id.price_text);
@@ -74,17 +78,17 @@ public class UrLikeGridViewAdapter extends BaseAdapter {
             viewHolder.iv = (ImageView) convertView.findViewById(R.id.ur_like_img);
             convertView.setTag(viewHolder);
         } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+            viewHolder = (UrLikeTeamAdpter.ViewHolder) convertView.getTag();
         }
         /**
          * 在给View绑定显示的数据时，计算正确的position = position + curIndex * pageSize，
          */
         int pos = position + curIndex * pageSize;
-        viewHolder.tag.setText(mDatas.get(pos).getTheme());
-        viewHolder.dpNum.setText(mDatas.get(pos).getComment_num()+"条点评");
-        viewHolder.price.setText(mDatas.get(pos).getShop_price());
-        viewHolder.address.setText(mDatas.get(pos).getCity());
-        viewHolder.touristMs.setText(mDatas.get(pos).getDesc());
+        viewHolder.tag.setText(mDatas.get(pos).getDuration()+"日游");
+        viewHolder.dpNum.setText(mDatas.get(pos).getCsr());
+        viewHolder.price.setText(mDatas.get(pos).getPriceAdultMin());
+        viewHolder.address.setText(mDatas.get(pos).getDepartCitysName()+"-->"+mDatas.get(pos).getDesCityName());
+        viewHolder.touristMs.setText(mDatas.get(pos).getProductName());
         Glide.with(viewHolder.iv.getContext()).load(mDatas.get(position).getThumb()).into(viewHolder.iv);
         return convertView;
     }
@@ -98,4 +102,6 @@ public class UrLikeGridViewAdapter extends BaseAdapter {
         public TextView touristMs;
         public ImageView iv;
     }
+
+
 }

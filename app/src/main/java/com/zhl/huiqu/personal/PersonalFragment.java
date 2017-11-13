@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.RecyclerView;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,19 +18,19 @@ import android.widget.TextView;
 
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseFragment;
-import com.zhl.huiqu.base.BaseInfo;
 import com.zhl.huiqu.login.LoginActivity;
 import com.zhl.huiqu.login.RegisterActivity;
 import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.main.ProductDetailActivity;
+import com.zhl.huiqu.main.team.TeamDetailActivity;
 import com.zhl.huiqu.main.ticket.ViewPagerAdapter;
+import com.zhl.huiqu.personal.bean.CollectTick;
 import com.zhl.huiqu.personal.bean.UrLikeBean;
-import com.zhl.huiqu.personal.bean.UrLikeEntity;
+import com.zhl.huiqu.personal.bean.UrLikeTeam;
 import com.zhl.huiqu.sdk.SDK;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
-import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.utils.ToastUtils;
 
 import org.aisen.android.network.task.TaskException;
@@ -49,7 +49,8 @@ import java.util.List;
 
 public class PersonalFragment extends BaseFragment {
 
-    private List<UrLikeEntity> mDatas;
+    private List<CollectTick> mDatas;
+    private List<UrLikeTeam> tDatas=new ArrayList<>();
     private LayoutInflater inflater_d;
     private List<View> mPagerList;
     /**
@@ -80,6 +81,11 @@ public class PersonalFragment extends BaseFragment {
     ImageView headImg;
     @ViewInject(id = R.id.personal_tel_text)
     TextView nameText;
+    @ViewInject(id =R.id.mrecycle)
+    RecyclerView mrecycle;
+    @ViewInject(id =R.id.jrecycle)
+    RecyclerView jrecycle;
+
 
     private RegisterEntity account;
     private GridView gridView;
@@ -144,7 +150,7 @@ public class PersonalFragment extends BaseFragment {
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 break;
             case R.id.row_look_his_layout:
-                startActivity(new Intent(getActivity(), LookHistoryActivity.class));
+                startActivity(new Intent(getActivity(), HistoryActivity.class));
                 break;
             case R.id.personal_login_btn:
                 startActivity(new Intent(getActivity(), LoginActivity.class));
@@ -217,9 +223,10 @@ public class PersonalFragment extends BaseFragment {
         protected void onSuccess(UrLikeBean info) {
             super.onSuccess(info);
             dismissAlert();
-            mDatas = new ArrayList<UrLikeEntity>();
+            mDatas = new ArrayList<CollectTick>();
             if (info.getCode().equals("1")) {
-                mDatas.addAll(info.getBody());
+                mDatas.addAll(info.getBody().getTicket());
+                tDatas.addAll(info.getBody().getTeam());
                 urLikeLayout.setVisibility(View.VISIBLE);
                 setUrLikeView();
             } else {
@@ -236,9 +243,10 @@ public class PersonalFragment extends BaseFragment {
     }
 
     private void setUrLikeView() {
-        pageCount = (int) Math.ceil(mDatas.size() * 1.0 / pageSize);
+
+        int mcount=(int) Math.ceil(mDatas.size() * 1.0 / pageSize);
         mPagerList = new ArrayList<View>();
-        for (int i = 0; i < pageCount; i++) {
+        for (int i = 0; i < mcount; i++) {
             //每个页面都是inflate出一个新实例
             GridView gridView = (GridView) inflater.inflate(R.layout.urlike_gridview, viewpager, false);
             gridView.setAdapter(new UrLikeGridViewAdapter(getActivity(), mDatas, i, pageSize));
@@ -252,6 +260,23 @@ public class PersonalFragment extends BaseFragment {
                 }
             });
         }
+
+        int tcount=(int) Math.ceil(tDatas.size() * 1.0 / pageSize);
+        for (int i = 0; i < tcount; i++) {
+            //每个页面都是inflate出一个新实例
+            GridView gridView = (GridView) inflater.inflate(R.layout.urlike_gridview, viewpager, false);
+            gridView.setAdapter(new UrLikeTeamAdpter(getActivity(), tDatas, i, pageSize));
+            mPagerList.add(gridView);
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(getActivity(), TeamDetailActivity.class);
+                    intent.putExtra("spot_team_id", tDatas.get(position).getProductId()+ "");
+                    startActivity(intent);
+                }
+            });
+        }
+        pageCount = mcount+tcount;
         //设置适配器
         viewpager.setAdapter(new ViewPagerAdapter(mPagerList));
         //设置圆点
@@ -259,7 +284,6 @@ public class PersonalFragment extends BaseFragment {
     }
 
     private void otherClickEvent(View view) {
-
         FragmentArgs args = new FragmentArgs();
         if (account == null) {
             startActivity(new Intent(getActivity(), LoginActivity.class));

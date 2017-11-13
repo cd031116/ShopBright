@@ -141,7 +141,9 @@ public class ResetPswActivity extends BaseActivity {
         @Override
         protected void onSuccess(String info) {
             dismissAlert();
-            TLog.log("tttt", "info=" + info);
+            ToastUtils.showShortToast(ResetPswActivity.this,"重置成功");
+           startActivity(new Intent(ResetPswActivity.this,LoginActivity.class));
+            ResetPswActivity.this.finish();
         }
 
         @Override

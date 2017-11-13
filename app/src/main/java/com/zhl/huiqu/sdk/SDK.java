@@ -982,6 +982,21 @@ public class SDK extends ABizLogic {
     }
 
     /**
+     * 浏览历史
+     *
+     * @return
+     * @throws TaskException
+     */
+    public MainSearchBean getbrowserhistoryd(String device_num,String page) throws TaskException {
+        Setting action = newSetting("getSearchInfo", "appapi/personalcenter/getbrowserhistory", "浏览历史");
+        Params params = new Params();
+        params.addParameter("device_num", device_num);
+        params.addParameter("page", page);
+        return doGet(configHttpConfig(), action, params, MainSearchBean.class);
+    }
+
+
+    /**
      * 删除收藏
      *
      * @return

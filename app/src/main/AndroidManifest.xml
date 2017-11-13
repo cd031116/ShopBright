@@ -184,7 +184,8 @@
         <activity android:name=".main.team.SignTeamActivity" />
         <activity android:name=".personal.OrderTotalActivity" />
         <activity android:name=".main.team.TeamOrderDetailActivity" />
-        <activity android:name=".main.MainSearchActivity"></activity>
+        <activity android:name=".main.MainSearchActivity" />
+        <activity android:name=".personal.HistoryActivity"></activity>
     </application>
 
 </manifest>

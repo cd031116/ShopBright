@@ -139,7 +139,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
                 }else {
                     Intent intent=new Intent(WXPayEntryActivity.this,OrderDetailActivity.class);
                     intent.putExtra("order_state", getResources().getString(R.string.personal_out_order));
-                    intent.putExtra("order_id",MapUtil.sharedInstance().getDefaultValue(Constants.PAY_PRODUCT_ID).toString());
+                    intent.putExtra("order_sn",MapUtil.sharedInstance().getDefaultValue(Constants.PAY_PRODUCT_ID).toString());
                     startActivity(intent);
                 }
                 WXPayEntryActivity.this.finish();

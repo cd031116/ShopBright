@@ -10,13 +10,13 @@ import java.util.List;
 
 public class UrLikeBean extends BaseInfo {
 
-    private List<UrLikeEntity> body;
+    private UrLikeInfo body;
 
-    public List<UrLikeEntity> getBody() {
+    public UrLikeInfo getBody() {
         return body;
     }
 
-    public void setBody(List<UrLikeEntity> body) {
+    public void setBody(UrLikeInfo body) {
         this.body = body;
     }
 }

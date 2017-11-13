@@ -1,5 +1,7 @@
 package com.zhl.huiqu.personal.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
@@ -19,7 +21,6 @@ public class UrLikeEntity implements Serializable {
      * sort : 100
      * csr : 暂无评价
      */
-
     private int shop_spot_id;
     private String title;
     private String thumb;
