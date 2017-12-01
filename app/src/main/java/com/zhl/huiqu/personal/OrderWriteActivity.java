@@ -87,7 +87,8 @@ public class OrderWriteActivity extends BaseActivity {
     TextView totalPrice;
     @Bind(R.id.take_person_free_btn)
     TextView code;
-
+    @Bind(R.id.ticket_type_text)
+    TextView ticket_type_text;
     @Bind(R.id.take_person_name_text)
     EditText nameText;
     @Bind(R.id.take_person_id_card_text)
@@ -140,6 +141,7 @@ public class OrderWriteActivity extends BaseActivity {
             orderPrice.setText(ticket_price);
             fymxPrice.setText(ticket_price);
             totalPrice.setText(ticket_price);
+            ticket_type_text.setText(mPerson.getTitle()+"【一张身份证限定一张票】");
         }
         timerCount = new TimerCount(60000, 1000, code);
     }

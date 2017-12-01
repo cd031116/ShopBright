@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.base.BaseConfig;
 import com.zhl.huiqu.base.BaseFragment;
 import com.zhl.huiqu.login.LoginActivity;
 import com.zhl.huiqu.login.RegisterActivity;
@@ -28,11 +30,16 @@ import com.zhl.huiqu.personal.bean.CollectTick;
 import com.zhl.huiqu.personal.bean.UrLikeBean;
 import com.zhl.huiqu.personal.bean.UrLikeTeam;
 import com.zhl.huiqu.sdk.SDK;
+import com.zhl.huiqu.sdk.eventbus.CityEvent;
+import com.zhl.huiqu.sdk.eventbus.CitySubscriber;
+import com.zhl.huiqu.sdk.eventbus.RefreshMe;
+import com.zhl.huiqu.sdk.eventbus.RefreshMeSubscriber;
 import com.zhl.huiqu.utils.Constants;
 import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.SupportMultipleScreensUtil;
 import com.zhl.huiqu.utils.ToastUtils;
 
+import org.aisen.android.component.eventbus.NotificationCenter;
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
 import org.aisen.android.support.inject.OnClick;
@@ -95,6 +102,11 @@ public class PersonalFragment extends BaseFragment {
         return new PersonalFragment();
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        NotificationCenter.defaultCenter().subscriber(RefreshMe.class, cityEvent);
+    }
 
     @Override
     public int inflateContentView() {
@@ -121,6 +133,21 @@ public class PersonalFragment extends BaseFragment {
             urMsgLayout.setVisibility(View.GONE);
         }
     }
+
+    RefreshMeSubscriber cityEvent = new RefreshMeSubscriber() {
+        @Override
+        public void onEvent(RefreshMe v) {
+            account = SaveObjectUtils.getInstance(getActivity()).getObject(Constants.USER_INFO, RegisterEntity.class);
+            if (account != null) {
+                nameText.setText(account.getBody().getNickname());
+                urMsgLayout.setVisibility(View.VISIBLE);
+                urLoginLayout.setVisibility(View.GONE);
+            } else {
+                urLoginLayout.setVisibility(View.VISIBLE);
+                urMsgLayout.setVisibility(View.GONE);
+            }
+        }
+    };
 
     @Override
     protected void layoutInit(LayoutInflater inflater, Bundle savedInstanceSate) {
@@ -325,5 +352,11 @@ public class PersonalFragment extends BaseFragment {
                     break;
             }
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        NotificationCenter.defaultCenter().unsubscribe(RefreshMe.class, cityEvent);
+        super.onDestroy();
     }
 }

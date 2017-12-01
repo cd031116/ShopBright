@@ -43,12 +43,27 @@ public class ToastUtils {
         showToast(context.getApplicationContext(), resId, Toast.LENGTH_LONG);
     }
 
+    public static void showcenterToast(Context context, CharSequence msg) {
+        showToastCenter(context.getApplicationContext(), msg, Toast.LENGTH_LONG);
+    }
+
+    private static void showToastCenter(Context context, CharSequence msg, int duration) {
+        try {
+            getToast(context);
+            toast.setText(msg);
+            toast.setDuration(duration);
+            toast.setGravity(Gravity.CENTER, 0, 100);
+            toast.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     private static void showToast(Context context, CharSequence msg, int duration) {
         try {
             getToast(context);
             toast.setText(msg);
             toast.setDuration(duration);
-            toast.setGravity(Gravity.BOTTOM, 0, 100);
+            toast.setGravity(Gravity.CENTER, 0, 100);
             toast.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,7 +78,7 @@ public class ToastUtils {
             getToast(context);
             toast.setText(resId);
             toast.setDuration(duration);
-            toast.setGravity(Gravity.BOTTOM, 0, 100);
+            toast.setGravity(Gravity.CENTER, 0, 100);
             toast.show();
         } catch (Exception e) {
             e.printStackTrace();

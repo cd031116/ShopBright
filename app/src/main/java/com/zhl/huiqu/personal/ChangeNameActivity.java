@@ -76,7 +76,7 @@ public class ChangeNameActivity extends BaseActivity {
 
         @Override
         public BaseInfo workInBackground(String... params) throws TaskException {
-            return SDK.newInstance(ChangeNameActivity.this).changeNickName(params[0], params[1]);
+            return SDK.newInstance(ChangeNameActivity.this).changeTrueName(params[0], params[1]);
         }
 
         @Override

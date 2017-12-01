@@ -81,6 +81,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="60px"
+                android:visibility="gone"
                 android:src="@drawable/mpxq_up" />
 
 
@@ -270,6 +271,7 @@
                 android:layout_width="48px"
                 android:layout_height="48px"
                 android:layout_centerVertical="true"
+                android:visibility="gone"
                 android:layout_toRightOf="@+id/money"
                 android:src="@drawable/mpxq_down" />
 

@@ -33,7 +33,7 @@
                 android:background="@drawable/personal_kefu_phone"
                 android:gravity="center"
                 android:textSize="38px"
-                android:text="@string/call_kefu_phone"
+                android:text="@string/order_account_phone_text"
                 android:textColor="@color/comm_white" />
         </RelativeLayout>
 

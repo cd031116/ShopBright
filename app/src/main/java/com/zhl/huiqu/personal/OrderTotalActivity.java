@@ -97,8 +97,6 @@ public class OrderTotalActivity extends BaseActivity {
         }
 
 
-
-
         fresh_main.setRefreshListener(new BaseRefreshListener() {
             @Override
             public void refresh() {
@@ -164,7 +162,7 @@ public class OrderTotalActivity extends BaseActivity {
                     public void onClick(View v) {
                         tList.remove(position);
                         tAdapter.notifyDataSetChanged();
-                        new deleteOrder(data.getOrder_id()).execute();
+                        new deleteOrder(data.getOrder_sn()).execute();
                     }
                 });
                 holder.setOnClickListener(R.id.main_item, new View.OnClickListener() {
@@ -232,7 +230,7 @@ public class OrderTotalActivity extends BaseActivity {
                         oList.remove(position);
                         oAdapter.notifyDataSetChanged();
 
-                        new deleteOrder(info.getOrderId()).execute();
+                        new deleteOrder(info.getOrderSn()).execute();
                     }
                 });
                 holder.setOnClickListener(R.id.main_item, new View.OnClickListener() {
@@ -253,7 +251,6 @@ public class OrderTotalActivity extends BaseActivity {
     }
 
 
-    //猜你喜欢
     class getOrderData extends WorkTask<String, Void, AllOrderBean> {
 
         @Override
@@ -350,7 +347,6 @@ public class OrderTotalActivity extends BaseActivity {
         @Override
         public BaseInfo workInBackground(String... params) throws TaskException {
             return SDK.newInstance(OrderTotalActivity.this).deleteOrder(positions);
-
         }
 
         @Override
@@ -364,7 +360,7 @@ public class OrderTotalActivity extends BaseActivity {
 
         @Override
         protected void onFailure(TaskException exception) {
-
+            ToastUtils.showShortToast(OrderTotalActivity.this, exception.getMessage());
         }
     }
 

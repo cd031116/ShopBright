@@ -155,7 +155,6 @@ public class RegisterActivity extends BaseActivity {
             super.onSuccess(info);
             dismissAlert();
             timerCount.start();
-            TLog.log("tttt", "info=" + info);
         }
 
         @Override
@@ -191,6 +190,7 @@ public class RegisterActivity extends BaseActivity {
 
         @Override
         protected void onFailure(TaskException exception) {
+            ToastUtils.showShortToast(RegisterActivity.this,exception.getMessage());
             dismissAlert();
         }
     }

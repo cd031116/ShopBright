@@ -9,10 +9,16 @@ import android.widget.TextView;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.BaseInfo;
+import com.zhl.huiqu.login.entity.RegisterEntity;
 import com.zhl.huiqu.sdk.SDK;
+import com.zhl.huiqu.sdk.eventbus.CityEvent;
+import com.zhl.huiqu.sdk.eventbus.RefreshMe;
+import com.zhl.huiqu.utils.Constants;
+import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.TLog;
 import com.zhl.huiqu.utils.ToastUtils;
 
+import org.aisen.android.component.eventbus.NotificationCenter;
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
 
@@ -30,7 +36,7 @@ public class ChangeNicknameActivity extends BaseActivity {
     @Bind(R.id.name_text)
     EditText nameText;
     private String memberId;
-
+    private RegisterEntity account;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_change_nickname;
@@ -39,6 +45,7 @@ public class ChangeNicknameActivity extends BaseActivity {
     @Override
     public void initView() {
         super.initView();
+        account = SaveObjectUtils.getInstance(ChangeNicknameActivity.this).getObject(Constants.USER_INFO, RegisterEntity.class);
         titleText.setText(getResources().getString(R.string.personal_setting_nick));
     }
 
@@ -87,6 +94,9 @@ public class ChangeNicknameActivity extends BaseActivity {
             super.onSuccess(info);
             dismissAlert();
             if ("1".equals(info.getCode())) {
+                account.getBody().setNickname(nameText.getText().toString());
+                SaveObjectUtils.getInstance(ChangeNicknameActivity.this).setObject(Constants.USER_INFO, account);
+                NotificationCenter.defaultCenter().publish(new RefreshMe());
                 Intent intent = new Intent();
                 intent.putExtra("nickname", nameText.getText().toString().trim());
                 setResult(1, intent);

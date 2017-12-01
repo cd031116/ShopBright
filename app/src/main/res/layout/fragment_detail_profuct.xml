@@ -124,6 +124,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20px"
+                    android:visibility="gone"
                     android:src="@drawable/mpxq_right" />
             </RelativeLayout>
 
@@ -202,6 +203,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="20px"
+                        android:visibility="gone"
                         android:src="@drawable/mpxq_down" />
                 </RelativeLayout>
 

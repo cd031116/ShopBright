@@ -423,6 +423,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/take_person_check_code_layout"
         android:layout_marginLeft="33px"
+        android:visibility="gone"
         android:button="@drawable/checkbox_style"
         android:checked="true"
         android:padding="24px"

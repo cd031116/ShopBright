@@ -664,6 +664,22 @@ public class SDK extends ABizLogic {
         return doPost(configHttpConfig(), action, params, null, null, BaseInfo.class);
     }
 
+
+    /**
+     * 修改姓名
+     *
+     * @param nickName //昵称
+     * @return
+     * @throws TaskException
+     */
+    public BaseInfo changeTrueName(String nickName, String memberId) throws TaskException {
+        Setting action = newSetting("changeTrueName", "appapi/Personalcenter/changeTrueName", "修改昵称");
+        Params params = new Params();
+        params.addParameter("trueName", nickName);
+        params.addParameter("memberId", memberId);
+        return doPost(configHttpConfig(), action, params, null, null, BaseInfo.class);
+    }
+
     /**
      * 修改密码
      *
@@ -782,7 +798,7 @@ public class SDK extends ABizLogic {
     public BaseInfo deleteOrder(String order_id) throws TaskException {
         Setting action = newSetting("deleteOrder", "appapi/personalcenter/deleteorder", "删除订单");
         Params params = new Params();
-        params.addParameter("order_id", order_id);
+        params.addParameter("order_sn", order_id);
         return doPost(configHttpConfig(), action, params, null, null, BaseInfo.class);
     }
 
