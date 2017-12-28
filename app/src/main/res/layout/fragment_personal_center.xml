@@ -42,7 +42,7 @@
                         android:layout_marginBottom="45px"
                         android:layout_marginLeft="54px"
                         android:layout_marginTop="45px"
-                        android:background="@drawable/image" />
+                        android:background="@drawable/person_setting" />
 
                     <TextView
                         android:id="@+id/personal_tel_text"

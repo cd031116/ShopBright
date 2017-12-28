@@ -429,12 +429,15 @@
         android:padding="24px"
         android:text="@string/refund_know"
         android:textSize="33px" />
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true">
     <RelativeLayout
         android:id="@+id/fymx_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/checkbox_read">
+    >
 
         <TextView
             android:id="@+id/fymx_text"
@@ -532,5 +535,5 @@
             android:text="@string/take_person_commit"
             android:textColor="@color/white" />
     </RelativeLayout>
-
+</RelativeLayout>
 </RelativeLayout>

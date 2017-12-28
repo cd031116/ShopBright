@@ -115,7 +115,6 @@ public class OrderWriteActivity extends BaseActivity {
     private String memberId = null;
     private String price = null;
     private TimerCount timerCount;
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_write_order;
@@ -142,6 +141,7 @@ public class OrderWriteActivity extends BaseActivity {
             fymxPrice.setText(ticket_price);
             totalPrice.setText(ticket_price);
             ticket_type_text.setText(mPerson.getTitle()+"【一张身份证限定一张票】");
+            fymxType.setText(mPerson.getTitle()+"【一张身份证限定一张票】");
         }
         timerCount = new TimerCount(60000, 1000, code);
     }
@@ -318,6 +318,10 @@ public class OrderWriteActivity extends BaseActivity {
     }
 
     private void getContacts(Intent data) {
+        if(data==null){
+            ToastUtils.showShortToast(OrderWriteActivity.this,"选择联系人失败,请手动输入!");
+            return;
+        }
         ContentResolver reContentResolverol = getContentResolver();
         Uri contactData = data.getData();
         @SuppressWarnings("deprecation")

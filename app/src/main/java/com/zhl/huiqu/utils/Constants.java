@@ -55,4 +55,5 @@ public class Constants {
     public static final String TEAM_ThemeId="team_themeld";
 
     public static final String TEAM_GradeId="team_gradeId";
+    public static final String IS_GUIDE="team_gradeId";
 }

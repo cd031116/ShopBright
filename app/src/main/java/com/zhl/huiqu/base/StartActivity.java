@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.zhl.huiqu.MainActivity;
 import com.zhl.huiqu.R;
+import com.zhl.huiqu.utils.Constants;
 
 import butterknife.Bind;
 
@@ -50,9 +51,16 @@ public class StartActivity extends BaseActivity {
     }
 
     private void redirectTo() {
-        startActivity(new Intent(StartActivity.this,MainActivity.class));
-        StartActivity.this.finish();
-
+        BaseConfig bg=BaseConfig.getInstance(StartActivity.this);
+          int sed=  bg.getIntValue(Constants.IS_GUIDE,-1);
+        if(sed==1){
+            startActivity(new Intent(StartActivity.this,MainActivity.class));
+            StartActivity.this.finish();
+        }else {
+            startActivity(new Intent(StartActivity.this,GuiDeActivity.class));
+            bg.setIntValue(Constants.IS_GUIDE,1);
+            StartActivity.this.finish();
+        }
     }
 
 }

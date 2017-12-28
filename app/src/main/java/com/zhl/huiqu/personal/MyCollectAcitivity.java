@@ -152,6 +152,7 @@ public class MyCollectAcitivity extends BaseActivity {
     }
 
     private void setReListView(final List<CollectTick> collectEntityList) {
+        recyclerView.setNestedScrollingEnabled(false);
         mRecyclerViewAdapter = new CollectRecyclerViewAdapter(MyCollectAcitivity.this, collectEntityList);
         recyclerView.setLayoutManager(new LinearLayoutManager(MyCollectAcitivity.this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(mRecyclerViewAdapter);

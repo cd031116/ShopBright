@@ -17,21 +17,29 @@
         android:layout_below="@id/view_top"
         android:background="#f0f0f0">
 
-        <LinearLayout
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/my_collect_list"
+            android:scrollbars="none">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/personal_bg" />
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/mp_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/personal_bg" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/my_collect_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/personal_bg" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/mp_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/personal_bg" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
     </com.jwenfeng.library.pulltorefresh.PullToRefreshLayout>
 
     <TextView

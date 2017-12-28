@@ -1,8 +1,5 @@
 package com.zhl.huiqu.main;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,7 +18,6 @@ import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
-import com.youth.banner.listener.OnBannerListener;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.base.BaseActivity;
 import com.zhl.huiqu.base.BaseInfo;
@@ -43,7 +38,6 @@ import com.zhl.huiqu.widget.GlideImageLoader;
 import com.zhl.huiqu.widget.MyScroview;
 import com.zhl.huiqu.widget.SimpleDividerItemDecoration;
 
-import org.aisen.android.network.http.Params;
 import org.aisen.android.network.task.TaskException;
 import org.aisen.android.network.task.WorkTask;
 
@@ -240,15 +234,27 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
                 break;
             case R.id.look_detail:
             case R.id.js_line:
-                Intent intent = new Intent(ProductDetailActivity.this, WebviewActivity.class);
-                intent.putExtra("title", info.getSpot_info().getTitle());
-                intent.putExtra("content", info.getSpot_info().getContent());
-                startActivity(intent);
+                if(info!=null&&info.getSpot_info()!=null){
+                    Intent intent = new Intent(ProductDetailActivity.this, WebviewActivity.class);
+                    intent.putExtra("title", info.getSpot_info().getTitle()!=null?info.getSpot_info().getTitle():"");
+                    intent.putExtra("content", info.getSpot_info().getContent()!=null? info.getSpot_info().getContent():"");
+                    startActivity(intent);
+                }else {
+                    ToastUtils.showShortToast(ProductDetailActivity.this,"为获取到内容");
+                }
                 break;
             case R.id.location:
                 Intent intent1 = new Intent(ProductDetailActivity.this, LocationActivity.class);
-                intent1.putExtra("latitude", info.getSpot_info().getLatitude());//纬度
-                intent1.putExtra("longitude", info.getSpot_info().getLongitude());//经度
+                if(info!=null&&info.getSpot_info()!=null&&!TextUtils.isEmpty(info.getSpot_info().getLatitude())){
+                    intent1.putExtra("latitude", info.getSpot_info().getLatitude());//纬度
+                }else {
+                    intent1.putExtra("latitude", "");//纬度
+                }
+                if(info!=null&&info.getSpot_info()!=null&&!TextUtils.isEmpty(info.getSpot_info().getLongitude())){
+                    intent1.putExtra("longitude", info.getSpot_info().getLongitude());//经度
+                }else {
+                    intent1.putExtra("longitude", "");//经度
+                }
                 intent1.putExtra("address", info.getSpot_info().getAddress());
                 startActivity(intent1);
                 break;
@@ -352,7 +358,7 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
         @Override
         protected void onPrepare() {
             super.onPrepare();
-            showAlert("..正在加载..", false);
+            showAlert("..正在加载..", true);
         }
 
         @Override
@@ -364,6 +370,10 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
         @Override
         protected void onSuccess(DetailMainBean infot) {
             super.onSuccess(infot);
+
+            if(ProductDetailActivity.this.isFinishing()){
+                return;
+            }
             info = infot.getBody();
             dismissAlert();
             progress.setVisibility(View.GONE);
@@ -484,5 +494,11 @@ public class ProductDetailActivity extends BaseActivity implements MyScroview.On
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
 
+
+        banner.releaseBanner();
+    }
 }

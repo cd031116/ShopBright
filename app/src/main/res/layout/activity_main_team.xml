@@ -76,11 +76,17 @@
         </RelativeLayout>
     </LinearLayout>
 
+
+    <com.zhl.huiqu.widget.PullToRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/main_search"
+        android:background="#f0f0f0">
     <com.zhl.huiqu.widget.MyScroview
         android:id="@+id/myscroview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/main_search"
         android:scrollbars="none">
 
         <LinearLayout
@@ -270,7 +276,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-
                 android:orientation="horizontal">
 
                 <TextView
@@ -458,25 +463,15 @@
                 <include layout="@layout/gt_tab_main" />
             </LinearLayout>
 
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="1px">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recycleview"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
-
-                    <include
-                        android:id="@+id/view_more"
-                        layout="@layout/lay_footerview"
-                        android:visibility="gone" />
-                </LinearLayout>
 
                 <include
                     android:id="@+id/view_empty"
@@ -492,7 +487,7 @@
 
         </LinearLayout>
     </com.zhl.huiqu.widget.MyScroview>
-
+</com.zhl.huiqu.widget.PullToRefreshLayout>
     <LinearLayout
         android:id="@+id/search01"
         android:layout_width="match_parent"

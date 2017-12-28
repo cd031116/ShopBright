@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.youth.banner.loader.ImageLoader;
 import com.zhl.huiqu.R;
 import com.zhl.huiqu.utils.TLog;
@@ -26,8 +27,11 @@ public class GlideImageLoader extends ImageLoader {
          */
         //Glide 加载图片简单用法
         TLog.log("mmmm","hhhhhhhhhhhhhhhhhhh="+Utils.getImageUrl(String.valueOf(path)));
+        RequestOptions opting=new RequestOptions()
+                .error(R.mipmap.error);
         Glide.with(context)
                 .load(Utils.getImageUrl(String.valueOf(path)))
+                .apply(opting)
                 .into(imageView);
     }
 

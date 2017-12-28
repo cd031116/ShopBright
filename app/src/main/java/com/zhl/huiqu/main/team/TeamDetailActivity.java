@@ -298,6 +298,9 @@ public class TeamDetailActivity extends BaseActivity implements MyScroview.OnScr
         protected void onSuccess(TeamDetailEntity info) {
             super.onSuccess(info);
             dismissAlert();
+            if(TeamDetailActivity.this.isFinishing()){
+                return;
+            }
             if (info.getCode().equals("1")) {
                 Log.e("ddd", "onSuccess: " + true);
                 setView(info.getBody());

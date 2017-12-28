@@ -62,20 +62,20 @@ public class MyScroview extends NestedScrollView {
          */
         public void onScroll(int scrollY);
     }
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent e) {
-        int action = e.getAction();
-        switch (action) {
-            case MotionEvent.ACTION_DOWN:
-                downX = (int) e.getRawX();
-                downY = (int) e.getRawY();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                int moveY = (int) e.getRawY();
-                if (Math.abs(moveY - downY) > mTouchSlop) {
-                    return true;
-                }
-        }
-        return super.onInterceptTouchEvent(e);
-    }
+//    @Override
+//    public boolean onInterceptTouchEvent(MotionEvent e) {
+//        int action = e.getAction();
+//        switch (action) {
+//            case MotionEvent.ACTION_DOWN:
+//                downX = (int) e.getRawX();
+//                downY = (int) e.getRawY();
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                int moveY = (int) e.getRawY();
+//                if (Math.abs(moveY - downY) > mTouchSlop) {
+//                    return true;
+//                }
+//        }
+//        return super.onInterceptTouchEvent(e);
+//    }
 }

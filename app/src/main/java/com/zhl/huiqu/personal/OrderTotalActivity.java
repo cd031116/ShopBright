@@ -322,14 +322,14 @@ public class OrderTotalActivity extends BaseActivity {
             }
             tAdapter.notifyDataSetChanged();
             oAdapter.notifyDataSetChanged();
-            fresh_main.finishRefresh();
+            fresh_main.finishLoadMore();
         }
 
         @Override
         protected void onFailure(TaskException exception) {
 
             dismissAlert();
-            fresh_main.finishRefresh();
+            fresh_main.finishLoadMore();
         }
     }
 

@@ -44,7 +44,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 * @data 2017/11/9
 * */
 
-public class MainActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks{
+public class MainActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
     private DoubleClickExitHelper mDoubleClickExit;
     @Bind(R.id.home_line)
     LinearLayout home_line;
@@ -54,20 +54,21 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     LinearLayout rim_line;
     @Bind(R.id.my_line)
     LinearLayout my_line;
-    @Bind({R.id.image_home,R.id.image_service,R.id.image_rim,R.id.image_my})
+    @Bind({R.id.image_home, R.id.image_service, R.id.image_rim, R.id.image_my})
     List<ImageButton> mTabs;
-    @Bind({R.id.text_home,R.id.service_text,R.id.text_rim,R.id.text_my})
+    @Bind({R.id.text_home, R.id.service_text, R.id.text_rim, R.id.text_my})
     List<TextView> mText;
     FragmentManager mFragmentMan;
-    int selected=0;
+    int selected = 0;
     private LocationService locationService;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
     }
 
     @Override
-    public void initView(){
+    public void initView() {
         super.initView();
         mFragmentMan = getFragmentManager();
         mDoubleClickExit = new DoubleClickExitHelper(this);
@@ -80,7 +81,8 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     // 3. 先进第二个或第三个的子模块，再返回首页
     private String lastFragmentTag = null;
-    private void changeFrament(String tag,int index){
+
+    private void changeFrament(String tag, int index) {
         if (mFragmentMan != null) {
             // Add default fragments to view. Try to reuse old fragments or create new ones
             FragmentTransaction transaction = mFragmentMan.beginTransaction();
@@ -88,20 +90,21 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
             Fragment mCurrentFragment = mFragmentMan.findFragmentByTag(tag);
             // 前一次Fragment
             Fragment mLastFragment = null;
-            if (!TextUtils.isEmpty(lastFragmentTag) && !lastFragmentTag.equals(tag)){
+            if (!TextUtils.isEmpty(lastFragmentTag) && !lastFragmentTag.equals(tag)) {
                 mLastFragment = mFragmentMan.findFragmentByTag(lastFragmentTag);
             }
             // 构造当前Fragment
-            if (mCurrentFragment == null){
-                switch (index){
+            if (mCurrentFragment == null) {
+                switch (index) {
                     case 0:
                         mCurrentFragment = MainTabFragment.newInstance();
                         break;
                     case 1:
-                       mCurrentFragment = KefuCenterFragment.newInstance(1);//子Fragment实例
+                        mCurrentFragment = KefuCenterFragment.newInstance(1);//子Fragment实例
                         break;
                     case 2:
-                        mCurrentFragment = NearlyFragment.newInstance("0");;//子Fragment实例
+                        mCurrentFragment = NearlyFragment.newInstance("0");
+                        ;//子Fragment实例
                         break;
                     case 3:
                         mCurrentFragment = PersonalFragment.newInstance();//子Fragment实例
@@ -122,68 +125,68 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         }
     }
 
-    @OnClick({R.id.home_line, R.id.service_line, R.id.rim_line, R.id.my_line,R.id.image_home,R.id.image_service,R.id.image_rim,R.id.image_my})
+    @OnClick({R.id.home_line, R.id.service_line, R.id.rim_line, R.id.my_line, R.id.image_home, R.id.image_service, R.id.image_rim, R.id.image_my})
     void onclick(View v) {
         switch (v.getId()) {
             case R.id.home_line:
-            case  R.id.image_home:
-                if(selected==0){
+            case R.id.image_home:
+                if (selected == 0) {
                     break;
                 }
-                selected=0;
+                selected = 0;
                 switchContent(selected);
                 break;
             case R.id.service_line:
-            case  R.id.image_service:
-                if(selected==1){
+            case R.id.image_service:
+                if (selected == 1) {
                     break;
                 }
-                selected=1;
+                selected = 1;
                 switchContent(selected);
                 break;
             case R.id.rim_line:
-            case  R.id.image_rim:
-                if(selected==2){
+            case R.id.image_rim:
+                if (selected == 2) {
                     break;
                 }
-                selected=2;
+                selected = 2;
                 switchContent(selected);
                 break;
             case R.id.my_line:
-            case  R.id.image_my:
-                if(selected==3){
+            case R.id.image_my:
+                if (selected == 3) {
                     break;
                 }
-                selected=3;
+                selected = 3;
                 switchContent(selected);
                 break;
         }
     }
 
-    void switchContent(int select){
+    void switchContent(int select) {
         initFoot();
-        if(select==0){
+        if (select == 0) {
             mTabs.get(0).setSelected(true);
             mText.get(0).setTextColor(Color.parseColor("#e11818"));
-            changeFrament("aFragment",0);
+            changeFrament("aFragment", 0);
             Logger.d("select==0");
-        }else if(select==1){
+        } else if (select == 1) {
             mTabs.get(1).setSelected(true);
             mText.get(1).setTextColor(Color.parseColor("#e11818"));
-            changeFrament("bFragment",1);
-        }else if(select==2){
+            changeFrament("bFragment", 1);
+        } else if (select == 2) {
             mTabs.get(2).setSelected(true);
             mText.get(2).setTextColor(Color.parseColor("#e11818"));
-            changeFrament("cFragment",2);
-        }else if(select==3){
+            changeFrament("cFragment", 2);
+        } else if (select == 3) {
             mTabs.get(3).setSelected(true);
             mText.get(3).setTextColor(Color.parseColor("#e11818"));
-            changeFrament("dFragment",3);
+            changeFrament("dFragment", 3);
             Logger.d("select==3");
         }
     }
 
-    private void initFoot(){
+    private void initFoot() {
         mTabs.get(0).setSelected(false);
         mTabs.get(1).setSelected(false);
         mTabs.get(2).setSelected(false);
@@ -193,8 +196,9 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         mText.get(2).setTextColor(Color.parseColor("#333333"));
         mText.get(3).setTextColor(Color.parseColor("#333333"));
     }
+
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         switchContent(selected);
     }
@@ -202,9 +206,9 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     @Override
     public void onPause() {
         super.onPause();
-        for(int i=0;i<mTabs.size();i++){
-            if(mTabs.get(i).isSelected()){
-                selected=i;
+        for (int i = 0; i < mTabs.size(); i++) {
+            if (mTabs.get(i).isSelected()) {
+                selected = i;
             }
         }
     }
@@ -216,6 +220,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         }
         return super.onKeyDown(keyCode, event);
     }
+
     @Override
     protected void onStart() {
         // TODO Auto-generated method stub
@@ -230,7 +235,9 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     @Override
     protected void onStop() {
         // TODO Auto-generated method stub
-        locationService.unregisterListener(mListener); //注销掉监听
+        if (mListener != null) {
+            locationService.unregisterListener(mListener); //注销掉监听
+        }
         locationService.stop(); //停止定位服务
         super.onStop();
     }
@@ -258,8 +265,8 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
                 sb.append("\ncity : ");// 城市
                 sb.append(location.getCity());
-                BaseConfig bg=new BaseConfig(MainActivity.this);
-                bg.setStringValue(Constants.Address,location.getCity());
+                BaseConfig bg = new BaseConfig(MainActivity.this);
+                bg.setStringValue(Constants.Address, location.getCity());
                 NotificationCenter.defaultCenter().publish(new CityEvent());
 //                if (location.getPoiList() != null && !location.getPoiList().isEmpty()) {
 //                    for (int i = 0; i < location.getPoiList().size(); i++) {
@@ -273,6 +280,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     };
     private static final int num = 123;//用于验证获取的权
+
     @AfterPermissionGranted(num)
     private void requireSomePermission() {
         String[] perms = {
@@ -302,7 +310,6 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     }
 
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -310,6 +317,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         // EasyPermissions handles the request result.
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
+
     @Override
     public void onPermissionsGranted(int requestCode, List<String> perms) {
         locationService = ((MyApplication) getApplication()).locationService;

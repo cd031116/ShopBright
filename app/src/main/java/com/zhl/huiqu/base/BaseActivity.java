@@ -136,9 +136,10 @@ public class BaseActivity extends org.aisen.android.ui.activity.basic.BaseActivi
                 @Override
                 public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
                     if (keyCode == KeyEvent.KEYCODE_BACK) {
-                        if(isCancel){
-                            progressDialog.dismiss();
-                        }
+                        progressDialog.dismiss();
+//                        if(isCancel){
+//                            progressDialog.dismiss();
+//                        }
                     }
                     return false;
                 }

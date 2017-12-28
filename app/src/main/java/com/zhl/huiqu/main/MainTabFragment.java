@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.jwenfeng.library.pulltorefresh.BaseRefreshListener;
 import com.jwenfeng.library.pulltorefresh.PullToRefreshLayout;
 import com.youth.banner.Banner;
@@ -68,7 +69,6 @@ import java.util.List;
 * @describe 首页Fragment
 * @data 2017/8/12
 * */
-
 public class MainTabFragment extends BaseFragment {
     @ViewInject(id = R.id.banner)
     Banner banner;
@@ -254,7 +254,6 @@ public class MainTabFragment extends BaseFragment {
             address.setText(TextUtils.isEmpty(addre) ? "长沙" : addre);
         }
     };
-
 
     @Override
     public void onPause() {
@@ -536,20 +535,26 @@ public class MainTabFragment extends BaseFragment {
         gList = info.getTeam();
         settuan();
         setBanner();
+        RequestOptions opting=new RequestOptions()
+                .error(R.mipmap.error);
         List<HotInfo> list = info.getHot();
         if (!TextUtils.isEmpty(list.get(0).getThumb())) {
+
             Glide.with(getActivity())
                     .load(list.get(0).getThumb())
+                    .apply(opting)
                     .into(hot_1);
         }
         if (!TextUtils.isEmpty(list.get(1).getThumb())) {
             Glide.with(getActivity())
                     .load(list.get(1).getThumb())
+                    .apply(opting)
                     .into(hot_2);
         }
         if (!TextUtils.isEmpty(list.get(2).getThumb())) {
             Glide.with(getActivity())
                     .load(list.get(2).getThumb())
+                    .apply(opting)
                     .into(hot_3);
         }
         List<TicketsInfo> tlist = info.getTicket();

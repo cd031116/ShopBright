@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.jwenfeng.library.pulltorefresh.BaseRefreshListener;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -38,6 +39,7 @@ import com.zhl.huiqu.utils.SaveObjectUtils;
 import com.zhl.huiqu.utils.ToastUtils;
 import com.zhl.huiqu.widget.GlideImageLoader;
 import com.zhl.huiqu.widget.MyScroview;
+import com.zhl.huiqu.widget.PullToRefreshLayout;
 import com.zhl.huiqu.widget.SimpleDividerItemDecoration;
 
 import org.aisen.android.network.task.TaskException;
@@ -91,13 +93,15 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
     LinearLayout view_empty;
     @ViewInject(id = R.id.view_progress)
     LinearLayout view_progress;
-    @ViewInject(id = R.id.view_more)
-    LinearLayout view_more;
 
     @ViewInject(id = R.id.recycleview)
     RecyclerView recycleview;
     @ViewInject(id = R.id.banner)
     Banner banner;
+
+    @ViewInject(id = R.id.refresh)
+    PullToRefreshLayout refresh;
+
     private CommonAdapter<TeamMainList> madapter;
     private List<TeamMainList> mList=new ArrayList<>();
     List<TeamHot> hlist=new ArrayList<>();
@@ -122,7 +126,6 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
     private TeamTop t_info = null;
     private int page=1;
     private LinearLayoutManager mLayoutManager;
-    private boolean ismore=false;
     private List<String> images = new ArrayList<>();
     private List<String> titles = new ArrayList<>();
     @Override
@@ -150,6 +153,18 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
         new getTopTask().execute();
         new getListTask().execute();
         initDatas();
+        refresh.setRefreshListener(new BaseRefreshListener() {
+            @Override
+            public void refresh() {
+
+            }
+
+            @Override
+            public void loadMore() {
+                   page++;
+                new getListMoreTask().execute();
+            }
+        });
     }
 
     private void setBanner() {
@@ -443,13 +458,13 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
                 search02.addView(tab_mian);
             }
         }
-        if (y == (myscroview.getChildAt(0).getMeasuredHeight() - myscroview.getMeasuredHeight())) {
-            if(mList!=null&&mList.size()>19&&(mList.size()%10)==0&&!ismore){
-                view_more.setVisibility(View.VISIBLE);
-                page++;
-                new getListTask().execute();
-            }
-        }
+//        if (y == (myscroview.getChildAt(0).getMeasuredHeight() - myscroview.getMeasuredHeight())) {
+//            if(mList!=null&&mList.size()>19&&(mList.size()%10)==0&&!ismore){
+//                view_more.setVisibility(View.VISIBLE);
+//                page++;
+//                new getListTask().execute();
+//            }
+//        }
     }
 
     private void showview(TeamTop data) {
@@ -523,11 +538,10 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
         protected void onPrepare() {
             super.onPrepare();
             if(mList!=null&&mList.size()>19){
-                view_more.setVisibility(View.VISIBLE);
+
             }else {
                 showrecy(2);
             }
-            ismore=true;
         }
 
         @Override
@@ -545,18 +559,46 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
             } else {
                 showrecy(1);
             }
-            ismore=false;
-            view_more.setVisibility(View.GONE);
         }
 
         @Override
         protected void onFailure(TaskException exception){
             showrecy(1);
-            ismore=false;
-            view_more.setVisibility(View.GONE);
         }
     }
 
+    /*列表数据
+    * */
+    class getListMoreTask extends WorkTask<Void, Void, TeamBase> {
+        @Override
+        protected void onPrepare() {
+            super.onPrepare();
+        }
+
+        @Override
+        public TeamBase workInBackground(Void... voids) throws TaskException {
+            return SDK.newInstance(MainTeamActivity.this).getListTop(select +"",page+"");
+        }
+
+        @Override
+        protected void onSuccess(TeamBase info){
+            super.onSuccess(info);
+            if (info.getBody()!= null) {
+                showrecy(0);
+                mList.addAll(info.getBody());
+                madapter.notifyDataSetChanged();
+            } else {
+                showrecy(1);
+            }
+            refresh.finishLoadMore();
+        }
+
+        @Override
+        protected void onFailure(TaskException exception){
+            showrecy(1);
+            refresh.finishLoadMore();
+        }
+    }
 
     private void showrecy(int curIndex) {
         if (curIndex == 1) {
@@ -619,5 +661,6 @@ public class MainTeamActivity extends BaseActivity implements MyScroview.OnScrol
         recycleview.setLayoutManager(mLayoutManager);
         recycleview.addItemDecoration(new SimpleDividerItemDecoration(this, null, 1));
         recycleview.setAdapter(madapter);
+        recycleview.setNestedScrollingEnabled(false);
     }
 }
